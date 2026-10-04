@@ -3,6 +3,7 @@
 /*
 !/.gitignore
 !/site/
+!/vercel.json
 
 # plain-text keys handed over by hand: never commit
 env.txt

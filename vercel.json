@@ -1,4 +1,6 @@
 {
+  "buildCommand": "node site/scripts/check.js",
+  "outputDirectory": "site",
   "rewrites": [
     { "source": "/owners", "destination": "/" },
     { "source": "/owners/", "destination": "/" },

@@ -34,12 +34,13 @@
   <nav class="nav-links" aria-label="Sections">
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
+    <a href="#passport">Passport</a>
     <a href="#catch">What's the catch?</a>
     <a href="#owners">For restaurants</a>
   </nav>
-  <div class="nav-cta">
-    <span class="nav-city"><i></i>Markham</span>
-    <a class="btn btn-sm" href="#join">Get early access</a>
+  <div class="nav-stores">
+    <a class="store" href="https://apps.apple.com/" target="_blank" rel="noopener" aria-label="App Store"><img src="/assets/stores/app-store.svg" alt="Download on the App Store" height="40"></a>
+    <a class="store" href="https://play.google.com/store/apps" target="_blank" rel="noopener" aria-label="Google Play"><img src="/assets/stores/google-play.png" alt="Get it on Google Play" height="40"></a>
   </div>
 </header>
 
@@ -94,7 +95,7 @@
     </div>
   </section>
 
-  <!-- FEATURES BENTO (video loops) -->
+  <!-- FEATURES BENTO: video loops, hover drops a panel over the whole box -->
   <section class="section" id="features">
     <div class="wrap">
       <h2 class="h2 two-tone reveal"><span>Everything you need to eat out for less.</span> <span class="muted">Find it, filter it, share it, save.</span></h2>
@@ -103,48 +104,68 @@
           <div class="cell-text">
             <h3>Your city, filtered.</h3>
             <p>Tell FIG your cravings, budget and diet once. 226 places become the ones that fit you.</p>
-            <div class="more"><div><ul><li>Pick cravings like dim sum, ramen or bubble tea</li><li>Set a budget per person</li><li>Halal, vegetarian and allergy filters, always confirmed with staff</li></ul></div></div>
-            <span class="hint">Hover for more</span>
+            <span class="hint">Hover to learn more</span>
           </div>
           <div class="panel cobalt"><video data-src="/assets/clips/filters.mp4" poster="/assets/clips/filters.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">Filters</p>
+            <h4>Set it once. Every search fits you.</h4>
+            <ul><li>Pick cravings like dim sum, ramen or bubble tea</li><li>Choose a budget per person</li><li>Halal, vegetarian and allergy filters, always confirmed with staff</li><li>Change any of it, anytime</li></ul>
+          </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Flash deals.</h3>
             <p>Short deals that drop near you. The timer is real, set by the restaurant.</p>
-            <div class="more"><div><ul><li>Get an alert when one drops close by</li><li>Claim it before the timer runs out</li><li>Turn alerts off anytime</li></ul></div></div>
           </div>
           <div class="panel volt"><video data-src="/assets/clips/flash.mp4" poster="/assets/clips/flash.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop volt" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">Flash deals</p>
+            <h4>Here for an hour. Gone after.</h4>
+            <ul><li>An alert when one drops close by</li><li>Claim it before the timer ends</li><li>Turn alerts off anytime</li></ul>
+          </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Group chat, solved.</h3>
             <p>Share a deal to the chat and everyone sees where you're going.</p>
-            <div class="more"><div><ul><li>One link with the photo, deal and distance</li><li>Friends can open it without the app</li></ul></div></div>
           </div>
           <div class="panel slate"><video data-src="/assets/clips/groupchat.mp4" poster="/assets/clips/groupchat.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop slate" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">Sharing</p>
+            <h4>Stop the "where are we eating?" loop.</h4>
+            <ul><li>One link with the photo, deal and distance</li><li>Friends can open it without the app</li><li>Everyone sees the same deal</li></ul>
+          </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Can't decide?</h3>
             <p>Type what you want. AI picks your three best deals, and says why.</p>
-            <div class="more"><div><ul><li>"Dim sum for 4, under $25"</li><li>3 free picks a day, unlimited with Premium</li><li>It only picks real deals that are live</li></ul></div></div>
           </div>
           <div class="panel violet"><video data-src="/assets/clips/decide.mp4" poster="/assets/clips/decide.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop violet" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">AI picks</p>
+            <h4>"Dim sum for 4, under $25."</h4>
+            <ul><li>Three picks, each with a reason</li><li>3 free picks a day, unlimited with Premium</li><li>Only real deals that are live right now</li></ul>
+          </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Every meal counts.</h3>
             <p>Each deal you use stamps your Passport. Stamps turn into free Premium.</p>
-            <div class="more"><div><ul><li>25 stamps: 1 free week</li><li>50 stamps: 3 free weeks</li><li>100 stamps: 1 free month</li></ul></div></div>
           </div>
           <div class="panel ice"><video data-src="/assets/clips/stamps.mp4" poster="/assets/clips/stamps.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop ice" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">Passport</p>
+            <h4>Your food diary pays you back.</h4>
+            <ul><li>25 stamps: 1 free week of Premium</li><li>50 stamps: 3 free weeks</li><li>100 stamps: 1 free month</li></ul>
+          </div></div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- PASSPORT -->
+  <!-- PASSPORT: stamps fill up to 50, then confetti -->
   <section class="section" id="passport">
     <div class="wrap">
       <div class="head-row">
@@ -154,19 +175,50 @@
         </div>
         <p class="side reveal">Stamps are yours to spend on free FIG Premium, again and again. No card needed.</p>
       </div>
-      <div class="stamps" id="stamps" aria-hidden="true"></div>
-      <div class="rewards">
-        <div class="reward reveal"><b data-count="25">25</b><span>stamps</span><em>1 free week of Premium</em></div>
-        <div class="reward reveal"><b data-count="50">50</b><span>stamps</span><em>3 free weeks</em></div>
-        <div class="reward reveal hot"><b data-count="100">100</b><span>stamps</span><em>1 free month</em></div>
+      <div class="pp">
+        <div class="pp-card reveal" id="pp">
+          <div class="pp-top"><span class="pp-tag">FIG Passport</span><span class="pp-city">Markham</span></div>
+          <div class="pp-main">
+            <div class="pp-ring">
+              <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" class="track"/><circle cx="100" cy="100" r="88" class="bar" id="pp-bar"/></svg>
+              <div class="pp-count"><b id="pp-num">0</b><span>/ 50 stamps</span></div>
+            </div>
+            <div class="pp-stamps" id="pp-stamps"></div>
+          </div>
+          <div class="pp-unlock" id="pp-unlock" aria-live="polite">
+            <img src="/assets/premium-seal.png" alt="" width="110" height="120">
+            <div><p class="pp-u1">Reward unlocked</p><p class="pp-u2">3 free weeks of Premium</p><p class="pp-u3">Claim it anytime. No card, no auto-renew.</p></div>
+          </div>
+          <canvas class="pp-confetti" id="pp-confetti" aria-hidden="true"></canvas>
+          <button class="pp-replay" id="pp-replay" type="button">Play again</button>
+        </div>
+        <ul class="ladder">
+          <li class="rung reveal" data-at="25"><b>25</b><div><strong>1 free week</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
+          <li class="rung reveal" data-at="50"><b>50</b><div><strong>3 free weeks</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
+          <li class="rung reveal" data-at="100"><b>100</b><div><strong>1 free month</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
+          <li class="ladder-note reveal">Stamps are a balance: claim a reward and keep collecting.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- CHATS -->
+  <!-- CHATS: a live conversation in the app's chat style -->
   <section class="section" id="chats">
     <div class="wrap chats">
-      <div class="phone big tilt reveal"><img src="/assets/screens/chat.webp" alt="Chat with Golden Lantern about the 2-for-1 Dim Sum deal" loading="lazy" width="390" height="844"></div>
+      <div class="phone big chatphone reveal" aria-label="Example chat between a diner and Golden Lantern">
+        <div class="cp">
+          <div class="cp-head">
+            <span class="cp-back"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="#0A1020" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <img src="/assets/food/golden-lantern.webp" alt="" width="40" height="40">
+            <div><b>Golden Lantern</b><small>About 2-for-1 Dim Sum</small></div>
+          </div>
+          <div class="cp-body" id="cp-body">
+            <span class="cp-chip"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z" fill="none" stroke="#1E5EFF" stroke-width="2.2" stroke-linejoin="round"/></svg>2-for-1 Dim Sum</span>
+            <span class="cp-day">Today</span>
+          </div>
+          <div class="cp-compose"><span id="cp-input">Message Golden Lantern</span><i id="cp-send"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+        </div>
+      </div>
       <div class="chats-copy">
         <p class="eyebrow">Chats</p>
         <h2 class="h2 reveal">Ask the restaurant before you go.</h2>
@@ -233,9 +285,14 @@
           <div class="cell-text">
             <h3>One day on FIG.</h3>
             <p>14 diners walk in from FIG. Guess what it costs.</p>
-            <div class="more"><div><ul><li>Post one deal in a minute</li><li>Staff scan diners at the counter</li><li>Your plan covers every scan</li></ul></div></div>
+            <span class="hint">Hover to learn more</span>
           </div>
           <div class="panel volt"><video data-src="/assets/clips/oneday.mp4" poster="/assets/clips/oneday.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="drop volt" aria-hidden="true"><div class="drop-in">
+            <p class="drop-k">For restaurants</p>
+            <h4>One plan covers every diner.</h4>
+            <ul><li>Post a deal in a minute</li><li>Staff scan diners at the counter</li><li>Set a daily cap or pause anytime</li><li>$50 a year, every location included</li></ul>
+          </div></div>
         </article>
       </div>
       <ul class="perks">
@@ -244,40 +301,15 @@
         <li class="reveal"><b>Live right away</b><span>Your page goes live when you finish setup.</span></li>
         <li class="reveal"><b>You're in control</b><span>Set daily caps and hours. Pause anytime.</span></li>
       </ul>
-      <form class="join owner-form reveal" data-role="restaurant" novalidate>
-        <h3>Get your restaurant on FIG</h3>
-        <div class="owner-fields">
-          <input name="restaurant" type="text" placeholder="Restaurant name" aria-label="Restaurant name" autocomplete="organization" maxlength="120">
-          <input name="contact" type="text" placeholder="Email or mobile number" aria-label="Email or mobile number" autocomplete="email" maxlength="254">
-          <button class="btn btn-volt" type="submit">Get started</button>
-        </div>
-        <label class="consent"><input type="checkbox" name="consent"><span>FIG can contact me about setting up, by email or text. <a href="/privacy">Privacy</a></span></label>
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="form-msg" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
-
-  <!-- CLOSING -->
-  <section class="section closing-wrap">
-    <div class="wrap">
-      <div class="closing reveal">
+      <div class="get-app reveal">
         <div>
-          <h2 class="display-2 rise" aria-label="Eat local. Save fast.">
-            <span class="mask"><span class="line">Eat local.</span></span>
-            <span class="mask"><span class="line volt-t">Save fast.</span></span>
-          </h2>
-          <p>Be first in Markham when FIG opens.</p>
+          <h3>Get your restaurant on FIG</h3>
+          <p>Download FIG and choose "I own a restaurant". Setup takes a few minutes, and your page goes live as soon as you finish.</p>
         </div>
-        <form class="join" data-role="diner" novalidate>
-          <div class="field-pill light">
-            <input name="contact" type="text" autocomplete="email" placeholder="Email or mobile number" aria-label="Email or mobile number" maxlength="254">
-            <button class="btn btn-ink" type="submit">Join</button>
-          </div>
-          <label class="consent light"><input type="checkbox" name="consent"><span>Send me FIG launch news by email or text. Unsubscribe anytime.</span></label>
-          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <p class="form-msg" role="status" aria-live="polite"></p>
-        </form>
+        <div class="badges">
+          <a class="store" href="https://apps.apple.com/" target="_blank" rel="noopener"><img src="/assets/stores/app-store.svg" alt="Download on the App Store" height="54"></a>
+          <a class="store" href="https://play.google.com/store/apps" target="_blank" rel="noopener"><img src="/assets/stores/google-play.png" alt="Get it on Google Play" height="54"></a>
+        </div>
       </div>
     </div>
   </section>
@@ -289,6 +321,10 @@
       <div class="foot-brand">
         <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
         <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario.</p>
+        <div class="badges small">
+          <a class="store" href="https://apps.apple.com/" target="_blank" rel="noopener"><img src="/assets/stores/app-store.svg" alt="Download on the App Store" height="40"></a>
+          <a class="store" href="https://play.google.com/store/apps" target="_blank" rel="noopener"><img src="/assets/stores/google-play.png" alt="Get it on Google Play" height="40"></a>
+        </div>
       </div>
       <div class="foot-cols">
         <div><h3>Diners</h3><a href="#how">How it works</a><a href="#passport">Passport</a><a href="#catch">What's the catch?</a></div>
@@ -298,15 +334,26 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 FIG Technologies Inc. · Markham, Ontario</span>
-      <span>App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap.</span>
+      <span>App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap. App Store is a trademark of Apple Inc. Google Play is a trademark of Google LLC.</span>
     </div>
   </div>
 </footer>
+
+<!-- giant wordmark, Chatbase-style -->
+<div class="mega" aria-hidden="true">
+  <div class="mega-word">FIG</div>
+  <span class="sticker s1"><img src="/assets/food/golden-lantern.webp" alt=""></span>
+  <span class="sticker s2"><img src="/assets/food/chatime.webp" alt=""></span>
+  <span class="sticker s3"><img src="/assets/food/kinton-ramen.webp" alt=""></span>
+  <span class="sticker s4 seal"><img src="/assets/premium-seal.png" alt=""></span>
+  <span class="tagline">Eat local. Save fast.</span>
+</div>
 
 <script src="/js/config.js"></script>
 <script src="/js/contact.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
 <script src="/js/map.js"></script>
 <script src="/js/main.js"></script>

@@ -28,7 +28,7 @@
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["how", "features", "catch", "owners"].forEach((id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+  ["how", "features", "passport", "catch", "owners"].forEach((id) => { const s = document.getElementById(id); if (s) io.observe(s); });
 
   // ---------- food strip ----------
   const FOOD = [["golden-lantern", "Dim sum"], ["kinton-ramen", "Ramen"], ["chatime", "Bubble tea"], ["pho-hung", "Pho"], ["sakura-house", "Sushi"],
@@ -41,9 +41,6 @@
     t.innerHTML = html + html; // twice, so the loop is seamless
   });
 
-  // ---------- passport stamps ----------
-  const pins = window.FIG_PINS || [];
-  $("#stamps").innerHTML = pins.slice(0, 12).map((p) => `<span class="stamp"><img src="${p}" alt="" loading="lazy"></span>`).join("");
 
   // ---------- letter rise (the videos' headline move) ----------
   function split(line) {
@@ -68,19 +65,124 @@
     gsap.to(".intro", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, delay: 0.55 });
     ScrollTrigger.batch(".reveal", { start: "top 88%", once: true,
       onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, overwrite: true }) });
-    const closing = $(".closing .rise");
-    gsap.set($$(".line", closing), { yPercent: 118 });
-    ScrollTrigger.create({ trigger: closing, start: "top 85%", once: true, onEnter: () => { gsap.set($$(".line", closing), { yPercent: 0 }); rise(closing); } });
-    // stamps slam in one after another
-    gsap.from(".stamp", { scale: 0.2, opacity: 0, rotate: -25, duration: 0.5, ease: "back.out(2.4)", stagger: 0.06,
-      scrollTrigger: { trigger: "#stamps", start: "top 85%", once: true } });
-    // reward numbers count up
-    $$("[data-count]").forEach((b) => {
-      const n = +b.dataset.count, o = { v: 0 };
-      gsap.to(o, { v: n, duration: 1.4, ease: "power2.out", onUpdate: () => (b.textContent = Math.round(o.v)),
-        scrollTrigger: { trigger: b, start: "top 90%", once: true } });
-    });
   }
+
+
+  // ---------- passport: stamps fill to 50, then confetti and the reward ----------
+  (() => {
+    const card = $("#pp"), num = $("#pp-num"), bar = $("#pp-bar"), box = $("#pp-stamps"), unlock = $("#pp-unlock");
+    const rungs = $$(".rung"), pins = window.FIG_PINS || [];
+    const C = 553; // ring circumference
+    const label = (r, t) => { r.querySelector(".state").textContent = t; };
+    const fire = window.confetti && confetti.create($("#pp-confetti"), { resize: true, useWorker: true });
+    function reset() {
+      num.textContent = "0"; bar.style.strokeDashoffset = C; box.innerHTML = "";
+      rungs.forEach((r) => { r.classList.remove("hit"); label(r, "Locked"); });
+      card.classList.remove("done");
+      if (motion) gsap.set(unlock, { opacity: 0, y: 30, scale: 0.96 });
+    }
+    function final() {
+      num.textContent = "50"; bar.style.strokeDashoffset = 0;
+      box.innerHTML = pins.slice(0, 10).map((p) => `<span><img src="${p}" alt=""></span>`).join("");
+      rungs[0].classList.add("hit"); label(rungs[0], "Claim");
+      rungs[1].classList.add("hit"); label(rungs[1], "Unlocked");
+      label(rungs[2], "50 to go");
+      unlock.style.opacity = 1; unlock.style.transform = "none";
+    }
+    function play() {
+      if (!motion) return final();
+      reset();
+      let shown = 0;
+      const o = { v: 0 };
+      const tl = gsap.timeline();
+      tl.to(o, { v: 50, duration: 3.6, ease: "power1.inOut", onUpdate() {
+        const v = Math.round(o.v);
+        num.textContent = v;
+        bar.style.strokeDashoffset = C * (1 - o.v / 50);
+        while (shown < Math.floor(o.v / 5)) {
+          const s = document.createElement("span");
+          s.innerHTML = `<img src="${pins[shown % pins.length]}" alt="">`;
+          box.appendChild(s);
+          gsap.from(s, { scale: 0.2, rotate: -30, opacity: 0, duration: 0.45, ease: "back.out(2.6)" });
+          shown++;
+        }
+        if (v >= 25 && !rungs[0].classList.contains("hit")) { rungs[0].classList.add("hit"); label(rungs[0], "Claim"); }
+      } });
+      tl.add(() => {
+        rungs[1].classList.add("hit"); label(rungs[1], "Unlocked"); label(rungs[2], "50 to go");
+        if (fire) {
+          fire({ particleCount: 140, spread: 80, startVelocity: 42, origin: { x: 0.3, y: 0.45 }, colors: ["#1E5EFF", "#C8F135", "#14C86B", "#6E56FF", "#FFFFFF"] });
+          setTimeout(() => fire({ particleCount: 90, spread: 110, startVelocity: 30, origin: { x: 0.7, y: 0.4 }, colors: ["#1E5EFF", "#C8F135", "#FFFFFF"] }), 220);
+        }
+      });
+      tl.to(unlock, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, "+=0.15");
+      tl.add(() => card.classList.add("done"), "+=0.4");
+    }
+    $("#pp-replay").addEventListener("click", play);
+    if (!motion) return final();
+    reset();
+    ScrollTrigger.create({ trigger: card, start: "top 70%", once: true, onEnter: play });
+  })();
+
+  // ---------- chats: a diner and the restaurant texting, 3-5 s per message ----------
+  (() => {
+    const body = $("#cp-body"), input = $("#cp-input"), send = $("#cp-send");
+    const PH = "Message Golden Lantern";
+    const CONVO = [
+      ["d", "Hi! Is the 2-for-1 dim sum still on tonight?"],
+      ["r", "Hi! Yes, it runs until 9 pm tonight."],
+      ["d", "Amazing. We're a table of 4, around 7?"],
+      ["r", "Perfect, we'll have a table for 4 ready at 7."],
+      ["d", "Can each of us use the deal?"],
+      ["r", "Yes, it's one per person per day, so everyone can claim it."],
+      ["d", "Nice. Is it dine-in only?"],
+      ["r", "Dine-in only for this one."],
+      ["d", "Got it. Anything spicy you'd recommend?"],
+      ["r", "Our chili wontons are a favourite. Not part of the deal, but worth it."],
+      ["d", "Haha sold. Do we just show the code at the counter?"],
+      ["r", "Yes, open your deal and show the QR when you order. We'll scan it."],
+      ["d", "Perfect, see you at 7!"],
+      ["r", "See you soon!"],
+    ];
+    let visible = false;
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const whenVisible = async () => { while (!visible) await wait(400); };
+    const gap = () => 3000 + Math.random() * 2000;
+    function add(cls, html) {
+      const b = document.createElement("div"); b.className = cls; b.innerHTML = html;
+      body.appendChild(b);
+      while (body.querySelectorAll(".bub").length > 12) body.querySelector(".bub").remove();
+      return b;
+    }
+    const esc = (t) => t.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    async function say(side, text) {
+      const t0 = performance.now(), total = gap();
+      if (side === "r") {
+        await wait(400);
+        const dots = add("bub a typing bub-in", "<i></i><i></i><i></i>");
+        await wait(Math.min(total - 900, 1100 + text.length * 22));
+        dots.remove();
+        add("bub a bub-in", esc(text));
+      } else {
+        input.classList.add("typing"); send.classList.add("on");
+        for (let k = 1; k <= text.length; k++) { input.textContent = text.slice(0, k); await wait(32); }
+        await wait(250);
+        add("bub q bub-in", esc(text));
+        input.textContent = PH; input.classList.remove("typing"); send.classList.remove("on");
+      }
+      await wait(Math.max(300, total - (performance.now() - t0)));
+    }
+    async function loop() {
+      for (;;) {
+        for (const [side, text] of CONVO) { await whenVisible(); await say(side, text); }
+        await wait(6000);
+        body.querySelectorAll(".bub").forEach((b) => b.remove());
+      }
+    }
+    if (!motion) { CONVO.slice(-6).forEach(([side, text]) => add(`bub ${side === "d" ? "q" : "a"}`, esc(text))); return; }
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.3 }).observe($(".chatphone"));
+    loop();
+  })();
 
   // ---------- tilt + glare on phones ----------
   if (finePointer && motion) $$(".tilt").forEach((el) => {

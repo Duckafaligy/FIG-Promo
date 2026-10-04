@@ -147,7 +147,7 @@
     let visible = false;
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     const whenVisible = async () => { while (!visible) await wait(400); };
-    const gap = () => 3000 + Math.random() * 2000;
+    const gap = () => 1700 + Math.random() * 1100;
     function add(cls, html) {
       const b = document.createElement("div"); b.className = cls; b.innerHTML = html;
       body.appendChild(b);
@@ -160,13 +160,13 @@
       if (side === "r") {
         await wait(400);
         const dots = add("bub a typing bub-in", "<i></i><i></i><i></i>");
-        await wait(Math.min(total - 900, 1100 + text.length * 22));
+        await wait(Math.min(total - 500, 700 + text.length * 12));
         dots.remove();
         add("bub a bub-in", esc(text));
       } else {
         input.classList.add("typing"); send.classList.add("on");
-        for (let k = 1; k <= text.length; k++) { input.textContent = text.slice(0, k); await wait(32); }
-        await wait(250);
+        for (let k = 1; k <= text.length; k++) { input.textContent = text.slice(0, k); await wait(18); }
+        await wait(150);
         add("bub q bub-in", esc(text));
         input.textContent = PH; input.classList.remove("typing"); send.classList.remove("on");
       }
@@ -175,7 +175,7 @@
     async function loop() {
       for (;;) {
         for (const [side, text] of CONVO) { await whenVisible(); await say(side, text); }
-        await wait(6000);
+        await wait(4000);
         body.querySelectorAll(".bub").forEach((b) => b.remove());
       }
     }
@@ -210,6 +210,57 @@
   }), { threshold: 0.35 });
   $$("video[data-src]").forEach((v) => vio.observe(v));
 
+
+  // ---------- tutorial: real app screens, diner and restaurant ----------
+  const TUT = {
+    diner: { title: "How to use FIG as a diner", sub: "Six steps, straight from the app.", steps: [
+      ["d1", "Download FIG and sign up", "Free for diners. Tell FIG what you crave, your budget and any diet needs once."],
+      ["d2", "Find a deal near you", "Home and the map show live deals from restaurants around you, nearest first."],
+      ["d3", "Claim it in one tap", "We hold it for 24 hours. Read the fine print, then tap Claim deal."],
+      ["d4", "Show your code at the counter", "Staff scan it, or type the 8 characters under the QR. It changes every 5 minutes."],
+      ["d5", "Earn a stamp", "Every visit adds a stamp to your Passport. Spend 25, 50 or 100 on free Premium."],
+      ["d6", "Order takeout or ask a question", "Order ahead and pay at pickup, or message the restaurant from your deal."],
+    ] },
+    restaurant: { title: "How to use FIG as a restaurant", sub: "Set up once, then just scan.", steps: [
+      ["r1", "Download FIG and sign up as a business", "Choose \"I own a restaurant\", add your name, your restaurant and your location."],
+      ["r2", "Set up your page", "Add 3 photos, your address, cuisine and dietary options. This is what diners see."],
+      ["r3", "Set your hours", "Diners see them on your page. Deals only show while you're open."],
+      ["r4", "Start your plan", "One plan, $50 a year. Every location and every scan included. Your page goes live."],
+      ["r5", "Post a deal", "Pick the type, the days and hours, who it's for and a daily cap. Pause it anytime."],
+      ["r6", "Scan diners at the counter", "Any phone or tablet. Can't read the QR? Type the code. Add staff and their devices."],
+    ] },
+  };
+  const tutBox = $("#tut"), tutScreens = $("#tut-screens"), tutSteps = $("#tut-steps");
+  let tutRole = "diner", tutCur = 0, tutTimer = null, tutPicked = false, tutVisible = false;
+  function tutRender(role) {
+    tutRole = role; tutCur = 0;
+    const t = TUT[role];
+    $("#tut-title").textContent = t.title; $("#tut-sub").textContent = t.sub;
+    tutScreens.innerHTML = t.steps.map(([img], k) => `<img src="/assets/tut/${img}.webp" alt="" loading="lazy" class="${k ? "" : "on"}">`).join("");
+    tutSteps.innerHTML = t.steps.map(([, h, d], k) => `<li class="${k ? "" : "on"}" tabindex="0" role="button"><span class="n">${k + 1}</span><div><b>${h}</b><p>${d}</p></div><i class="bar"></i></li>`).join("");
+    $$("li", tutSteps).forEach((li, k) => {
+      const go = () => { tutPicked = true; tutShow(k); };
+      li.addEventListener("click", go);
+      li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
+    tutPlay();
+  }
+  function tutShow(k) {
+    tutCur = k;
+    $$("img", tutScreens).forEach((im, i) => im.classList.toggle("on", i === k));
+    $$("li", tutSteps).forEach((li, i) => li.classList.toggle("on", i === k));
+    tutPlay();
+  }
+  function tutPlay() {
+    clearTimeout(tutTimer);
+    const bar = $$("li .bar", tutSteps)[tutCur];
+    if (motion && bar) gsap.fromTo(bar, { scaleX: 0 }, { scaleX: tutPicked ? 0 : 1, duration: tutPicked ? 0 : 4.5, ease: "none", overwrite: true });
+    if (!motion || tutPicked || !tutVisible) return;
+    tutTimer = setTimeout(() => tutShow((tutCur + 1) % TUT[tutRole].steps.length), 4500);
+  }
+  new IntersectionObserver(([e]) => { tutVisible = e.isIntersecting; tutPlay(); }, { threshold: 0.35 }).observe(tutBox);
+  tutRender("diner");
+
   // ---------- what's the catch: a chat that types ----------
   const QA = {
     diner: [["is it actually free?", "Yes. Deals are free to claim and use."], ["so what do I pay?", "Just your bill, at the restaurant, like normal."],
@@ -242,6 +293,7 @@
   function selectTab(tab) {
     $$("#catch [data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
     play(tab);
+    if (tab !== tutRole) { tutPicked = false; tutRender(tab); }
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   let chatStarted = false;

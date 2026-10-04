@@ -501,10 +501,11 @@ button, input { font: inherit; color: inherit; }
 .tut-steps .bar { transition: none; }
 
 /* ---------- what's the catch: tutorial video ---------- */
-.tutwrap { justify-self: center; width: 100%; max-width: 400px; }
-.tut-label { display: flex; align-items: flex-end; justify-content: center; gap: 4px; margin-bottom: 10px; color: var(--volt); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
+.tutwrap { justify-self: center; width: 100%; max-width: 500px; }
+.tut-label { display: flex; align-items: flex-end; justify-content: center; gap: 4px; margin-bottom: 12px; color: var(--volt); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
 .tut-label span { padding: 8px 14px; border-radius: 999px; background: rgba(200, 241, 53, .12); border: 1px solid rgba(200, 241, 53, .35); }
 .tut-label svg { margin-bottom: -18px; }
-.tutvid { width: 100%; max-width: 400px; padding: 10px; border-radius: 34px; background: linear-gradient(160deg, #262E42, #141925 60%); border: 1px solid var(--line-2); box-shadow: 0 40px 100px rgba(0, 0, 0, .5); }
-.tutvid video { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 26px; object-fit: cover; background: #F4F6FB; pointer-events: none; }
-@media (min-width: 980px) { .catch { grid-template-columns: 1fr 420px; align-items: center; } .catch-copy { position: static; } }
+/* the video already shows the phone: present it on a soft light stage instead of a second bezel */
+.tutvid { position: relative; width: 100%; padding: 1.5px; border-radius: 30px; background: linear-gradient(160deg, rgba(255,255,255,.55), rgba(30,94,255,.5) 45%, rgba(200,241,53,.45)); box-shadow: 0 50px 120px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255,255,255,.04); }
+.tutvid video { display: block; width: 100%; aspect-ratio: 600 / 1000; border-radius: 28.5px; object-fit: cover; background: #EEF2FA; pointer-events: none; }
+@media (min-width: 980px) { .catch { grid-template-columns: 1fr 500px; align-items: center; } .catch-copy { position: static; } }

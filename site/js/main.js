@@ -211,93 +211,22 @@
   $$("video[data-src]").forEach((v) => vio.observe(v));
 
 
-  // ---------- tutorial: real app screens, diner and restaurant ----------
-  const TUT = {
-    diner: { title: "How to use FIG as a diner", sub: "Six steps, straight from the app.", steps: [
-      ["d1", "Download FIG and sign up", "Free for diners. Tell FIG what you crave, your budget and any diet needs once."],
-      ["d2", "Find a deal near you", "Home and the map show live deals from restaurants around you, nearest first."],
-      ["d3", "Claim it in one tap", "We hold it for 24 hours. Read the fine print, then tap Claim deal."],
-      ["d4", "Show your code at the counter", "Staff scan it, or type the 8 characters under the QR. It changes every 5 minutes."],
-      ["d5", "Earn a stamp", "Every visit adds a stamp to your Passport. Spend 25, 50 or 100 on free Premium."],
-      ["d6", "Order takeout or ask a question", "Order ahead and pay at pickup, or message the restaurant from your deal."],
-    ] },
-    restaurant: { title: "How to use FIG as a restaurant", sub: "Set up once, then just scan.", steps: [
-      ["r1", "Download FIG and sign up as a business", "Choose \"I own a restaurant\", add your name, your restaurant and your location."],
-      ["r2", "Set up your page", "Add 3 photos, your address, cuisine and dietary options. This is what diners see."],
-      ["r3", "Set your hours", "Diners see them on your page. Deals only show while you're open."],
-      ["r4", "Start your plan", "One plan, $50 a year. Every location and every scan included. Your page goes live."],
-      ["r5", "Post a deal", "Pick the type, the days and hours, who it's for and a daily cap. Pause it anytime."],
-      ["r6", "Scan diners at the counter", "Any phone or tablet. Can't read the QR? Type the code. Add staff and their devices."],
-    ] },
-  };
-  // the tutorial plays a looping video of the real app (tut-diner / tut-restaurant); step k starts at 0.3 + 4.5k seconds
-  const tutBox = $("#tut"), tutScreens = $("#tut-screens"), tutSteps = $("#tut-steps");
-  const STEP_AT = (k) => 0.3 + k * 4.5, STEP_LEN = 4.5;
-  let tutRole = "diner", tutVisible = false;
-  tutScreens.innerHTML = '<video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video>';
-  const tutVideo = $("video", tutScreens);
-  function tutRender(role) {
-    tutRole = role;
-    const t = TUT[role];
-    $("#tut-title").textContent = t.title; $("#tut-sub").textContent = t.sub;
-    tutSteps.innerHTML = t.steps.map(([, h, d], k) => `<li class="${k ? "" : "on"}" tabindex="0" role="button"><span class="n">${k + 1}</span><div><b>${h}</b><p>${d}</p></div><i class="bar"></i></li>`).join("");
-    $$("li", tutSteps).forEach((li, k) => {
-      const go = () => { tutVideo.currentTime = STEP_AT(k) + 0.05; tutVideo.play().catch(() => {}); };
-      li.addEventListener("click", go);
-      li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
-    });
-    tutVideo.poster = `/assets/clips/tut-${role}.jpg`;
-    tutVideo.src = `/assets/clips/tut-${role}.mp4`;
-    if (tutVisible) tutVideo.play().catch(() => {});
-  }
-  let tutLast = -1;
-  tutVideo.addEventListener("timeupdate", () => {
-    const t = tutVideo.currentTime, k = Math.max(0, Math.min(5, Math.floor((t - 0.3) / STEP_LEN)));
-    const lis = $$("li", tutSteps);
-    if (k !== tutLast) { lis.forEach((li, i) => li.classList.toggle("on", i === k)); tutLast = k; }
-    const bar = lis[k] && $(".bar", lis[k]);
-    if (bar) bar.style.transform = `scaleX(${Math.max(0, Math.min(1, (t - STEP_AT(k)) / STEP_LEN))})`;
-  });
-  new IntersectionObserver(([e]) => { tutVisible = e.isIntersecting; if (tutVisible) tutVideo.play().catch(() => {}); else tutVideo.pause(); }, { threshold: 0.3 }).observe(tutBox);
-  tutRender("diner");
-
-  // ---------- what's the catch: a chat that types ----------
-  const QA = {
-    diner: [["is it actually free?", "Yes. Deals are free to claim and use."], ["so what do I pay?", "Just your bill, at the restaurant, like normal."],
-      ["do restaurants get my number?", "Never. You chat in the app and your number stays private."], ["can someone use my screenshot?", "No. Your code changes every 5 minutes."],
-      ["are the deals real?", "Every deal and its hours are set by the restaurant itself."]],
-    restaurant: [["do I need new equipment?", "No. Any phone or tablet scans."], ["what if a code won't scan?", "Type it in. Same check."],
-      ["what if we get too busy?", "You set a daily cap. Pause anytime."], ["ok so what does it cost?", "$50 a year. No fee per diner."],
-      ["I have two locations", "One plan covers every location."]],
-  };
-  const body = $("#chat-body");
-  let run = 0;
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-  function bubble(kind, text) {
-    const b = document.createElement("div"); b.className = `bub ${kind} bub-in`;
-    if (kind === "typing") { b.className = "bub a typing bub-in"; b.innerHTML = "<i></i><i></i><i></i>"; } else b.textContent = text;
-    body.appendChild(b); return b;
-  }
-  async function play(tab) {
-    const id = ++run; body.innerHTML = "";
-    for (const [q, a] of QA[tab]) {
-      if (id !== run) return;
-      if (!motion) { bubble("q", q); bubble("a", a); continue; }
-      bubble("q", q); await wait(450);
-      if (id !== run) return;
-      const t = bubble("typing"); await wait(750);
-      if (id !== run) return;
-      t.remove(); bubble("a", a); await wait(500);
-    }
-  }
+  // ---------- what's the catch: the tutorial video (diner or restaurant), nothing else ----------
+  const tutVideo = $("#tut-video");
+  let tutRole = "";
   function selectTab(tab) {
     $$("#catch [data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
-    play(tab);
-    if (tab !== tutRole) tutRender(tab);
+    if (tab === tutRole) return;
+    tutRole = tab;
+    tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
+    tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
+    tutVideo.play().catch(() => {});
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
-  let chatStarted = false;
-  new IntersectionObserver(([e]) => { if (e.isIntersecting && !chatStarted) { chatStarted = true; play("diner"); } }, { threshold: 0.3 }).observe($(".chatwin"));
+  new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return tutVideo.pause();
+    if (!tutRole) selectTab("diner"); else tutVideo.play().catch(() => {});
+  }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------
   const shots = $$(".tablet img"), tabs = $$("[data-tshot]");
@@ -342,7 +271,7 @@
 
   // figpromo.com/owners: the link to open on your phone when you walk into a restaurant
   if (location.pathname.startsWith("/owners")) {
-    selectTab("restaurant"); chatStarted = true;
+    selectTab("restaurant");
     setTimeout(() => $("#owners").scrollIntoView(), 300);
   }
 })();

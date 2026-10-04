@@ -80,6 +80,11 @@
       "source": "/owners/",
       "destination": "/restaurants",
       "permanent": false
+    },
+    {
+      "source": "/pricing",
+      "destination": "/#owners",
+      "permanent": false
     }
   ]
 }

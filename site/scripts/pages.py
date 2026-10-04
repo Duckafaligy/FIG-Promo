@@ -20,7 +20,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
 
-NAV_LINKS = [("/how-it-works", "How it works"), ("/features", "Features"), ("/pricing", "Pricing"), ("/restaurants", "For restaurants"), ("/help", "Help")]
+NAV_LINKS = [("/how-it-works", "How it works"), ("/features", "Features"), ("/#owners", "Pricing"), ("/restaurants", "For restaurants"), ("/help", "Help")]
 
 
 def nav(current=""):
@@ -41,8 +41,8 @@ FOOTER = f'''<footer class="foot">
         {STORES}
       </div>
       <div class="foot-cols">
-        <div><h3>Diners</h3><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/passport">Passport</a><a href="/how-it-works#tutorial">Diner tutorial</a><a href="/pricing">Pricing</a><a href="/help">Help center</a></div>
-        <div><h3>Restaurants</h3><a href="/restaurants">FIG for restaurants</a><a href="/pricing#restaurants">Pricing</a><a href="/restaurants#tutorial">Restaurant tutorial</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><h3>Diners</h3><a href="/how-it-works">How it works</a><a href="/features">Features</a><a href="/passport">Passport</a><a href="/how-it-works#tutorial">Diner tutorial</a><a href="/#owners">Pricing</a><a href="/help">Help center</a></div>
+        <div><h3>Restaurants</h3><a href="/restaurants">FIG for restaurants</a><a href="/#owners">Pricing</a><a href="/restaurants#tutorial">Restaurant tutorial</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/press">Press kit</a><a href="/contact">Contact</a><a href="/sitemap">Site map</a></div>
         <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
       </div>
@@ -294,7 +294,7 @@ page("how-it-works", "How it works", "Find a deal, claim it, show your code, ear
      + '''<section class="section"><div class="wrap"><div class="cards three">
   <a class="card-l" href="/passport"><b>The Passport</b><span>Every meal earns a stamp. Spend them on free Premium.</span><em>How stamps work</em></a>
   <a class="card-l" href="/features"><b>Takeout and chats</b><span>Order ahead, pay at pickup, and message restaurants before you go.</span><em>See every feature</em></a>
-  <a class="card-l" href="/pricing"><b>What it costs</b><span>Nothing for diners. Premium is optional, or free with stamps.</span><em>See pricing</em></a>
+  <a class="card-l" href="/#owners"><b>What it costs</b><span>Nothing for diners. Premium is optional, or free with stamps.</span><em>See pricing</em></a>
 </div></div></section>''' + cta("Ready when you are.", "FIG opens in Markham first. Download it and you'll be first in line."))
 
 page("features", "Features", "Map, filters, flash deals, sharing, AI picks, the Passport, chats and takeout: everything in the FIG app.", wide=True, group="Main", body=
@@ -314,28 +314,6 @@ page("restaurants", "FIG for restaurants", "One plan, $50 a year. No commission,
      + SECTION("owners") + tutorial("restaurant", OWNER_STEPS, "Set up in minutes.")
      + f'<section class="section"><div class="wrap narrow"><h2 class="h2">Owners ask.</h2>{faq(OWNER_QA)}<p class="more-link">More in the <a href="/help#restaurants">help center</a>, or read the <a href="/business-terms">business terms</a>.</p></div></section>'
      + cta("Get your restaurant on FIG", "Download FIG and choose \"I own a restaurant\". Your page goes live as soon as you finish setup."))
-
-PRICING_QA = [("Is FIG really free for diners?", "Yes. Claiming and using deals is free. You only pay your bill at the restaurant."),
-              ("What does FIG Premium add?", "AI picks: tell FIG what you feel like and it picks your three best live deals, with a reason for each. Free accounts get 3 picks a day; Premium is unlimited."),
-              ("Can I get Premium without paying?", "Yes. Spend 25 stamps for a free week, 50 for three weeks or 100 for a month. No card needed."),
-              ("What do restaurants pay?", "One plan, $50 CAD a year. It covers every location and every diner who walks in from FIG."),
-              ("Is there a commission or a fee per diner?", "No. A diner who uses your deal pays you at your counter, the way they always do."),
-              ("Can a restaurant cancel?", "Anytime, in the app. The plan runs to the end of the year you paid for.")]
-page("pricing", "Pricing", "Free for diners. FIG Premium $6.99/month or free with stamps. Restaurants pay one plan, $50 a year, with no commission.", wide=True, group="Main", extra_head=faq_ld(PRICING_QA), body=
-     hero("Simple, honest pricing.", "Free for diners. One flat plan for restaurants. No commission, ever.", ctas=False)
-     + '''<section class="section tight"><div class="wrap"><div class="plans">
-  <div class="plan"><p class="plan-k">Diners</p><p class="price"><b>$0</b></p><p class="plan-d">Everything you need to eat out for less.</p>
-    <ul><li>Every live deal on the map</li><li>Claim, show your code, save</li><li>Passport stamps on every visit</li><li>Takeout and chats with restaurants</li><li>3 AI picks a day</li></ul></div>
-  <div class="plan prem"><p class="plan-k">FIG Premium</p><p class="price"><b>$6.99</b><span>/ month</span></p><p class="plan-d">Or earn it free with stamps. Optional, cancel anytime.</p>
-    <ul><li>Everything in the free plan</li><li>Unlimited AI picks, each with a reason</li><li>25 stamps = 1 free week</li><li>50 stamps = 3 free weeks</li><li>100 stamps = 1 free month</li></ul></div>
-  <div class="plan biz" id="restaurants"><p class="plan-k">Restaurants</p><p class="price"><b>$50</b><span>/ year</span></p><p class="plan-d">CAD. One plan covers every location.</p>
-    <ul><li>Unlimited deals, everyday and flash</li><li>Unlimited scans on any phone or tablet</li><li>No commission, no fee per diner</li><li>Takeout ordering and chats</li><li>Daily caps, pause anytime</li></ul></div>
-</div>
-<div class="compare"><div><h3>Compared with a commission</h3><p>A typical 25% commission on a $40 order is $10. Five orders like that cost about what FIG costs for a whole year. Example numbers, not a quote from any company.</p></div>
-  <div class="bars"><div><span>FIG, a whole year</span><i style="--w:5%"></i><b>$50</b></div><div><span>25% of 5 orders of $40</span><i style="--w:5%"></i><b>$50</b></div><div><span>25% of 100 orders of $40</span><i style="--w:100%"></i><b>$1,000</b></div></div></div>
-</div></section>'''
-     + f'<section class="section"><div class="wrap narrow"><h2 class="h2">Pricing questions</h2>{faq(PRICING_QA)}</div></section>'
-     + cta("Start for free.", "Diners pay nothing. Restaurants: one plan, $50 a year."))
 
 page("passport", "The Passport", "Every meal on FIG earns a stamp. Spend 25, 50 or 100 stamps on free FIG Premium.", wide=True, group="Main", body=
      hero("Every meal earns a stamp.", "The Passport is your food diary on FIG. Every deal you use and every takeout pickup adds a stamp you can spend on free Premium.")

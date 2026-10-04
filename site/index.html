@@ -4,227 +4,310 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>FIG · Local deals in Markham</title>
-  <meta name="description" content="FIG shows live deals from Markham restaurants on a map. Claim one, show your code, save. Coming soon to Markham.">
+  <meta name="description" content="FIG puts live deals from Markham restaurants on a map. Claim one, show your code at the counter, and save. Free for diners. Coming soon.">
   <meta property="og:title" content="FIG · Local deals in Markham">
   <meta property="og:description" content="Live deals from Markham restaurants, one tap away. Get first access.">
   <meta property="og:image" content="/assets/og.png">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#1E5EFF">
+  <meta name="theme-color" content="#0A0D14">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/PlusJakartaSans.ttf" as="font" type="font/ttf" crossorigin>
-  <style>@layer reset, properties, theme, utilities;</style>
-  <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
-  <link rel="stylesheet" href="/css/screens.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="/css/site.css">
+  <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="logo" viewBox="743 716 100 100">
-    <path style="fill: var(--lg-a, #1E5EFF)" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/>
-    <path style="fill: var(--lg-a, #1E5EFF)" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/>
-    <path style="fill: var(--lg-leaf, #14C86B)" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/>
+    <path fill="#fff" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/>
+    <path fill="#fff" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/>
+    <path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/>
   </symbol>
 </svg>
 
-<header class="nav">
+<!-- page background: faint grid that lights up around the cursor -->
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-lit"></div><div class="bg-glow"></div></div>
+
+<header class="nav" id="nav">
   <a class="brand" href="/" aria-label="FIG home"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
-  <nav>
-    <a class="nav-link" href="#owners" data-role-link="restaurant">For restaurants</a>
-    <a class="btn btn-sm" href="#join">Get early access</a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#catch">What's the catch?</a>
+    <a href="#owners">For restaurants</a>
   </nav>
+  <div class="nav-cta">
+    <span class="nav-city"><i></i>Markham</span>
+    <a class="btn btn-sm" href="#join">Get early access</a>
+  </div>
 </header>
 
 <main>
-  <!-- HERO: the outro map, live -->
+  <!-- HERO -->
   <section class="hero" id="top">
-    <canvas class="map" id="map" aria-hidden="true"></canvas>
+    <div class="hero-map" id="map" aria-hidden="true"><img src="/assets/map-fallback.webp" alt="" class="map-fallback"></div>
     <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-copy wrap">
-      <p class="chip"><span class="dot"></span>Coming soon to Markham</p>
+    <div class="wrap hero-copy" id="join">
+      <p class="chip intro"><span class="dot"></span>Coming soon to Markham</p>
       <h1 class="display rise" aria-label="Local deals, one tap away.">
         <span class="mask"><span class="line">Local deals,</span></span>
         <span class="mask"><span class="line accent">one tap away.</span></span>
       </h1>
-      <p class="lede fade-in">FIG puts live deals from Markham restaurants on a map. Claim one, show your code at the counter, and save. Free for diners.</p>
-      <div class="hero-ctas fade-in">
-        <a class="btn" href="#join">Get early access</a>
-        <a class="btn btn-ghost" href="#owners" data-role-link="restaurant">I own a restaurant</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WAITLIST -->
-  <section class="join-band" id="join">
-    <div class="wrap join-grid">
-      <div class="join-copy">
-        <h2 class="h2">Be first in Markham.</h2>
-        <p class="body">Join the list and we'll message you the day FIG opens near you. Email or mobile, whichever you check more.</p>
-        <p class="counter" id="counter" hidden></p>
-      </div>
-      <form class="card form" id="waitlist" novalidate>
-        <div class="seg" role="radiogroup" aria-label="I am">
-          <label><input type="radio" name="role" value="diner" checked><span>I'm a diner</span></label>
-          <label><input type="radio" name="role" value="restaurant"><span>I own a restaurant</span></label>
+      <p class="lede intro">Live deals from Markham restaurants, right on the map. Claim one, show your code at the counter, and save. Free for diners.</p>
+      <form class="join intro" data-role="diner" novalidate>
+        <div class="field-pill">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <input name="contact" type="text" autocomplete="email" placeholder="Email or mobile number" aria-label="Email or mobile number" maxlength="254">
+          <button class="btn" type="submit"><span class="lg">Get early access</span><span class="sm">Join</span></button>
         </div>
-
-        <label class="field" data-only="restaurant" hidden>
-          <span>Restaurant name</span>
-          <input name="restaurant" type="text" autocomplete="organization" maxlength="120">
-        </label>
-
-        <label class="field">
-          <span>Email or mobile number</span>
-          <input name="contact" type="text" autocomplete="email" inputmode="email" placeholder="you@example.com or 905 555 0123" required maxlength="254">
-        </label>
-
-        <fieldset class="field">
-          <legend>Where do you eat most?</legend>
-          <div class="chips">
-            <label><input type="radio" name="area" value="Unionville"><span>Unionville</span></label>
-            <label><input type="radio" name="area" value="Hwy 7 & Kennedy"><span>Hwy 7 &amp; Kennedy</span></label>
-            <label><input type="radio" name="area" value="Pacific Mall area"><span>Pacific Mall area</span></label>
-            <label><input type="radio" name="area" value="Markham Village"><span>Markham Village</span></label>
-            <label><input type="radio" name="area" value="Cornell"><span>Cornell</span></label>
-            <label><input type="radio" name="area" value="Richmond Hill"><span>Richmond Hill</span></label>
-            <label><input type="radio" name="area" value="Somewhere else"><span>Somewhere else</span></label>
-          </div>
-        </fieldset>
-
-        <label class="check">
-          <input type="checkbox" name="consent" required>
-          <span>Send me FIG launch news and deals by email or text. I can unsubscribe anytime. <a href="/privacy">Privacy</a></span>
-        </label>
-
+        <label class="consent"><input type="checkbox" name="consent"><span>Send me FIG launch news by email or text. Unsubscribe anytime. <a href="/privacy">Privacy</a></span></label>
         <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-block" type="submit" id="submit">Join the waitlist</button>
-        <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+        <p class="form-msg" role="status" aria-live="polite"></p>
       </form>
+      <p class="owner-link intro">Own a restaurant? <a href="#owners">Get on FIG for $50 a year →</a></p>
     </div>
   </section>
 
-  <!-- HOW IT WORKS: one phone, four real app screens -->
-  <section class="how" id="how">
-    <div class="how-stage">
-      <div class="wrap how-grid">
-        <div class="device phone" data-w="390" data-h="844">
-          <div class="device-screen">
-            <div class="screen-slot" data-screen="results"></div>
-            <div class="screen-slot" data-screen="claim"></div>
-            <div class="screen-slot" data-screen="qr"></div>
-            <div class="screen-slot" data-screen="stamp"></div>
-          </div>
-        </div>
-        <div class="how-text">
+  <!-- FOOD STRIP -->
+  <section class="strip" aria-label="Cuisines on FIG">
+    <div class="marquee"><div class="marquee-track" data-marquee="0"></div></div>
+    <div class="marquee reverse"><div class="marquee-track" data-marquee="1"></div></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
           <p class="eyebrow">How it works</p>
-          <div class="steps">
-            <div class="step"><span class="num">1</span><h3>Find a deal nearby</h3><p>Live deals from Markham restaurants, nearest first. Filter by what's open, what's cheap, what you're craving.</p></div>
-            <div class="step"><span class="num">2</span><h3>Claim it in one tap</h3><p>We hold it for 24 hours. No card, no payment, nothing to print.</p></div>
-            <div class="step"><span class="num">3</span><h3>Show your code</h3><p>Staff scan it at the counter. The code changes every few minutes, so it only works for you.</p></div>
-            <div class="step"><span class="num">4</span><h3>Earn a stamp</h3><p>Every deal you use adds a stamp to your Passport. Spend stamps on free weeks of FIG Premium.</p></div>
-          </div>
-          <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <h2 class="h2 reveal">From craving to counter in four taps.</h2>
         </div>
+        <p class="side reveal">These are the real FIG screens. No card, no payment in the app. You pay the restaurant like normal.</p>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/map.webp" alt="FIG map with photo pins of nearby restaurants" loading="lazy" width="390" height="844"></div><span class="num">01</span><h3>Spot a deal on the map</h3><p>Every photo pin is a restaurant near you. Tap one to see what's on.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/claim.webp" alt="Claim sheet for 2-for-1 Dim Sum" loading="lazy" width="390" height="844"></div><span class="num">02</span><h3>Claim it in one tap</h3><p>We hold it for 24 hours. Nothing to pay, nothing to print.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/qr.webp" alt="QR code to show staff" loading="lazy" width="390" height="844"></div><span class="num">03</span><h3>Show your code</h3><p>Staff scan it at the counter. It changes every 5 minutes, so it only works for you.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/stamp.webp" alt="Stamp earned screen" loading="lazy" width="390" height="844"></div><span class="num">04</span><h3>Earn a stamp</h3><p>Every deal you use adds a stamp. Spend them on free weeks of Premium.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FEATURES BENTO (video loops) -->
+  <section class="section" id="features">
+    <div class="wrap">
+      <h2 class="h2 two-tone reveal"><span>Everything you need to eat out for less.</span> <span class="muted">Find it, filter it, share it, save.</span></h2>
+      <div class="bento">
+        <article class="cell wide" tabindex="0">
+          <div class="cell-text">
+            <h3>Your city, filtered.</h3>
+            <p>Tell FIG your cravings, budget and diet once. 226 places become the ones that fit you.</p>
+            <div class="more"><div><ul><li>Pick cravings like dim sum, ramen or bubble tea</li><li>Set a budget per person</li><li>Halal, vegetarian and allergy filters, always confirmed with staff</li></ul></div></div>
+            <span class="hint">Hover for more</span>
+          </div>
+          <div class="panel cobalt"><video data-src="/assets/clips/filters.mp4" poster="/assets/clips/filters.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Flash deals.</h3>
+            <p>Short deals that drop near you. The timer is real, set by the restaurant.</p>
+            <div class="more"><div><ul><li>Get an alert when one drops close by</li><li>Claim it before the timer runs out</li><li>Turn alerts off anytime</li></ul></div></div>
+          </div>
+          <div class="panel volt"><video data-src="/assets/clips/flash.mp4" poster="/assets/clips/flash.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Group chat, solved.</h3>
+            <p>Share a deal to the chat and everyone sees where you're going.</p>
+            <div class="more"><div><ul><li>One link with the photo, deal and distance</li><li>Friends can open it without the app</li></ul></div></div>
+          </div>
+          <div class="panel slate"><video data-src="/assets/clips/groupchat.mp4" poster="/assets/clips/groupchat.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Can't decide?</h3>
+            <p>Type what you want. AI picks your three best deals, and says why.</p>
+            <div class="more"><div><ul><li>"Dim sum for 4, under $25"</li><li>3 free picks a day, unlimited with Premium</li><li>It only picks real deals that are live</li></ul></div></div>
+          </div>
+          <div class="panel violet"><video data-src="/assets/clips/decide.mp4" poster="/assets/clips/decide.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Every meal counts.</h3>
+            <p>Each deal you use stamps your Passport. Stamps turn into free Premium.</p>
+            <div class="more"><div><ul><li>25 stamps: 1 free week</li><li>50 stamps: 3 free weeks</li><li>100 stamps: 1 free month</li></ul></div></div>
+          </div>
+          <div class="panel ice"><video data-src="/assets/clips/stamps.mp4" poster="/assets/clips/stamps.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- PASSPORT -->
-  <section class="passport wrap" id="passport">
-    <div class="passport-copy">
-      <p class="eyebrow">The Passport</p>
-      <h2 class="h2">Every meal earns a stamp.</h2>
-      <p class="body">Stamps are yours to spend, again and again.</p>
-      <ul class="rewards">
-        <li><b>25</b><span>stamps</span><em>1 free week of Premium</em></li>
-        <li><b>50</b><span>stamps</span><em>3 free weeks</em></li>
-        <li><b>100</b><span>stamps</span><em>1 free month</em></li>
-      </ul>
+  <section class="section" id="passport">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">The Passport</p>
+          <h2 class="h2 reveal">Every meal earns a stamp.</h2>
+        </div>
+        <p class="side reveal">Stamps are yours to spend on free FIG Premium, again and again. No card needed.</p>
+      </div>
+      <div class="stamps" id="stamps" aria-hidden="true"></div>
+      <div class="rewards">
+        <div class="reward reveal"><b data-count="25">25</b><span>stamps</span><em>1 free week of Premium</em></div>
+        <div class="reward reveal"><b data-count="50">50</b><span>stamps</span><em>3 free weeks</em></div>
+        <div class="reward reveal hot"><b data-count="100">100</b><span>stamps</span><em>1 free month</em></div>
+      </div>
     </div>
-    <div class="stamp-grid" id="stamps" aria-hidden="true"></div>
   </section>
 
-  <!-- WHAT'S THE CATCH? -->
-  <section class="catch" id="catch">
-    <div class="wrap">
-      <h2 class="h2 center">What's the catch?</h2>
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-tab="diner">Diners</button>
-        <button role="tab" aria-selected="false" data-tab="restaurant">Restaurants</button>
+  <!-- CHATS -->
+  <section class="section" id="chats">
+    <div class="wrap chats">
+      <div class="phone big tilt reveal"><img src="/assets/screens/chat.webp" alt="Chat with Golden Lantern about the 2-for-1 Dim Sum deal" loading="lazy" width="390" height="844"></div>
+      <div class="chats-copy">
+        <p class="eyebrow">Chats</p>
+        <h2 class="h2 reveal">Ask the restaurant before you go.</h2>
+        <p class="body reveal">Table for four? Still running tonight? Message them right from your deal. Your phone number is never shared.</p>
+        <ul class="points">
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>Your number stays private, always</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.6 5.6l12.8 12.8" stroke="currentColor" stroke-width="2"/></svg></span>Block or report in two taps</li>
+        </ul>
       </div>
-      <div class="chat" data-panel="diner">
-        <div class="q">is it actually free?</div><div class="a">Yes. Deals are free to claim and use.</div>
-        <div class="q">so what do I pay?</div><div class="a">Just your bill, at the restaurant, like normal.</div>
-        <div class="q">do restaurants get my number?</div><div class="a">Never. It stays private.</div>
-        <div class="q">can someone use my screenshot?</div><div class="a">No. Your code changes every 5 minutes.</div>
-        <div class="q">are the deals real?</div><div class="a">Every deal and its hours are set by the restaurant itself.</div>
+    </div>
+  </section>
+
+  <!-- WHAT'S THE CATCH -->
+  <section class="section band" id="catch">
+    <div class="wrap catch">
+      <div class="catch-copy">
+        <p class="eyebrow">No catch</p>
+        <h2 class="h2 reveal">What's the catch?</h2>
+        <p class="body reveal">Everyone asks. Here are the straight answers.</p>
+        <div class="seg" role="tablist" aria-label="Questions for">
+          <button role="tab" aria-selected="true" data-tab="diner">I'm a diner</button>
+          <button role="tab" aria-selected="false" data-tab="restaurant">I own a restaurant</button>
+        </div>
+        <article class="cell mini reveal" tabindex="0">
+          <div class="panel slate"><video data-src="/assets/clips/nocatch.mp4" poster="/assets/clips/nocatch.jpg" muted loop playsinline preload="none"></video></div>
+          <div class="cell-text"><h3>Watch: What's the catch?</h3><p>The 30-second version, straight from our videos.</p></div>
+        </article>
       </div>
-      <div class="chat" data-panel="restaurant" hidden>
-        <div class="q">do I need new equipment?</div><div class="a">No. Any phone or tablet scans.</div>
-        <div class="q">what if a code won't scan?</div><div class="a">Type it in. Same check.</div>
-        <div class="q">what about screenshots?</div><div class="a">Codes change every 5 minutes. Screenshots don't work.</div>
-        <div class="q">what if we get too busy?</div><div class="a">You set the daily cap. Pause anytime.</div>
-        <div class="q">ok so what does it cost?</div><div class="a">$50 a year. No fee per diner.</div>
-        <div class="q">I have two locations</div><div class="a">One plan covers every location.</div>
+      <div class="chatwin reveal">
+        <div class="chat-head">
+          <span class="chat-av"><svg class="logo"><use href="#logo"/></svg></span>
+          <div><b>FIG</b><small>The questions everyone asks</small></div>
+        </div>
+        <div class="chat-body" id="chat-body" aria-live="polite"></div>
+        <div class="chat-compose"><span>Something else? Message us on Instagram</span><i><svg width="19" height="19" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
       </div>
     </div>
   </section>
 
   <!-- RESTAURANTS -->
-  <section class="owners" id="owners">
+  <section class="section" id="owners">
     <div class="wrap">
-      <p class="eyebrow on-dark">For restaurants</p>
-      <h2 class="h2 on-dark">$50 a year.<br><span class="volt">That's it.</span></h2>
-      <p class="body on-dark">Diners find you on the map, claim your deal and show a code. Your staff scan it on any phone or tablet. No commission, no fee per diner.</p>
-
-      <div class="tablet-wrap">
-        <div class="tabs tabs-dark" role="tablist" aria-label="Business screens">
-          <button role="tab" aria-selected="true" data-tscreen="0">Dashboard</button>
-          <button role="tab" aria-selected="false" data-tscreen="1">Scanner</button>
-          <button role="tab" aria-selected="false" data-tscreen="2">Verified</button>
+      <div class="head-row">
+        <div>
+          <p class="eyebrow volt-t">For restaurants</p>
+          <h2 class="display-2 reveal">$50 a year.<br><span class="volt-t">That's it.</span></h2>
         </div>
-        <div class="device tablet" data-w="1180" data-h="820">
-          <div class="device-screen">
-            <div class="screen-slot" data-screen="tdash"></div>
-            <div class="screen-slot" data-screen="tscanner"></div>
-            <div class="screen-slot" data-screen="tverified"></div>
+        <p class="side reveal">Diners find you on the map, claim your deal and show a code. Your staff scan it on any phone or tablet. No commission, no fee per diner.</p>
+      </div>
+      <div class="tablet-row">
+        <div class="tablet-wrap reveal">
+          <div class="seg" role="tablist" aria-label="Business screens">
+            <button role="tab" aria-selected="true" data-tshot="0">Dashboard</button>
+            <button role="tab" aria-selected="false" data-tshot="1">Scanner</button>
+            <button role="tab" aria-selected="false" data-tshot="2">Verified</button>
+          </div>
+          <div class="tablet">
+            <img src="/assets/screens/tdash.webp" alt="FIG business dashboard" loading="lazy" class="on">
+            <img src="/assets/screens/tscanner.webp" alt="FIG staff scanner" loading="lazy">
+            <img src="/assets/screens/tverified.webp" alt="Scan verified, included in your plan" loading="lazy">
           </div>
         </div>
+        <article class="cell tall reveal" tabindex="0">
+          <div class="cell-text">
+            <h3>One day on FIG.</h3>
+            <p>14 diners walk in from FIG. Guess what it costs.</p>
+            <div class="more"><div><ul><li>Post one deal in a minute</li><li>Staff scan diners at the counter</li><li>Your plan covers every scan</li></ul></div></div>
+          </div>
+          <div class="panel volt"><video data-src="/assets/clips/oneday.mp4" poster="/assets/clips/oneday.jpg" muted loop playsinline preload="none"></video></div>
+        </article>
       </div>
-
       <ul class="perks">
-        <li><b>Unlimited scans</b><span>Every diner is included in your plan.</span></li>
-        <li><b>Every location</b><span>One plan covers all of them.</span></li>
-        <li><b>Live right away</b><span>Your page goes live as soon as you finish setup.</span></li>
-        <li><b>You're in control</b><span>Set daily caps, pick your hours, pause anytime.</span></li>
+        <li class="reveal"><b>Unlimited scans</b><span>Every diner is included in your plan.</span></li>
+        <li class="reveal"><b>Every location</b><span>One plan covers all of them.</span></li>
+        <li class="reveal"><b>Live right away</b><span>Your page goes live when you finish setup.</span></li>
+        <li class="reveal"><b>You're in control</b><span>Set daily caps and hours. Pause anytime.</span></li>
       </ul>
-      <a class="btn btn-volt" href="#join" data-role-link="restaurant">Get your restaurant on FIG</a>
+      <form class="join owner-form reveal" data-role="restaurant" novalidate>
+        <h3>Get your restaurant on FIG</h3>
+        <div class="owner-fields">
+          <input name="restaurant" type="text" placeholder="Restaurant name" aria-label="Restaurant name" autocomplete="organization" maxlength="120">
+          <input name="contact" type="text" placeholder="Email or mobile number" aria-label="Email or mobile number" autocomplete="email" maxlength="254">
+          <button class="btn btn-volt" type="submit">Get started</button>
+        </div>
+        <label class="consent"><input type="checkbox" name="consent"><span>FIG can contact me about setting up, by email or text. <a href="/privacy">Privacy</a></span></label>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-msg" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
-  <!-- OUTRO -->
-  <section class="outro">
-    <svg class="logo logo-inv" viewBox="743 716 100 100" aria-hidden="true"><path class="lg-a" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path class="lg-a" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path class="lg-leaf" id="outro-leaf" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>
-    <h2 class="display rise" aria-label="Eat local. Save fast.">
-      <span class="mask"><span class="line">Eat local.</span></span>
-      <span class="mask"><span class="line volt">Save fast.</span></span>
-    </h2>
-    <a class="btn btn-white" href="#join">Get early access</a>
+  <!-- CLOSING -->
+  <section class="section closing-wrap">
+    <div class="wrap">
+      <div class="closing reveal">
+        <div>
+          <h2 class="display-2 rise" aria-label="Eat local. Save fast.">
+            <span class="mask"><span class="line">Eat local.</span></span>
+            <span class="mask"><span class="line volt-t">Save fast.</span></span>
+          </h2>
+          <p>Be first in Markham when FIG opens.</p>
+        </div>
+        <form class="join" data-role="diner" novalidate>
+          <div class="field-pill light">
+            <input name="contact" type="text" autocomplete="email" placeholder="Email or mobile number" aria-label="Email or mobile number" maxlength="254">
+            <button class="btn btn-ink" type="submit">Join</button>
+          </div>
+          <label class="consent light"><input type="checkbox" name="consent"><span>Send me FIG launch news by email or text. Unsubscribe anytime.</span></label>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="wrap foot-grid">
-    <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
-    <p>Markham, Ontario · <a href="/privacy">Privacy</a></p>
-    <p class="fine">App screens show example restaurants and deals. Map data © OpenStreetMap contributors.</p>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
+        <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Diners</h4><a href="#how">How it works</a><a href="#passport">Passport</a><a href="#catch">What's the catch?</a></div>
+        <div><h4>Restaurants</h4><a href="#owners">Get on FIG</a><a href="#owners">Pricing</a></div>
+        <div><h4>Company</h4><a href="/privacy">Privacy</a><a href="#join">Early access</a></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 FIG Technologies Inc. · Markham, Ontario</span>
+      <span>App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap.</span>
+    </div>
   </div>
 </footer>
 
 <script src="/js/config.js"></script>
+<script src="/js/contact.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="/js/contact.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
 <script src="/js/map.js"></script>
 <script src="/js/main.js"></script>
 </body>

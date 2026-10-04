@@ -1,6 +1,9 @@
 {
-  "cleanUrls": true,
-  "rewrites": [{ "source": "/owners", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/owners", "destination": "/" },
+    { "source": "/owners/", "destination": "/" },
+    { "source": "/privacy", "destination": "/privacy.html" }
+  ],
   "headers": [
     { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] }
   ]

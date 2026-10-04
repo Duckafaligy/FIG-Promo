@@ -220,6 +220,7 @@
     tutRole = tab;
     tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
     tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
+    tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
     tutVideo.play().catch(() => {});
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));

@@ -1,0 +1,312 @@
+{
+ "terms": {
+  "title": "Terms of service",
+  "updated": "Last updated October 3, 2026",
+  "short": [
+   "Deals are free for you. Restaurants pay FIG when a deal is used.",
+   "A deal counts once staff scan your QR at the restaurant.",
+   "One account per person. No sharing codes or faking visits.",
+   "Stamps can be spent on free Premium time. They have no cash value.",
+   "Premium is $6.99/month through your app store. Cancel anytime."
+  ],
+  "sections": [
+   {
+    "heading": "1. Who we are",
+    "paragraphs": [
+     "FIG is a local deals app run by FIG Technologies Inc. in Ontario, Canada (\"FIG\", \"we\", \"us\"). These terms cover the FIG app and website. By creating an account, you agree to them and to our Privacy Policy."
+    ]
+   },
+   {
+    "heading": "2. Your account",
+    "paragraphs": [
+     "You need an account to use FIG, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay, especially before buying Premium. Use your real name, an email and a mobile number, each confirmed with a code. One account per person and per mobile number. Keep your password private. You're responsible for what happens on your account."
+    ]
+   },
+   {
+    "heading": "3. How deals work",
+    "paragraphs": [
+     "Deals are offered by restaurants, not by FIG. Each deal shows its own rules (times, limits, dine-in only, and so on) before you claim it.",
+     "• Claiming holds a deal for you for 24 hours.",
+     "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
+     "• The deal is used once staff scan it. That scan is a \"redemption\".",
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Takeout orders are paid to the restaurant when you pick up. Deals that allow takeout are applied to your order; dine-in only deals are not. If you don't collect an order, the restaurant can report a no-show. You can contest it. Two confirmed no-shows turn off takeout for your account and mobile number."
+    ]
+   },
+   {
+    "heading": "4. Play fair",
+    "paragraphs": [
+     "Restaurants pay for every redemption, so we protect them from abuse. Don't:",
+     "• make more than one account",
+     "• share, screenshot or sell QR codes",
+     "• fake visits or redeem without buying",
+     "• use bots, scripts or location spoofing",
+     "• harass restaurant staff or other diners",
+     "If we see this, we may cancel claims, remove stamps, or suspend your account."
+    ]
+   },
+   {
+    "heading": "5. Stamps and free Premium",
+    "paragraphs": [
+     "You earn 1 stamp for each verified redemption. A scanned takeout pickup counts as one. Your first stamp starts 3 days of Premium. After that you can spend stamps on Premium time: 25 stamps for 1 week, 50 for 3 weeks and 100 for 1 month, as often as you have the stamps. Spent stamps come off your balance and can't be given back. Free time needs no card and never auto-renews. Early-bird and other gift time works the same way.",
+     "Stamps have no cash value and can't be sold or transferred. If a redemption is reversed (for example, it turns out to be fraud), its stamp is removed."
+    ]
+   },
+   {
+    "heading": "6. FIG Premium",
+    "paragraphs": [
+     "Premium costs $6.99 CAD a month, plus tax. It's billed by Apple's App Store or Google Play and renews each month until you cancel in your store settings. Refunds follow the store's policy. If the price changes, we'll tell you at least 30 days before it applies to you."
+    ]
+   },
+   {
+    "heading": "7. AI picks",
+    "paragraphs": [
+     "AI picks suggest deals using restaurant info on FIG and your taste settings. They only suggest real deals listed on FIG, but they can still get details wrong. Check the deal page before you go."
+    ]
+   },
+   {
+    "heading": "8. Restaurants and your food",
+    "paragraphs": [
+     "FIG doesn't run any restaurant. Food, prices, service, safety and allergens are the restaurant's responsibility. Dietary filters are a guide only. Always tell staff about allergies before you order."
+    ]
+   },
+   {
+    "heading": "9. What you send us",
+    "paragraphs": [
+     "If you send us photos, reports or feedback, you still own them. You let us use them to run and improve FIG. Don't send anything that isn't yours or breaks the law. Reviews must be about your own scanned visit and honest. They're public under your first name and last initial. We can remove reviews that are abusive, fake or off-topic."
+    ]
+   },
+   {
+    "heading": "10. Leaving FIG",
+    "paragraphs": [
+     "You can delete your account anytime in Profile → Account & password. We can suspend or close accounts that break these terms. If we do, we'll tell you why unless the law or safety stops us."
+    ]
+   },
+   {
+    "heading": "11. Our responsibility",
+    "paragraphs": [
+     "We work hard to keep FIG accurate and running, but it's provided \"as is\". As far as the law allows, we aren't liable for indirect losses, and our total liability to you is limited to the greater of what you paid us in the last 12 months or $50 CAD. Nothing here removes your rights under Ontario consumer protection law."
+    ]
+   },
+   {
+    "heading": "12. Changes to these terms",
+    "paragraphs": [
+     "If we make an important change, we'll tell you in the app at least 14 days before it starts. If you keep using FIG after that, the new terms apply."
+    ]
+   },
+   {
+    "heading": "13. Governing law",
+    "paragraphs": [
+     "These terms are governed by the laws of Ontario and the federal laws of Canada that apply there. Disputes go to the courts of Ontario."
+    ]
+   }
+  ],
+  "contactAsk": "Questions about these terms?",
+  "contactLine": "legal@fig.app · FIG Technologies Inc., Markham, Ontario",
+  "email": "legal@fig.app"
+ },
+ "privacy": {
+  "title": "Privacy policy",
+  "updated": "Last updated October 3, 2026",
+  "short": [
+   "We collect what we need to show you deals nearby and check that redemptions are real.",
+   "We never sell your personal information.",
+   "Restaurants only see what they need to verify your visit.",
+   "Location is used while you use FIG, and for alerts only if you turn them on.",
+   "You can download or delete your data anytime."
+  ],
+  "sections": [
+   {
+    "heading": "1. Who's responsible",
+    "paragraphs": [
+     "FIG Technologies Inc. in Ontario, Canada is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions at privacy@fig.app."
+    ]
+   },
+   {
+    "heading": "2. What we collect",
+    "paragraphs": [
+     "• Account: name, username, email and mobile number (each confirmed with a code), photo, and your password (stored scrambled, never readable).",
+     "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
+     "• Location: your precise location while you use FIG, to show nearby deals and confirm you're at the restaurant when you activate a deal or pick up an order. We keep the result of that check with the visit record. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
+     "• Activity: claims, redemptions, stamps, searches, takeout orders, chat messages, and the reviews and photos you post.",
+     "• Device: phone model, app version, notification token and crash reports.",
+     "• Purchases: Apple or Google tells us if Premium is active. We never see your card.",
+     "• Support: messages and reports you send us."
+    ]
+   },
+   {
+    "heading": "3. How we use it",
+    "paragraphs": [
+     "• Show deals and places near you",
+     "• Verify redemptions and stop fraud",
+     "• Count stamps and the free Premium you spend them on",
+     "• Personalise Home and AI picks (you can turn this off)",
+     "• Send the alerts and emails you chose",
+     "• Deliver chat messages between you and a restaurant. Phone numbers typed into a chat are hidden. The FIG team reads a chat only when someone reports it",
+     "• Answer support requests and improve FIG",
+     "We don't sell your information or show you third-party ads based on it."
+    ]
+   },
+   {
+    "heading": "4. Dietary needs",
+    "paragraphs": [
+     "Dietary needs can say something about your health or beliefs, so we treat them as sensitive. They're only used to filter deals for you. They're never shared with restaurants."
+    ]
+   },
+   {
+    "heading": "5. What restaurants see",
+    "paragraphs": [
+     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email, location or history. They never see your mobile number, not even for a takeout order: they reach you by chat or a notification in FIG. Reviews you post are public and show your first name and last initial."
+    ]
+   },
+   {
+    "heading": "6. Companies that help us",
+    "paragraphs": [
+     "These companies process data for us, only to run FIG, under contracts that protect it:",
+     "• Supabase: database and sign-in",
+     "• Vercel: hosting",
+     "• Stripe: restaurant payments",
+     "• Apple and Google: sign-in, maps, notifications, Premium billing",
+     "• Anthropic: AI picks"
+    ]
+   },
+   {
+    "heading": "7. AI picks and your data",
+    "paragraphs": [
+     "For AI picks, we send Anthropic's Claude your taste settings, what you type, and the deals near you. We don't send your name or email, and Anthropic doesn't use it to train its models."
+    ]
+   },
+   {
+    "heading": "8. Where your data lives",
+    "paragraphs": [
+     "Some of these companies store data outside Canada, mostly in the United States. There, it's protected by our contracts but also covered by local law."
+    ]
+   },
+   {
+    "heading": "9. How long we keep it",
+    "paragraphs": [
+     "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days. Redemption records are kept without your name for up to 7 years, because restaurants are billed for them and tax law requires it."
+    ]
+   },
+   {
+    "heading": "10. Your choices",
+    "paragraphs": [
+     "• See or fix your info in Profile",
+     "• Download it in Privacy & terms",
+     "• Turn off location, alerts or personalised picks",
+     "• Delete your account at any time",
+     "Not happy with our answer? You can complain to the Office of the Privacy Commissioner of Canada."
+    ]
+   },
+   {
+    "heading": "11. Keeping it safe",
+    "paragraphs": [
+     "We encrypt data in transit, scramble passwords and limit who on our team can access data. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
+    ]
+   },
+   {
+    "heading": "12. Age",
+    "paragraphs": [
+     "FIG is for people 14 and older. We don't knowingly collect information from anyone younger. If we learn that someone under 14 has an account, we delete it."
+    ]
+   },
+   {
+    "heading": "13. Changes",
+    "paragraphs": [
+     "If we change how we use your information in an important way, we'll tell you in the app first, and ask for your consent where the law requires it."
+    ]
+   }
+  ],
+  "contactAsk": "Questions about your privacy?",
+  "contactLine": "privacy@fig.app · Privacy Officer, FIG Technologies Inc., Markham, Ontario",
+  "email": "privacy@fig.app"
+ },
+ "business-terms": {
+  "title": "Business terms",
+  "updated": "Last updated October 3, 2026",
+  "short": [
+   "One plan: $50 CAD a year for all your locations. No fee per scan, no other fees.",
+   "Your page shows to diners while your plan is on. Cancel anytime: it runs to the end of the year you paid for.",
+   "Honour your live deals exactly as written.",
+   "Only your enrolled staff devices can verify scans."
+  ],
+  "sections": [
+   {
+    "heading": "1. Who these terms are for",
+    "paragraphs": [
+     "These terms apply to restaurants in Canada that use FIG Business. They sit alongside our Terms of service and Privacy policy. By signing up, you confirm you're 18 or older and can accept them for your business."
+    ]
+   },
+   {
+    "heading": "2. Your listing",
+    "paragraphs": [
+     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Your page goes live as soon as you finish setting it up. We can pause or remove a listing that breaks these terms."
+    ]
+   },
+   {
+    "heading": "3. Your deals",
+    "paragraphs": [
+     "You choose your deals, times and daily limits. While a deal is live, you must honour it exactly as listed. Don't raise prices to cancel out a discount. If you pause or end a deal, honour claims made before that until they expire (up to 24 hours)."
+    ]
+   },
+   {
+    "heading": "4. Your plan",
+    "paragraphs": [
+     "• FIG for restaurants costs $50 CAD a year, plus applicable tax. One plan covers every location on your account.",
+     "• It includes unlimited deals and unlimited verified scans (valid QR scans by your enrolled devices), takeout orders, reviews and your numbers.",
+     "• There are no fees per scan, and no sign-up, monthly or listing fees."
+    ]
+   },
+   {
+    "heading": "5. Paying, renewing and cancelling",
+    "paragraphs": [
+     "You pay by card through Stripe, which keeps your card details; FIG never sees them. Your plan renews each year on the date you started it, at the price then in effect, until you cancel. Cancel anytime from Plan in FIG Business: your plan runs to the end of the year you've paid for, then your page and deals stop showing to diners. If a payment fails, Stripe tries again for a short while and your page stays live; if it still fails, your plan ends. Receipts are in Plan (Manage billing). Takeout orders don't cost extra: you collect the food payment yourself, and you're responsible for your menu, prices and tax."
+    ]
+   },
+   {
+    "heading": "6. Wrong scans and disputes",
+    "paragraphs": [
+     "You can report a scan you think is wrong within 14 days. We review it and remove it if it was a mistake. Duplicate scans are removed automatically."
+    ]
+   },
+   {
+    "heading": "7. Reviews",
+    "paragraphs": [
+     "Paying for FIG never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
+    ]
+   },
+   {
+    "heading": "8. Staff and devices",
+    "paragraphs": [
+     "You're responsible for scans made by your staff and devices. Remove access when someone leaves."
+    ]
+   },
+   {
+    "heading": "9. Diner information",
+    "paragraphs": [
+     "You'll see a diner's first name, last initial and the deal they used, never their mobile number or email. Reach a diner only through FIG (chat, or \"We're waiting\" on a takeout order), and only to serve that deal or order. Don't contact diners outside FIG, and handle their information as Canadian privacy law requires."
+    ]
+   },
+   {
+    "heading": "10. Ending the agreement",
+    "paragraphs": [
+     "You can close your business account anytime. Your plan ends at once and the rest of the year isn't refunded. We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund the unused months."
+    ]
+   },
+   {
+    "heading": "11. Responsibility",
+    "paragraphs": [
+     "You're responsible for your food, prices, service and safety, and for any claims about them. FIG is provided \"as is\". As far as the law allows, our total liability is limited to the greater of the fees you paid us in the last 12 months or $100 CAD."
+    ]
+   },
+   {
+    "heading": "12. Changes and law",
+    "paragraphs": [
+     "We'll give you at least 30 days' notice before changing the price. A new price applies from your next renewal. These terms follow Ontario law, and disputes go to the courts of Ontario."
+    ]
+   }
+  ],
+  "contactAsk": "Questions about these terms?",
+  "contactLine": "business@fig.app · FIG Technologies Inc., Markham, Ontario",
+  "email": "business@fig.app"
+ }
+}

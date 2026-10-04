@@ -230,35 +230,35 @@
       ["r6", "Scan diners at the counter", "Any phone or tablet. Can't read the QR? Type the code. Add staff and their devices."],
     ] },
   };
+  // the tutorial plays a looping video of the real app (tut-diner / tut-restaurant); step k starts at 0.3 + 4.5k seconds
   const tutBox = $("#tut"), tutScreens = $("#tut-screens"), tutSteps = $("#tut-steps");
-  let tutRole = "diner", tutCur = 0, tutTimer = null, tutPicked = false, tutVisible = false;
+  const STEP_AT = (k) => 0.3 + k * 4.5, STEP_LEN = 4.5;
+  let tutRole = "diner", tutVisible = false;
+  tutScreens.innerHTML = '<video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video>';
+  const tutVideo = $("video", tutScreens);
   function tutRender(role) {
-    tutRole = role; tutCur = 0;
+    tutRole = role;
     const t = TUT[role];
     $("#tut-title").textContent = t.title; $("#tut-sub").textContent = t.sub;
-    tutScreens.innerHTML = t.steps.map(([img], k) => `<img src="/assets/tut/${img}.webp" alt="" loading="lazy" class="${k ? "" : "on"}">`).join("");
     tutSteps.innerHTML = t.steps.map(([, h, d], k) => `<li class="${k ? "" : "on"}" tabindex="0" role="button"><span class="n">${k + 1}</span><div><b>${h}</b><p>${d}</p></div><i class="bar"></i></li>`).join("");
     $$("li", tutSteps).forEach((li, k) => {
-      const go = () => { tutPicked = true; tutShow(k); };
+      const go = () => { tutVideo.currentTime = STEP_AT(k) + 0.05; tutVideo.play().catch(() => {}); };
       li.addEventListener("click", go);
       li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
     });
-    tutPlay();
+    tutVideo.poster = `/assets/clips/tut-${role}.jpg`;
+    tutVideo.src = `/assets/clips/tut-${role}.mp4`;
+    if (tutVisible) tutVideo.play().catch(() => {});
   }
-  function tutShow(k) {
-    tutCur = k;
-    $$("img", tutScreens).forEach((im, i) => im.classList.toggle("on", i === k));
-    $$("li", tutSteps).forEach((li, i) => li.classList.toggle("on", i === k));
-    tutPlay();
-  }
-  function tutPlay() {
-    clearTimeout(tutTimer);
-    const bar = $$("li .bar", tutSteps)[tutCur];
-    if (motion && bar) gsap.fromTo(bar, { scaleX: 0 }, { scaleX: tutPicked ? 0 : 1, duration: tutPicked ? 0 : 4.5, ease: "none", overwrite: true });
-    if (!motion || tutPicked || !tutVisible) return;
-    tutTimer = setTimeout(() => tutShow((tutCur + 1) % TUT[tutRole].steps.length), 4500);
-  }
-  new IntersectionObserver(([e]) => { tutVisible = e.isIntersecting; tutPlay(); }, { threshold: 0.35 }).observe(tutBox);
+  let tutLast = -1;
+  tutVideo.addEventListener("timeupdate", () => {
+    const t = tutVideo.currentTime, k = Math.max(0, Math.min(5, Math.floor((t - 0.3) / STEP_LEN)));
+    const lis = $$("li", tutSteps);
+    if (k !== tutLast) { lis.forEach((li, i) => li.classList.toggle("on", i === k)); tutLast = k; }
+    const bar = lis[k] && $(".bar", lis[k]);
+    if (bar) bar.style.transform = `scaleX(${Math.max(0, Math.min(1, (t - STEP_AT(k)) / STEP_LEN))})`;
+  });
+  new IntersectionObserver(([e]) => { tutVisible = e.isIntersecting; if (tutVisible) tutVideo.play().catch(() => {}); else tutVideo.pause(); }, { threshold: 0.3 }).observe(tutBox);
   tutRender("diner");
 
   // ---------- what's the catch: a chat that types ----------
@@ -293,7 +293,7 @@
   function selectTab(tab) {
     $$("#catch [data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
     play(tab);
-    if (tab !== tutRole) { tutPicked = false; tutRender(tab); }
+    if (tab !== tutRole) tutRender(tab);
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   let chatStarted = false;

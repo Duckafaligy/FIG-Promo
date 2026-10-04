@@ -266,7 +266,7 @@ button, input { font: inherit; color: inherit; }
 .cp-head small { display: block; font-size: 12px; font-weight: 600; color: #5B6779; }
 .cp-back { width: 36px; height: 36px; border-radius: 99px; background: #F2F5FA; display: grid; place-items: center; flex-shrink: 0; }
 .cp-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 14px 14px 10px; justify-content: flex-end; }
-.cp-chip { align-self: center; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: 99px; background: #EAF0FF; color: #1E5EFF; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
+.cp-chip { align-self: center; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: 99px; background: #EAF0FF; color: #1A52E0; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
 .cp-day { align-self: center; font-size: 12px; font-weight: 700; color: #5B6779; margin-bottom: 4px; }
 .cp-body .bub { font-size: 14px; line-height: 20px; max-width: 80%; flex-shrink: 0; }
 .cp-body .bub.q + .bub.a, .cp-body .bub.a + .bub.q { margin-top: 8px; }

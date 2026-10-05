@@ -11,8 +11,8 @@
     const place = () => {
       const b = seg.querySelector('[aria-selected="true"]');
       if (!b) return;
-      pill.style.width = b.offsetWidth + "px";
-      pill.style.transform = `translateX(${b.offsetLeft - 4}px)`;
+      const l = b.offsetLeft - 4, r = seg.clientWidth - 8 - l - b.offsetWidth;
+      pill.style.clipPath = `inset(0 ${r}px 0 ${l}px round 999px)`;
     };
     new MutationObserver(place).observe(seg, { subtree: true, attributeFilter: ["aria-selected"] });
     addEventListener("resize", place);

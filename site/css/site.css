@@ -666,8 +666,8 @@ button, input { font: inherit; color: inherit; }
 /* sliding tab pill */
 .seg { position: relative; }
 .seg button { position: relative; z-index: 1; overflow: hidden; transition: color .35s, transform .2s var(--ease); }
-.seg-pill { position: absolute; top: 4px; bottom: 4px; left: 4px; border-radius: 999px; background: var(--cobalt); box-shadow: 0 6px 16px rgba(10, 16, 32, .14); }
-.seg.pill-on .seg-pill { transition: transform .5s cubic-bezier(.3, 1.35, .45, 1), width .5s cubic-bezier(.3, 1.35, .45, 1); }
+.seg-pill { position: absolute; inset: 4px; background: var(--cobalt); clip-path: inset(0 100% 0 0 round 999px); }
+.seg.pill-on .seg-pill { transition: clip-path .5s cubic-bezier(.3, 1.35, .45, 1); }
 .seg:has(.seg-pill) button[aria-selected="true"] { background: transparent; }
 .seg button:not([aria-selected="true"]):hover { color: var(--text); }
 

@@ -23,7 +23,7 @@ const count = async (path) => (await rest(path + (path.includes("?") ? "&" : "?"
 const safe = (p, fallback) => p.catch(() => fallback);
 
 async function overview() {
-  const [diners, waiting, restaurants, live, reports, keys, recentR, recentRep, leads] = await Promise.all([
+  const [diners, waiting, restaurants, live, reports, keys, recentR, recentRep, leads, plans, planUsed] = await Promise.all([
     safe(count("profiles?role=eq.diner"), null),
     safe(count("profiles?role=eq.diner&early_access=is.false"), null),
     safe(count("restaurants"), null),
@@ -33,19 +33,25 @@ async function overview() {
     safe(rest("restaurants?select=id,name,cuisine,city,status,created_at&order=created_at.desc&limit=100"), { rows: [] }),
     safe(rest("reports?select=id,reason,details,at,status&order=at.desc&limit=100"), { rows: [] }),
     safe(rest("waitlist?select=created_at,role,email,phone,restaurant,area,source&order=created_at.desc&limit=500"), { rows: [] }),
+    safe(rest("plan_codes?select=code,note,days,max_uses,uses,made_at&order=made_at.desc&limit=200"), { rows: [] }),
+    safe(rest("billing_accounts?select=owner_id,plan_code&plan_code=not.is.null"), { rows: [] }),
   ]);
+  // which restaurants each plan code turned on
+  const owners = [...new Set(planUsed.rows.map((b) => b.owner_id))];
+  const names = owners.length ? (await safe(rest(`restaurants?select=owner_id,name&owner_id=in.(${owners.join(",")})`), { rows: [] })).rows : [];
+  const planCodes = plans.rows.map((k) => ({ ...k, used_by: planUsed.rows.filter((b) => b.plan_code === k.code).flatMap((b) => names.filter((n) => n.owner_id === b.owner_id).map((n) => n.name)) }));
   return {
     counts: { diners, waiting, restaurants, live, reports, keys: keys.rows.length },
-    keys: keys.rows, restaurants: recentR.rows, reports: recentRep.rows,
+    keys: keys.rows, planCodes, restaurants: recentR.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
 }
 
 // FIG-XXXXX-XXXXX from letters and digits that can't be misread (same alphabet as the app's make_access_keys)
 const ABC = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-function newCode() {
+function newCode(prefix = "FIG-") {
   const b = crypto.randomBytes(10);
-  let c = "FIG-";
+  let c = prefix;
   for (let j = 0; j < 10; j++) c += ABC[b[j] % 32] + (j === 4 ? "-" : "");
   return c;
 }
@@ -60,4 +66,16 @@ async function deleteKey(code) {
   await rest(`access_keys?code=eq.${encodeURIComponent(code)}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, makeKeys, deleteKey };
+// plan codes: one-time PLAN-XXXXX-XXXXX codes; each turns one restaurant owner's plan on free for a year (in the app)
+async function makePlanCodes(n, note) {
+  n = Math.max(1, Math.min(50, n | 0));
+  const rows = Array.from({ length: n }, () => ({ code: newCode("PLAN-"), note: String(note || "").trim().slice(0, 80), max_uses: 1, days: 365 }));
+  await rest("plan_codes", { method: "POST", body: JSON.stringify(rows), headers: { Prefer: "return=minimal" } });
+  return rows.map((r) => r.code);
+}
+async function deletePlanCode(code) {
+  if (!/^[A-Z0-9-]{4,24}$/.test(code)) throw new Error("bad code");
+  await rest(`plan_codes?code=eq.${encodeURIComponent(code)}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+}
+
+module.exports = { connected, overview, makeKeys, deleteKey, makePlanCodes, deletePlanCode };

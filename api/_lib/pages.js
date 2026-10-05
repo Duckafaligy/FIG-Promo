@@ -111,6 +111,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
       <button data-v="keys">Access keys <span class="badge" id="n-keys">–</span></button>
+      <button data-v="plans">Plan codes <span class="badge" id="n-plans">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -155,7 +156,40 @@ const VIEWS = {
     "<h2>All keys</h2>" + table(["Key", "Who it's for", "Used", "Made", ""], D.keys.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note), k.uses ? k.uses + " of " + k.max_uses : '<span class="pill">Not used yet</span>', ago(k.made_at),
       '<button class="link" data-copy="' + esc(k.code) + '">Copy</button><button class="link red" data-del="' + esc(k.code) + '">Delete</button>']), "No keys yet.") +
     '<p class="note">Restaurants don\\'t need a key. Deleting a key stops anyone new from using it; people it already let in stay in.</p>'),
+  plans: () => '<h1>Plan codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+    '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
+    '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
+    '<div><label for="p-note">Which restaurant</label><input class="f" id="p-note" maxlength="80" placeholder="Golden Lantern, Kennedy & Bur Oak"></div>' +
+    '<div><label for="p-n">How many codes</label><input class="f" id="p-n" type="number" min="1" max="50" value="1"></div>' +
+    '<div></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
+    "<h2>All plan codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
+      k.uses ? '<span class="pill g">Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
+      '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No plan codes yet.") +
+    '<p class="note">A used code can\\'t be used again, so it\\'s safe to hand over. Deleting a code stops it working; plans it already turned on keep running.</p>'),
 };
+
+// a printable "first year on us" card to hand a restaurant with its code
+const CARD_LOGO = ${JSON.stringify(LOGO)};
+function printCard(code, who) {
+  const w = window.open("", "_blank");
+  if (!w) return alert("Allow pop-ups to print the card.");
+  w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>FIG founding card</title><style>' +
+    '@page{size:auto;margin:16mm}body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;margin:0;display:grid;place-items:center;min-height:100vh;color:#0A1020}' +
+    '.c{width:400px;border-radius:26px;padding:30px;color:#fff;background:linear-gradient(135deg,#3B78FF,#1E5EFF 42%,#1239B8);-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+    '.b{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:.06em}.b span.m{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#fff}.b svg{width:28px;height:28px}' +
+    '.p{display:inline-block;margin-top:22px;padding:6px 13px;border-radius:99px;background:#C8F135;color:#0A1020;font-weight:800;font-size:13px}' +
+    'h1{font-size:34px;line-height:1.05;letter-spacing:-.03em;margin:12px 0 6px}.f{font-size:15px;opacity:.9;margin:0 0 20px}' +
+    '.k{background:#fff;color:#0A1020;border-radius:16px;padding:16px;text-align:center}.k small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:#5B6779}.k b{display:block;font-family:ui-monospace,Consolas,monospace;font-size:24px;letter-spacing:.06em;margin-top:6px}' +
+    'ol{margin:18px 0 0;padding-left:20px;font-size:13.5px;line-height:1.7}.n{margin-top:14px;font-size:12px;opacity:.75}</style></head><body><div class="c">' +
+    '<div class="b"><span class="m">' + CARD_LOGO + '</span>FIG FOR RESTAURANTS</div>' +
+    '<span class="p">Founding restaurant</span><h1>Your first year<br>of FIG is on us</h1><p class="f">' + esc(who || "Welcome to FIG") + '</p>' +
+    '<div class="k"><small>YOUR CODE</small><b>' + esc(code) + '</b></div>' +
+    '<ol><li>Open FIG and sign up as a restaurant</li><li>Settings, then Your FIG plan</li><li>Tap Enter a code from FIG and type this code</li></ol>' +
+    '<div class="n">One-time code for this restaurant only. Free until a year after you enter it.</div></div></body></html>');
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 300);
+}
 
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
@@ -171,13 +205,26 @@ function render() {
     document.querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => navigator.clipboard.writeText(b.dataset.copy).then(() => { b.textContent = "Copied"; }));
     document.querySelectorAll("[data-del]").forEach((b) => b.onclick = async () => { if (!confirm("Delete " + b.dataset.del + "?")) return; await api("delete-key", { code: b.dataset.del }); await load(); render(); });
   }
+  if (view === "plans" && D.connected) {
+    $("#p-make").onclick = async () => {
+      const note = $("#p-note").value;
+      const r = await api("make-plan-codes", { count: +$("#p-n").value, note });
+      if (!r.codes) return alert(r.error || "Couldn't make codes.");
+      await load(); view = "plans"; render();
+      $("#p-new").style.display = "block"; $("#p-title").textContent = (r.codes.length === 1 ? "New code" : r.codes.length + " new codes") + (note ? " · " + note : "");
+      $("#p-codes").innerHTML = r.codes.map((c) => '<span class="mono">' + esc(c) + "</span>").join("");
+    };
+    document.querySelectorAll("[data-pcopy]").forEach((b) => b.onclick = () => navigator.clipboard.writeText(b.dataset.pcopy).then(() => { b.textContent = "Copied"; }));
+    document.querySelectorAll("[data-card]").forEach((b) => b.onclick = () => printCard(b.dataset.card, b.dataset.for));
+    document.querySelectorAll("[data-pdel]").forEach((b) => b.onclick = async () => { if (!confirm("Delete " + b.dataset.pdel + "? It stops working; a plan it already turned on keeps running.")) return; await api("delete-plan-code", { code: b.dataset.pdel }); await load(); render(); });
+  }
 }
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-keys", D.counts.keys); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-keys", D.counts.keys); set("#n-plans", D.planCodes.length); }
 }
-document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; render(); });
+document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };
 load().then(render).catch(() => { $("#main").innerHTML = '<div class="empty">Couldn\\'t load. Refresh to try again.</div>'; });
 </script></body></html>`;

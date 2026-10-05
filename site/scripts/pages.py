@@ -109,6 +109,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head=""):
 </main>
 {FOOTER}
 {MEGA}
+<script src="/js/fx.js" defer></script>
 <script src="/js/sub.js" defer></script>
 </body>
 </html>

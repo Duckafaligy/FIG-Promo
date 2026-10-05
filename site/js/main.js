@@ -217,11 +217,26 @@
   function selectTab(tab) {
     $$("#catch [data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
     if (tab === tutRole) return;
+    const first = !tutRole;
     tutRole = tab;
-    tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
-    tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
-    tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
-    tutVideo.play().catch(() => {});
+    const load = () => {
+      $(".tutwrap").dataset.role = tab;
+      tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
+      tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
+      tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
+      tutVideo.play().catch(() => {});
+    };
+    if (first || !root.classList.contains("motion")) return load();
+    // switching point of view: the card flips over and comes back as the other side
+    const card = $("#tut"), dir = tab === "restaurant" ? 1 : -1;
+    card.getAnimations().forEach((a) => a.cancel());
+    card.animate([{ transform: "perspective(1400px) rotateY(0) scale(1)" }, { transform: `perspective(1400px) rotateY(${dir * 90}deg) scale(.9)`, opacity: 0.6 }],
+      { duration: 260, easing: "cubic-bezier(.55,0,.8,.2)" }).finished.then(() => {
+      load();
+      card.animate([{ transform: `perspective(1400px) rotateY(${-dir * 90}deg) scale(.9)`, opacity: 0.6 }, { transform: "perspective(1400px) rotateY(0) scale(1)", opacity: 1 }],
+        { duration: 520, easing: "cubic-bezier(.2,1.25,.4,1)" });
+      $(".tut-label span").animate([{ transform: "scale(1)" }, { transform: "scale(1.12) rotate(-3deg)" }, { transform: "scale(1)" }], { duration: 420, easing: "ease-out" });
+    }).catch(() => {});
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   new IntersectionObserver(([e]) => {

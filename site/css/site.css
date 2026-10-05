@@ -659,3 +659,81 @@ button, input { font: inherit; color: inherit; }
 .plan.prem .plan-k { color: #5440E0; } .plan.biz .plan-k { color: #3F6200; }
 .tsteps li, .compare { background: #fff; }
 .chat-av, .kit-logo.dark, .mega { --lg: #fff; }
+
+/* =====================================================================
+   MOTION EVERYWHERE (2026-10-04): tabs, presses, page changes, reveals
+   ===================================================================== */
+/* sliding tab pill */
+.seg { position: relative; }
+.seg button { position: relative; z-index: 1; overflow: hidden; transition: color .35s, transform .2s var(--ease); }
+.seg-pill { position: absolute; top: 4px; bottom: 4px; left: 4px; border-radius: 999px; background: var(--cobalt); box-shadow: 0 6px 16px rgba(30, 94, 255, .3); }
+.seg.pill-on .seg-pill { transition: transform .5s cubic-bezier(.3, 1.35, .45, 1), width .5s cubic-bezier(.3, 1.35, .45, 1); }
+.seg:has(.seg-pill) button[aria-selected="true"] { background: transparent; }
+.seg button:not([aria-selected="true"]):hover { color: var(--text); }
+
+/* press feedback */
+.btn, .dl, .pp-replay, .card-l, .post-card, .tsteps li, .faq summary { position: relative; overflow: hidden; }
+.ripple { position: absolute; border-radius: 50%; background: currentColor; pointer-events: none; }
+.dl:active, .seg button:active, .pp-replay:active, .store:active { transform: scale(.95); }
+.card-l:active, .post-card:active { transform: translateY(-1px) scale(.985); }
+
+/* store buttons: a light sweep on hover */
+.dl::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .35) 50%, transparent 65%); transform: translateX(-120%); pointer-events: none; }
+.dl + .dl::after { background: linear-gradient(110deg, transparent 35%, rgba(30, 94, 255, .12) 50%, transparent 65%); }
+.dl:hover::after { transform: translateX(120%); transition: transform .8s var(--ease); }
+.dl svg, .dl img { transition: transform .35s var(--ease); }
+.dl:hover svg, .dl:hover img { transform: scale(1.12) rotate(-6deg); }
+
+/* small hovers */
+.foot-cols a, .sitemap a { transition: color .2s, transform .25s var(--ease); }
+.foot-cols a:hover, .sitemap a:hover { transform: translateX(4px); }
+.food { transition: border-color .2s, background .2s, transform .3s var(--ease); }
+.food:hover { transform: translateY(-3px); }
+.food img { transition: transform .4s var(--ease); }
+.food:hover img { transform: rotate(-12deg) scale(1.08); }
+.points li .ic, .rung, .perks li { transition: transform .3s var(--ease), background .3s, border-color .3s; }
+.points li:hover .ic { transform: scale(1.12) rotate(-8deg); background: var(--ice); border-color: var(--cobalt); }
+.rung:not(.hit):hover { transform: translateX(4px); border-color: var(--line-2); }
+.tsteps li { transition: border-color .25s, transform .3s var(--ease); }
+.tsteps li:hover { border-color: var(--cobalt); transform: translateX(4px); }
+.tsteps li:hover .n { animation: pop .45s var(--ease); }
+.brand .logo { transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+.brand:hover .logo { transform: rotate(-12deg) scale(1.1); }
+.chip { transition: transform .3s var(--ease); }
+.chip:hover { transform: translateY(-2px); }
+@keyframes pop { 50% { transform: scale(1.2); } }
+
+/* tutorial: the frame takes the colour of whose point of view you picked */
+.tutvid { transition: background .4s; will-change: transform; }
+.tutwrap[data-role="restaurant"] .tutvid { background: linear-gradient(160deg, #D5DCE6, rgba(200, 241, 53, .95) 45%, rgba(30, 94, 255, .45)); }
+.tut-label span { display: inline-block; }
+
+/* opening things */
+.faq details[open] > :not(summary) { animation: openIn .45s var(--ease); }
+.faq summary { transition: color .2s; }
+.faq summary:hover { color: var(--cobalt); }
+.form-msg:not(:empty) { animation: openIn .4s var(--ease); }
+[aria-invalid="true"] { animation: shake .4s; }
+@keyframes openIn { from { opacity: 0; transform: translateY(-8px); } }
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+/* navbar drops in on load */
+.nav { animation: navIn .8s var(--ease) both; }
+@keyframes navIn { from { opacity: 0; transform: translate(-50%, -24px); } }
+
+/* inner pages: scroll reveals (fx.js) */
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .7s, transform .9s var(--ease); }
+.rv.in { opacity: 1; transform: none; }
+
+/* page to page: the navbar stays put, the page slides in under it */
+@view-transition { navigation: auto; }
+.nav { view-transition-name: nav; }
+::view-transition-old(root) { animation: vtOut .25s ease both; }
+::view-transition-new(root) { animation: vtIn .45s var(--ease) both; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(16px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  @view-transition { navigation: none; }
+}

@@ -22,6 +22,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
+HIDDEN = {"404", "r"}  # not indexed, no breadcrumbs, not in the sitemap
 
 NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#passport", "Passport"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
 
@@ -99,7 +100,7 @@ def crumbs(items):
 
 def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None):
     path = "/" + slug
-    if slug != "404":
+    if slug not in HIDDEN:
         extra_head = ld(crumbs([("Home", "/")] + (trail or []) + [(title, path)])) + extra_head
     current = path if path in dict(NAV_LINKS) else ""
     out = f'''<!doctype html>
@@ -110,7 +111,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <title>{e(title)} · FIG</title>
   <meta name="description" content="{e(desc)}">
   <meta name="keywords" content="{e(keywords or BASE_KW)}">
-  <meta name="robots" content="{'noindex' if slug == '404' else 'index, follow, max-image-preview:large'}">
+  <meta name="robots" content="{'noindex' if slug in HIDDEN else 'index, follow, max-image-preview:large'}">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 {head_meta(path, title + " · FIG", desc, extra_head, og_type)}
@@ -133,7 +134,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
     p = SITE / (slug + ".html")
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(out, encoding="utf-8")
-    if slug != "404":
+    if slug not in HIDDEN:
         PAGES.append((path, title, group))
 
 
@@ -254,6 +255,13 @@ page("404", "Page not found", "This page doesn't exist.", body='''<p class="doc-
 <p class="lead-p">It may have moved, or the link has a typo.</p>
 <div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
 <a class="card-l" href="/#owners"><b>For restaurants</b><span>One plan, $50 a year.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
+
+# a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
+page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<p class="doc-kicker">Shared with you</p><h1 id="r-title">Someone sent you a spot on FIG</h1>
+<p class="lead-p" id="r-line">Live deals from restaurants near you. Claim one, show your QR at the counter. Free for diners.</p>
+<div class="cards"><a class="card-l" id="r-open" href="/" hidden><b>Open in FIG</b><span>Already have the app? Open this restaurant there.</span></a><a class="card-l" href="/#join"><b>Join the waitlist</b><span>FIG opens in Markham on January 1, 2027.</span></a>
+<a class="card-l" href="/#how"><b>How FIG works</b><span>Find, claim, show, save.</span></a></div>
+<script src="/js/r.js" defer></script>''')
 
 today = datetime.date.today().isoformat()
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"

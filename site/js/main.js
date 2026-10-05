@@ -205,7 +205,7 @@
     const v = e.target;
     if (e.isIntersecting) {
       if (!v.src) v.src = v.dataset.src;
-      v.play().catch(() => {});
+      figPlay(v);
     } else v.pause();
   }), { threshold: 0.35 });
   $$("video[data-src]").forEach((v) => vio.observe(v));
@@ -224,7 +224,7 @@
       tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
       tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
       tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
-      tutVideo.play().catch(() => {});
+      figPlay(tutVideo);
     };
     if (first || !root.classList.contains("motion")) return load();
     // switching point of view: the card flips over and comes back as the other side
@@ -241,7 +241,7 @@
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return tutVideo.pause();
-    if (!tutRole) selectTab("diner"); else tutVideo.play().catch(() => {});
+    if (!tutRole) selectTab("diner"); else figPlay(tutVideo);
   }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------

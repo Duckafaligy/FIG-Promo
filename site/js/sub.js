@@ -10,7 +10,7 @@
     if (!e.isIntersecting) return v.pause();
     if (!v.getAttribute("src")) v.src = v.dataset.src;
     if (v.dataset.rate) v.defaultPlaybackRate = v.playbackRate = +v.dataset.rate;
-    v.play().catch(() => {});
+    figPlay(v);
   }), { threshold: 0.35 });
   $$("video[data-src]").forEach((v) => io.observe(v));
 

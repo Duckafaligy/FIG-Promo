@@ -3,6 +3,19 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // video loops: phones in Low Power Mode or data saver refuse to autoplay, so retry on the first touch
+  const blocked = new Set();
+  window.figPlay = (v) => {
+    v.muted = true; v.playsInline = true; v.autoplay = true;
+    const p = v.play();
+    if (p) p.then(() => blocked.delete(v)).catch(() => blocked.add(v));
+  };
+  const retry = () => blocked.forEach((v) => {
+    const r = v.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth) window.figPlay(v);
+  });
+  ["touchend", "click", "keydown"].forEach((t) => document.addEventListener(t, retry, { capture: true, passive: true }));
+
   // tab groups: one pill slides to whichever tab is selected
   $$(".seg").forEach((seg) => {
     const pill = document.createElement("span");

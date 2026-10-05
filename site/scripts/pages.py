@@ -141,7 +141,7 @@ L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))
 legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], '''<h2>The website waitlist</h2>
-<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you ticked the consent box. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')
+<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you asked for it when you signed up. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')
 
 page("cookies", "Cookies", "What this website stores on your device.", group="Legal", body='''<p class="doc-kicker">Last updated October 4, 2026</p>
 <h1>Cookies</h1>

@@ -269,7 +269,6 @@
       if (role === "restaurant" && !restaurant) { form.elements.restaurant.setAttribute("aria-invalid", "true"); form.elements.restaurant.focus(); return say("Add your restaurant's name.", "err"); }
       const who = parseContact(form.elements.contact.value);
       if (!who) { form.elements.contact.setAttribute("aria-invalid", "true"); form.elements.contact.focus(); return say("Enter an email, or a 10-digit mobile number.", "err"); }
-      if (!form.elements.consent.checked) return say("Tick the box so we're allowed to message you.", "err");
       if (!cfg.supabaseUrl || !cfg.supabaseKey) return say("Sign-ups open in the next few days. Check back soon!", "err");
       btn.disabled = true; say("");
       try {

@@ -32,7 +32,8 @@ def nav(current=""):
     return f'''<header class="nav" id="nav">
   <a class="brand" href="/" aria-label="FIG home"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
   <nav class="nav-links" aria-label="Sections">{links}</nav>
-  {STORES_NAV}
+  <div class="nav-end">{STORES_NAV}<a class="btn btn-sm nav-get" href="https://apps.apple.com/" target="_blank" rel="noopener" data-get-app>Get FIG</a><button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span></button></div>
+  <div class="nav-sheet" id="nav-sheet">{links}{STORES}</div>
 </header>'''
 
 
@@ -295,7 +296,7 @@ def end_cta(post):
 
 
 STORE_BTNS = re.search(r'<div class="badges small">(.*)</div>', STORES, re.S).group(1)
-chips = "".join(f'<button role="tab" aria-selected="{str(t == "All").lower()}" data-topic="{t}">{t}</button>' for t in ["All"] + [t for t in TOPICS if any(x["topic"] == t for x in POSTS)])
+chips = "".join(f'<button role="tab" aria-selected="{str(t == "All").lower()}" data-topic="{t}">{t.replace("For ", "").capitalize()}</button>' for t in ["All"] + [t for t in TOPICS if any(x["topic"] == t for x in POSTS)])
 blog = ('<h1>The FIG blog</h1><p class="lead-p">Eating out in Markham for less, and running a busier restaurant. Notes from the FIG team.</p>'
         f'<div class="seg blog-filter" role="tablist" aria-label="Filter posts">{chips}</div><div class="posts">')
 items = []

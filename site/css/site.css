@@ -770,3 +770,85 @@ p.consent { cursor: default; padding-left: 22px; }
 .btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--line-2); }
 .btn-ghost:hover { background: var(--card); border-color: var(--cobalt); }
 @media (max-width: 420px) { .signup-btns .btn { flex: 1; padding: 0 18px; } }
+
+/* =====================================================================
+   PHONE LAYOUT (2026-10-05): menu button, swipe rows, shorter sections.
+   Tablet and desktop are unchanged.
+   ===================================================================== */
+.nav-end { display: flex; align-items: center; gap: 8px; }
+.nav-get, .nav-menu { display: none; }
+.nav-menu { width: 42px; height: 42px; padding: 0; border-radius: 99px; border: 1px solid var(--line-2); background: #fff; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.nav-menu span { display: block; width: 16px; height: 2px; border-radius: 2px; background: var(--text); transition: transform .3s var(--ease); }
+.nav.open .nav-menu span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.nav.open .nav-menu span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+.nav-sheet { position: absolute; left: 0; right: 0; top: calc(100% + 8px); display: grid; gap: 2px; padding: 10px; border-radius: 24px; background: #fff; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(10, 16, 32, .14);
+  opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.98); transform-origin: top; pointer-events: none; transition: opacity .25s, transform .35s var(--ease), visibility .35s; }
+.nav-sheet > a { padding: 14px 16px; border-radius: 14px; font-weight: 700; font-size: 17px; text-decoration: none; }
+.nav-sheet > a:active { background: var(--card); }
+.nav-sheet .badges.small { margin: 0; padding: 10px 8px 6px; border-top: 1px solid var(--line); }
+.nav.open .nav-sheet { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+@media (max-width: 1099px) { .nav-menu { display: flex; } }
+@media (min-width: 1100px) { .nav-sheet { display: none; } }
+@media (max-width: 699px) { .nav-stores { display: none; } .nav-get { display: inline-flex; } }
+
+/* touch screens: the boxes open on tap */
+@media (hover: none) { .hint { display: block; font-size: 0; } .hint::after { content: "Tap to learn more"; font-size: 13px; } }
+
+@media (max-width: 719px) {
+  .section { padding: 64px 0; }
+  .head-row { margin-bottom: 28px; }
+  .two-tone { font-size: 30px; }
+
+  /* swipe rows */
+  .steps, .bento { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+    margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); background: none; border: 0; border-radius: 0; }
+  .steps::-webkit-scrollbar, .bento::-webkit-scrollbar { display: none; }
+  .step { flex: 0 0 68%; scroll-snap-align: center; }
+  .step .phone { max-width: 200px; margin-bottom: 18px; }
+  .step h3 { font-size: 19px; }
+  .bento { margin-top: 28px; }
+  .bento .cell { flex: 0 0 86%; scroll-snap-align: center; min-height: 430px; gap: 18px; padding: 22px 22px 0; border: 1px solid var(--line); border-radius: 18px; }
+  .owners-bento { margin-top: 16px; }
+  .cell h3 { font-size: 21px; }
+  .cell p { font-size: 15px; }
+  .panel { min-height: 0; padding-top: 20px; }
+  .panel video { width: 200px; height: 266px; }
+  .drop { padding: 16px; }
+  .drop-in { padding: 18px; }
+  .drop h4 { font-size: 22px; }
+  .drop ul { margin-top: 12px; gap: 8px; }
+  .drop li { font-size: 14px; }
+  .swipe-dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+  .swipe-dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); transition: width .3s var(--ease), background .3s; }
+  .swipe-dots i.on { width: 20px; background: var(--cobalt); }
+
+  /* shorter blocks */
+  .pp-card { padding: 20px 20px 160px; min-height: 0; }
+  .pp-ring { width: 170px; height: 170px; }
+  .pp-count b { font-size: 50px; }
+  .rung { padding: 14px 16px; grid-template-columns: 56px 1fr auto; }
+  .rung b { font-size: 30px; }
+  .phone.big { max-width: 290px; }
+  .cp { height: 470px; }
+  .chats { gap: 36px; }
+  .points { gap: 10px; }
+  .points li { font-size: 15px; }
+  .catch { gap: 32px; }
+  .tutwrap { max-width: 290px; }
+  .tablet { padding: 7px; border-radius: 20px; }
+  .tablet img { inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); border-radius: 14px; }
+  .cell.tall { min-height: 0; }
+  .perks { grid-template-columns: 1fr 1fr; gap: 20px 16px; margin: 36px 0; }
+  .perks b { font-size: 16px; }
+  .perks span { font-size: 14px; }
+  .get-app { padding: 22px; gap: 18px; }
+  .get-app h3 { font-size: 22px; }
+  .get-app .badges { flex-wrap: nowrap; gap: 8px; }
+  .get-app .dl.lg { height: 46px; padding: 0 14px 0 12px; }
+  .get-app .dl.lg span { font-size: 15px; }
+  .foot { padding-top: 48px; }
+  .foot-top { gap: 30px; }
+  .foot-cols { gap: 24px 16px; }
+  .foot-bottom { margin-top: 36px; }
+}
+@media (max-width: 719px) { .blog-filter { flex-wrap: nowrap; } .blog-filter button { padding: 0 14px; font-size: 14px; height: 38px; white-space: nowrap; } }

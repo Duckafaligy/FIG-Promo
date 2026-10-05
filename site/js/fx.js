@@ -20,6 +20,32 @@
     place();
   });
 
+  // phones and tablets: the menu button opens the section links
+  const nav = document.getElementById("nav"), menu = nav && nav.querySelector(".nav-menu");
+  if (menu) {
+    const set = (open) => { nav.classList.toggle("open", open); menu.setAttribute("aria-expanded", String(open)); };
+    menu.addEventListener("click", () => set(!nav.classList.contains("open")));
+    $$(".nav-sheet a", nav).forEach((a) => a.addEventListener("click", () => set(false)));
+    document.addEventListener("click", (e) => { if (!nav.contains(e.target)) set(false); });
+  }
+
+  // phones: steps and feature boxes are swipe rows, with dots that follow along
+  if (matchMedia("(max-width: 719px)").matches) $$(".steps, .bento").forEach((row) => {
+    const kids = [...row.children];
+    if (kids.length < 2) return;
+    const dots = document.createElement("div");
+    dots.className = "swipe-dots";
+    dots.setAttribute("aria-hidden", "true");
+    dots.innerHTML = kids.map(() => "<i></i>").join("");
+    row.after(dots);
+    const mark = () => {
+      const i = Math.round(row.scrollLeft / (kids[1].offsetLeft - kids[0].offsetLeft));
+      [...dots.children].forEach((d, k) => d.classList.toggle("on", k === i));
+    };
+    row.addEventListener("scroll", mark, { passive: true });
+    mark();
+  });
+
   if (still) return;
 
   // press ripple from the exact point you tapped

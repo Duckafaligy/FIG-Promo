@@ -73,17 +73,82 @@
   "redirects": [
     {
       "source": "/owners",
-      "destination": "/restaurants",
+      "destination": "/#owners",
       "permanent": false
     },
     {
       "source": "/owners/",
-      "destination": "/restaurants",
+      "destination": "/#owners",
       "permanent": false
     },
     {
       "source": "/pricing",
       "destination": "/#owners",
+      "permanent": false
+    },
+    {
+      "source": "/pricing/",
+      "destination": "/#owners",
+      "permanent": false
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/#how",
+      "permanent": false
+    },
+    {
+      "source": "/how-it-works/",
+      "destination": "/#how",
+      "permanent": false
+    },
+    {
+      "source": "/features",
+      "destination": "/#features",
+      "permanent": false
+    },
+    {
+      "source": "/features/",
+      "destination": "/#features",
+      "permanent": false
+    },
+    {
+      "source": "/restaurants",
+      "destination": "/#owners",
+      "permanent": false
+    },
+    {
+      "source": "/restaurants/",
+      "destination": "/#owners",
+      "permanent": false
+    },
+    {
+      "source": "/passport",
+      "destination": "/#passport",
+      "permanent": false
+    },
+    {
+      "source": "/passport/",
+      "destination": "/#passport",
+      "permanent": false
+    },
+    {
+      "source": "/press",
+      "destination": "/about",
+      "permanent": false
+    },
+    {
+      "source": "/press/",
+      "destination": "/about",
+      "permanent": false
+    },
+    {
+      "source": "/sitemap",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sitemap/",
+      "destination": "/",
       "permanent": false
     }
   ]

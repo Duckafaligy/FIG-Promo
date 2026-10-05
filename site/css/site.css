@@ -738,3 +738,4 @@ button, input { font: inherit; color: inherit; }
   @view-transition { navigation: none; }
 }
 p.consent { cursor: default; padding-left: 22px; }
+.doc ol { list-style: decimal; padding-left: 22px; }

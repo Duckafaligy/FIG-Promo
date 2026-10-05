@@ -1,6 +1,6 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
-Each post: slug, title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
+Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
 sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: $50/year plan, Premium $6.99/month,
 codes refresh every 5 minutes, claims held 24 hours, stamps 25/50/100.
 """
@@ -67,7 +67,7 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <p>Restaurant owners: <a href="/#owners">see the $50 a year plan</a>. Diners: <a href="/#how">see how it works</a>. Everyone else: <a href="/contact">say hello</a>, or read the <a href="/blog">blog</a>.</p>'''
 
 POSTS = [
-    dict(slug="why-we-built-fig", title="Why we built FIG", date="2026-10-02", topic="News",
+    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", topic="News",
          dek="Markham has incredible independent restaurants. We wanted a way to find them that's fair to the owners too.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app",
          points=["FIG is a restaurant deals app starting in Markham, Ontario.",
@@ -81,7 +81,7 @@ POSTS = [
          faq=[("When does FIG launch?", "FIG is launching in Markham first. Download the app or join the waitlist on the home page to hear the moment it opens near you."),
               ("Does FIG take a commission?", "No. Restaurants pay one flat plan of $50 a year. FIG never takes a percentage of the bill.")]),
 
-    dict(slug="one-plan-50-a-year", title="One plan, $50 a year: how FIG pricing works", date="2026-10-03", topic="For restaurants",
+    dict(slug="one-plan-50-a-year", screen="tdash", title="One plan, $50 a year: how FIG pricing works", date="2026-10-03", topic="For restaurants",
          dek="No commission, no fee per diner, every location included. Here's what FIG's $50 a year plan means for a restaurant.",
          keywords="FIG pricing, restaurant marketing cost, no commission restaurant app, $50 a year",
          points=["Restaurants pay $50 CAD a year for FIG. That's the only fee.",
@@ -96,7 +96,7 @@ POSTS = [
          faq=[("How much does FIG cost a restaurant?", "$50 CAD a year for all locations, with no commission and no per-diner fees."),
               ("Is there a contract?", "No long contract. The plan is yearly and you can cancel anytime; it runs to the end of the year you paid for.")]),
 
-    dict(slug="how-the-passport-works", title="Your Passport: how stamps turn into free Premium", date="2026-10-03", topic="For diners",
+    dict(slug="how-the-passport-works", screen="stamp", title="Your Passport: how stamps turn into free Premium", date="2026-10-03", topic="For diners",
          dek="Every meal on FIG earns a stamp. Spend 25, 50 or 100 stamps on free FIG Premium. Here's how it works.",
          keywords="FIG Passport, restaurant stamps, food rewards Markham, FIG Premium",
          points=["Every deal you use and every takeout pickup earns one stamp.",
@@ -111,7 +111,7 @@ POSTS = [
          faq=[("Do stamps expire?", "Stamps stay in your Passport as a balance you can spend on Premium rewards."),
               ("Do takeout orders earn stamps?", "Yes. A scanned takeout pickup earns a stamp, just like a dine-in deal.")]),
 
-    dict(slug="restaurant-deals-markham", title="How to find the best restaurant deals in Markham", date="2026-10-04", topic="For diners",
+    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", topic="For diners",
          dek="A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.",
          keywords="restaurant deals Markham, Markham food deals, cheap eats Markham, Markham restaurants, Unionville restaurants",
          points=["The best restaurant deals in Markham are usually in off-peak hours: weekday afternoons and early evenings.",
@@ -127,7 +127,7 @@ POSTS = [
          faq=[("What's the best app for restaurant deals in Markham?", "FIG is built specifically for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners."),
               ("Do I pay through the app?", "No. You pay the restaurant at the counter, like normal. FIG never handles payment for food.")]),
 
-    dict(slug="delivery-app-commissions-vs-fig", title="Delivery app commissions vs a flat $50 plan: what restaurants keep", date="2026-10-04", topic="For restaurants",
+    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs a flat $50 plan: what restaurants keep", date="2026-10-04", topic="For restaurants",
          dek="Delivery apps charge restaurants a percentage of every order. FIG charges $50 a year. Here's how the two compare for a Markham restaurant.",
          keywords="delivery app commission, UberEats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
          points=["Delivery platforms commonly charge restaurants a commission on every order, often reported in the 15% to 30% range depending on the plan.",
@@ -142,7 +142,7 @@ POSTS = [
          faq=[("Does FIG charge a commission?", "No. FIG is a flat $50 CAD a year per restaurant, with every location and scan included."),
               ("Does FIG do delivery?", "No. Diners eat in or order takeout ahead and pick it up, paying the restaurant at the counter.")]),
 
-    dict(slug="fill-slow-hours-restaurant", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", topic="For restaurants",
+    dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", topic="For restaurants",
          dek="Practical ideas for independent restaurants to bring in diners on quiet afternoons and weeknights, without giving away margin.",
          keywords="fill slow hours restaurant, restaurant marketing ideas, slow restaurant days, increase restaurant traffic, Markham restaurant marketing",
          points=["Target the exact hours that are slow, not the whole day.",
@@ -160,7 +160,7 @@ POSTS = [
          faq=[("What's the cheapest way to market a small restaurant?", "Target your slow hours with a specific, capped deal where diners are already looking. FIG does this for a flat $50 a year."),
               ("Will a deal hurt my margins?", "Not if you cap it and only run it in hours that would otherwise be empty.")]),
 
-    dict(slug="student-food-deals-markham", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", topic="For diners",
+    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", topic="For diners",
          dek="How high school and university students in Markham can eat out for less: after-school deals, group plans and free Premium with stamps.",
          keywords="student food deals Markham, cheap eats for students, after school food Markham, budget restaurants Markham, bubble tea deals Markham",
          points=["After-school hours are exactly when many restaurants are quiet, so that's when deals show up.",
@@ -176,7 +176,7 @@ POSTS = [
          faq=[("Is FIG free for students?", "Yes. FIG is free for every diner. Premium is optional and can be earned free with stamps."),
               ("Do I need a credit card?", "No. You claim deals in the app and pay the restaurant directly at the counter.")]),
 
-    dict(slug="flash-deals-explained", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", topic="For diners",
+    dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", topic="For diners",
          dek="Flash deals are short, real-time restaurant deals posted during quiet hours. Here's how to catch them in Markham.",
          keywords="flash deals restaurants, last minute restaurant deals, happy hour Markham, real time food deals",
          points=["A flash deal is a short deal a restaurant posts right now, for a quiet hour.",
@@ -191,7 +191,7 @@ POSTS = [
          faq=[("How long do flash deals last?", "The restaurant sets the length, usually an hour or two. The timer you see in the app is the real one."),
               ("Can I turn flash alerts off?", "Yes. Every alert in FIG can be turned off, and quiet hours at night are on by default.")]),
 
-    dict(slug="takeout-without-delivery-fees", title="Order ahead, pick up, skip the delivery fees", date="2026-10-04", topic="For diners",
+    dict(slug="takeout-without-delivery-fees", screen="chat", title="Order ahead, pick up, skip the delivery fees", date="2026-10-04", topic="For diners",
          dek="FIG takeout lets you order from a Markham restaurant's menu, watch it get made and pay at pickup, with no delivery or service fees.",
          keywords="takeout without delivery fees, order ahead pickup Markham, takeout deals Markham, pickup orders",
          points=["Order from the restaurant's menu in FIG and pay at the counter when you pick up.",

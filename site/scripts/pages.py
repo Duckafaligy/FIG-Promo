@@ -59,7 +59,7 @@ FOOTER = f'''<footer class="foot">
 </footer>'''
 
 
-def head_meta(path, title, desc, extra="", og_type="website"):
+def head_meta(path, title, desc, extra="", og_type="website", image="/assets/og.png"):
     url = SITE_URL + ("" if path == "/" else path)
     return f'''  <link rel="canonical" href="{url}">
   <meta property="og:type" content="{og_type}">
@@ -67,7 +67,8 @@ def head_meta(path, title, desc, extra="", og_type="website"):
   <meta property="og:url" content="{url}">
   <meta property="og:title" content="{e(title)}">
   <meta property="og:description" content="{e(desc)}">
-  <meta property="og:image" content="{SITE_URL}/assets/og.png">
+  <meta property="og:image" content="{SITE_URL}{image}">
+  <link rel="alternate" type="application/rss+xml" title="The FIG blog" href="/feed.xml">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">{extra}'''
@@ -98,7 +99,7 @@ def crumbs(items):
         {"@type": "ListItem", "position": k + 1, "name": n, "item": SITE_URL + u} for k, (n, u) in enumerate(items)]}
 
 
-def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None):
+def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png"):
     path = "/" + slug
     if slug not in HIDDEN:
         extra_head = ld(crumbs([("Home", "/")] + (trail or []) + [(title, path)])) + extra_head
@@ -114,7 +115,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <meta name="robots" content="{'noindex' if slug in HIDDEN else 'index, follow, max-image-preview:large'}">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-{head_meta(path, title + " · FIG", desc, extra_head, og_type)}
+{head_meta(path, title + " · FIG", desc, extra_head, og_type, image)}
   <link rel="stylesheet" href="/css/site.css">
 </head>
 <body class="sub">
@@ -226,28 +227,114 @@ def read_min(post):
 
 
 POSTS.sort(key=lambda x: x["date"], reverse=True)
-blog = '<h1>The FIG blog</h1><p class="lead-p">Eating out in Markham for less, and running a busier restaurant. Notes from the FIG team.</p><div class="posts">'
+TOPICS = ["For diners", "For restaurants", "News"]
+
+
+def cover(post):
+    """1200x630 cover + social image: topic colour, the title, a real app screen. Rebuilt every run (fast, deterministic)."""
+    from PIL import Image, ImageDraw, ImageFilter, ImageFont
+    W, H = 1200, 630
+    top, bot, ink = {"For diners": ((58, 115, 255), (21, 70, 201), (255, 255, 255)),
+                     "For restaurants": ((217, 250, 106), (156, 200, 26), (10, 16, 32))}.get(post["topic"], ((29, 36, 56), (10, 16, 32), (255, 255, 255)))
+    img = Image.new("RGB", (W, H))
+    d = ImageDraw.Draw(img)
+    for y in range(H):
+        t = y / H
+        d.line([(0, y), (W, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(top, bot)))
+    font = lambda size, weight="ExtraBold": (lambda f: (f.set_variation_by_name(weight), f)[1])(ImageFont.truetype(str(SITE / "assets/PlusJakartaSans.ttf"), size))
+
+    shot = Image.open(SITE / f"assets/screens/{post.get('screen', 'map')}.webp").convert("RGB")
+    tablet = shot.width > shot.height
+    sw = 600 if tablet else 330
+    shot = shot.resize((sw, round(sw * shot.height / shot.width)), Image.LANCZOS)
+    pad, rad = (14, 30) if tablet else (12, 46)
+    fw, fh = shot.width + pad * 2, shot.height + pad * 2
+    x0, y0 = (W - fw + 70, H - fh + 150) if tablet else (W - fw - 70, 150)
+    shadow = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(shadow).rounded_rectangle([x0 + 10, y0 + 24, x0 + fw + 10, y0 + fh + 24], rad, fill=120)
+    img.paste((5, 10, 30), mask=shadow.filter(ImageFilter.GaussianBlur(26)))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([x0, y0, x0 + fw, y0 + fh], rad, fill=(10, 16, 32))
+    m = Image.new("L", shot.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle([0, 0, shot.width, shot.height], rad - pad + 2, fill=255)
+    img.paste(shot, (x0 + pad, y0 + pad), m)
+
+    maxw = x0 - 64 - 48
+    for size in range(76, 38, -4):
+        f, lines = font(size), [""]
+        for word in post["title"].split():
+            trial = (lines[-1] + " " + word).strip()
+            if f.getlength(trial) <= maxw: lines[-1] = trial
+            else: lines.append(word)
+        if len(lines) <= 4: break
+    k = font(22, "Bold")
+    tw = k.getlength(post["topic"].upper())
+    d.rounded_rectangle([64, 64, 64 + tw + 36, 104], 20, fill=ink)
+    d.text((82, 84), post["topic"].upper(), font=k, fill=bot, anchor="lm")
+    y = 140
+    for line in lines:
+        d.text((64, y), line, font=f, fill=ink)
+        y += round(size * 1.1)
+    d.text((64, H - 64), "FIG", font=font(40), fill=ink, anchor="ls")
+    d.text((64 + font(40).getlength("FIG") + 14, H - 70), "Restaurant deals in Markham", font=font(22, "SemiBold"), fill=ink, anchor="ls")
+    out = SITE / "assets/blog" / f"{post['slug']}.jpg"
+    out.parent.mkdir(exist_ok=True)
+    img.save(out, quality=84, optimize=True, progressive=True)
+    return f"/assets/blog/{post['slug']}.jpg"
+
+
+slug_id = lambda h: re.sub(r"[^a-z0-9]+", "-", h.lower()).strip("-")
+SHARE = '<button class="share" type="button" data-share><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg><span>Share</span></button>'
+
+
+def end_cta(post):
+    if post["topic"] == "For restaurants":
+        return ('<div class="get-app post-cta"><div><h3>Get your restaurant on FIG</h3><p>One plan, $50 a year. No commission, no fee per diner, every scan included.</p></div>'
+                f'<div class="badges">{STORE_BTNS}</div></div><p class="more-link"><a href="/#owners">See what the plan includes</a></p>')
+    return f'<div class="get-app post-cta"><div><h3>Find a deal near you</h3><p>FIG is free for diners. Launching in Markham.</p></div><div class="badges">{STORE_BTNS}</div></div>'
+
+
+STORE_BTNS = re.search(r'<div class="badges small">(.*)</div>', STORES, re.S).group(1)
+chips = "".join(f'<button role="tab" aria-selected="{str(t == "All").lower()}" data-topic="{t}">{t}</button>' for t in ["All"] + [t for t in TOPICS if any(x["topic"] == t for x in POSTS)])
+blog = ('<h1>The FIG blog</h1><p class="lead-p">Eating out in Markham for less, and running a busier restaurant. Notes from the FIG team.</p>'
+        f'<div class="seg blog-filter" role="tablist" aria-label="Filter posts">{chips}</div><div class="posts">')
+items = []
 for post in POSTS:
     url = f"/blog/{post['slug']}"
+    img = cover(post)
     meta = f"{post['topic']} · {nice_date(post['date'])} · {read_min(post)} min read"
-    blog += f'<a class="post-card" href="{url}"><span>{meta}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></a>'
+    blog += (f'<a class="post-card" href="{url}" data-topic="{post["topic"]}"><img src="{img}" alt="" width="1200" height="630" loading="lazy">'
+             f'<div><span>{meta}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></div></a>')
     related = [x for x in POSTS if x is not post and x["topic"] == post["topic"]][:2] or [x for x in POSTS if x is not post][:2]
+    toc = '<nav class="toc" aria-label="In this post"><b>In this post</b><ol>' + "".join(f'<li><a href="#{slug_id(h)}">{e(h)}</a></li>' for h, _ in post["sections"]) + "</ol></nav>"
     body = (f'<p class="doc-kicker"><a href="/blog">Blog</a> · {meta}</p><h1>{e(post["title"])}</h1><p class="lead-p">{e(post["dek"])}</p>'
-            + '<div class="doc-short"><h2>Key points</h2><ul>' + "".join(f"<li>{e(x)}</li>" for x in post["points"]) + "</ul></div>"
-            + "".join(f"<h2>{e(h)}</h2>{t}" for h, t in post["sections"])
+            f'<div class="post-by"><span>By the FIG team · Markham, Ontario</span>{SHARE}</div>'
+            f'<img class="post-cover" src="{img}" alt="{e(post["title"])}" width="1200" height="630">'
+            + '<div class="doc-short"><h2>Key points</h2><ul>' + "".join(f"<li>{e(x)}</li>" for x in post["points"]) + "</ul></div>" + toc
+            + "".join(f'<h2 id="{slug_id(h)}">{e(h)}</h2>{t}' for h, t in post["sections"])
+            + end_cta(post)
             + "<h2>Questions</h2><div class=\"faq\">" + "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in post["faq"]) + "</div>"
             + '<h2>Keep reading</h2><div class="cards">' + "".join(f'<a class="card-l" href="/blog/{x["slug"]}"><b>{e(x["title"])}</b><span>{e(x["dek"])}</span></a>' for x in related) + "</div>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post["dek"], "keywords": post["keywords"],
-               "datePublished": post["date"], "dateModified": post["date"], "articleSection": post["topic"], "inLanguage": "en-CA",
-               "image": SITE_URL + "/assets/og.png", "mainEntityOfPage": SITE_URL + url,
+               "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",
+               "image": SITE_URL + img, "mainEntityOfPage": SITE_URL + url, "wordCount": len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split()),
                "author": {"@type": "Organization", "name": "FIG", "url": SITE_URL},
                "publisher": {"@type": "Organization", "name": "FIG Technologies Inc.", "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/icons/icon-512.png"}}}
-    page(url[1:], post["title"], post["dek"], body, group="Blog", keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")],
+    page(url[1:], post["title"], post["dek"], body, group="Blog", keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img,
          extra_head=ld(article) + faq_ld(post["faq"]))
+    items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
+    <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
+""")
 page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for independent restaurants, from the FIG team.", blog + "</div>", group="Blog",
      keywords=BASE_KW + ", Markham food blog, restaurant marketing blog",
      extra_head=ld({"@context": "https://schema.org", "@type": "Blog", "name": "The FIG blog", "url": SITE_URL + "/blog",
                     "blogPost": [{"@type": "BlogPosting", "headline": x["title"], "url": f"{SITE_URL}/blog/{x['slug']}", "datePublished": x["date"]} for x in POSTS]}))
+(SITE / "feed.xml").write_text(f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>The FIG blog</title><link>{SITE_URL}/blog</link><language>en-ca</language>
+  <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+{"".join(items)}</channel></rss>
+""", encoding="utf-8")
 
 
 # =====================================================================  404, site map, sitemap.xml, robots, manifest

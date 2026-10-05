@@ -27,3 +27,17 @@
     tabs.forEach((t, k) => t.setAttribute("aria-selected", String(k === i)));
   }));
 })();
+
+// blog: topic filter and share button
+document.querySelectorAll("[data-topic]").forEach((b) => b.tagName === "BUTTON" && b.addEventListener("click", () => {
+  document.querySelectorAll(".blog-filter button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+  document.querySelectorAll(".post-card").forEach((c) => (c.hidden = b.dataset.topic !== "All" && c.dataset.topic !== b.dataset.topic));
+}));
+document.querySelectorAll("[data-share]").forEach((b) => b.addEventListener("click", async () => {
+  const data = { title: document.title, url: location.href };
+  try {
+    if (navigator.share) return await navigator.share(data);
+    await navigator.clipboard.writeText(location.href);
+    b.querySelector("span").textContent = "Link copied";
+  } catch {}
+}));

@@ -1,4 +1,4 @@
-// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Plan codes).
+// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Free codes).
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
 const BASE = `
@@ -97,10 +97,12 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
 .row { display: grid; grid-template-columns: 1fr 140px 140px auto; gap: 12px; align-items: end; margin-top: 14px; }
 .row label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
 .new { margin-top: 16px; padding: 18px; border-radius: 14px; background: #C8F135; display: none; }
+.spot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 22px; border-radius: 18px; background: #EAF0FF; margin-bottom: 16px; } .spot h2 { margin: 0 0 4px; } .spot .btn { flex-shrink: 0; width: auto; margin: 0; }
+#q-new { margin: 0 0 28px; } .big .codes span { font-size: 26px; padding: 12px 18px; }
 .new .codes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; } .new .codes span { background: #fff; padding: 8px 12px; border-radius: 10px; }
 .link { border: 0; background: none; padding: 0; color: #1E5EFF; font-weight: 800; cursor: pointer; } .link.red { color: #C9353A; margin-left: 14px; }
 .note { font-size: 13px; color: #5B6779; }
-@media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { position: static; height: auto; flex-direction: row; flex-wrap: wrap; } .stats { grid-template-columns: 1fr 1fr; } .row { grid-template-columns: 1fr; } main { padding: 24px 18px; } .tbl { overflow-x: auto; } }`) + `<body>
+@media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { position: static; height: auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 14px 16px; border-right: 0; border-bottom: 1px solid #E2E7EF; } aside .brand { padding: 0; } .who { grid-column: 2; grid-row: 1; text-align: right; } .nav { grid-column: 1 / -1; display: flex; gap: 6px; overflow-x: auto; margin: 0 -16px; padding: 0 16px; } .nav button { width: auto; flex-shrink: 0; gap: 8px; } .stats { grid-template-columns: 1fr 1fr; } .row { grid-template-columns: 1fr; } main { padding: 24px 18px; } .tbl { overflow-x: auto; } }`) + `<body>
 <div class="shell">
   <aside>
     <div class="brand">${LOGO}FIG Admin</div>
@@ -110,7 +112,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="reports">Reports <span class="badge" id="n-reports">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
-      <button data-v="plans">Plan codes <span class="badge" id="n-plans">–</span></button>
+      <button data-v="plans">Free codes <span class="badge" id="n-plans">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -145,15 +147,17 @@ const VIEWS = {
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(days, "Days to launch") + "</div>"),
-  plans: () => '<h1>Plan codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+  plans: () => '<h1>Free codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
+    '<div class="spot"><div><h2>At a restaurant?</h2><p class="note">One tap makes a one-time code for the restaurant in front of you.</p></div><button class="btn" id="q-make">Generate a code</button></div>' +
+    '<div class="new big" id="q-new"><b>Their code</b><div class="codes"><span class="mono" id="q-code"></span></div><div style="margin-top:12px"><button class="link" id="q-copy">Copy</button><button class="link" style="margin-left:14px" id="q-card">Show their card</button></div></div>' +
     '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting, or type your own (like GOLDENLANTERN). Every code works once. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
     '<div><label for="p-note">Which restaurant</label><input class="f" id="p-note" maxlength="80" placeholder="Golden Lantern, Kennedy & Bur Oak"></div>' +
     '<div><label for="p-n">How many codes</label><input class="f" id="p-n" type="number" min="1" max="50" value="1"></div>' +
     '<div><label for="p-custom">Custom code</label><input class="f" id="p-custom" maxlength="24" placeholder="Optional"></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
-    "<h2>All plan codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
+    "<h2>All free codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
       k.uses ? '<span class="pill g">Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
-      '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No plan codes yet.") +
+      '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No free codes yet.") +
     '<p class="note">A used code can\\'t be used again, so it\\'s safe to hand over. Deleting a code stops it working; plans it already turned on keep running.</p>'),
 };
 
@@ -182,8 +186,18 @@ function printCard(code, who) {
 
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
+  const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
   $("#main").innerHTML = VIEWS[view]();
   if (view === "plans" && D.connected) {
+    $("#q-make").onclick = async () => {
+      const r = await api("make-plan-codes", { count: 1, note: "Made on the spot" });
+      if (!r.codes) return alert(r.error || "Couldn't make a code.");
+      await load(); view = "plans"; render();
+      const c = r.codes[0];
+      $("#q-new").style.display = "block"; $("#q-code").textContent = c;
+      $("#q-copy").onclick = () => navigator.clipboard.writeText(c).then(() => { $("#q-copy").textContent = "Copied"; });
+      $("#q-card").onclick = () => printCard(c, "");
+    };
     $("#p-make").onclick = async () => {
       const note = $("#p-note").value;
       const r = await api("make-plan-codes", { count: +$("#p-n").value, note, custom: $("#p-custom").value });

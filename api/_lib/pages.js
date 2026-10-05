@@ -1,4 +1,4 @@
-// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads, 05 Access keys).
+// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Plan codes).
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
 const BASE = `
@@ -110,7 +110,6 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="reports">Reports <span class="badge" id="n-reports">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
-      <button data-v="keys">Access keys <span class="badge" id="n-keys">–</span></button>
       <button data-v="plans">Plan codes <span class="badge" id="n-plans">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
@@ -136,7 +135,7 @@ const statusPill = (s) => s === "approved" ? '<span class="pill g">Live</span>' 
 
 const VIEWS = {
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diners signed up") + stat(D.counts.waiting, "Waiting on the early-bird page", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.reports, "Open reports", "red") + "</div>" +
+    '<div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.reports, "Open reports", "red") + "</div>" +
     "<h2>Latest restaurants</h2>" + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
   restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Every restaurant on FIG, newest first. A restaurant goes live when it finishes setup.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
@@ -145,17 +144,7 @@ const VIEWS = {
   leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diner accounts") + stat(D.counts.waiting, "Waiting on the early-bird page", "blue") + stat(D.waitlist, "Website waitlist") + stat(days, "Days to launch") + "</div>"),
-  keys: () => '<h1>Access keys</h1><p class="lead muted">Codes that let diners past the app\\'s early-bird page · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.waiting, "Waiting on the early-bird page") + stat(D.keys.reduce((n, k) => n + k.uses, 0), "Let in with a key", "blue") + stat(D.keys.length, "Keys made") + stat(D.keys.reduce((n, k) => n + Math.max(0, k.max_uses - k.uses), 0), "Uses left") + "</div>" +
-    '<div class="make"><h2>Make keys</h2><p class="note">One key per person, or one key a whole group can use.</p><div class="row">' +
-    '<div><label for="k-note">Who it\\'s for</label><input class="f" id="k-note" maxlength="80" placeholder="Pho Metro staff"></div>' +
-    '<div><label for="k-n">How many keys</label><input class="f" id="k-n" type="number" min="1" max="100" value="3"></div>' +
-    '<div><label for="k-u">People per key</label><input class="f" id="k-u" type="number" min="1" max="10000" value="1"></div>' +
-    '<button class="btn" id="k-make">Make keys</button></div><div class="new" id="k-new"><b id="k-title"></b><div class="codes" id="k-codes"></div></div></div>' +
-    "<h2>All keys</h2>" + table(["Key", "Who it's for", "Used", "Made", ""], D.keys.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note), k.uses ? k.uses + " of " + k.max_uses : '<span class="pill">Not used yet</span>', ago(k.made_at),
-      '<button class="link" data-copy="' + esc(k.code) + '">Copy</button><button class="link red" data-del="' + esc(k.code) + '">Delete</button>']), "No keys yet.") +
-    '<p class="note">Restaurants don\\'t need a key. Deleting a key stops anyone new from using it; people it already let in stay in.</p>'),
+    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(days, "Days to launch") + "</div>"),
   plans: () => '<h1>Plan codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
     '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
@@ -194,17 +183,6 @@ function printCard(code, who) {
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   $("#main").innerHTML = VIEWS[view]();
-  if (view === "keys" && D.connected) {
-    $("#k-make").onclick = async () => {
-      const r = await api("make-keys", { count: +$("#k-n").value, uses: +$("#k-u").value, note: $("#k-note").value });
-      if (!r.codes) return alert(r.error || "Couldn't make keys.");
-      await load(); view = "keys"; render();
-      $("#k-new").style.display = "block"; $("#k-title").textContent = r.codes.length + " new keys" + ($("#k-note").value ? " · " + $("#k-note").value : "");
-      $("#k-codes").innerHTML = r.codes.map((c) => '<span class="mono">' + esc(c) + "</span>").join("");
-    };
-    document.querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => navigator.clipboard.writeText(b.dataset.copy).then(() => { b.textContent = "Copied"; }));
-    document.querySelectorAll("[data-del]").forEach((b) => b.onclick = async () => { if (!confirm("Delete " + b.dataset.del + "?")) return; await api("delete-key", { code: b.dataset.del }); await load(); render(); });
-  }
   if (view === "plans" && D.connected) {
     $("#p-make").onclick = async () => {
       const note = $("#p-note").value;
@@ -222,7 +200,7 @@ function render() {
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-keys", D.counts.keys); set("#n-plans", D.planCodes.length); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-plans", D.planCodes.length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };

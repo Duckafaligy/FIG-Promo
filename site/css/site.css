@@ -819,7 +819,7 @@ p.consent { cursor: default; padding-left: 22px; }
   .drop ul { margin-top: 12px; gap: 8px; }
   .drop li { font-size: 14px; }
   .swipe-dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
-  .swipe-dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); transition: width .3s var(--ease), background .3s; }
+  .swipe-dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); transition: background .3s; }
   .swipe-dots i.on { width: 20px; background: var(--cobalt); }
 
   /* shorter blocks */

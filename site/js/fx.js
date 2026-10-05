@@ -49,3 +49,6 @@
   }, { rootMargin: "0px 0px -8% 0px" });
   els.forEach((el) => io.observe(el));
 })();
+
+// "Sign up free" goes to the right store for the phone you're on
+if (/android/i.test(navigator.userAgent)) document.querySelectorAll("[data-get-app]").forEach((a) => (a.href = "https://play.google.com/store/apps"));

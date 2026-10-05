@@ -761,3 +761,12 @@ p.consent { cursor: default; padding-left: 22px; }
 .toc a:hover { text-decoration: underline; }
 .post-cta { margin: 44px 0 10px; }
 .doc h2[id] { scroll-margin-top: 110px; }
+
+/* hero: sign up instead of a waitlist field */
+.signup { margin-top: 32px; }
+.signup-q { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; margin-bottom: 14px; }
+.signup-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-lg { min-height: 56px; padding: 0 28px; font-size: 17px; }
+.btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--line-2); }
+.btn-ghost:hover { background: var(--card); border-color: var(--cobalt); }
+@media (max-width: 420px) { .signup-btns .btn { flex: 1; padding: 0 18px; } }

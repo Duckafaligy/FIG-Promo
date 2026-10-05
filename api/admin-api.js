@@ -19,7 +19,15 @@ module.exports = async (req, res) => {
   try {
     if (action === "data") return send(res, 200, db.connected() ? { connected: true, ...(await db.overview()) } : { connected: false });
     if (!db.connected()) return send(res, 409, { error: "The database isn't connected yet." });
-    if (action === "make-plan-codes") return send(res, 200, { codes: await db.makePlanCodes(body.count, body.note) });
+    if (action === "make-plan-codes") {
+      try {
+        return send(res, 200, { codes: await db.makePlanCodes(body.count, body.note, body.custom) });
+      } catch (e) {
+        if (/^409/.test(e.message)) return send(res, 409, { error: "That code is already taken. Pick another." });
+        if (/^400/.test(e.message)) return send(res, 400, { error: "Use 4 to 24 letters, numbers or dashes." });
+        throw e;
+      }
+    }
     if (action === "delete-plan-code") { await db.deletePlanCode(String(body.code || "")); return send(res, 200, { ok: true }); }
   } catch (e) {
     return send(res, 502, { error: "The database didn't answer. Try again." });

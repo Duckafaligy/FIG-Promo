@@ -147,10 +147,10 @@ const VIEWS = {
     '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(days, "Days to launch") + "</div>"),
   plans: () => '<h1>Plan codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
-    '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
+    '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting, or type your own (like GOLDENLANTERN). Every code works once. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
     '<div><label for="p-note">Which restaurant</label><input class="f" id="p-note" maxlength="80" placeholder="Golden Lantern, Kennedy & Bur Oak"></div>' +
     '<div><label for="p-n">How many codes</label><input class="f" id="p-n" type="number" min="1" max="50" value="1"></div>' +
-    '<div></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
+    '<div><label for="p-custom">Custom code</label><input class="f" id="p-custom" maxlength="24" placeholder="Optional"></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
     "<h2>All plan codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
       k.uses ? '<span class="pill g">Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
       '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No plan codes yet.") +
@@ -186,7 +186,7 @@ function render() {
   if (view === "plans" && D.connected) {
     $("#p-make").onclick = async () => {
       const note = $("#p-note").value;
-      const r = await api("make-plan-codes", { count: +$("#p-n").value, note });
+      const r = await api("make-plan-codes", { count: +$("#p-n").value, note, custom: $("#p-custom").value });
       if (!r.codes) return alert(r.error || "Couldn't make codes.");
       await load(); view = "plans"; render();
       $("#p-new").style.display = "block"; $("#p-title").textContent = (r.codes.length === 1 ? "New code" : r.codes.length + " new codes") + (note ? " · " + note : "");

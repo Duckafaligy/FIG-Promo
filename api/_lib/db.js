@@ -54,9 +54,13 @@ function newCode(prefix) {
   return c;
 }
 // plan codes: one-time PLAN-XXXXX-XXXXX codes; each turns one restaurant owner's plan on free for a year (in the app)
-async function makePlanCodes(n, note) {
+// a custom code (like GOLDENLANTERN) is one code, still one-time; "409" when it's taken (any case or dashes)
+async function makePlanCodes(n, note, custom) {
   n = Math.max(1, Math.min(50, n | 0));
-  const rows = Array.from({ length: n }, () => ({ code: newCode("PLAN-"), note: String(note || "").trim().slice(0, 80), max_uses: 1, days: 365 }));
+  custom = String(custom || "").trim().toUpperCase();
+  if (custom && !/^[A-Z0-9][A-Z0-9-]{3,23}$/.test(custom)) throw new Error("400 bad custom code");
+  const codes = custom ? [custom] : Array.from({ length: n }, () => newCode("PLAN-"));
+  const rows = codes.map((code) => ({ code, note: String(note || "").trim().slice(0, 80), max_uses: 1, days: 365 }));
   await rest("plan_codes", { method: "POST", body: JSON.stringify(rows), headers: { Prefer: "return=minimal" } });
   return rows.map((r) => r.code);
 }

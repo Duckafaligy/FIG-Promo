@@ -66,7 +66,8 @@ async function makePlanCodes(n, note, custom) {
 }
 async function deletePlanCode(code) {
   if (!/^[A-Z0-9-]{4,24}$/.test(code)) throw new Error("bad code");
-  await rest(`plan_codes?code=eq.${encodeURIComponent(code)}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+  // a used code stays on the list as a record (uses=0 in the filter: nothing happens to it)
+  await rest(`plan_codes?code=eq.${encodeURIComponent(code)}&uses=eq.0`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
 }
 
 module.exports = { connected, overview, makePlanCodes, deletePlanCode };

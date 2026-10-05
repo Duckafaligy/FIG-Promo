@@ -89,6 +89,7 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; }
 th { background: #F2F5FA; text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #5B6779; padding: 13px 18px; }
 td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
 .pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 800; background: #EAF0FF; color: #1A52E0; }
+.used { color: #067A55; font-weight: 800; }
 .pill.g { background: #E3F7EF; color: #067A55; } .pill.r { background: #FDECEC; color: #B4282D; } .pill.k { background: #F2F5FA; color: #5B6779; }
 .mono { font-family: ui-monospace, Consolas, monospace; font-weight: 700; letter-spacing: .02em; }
 .empty { padding: 26px; border-radius: 16px; background: #F2F5FA; color: #5B6779; font-size: 15px; line-height: 1.6; }
@@ -156,9 +157,9 @@ const VIEWS = {
     '<div><label for="p-n">How many codes</label><input class="f" id="p-n" type="number" min="1" max="50" value="1"></div>' +
     '<div><label for="p-custom">Custom code</label><input class="f" id="p-custom" maxlength="24" placeholder="Optional"></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
     "<h2>All free codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
-      k.uses ? '<span class="pill g">Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
-      '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No free codes yet.") +
-    '<p class="note">A used code can\\'t be used again, so it\\'s safe to hand over. Deleting a code stops it working; plans it already turned on keep running.</p>'),
+      k.uses ? '<span class="pill g">&#10003; Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
+      k.uses ? '<span class="used">&#10003; Used</span>' : '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No free codes yet.") +
+    '<p class="note">Each code works once. Used codes stay here, checked off, as a record. Deleting an unused code stops it working.</p>'),
 };
 
 // a printable "first year on us" card to hand a restaurant with its code

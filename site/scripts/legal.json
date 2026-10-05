@@ -222,10 +222,10 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 3, 2026",
+  "updated": "Last updated October 5, 2026",
   "short": [
-   "One plan: $50 CAD a year for all your locations. No fee per scan, no other fees.",
-   "Your page shows to diners while your plan is on. Cancel anytime: it runs to the end of the year you paid for.",
+   "Free to join and to go live. Your first 10 scans are free, then each verified scan costs $1.50 CAD from your prepaid balance.",
+   "At $0, new claims pause until you top up. Deals already claimed still work.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
   ],
@@ -249,23 +249,26 @@
     ]
    },
    {
-    "heading": "4. Your plan",
+    "heading": "4. What FIG costs",
     "paragraphs": [
-     "• FIG for restaurants costs $50 CAD a year, plus applicable tax. One plan covers every location on your account.",
-     "• It includes unlimited deals and unlimited verified scans (valid QR scans by your enrolled devices), takeout orders, reviews and your numbers.",
-     "• There are no fees per scan, and no sign-up, monthly or listing fees."
+     "• Joining FIG, setting up your page, going live and posting deals are free. One balance covers every location on your account.",
+     "• Each account starts with 10 free scans. After that, each verified scan costs $1.50 CAD, plus applicable tax. A verified scan is a valid FIG code (a claimed deal or a takeout pickup) scanned or entered by your enrolled devices.",
+     "• A founding code from FIG makes scans free until the date it shows. There's no commission on the bill, and no sign-up, monthly or listing fees."
     ]
    },
    {
-    "heading": "5. Paying, renewing and cancelling",
+    "heading": "5. Your balance, top-ups and alerts",
     "paragraphs": [
-     "You pay by card through Stripe, which keeps your card details; FIG never sees them. Your plan renews each year on the date you started it, at the price then in effect, until you cancel. Cancel anytime from Plan in FIG Business: your plan runs to the end of the year you've paid for, then your page and deals stop showing to diners. If a payment fails, Stripe tries again for a short while and your page stays live; if it still fails, your plan ends. Receipts are in Plan (Manage billing). Takeout orders don't cost extra: you collect the food payment yourself, and you're responsible for your menu, prices and tax."
+     "You prepay a balance by card through Stripe, which keeps your card details; FIG never sees them. Top up $20, $50, $100 or any amount from $10 to $500 CAD. Each scan is taken from your balance when it's verified.",
+     "Automatic top-up is optional: you choose when it runs (for example, under $5), how much it adds, and a monthly limit. You authorise FIG to charge your saved card on those terms until you turn it off in Balance. We notify you each time it runs, and if a charge fails.",
+     "We tell you when your balance drops under $10, under $5, and when it runs out. With nothing left to pay a scan, new claims on your deals pause until you top up; your page stays visible, and deals already claimed still work. If a claimed deal is scanned with nothing left, your balance can go below $0, and your next top-up covers it.",
+     "Receipts are in Balance (Cards and receipts). Balances don't expire. Takeout orders don't cost extra beyond the scan at pickup: you collect the food payment yourself, and you're responsible for your menu, prices and tax."
     ]
    },
    {
     "heading": "6. Wrong scans and disputes",
     "paragraphs": [
-     "You can report a scan you think is wrong within 14 days. We review it and remove it if it was a mistake. Duplicate scans are removed automatically."
+     "You can report a scan you think is wrong within 14 days. We review it, and if it was a mistake we remove it and put its $1.50 back on your balance. Duplicate scans are never charged."
     ]
    },
    {
@@ -289,7 +292,7 @@
    {
     "heading": "10. Ending the agreement",
     "paragraphs": [
-     "You can close your business account anytime. Your plan ends at once and the rest of the year isn't refunded. We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund the unused months."
+     "You can close your business account anytime. Nothing more is charged after that. Ask us within 30 days of closing and we refund what's left on your balance (less any amount below $0). We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund your full remaining balance."
     ]
    },
    {

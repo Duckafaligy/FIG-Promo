@@ -154,6 +154,11 @@
       "source": "/sitemap/",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/blog/one-plan-50-a-year",
+      "destination": "/blog/pay-per-scan-pricing",
+      "permanent": true
     }
   ]
 }

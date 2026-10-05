@@ -47,7 +47,7 @@ FOOTER = f'''<footer class="foot">
       </div>
       <div class="foot-cols">
         <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#passport">Passport</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/one-plan-50-a-year">How the plan works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/pay-per-scan-pricing">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
         <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
       </div>
@@ -85,7 +85,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Live deals from Markham restaurants, one tap away. Free for diners, $50 a year for restaurants.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Live deals from Markham restaurants, one tap away. Free for diners, free to join for restaurants.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 (SITE / "index.html").write_text(index, encoding="utf-8")
 PAGES.append(("/", "Home", "Main"))
@@ -171,7 +171,7 @@ page("cookies", "Cookies", "What this website stores on your device.", group="Le
 <h2>Things loaded from other services</h2>
 <p>The map tiles come from OpenFreeMap, the animation library from cdnjs and the map library from jsDelivr. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>''')
 
-page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, one $50 a year plan for restaurants.",
+page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, free to join for restaurants ($1.50 per diner scanned in).",
      ABOUT.replace("{faq}", '<div class="faq">' + "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in ABOUT_FAQ) + "</div>"),
      keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
@@ -181,7 +181,7 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 <p class="lead-p">A real person reads every message.</p>
 <div class="cards">
-<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, your plan, deals and scanning.</span><em>business@fig.app</em></a>
+<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, your balance, deals and scanning.</span><em>business@fig.app</em></a>
 <a class="card-l" href="mailto:privacy@fig.app"><b>Privacy</b><span>See or delete what we hold about you.</span><em>privacy@fig.app</em></a>
 <a class="card-l" href="mailto:legal@fig.app"><b>Legal</b><span>Terms and anything official.</span><em>legal@fig.app</em></a>
 <a class="card-l" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
@@ -200,13 +200,13 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "One plan: $50 CAD a year for all your locations. No commission, no fee per diner, no other fees."),
+        ("What does FIG cost?", "Nothing to join or go live, and your first 10 scans are free. Then $1.50 CAD per verified scan from a prepaid balance. No commission, no monthly fee."),
         ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the type, the days and hours, who it's for and an optional daily cap. You can pause it anytime."),
-        ("When does my page go live?", "As soon as you finish setup (photos, address, hours, cuisine) and start your plan."),
+        ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
         ("Can I take takeout orders?", "Yes. Turn on takeout and add your menu (you can read it from a photo). Diners pay you at pickup and you scan their pickup code."),
-        ("How do I cancel?", "Cancel anytime in the app under Your FIG plan. It runs to the end of the year you paid for."),
+        ("How do I stop?", "There's no subscription. Stop topping up, pause your deals, or close your account in Settings. Ask us within 30 days of closing for a refund of what's left on your balance."),
     ]),
 ]
 help_html = '<h1>Help center</h1><p class="lead-p">Short answers to the questions people ask most. Still stuck? <a href="/contact">Contact us</a>.</p>'
@@ -290,8 +290,8 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 
 def end_cta(post):
     if post["topic"] == "For restaurants":
-        return ('<div class="get-app post-cta"><div><h3>Get your restaurant on FIG</h3><p>One plan, $50 a year. No commission, no fee per diner, every scan included.</p></div>'
-                f'<div class="badges">{STORE_BTNS}</div></div><p class="more-link"><a href="/#owners">See what the plan includes</a></p>')
+        return ('<div class="get-app post-cta"><div><h3>Get your restaurant on FIG</h3><p>Free to join. 10 free scans, then $1.50 per diner FIG brings in. No commission.</p></div>'
+                f'<div class="badges">{STORE_BTNS}</div></div><p class="more-link"><a href="/#owners">See how pricing works</a></p>')
     return f'<div class="get-app post-cta"><div><h3>Find a deal near you</h3><p>FIG is free for diners. Launching in Markham.</p></div><div class="badges">{STORE_BTNS}</div></div>'
 
 
@@ -342,7 +342,7 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
 page("404", "Page not found", "This page doesn't exist.", body='''<p class="doc-kicker">404</p><h1>This page wandered off.</h1>
 <p class="lead-p">It may have moved, or the link has a typo.</p>
 <div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
-<a class="card-l" href="/#owners"><b>For restaurants</b><span>One plan, $50 a year.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
+<a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to join, $1.50 a scan.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
 
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<p class="doc-kicker">Shared with you</p><h1 id="r-title">Someone sent you a spot on FIG</h1>
@@ -359,14 +359,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one plan of $50 CAD a year with no commission and no fee per diner.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants join free and pay $1.50 CAD only when a FIG diner's code is scanned, with no commission.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; optional FIG Premium $6.99/month (AI picks), or earned free with Passport stamps (25 = 1 week, 50 = 3 weeks, 100 = 1 month)
-- Restaurants: $50 CAD/year, every location and scan included, unlimited everyday and flash deals, takeout ordering, chats, dashboard
+- Restaurants: free to join and go live, 10 free scans, then $1.50 CAD per verified scan from a prepaid balance (top-ups $20/$50/$100 or custom, optional automatic top-up); unlimited everyday and flash deals, takeout ordering, chats, dashboard
 - How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly, earn a stamp
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number

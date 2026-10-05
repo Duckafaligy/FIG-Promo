@@ -95,7 +95,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head=""):
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{e(title)} · FIG</title>
   <meta name="description" content="{e(desc)}">
-  <meta name="theme-color" content="#0A0D14">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 {head_meta(path, title + " · FIG", desc, extra_head)}
   <link rel="stylesheet" href="/css/site.css">
@@ -352,7 +352,7 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "sitemap.xml").write_text(xml, encoding="utf-8")
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 (SITE / "site.webmanifest").write_text(json.dumps({
-    "name": "FIG · Local deals", "short_name": "FIG", "start_url": "/", "display": "standalone", "background_color": "#0A0D14", "theme_color": "#1E5EFF",
+    "name": "FIG · Local deals", "short_name": "FIG", "start_url": "/", "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#1E5EFF",
     "icons": [{"src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
               {"src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=1), encoding="utf-8")
 

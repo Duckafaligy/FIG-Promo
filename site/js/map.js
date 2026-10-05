@@ -14,7 +14,7 @@
   let map;
   try {
     map = new maplibregl.Map({
-      container: box, style: "https://tiles.openfreemap.org/styles/dark", center: [-79.302, 43.8555],
+      container: box, style: "https://tiles.openfreemap.org/styles/positron", center: [-79.302, 43.8555],
       zoom: wide() ? 13.8 : 13.3, interactive: false, attributionControl: false, fadeDuration: 0,
     });
   } catch (e) { return; } // no WebGL: the still image stays

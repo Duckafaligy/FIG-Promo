@@ -3,7 +3,7 @@
  "short_name": "FIG",
  "start_url": "/",
  "display": "standalone",
- "background_color": "#0A0D14",
+ "background_color": "#FFFFFF",
  "theme_color": "#1E5EFF",
  "icons": [
   {

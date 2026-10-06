@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
   <title>The FIG blog</title><link>https://fig-promo.vercel.app/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+  <item><title>Planning a group dinner in Markham: how to pick a place</title><link>https://fig-promo.vercel.app/blog/group-dinner-ideas-markham</link><guid>https://fig-promo.vercel.app/blog/group-dinner-ideas-markham</guid>
+    <pubDate>Tue, 06 Oct 2026 12:00:00 -0400</pubDate><category>For diners</category><description>Group dinner ideas for Markham, Ontario: how to settle on a restaurant fast, check dietary needs, confirm space for your group and use a deal to save.</description></item>
   <item><title>Free to join, $1.50 a scan: how FIG pricing works</title><link>https://fig-promo.vercel.app/blog/pay-per-scan-pricing</link><guid>https://fig-promo.vercel.app/blog/pay-per-scan-pricing</guid>
     <pubDate>Mon, 05 Oct 2026 12:00:00 -0400</pubDate><category>For restaurants</category><description>FIG is free to join and to go live. Restaurants pay $1.50 only when a FIG diner&#x27;s code is scanned, from a prepaid balance.</description></item>
   <item><title>How to find the best restaurant deals in Markham</title><link>https://fig-promo.vercel.app/blog/restaurant-deals-markham</link><guid>https://fig-promo.vercel.app/blog/restaurant-deals-markham</guid>

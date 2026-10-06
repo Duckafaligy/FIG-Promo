@@ -16,6 +16,7 @@
 - [Home](https://fig-promo.vercel.app/): what FIG is, features, the Passport, pricing
 - [About](https://fig-promo.vercel.app/about): the full story and FAQ
 - [Help center](https://fig-promo.vercel.app/help): answers for diners and restaurants
+- [Planning a group dinner in Markham: how to pick a place](https://fig-promo.vercel.app/blog/group-dinner-ideas-markham): Group dinner ideas for Markham, Ontario: how to settle on a restaurant fast, check dietary needs, confirm space for your group and use a deal to save.
 - [Free to join, $1.50 a scan: how FIG pricing works](https://fig-promo.vercel.app/blog/pay-per-scan-pricing): FIG is free to join and to go live. Restaurants pay $1.50 only when a FIG diner's code is scanned, from a prepaid balance.
 - [How to find the best restaurant deals in Markham](https://fig-promo.vercel.app/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.
 - [Delivery app commissions vs $1.50 a diner: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges $1.50 per diner it brings in. Here's how the two compare for a Markham restaurant.

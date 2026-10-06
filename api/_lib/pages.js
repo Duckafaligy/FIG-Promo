@@ -175,7 +175,7 @@ function disputeCard(x) {
       row("“We’re waiting” sent", o.nudged_at) + row("Diner checked in", o.arrived_at, here ? "g" : "", checkin) + row("Scanned (picked up)", o.picked_at, "g") +
       row("No-show reported", o.noshow_at, "r") + "</div></div>" +
     '<div class="box"><h3>Diner</h3><div class="kv">' + kv("Name", esc(dn.name)) + kv("Username", "@" + esc(dn.username || "")) + kv("Email", esc(dn.email || "")) + kv("Joined", when(dn.created_at)) +
-      kv("Orders", dn.orders) + kv("Picked up", dn.picked) + kv("No-shows", dn.noshows) + kv("Check-ins", dn.checkins) + kv("Strikes now", dn.strikes) + kv("Past contests", dn.disputes + (dn.disputes ? " (" + dn.upheld + " upheld)" : "")) + "</div></div>" +
+      kv("Orders", dn.orders) + kv("Picked up", dn.picked) + kv("No-shows", dn.noshows) + kv("Check-ins", dn.checkins) + kv("Strikes (2 months)", dn.strikes) + kv("Past contests", dn.disputes + (dn.disputes ? " (" + dn.upheld + " upheld)" : "")) + "</div></div>" +
     '<div class="box"><h3>Restaurant</h3><div class="kv">' + kv("Name", esc(r.name)) + kv("City", esc(r.city || "")) + kv("Orders", r.orders) + kv("Picked up", r.picked) + kv("No-shows reported", r.noshows) +
       kv("Wrong reports", (r.false_noshows || 0) + " of 3") + "</div></div></div>" +
     '<div class="hint ' + hint[0] + '">' + esc(hint[1]) + "</div>" +

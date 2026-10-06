@@ -84,6 +84,11 @@ async function disputes() {
     rest(`orders?restaurant_id=in.(${ids("restaurant_id")})&select=restaurant_id,status&limit=5000`),
   ]);
   const n = (rows, f) => rows.filter(f).length;
+  // strikes as they stand: no-shows of the last 2 months not overturned (the same rule the app uses)
+  const live = {};
+  await Promise.all([...new Set(d.map((x) => x.user_id))].map(async (u) => {
+    live[u] = await rest("rpc/strikes_of", { method: "POST", body: JSON.stringify({ p_user: u }) }).then((r) => r.rows, () => null);
+  }));
   return d.map((x) => {
     const mine = dinerOrders.rows.filter((o) => o.user_id === x.user_id);
     const theirs = restOrders.rows.filter((o) => o.restaurant_id === x.restaurant_id);
@@ -93,7 +98,7 @@ async function disputes() {
     return {
       ...x,
       order: orders.rows.find((o) => o.id === x.order_id) || {},
-      diner: { ...p, orders: mine.length, picked: n(mine, (o) => o.status === "picked"), noshows: n(mine, (o) => o.status === "noshow"), checkins: n(mine, (o) => o.arrived_at),
+      diner: { ...p, strikes: live[x.user_id] ?? p.strikes, orders: mine.length, picked: n(mine, (o) => o.status === "picked"), noshows: n(mine, (o) => o.status === "noshow"), checkins: n(mine, (o) => o.arrived_at),
         disputes: past.length, upheld: n(past, (y) => y.status === "upheld") },
       restaurant: { ...r, orders: theirs.length, picked: n(theirs, (o) => o.status === "picked"), noshows: n(theirs, (o) => o.status === "noshow") },
     };

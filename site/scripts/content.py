@@ -105,7 +105,7 @@ POSTS = [
          sections=[
              ("Earning stamps", "<p>Every time you use a deal on FIG, staff scan your code and a stamp lands in your Passport, with the place, the date and what you saved. Takeout pickups earn stamps too.</p>"),
              ("Spending stamps", "<p>Stamps are a balance you spend, not a punch card that resets. 25 stamps buys a free week of FIG Premium, 50 buys three weeks and 100 buys a month. Claim a reward and keep collecting for the next one.</p>"),
-             ("What Premium adds", "<p>Premium ($6.99 a month if you pay for it) adds unlimited AI picks: tell FIG what you feel like and it picks your three best deals nearby, with a reason for each. Without Premium you get 3 picks a day.</p>"),
+             ("What Premium adds", "<p>Premium ($6.99 a month if you pay for it) adds AI picks: tell FIG what you feel like and it picks your three best deals nearby, with a reason for each. It also gives you double stamps and holds claimed deals for 48 hours.</p>"),
              ("A food diary you didn't have to write", "<p>Your Passport doubles as a history of every place you've tried in Markham, and how much you saved there.</p>"),
          ],
          faq=[("Do stamps expire?", "Stamps stay in your Passport as a balance you can spend on Premium rewards."),

@@ -22,7 +22,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
-HIDDEN = {"404", "r", "business"}  # not indexed, no breadcrumbs, not in the sitemap
+HIDDEN = {"404", "r"}  # not indexed, no breadcrumbs, not in the sitemap
 
 NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#passport", "Passport"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
 
@@ -47,7 +47,7 @@ FOOTER = f'''<footer class="foot">
       </div>
       <div class="foot-cols">
         <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#passport">Passport</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/pay-per-scan-pricing">How pricing works</a><a href="/business">Top up your balance</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/pay-per-scan-pricing">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
         <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
       </div>
@@ -351,95 +351,6 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 <a class="card-l" href="/#how"><b>How FIG works</b><span>Find, claim, show, save.</span></a></div>
 <script src="/js/r.js" defer></script>''')
 
-
-# ---- /business: restaurant owners top up their balance (js/business.js); not indexed
-page("business", "Restaurant balance", "Top up your FIG restaurant balance: $1.50 per scan, $20, $50, $100 or any amount.", body='''<style>
-.bal{max-width:560px;margin:0 auto}.bal .kick{color:var(--cobalt);font-weight:800;letter-spacing:.08em;font-size:12px;text-transform:uppercase}
-.bal h1{margin:6px 0 4px}.bal .sub-l{color:var(--muted);margin:0 0 24px}
-.bal-box{border:1.5px solid var(--line);border-radius:24px;padding:22px;margin:0 0 16px;background:var(--bg)}
-.bal-box h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-.bal-box label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
-.bal-box input[type=email],.bal-box input[type=password],.bal-box input[type=text],.bal-box select{width:100%;height:50px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);padding:0 14px;font:inherit;font-size:16px;color:var(--text)}
-.bal-box input:focus,.bal-box select:focus{outline:none;border-color:var(--cobalt);background:var(--ice)}
-.bal-box .btn{width:100%;justify-content:center;margin-top:16px}.bal-or{text-align:center;color:var(--muted);font-size:13px;margin:14px 0 0}
-.bal-hero{border-radius:28px;padding:24px;color:#fff;background:linear-gradient(135deg,#3B78FF,#1E5EFF 42%,#1239B8);box-shadow:0 18px 40px rgba(30,94,255,.3);margin:0 0 16px}
-.bal-hero .row{display:flex;justify-content:space-between;align-items:center;gap:12px}.bal-hero small{opacity:.8;font-weight:800;letter-spacing:.08em;font-size:12px}
-.bal-amount{font-size:60px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:10px 0 4px}.bal-line{color:var(--volt);font-weight:700}
-.bal-pill{border-radius:99px;padding:4px 12px;font-size:12px;font-weight:800}.bal-pill.volt{background:var(--volt);color:#0A1020}.bal-pill.red{background:#FDECEC;color:#C9353A}.bal-pill.amber{background:#FFE7A8;color:#0A1020}
-.bal-warn{border:1.5px solid #E5484D;background:#FDECEC;color:#8A2A2E;border-radius:20px;padding:14px 16px;margin:0 0 16px;font-weight:600;font-size:14px}
-.bal-note{border-radius:18px;padding:14px 16px;margin:0 0 16px;font-weight:700;font-size:14px}.bal-note.wait{background:var(--ice);color:var(--text)}.bal-note.done{background:#E3F7EF;color:#067A55}
-.amts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.amts button{height:44px;padding:0 18px;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);font:inherit;font-weight:800;color:var(--text);cursor:pointer}
-.amts button.on{background:#0A1020;border-color:#0A1020;color:#fff}.bal-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:600}
-.toggle{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:800}.toggle input{width:22px;height:22px;accent-color:var(--cobalt)}
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.three label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.acts{list-style:none;margin:8px 0 0;padding:0}.acts li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.acts li:first-child{border-top:0}
-.acts small{display:block;color:var(--muted);font-size:12px}.acts em{font-style:normal;font-weight:800}.acts em.plus{color:#067A55}.acts .empty{color:var(--muted);justify-content:center}
-.bal-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin:8px 0 0}.linkbtn{border:0;background:none;color:var(--cobalt);font:inherit;font-weight:800;cursor:pointer;padding:0}
-@media (max-width:480px){.three{grid-template-columns:1fr}.bal-amount{font-size:48px}}
-</style>
-<div class="bal">
-<p class="kick">FIG for restaurants</p>
-<h1>Your balance</h1>
-<p class="sub-l">$1.50 per scan, only when a FIG diner’s code is scanned. Top up here and the FIG app shows it within seconds.</p>
-
-<section id="bal-out" hidden>
-  <form class="bal-box" id="s-form">
-    <h2>Sign in</h2>
-    <p class="hint">Use the email and password of your FIG business account.</p>
-    <label for="s-email">Email</label><input id="s-email" type="email" autocomplete="email" required>
-    <label for="s-pass">Password</label><input id="s-pass" type="password" autocomplete="current-password" required>
-    <p class="form-msg" id="s-msg" hidden></p>
-    <button class="btn btn-ink" type="submit">Sign in</button>
-    <button class="btn btn-ghost" type="button" id="s-google">Continue with Google</button>
-    <p class="bal-or">Forgot your password? Reset it in the FIG app: Sign in, then Forgot?</p>
-  </form>
-</section>
-
-<section id="bal-none" hidden>
-  <div class="bal-box"><h2>No restaurant here</h2><p>This account isn’t the owner or a manager of a restaurant on FIG. Sign in with your business account, or <a href="/#owners">see how FIG works for restaurants</a>.</p>
-  <button class="linkbtn" type="button" data-out>Sign out</button></div>
-</section>
-
-<section id="bal-in" hidden>
-  <p class="bal-note" id="b-note" hidden></p>
-  <div class="bal-hero">
-    <div class="row"><small>YOUR BALANCE</small><span class="bal-pill" id="b-pill"></span></div>
-    <div style="opacity:.85;font-weight:700;margin-top:10px" id="b-name"></div>
-    <div class="bal-amount" id="b-amount">$0.00</div>
-    <div class="bal-line" id="b-line"></div>
-  </div>
-  <p class="bal-warn" id="b-paused" hidden>Your deals are paused. Diners can still see your page, but can’t claim deals until you top up. Deals already claimed still work.</p>
-
-  <div class="bal-box">
-    <h2>Add to your balance</h2>
-    <div class="amts"><button type="button" data-amt="20">$20</button><button type="button" data-amt="50">$50</button><button type="button" data-amt="100">$100</button><button type="button" data-amt="custom">Custom</button></div>
-    <div id="t-custom" hidden><label for="t-amt">Amount (CAD)</label><input id="t-amt" type="text" inputmode="decimal" placeholder="$10 to $500"></div>
-    <div class="bal-meta"><span id="t-scans"></span><span id="b-card"></span></div>
-    <p class="form-msg" id="t-msg" hidden></p>
-    <button class="btn btn-volt" type="button" id="t-go">Top up</button>
-    <p class="bal-or">Paid securely through Stripe. Receipts come by email.</p>
-  </div>
-
-  <div class="bal-box">
-    <div class="toggle"><span>Automatic top-up</span><input type="checkbox" id="a-on" aria-label="Automatic top-up"></div>
-    <p class="hint">Never pause: FIG tops you up when you run low.</p>
-    <div id="a-fields" hidden>
-      <div class="three">
-        <div><label for="a-below">When under</label><select id="a-below"><option value="5">$5</option><option value="10">$10</option><option value="20">$20</option></select></div>
-        <div><label for="a-amount">Add</label><select id="a-amount"><option value="20">$20</option><option value="50">$50</option><option value="100">$100</option></select></div>
-        <div><label for="a-limit">Max a month</label><select id="a-limit"><option value="100">$100</option><option value="200">$200</option><option value="500">$500</option></select></div>
-      </div>
-      <p class="hint" id="a-card"></p>
-    </div>
-    <p class="form-msg" id="a-msg" hidden></p>
-  </div>
-
-  <div class="bal-box"><h2>Activity</h2><ul class="acts" id="b-activity"></ul></div>
-  <div class="bal-foot"><span>$1.50 per scan · <a href="/business-terms">Business terms</a></span><button class="linkbtn" type="button" data-out>Sign out</button></div>
-</section>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js"></script>
-<script src="/js/business.js" defer></script>''')
 
 today = datetime.date.today().isoformat()
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"

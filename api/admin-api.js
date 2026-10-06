@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
         throw e;
       }
     }
+    if (action === "lift-takeout") { await db.liftTakeout(body.id); return send(res, 200, { ok: true }); }
     if (action === "decide-dispute") {
       try { await db.decideDispute(body.id, body.upheld, body.note); } catch { return send(res, 409, { error: "Already decided, or not found." }); }
       return send(res, 200, { ok: true });

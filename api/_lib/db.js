@@ -41,6 +41,7 @@ async function overview() {
   return {
     counts: { diners, restaurants, live, reports },
     disputes: await safe(disputes(), []),
+    suspended: await safe(suspended(), []),
     planCodes, restaurants: recentR.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
@@ -84,10 +85,10 @@ async function disputes() {
     rest(`orders?restaurant_id=in.(${ids("restaurant_id")})&select=restaurant_id,status&limit=5000`),
   ]);
   const n = (rows, f) => rows.filter(f).length;
-  // strikes as they stand: no-shows of the last 2 months not overturned (the same rule the app uses)
+  // where each diner stands: strikes in force, and any takeout suspension (the same rule the app uses)
   const live = {};
   await Promise.all([...new Set(d.map((x) => x.user_id))].map(async (u) => {
-    live[u] = await rest("rpc/strikes_of", { method: "POST", body: JSON.stringify({ p_user: u }) }).then((r) => r.rows, () => null);
+    live[u] = await takeoutStatus(u);
   }));
   return d.map((x) => {
     const mine = dinerOrders.rows.filter((o) => o.user_id === x.user_id);
@@ -98,11 +99,29 @@ async function disputes() {
     return {
       ...x,
       order: orders.rows.find((o) => o.id === x.order_id) || {},
-      diner: { ...p, strikes: live[x.user_id] ?? p.strikes, orders: mine.length, picked: n(mine, (o) => o.status === "picked"), noshows: n(mine, (o) => o.status === "noshow"), checkins: n(mine, (o) => o.arrived_at),
+      diner: { ...p, strikes: live[x.user_id]?.strikes ?? p.strikes, suspended_until: live[x.user_id]?.suspended_until, banned: live[x.user_id]?.banned, orders: mine.length, picked: n(mine, (o) => o.status === "picked"), noshows: n(mine, (o) => o.status === "noshow"), checkins: n(mine, (o) => o.arrived_at),
         disputes: past.length, upheld: n(past, (y) => y.status === "upheld") },
       restaurant: { ...r, orders: theirs.length, picked: n(theirs, (o) => o.status === "picked"), noshows: n(theirs, (o) => o.status === "noshow") },
     };
   });
+}
+const takeoutStatus = (u) => rest("rpc/takeout_status", { method: "POST", body: JSON.stringify({ p_user: u }) }).then((r) => r.rows[0], () => null);
+// diners whose takeout is paused or off: anyone with a no-show in the last 2 years, checked one by one (few, at pilot size)
+async function suspended() {
+  const ns = (await rest("orders?status=eq.noshow&select=user_id&noshow_at=gte." + new Date(Date.now() - 730 * 864e5).toISOString() + "&limit=2000")).rows;
+  const ids = [...new Set(ns.map((o) => o.user_id))];
+  const out = [];
+  for (const u of ids) {
+    const s = await takeoutStatus(u);
+    if (s && (s.banned || (s.suspended_until && Date.parse(s.suspended_until) > Date.now()))) out.push({ user_id: u, ...s, noshows: ns.filter((o) => o.user_id === u).length });
+  }
+  if (!out.length) return [];
+  const people = (await rest(`profiles?id=in.(${out.map((x) => x.user_id).join(",")})&select=id,name,username,email`)).rows;
+  return out.map((x) => ({ ...x, ...(people.find((p) => p.id === x.user_id) || {}) }));
+}
+async function liftTakeout(id) {
+  if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id");
+  await rest("rpc/lift_takeout", { method: "POST", body: JSON.stringify({ p_user: id }), headers: { Prefer: "return=minimal" } });
 }
 // the FIG team's call: upheld = the diner was right (their strike comes off, the restaurant gets a false-report strike)
 async function decideDispute(id, upheld, note) {
@@ -110,4 +129,4 @@ async function decideDispute(id, upheld, note) {
   await rest("rpc/decide_dispute", { method: "POST", body: JSON.stringify({ p_dispute: id, p_upheld: !!upheld, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, disputes, decideDispute, makePlanCodes, deletePlanCode };
+module.exports = { connected, overview, disputes, decideDispute, liftTakeout, makePlanCodes, deletePlanCode };

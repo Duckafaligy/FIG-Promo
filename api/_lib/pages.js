@@ -175,7 +175,7 @@ function disputeCard(x) {
       row("“We’re waiting” sent", o.nudged_at) + row("Diner checked in", o.arrived_at, here ? "g" : "", checkin) + row("Scanned (picked up)", o.picked_at, "g") +
       row("No-show reported", o.noshow_at, "r") + "</div></div>" +
     '<div class="box"><h3>Diner</h3><div class="kv">' + kv("Name", esc(dn.name)) + kv("Username", "@" + esc(dn.username || "")) + kv("Email", esc(dn.email || "")) + kv("Joined", when(dn.created_at)) +
-      kv("Orders", dn.orders) + kv("Picked up", dn.picked) + kv("No-shows", dn.noshows) + kv("Check-ins", dn.checkins) + kv("Strikes (2 months)", dn.strikes) + kv("Past contests", dn.disputes + (dn.disputes ? " (" + dn.upheld + " upheld)" : "")) + "</div></div>" +
+      kv("Orders", dn.orders) + kv("Picked up", dn.picked) + kv("No-shows", dn.noshows) + kv("Check-ins", dn.checkins) + kv("Strikes now", dn.strikes) + kv("Takeout", dn.banned ? "Banned" : dn.suspended_until && Date.parse(dn.suspended_until) > Date.now() ? "Paused until " + when(dn.suspended_until) : "OK") + kv("Past contests", dn.disputes + (dn.disputes ? " (" + dn.upheld + " upheld)" : "")) + "</div></div>" +
     '<div class="box"><h3>Restaurant</h3><div class="kv">' + kv("Name", esc(r.name)) + kv("City", esc(r.city || "")) + kv("Orders", r.orders) + kv("Picked up", r.picked) + kv("No-shows reported", r.noshows) +
       kv("Wrong reports", (r.false_noshows || 0) + " of 3") + "</div></div></div>" +
     '<div class="hint ' + hint[0] + '">' + esc(hint[1]) + "</div>" +
@@ -199,7 +199,10 @@ const VIEWS = {
   leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(days, "Days to launch") + "</div>"),
+    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(D.suspended.length, "Takeout paused or off", "red") + "</div>" +
+    "<h2>Takeout paused or off</h2>" + table(["Diner", "Status", "No-shows (2 years)", ""], D.suspended.map((x) => ["<b>" + esc(x.name) + '</b><br><span class="muted">@' + esc(x.username || "") + " · " + esc(x.email || "") + "</span>",
+      x.banned ? '<span class="pill r">Banned</span>' : '<span class="pill">Paused until ' + when(x.suspended_until) + "</span>", x.noshows, '<button class="link" data-lift="' + x.user_id + '">Lift</button>']),
+      "Nobody’s takeout is paused. Two no-shows pause it for 2 weeks; each pause after that is longer (2 months, 6 months, 1 year), then it’s off for good.")),
   plans: () => '<h1>Free codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
     '<div class="spot"><div><h2>At a restaurant?</h2><p class="note">One tap makes a one-time code for the restaurant in front of you.</p></div><button class="btn" id="q-make">Generate a code</button></div>' +
@@ -241,6 +244,12 @@ function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
   $("#main").innerHTML = VIEWS[view]();
+  if (view === "diners" && D.connected) {
+    document.querySelectorAll("[data-lift]").forEach((b) => b.onclick = async () => {
+      if (!confirm("Lift this diner's takeout pause or ban? Earlier no-shows stop counting (they stay on the record).")) return;
+      await api("lift-takeout", { id: b.dataset.lift }); await load(); render();
+    });
+  }
   if (view === "disputes" && D.connected) {
     const decide = async (id, upheld) => {
       if (!confirm(upheld ? "The diner was right? Their strike comes off and the restaurant gets a wrong-report strike." : "The no-show stands? The diner's strike stays.")) return;

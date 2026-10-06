@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|logout|data|make-plan-codes|delete-plan-code  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|make-plan-codes|delete-plan-code|decide-dispute  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
 
@@ -27,6 +27,10 @@ module.exports = async (req, res) => {
         if (/^400/.test(e.message)) return send(res, 400, { error: "Use 4 to 24 letters, numbers or dashes." });
         throw e;
       }
+    }
+    if (action === "decide-dispute") {
+      try { await db.decideDispute(body.id, body.upheld, body.note); } catch { return send(res, 409, { error: "Already decided, or not found." }); }
+      return send(res, 200, { ok: true });
     }
     if (action === "delete-plan-code") { await db.deletePlanCode(String(body.code || "")); return send(res, 200, { ok: true }); }
   } catch (e) {

@@ -40,6 +40,7 @@ async function overview() {
   const planCodes = plans.rows.map((k) => ({ ...k, used_by: planUsed.rows.filter((b) => b.plan_code === k.code).flatMap((b) => names.filter((n) => n.owner_id === b.owner_id).map((n) => n.name)) }));
   return {
     counts: { diners, restaurants, live, reports },
+    disputes: await safe(disputes(), []),
     planCodes, restaurants: recentR.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
@@ -70,4 +71,38 @@ async function deletePlanCode(code) {
   await rest(`plan_codes?code=eq.${encodeURIComponent(code)}&uses=eq.0`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, makePlanCodes, deletePlanCode };
+// contested no-shows, newest first: each with its order's every timestamp, and both accounts' track record
+async function disputes() {
+  const d = (await rest("disputes?select=id,order_id,user_id,restaurant_id,reason,status,created_at,decided_at,note&order=created_at.desc&limit=100")).rows;
+  if (!d.length) return [];
+  const ids = (k) => [...new Set(d.map((x) => x[k]))].join(",");
+  const [orders, people, rests, dinerOrders, restOrders] = await Promise.all([
+    rest(`orders?id=in.(${ids("order_id")})&select=id,number,total,status,placed_at,accepted_at,pickup_at,ready_at,nudged_at,arrived_at,arrived_m,picked_at,noshow_at`),
+    rest(`profiles?id=in.(${ids("user_id")})&select=id,name,username,email,strikes,created_at`),
+    rest(`restaurants?id=in.(${ids("restaurant_id")})&select=id,name,city,false_noshows`),
+    rest(`orders?user_id=in.(${ids("user_id")})&select=user_id,status,arrived_at&limit=5000`),
+    rest(`orders?restaurant_id=in.(${ids("restaurant_id")})&select=restaurant_id,status&limit=5000`),
+  ]);
+  const n = (rows, f) => rows.filter(f).length;
+  return d.map((x) => {
+    const mine = dinerOrders.rows.filter((o) => o.user_id === x.user_id);
+    const theirs = restOrders.rows.filter((o) => o.restaurant_id === x.restaurant_id);
+    const past = d.filter((y) => y.user_id === x.user_id && y.id !== x.id);
+    const p = people.rows.find((y) => y.id === x.user_id) || {};
+    const r = rests.rows.find((y) => y.id === x.restaurant_id) || {};
+    return {
+      ...x,
+      order: orders.rows.find((o) => o.id === x.order_id) || {},
+      diner: { ...p, orders: mine.length, picked: n(mine, (o) => o.status === "picked"), noshows: n(mine, (o) => o.status === "noshow"), checkins: n(mine, (o) => o.arrived_at),
+        disputes: past.length, upheld: n(past, (y) => y.status === "upheld") },
+      restaurant: { ...r, orders: theirs.length, picked: n(theirs, (o) => o.status === "picked"), noshows: n(theirs, (o) => o.status === "noshow") },
+    };
+  });
+}
+// the FIG team's call: upheld = the diner was right (their strike comes off, the restaurant gets a false-report strike)
+async function decideDispute(id, upheld, note) {
+  if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id");
+  await rest("rpc/decide_dispute", { method: "POST", body: JSON.stringify({ p_dispute: id, p_upheld: !!upheld, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
+}
+
+module.exports = { connected, overview, disputes, decideDispute, makePlanCodes, deletePlanCode };

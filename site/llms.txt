@@ -8,7 +8,7 @@
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional ads from the Ads Manager (https://fig-promo.vercel.app/ads): pay per tap (auction, second price, $0.30 minimum), daily budget, targeting by distance, days/hours, foods and new vs returning diners, rotating photos, results down to diners who came in; invoiced monthly
-- How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly
+- How a deal works: claim (yours until the restaurant ends the deal), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number
 

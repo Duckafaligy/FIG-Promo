@@ -2,7 +2,7 @@
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
 sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no fees, no commission), ads pay per tap (from $0.30, daily budget,
-invoiced monthly), no AI features, codes refresh every 5 minutes, claims held 24 hours, no loyalty points or rewards.
+invoiced monthly), no AI features, codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 
 ABOUT_FAQ = [
@@ -33,7 +33,7 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <h2>How FIG works for diners</h2>
 <ol>
 <li><b>Find</b> a live deal near you on the home feed or the map. Filter by craving, budget and diet (halal, vegetarian, vegan, gluten-free and more).</li>
-<li><b>Claim</b> it in one tap. We hold it for 24 hours.</li>
+<li><b>Claim</b> it in one tap. It’s yours for as long as the deal runs.</li>
 <li><b>Show</b> your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</li>
 <li><b>Rate</b> the visit afterwards, so reviews on FIG come from real visits.</li>
 </ol>

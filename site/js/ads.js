@@ -137,19 +137,58 @@
   }
   const tipHtml = (list) => list.map(([ic, txt]) => `<div class="tip ${ic === "warn" ? "warn" : ""}">${I[ic]}<div>${txt}</div></div>`).join("");
 
+  // ------------------------------------------------------------------ the restaurant switcher (photo, name, city and status;
+  // a menu of the owner's restaurants when there's more than one)
+  const CHEV = P('<path d="m6 9 6 6 6-6"/>'), CHECK = P('<path d="m5 12 5 5 9-10"/>');
+  const thumb = (x) => `<span class="pr-photo">${x.photos?.[0] ? `<img src="${esc(x.photos[0])}" alt="">` : esc((x.name || "?").trim()[0].toUpperCase())}</span>`;
+  const line = (x) => `<span class="pr-line"><i class="dot ${x.status === "approved" ? "" : "wait"}"></i>${x.status === "approved" ? "Live" : "Setting up"}${x.city ? " · " + esc(x.city) : ""}</span>`;
+  function switcher(r) {
+    if (!r) return "";
+    const many = S.rests.length > 1;
+    const face = `${thumb(r)}<span class="pr-text"><b>${esc(r.name)}</b>${line(r)}</span>`;
+    if (!many) return `<div class="place"><div class="pick-rest single" aria-label="${esc(r.name)}">${face}</div></div>`;
+    return `<div class="place"><button class="pick-rest" id="rs" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="rs-menu" aria-label="${esc(r.name)}. Switch restaurant">${face}<span class="pr-chev">${CHEV}</span></button>
+      <div class="pr-menu" id="rs-menu" role="listbox" aria-label="Your restaurants" hidden><p class="pr-head">Your restaurants</p>
+        ${S.rests.map((x) => `<button class="pr-opt" type="button" role="option" aria-selected="${x.id === S.rid}" data-rid="${x.id}">${thumb(x)}<span class="pr-text"><b>${esc(x.name)}</b>${line(x)}</span><span class="pr-check">${CHECK}</span></button>`).join("")}
+        <p class="pr-foot">Add a location in the FIG app.</p></div></div>`;
+  }
+  function wireSwitcher() {
+    const btn = document.getElementById("rs"), menu = document.getElementById("rs-menu");
+    if (!btn) return;
+    const opts = () => [...menu.querySelectorAll(".pr-opt")];
+    const close = (focus) => { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); document.removeEventListener("pointerdown", outside); if (focus) btn.focus(); };
+    const outside = (e) => { if (!menu.contains(e.target) && !btn.contains(e.target)) close(false); };
+    const open = () => { menu.hidden = false; btn.setAttribute("aria-expanded", "true"); document.addEventListener("pointerdown", outside); (opts().find((o) => o.getAttribute("aria-selected") === "true") || opts()[0]).focus(); };
+    btn.onclick = () => (menu.hidden ? open() : close(true));
+    btn.onkeydown = (e) => { if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); open(); } };
+    menu.onkeydown = (e) => {
+      const list = opts(), i = list.indexOf(document.activeElement);
+      if (e.key === "Escape") { e.preventDefault(); close(true); }
+      else if (e.key === "ArrowDown") { e.preventDefault(); list[(i + 1) % list.length].focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); list[(i - 1 + list.length) % list.length].focus(); }
+      else if (e.key === "Tab") close(false);
+    };
+    opts().forEach((o) => (o.onclick = async () => {
+      close(true);
+      if (o.dataset.rid === S.rid) return;
+      S.rid = o.dataset.rid; store.set("fig-ads-rest", S.rid);
+      btn.classList.add("busy");
+      await loadRest(); route();
+    }));
+  }
+
   // ------------------------------------------------------------------ the shell
-  const NAV = [["overview", "Overview", I.home], ["campaigns", "Ads", I.list], ["create", "Create an ad", I.plus], ["insights", "Insights", I.chart], ["billing", "Billing", I.card]];
+  const NAV =[["overview", "Overview", I.home], ["campaigns", "Ads", I.list], ["create", "Create an ad", I.plus], ["insights", "Insights", I.chart], ["billing", "Billing", I.card]];
   function shell(view, inner) {
     const r = rest();
     app.innerHTML = `<div class="shell"><aside>
       <div class="brand">${LOGO}FIG Ads</div>
-      <div class="place"><label class="l" for="rs" style="margin:0">Restaurant</label>
-        <select id="rs">${S.rests.map((x) => `<option value="${x.id}" ${x.id === S.rid ? "selected" : ""}>${esc(x.name)}${x.city ? " · " + esc(x.city) : ""}</option>`).join("")}</select></div>
+      ${switcher(r)}
       <nav class="side">${NAV.map(([v, label, ic]) => `<button data-go="${v}" class="${view === v || (view === "detail" && v === "campaigns") ? "on" : ""}">${ic}${label}</button>`).join("")}</nav>
       <div class="foot"><span>${esc(S.session.user.email)}</span><button class="link" id="so" style="justify-self:start">Sign out</button></div>
     </aside><main>${r && r.status !== "approved" ? `<div class="tip warn" style="margin-bottom:20px">${I.warn}<div>${esc(r.name)} isn’t live on FIG yet. Finish setup in the app so your ads can show.</div></div>` : ""}${S.account?.status === "held" ? `<div class="tip warn" style="margin-bottom:20px">${I.warn}<div>Your ads are on hold. The FIG team will contact you about your account.</div></div>` : ""}${inner}</main></div>`;
     document.querySelectorAll("[data-go]").forEach((b) => (b.onclick = () => go(b.dataset.go)));
-    document.getElementById("rs").onchange = async (e) => { S.rid = e.target.value; store.set("fig-ads-rest", S.rid); await loadRest(); route(); };
+    wireSwitcher();
     document.getElementById("so").onclick = async () => { await db.auth.signOut(); location.hash = ""; signInView(); };
   }
   const go = (v) => { location.hash = v; };

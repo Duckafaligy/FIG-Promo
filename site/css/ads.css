@@ -51,8 +51,38 @@ input[type=range] { width: 100%; accent-color: var(--cobalt); }
 /* shell */
 .shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
 aside { position: sticky; top: 0; height: 100vh; padding: 22px 16px; border-right: 1px solid var(--hair); display: flex; flex-direction: column; gap: 18px; }
-.place { display: flex; flex-direction: column; gap: 4px; padding: 0 8px; }
-.place select { border: 0; background: var(--grey); border-radius: 12px; height: 40px; padding: 0 10px; font-weight: 700; }
+/* the restaurant switcher: a card with the photo, name and status; a menu of restaurants under it */
+.place { position: relative; }
+.pick-rest { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px 8px 8px; border: 1px solid var(--hair); border-radius: 16px; background: var(--bg); text-align: left; transition: border-color .15s, box-shadow .15s, background .15s; }
+button.pick-rest { cursor: pointer; }
+button.pick-rest:hover { border-color: #C9CED6; background: #FAFBFC; }
+button.pick-rest:focus-visible { outline: none; border-color: var(--cobalt); box-shadow: 0 0 0 3px var(--cobalt-soft); }
+.pick-rest[aria-expanded="true"] { border-color: var(--cobalt); box-shadow: 0 0 0 3px var(--cobalt-soft); }
+.pick-rest.busy { opacity: .6; }
+.pr-photo { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; flex-shrink: 0; display: grid; place-items: center; background: var(--grey); color: var(--slate); font: 800 16px var(--d); }
+.pr-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr-text { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.pr-text b { font: 700 15px/1.25 var(--d); letter-spacing: -.01em; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: anywhere; }
+.pr-line { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--slate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dot { width: 7px; height: 7px; border-radius: 99px; background: var(--green); flex-shrink: 0; }
+.dot.wait { background: #F5A524; }
+.pr-chev { width: 28px; height: 28px; border-radius: 99px; display: grid; place-items: center; background: var(--grey); color: var(--ink); flex-shrink: 0; transition: transform .2s; }
+.pr-chev svg { width: 15px; height: 15px; }
+.pick-rest[aria-expanded="true"] .pr-chev { transform: rotate(180deg); }
+.pr-menu { position: absolute; left: 0; width: max(100%, 320px); max-width: calc(100vw - 32px); top: calc(100% + 8px); z-index: 30; display: grid; gap: 2px; padding: 6px; background: var(--bg); border: 1px solid var(--hair); border-radius: 16px; box-shadow: 0 18px 44px rgba(14,17,22,.16); transform-origin: top center; animation: pr-in .16s cubic-bezier(.2,.8,.2,1); }
+.pr-menu[hidden] { display: none; }
+@keyframes pr-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@media (prefers-reduced-motion: reduce) { .pr-menu { animation: none; } .pr-chev { transition: none; } }
+.pr-head { padding: 8px 10px 4px; font: 700 12px var(--s); color: var(--slate); }
+.pr-opt { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px; border: 0; border-radius: 12px; background: none; text-align: left; cursor: pointer; }
+.pr-opt .pr-photo { width: 34px; height: 34px; border-radius: 8px; font-size: 14px; }
+.pr-opt .pr-text b { font-size: 14px; }
+.pr-opt:hover, .pr-opt:focus-visible { background: var(--grey); outline: none; }
+.pr-check { width: 18px; height: 18px; color: var(--cobalt); flex-shrink: 0; visibility: hidden; }
+.pr-check svg { width: 18px; height: 18px; }
+.pr-opt[aria-selected="true"] .pr-check { visibility: visible; }
+.pr-opt[aria-selected="true"] .pr-text b { color: var(--cobalt); }
+.pr-foot { margin-top: 4px; padding: 8px 10px 6px; border-top: 1px solid var(--hair); font-size: 12px; color: var(--slate); }
 nav.side { display: grid; gap: 4px; }
 nav.side button { display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 12px; border: 0; border-radius: 999px; background: none; font: 600 15px var(--s); text-align: left; cursor: pointer; }
 nav.side button:hover { background: var(--grey); }

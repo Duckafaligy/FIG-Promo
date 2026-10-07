@@ -24,7 +24,7 @@ BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food dea
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
 HIDDEN = {"404", "r"}  # not indexed, no breadcrumbs, not in the sitemap
 
-NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#passport", "Passport"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
+NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
 
 
 def nav(current=""):
@@ -46,7 +46,7 @@ FOOTER = f'''<footer class="foot">
         {STORES}
       </div>
       <div class="foot-cols">
-        <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#passport">Passport</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
+        <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
         <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/pay-per-scan-pricing">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
         <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
@@ -194,7 +194,7 @@ HELP = [
         ("How do I use a deal?", "Claim it in the app (we hold it for 24 hours), then show the QR code at the counter when you order. Staff scan it, or type the 8 characters under it."),
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, at the restaurant, like normal. FIG never takes payment for food."),
-        ("How do stamps work?", "Every deal you use, and every takeout pickup, adds a stamp to your Passport: the place, the date, a photo and what you saved."),
+        ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
         ("Do restaurants see my phone number?", "Never. Chats and takeout go through the app and your number stays private."),
         ("Can I order takeout?", "Yes, where the restaurant offers it. Order from the menu, watch it get made, and pay at the counter when you pick it up. Deals can apply to takeout unless the deal is dine-in only."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
@@ -366,14 +366,14 @@ LLMS = f"""# FIG
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
-- Diners: free, including AI picks (3 a day); every visit earns a Passport stamp (a record of places and savings)
+- Diners: free, including AI picks (3 a day); no loyalty points or rewards
 - Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional boosts: a boosted deal from $15/week or a featured restaurant from $35/week, a few spots per city, always labelled Sponsored
-- How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly, earn a stamp
+- How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages
-- [Home]({SITE_URL}/): what FIG is, features, the Passport, pricing
+- [Home]({SITE_URL}/): what FIG is, features, pricing
 - [About]({SITE_URL}/about): the full story and FAQ
 - [Help center]({SITE_URL}/help): answers for diners and restaurants
 """ + "".join(f"- [{x['title']}]({SITE_URL}/blog/{x['slug']}): {x['dek']}\n" for x in POSTS) + f"""

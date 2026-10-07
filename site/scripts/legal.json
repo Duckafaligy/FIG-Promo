@@ -6,7 +6,6 @@
    "FIG is free for you, and for restaurants. Restaurants can pay to sponsor a spot, always labelled Sponsored.",
    "A deal counts once staff scan your QR at the restaurant.",
    "One account per person. No sharing codes or faking visits.",
-   "Stamps are a record of your visits. They have no cash value.",
    "AI picks are free, 3 a day."
   ],
   "sections": [
@@ -35,66 +34,59 @@
    {
     "heading": "4. Play fair",
     "paragraphs": [
-     "Restaurants pay for every redemption, so we protect them from abuse. Don't:",
+     "Restaurants honour every deal in good faith, so we protect them from abuse. Don't:",
      "• make more than one account",
      "• share, screenshot or sell QR codes",
      "• fake visits or redeem without buying",
      "• use bots, scripts or location spoofing",
      "• harass restaurant staff or other diners",
-     "If we see this, we may cancel claims, remove stamps, or suspend your account."
+     "If we see this, we may cancel claims or suspend your account."
     ]
    },
    {
-    "heading": "5. Stamps",
+    "heading": "5. Sponsored spots",
     "paragraphs": [
-     "You earn 1 stamp for each verified redemption. A scanned takeout pickup counts as one. Stamps are a record of your visits and what you saved.",
-     "Stamps have no cash value and can't be sold or transferred. If a redemption is reversed (for example, it turns out to be fraud), its stamp is removed."
+     "FIG is free for diners and restaurants. Restaurants can pay FIG to advertise a deal or their restaurant. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price, its reviews or what AI picks suggests, and restaurants never get your details from it."
     ]
    },
    {
-    "heading": "6. Sponsored spots",
-    "paragraphs": [
-     "FIG is free for diners and restaurants. Restaurants can pay FIG to show a deal or their restaurant first for a week. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price, its reviews or what AI picks suggests, and restaurants never get your details from it."
-    ]
-   },
-   {
-    "heading": "7. AI picks",
+    "heading": "6. AI picks",
     "paragraphs": [
      "AI picks are free, up to 3 a day. They suggest deals using restaurant info on FIG and your taste settings. They only suggest real deals listed on FIG, but they can still get details wrong. Check the deal page before you go."
     ]
    },
    {
-    "heading": "8. Restaurants and your food",
+    "heading": "7. Restaurants and your food",
     "paragraphs": [
      "FIG doesn't run any restaurant. Food, prices, service, safety and allergens are the restaurant's responsibility. Dietary filters are a guide only. Always tell staff about allergies before you order."
     ]
    },
    {
-    "heading": "9. What you send us",
+    "heading": "8. What you send us",
     "paragraphs": [
      "If you send us photos, reports or feedback, you still own them. You let us use them to run and improve FIG. Don't send anything that isn't yours or breaks the law. Reviews must be about your own scanned visit and honest. They're public under your first name and last initial. We can remove reviews that are abusive, fake or off-topic."
     ]
    },
    {
-    "heading": "10. Leaving FIG",
+    "heading": "9. Leaving FIG",
     "paragraphs": [
      "You can delete your account anytime in Profile → Account & password. We can suspend or close accounts that break these terms. If we do, we'll tell you why unless the law or safety stops us."
     ]
    },
    {
-    "heading": "11. Our responsibility",
+    "heading": "10. Our responsibility",
     "paragraphs": [
      "We work hard to keep FIG accurate and running, but it's provided \"as is\". As far as the law allows, we aren't liable for indirect losses, and our total liability to you is limited to the greater of what you paid us in the last 12 months or $50 CAD. Nothing here removes your rights under Ontario consumer protection law."
     ]
    },
    {
-    "heading": "12. Changes to these terms",
+    "heading": "11. Changes to these terms",
     "paragraphs": [
      "If we make an important change, we'll tell you in the app at least 14 days before it starts. If you keep using FIG after that, the new terms apply."
     ]
    },
    {
-    "heading": "13. Governing law",
+    "heading": "12. Governing law",
     "paragraphs": [
      "These terms are governed by the laws of Ontario and the federal laws of Canada that apply there. Disputes go to the courts of Ontario."
     ]
@@ -127,7 +119,7 @@
      "• Account: name, username, email and mobile number (each confirmed with a code), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
      "• Location: your precise location while you use FIG, to show nearby deals and confirm you're at the restaurant when you activate a deal or pick up an order. We keep the result of that check with the visit record. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
-     "• Activity: claims, redemptions, stamps, searches, takeout orders, chat messages, and the reviews and photos you post.",
+     "• Activity: claims, verified visits, searches, takeout orders, chat messages, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Support: messages and reports you send us."
     ]
@@ -137,7 +129,7 @@
     "paragraphs": [
      "• Show deals and places near you",
      "• Verify redemptions and stop fraud",
-     "• Count your stamps and what you saved",
+     "• Keep a record of your visits, so you can rate them and find places again",
      "• Personalise Home and AI picks (you can turn this off)",
      "• Send the alerts and emails you chose",
      "• Deliver chat messages between you and a restaurant. Phone numbers typed into a chat are hidden. The FIG team reads a chat only when someone reports it",

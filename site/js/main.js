@@ -28,7 +28,7 @@
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["how", "features", "passport", "catch", "owners"].forEach((id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+  ["how", "features", "catch", "owners"].forEach((id) => { const s = document.getElementById(id); if (s) io.observe(s); });
 
   // ---------- food strip ----------
   const FOOD = [["golden-lantern", "Dim sum"], ["kinton-ramen", "Ramen"], ["chatime", "Bubble tea"], ["pho-hung", "Pho"], ["sakura-house", "Sushi"],
@@ -68,61 +68,6 @@
   }
 
 
-  // ---------- passport: stamps fill to 50, then confetti and the milestone ----------
-  (() => {
-    const card = $("#pp"), num = $("#pp-num"), bar = $("#pp-bar"), box = $("#pp-stamps"), unlock = $("#pp-unlock");
-    const rungs = $$(".rung"), pins = window.FIG_PINS || [];
-    const C = 553; // ring circumference
-    const label = (r, t) => { r.querySelector(".state").textContent = t; };
-    const fire = window.confetti && confetti.create($("#pp-confetti"), { resize: true, useWorker: true });
-    function reset() {
-      num.textContent = "0"; bar.style.strokeDashoffset = C; box.innerHTML = "";
-      rungs.forEach((r) => { r.classList.remove("hit"); label(r, "Soon"); });
-      card.classList.remove("done");
-      if (motion) gsap.set(unlock, { opacity: 0, y: 30, scale: 0.96 });
-    }
-    function final() {
-      num.textContent = "50"; bar.style.strokeDashoffset = 0;
-      box.innerHTML = pins.slice(0, 10).map((p) => `<span><img src="${p}" alt=""></span>`).join("");
-      rungs[0].classList.add("hit"); label(rungs[0], "Done");
-      rungs[1].classList.add("hit"); label(rungs[1], "Done");
-      label(rungs[2], "50 to go");
-      unlock.style.opacity = 1; unlock.style.transform = "none";
-    }
-    function play() {
-      if (!motion) return final();
-      reset();
-      let shown = 0;
-      const o = { v: 0 };
-      const tl = gsap.timeline();
-      tl.to(o, { v: 50, duration: 3.6, ease: "power1.inOut", onUpdate() {
-        const v = Math.round(o.v);
-        num.textContent = v;
-        bar.style.strokeDashoffset = C * (1 - o.v / 50);
-        while (shown < Math.floor(o.v / 5)) {
-          const s = document.createElement("span");
-          s.innerHTML = `<img src="${pins[shown % pins.length]}" alt="">`;
-          box.appendChild(s);
-          gsap.from(s, { scale: 0.2, rotate: -30, opacity: 0, duration: 0.45, ease: "back.out(2.6)" });
-          shown++;
-        }
-        if (v >= 25 && !rungs[0].classList.contains("hit")) { rungs[0].classList.add("hit"); label(rungs[0], "Done"); }
-      } });
-      tl.add(() => {
-        rungs[1].classList.add("hit"); label(rungs[1], "Done"); label(rungs[2], "50 to go");
-        if (fire) {
-          fire({ particleCount: 140, spread: 80, startVelocity: 42, origin: { x: 0.3, y: 0.45 }, colors: ["#1E5EFF", "#C8F135", "#14C86B", "#6E56FF", "#FFFFFF"] });
-          setTimeout(() => fire({ particleCount: 90, spread: 110, startVelocity: 30, origin: { x: 0.7, y: 0.4 }, colors: ["#1E5EFF", "#C8F135", "#FFFFFF"] }), 220);
-        }
-      });
-      tl.to(unlock, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, "+=0.15");
-      tl.add(() => card.classList.add("done"), "+=0.4");
-    }
-    $("#pp-replay").addEventListener("click", play);
-    if (!motion) return final();
-    reset();
-    ScrollTrigger.create({ trigger: card, start: "top 70%", once: true, onEnter: play });
-  })();
 
   // ---------- chats: a diner and the restaurant texting, 3-5 s per message ----------
   (() => {

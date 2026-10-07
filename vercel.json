@@ -164,6 +164,11 @@
       "source": "/blog/pay-per-scan-pricing",
       "destination": "/blog/how-fig-makes-money",
       "permanent": true
+    },
+    {
+      "source": "/blog/how-the-passport-works",
+      "destination": "/blog",
+      "permanent": true
     }
   ]
 }

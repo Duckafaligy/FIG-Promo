@@ -2,7 +2,7 @@
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
 sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no fees, no commission), boosts from $15 (deal) / $35
-(restaurant) a week, AI picks free 3 a day, codes refresh every 5 minutes, claims held 24 hours, stamps are a record (no rewards).
+(restaurant) a week, AI picks free 3 a day, codes refresh every 5 minutes, claims held 24 hours, no loyalty points or rewards.
 """
 
 ABOUT_FAQ = [
@@ -35,7 +35,7 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <li><b>Find</b> a live deal near you on the home feed or the map. Filter by craving, budget and diet (halal, vegetarian, vegan, gluten-free and more).</li>
 <li><b>Claim</b> it in one tap. We hold it for 24 hours.</li>
 <li><b>Show</b> your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</li>
-<li><b>Earn</b> a stamp in your Passport, with the place, the date and what you saved.</li>
+<li><b>Rate</b> the visit afterwards, so reviews on FIG come from real visits.</li>
 </ol>
 <p>You can also order takeout ahead and pay at pickup, message a restaurant before you go, and share a deal with your group chat so everyone can agree on where to eat.</p>
 
@@ -97,21 +97,6 @@ POSTS = [
          faq=[("How much does FIG cost a restaurant?", "Nothing. Boosts are optional: from $15 a week to boost a deal, from $35 a week to feature your restaurant."),
               ("Is there a contract?", "No. Nothing to cancel. A boost is one week at a time, agreed before it runs.")]),
 
-    dict(slug="how-the-passport-works", screen="stamp", title="Your Passport: every meal you've had on FIG", date="2026-10-03", topic="For diners",
-         dek="Every meal on FIG earns a stamp in your Passport: the place, the date, a photo and what you saved. Here's how it works.",
-         keywords="FIG Passport, restaurant stamps, food diary Markham, restaurant visits",
-         points=["Every deal you use and every takeout pickup earns one stamp.",
-                 "Your Passport shows every place you tried, how often you went and what you saved.",
-                 "It's free, and it never asks for a card."],
-         sections=[
-             ("Earning stamps", "<p>Every time you use a deal on FIG, staff scan your code and a stamp lands in your Passport, with the place, the date, a photo of what you ate and what you saved. Takeout pickups earn stamps too.</p>"),
-             ("Your places", "<p>The Voucher tab groups your stamps by restaurant, so you can see your regular spots at a glance, and the places you loved but haven't been back to.</p>"),
-             ("What you saved", "<p>FIG adds up roughly how much the deals saved you, visit by visit.</p>"),
-             ("A food diary you didn't have to write", "<p>Your Passport doubles as a history of every place you've tried in Markham. Rate a visit right from its stamp.</p>"),
-         ],
-         faq=[("Do stamps expire?", "No. Stamps stay in your Passport as a record of your visits."),
-              ("Do takeout orders earn stamps?", "Yes. A scanned takeout pickup earns a stamp, just like a dine-in deal.")]),
-
     dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", topic="For diners",
          dek="A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.",
          keywords="restaurant deals Markham, Markham food deals, cheap eats Markham, Markham restaurants, Unionville restaurants",
@@ -123,7 +108,7 @@ POSTS = [
              ("Know the food streets", "<p>Markham's restaurants cluster in plazas. The Highway 7 corridor, Kennedy Road, Warden Avenue, Main Street Unionville and Markham Village each have dozens of places within a few minutes of each other, which makes it easy to try somewhere new when a deal pops up nearby.</p>"),
              ("Let the app do the searching", "<p>Instead of checking ten Instagram accounts, open FIG. Home and the map show every live deal around you, nearest first. Tell FIG your cravings, budget and any dietary needs once (halal, vegetarian, vegan, gluten-free and more) and the list becomes the places that actually fit you.</p>"),
              ("Watch for flash deals", "<p>Flash deals are short deals a restaurant posts when it has a quiet hour. Turn on flash alerts and FIG tells you when one drops near you. The timer is real, set by the restaurant. <a href=\"/blog/flash-deals-explained\">How flash deals work</a>.</p>"),
-             ("Make it count", "<p>Every deal you use earns a Passport stamp, with what you saved, so you can see every place you tried and how much FIG saved you. <a href=\"/blog/how-the-passport-works\">How the Passport works</a>.</p>"),
+             ("Rate where you went", "<p>After a visit, rate it in a tap. Only diners whose visit was scanned can review on FIG, so the ratings you read come from real meals.</p>"),
          ],
          faq=[("What's the best app for restaurant deals in Markham?", "FIG is built specifically for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners."),
               ("Do I pay through the app?", "No. You pay the restaurant at the counter, like normal. FIG never handles payment for food.")]),
@@ -171,7 +156,7 @@ POSTS = [
              ("After school is deal time", "<p>Between 3 and 6 pm, a lot of Markham restaurants and bubble tea shops are quiet. That's when owners post deals, and when you're most likely to be hungry.</p>"),
              ("Set your budget once", "<p>When you sign up, tell FIG your budget and what you crave. The home feed and map then show deals that fit, nearest first, so you're not scrolling past $40 dinners.</p>"),
              ("Decide with your friends", "<p>Can't agree where to eat? Share a deal from FIG straight to your group chat. Everyone sees the same place, the same deal and how far it is.</p>"),
-             ("Free is better", "<p>FIG is free for diners, AI picks included (3 a day). Every deal you use earns a stamp, so you can see where you've been and how much you saved. <a href=\"/blog/how-the-passport-works\">How stamps work</a>.</p>"),
+             ("Free is better", "<p>FIG is free for diners, AI picks included (3 a day). Nothing to collect, nothing to upgrade: just deals.</p>"),
              ("Ask before you go", "<p>Not sure if there's space for six, or if the deal works for takeout? Message the restaurant from the deal. Your phone number stays private.</p>"),
          ],
          faq=[("Is FIG free for students?", "Yes. FIG is free for every diner, with nothing to upgrade."),
@@ -201,7 +186,7 @@ POSTS = [
          sections=[
              ("How it works", "<p>Open a restaurant in FIG, tap the menu and build your order. The restaurant accepts it and you can watch its status: new, cooking, ready. Head over, show your pickup code, pay at the counter and go.</p>"),
              ("Why pickup is cheaper", "<p>There's no driver, so there's no delivery fee, and FIG doesn't add a service fee. You pay the menu price, minus any deal, straight to the restaurant.</p>"),
-             ("Deals and stamps still count", "<p>Deals work on takeout unless the restaurant says dine-in only, and every scanned pickup earns a Passport stamp.</p>"),
+             ("Deals still count", "<p>Deals work on takeout unless the restaurant says dine-in only.</p>"),
              ("Private by default", "<p>The restaurant never sees your phone number. If you need to change something, message them from the order in the app.</p>"),
          ],
          faq=[("Does FIG deliver?", "No. FIG takeout is order-ahead pickup. You collect the food and pay the restaurant at the counter."),

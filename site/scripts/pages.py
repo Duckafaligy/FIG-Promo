@@ -176,7 +176,7 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
      keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
                     "mainEntity": {"@type": "Organization", "name": "FIG Technologies Inc.", "url": SITE_URL, "foundingLocation": "Markham, Ontario",
-                                   "areaServed": ["Markham, Ontario", "Richmond Hill, Ontario"], "description": "FIG is a restaurant deals app for Markham, Ontario."}}) + faq_ld(ABOUT_FAQ))
+                                   "areaServed": ["Markham, Ontario"], "description": "FIG is a restaurant deals app for Markham, Ontario."}}) + faq_ld(ABOUT_FAQ))
 
 page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 <p class="lead-p">A real person reads every message.</p>

@@ -68,7 +68,7 @@
   }
 
 
-  // ---------- passport: stamps fill to 50, then confetti and the reward ----------
+  // ---------- passport: stamps fill to 50, then confetti and the milestone ----------
   (() => {
     const card = $("#pp"), num = $("#pp-num"), bar = $("#pp-bar"), box = $("#pp-stamps"), unlock = $("#pp-unlock");
     const rungs = $$(".rung"), pins = window.FIG_PINS || [];
@@ -77,15 +77,15 @@
     const fire = window.confetti && confetti.create($("#pp-confetti"), { resize: true, useWorker: true });
     function reset() {
       num.textContent = "0"; bar.style.strokeDashoffset = C; box.innerHTML = "";
-      rungs.forEach((r) => { r.classList.remove("hit"); label(r, "Locked"); });
+      rungs.forEach((r) => { r.classList.remove("hit"); label(r, "Soon"); });
       card.classList.remove("done");
       if (motion) gsap.set(unlock, { opacity: 0, y: 30, scale: 0.96 });
     }
     function final() {
       num.textContent = "50"; bar.style.strokeDashoffset = 0;
       box.innerHTML = pins.slice(0, 10).map((p) => `<span><img src="${p}" alt=""></span>`).join("");
-      rungs[0].classList.add("hit"); label(rungs[0], "Claim");
-      rungs[1].classList.add("hit"); label(rungs[1], "Unlocked");
+      rungs[0].classList.add("hit"); label(rungs[0], "Done");
+      rungs[1].classList.add("hit"); label(rungs[1], "Done");
       label(rungs[2], "50 to go");
       unlock.style.opacity = 1; unlock.style.transform = "none";
     }
@@ -106,10 +106,10 @@
           gsap.from(s, { scale: 0.2, rotate: -30, opacity: 0, duration: 0.45, ease: "back.out(2.6)" });
           shown++;
         }
-        if (v >= 25 && !rungs[0].classList.contains("hit")) { rungs[0].classList.add("hit"); label(rungs[0], "Claim"); }
+        if (v >= 25 && !rungs[0].classList.contains("hit")) { rungs[0].classList.add("hit"); label(rungs[0], "Done"); }
       } });
       tl.add(() => {
-        rungs[1].classList.add("hit"); label(rungs[1], "Unlocked"); label(rungs[2], "50 to go");
+        rungs[1].classList.add("hit"); label(rungs[1], "Done"); label(rungs[2], "50 to go");
         if (fire) {
           fire({ particleCount: 140, spread: 80, startVelocity: 42, origin: { x: 0.3, y: 0.45 }, colors: ["#1E5EFF", "#C8F135", "#14C86B", "#6E56FF", "#FFFFFF"] });
           setTimeout(() => fire({ particleCount: 90, spread: 110, startVelocity: 30, origin: { x: 0.7, y: 0.4 }, colors: ["#1E5EFF", "#C8F135", "#FFFFFF"] }), 220);

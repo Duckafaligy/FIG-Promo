@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>FIG · Restaurant deals in Markham, Ontario</title>
-  <meta name="description" content="FIG puts live deals from Markham restaurants on a map. Claim one, show your code at the counter and save. Free for diners. Restaurants join free and pay $1.50 only when a FIG diner comes in.">
+  <meta name="description" content="FIG puts live deals from Markham restaurants on a map. Claim one, show your code at the counter and save. Free for diners, and free for restaurants: no commission, no fees. Restaurants can pay to sponsor a spot for a week.">
   <meta name="keywords" content="FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app, Markham takeout deals">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:title" content="FIG · Local deals in Markham">
@@ -93,7 +93,7 @@
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/map.webp" alt="FIG map with photo pins of nearby restaurants" loading="lazy" width="390" height="844"></div><span class="num">01</span><h3>Spot a deal on the map</h3><p>Every photo pin is a restaurant near you. Tap one to see what's on.</p></li>
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/claim.webp" alt="Claim sheet for 2-for-1 Dim Sum" loading="lazy" width="390" height="844"></div><span class="num">02</span><h3>Claim it in one tap</h3><p>We hold it for 24 hours. Nothing to pay, nothing to print.</p></li>
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/qr.webp" alt="QR code to show staff" loading="lazy" width="390" height="844"></div><span class="num">03</span><h3>Show your code</h3><p>Staff scan it at the counter. It changes every 5 minutes, so it only works for you.</p></li>
-        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/stamp.webp" alt="Stamp earned screen" loading="lazy" width="390" height="844"></div><span class="num">04</span><h3>Earn a stamp</h3><p>Every deal you use adds a stamp. Spend them on free weeks of Premium.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/stamp.webp" alt="Stamp earned screen" loading="lazy" width="390" height="844"></div><span class="num">04</span><h3>Earn a stamp</h3><p>Every deal you use adds a stamp, with a photo of what you ate and what you saved.</p></li>
       </ol>
     </div>
   </section>
@@ -145,18 +145,18 @@
           <div class="panel violet"><video data-src="/assets/clips/decide.mp4" poster="/assets/clips/decide.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
           <div class="drop violet" aria-hidden="true"><div class="drop-in">
             <h4>"Dim sum for 4, under $25."</h4>
-            <ul><li>Three picks, each with a reason</li><li>A Premium perk: earn it free with stamps</li><li>Only real deals that are live right now</li></ul>
+            <ul><li>Three picks, each with a reason</li><li>Free for everyone, 3 a day</li><li>Only real deals that are live right now</li></ul>
           </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Every meal counts.</h3>
-            <p>Each deal you use stamps your Passport. Stamps turn into free Premium.</p>
+            <p>Each deal you use stamps your Passport: every place you tried, and what you saved.</p>
           </div>
           <div class="panel ice"><video data-src="/assets/clips/stamps.mp4" poster="/assets/clips/stamps.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
           <div class="drop ice" aria-hidden="true"><div class="drop-in">
-            <h4>Your food diary pays you back.</h4>
-            <ul><li>25 stamps: 1 free week of Premium</li><li>50 stamps: 3 free weeks</li><li>100 stamps: 1 free month</li></ul>
+            <h4>A food diary you didn't have to write.</h4>
+            <ul><li>A stamp for every visit with a deal</li><li>How often you've been to each place</li><li>What FIG saved you, added up</li></ul>
           </div></div>
         </article>
         <article class="cell" tabindex="0">
@@ -192,7 +192,7 @@
         <div>
           <h2 class="h2 reveal">Every meal earns a stamp.</h2>
         </div>
-        <p class="side reveal">Spend your stamps on free FIG Premium as often as you like, without ever adding a card.</p>
+        <p class="side reveal">Your Passport keeps every place you tried in Markham, how often you went and what you saved. Free, and no card, ever.</p>
       </div>
       <div class="pp">
         <div class="pp-card reveal" id="pp">
@@ -205,17 +205,16 @@
             <div class="pp-stamps" id="pp-stamps"></div>
           </div>
           <div class="pp-unlock" id="pp-unlock" aria-live="polite">
-            <img src="/assets/premium-seal.png" alt="" width="110" height="120">
-            <div><p class="pp-u1">Reward unlocked</p><p class="pp-u2">3 free weeks of Premium</p><p class="pp-u3">Claim it anytime. No card, no auto-renew.</p></div>
+            <div><p class="pp-u1">50 meals on FIG</p><p class="pp-u2">About $340 saved</p><p class="pp-u3">Every place you tried, kept in your Passport.</p></div>
           </div>
           <canvas class="pp-confetti" id="pp-confetti" aria-hidden="true"></canvas>
           <button class="pp-replay" id="pp-replay" type="button">Play again</button>
         </div>
         <ul class="ladder">
-          <li class="rung reveal" data-at="25"><b>25</b><div><strong>1 free week</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
-          <li class="rung reveal" data-at="50"><b>50</b><div><strong>3 free weeks</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
-          <li class="rung reveal" data-at="100"><b>100</b><div><strong>1 free month</strong><span>of FIG Premium</span></div><i class="state">Locked</i></li>
-          <li class="ladder-note reveal">Stamps are a balance: claim a reward and keep collecting.</li>
+          <li class="rung reveal" data-at="25"><b>25</b><div><strong>A regular</strong><span>25 visits with a deal</span></div><i class="state">Soon</i></li>
+          <li class="rung reveal" data-at="50"><b>50</b><div><strong>All over Markham</strong><span>50 meals, dozens of places</span></div><i class="state">Soon</i></li>
+          <li class="rung reveal" data-at="100"><b>100</b><div><strong>Local legend</strong><span>100 meals on FIG</span></div><i class="state">Soon</i></li>
+          <li class="ladder-note reveal">Stamps are your record: every visit, every place, what you saved.</li>
         </ul>
       </div>
     </div>
@@ -259,10 +258,6 @@
       <div class="catch-copy">
         <h2 class="h2 reveal">What's the catch?</h2>
         <p class="body reveal">There isn't one. Watch exactly how FIG works, start to finish, in the real app.</p>
-        <div class="seg" role="tablist" aria-label="Tutorial for">
-          <button role="tab" aria-selected="true" data-tab="diner">I'm a diner</button>
-          <button role="tab" aria-selected="false" data-tab="restaurant">I own a restaurant</button>
-        </div>
         
       </div>
       <div class="tutwrap reveal">
@@ -279,9 +274,9 @@
     <div class="wrap">
       <div class="head-row">
         <div>
-          <h2 class="display-2 reveal price-head"><span class="ph-row"><span class="ph-k">Diners</span>Free.</span><span class="ph-row volt-t"><span class="ph-k">Restaurants</span>$1.50 a diner.</span></h2>
+          <h2 class="display-2 reveal price-head"><span class="ph-row"><span class="ph-k">Diners</span>Free.</span><span class="ph-row volt-t"><span class="ph-k">Restaurants</span>Free too.</span></h2>
         </div>
-        <p class="side reveal">Diners never pay to use FIG, they just pay their bill. Restaurants join free, get 10 free scans, then pay $1.50 only when a FIG diner's code is scanned. No commission, no monthly fee.</p>
+        <p class="side reveal">Diners never pay to use FIG, they just pay their bill. Restaurants list, post deals, scan diners and take takeout orders for free. No commission, no fees. Want more? Sponsor a spot for a week.</p>
       </div>
       <div class="tablet-row">
         <div class="tablet-wrap reveal">
@@ -299,13 +294,18 @@
         <article class="cell tall reveal" tabindex="0">
           <div class="cell-text">
             <h3>One day on FIG.</h3>
-            <p>14 diners walk in from FIG. Guess what it costs.</p>
-            <span class="hint">Hover to learn more</span>
+            <p>14 diners walk in from FIG. Here's what it costs.</p>
           </div>
-          <div class="panel volt"><video data-src="/assets/clips/oneday.mp4" poster="/assets/clips/oneday.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="panel volt"><div class="receipt" role="img" aria-label="Example day: 14 diners from FIG, total $0.00">
+            <p class="r-k">Example day · Golden Lantern</p>
+            <p><span>Diners from FIG</span><b>14</b></p>
+            <p><span>Fee per diner</span><b>$0.00</b></p>
+            <p><span>Commission</span><b>$0.00</b></p>
+            <p class="r-t"><span>Total</span><b>$0.00</b></p>
+          </div></div>
           <div class="drop volt" aria-hidden="true"><div class="drop-in">
-            <h4>Pay only for diners who come in.</h4>
-            <ul><li>Post a deal in a minute</li><li>Staff scan diners at the counter</li><li>Set a daily cap or pause anytime</li><li>$1.50 a scan, every location on one balance</li></ul>
+            <h4>Free. Every diner, every day.</h4>
+            <ul><li>Post a deal in a minute</li><li>Staff scan diners at the counter</li><li>Set a daily cap or pause anytime</li><li>Every location, free</li></ul>
           </div></div>
         </article>
       </div>
@@ -318,24 +318,27 @@
           <div class="panel cobalt"><video data-src="/assets/clips/quiethours.mp4" poster="/assets/clips/quiethours.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
           <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
             <h4>Your deal, your hours.</h4>
-            <ul><li>Pick the days and the hours it runs</li><li>Set a daily cap so it never gets out of hand</li><li>You only pay when a diner uses it</li></ul>
+            <ul><li>Pick the days and the hours it runs</li><li>Set a daily cap so it never gets out of hand</li><li>Free to post, free to scan</li></ul>
           </div></div>
         </article>
         <article class="cell" tabindex="0">
           <div class="cell-text">
-            <h3>Owners ask. We answer.</h3>
-            <p>New equipment? Codes that won't scan? Busy nights? Straight answers from the business app.</p>
+            <h3>Want more? Get seen first.</h3>
+            <p>Boost a deal or feature your restaurant for a week. Optional, and the only thing FIG ever charges.</p>
           </div>
-          <div class="panel slate"><video data-src="/assets/clips/ownercatch.mp4" poster="/assets/clips/ownercatch.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="panel slate"><div class="boostcard" role="img" aria-label="Example boost results: 1,240 views, 96 taps, 31 claims, 18 customers">
+            <p class="bc-k">Example · Featured on Home this week</p>
+            <div class="bc-g"><p><b>1,240</b><span>views</span></p><p><b>96</b><span>taps</span></p><p><b>31</b><span>claims</span></p><p><b>18</b><span>customers</span></p></div>
+          </div></div>
           <div class="drop slate" aria-hidden="true"><div class="drop-in">
-            <h4>No catch. Just diners.</h4>
-            <ul><li>Any phone or tablet scans</li><li>Type the code if the camera can't read it</li><li>Codes change every 5 minutes</li><li>One balance covers every location</li></ul>
+            <h4>Simple weekly prices.</h4>
+            <ul><li>Boost a deal from $15 a week</li><li>Feature your restaurant from $35 a week</li><li>Always labelled Sponsored</li><li>See every view, tap and customer</li></ul>
           </div></div>
         </article>
       </div>
       <ul class="perks">
-        <li class="reveal"><b>10 free scans</b><span>Then $1.50 per diner, from a prepaid balance.</span></li>
-        <li class="reveal"><b>Every location</b><span>One balance covers all of them.</span></li>
+        <li class="reveal"><b>$0 per diner</b><span>Every scan is free. No commission on the bill.</span></li>
+        <li class="reveal"><b>Every location</b><span>Free, all under one sign-in.</span></li>
         <li class="reveal"><b>Live right away</b><span>Your page goes live when you finish setup.</span></li>
         <li class="reveal"><b>You're in control</b><span>Set daily caps and hours. Pause anytime.</span></li>
       </ul>

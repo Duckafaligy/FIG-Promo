@@ -1,5 +1,6 @@
-// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Free codes,
-// and Disputes: contested no-shows with every timestamp of the order and both accounts' track record).
+// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Boosts,
+// FIG's only income: approve or decline restaurants' requests for a sponsored week; and Disputes: contested no-shows with
+// every timestamp of the order and both accounts' track record).
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
 const BASE = `
@@ -131,7 +132,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="disputes">Disputes <span class="badge" id="n-disputes">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
-      <button data-v="plans">Free codes <span class="badge" id="n-plans">–</span></button>
+      <button data-v="boosts">Boosts <span class="badge" id="n-boosts">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -203,42 +204,22 @@ const VIEWS = {
     "<h2>Takeout paused or off</h2>" + table(["Diner", "Status", "No-shows (2 years)", ""], D.suspended.map((x) => ["<b>" + esc(x.name) + '</b><br><span class="muted">@' + esc(x.username || "") + " · " + esc(x.email || "") + "</span>",
       x.banned ? '<span class="pill r">Banned</span>' : '<span class="pill">Paused until ' + when(x.suspended_until) + "</span>", x.noshows, '<button class="link" data-lift="' + x.user_id + '">Lift</button>']),
       "Nobody’s takeout is paused. Two no-shows pause it for 2 weeks; each pause after that is longer (2 months, 6 months, 1 year), then it’s off for good.")),
-  plans: () => '<h1>Free codes</h1><p class="lead muted">Founding restaurants: their first year of FIG is on us. One code per restaurant; each works once.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.planCodes.length, "Codes made") + stat(D.planCodes.filter((k) => k.uses > 0).length, "Restaurants on a free year", "blue") + stat(D.planCodes.filter((k) => !k.uses).length, "Not used yet") + stat(D.counts.live, "Restaurants live") + "</div>" +
-    '<div class="spot"><div><h2>At a restaurant?</h2><p class="note">One tap makes a one-time code for the restaurant in front of you.</p></div><button class="btn" id="q-make">Generate a code</button></div>' +
-    '<div class="new big" id="q-new"><b>Their code</b><div class="codes"><span class="mono" id="q-code"></span></div><div style="margin-top:12px"><button class="link" id="q-copy">Copy</button><button class="link" style="margin-left:14px" id="q-card">Show their card</button></div></div>' +
-    '<div class="make"><h2>Make codes</h2><p class="note">Make one for the restaurant you\\'re visiting, or type your own (like GOLDENLANTERN). Every code works once. They enter it in the app: Settings, Your FIG plan, Enter a code from FIG.</p><div class="row">' +
-    '<div><label for="p-note">Which restaurant</label><input class="f" id="p-note" maxlength="80" placeholder="Golden Lantern, Kennedy & Bur Oak"></div>' +
-    '<div><label for="p-n">How many codes</label><input class="f" id="p-n" type="number" min="1" max="50" value="1"></div>' +
-    '<div><label for="p-custom">Custom code</label><input class="f" id="p-custom" maxlength="24" placeholder="Optional"></div><button class="btn" id="p-make">Make codes</button></div><div class="new" id="p-new"><b id="p-title"></b><div class="codes" id="p-codes"></div></div></div>' +
-    "<h2>All free codes</h2>" + table(["Code", "For", "Status", "Made", ""], D.planCodes.map((k) => ['<span class="mono">' + esc(k.code) + "</span>", esc(k.note),
-      k.uses ? '<span class="pill g">&#10003; Used by ' + esc(k.used_by.join(", ") || "a restaurant") + "</span>" : '<span class="pill">Not used yet</span>', ago(k.made_at),
-      k.uses ? '<span class="used">&#10003; Used</span>' : '<button class="link" data-pcopy="' + esc(k.code) + '">Copy</button><button class="link" style="margin-left:14px" data-card="' + esc(k.code) + '" data-for="' + esc(k.note) + '">Card</button><button class="link red" data-pdel="' + esc(k.code) + '">Delete</button>']), "No free codes yet.") +
-    '<p class="note">Each code works once. Used codes stay here, checked off, as a record. Deleting an unused code stops it working.</p>'),
+  boosts: () => {
+    const B = D.boosts || [], now = Date.now();
+    const asked = B.filter((x) => x.status === "requested"), live = B.filter((x) => x.status === "live" && Date.parse(x.end_at) > now);
+    const past = B.filter((x) => !asked.includes(x) && !live.includes(x));
+    const what = (x) => (x.kind === "deal" ? "Boost a deal" + (x.deal ? ": " + esc(x.deal) : "") : "Featured on Home") + '<br><span class="muted">' + esc(x.placement) + "</span>";
+    const week = (x) => when(x.start_at).split(",")[0] + " – " + when(new Date(Date.parse(x.end_at) - 1).toISOString()).split(",")[0];
+    const who = (x) => "<b>" + esc(x.restaurant) + '</b><br><span class="muted">' + esc(x.owner.name || "") + " · " + esc(x.owner.email || "") + "</span>";
+    return '<h1>Boosts</h1><p class="lead muted">FIG’s only income: restaurants sponsor a spot for a week. Email the owner to confirm the week and settle the price, then approve it. Approved boosts go live on their Monday, labelled Sponsored.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+      '<div class="stats">' + stat(asked.length, "Waiting for you", "red") + stat(live.length, "Live or coming up", "blue") + stat("$" + live.reduce((a, x) => a + Number(x.cost || 0), 0), "Booked (live and coming up)") + "</div>" +
+      "<h2>Requests</h2>" + table(["Restaurant", "Boost", "Week", "Price", ""], asked.map((x) => [who(x), what(x), week(x), "$" + Number(x.cost || 0),
+        '<input class="f" id="bn-' + x.id + '" maxlength="300" placeholder="Note if declining" style="width:180px"> <button class="btn g" data-bon="' + x.id + '">Approve</button> <button class="link" data-boff="' + x.id + '">Decline</button>']),
+        "No requests waiting. Restaurants ask from Boosts in the app.") +
+      "<h2>Live and coming up</h2>" + table(["Restaurant", "Boost", "Week", "Views", "Taps", "Customers"], live.map((x) => [who(x), what(x), week(x) + (Date.parse(x.start_at) > now ? ' <span class="pill">Coming up</span>' : ' <span class="pill g">Live</span>'), x.views, x.taps, x.customers]), "Nothing live.") +
+      "<h2>Past</h2>" + table(["Restaurant", "Boost", "Week", "Result"], past.map((x) => [who(x), what(x), week(x), x.status === "declined" ? '<span class="pill r">Declined</span> ' + esc(x.note || "") : x.views + " views · " + x.taps + " taps · " + x.customers + " customers · $" + Number(x.cost || 0)]), "No past boosts yet."));
+  },
 };
-
-// a printable "first year on us" card to hand a restaurant with its code
-const CARD_LOGO = ${JSON.stringify(LOGO)};
-function printCard(code, who) {
-  const w = window.open("", "_blank");
-  if (!w) return alert("Allow pop-ups to print the card.");
-  w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>FIG founding card</title><style>' +
-    '@page{size:auto;margin:16mm}body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;margin:0;display:grid;place-items:center;min-height:100vh;color:#0A1020}' +
-    '.c{width:400px;border-radius:26px;padding:30px;color:#fff;background:linear-gradient(135deg,#3B78FF,#1E5EFF 42%,#1239B8);-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
-    '.b{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:.06em}.b span.m{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#fff}.b svg{width:28px;height:28px}' +
-    '.p{display:inline-block;margin-top:22px;padding:6px 13px;border-radius:99px;background:#C8F135;color:#0A1020;font-weight:800;font-size:13px}' +
-    'h1{font-size:34px;line-height:1.05;letter-spacing:-.03em;margin:12px 0 6px}.f{font-size:15px;opacity:.9;margin:0 0 20px}' +
-    '.k{background:#fff;color:#0A1020;border-radius:16px;padding:16px;text-align:center}.k small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:#5B6779}.k b{display:block;font-family:ui-monospace,Consolas,monospace;font-size:24px;letter-spacing:.06em;margin-top:6px}' +
-    'ol{margin:18px 0 0;padding-left:20px;font-size:13.5px;line-height:1.7}.n{margin-top:14px;font-size:12px;opacity:.75}</style></head><body><div class="c">' +
-    '<div class="b"><span class="m">' + CARD_LOGO + '</span>FIG FOR RESTAURANTS</div>' +
-    '<span class="p">Founding restaurant</span><h1>Your first year<br>of FIG is on us</h1><p class="f">' + esc(who || "Welcome to FIG") + '</p>' +
-    '<div class="k"><small>YOUR CODE</small><b>' + esc(code) + '</b></div>' +
-    '<ol><li>Open FIG and sign up as a restaurant</li><li>Settings, then Your FIG plan</li><li>Tap Enter a code from FIG and type this code</li></ol>' +
-    '<div class="n">One-time code for this restaurant only. Free until a year after you enter it.</div></div></body></html>');
-  w.document.close();
-  w.focus();
-  setTimeout(() => w.print(), 300);
-}
 
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
@@ -260,33 +241,21 @@ function render() {
     document.querySelectorAll("[data-up]").forEach((b) => b.onclick = () => decide(b.dataset.up, true));
     document.querySelectorAll("[data-down]").forEach((b) => b.onclick = () => decide(b.dataset.down, false));
   }
-  if (view === "plans" && D.connected) {
-    $("#q-make").onclick = async () => {
-      const r = await api("make-plan-codes", { count: 1, note: "Made on the spot" });
-      if (!r.codes) return alert(r.error || "Couldn't make a code.");
-      await load(); view = "plans"; render();
-      const c = r.codes[0];
-      $("#q-new").style.display = "block"; $("#q-code").textContent = c;
-      $("#q-copy").onclick = () => navigator.clipboard.writeText(c).then(() => { $("#q-copy").textContent = "Copied"; });
-      $("#q-card").onclick = () => printCard(c, "");
+  if (view === "boosts" && D.connected) {
+    const decide = async (id, live) => {
+      if (!confirm(live ? "Approve this boost? It goes live on its Monday, and the owner is told." : "Decline this request? The owner sees your note.")) return;
+      const r = await api("decide-boost", { id, live, note: ($("#bn-" + id) || {}).value || "" });
+      if (r.error) alert(r.error);
+      await load(); render();
     };
-    $("#p-make").onclick = async () => {
-      const note = $("#p-note").value;
-      const r = await api("make-plan-codes", { count: +$("#p-n").value, note, custom: $("#p-custom").value });
-      if (!r.codes) return alert(r.error || "Couldn't make codes.");
-      await load(); view = "plans"; render();
-      $("#p-new").style.display = "block"; $("#p-title").textContent = (r.codes.length === 1 ? "New code" : r.codes.length + " new codes") + (note ? " · " + note : "");
-      $("#p-codes").innerHTML = r.codes.map((c) => '<span class="mono">' + esc(c) + "</span>").join("");
-    };
-    document.querySelectorAll("[data-pcopy]").forEach((b) => b.onclick = () => navigator.clipboard.writeText(b.dataset.pcopy).then(() => { b.textContent = "Copied"; }));
-    document.querySelectorAll("[data-card]").forEach((b) => b.onclick = () => printCard(b.dataset.card, b.dataset.for));
-    document.querySelectorAll("[data-pdel]").forEach((b) => b.onclick = async () => { if (!confirm("Delete " + b.dataset.pdel + "? It stops working; a plan it already turned on keeps running.")) return; await api("delete-plan-code", { code: b.dataset.pdel }); await load(); render(); });
+    document.querySelectorAll("[data-bon]").forEach((b) => b.onclick = () => decide(b.dataset.bon, true));
+    document.querySelectorAll("[data-boff]").forEach((b) => b.onclick = () => decide(b.dataset.boff, false));
   }
 }
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-disputes", D.disputes.filter((x) => x.status === "open").length); set("#n-leads", D.leads.length); set("#n-plans", D.planCodes.length); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-disputes", D.disputes.filter((x) => x.status === "open").length); set("#n-leads", D.leads.length); set("#n-boosts", (D.boosts || []).filter((x) => x.status === "requested").length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };

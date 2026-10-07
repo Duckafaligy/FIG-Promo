@@ -171,7 +171,7 @@ page("cookies", "Cookies", "What this website stores on your device.", group="Le
 <h2>Things loaded from other services</h2>
 <p>The map tiles come from OpenFreeMap, the animation library from cdnjs and the map library from jsDelivr. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>''')
 
-page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, free to join for restaurants ($1.50 per diner scanned in).",
+page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
      ABOUT.replace("{faq}", '<div class="faq">' + "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in ABOUT_FAQ) + "</div>"),
      keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
@@ -181,7 +181,7 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 <p class="lead-p">A real person reads every message.</p>
 <div class="cards">
-<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, your balance, deals and scanning.</span><em>business@fig.app</em></a>
+<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, deals, scanning and boosts.</span><em>business@fig.app</em></a>
 <a class="card-l" href="mailto:privacy@fig.app"><b>Privacy</b><span>See or delete what we hold about you.</span><em>privacy@fig.app</em></a>
 <a class="card-l" href="mailto:legal@fig.app"><b>Legal</b><span>Terms and anything official.</span><em>legal@fig.app</em></a>
 <a class="card-l" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
@@ -190,23 +190,23 @@ page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 
 HELP = [
     ("diners", "For diners", [
-        ("Is FIG free?", "Yes. Deals are free to claim and use. FIG Premium ($6.99/month) is optional and adds AI picks; you can also earn Premium free with stamps."),
+        ("Is FIG free?", "Yes, completely. Deals are free to claim and use, and AI picks are free (3 a day). Restaurants can pay to sponsor a spot, which is always labelled Sponsored."),
         ("How do I use a deal?", "Claim it in the app (we hold it for 24 hours), then show the QR code at the counter when you order. Staff scan it, or type the 8 characters under it."),
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, at the restaurant, like normal. FIG never takes payment for food."),
-        ("How do stamps work?", "Every deal you use, and every takeout pickup, adds a stamp. Spend 25 for a free week of Premium, 50 for 3 weeks or 100 for a month, again and again."),
+        ("How do stamps work?", "Every deal you use, and every takeout pickup, adds a stamp to your Passport: the place, the date, a photo and what you saved."),
         ("Do restaurants see my phone number?", "Never. Chats and takeout go through the app and your number stays private."),
         ("Can I order takeout?", "Yes, where the restaurant offers it. Order from the menu, watch it get made, and pay at the counter when you pick it up. Deals can apply to takeout unless the deal is dine-in only."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing to join or go live, and your first 10 scans are free. Then $1.50 CAD per verified scan from a prepaid balance. No commission, no monthly fee."),
+        ("What does FIG cost?", "Nothing. Joining, your page, deals, scans, takeout and chats are free, with no commission. Optional boosts put you first for a week: from $15 for a deal, from $35 to feature your restaurant."),
         ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the type, the days and hours, who it's for and an optional daily cap. You can pause it anytime."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
         ("Can I take takeout orders?", "Yes. Turn on takeout and add your menu (you can read it from a photo). Diners pay you at pickup and you scan their pickup code."),
-        ("How do I stop?", "There's no subscription. Stop topping up, pause your deals, or close your account in Settings. Ask us within 30 days of closing for a refund of what's left on your balance."),
+        ("How do I stop?", "There's nothing to cancel. Pause your deals, or close your account in Settings anytime."),
     ]),
 ]
 help_html = '<h1>Help center</h1><p class="lead-p">Short answers to the questions people ask most. Still stuck? <a href="/contact">Contact us</a>.</p>'
@@ -360,14 +360,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants join free and pay $1.50 CAD only when a FIG diner's code is scanned, with no commission.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid only when a restaurant chooses to sponsor a spot for a week, always labelled Sponsored.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
-- Diners: free; optional FIG Premium $6.99/month (AI picks), or earned free with Passport stamps (25 = 1 week, 50 = 3 weeks, 100 = 1 month)
-- Restaurants: free to join and go live, 10 free scans, then $1.50 CAD per verified scan from a prepaid balance (top-ups $20/$50/$100 or custom, optional automatic top-up); unlimited everyday and flash deals, takeout ordering, chats, dashboard
+- Diners: free, including AI picks (3 a day); every visit earns a Passport stamp (a record of places and savings)
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional boosts: a boosted deal from $15/week or a featured restaurant from $35/week, a few spots per city, always labelled Sponsored
 - How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly, earn a stamp
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number

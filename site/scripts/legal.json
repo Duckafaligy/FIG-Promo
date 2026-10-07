@@ -1,13 +1,13 @@
 {
  "terms": {
   "title": "Terms of service",
-  "updated": "Last updated October 3, 2026",
+  "updated": "Last updated October 7, 2026",
   "short": [
-   "Deals are free for you. Restaurants pay FIG when a deal is used.",
+   "FIG is free for you, and for restaurants. Restaurants can pay to sponsor a spot, always labelled Sponsored.",
    "A deal counts once staff scan your QR at the restaurant.",
    "One account per person. No sharing codes or faking visits.",
-   "Stamps can be spent on free Premium time. They have no cash value.",
-   "Premium is $6.99/month through your app store. Cancel anytime."
+   "Stamps are a record of your visits. They have no cash value.",
+   "AI picks are free, 3 a day."
   ],
   "sections": [
    {
@@ -19,7 +19,7 @@
    {
     "heading": "2. Your account",
     "paragraphs": [
-     "You need an account to use FIG, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay, especially before buying Premium. Use your real name, an email and a mobile number, each confirmed with a code. One account per person and per mobile number. Keep your password private. You're responsible for what happens on your account."
+     "You need an account to use FIG, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email and a mobile number, each confirmed with a code. One account per person and per mobile number. Keep your password private. You're responsible for what happens on your account."
     ]
    },
    {
@@ -45,22 +45,22 @@
     ]
    },
    {
-    "heading": "5. Stamps and free Premium",
+    "heading": "5. Stamps",
     "paragraphs": [
-     "You earn 1 stamp for each verified redemption. A scanned takeout pickup counts as one. Your first stamp starts 3 days of Premium. After that you can spend stamps on Premium time: 25 stamps for 1 week, 50 for 3 weeks and 100 for 1 month, as often as you have the stamps. Spent stamps come off your balance and can't be given back. Free time needs no card and never auto-renews. Early-bird and other gift time works the same way.",
+     "You earn 1 stamp for each verified redemption. A scanned takeout pickup counts as one. Stamps are a record of your visits and what you saved.",
      "Stamps have no cash value and can't be sold or transferred. If a redemption is reversed (for example, it turns out to be fraud), its stamp is removed."
     ]
    },
    {
-    "heading": "6. FIG Premium",
+    "heading": "6. Sponsored spots",
     "paragraphs": [
-     "Premium costs $6.99 CAD a month, plus tax. It's billed by Apple's App Store or Google Play and renews each month until you cancel in your store settings. Refunds follow the store's policy. If the price changes, we'll tell you at least 30 days before it applies to you."
+     "FIG is free for diners and restaurants. Restaurants can pay FIG to show a deal or their restaurant first for a week. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price, its reviews or what AI picks suggests, and restaurants never get your details from it."
     ]
    },
    {
     "heading": "7. AI picks",
     "paragraphs": [
-     "AI picks suggest deals using restaurant info on FIG and your taste settings. They only suggest real deals listed on FIG, but they can still get details wrong. Check the deal page before you go."
+     "AI picks are free, up to 3 a day. They suggest deals using restaurant info on FIG and your taste settings. They only suggest real deals listed on FIG, but they can still get details wrong. Check the deal page before you go."
     ]
    },
    {
@@ -129,7 +129,6 @@
      "• Location: your precise location while you use FIG, to show nearby deals and confirm you're at the restaurant when you activate a deal or pick up an order. We keep the result of that check with the visit record. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
      "• Activity: claims, redemptions, stamps, searches, takeout orders, chat messages, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
-     "• Purchases: Apple or Google tells us if Premium is active. We never see your card.",
      "• Support: messages and reports you send us."
     ]
    },
@@ -138,12 +137,12 @@
     "paragraphs": [
      "• Show deals and places near you",
      "• Verify redemptions and stop fraud",
-     "• Count stamps and the free Premium you spend them on",
+     "• Count your stamps and what you saved",
      "• Personalise Home and AI picks (you can turn this off)",
      "• Send the alerts and emails you chose",
      "• Deliver chat messages between you and a restaurant. Phone numbers typed into a chat are hidden. The FIG team reads a chat only when someone reports it",
      "• Answer support requests and improve FIG",
-     "We don't sell your information or show you third-party ads based on it."
+     "Sponsored spots are the same for everyone in an area: they never use your history. We don't sell your information or show you third-party ads based on it."
     ]
    },
    {
@@ -164,8 +163,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
-     "• Stripe: restaurant payments",
-     "• Apple and Google: sign-in, maps, notifications, Premium billing",
+     "• Apple and Google: sign-in, maps, notifications",
      "• Anthropic: AI picks"
     ]
    },
@@ -222,10 +220,10 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 5, 2026",
+  "updated": "Last updated October 7, 2026",
   "short": [
-   "Free to join and to go live. Your first 10 scans are free, then each verified scan costs $1.50 CAD from your prepaid balance.",
-   "At $0, new claims pause until you top up. Deals already claimed still work.",
+   "FIG is free: joining, your page, deals, scans, takeout and chats. No commission.",
+   "Boosts are optional: you pay for a week in a sponsored spot, agreed with FIG before it runs.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
   ],
@@ -251,30 +249,28 @@
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• Joining FIG, setting up your page, going live and posting deals are free. One balance covers every location on your account.",
-     "• Each account starts with 10 free scans. After that, each verified scan costs $1.50 CAD, plus applicable tax. A verified scan is a valid FIG code (a claimed deal or a takeout pickup) scanned or entered by your enrolled devices.",
-     "• A founding code from FIG makes scans free until the date it shows. There's no commission on the bill, and no sign-up, monthly or listing fees."
+     "• Joining FIG, setting up your page, going live, posting deals, verified scans, takeout and chats are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
+     "• You can pay for a boost: a week in a sponsored spot (a boosted deal, or your restaurant featured on Home, the map and search). Boosts are optional and never needed to use FIG."
     ]
    },
    {
-    "heading": "5. Your balance, top-ups and alerts",
+    "heading": "5. Boosts",
     "paragraphs": [
-     "You prepay a balance by card through Stripe, which keeps your card details; FIG never sees them. Top up $20, $50, $100 or any amount from $10 to $500 CAD. Each scan is taken from your balance when it's verified.",
-     "Automatic top-up is optional: you choose when it runs (for example, under $5), how much it adds, and a monthly limit. You authorise FIG to charge your saved card on those terms until you turn it off in Balance. We notify you each time it runs, and if a charge fails.",
-     "We tell you when your balance drops under $10, under $5, and when it runs out. With nothing left to pay a scan, new claims on your deals pause until you top up; your page stays visible, and deals already claimed still work. If a claimed deal is scanned with nothing left, your balance can go below $0, and your next top-up covers it.",
-     "Receipts are in Balance (Cards and receipts). Balances don't expire. Takeout orders don't cost extra beyond the scan at pickup: you collect the food payment yourself, and you're responsible for your menu, prices and tax."
+     "You ask for a boost in the app for a week (Monday to Sunday). It isn't charged in the app. The FIG team confirms the week and the price with you by email, and the boost runs once you've agreed and paid as invoiced. Prices are in CAD, plus applicable tax.",
+     "There are a limited number of spots each week. We can decline a request (for example, when the week is full or the deal breaks these terms), and we'll tell you why. You can cancel a request before it's approved at no cost.",
+     "Boosted spots are always labelled Sponsored. A boost never changes your deal's terms, your reviews or what AI picks suggests. Results (views, taps, claims and customers scanned in) are shown in Boosts. If a boost can't run as agreed because of a problem on our side, we refund the days that didn't run."
     ]
    },
    {
     "heading": "6. Wrong scans and disputes",
     "paragraphs": [
-     "You can report a scan you think is wrong within 14 days. We review it, and if it was a mistake we remove it and put its $1.50 back on your balance. Duplicate scans are never charged."
+     "You can report a scan you think is wrong within 14 days. We review it, and if it was a mistake we remove it."
     ]
    },
    {
     "heading": "7. Reviews",
     "paragraphs": [
-     "Paying for FIG never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
+     "Paying for a boost never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
     ]
    },
    {
@@ -292,7 +288,7 @@
    {
     "heading": "10. Ending the agreement",
     "paragraphs": [
-     "You can close your business account anytime. Nothing more is charged after that. Ask us within 30 days of closing and we refund what's left on your balance (less any amount below $0). We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund your full remaining balance."
+     "You can close your business account anytime. A boost that hasn't started yet is refunded. We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund the unused days of any boost."
     ]
    },
    {

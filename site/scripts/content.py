@@ -1,13 +1,13 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: restaurants free to join, 10 free scans, then $1.50 a scan, Premium $6.99/month,
-codes refresh every 5 minutes, claims held 24 hours, stamps 25/50/100.
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no fees, no commission), boosts from $15 (deal) / $35
+(restaurant) a week, AI picks free 3 a day, codes refresh every 5 minutes, claims held 24 hours, stamps are a record (no rewards).
 """
 
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
-    ("Is FIG free?", "Yes, for diners. Restaurants join free and pay $1.50 CAD only when a FIG diner's code is scanned, with no commission. FIG Premium for diners ($6.99 a month) is optional and can be earned free with stamps."),
+    ("Is FIG free?", "Yes, for diners and restaurants. FIG makes money only when a restaurant chooses to sponsor a spot for a week, which is always labelled Sponsored. There's no commission and no fee per diner."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario first, then Richmond Hill, then the rest of York Region and the Greater Toronto Area."),
     ("Who makes FIG?", "FIG Technologies Inc., a small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. You eat in, or order takeout ahead and pick it up. You pay the restaurant directly, and FIG never takes a cut of the bill."),
@@ -15,46 +15,47 @@ ABOUT_FAQ = [
 
 ABOUT = '''<p class="doc-kicker">About FIG</p>
 <h1>FIG is the restaurant deals app for Markham.</h1>
-<p class="lead-p">Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free and pay $1.50 only when a FIG diner comes in, and keep every dollar of every bill.</p>
+<p class="lead-p">Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and keep every dollar of every bill.</p>
 
 <div class="doc-short"><h2>FIG at a glance</h2><ul>
 <li><b>What:</b> a mobile app (iPhone and Android) for finding and using deals at local restaurants.</li>
 <li><b>Where:</b> launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</li>
-<li><b>For diners:</b> free. Optional FIG Premium is $6.99 a month, or free with Passport stamps.</li>
-<li><b>For restaurants:</b> free to join, 10 free scans, then $1.50 CAD per scan. No commission, no monthly fee.</li>
+<li><b>For diners:</b> free, including AI picks (3 a day).</li>
+<li><b>For restaurants:</b> free. No commission, no fees. Optional boosts from $15 a week.</li>
 <li><b>Company:</b> FIG Technologies Inc., Markham, Ontario.</li>
 </ul></div>
 
 <h2>Why FIG exists</h2>
 <p>Markham is one of the best places in Canada to eat. Dim sum, ramen, Hakka, Hong Kong cafés, Korean fried chicken, Indian sweets, bubble tea on every plaza. Most of the places that make it great are small and independent.</p>
 <p>Those owners all have the same problem: quiet hours. A full room at 7 pm, then a slow Tuesday afternoon. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>
-<p>FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. The restaurant pays FIG one flat plan for the year, whether one diner shows up or a thousand.</p>
+<p>FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it. We make money only when a restaurant wants to be seen first and sponsors a spot for a week.</p>
 
 <h2>How FIG works for diners</h2>
 <ol>
 <li><b>Find</b> a live deal near you on the home feed or the map. Filter by craving, budget and diet (halal, vegetarian, vegan, gluten-free and more).</li>
 <li><b>Claim</b> it in one tap. We hold it for 24 hours.</li>
 <li><b>Show</b> your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</li>
-<li><b>Earn</b> a stamp in your Passport. Spend 25, 50 or 100 stamps on free FIG Premium.</li>
+<li><b>Earn</b> a stamp in your Passport, with the place, the date and what you saved.</li>
 </ol>
 <p>You can also order takeout ahead and pay at pickup, message a restaurant before you go, and share a deal with your group chat so everyone can agree on where to eat.</p>
 
 <h2>How FIG works for restaurants</h2>
 <ol>
 <li><b>Set up</b> your page: photos, address, hours, cuisine and dietary options.</li>
-<li><b>Go live</b> for free. Your first 10 scans are on us.</li>
+<li><b>Go live</b> for free.</li>
 <li><b>Post</b> a deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</li>
-<li><b>Scan</b> diners at the counter with any phone or tablet. Every scan is included.</li>
+<li><b>Scan</b> diners at the counter with any phone or tablet. Every scan is free.</li>
+<li><b>Boost</b> a deal or feature your restaurant for a week when you want more diners. Optional.</li>
 </ol>
 <p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p>
 
 <h2>What makes FIG different</h2>
 <ul>
-<li><b>No commission.</b> $1.50 per FIG diner, only when they come in. They pay you, at your counter.</li>
+<li><b>No commission, no fees.</b> Diners pay you, at your counter. FIG is paid only by optional, clearly labelled boosts.</li>
 <li><b>Honest deals.</b> Every deal, timer and opening hour is set by the restaurant itself.</li>
 <li><b>Codes that can't be copied.</b> Rotating QR codes stop screenshots and resold deals.</li>
 <li><b>Private by default.</b> Restaurants never see a diner's phone number, even for takeout. Chats go through the app.</li>
-<li><b>Real reviews.</b> Only diners whose visit was scanned can review, and paying never removes a review.</li>
+<li><b>Real reviews.</b> Only diners whose visit was scanned can review, and a boost never changes or removes a review.</li>
 </ul>
 
 <h2>Local first</h2>
@@ -71,44 +72,44 @@ POSTS = [
          dek="Markham has incredible independent restaurants. We wanted a way to find them that's fair to the owners too.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app",
          points=["FIG is a restaurant deals app starting in Markham, Ontario.",
-                 "Restaurants post their own deals for free and pay $1.50 only when a FIG diner comes in, with no commission.",
+                 "Restaurants post their own deals for free, with no commission and no fees.",
                  "Diners find deals on a map, claim one and show a code at the counter. It's free for diners."],
          sections=[
              ("Markham deserves better than a cut of every bill", "<p>Markham is one of the best places in Canada to eat. Dim sum on Kennedy, ramen on Highway 7, Hong Kong cafés in every plaza, bubble tea on every corner. But the places that make it great are mostly small and independent, and they compete for attention with apps that take a percentage of every order.</p><p>Owners told us the same thing again and again: they have quiet hours they'd love to fill, but giving away a large share of each bill doesn't add up.</p>"),
-             ("So we flipped the model", "<p>On FIG, a restaurant posts its own deal, for the hours it wants, with its own daily cap. Diners find it on a map, claim it, and show a code at the counter. The diner pays the restaurant directly. The restaurant pays FIG $1.50 for each FIG diner who actually walks in, and nothing else.</p><p>That means a deal on FIG is a decision the owner made, not a discount a platform forced on them. It also means the deals are real: the timer on a flash deal is the owner's timer.</p>"),
+             ("So we flipped the model", "<p>On FIG, a restaurant posts its own deal, for the hours it wants, with its own daily cap. Diners find it on a map, claim it, and show a code at the counter. The diner pays the restaurant directly, and FIG takes nothing from the bill. Restaurants that want to be seen first can sponsor a spot for a week; that's how FIG is paid.</p><p>That means a deal on FIG is a decision the owner made, not a discount a platform forced on them. It also means the deals are real: the timer on a flash deal is the owner's timer.</p>"),
              ("Why Markham first", "<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants, busy plazas, and a lot of people who love finding a new place to eat. Richmond Hill is next.</p><p>If you own a restaurant in Markham, we'd love to set you up before launch. <a href=\"/#owners\">See how pricing works</a>.</p>"),
          ],
          faq=[("When does FIG launch?", "FIG is launching in Markham first. Download the app or join the waitlist on the home page to hear the moment it opens near you."),
-              ("Does FIG take a commission?", "No. Restaurants pay $1.50 per FIG diner scanned in. FIG never takes a percentage of the bill.")]),
+              ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can choose to pay for a boost.")]),
 
-    dict(slug="pay-per-scan-pricing", screen="tdash", title="Free to join, $1.50 a scan: how FIG pricing works", date="2026-10-05", topic="For restaurants",
-         dek="FIG is free to join and to go live. Restaurants pay $1.50 only when a FIG diner's code is scanned, from a prepaid balance.",
-         keywords="FIG pricing, restaurant marketing cost, no commission restaurant app, pay per customer, $1.50 per scan",
-         points=["FIG is free to join and to go live. Every restaurant starts with 10 free scans.",
-                 "After that, each verified scan of a FIG diner's code costs $1.50 CAD from a prepaid balance.",
-                 "No commission on the bill, no monthly fee. Top up $20, $50, $100 or any amount, or turn on automatic top-up."],
+    dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
+         dek="Listing, deals, scans, takeout and chats are free on FIG, with no commission. FIG is paid only when a restaurant chooses to sponsor a spot for a week.",
+         keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant advertising Markham, sponsored restaurant listing",
+         points=["FIG is free for restaurants: listing, unlimited deals, every scan, takeout and chats. No commission, no fees.",
+                 "FIG makes money from boosts: a restaurant can sponsor a spot for a week, from $15 for a deal or $35 to feature the restaurant.",
+                 "Boosts are optional, limited to a few spots per city each week, and always labelled Sponsored."],
          sections=[
-             ("What you pay", "<p>Nothing to join, nothing to go live, and your first 10 scans are free. After that, you pay $1.50 CAD each time your staff scan a FIG diner's code at the counter: one customer FIG brought you, one charge. No commission on the bill, and no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p>"),
-             ("Your balance", "<p>Scans come out of a prepaid balance, shared by all your locations. Top up $20, $50, $100 or any amount from $10 to $500 by card through Stripe, or turn on automatic top-up (for example: when you drop under $5, add $20, up to a monthly limit you choose).</p><p>FIG lets you know when your balance drops under $10, under $5, and when it runs out. At $0 your page stays up, but new claims pause until you top up. Deals diners already claimed still work.</p>"),
-             ("What's included", "<ul><li>Unlimited deals, everyday and flash</li><li>Scanning on any phone or tablet, for every staff member</li><li>Takeout ordering, with diners paying you at pickup</li><li>Chats with diners (their phone number stays private)</li><li>A dashboard with scans, new diners and what's working</li></ul>"),
-             ("You control the cost", "<p>You only pay when a diner actually comes in. You choose the deal, the days and hours, and an optional daily cap, so a deal never brings more scans than you planned. Pause anytime. Read the full <a href=\"/business-terms\">business terms</a>.</p>"),
+             ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, takeout ordering, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p>"),
+             ("How FIG makes money", "<p>When you want more diners, you can sponsor a spot for a week. <b>Boost a deal</b> (from $15 a week) puts one deal first in Deals near you and in search for its food. <b>Feature your restaurant</b> (from $35 a week) puts you at the top of Home, gives you a featured pin on the map and puts you first in search.</p><p>There are only a few spots in each city each week, so diners never see a wall of ads, and every paid spot is labelled Sponsored.</p>"),
+             ("You see what you get", "<p>Every boost shows its results: how many diners saw it, tapped it, claimed the deal and actually came in. You decide whether it was worth it, week by week.</p>"),
+             ("What a boost never does", "<ul><li>Change your deal or its price</li><li>Hide, remove or reorder reviews</li><li>Change what AI picks suggests</li><li>Share any diner's details with you</li></ul><p>Read the full <a href=\"/business-terms\">business terms</a>.</p>"),
          ],
-         faq=[("How much does FIG cost a restaurant?", "Nothing to join. 10 free scans, then $1.50 CAD per verified scan from a prepaid balance. No commission, no monthly fee."),
-              ("Is there a contract?", "No. There's no subscription to cancel. Top up when you want, and close your account anytime.")]),
+         faq=[("How much does FIG cost a restaurant?", "Nothing. Boosts are optional: from $15 a week to boost a deal, from $35 a week to feature your restaurant."),
+              ("Is there a contract?", "No. Nothing to cancel. A boost is one week at a time, agreed before it runs.")]),
 
-    dict(slug="how-the-passport-works", screen="stamp", title="Your Passport: how stamps turn into free Premium", date="2026-10-03", topic="For diners",
-         dek="Every meal on FIG earns a stamp. Spend 25, 50 or 100 stamps on free FIG Premium. Here's how it works.",
-         keywords="FIG Passport, restaurant stamps, food rewards Markham, FIG Premium",
+    dict(slug="how-the-passport-works", screen="stamp", title="Your Passport: every meal you've had on FIG", date="2026-10-03", topic="For diners",
+         dek="Every meal on FIG earns a stamp in your Passport: the place, the date, a photo and what you saved. Here's how it works.",
+         keywords="FIG Passport, restaurant stamps, food diary Markham, restaurant visits",
          points=["Every deal you use and every takeout pickup earns one stamp.",
-                 "Stamps are a balance: 25 = a free week of Premium, 50 = three weeks, 100 = a month.",
-                 "Your first stamp unlocks 3 days of Premium straight away."],
+                 "Your Passport shows every place you tried, how often you went and what you saved.",
+                 "It's free, and it never asks for a card."],
          sections=[
-             ("Earning stamps", "<p>Every time you use a deal on FIG, staff scan your code and a stamp lands in your Passport, with the place, the date and what you saved. Takeout pickups earn stamps too.</p>"),
-             ("Spending stamps", "<p>Stamps are a balance you spend, not a punch card that resets. 25 stamps buys a free week of FIG Premium, 50 buys three weeks and 100 buys a month. Claim a reward and keep collecting for the next one.</p>"),
-             ("What Premium adds", "<p>Premium ($6.99 a month if you pay for it) adds AI picks: tell FIG what you feel like and it picks your three best deals nearby, with a reason for each. It also gives you double stamps and holds claimed deals for 48 hours.</p>"),
-             ("A food diary you didn't have to write", "<p>Your Passport doubles as a history of every place you've tried in Markham, and how much you saved there.</p>"),
+             ("Earning stamps", "<p>Every time you use a deal on FIG, staff scan your code and a stamp lands in your Passport, with the place, the date, a photo of what you ate and what you saved. Takeout pickups earn stamps too.</p>"),
+             ("Your places", "<p>The Voucher tab groups your stamps by restaurant, so you can see your regular spots at a glance, and the places you loved but haven't been back to.</p>"),
+             ("What you saved", "<p>FIG adds up roughly how much the deals saved you, visit by visit.</p>"),
+             ("A food diary you didn't have to write", "<p>Your Passport doubles as a history of every place you've tried in Markham. Rate a visit right from its stamp.</p>"),
          ],
-         faq=[("Do stamps expire?", "Stamps stay in your Passport as a balance you can spend on Premium rewards."),
+         faq=[("Do stamps expire?", "No. Stamps stay in your Passport as a record of your visits."),
               ("Do takeout orders earn stamps?", "Yes. A scanned takeout pickup earns a stamp, just like a dine-in deal.")]),
 
     dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", topic="For diners",
@@ -122,24 +123,24 @@ POSTS = [
              ("Know the food streets", "<p>Markham's restaurants cluster in plazas. The Highway 7 corridor, Kennedy Road, Warden Avenue, Main Street Unionville and Markham Village each have dozens of places within a few minutes of each other, which makes it easy to try somewhere new when a deal pops up nearby.</p>"),
              ("Let the app do the searching", "<p>Instead of checking ten Instagram accounts, open FIG. Home and the map show every live deal around you, nearest first. Tell FIG your cravings, budget and any dietary needs once (halal, vegetarian, vegan, gluten-free and more) and the list becomes the places that actually fit you.</p>"),
              ("Watch for flash deals", "<p>Flash deals are short deals a restaurant posts when it has a quiet hour. Turn on flash alerts and FIG tells you when one drops near you. The timer is real, set by the restaurant. <a href=\"/blog/flash-deals-explained\">How flash deals work</a>.</p>"),
-             ("Make it count", "<p>Every deal you use earns a Passport stamp, and stamps turn into free Premium. Eat out more, save more. <a href=\"/blog/how-the-passport-works\">How the Passport works</a>.</p>"),
+             ("Make it count", "<p>Every deal you use earns a Passport stamp, with what you saved, so you can see every place you tried and how much FIG saved you. <a href=\"/blog/how-the-passport-works\">How the Passport works</a>.</p>"),
          ],
          faq=[("What's the best app for restaurant deals in Markham?", "FIG is built specifically for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners."),
               ("Do I pay through the app?", "No. You pay the restaurant at the counter, like normal. FIG never handles payment for food.")]),
 
-    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs $1.50 a diner: what restaurants keep", date="2026-10-04", topic="For restaurants",
-         dek="Delivery apps charge restaurants a percentage of every order. FIG charges $1.50 per diner it brings in. Here's how the two compare for a Markham restaurant.",
+    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", topic="For restaurants",
+         dek="Delivery apps charge restaurants a percentage of every order. FIG charges nothing per diner. Here's how the two compare for a Markham restaurant.",
          keywords="delivery app commission, UberEats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
          points=["Delivery platforms commonly charge restaurants a commission on every order, often reported in the 15% to 30% range depending on the plan.",
-                 "FIG charges $1.50 CAD per diner it brings in, with no commission, because diners come to the restaurant and pay it directly.",
+                 "FIG charges no commission and no fee per diner: diners come to the restaurant and pay it directly.",
                  "FIG isn't a delivery replacement: it fills dine-in and pickup during the hours a restaurant chooses."],
          sections=[
              ("How commission pricing works", "<p>Delivery platforms usually charge the restaurant a percentage of each order, plus sometimes marketing or promotion fees. The exact rate depends on the plan, but commissions in the 15% to 30% range are commonly reported. The more a restaurant sells through the app, the more it pays.</p>"),
-             ("A simple example", "<p>Take a $40 dinner order. At a 25% commission, the platform keeps $10 of it. Ten orders like that a week is $100 a week, or about $5,200 a year, in commission alone.</p><p>On FIG, ten diners a week cost that same restaurant $15, about $780 a year, and only for diners who actually walked in. They show a code and pay the restaurant directly. The only extra cost is the deal the owner chose to offer.</p>"),
+             ("A simple example", "<p>Take a $40 dinner order. At a 25% commission, the platform keeps $10 of it. Ten orders like that a week is $100 a week, or about $5,200 a year, in commission alone.</p><p>On FIG, those ten diners cost the restaurant nothing. They show a code and pay the restaurant directly. The only cost is the deal the owner chose to offer, and an optional boost if the owner wants to be seen first that week.</p>"),
              ("Different jobs", "<p>Delivery apps are good at getting food to someone's door. FIG does a different job: it brings people into the restaurant, or to the counter for takeout pickup, during the hours the owner wants to fill. Many restaurants will use both.</p>"),
-             ("What you control on FIG", "<ul><li>The deal itself: what, when and for whom</li><li>A daily cap, so a deal never costs more than you planned</li><li>Pausing anytime, with one tap</li></ul><p><a href=\"/#owners\">See how pricing works</a>.</p>"),
+             ("What you control on FIG", "<ul><li>The deal itself: what, when and for whom</li><li>A daily cap, so a deal never gives away more than you planned</li><li>Pausing anytime, with one tap</li><li>Whether to boost at all</li></ul><p><a href=\"/blog/how-fig-makes-money\">How FIG makes money</a>.</p>"),
          ],
-         faq=[("Does FIG charge a commission?", "No. FIG is free to join, then $1.50 CAD per diner scanned in, across every location."),
+         faq=[("Does FIG charge a commission?", "No. FIG is free for restaurants, with no commission and no fee per diner. Boosts are optional."),
               ("Does FIG do delivery?", "No. Diners eat in or order takeout ahead and pick it up, paying the restaurant at the counter.")]),
 
     dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", topic="For restaurants",
@@ -157,11 +158,11 @@ POSTS = [
              ("6. Offer pickup", "<p>Takeout ordered ahead and picked up at the counter fills the kitchen without filling tables, and without delivery fees.</p>"),
              ("7. Measure and repeat", "<p>Track scans and new diners per deal. Keep the deals that bring new people in and pause the rest. FIG's dashboard shows this for every deal.</p>"),
          ],
-         faq=[("What's the cheapest way to market a small restaurant?", "Target your slow hours with a specific, capped deal where diners are already looking. FIG does this for $1.50 per diner who comes in, and nothing to join."),
+         faq=[("What's the cheapest way to market a small restaurant?", "Target your slow hours with a specific, capped deal where diners are already looking. FIG does this for free."),
               ("Will a deal hurt my margins?", "Not if you cap it and only run it in hours that would otherwise be empty.")]),
 
     dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", topic="For diners",
-         dek="How high school and university students in Markham can eat out for less: after-school deals, group plans and free Premium with stamps.",
+         dek="How high school and university students in Markham can eat out for less: after-school deals, group plans and free AI picks.",
          keywords="student food deals Markham, cheap eats for students, after school food Markham, budget restaurants Markham, bubble tea deals Markham",
          points=["After-school hours are exactly when many restaurants are quiet, so that's when deals show up.",
                  "Set a budget filter in FIG once and only see deals you can afford.",
@@ -170,10 +171,10 @@ POSTS = [
              ("After school is deal time", "<p>Between 3 and 6 pm, a lot of Markham restaurants and bubble tea shops are quiet. That's when owners post deals, and when you're most likely to be hungry.</p>"),
              ("Set your budget once", "<p>When you sign up, tell FIG your budget and what you crave. The home feed and map then show deals that fit, nearest first, so you're not scrolling past $40 dinners.</p>"),
              ("Decide with your friends", "<p>Can't agree where to eat? Share a deal from FIG straight to your group chat. Everyone sees the same place, the same deal and how far it is.</p>"),
-             ("Free is better", "<p>FIG is free for diners. Every deal you use earns a stamp, and your first stamp unlocks 3 days of Premium. Collect 25 stamps for a free week. <a href=\"/blog/how-the-passport-works\">How stamps work</a>.</p>"),
+             ("Free is better", "<p>FIG is free for diners, AI picks included (3 a day). Every deal you use earns a stamp, so you can see where you've been and how much you saved. <a href=\"/blog/how-the-passport-works\">How stamps work</a>.</p>"),
              ("Ask before you go", "<p>Not sure if there's space for six, or if the deal works for takeout? Message the restaurant from the deal. Your phone number stays private.</p>"),
          ],
-         faq=[("Is FIG free for students?", "Yes. FIG is free for every diner. Premium is optional and can be earned free with stamps."),
+         faq=[("Is FIG free for students?", "Yes. FIG is free for every diner, with nothing to upgrade."),
               ("Do I need a credit card?", "No. You claim deals in the app and pay the restaurant directly at the counter.")]),
 
     dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", topic="For diners",
@@ -186,7 +187,7 @@ POSTS = [
              ("What a flash deal is", "<p>Everyday deals run on a schedule, like every weekday afternoon. A flash deal is different: a restaurant posts it on the spot, because it has empty tables right now. It usually lasts an hour or two.</p>"),
              ("How to catch one", "<p>Turn on flash alerts in FIG and you'll get a notification when a flash deal drops near you. Flash deals also show at the top of your home feed and glow on the map.</p>"),
              ("Claim it, then go", "<p>Claim the flash deal in one tap and head over. Show your code at the counter. Like every FIG code, it refreshes every 5 minutes so it can't be screenshotted and reused.</p>"),
-             ("For restaurant owners", "<p>Posting a flash deal takes a few seconds: pick the deal, the length and an optional cap. Each diner who uses it is one scan, <a href=\"/#owners\">$1.50 from your balance</a>.</p>"),
+             ("For restaurant owners", "<p>Posting a flash deal takes a few seconds: pick the deal, the length and an optional cap. It's free, like every scan. <a href=\"/#owners\">How FIG works for restaurants</a>.</p>"),
          ],
          faq=[("How long do flash deals last?", "The restaurant sets the length, usually an hour or two. The timer you see in the app is the real one."),
               ("Can I turn flash alerts off?", "Yes. Every alert in FIG can be turned off, and quiet hours at night are on by default.")]),

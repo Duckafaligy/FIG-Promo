@@ -159,6 +159,11 @@
       "source": "/blog/one-plan-50-a-year",
       "destination": "/blog/pay-per-scan-pricing",
       "permanent": true
+    },
+    {
+      "source": "/blog/pay-per-scan-pricing",
+      "destination": "/blog/how-fig-makes-money",
+      "permanent": true
     }
   ]
 }

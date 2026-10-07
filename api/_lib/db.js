@@ -2,8 +2,6 @@
 //   SUPABASE_URL                https://<project>.supabase.co
 //   SUPABASE_SERVICE_ROLE_KEY   the service_role key (Supabase → Project Settings → API). It bypasses row security,
 //                               so it must only ever live here.
-const crypto = require("crypto");
-
 const url = () => (process.env.SUPABASE_URL || "").replace(/\/$/, "");
 const key = () => process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const connected = () => !!(url() && key());
@@ -23,7 +21,7 @@ const count = async (path) => (await rest(path + (path.includes("?") ? "&" : "?"
 const safe = (p, fallback) => p.catch(() => fallback);
 
 async function overview() {
-  const [diners, restaurants, live, reports, recentR, recentRep, leads, plans, planUsed] = await Promise.all([
+  const [diners, restaurants, live, reports, recentR, recentRep, leads] = await Promise.all([
     safe(count("profiles?role=eq.diner"), null),
     safe(count("restaurants"), null),
     safe(count("restaurants?status=eq.approved"), null),
@@ -31,45 +29,42 @@ async function overview() {
     safe(rest("restaurants?select=id,name,cuisine,city,status,created_at&order=created_at.desc&limit=100"), { rows: [] }),
     safe(rest("reports?select=id,reason,details,at,status&order=at.desc&limit=100"), { rows: [] }),
     safe(rest("waitlist?select=created_at,role,email,phone,restaurant,area,source&order=created_at.desc&limit=500"), { rows: [] }),
-    safe(rest("plan_codes?select=code,note,days,max_uses,uses,made_at&order=made_at.desc&limit=200"), { rows: [] }),
-    safe(rest("billing_accounts?select=owner_id,plan_code&plan_code=not.is.null"), { rows: [] }),
   ]);
-  // which restaurants each plan code turned on
-  const owners = [...new Set(planUsed.rows.map((b) => b.owner_id))];
-  const names = owners.length ? (await safe(rest(`restaurants?select=owner_id,name&owner_id=in.(${owners.join(",")})`), { rows: [] })).rows : [];
-  const planCodes = plans.rows.map((k) => ({ ...k, used_by: planUsed.rows.filter((b) => b.plan_code === k.code).flatMap((b) => names.filter((n) => n.owner_id === b.owner_id).map((n) => n.name)) }));
   return {
     counts: { diners, restaurants, live, reports },
     disputes: await safe(disputes(), []),
     suspended: await safe(suspended(), []),
-    planCodes, restaurants: recentR.rows, reports: recentRep.rows,
+    boosts: await safe(boosts(), []), restaurants: recentR.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
 }
 
-// codes from letters and digits that can't be misread (no 0/O or 1/I)
-const ABC = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-function newCode(prefix) {
-  const b = crypto.randomBytes(10);
-  let c = prefix;
-  for (let j = 0; j < 10; j++) c += ABC[b[j] % 32] + (j === 4 ? "-" : "");
-  return c;
+// boosts (FIG's only income): every request, live and past week, with its restaurant, the owner's email (to settle the
+// price), the deal it boosts, and its results; customers = diners scanned in during the week
+async function boosts() {
+  const b = (await rest("promotions?select=id,restaurant_id,placement,kind,deal_id,status,cost,start_at,end_at,requested_at,note,views,taps&status=neq.cancelled&order=start_at.desc&limit=200")).rows;
+  if (!b.length) return [];
+  const ids = (xs) => [...new Set(xs.filter(Boolean))].join(",");
+  const [rests, deals] = await Promise.all([
+    rest(`restaurants?id=in.(${ids(b.map((x) => x.restaurant_id))})&select=id,name,city,owner_id`),
+    b.some((x) => x.deal_id) ? rest(`deals?id=in.(${ids(b.map((x) => x.deal_id))})&select=id,title`) : { rows: [] },
+  ]);
+  const owners = ids(rests.rows.map((r) => r.owner_id));
+  const people = owners ? (await rest(`profiles?id=in.(${owners})&select=id,name,email,phone`)).rows : [];
+  return Promise.all(b.map(async (x) => {
+    const r = rests.rows.find((y) => y.id === x.restaurant_id) || {};
+    const started = Date.parse(x.start_at) <= Date.now() && x.status !== "requested" && x.status !== "declined";
+    const scans = started ? (await safe(rest(`redemptions?restaurant_id=eq.${x.restaurant_id}&at=gte.${encodeURIComponent(x.start_at)}&at=lt.${encodeURIComponent(x.end_at)}&select=user_id&limit=5000`), { rows: [] })).rows : [];
+    return {
+      ...x, restaurant: r.name, city: r.city, owner: people.find((p) => p.id === r.owner_id) || {},
+      deal: (deals.rows.find((d) => d.id === x.deal_id) || {}).title, customers: new Set(scans.map((s) => s.user_id)).size,
+    };
+  }));
 }
-// free codes: one-time FIG-XXXXX-XXXXX codes; each turns one restaurant owner's plan on free for a year (in the app)
-// a custom code (like GOLDENLANTERN) is one code, still one-time; "409" when it's taken (any case or dashes)
-async function makePlanCodes(n, note, custom) {
-  n = Math.max(1, Math.min(50, n | 0));
-  custom = String(custom || "").trim().toUpperCase();
-  if (custom && !/^[A-Z0-9][A-Z0-9-]{3,23}$/.test(custom)) throw new Error("400 bad custom code");
-  const codes = custom ? [custom] : Array.from({ length: n }, () => newCode("FIG-"));
-  const rows = codes.map((code) => ({ code, note: String(note || "").trim().slice(0, 80), max_uses: 1, days: 365 }));
-  await rest("plan_codes", { method: "POST", body: JSON.stringify(rows), headers: { Prefer: "return=minimal" } });
-  return rows.map((r) => r.code);
-}
-async function deletePlanCode(code) {
-  if (!/^[A-Z0-9-]{4,24}$/.test(code)) throw new Error("bad code");
-  // a used code stays on the list as a record (uses=0 in the filter: nothing happens to it)
-  await rest(`plan_codes?code=eq.${encodeURIComponent(code)}&uses=eq.0`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+// the team's call on a request: live (it runs that week) or declined with a note; the owner gets a notice either way
+async function decideBoost(id, live, note) {
+  if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id");
+  await rest("rpc/decide_boost", { method: "POST", body: JSON.stringify({ p_id: id, p_live: !!live, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
 }
 
 // contested no-shows, newest first: each with its order's every timestamp, and both accounts' track record
@@ -129,4 +124,4 @@ async function decideDispute(id, upheld, note) {
   await rest("rpc/decide_dispute", { method: "POST", body: JSON.stringify({ p_dispute: id, p_upheld: !!upheld, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, disputes, decideDispute, liftTakeout, makePlanCodes, deletePlanCode };
+module.exports = { connected, overview, disputes, decideDispute, liftTakeout, decideBoost };

@@ -1,13 +1,13 @@
 # FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants join free and pay $1.50 CAD only when a FIG diner's code is scanned, with no commission.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid only when a restaurant chooses to sponsor a spot for a week, always labelled Sponsored.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
-- Diners: free; optional FIG Premium $6.99/month (AI picks), or earned free with Passport stamps (25 = 1 week, 50 = 3 weeks, 100 = 1 month)
-- Restaurants: free to join and go live, 10 free scans, then $1.50 CAD per verified scan from a prepaid balance (top-ups $20/$50/$100 or custom, optional automatic top-up); unlimited everyday and flash deals, takeout ordering, chats, dashboard
+- Diners: free, including AI picks (3 a day); every visit earns a Passport stamp (a record of places and savings)
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional boosts: a boosted deal from $15/week or a featured restaurant from $35/week, a few spots per city, always labelled Sponsored
 - How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly, earn a stamp
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number
@@ -16,14 +16,14 @@
 - [Home](https://fig-promo.vercel.app/): what FIG is, features, the Passport, pricing
 - [About](https://fig-promo.vercel.app/about): the full story and FAQ
 - [Help center](https://fig-promo.vercel.app/help): answers for diners and restaurants
-- [Free to join, $1.50 a scan: how FIG pricing works](https://fig-promo.vercel.app/blog/pay-per-scan-pricing): FIG is free to join and to go live. Restaurants pay $1.50 only when a FIG diner's code is scanned, from a prepaid balance.
+- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans, takeout and chats are free on FIG, with no commission. FIG is paid only when a restaurant chooses to sponsor a spot for a week.
 - [How to find the best restaurant deals in Markham](https://fig-promo.vercel.app/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.
-- [Delivery app commissions vs $1.50 a diner: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges $1.50 per diner it brings in. Here's how the two compare for a Markham restaurant.
+- [Delivery app commissions vs FIG: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges nothing per diner. Here's how the two compare for a Markham restaurant.
 - [7 ways to fill slow hours at your restaurant](https://fig-promo.vercel.app/blog/fill-slow-hours-restaurant): Practical ideas for independent restaurants to bring in diners on quiet afternoons and weeknights, without giving away margin.
-- [Student food deals in Markham: eating out on a budget](https://fig-promo.vercel.app/blog/student-food-deals-markham): How high school and university students in Markham can eat out for less: after-school deals, group plans and free Premium with stamps.
+- [Student food deals in Markham: eating out on a budget](https://fig-promo.vercel.app/blog/student-food-deals-markham): How high school and university students in Markham can eat out for less: after-school deals, group plans and free AI picks.
 - [What are flash deals, and how do they work on FIG?](https://fig-promo.vercel.app/blog/flash-deals-explained): Flash deals are short, real-time restaurant deals posted during quiet hours. Here's how to catch them in Markham.
 - [Order ahead, pick up, skip the delivery fees](https://fig-promo.vercel.app/blog/takeout-without-delivery-fees): FIG takeout lets you order from a Markham restaurant's menu, watch it get made and pay at pickup, with no delivery or service fees.
-- [Your Passport: how stamps turn into free Premium](https://fig-promo.vercel.app/blog/how-the-passport-works): Every meal on FIG earns a stamp. Spend 25, 50 or 100 stamps on free FIG Premium. Here's how it works.
+- [Your Passport: every meal you've had on FIG](https://fig-promo.vercel.app/blog/how-the-passport-works): Every meal on FIG earns a stamp in your Passport: the place, the date, a photo and what you saved. Here's how it works.
 - [Why we built FIG](https://fig-promo.vercel.app/blog/why-we-built-fig): Markham has incredible independent restaurants. We wanted a way to find them that's fair to the owners too.
 
 ## Legal

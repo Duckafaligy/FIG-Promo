@@ -852,3 +852,15 @@ p.consent { cursor: default; padding-left: 22px; }
   .foot-bottom { margin-top: 36px; }
 }
 @media (max-width: 719px) { .blog-filter { flex-wrap: nowrap; } .blog-filter button { padding: 0 14px; font-size: 14px; height: 38px; white-space: nowrap; } }
+
+/* owners: an example day's receipt and a sample boost card (2026-10-07: FIG is free; boosts are the only price) */
+.receipt { align-self: center; width: min(280px, 86%); margin-bottom: 26px; padding: 20px 20px 16px; background: #fff; color: #0E1116; border-radius: 10px; box-shadow: 0 12px 30px rgba(14,17,22,.14); font-size: 15px; }
+.receipt p { display: flex; justify-content: space-between; gap: 12px; margin: 0; padding: 9px 0; border-top: 1px dashed #E3E6EA; }
+.receipt .r-k { display: block; border: 0; padding: 0 0 8px; color: #5C6470; font-size: 13px; font-weight: 700; }
+.receipt .r-t { font-size: 20px; font-weight: 800; border-top: 2px solid #0E1116; margin-top: 4px; padding-top: 12px; }
+.receipt .r-t b { color: #0B7A41; }
+.boostcard { align-self: center; width: min(320px, 88%); margin-bottom: 26px; padding: 18px; background: #fff; color: #0E1116; border: 1.5px solid #1E5EFF; border-radius: 16px; box-shadow: 0 12px 30px rgba(14,17,22,.14); }
+.boostcard .bc-k { margin: 0 0 12px; color: #1E5EFF; font-size: 13px; font-weight: 700; }
+.boostcard .bc-g { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.boostcard .bc-g p { margin: 0; padding: 10px 12px; background: #EFF1F4; border-radius: 12px; display: grid; }
+.boostcard .bc-g b { font-size: 22px; font-weight: 800; } .boostcard .bc-g span { color: #5C6470; font-size: 12px; }

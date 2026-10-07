@@ -5,8 +5,7 @@
   "short": [
    "FIG is free for you, and for restaurants. Restaurants can pay to sponsor a spot, always labelled Sponsored.",
    "A deal counts once staff scan your QR at the restaurant.",
-   "One account per person. No sharing codes or faking visits.",
-   "AI picks are free, 3 a day."
+   "One account per person. No sharing codes or faking visits."
   ],
   "sections": [
    {
@@ -46,47 +45,41 @@
    {
     "heading": "5. Sponsored spots",
     "paragraphs": [
-     "FIG is free for diners and restaurants. Restaurants can pay FIG to advertise a deal or their restaurant. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price, its reviews or what AI picks suggests, and restaurants never get your details from it."
+     "FIG is free for diners and restaurants. Restaurants can pay FIG to advertise a deal or their restaurant. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price or its reviews, and restaurants never get your details from it."
     ]
    },
    {
-    "heading": "6. AI picks",
-    "paragraphs": [
-     "AI picks are free, up to 3 a day. They suggest deals using restaurant info on FIG and your taste settings. They only suggest real deals listed on FIG, but they can still get details wrong. Check the deal page before you go."
-    ]
-   },
-   {
-    "heading": "7. Restaurants and your food",
+    "heading": "6. Restaurants and your food",
     "paragraphs": [
      "FIG doesn't run any restaurant. Food, prices, service, safety and allergens are the restaurant's responsibility. Dietary filters are a guide only. Always tell staff about allergies before you order."
     ]
    },
    {
-    "heading": "8. What you send us",
+    "heading": "7. What you send us",
     "paragraphs": [
      "If you send us photos, reports or feedback, you still own them. You let us use them to run and improve FIG. Don't send anything that isn't yours or breaks the law. Reviews must be about your own scanned visit and honest. They're public under your first name and last initial. We can remove reviews that are abusive, fake or off-topic."
     ]
    },
    {
-    "heading": "9. Leaving FIG",
+    "heading": "8. Leaving FIG",
     "paragraphs": [
      "You can delete your account anytime in Profile → Account & password. We can suspend or close accounts that break these terms. If we do, we'll tell you why unless the law or safety stops us."
     ]
    },
    {
-    "heading": "10. Our responsibility",
+    "heading": "9. Our responsibility",
     "paragraphs": [
      "We work hard to keep FIG accurate and running, but it's provided \"as is\". As far as the law allows, we aren't liable for indirect losses, and our total liability to you is limited to the greater of what you paid us in the last 12 months or $50 CAD. Nothing here removes your rights under Ontario consumer protection law."
     ]
    },
    {
-    "heading": "11. Changes to these terms",
+    "heading": "10. Changes to these terms",
     "paragraphs": [
      "If we make an important change, we'll tell you in the app at least 14 days before it starts. If you keep using FIG after that, the new terms apply."
     ]
    },
    {
-    "heading": "12. Governing law",
+    "heading": "11. Governing law",
     "paragraphs": [
      "These terms are governed by the laws of Ontario and the federal laws of Canada that apply there. Disputes go to the courts of Ontario."
     ]
@@ -130,7 +123,7 @@
      "• Show deals and places near you",
      "• Verify redemptions and stop fraud",
      "• Keep a record of your visits, so you can rate them and find places again",
-     "• Personalise Home and AI picks (you can turn this off)",
+     "• Personalise Home (you can turn this off)",
      "• Send the alerts and emails you chose",
      "• Deliver chat messages between you and a restaurant. Phone numbers typed into a chat are hidden. The FIG team reads a chat only when someone reports it",
      "• Answer support requests and improve FIG",
@@ -155,30 +148,23 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
-     "• Apple and Google: sign-in, maps, notifications",
-     "• Anthropic: AI picks"
+     "• Apple and Google: sign-in, maps, notifications"
     ]
    },
    {
-    "heading": "7. AI picks and your data",
-    "paragraphs": [
-     "For AI picks, we send Anthropic's Claude your taste settings, what you type, and the deals near you. We don't send your name or email, and Anthropic doesn't use it to train its models."
-    ]
-   },
-   {
-    "heading": "8. Where your data lives",
+    "heading": "7. Where your data lives",
     "paragraphs": [
      "Some of these companies store data outside Canada, mostly in the United States. There, it's protected by our contracts but also covered by local law."
     ]
    },
    {
-    "heading": "9. How long we keep it",
+    "heading": "8. How long we keep it",
     "paragraphs": [
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days. Redemption records are kept without your name for up to 7 years, because restaurants are billed for them and tax law requires it."
     ]
    },
    {
-    "heading": "10. Your choices",
+    "heading": "9. Your choices",
     "paragraphs": [
      "• See or fix your info in Profile",
      "• Download it in Privacy & terms",
@@ -188,19 +174,19 @@
     ]
    },
    {
-    "heading": "11. Keeping it safe",
+    "heading": "10. Keeping it safe",
     "paragraphs": [
      "We encrypt data in transit, scramble passwords and limit who on our team can access data. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
     ]
    },
    {
-    "heading": "12. Age",
+    "heading": "11. Age",
     "paragraphs": [
      "FIG is for people 14 and older. We don't knowingly collect information from anyone younger. If we learn that someone under 14 has an account, we delete it."
     ]
    },
    {
-    "heading": "13. Changes",
+    "heading": "12. Changes",
     "paragraphs": [
      "If we change how we use your information in an important way, we'll tell you in the app first, and ask for your consent where the law requires it."
     ]
@@ -215,7 +201,7 @@
   "updated": "Last updated October 7, 2026",
   "short": [
    "FIG is free: joining, your page, deals, scans, takeout and chats. No commission.",
-   "Boosts are optional: you pay for a week in a sponsored spot, agreed with FIG before it runs.",
+   "Ads are optional: you pay per tap, within the daily budget you set, invoiced monthly.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
   ],
@@ -242,15 +228,16 @@
     "heading": "4. What FIG costs",
     "paragraphs": [
      "• Joining FIG, setting up your page, going live, posting deals, verified scans, takeout and chats are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
-     "• You can pay for a boost: a week in a sponsored spot (a boosted deal, or your restaurant featured on Home, the map and search). Boosts are optional and never needed to use FIG."
+     "• You can pay for ads: sponsored spots on Home, in Deals near you, in search and on the map. Ads are optional and never needed to use FIG."
     ]
    },
    {
-    "heading": "5. Boosts",
+    "heading": "5. Ads",
     "paragraphs": [
-     "You ask for a boost in the app for a week (Monday to Sunday). It isn't charged in the app. The FIG team confirms the week and the price with you by email, and the boost runs once you've agreed and paid as invoiced. Prices are in CAD, plus applicable tax.",
+     "You make and manage ads in the FIG Ads Manager on our website. Each ad has a daily budget you set, and an optional maximum per tap. You pay only when a diner taps your ad. The price of a tap is set by a short auction among the ads competing for that spot: you pay just enough to beat the next ad, never more than your maximum, and never less than our minimum (currently $0.30 CAD). A diner tapping the same ad more than once in a day is charged once. Your spend never goes past the ad's daily budget or your account's monthly limit.",
+     "We send you an invoice for the previous month's taps at the start of each month, payable within 15 days. Prices are in CAD, plus applicable tax. If an invoice goes unpaid, we can put your ads on hold until it's paid.",
      "There are a limited number of spots each week. We can decline a request (for example, when the week is full or the deal breaks these terms), and we'll tell you why. You can cancel a request before it's approved at no cost.",
-     "Boosted spots are always labelled Sponsored. A boost never changes your deal's terms, your reviews or what AI picks suggests. Results (views, taps, claims and customers scanned in) are shown in Boosts. If a boost can't run as agreed because of a problem on our side, we refund the days that didn't run."
+     "Ads are always labelled Sponsored. An ad never changes your deal's terms or your reviews. We can decline or stop an ad that breaks these terms (for example, a photo that isn't your food or a deal you don't honour) and we'll tell you why. Results (views, taps, and diners who came in after tapping) are shown in the Ads Manager and in the app. If we charged a tap because of a problem on our side, we credit it on your next invoice."
     ]
    },
    {
@@ -262,7 +249,7 @@
    {
     "heading": "7. Reviews",
     "paragraphs": [
-     "Paying for a boost never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
+     "Paying for ads never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
     ]
    },
    {
@@ -280,7 +267,7 @@
    {
     "heading": "10. Ending the agreement",
     "paragraphs": [
-     "You can close your business account anytime. A boost that hasn't started yet is refunded. We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, we refund the unused days of any boost."
+     "You can close your business account anytime. Taps up to then are invoiced as usual. We can suspend or close your account if you break these terms, for example by not honouring deals or faking scans. If we close it for any other reason, nothing more is charged."
     ]
    },
    {

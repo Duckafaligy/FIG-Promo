@@ -181,7 +181,7 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 <p class="lead-p">A real person reads every message.</p>
 <div class="cards">
-<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, deals, scanning and boosts.</span><em>business@fig.app</em></a>
+<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, deals, scanning and ads.</span><em>business@fig.app</em></a>
 <a class="card-l" href="mailto:privacy@fig.app"><b>Privacy</b><span>See or delete what we hold about you.</span><em>privacy@fig.app</em></a>
 <a class="card-l" href="mailto:legal@fig.app"><b>Legal</b><span>Terms and anything official.</span><em>legal@fig.app</em></a>
 <a class="card-l" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
@@ -190,7 +190,7 @@ page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 
 HELP = [
     ("diners", "For diners", [
-        ("Is FIG free?", "Yes, completely. Deals are free to claim and use, and AI picks are free (3 a day). Restaurants can pay to sponsor a spot, which is always labelled Sponsored."),
+        ("Is FIG free?", "Yes, completely. Deals are free to claim and use. Restaurants can pay to sponsor a spot, which is always labelled Sponsored."),
         ("How do I use a deal?", "Claim it in the app (we hold it for 24 hours), then show the QR code at the counter when you order. Staff scan it, or type the 8 characters under it."),
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, at the restaurant, like normal. FIG never takes payment for food."),
@@ -200,7 +200,7 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing. Joining, your page, deals, scans, takeout and chats are free, with no commission. Optional boosts put you first for a week: from $15 for a deal, from $35 to feature your restaurant."),
+        ("What does FIG cost?", "Nothing. Joining, your page, deals, scans, takeout and chats are free, with no commission. Optional ads, run from the Ads Manager at /ads, cost only when a diner taps them, within a daily budget you set. Invoiced monthly."),
         ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the type, the days and hours, who it's for and an optional daily cap. You can pause it anytime."),
@@ -360,14 +360,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid only when a restaurant chooses to sponsor a spot for a week, always labelled Sponsored.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid only by restaurants' ads: pay per tap, within a daily budget, always labelled Sponsored.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
-- Diners: free, including AI picks (3 a day); no loyalty points or rewards
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional boosts: a boosted deal from $15/week or a featured restaurant from $35/week, a few spots per city, always labelled Sponsored
+- Diners: free; no loyalty points, rewards or AI features
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional ads from the Ads Manager ({SITE_URL}/ads): pay per tap (auction, second price, $0.30 minimum), daily budget, targeting by distance, days/hours, foods and new vs returning diners, rotating photos, results down to diners who came in; invoiced monthly
 - How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
 - Privacy: restaurants never see a diner's phone number

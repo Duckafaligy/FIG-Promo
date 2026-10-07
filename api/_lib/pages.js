@@ -1,5 +1,5 @@
-// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Boosts,
-// FIG's only income: approve or decline restaurants' requests for a sponsored week; and Disputes: contested no-shows with
+// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Ads,
+// FIG's only income: every restaurant's ads, stop or restart one, account limits and holds, and the monthly invoices; and Disputes: contested no-shows with
 // every timestamp of the order and both accounts' track record).
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
@@ -132,7 +132,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="disputes">Disputes <span class="badge" id="n-disputes">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
-      <button data-v="boosts">Boosts <span class="badge" id="n-boosts">–</span></button>
+      <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -204,20 +204,31 @@ const VIEWS = {
     "<h2>Takeout paused or off</h2>" + table(["Diner", "Status", "No-shows (2 years)", ""], D.suspended.map((x) => ["<b>" + esc(x.name) + '</b><br><span class="muted">@' + esc(x.username || "") + " · " + esc(x.email || "") + "</span>",
       x.banned ? '<span class="pill r">Banned</span>' : '<span class="pill">Paused until ' + when(x.suspended_until) + "</span>", x.noshows, '<button class="link" data-lift="' + x.user_id + '">Lift</button>']),
       "Nobody’s takeout is paused. Two no-shows pause it for 2 weeks; each pause after that is longer (2 months, 6 months, 1 year), then it’s off for good.")),
-  boosts: () => {
-    const B = D.boosts || [], now = Date.now();
-    const asked = B.filter((x) => x.status === "requested"), live = B.filter((x) => x.status === "live" && Date.parse(x.end_at) > now);
-    const past = B.filter((x) => !asked.includes(x) && !live.includes(x));
-    const what = (x) => (x.kind === "deal" ? "Boost a deal" + (x.deal ? ": " + esc(x.deal) : "") : "Featured on Home") + '<br><span class="muted">' + esc(x.placement) + "</span>";
-    const week = (x) => when(x.start_at).split(",")[0] + " – " + when(new Date(Date.parse(x.end_at) - 1).toISOString()).split(",")[0];
-    const who = (x) => "<b>" + esc(x.restaurant) + '</b><br><span class="muted">' + esc(x.owner.name || "") + " · " + esc(x.owner.email || "") + "</span>";
-    return '<h1>Boosts</h1><p class="lead muted">FIG’s only income: restaurants sponsor a spot for a week. Email the owner to confirm the week and settle the price, then approve it. Approved boosts go live on their Monday, labelled Sponsored.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-      '<div class="stats">' + stat(asked.length, "Waiting for you", "red") + stat(live.length, "Live or coming up", "blue") + stat("$" + live.reduce((a, x) => a + Number(x.cost || 0), 0), "Booked (live and coming up)") + "</div>" +
-      "<h2>Requests</h2>" + table(["Restaurant", "Boost", "Week", "Price", ""], asked.map((x) => [who(x), what(x), week(x), "$" + Number(x.cost || 0),
-        '<input class="f" id="bn-' + x.id + '" maxlength="300" placeholder="Note if declining" style="width:180px"> <button class="btn g" data-bon="' + x.id + '">Approve</button> <button class="link" data-boff="' + x.id + '">Decline</button>']),
-        "No requests waiting. Restaurants ask from Boosts in the app.") +
-      "<h2>Live and coming up</h2>" + table(["Restaurant", "Boost", "Week", "Views", "Taps", "Customers"], live.map((x) => [who(x), what(x), week(x) + (Date.parse(x.start_at) > now ? ' <span class="pill">Coming up</span>' : ' <span class="pill g">Live</span>'), x.views, x.taps, x.customers]), "Nothing live.") +
-      "<h2>Past</h2>" + table(["Restaurant", "Boost", "Week", "Result"], past.map((x) => [who(x), what(x), week(x), x.status === "declined" ? '<span class="pill r">Declined</span> ' + esc(x.note || "") : x.views + " views · " + x.taps + " taps · " + x.customers + " customers · $" + Number(x.cost || 0)]), "No past boosts yet."));
+  ads: () => {
+    const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
+    const live = A.campaigns.filter((c) => c.status === "active");
+    const lastMonth = new Date(); lastMonth.setDate(1); lastMonth.setMonth(lastMonth.getMonth() - 1);
+    const ym = (d) => d.toISOString().slice(0, 7) + "-01";
+    const st = (s) => s === "active" ? '<span class="pill g">Running</span>' : s === "stopped" ? '<span class="pill r">Stopped</span>' : '<span class="pill">' + esc(s) + "</span>";
+    return '<h1>Ads</h1><p class="lead muted">FIG’s only income. Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+      '<div class="stats">' + stat(live.length, "Ads running", "blue") + stat(m$(A.accounts.reduce((a, x) => a + Number(x.spent_month || 0), 0)), "Spent this month") + stat(A.invoices.filter((x) => x.status !== "paid" && x.status !== "void").length, "Invoices not paid", "red") + "</div>" +
+      "<h2>Campaigns</h2>" + table(["Restaurant", "Ad", "Status", "Budget", "Views", "Taps", "Spent (month)", ""], A.campaigns.map((c) => [
+        "<b>" + esc(c.restaurant) + '</b><br><span class="muted">' + esc(c.owner_email || "") + "</span>", esc(c.name) + '<br><span class="muted">' + esc(c.goal) + (c.note ? " · " + esc(c.note) : "") + "</span>", st(c.status),
+        m$(c.daily_budget) + "/day" + (c.bid ? '<br><span class="muted">max ' + m$(c.bid) + "</span>" : ""), c.views, c.taps + '<br><span class="muted">' + (c.views ? (100 * c.taps / c.views).toFixed(1) : "0") + "%</span>", m$(c.spend_month),
+        c.status === "stopped" ? '<button class="link" data-run="' + c.id + '">Let it run</button>' : c.status === "active" || c.status === "paused" ? '<input class="f" id="cn-' + c.id + '" maxlength="300" placeholder="Why (the owner sees it)" style="width:170px"> <button class="link" data-stop="' + c.id + '">Stop</button>' : ""]),
+        "No ads yet. They appear here the moment a restaurant launches one.") +
+      "<h2>Ad accounts</h2>" + table(["Owner", "Restaurants", "This month", "Monthly limit", "Status", ""], A.accounts.map((a) => [
+        "<b>" + esc(a.name || "") + '</b><br><span class="muted">' + esc(a.email || "") + "</span>", esc(a.restaurants || ""), m$(a.spent_month),
+        '<input class="f" id="al-' + a.owner_id + '" type="number" min="0" step="10" value="' + Number(a.monthly_limit) + '" style="width:100px"> <button class="link" data-limit="' + a.owner_id + '">Save</button>',
+        a.status === "held" ? '<span class="pill r">On hold</span>' : '<span class="pill g">Active</span>',
+        '<button class="link" data-hold="' + a.owner_id + '" data-held="' + (a.status === "held" ? "0" : "1") + '">' + (a.status === "held" ? "Lift hold" : "Hold all ads") + "</button>"]),
+        "No ad accounts yet. One opens with a restaurant’s first ad.") +
+      '<h2>Invoices</h2><div class="act" style="margin:0 0 14px"><button class="btn" data-mk="' + ym(lastMonth) + '">Make invoices for ' + lastMonth.toLocaleDateString("en-CA", { month: "long" }) + '</button><button class="btn k" data-mk="' + ym(new Date()) + '">Preview this month so far</button></div>' +
+      table(["Owner", "Month", "Amount", "Status", ""], A.invoices.map((x) => [
+        "<b>" + esc(x.owner.name || "") + '</b><br><span class="muted">' + esc(x.owner.email || "") + "</span>", esc(new Date(x.month + "T12:00:00").toLocaleDateString("en-CA", { month: "long", year: "numeric" })), "<b>" + m$(x.amount) + "</b>",
+        { open: '<span class="pill">To send</span>', sent: '<span class="pill">Sent ' + (x.sent_at ? when(x.sent_at) : "") + "</span>", paid: '<span class="pill g">Paid ' + (x.paid_at ? when(x.paid_at) : "") + "</span>", void: '<span class="pill r">Cancelled</span>' }[x.status],
+        x.status === "open" ? '<button class="link" data-inv="' + x.id + '" data-to="sent">Mark sent</button>' : x.status === "sent" ? '<button class="link" data-inv="' + x.id + '" data-to="paid">Mark paid</button> <button class="link" style="margin-left:12px" data-inv="' + x.id + '" data-to="void">Cancel</button>' : ""]),
+        "No invoices yet. Make them at the start of each month; each owner’s taps for that month become one invoice."));
   },
 };
 
@@ -241,21 +252,20 @@ function render() {
     document.querySelectorAll("[data-up]").forEach((b) => b.onclick = () => decide(b.dataset.up, true));
     document.querySelectorAll("[data-down]").forEach((b) => b.onclick = () => decide(b.dataset.down, false));
   }
-  if (view === "boosts" && D.connected) {
-    const decide = async (id, live) => {
-      if (!confirm(live ? "Approve this boost? It goes live on its Monday, and the owner is told." : "Decline this request? The owner sees your note.")) return;
-      const r = await api("decide-boost", { id, live, note: ($("#bn-" + id) || {}).value || "" });
-      if (r.error) alert(r.error);
-      await load(); render();
-    };
-    document.querySelectorAll("[data-bon]").forEach((b) => b.onclick = () => decide(b.dataset.bon, true));
-    document.querySelectorAll("[data-boff]").forEach((b) => b.onclick = () => decide(b.dataset.boff, false));
+  if (view === "ads" && D.connected) {
+    const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
+    document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));
+    document.querySelectorAll("[data-run]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.run, stop: false }, "Let this ad run again?"));
+    document.querySelectorAll("[data-limit]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.limit, limit: +$("#al-" + b.dataset.limit).value }));
+    document.querySelectorAll("[data-hold]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.hold, held: b.dataset.held === "1" }, b.dataset.held === "1" ? "Hold all of this owner’s ads?" : "Lift the hold? Their ads can run again."));
+    document.querySelectorAll("[data-mk]").forEach((b) => b.onclick = () => run("ad-invoices", { month: b.dataset.mk }, "Make (or update) the invoices for this month? Sent and paid ones aren’t changed."));
+    document.querySelectorAll("[data-inv]").forEach((b) => b.onclick = () => run("ad-invoice", { id: b.dataset.inv, status: b.dataset.to }));
   }
 }
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-disputes", D.disputes.filter((x) => x.status === "open").length); set("#n-leads", D.leads.length); set("#n-boosts", (D.boosts || []).filter((x) => x.status === "requested").length); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-disputes", D.disputes.filter((x) => x.status === "open").length); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };

@@ -34,37 +34,42 @@ async function overview() {
     counts: { diners, restaurants, live, reports },
     disputes: await safe(disputes(), []),
     suspended: await safe(suspended(), []),
-    boosts: await safe(boosts(), []), restaurants: recentR.rows, reports: recentRep.rows,
+    ads: await safe(ads(), { campaigns: [], accounts: [], invoices: [] }), restaurants: recentR.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
 }
 
-// boosts (FIG's only income): every request, live and past week, with its restaurant, the owner's email (to settle the
-// price), the deal it boosts, and its results; customers = diners scanned in during the week
-async function boosts() {
-  const b = (await rest("promotions?select=id,restaurant_id,placement,kind,deal_id,status,cost,start_at,end_at,requested_at,note,views,taps&status=neq.cancelled&order=start_at.desc&limit=200")).rows;
-  if (!b.length) return [];
-  const ids = (xs) => [...new Set(xs.filter(Boolean))].join(",");
-  const [rests, deals] = await Promise.all([
-    rest(`restaurants?id=in.(${ids(b.map((x) => x.restaurant_id))})&select=id,name,city,owner_id`),
-    b.some((x) => x.deal_id) ? rest(`deals?id=in.(${ids(b.map((x) => x.deal_id))})&select=id,title`) : { rows: [] },
+// ads (FIG's only income: restaurants pay per tap, the team invoices monthly): every campaign with its results, every
+// ad account with this month's spend, and the invoices
+async function ads() {
+  const [campaigns, accounts, invoices] = await Promise.all([
+    rest("rpc/admin_campaigns", { method: "POST", body: "{}" }),
+    rest("rpc/admin_ad_accounts", { method: "POST", body: "{}" }),
+    rest("ad_invoices?select=id,owner_id,month,amount,status,sent_at,paid_at&order=month.desc&limit=300"),
   ]);
-  const owners = ids(rests.rows.map((r) => r.owner_id));
-  const people = owners ? (await rest(`profiles?id=in.(${owners})&select=id,name,email,phone`)).rows : [];
-  return Promise.all(b.map(async (x) => {
-    const r = rests.rows.find((y) => y.id === x.restaurant_id) || {};
-    const started = Date.parse(x.start_at) <= Date.now() && x.status !== "requested" && x.status !== "declined";
-    const scans = started ? (await safe(rest(`redemptions?restaurant_id=eq.${x.restaurant_id}&at=gte.${encodeURIComponent(x.start_at)}&at=lt.${encodeURIComponent(x.end_at)}&select=user_id&limit=5000`), { rows: [] })).rows : [];
-    return {
-      ...x, restaurant: r.name, city: r.city, owner: people.find((p) => p.id === r.owner_id) || {},
-      deal: (deals.rows.find((d) => d.id === x.deal_id) || {}).title, customers: new Set(scans.map((s) => s.user_id)).size,
-    };
-  }));
+  const names = new Map(accounts.rows.map((a) => [a.owner_id, a]));
+  return { campaigns: campaigns.rows, accounts: accounts.rows, invoices: invoices.rows.map((x) => ({ ...x, owner: names.get(x.owner_id) || {} })) };
 }
-// the team's call on a request: live (it runs that week) or declined with a note; the owner gets a notice either way
-async function decideBoost(id, live, note) {
-  if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id");
-  await rest("rpc/decide_boost", { method: "POST", body: JSON.stringify({ p_id: id, p_live: !!live, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
+const uuid = (id) => { if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id"); return id; };
+// stop an ad (with a note the owner sees) or let it run again
+async function setCampaign(id, stop, note) {
+  await rest(`campaigns?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify(stop ? { status: "stopped", note: String(note || "").slice(0, 300) || null } : { status: "active", note: null }), headers: { Prefer: "return=minimal" } });
+}
+// an owner's monthly limit, or a hold on every ad (an unpaid invoice)
+async function setAccount(owner, limit, held) {
+  const change = {};
+  if (limit != null) { const n = Number(limit); if (!(n >= 0 && n <= 100000)) throw new Error("bad limit"); change.monthly_limit = n; }
+  if (held != null) change.status = held ? "held" : "active";
+  await rest(`ad_accounts?owner_id=eq.${uuid(owner)}`, { method: "PATCH", body: JSON.stringify(change), headers: { Prefer: "return=minimal" } });
+}
+async function makeInvoices(month) {
+  if (!/^\d{4}-\d{2}-01$/.test(String(month))) throw new Error("bad month");
+  await rest("rpc/make_ad_invoices", { method: "POST", body: JSON.stringify({ p_month: month }) });
+}
+async function setInvoice(id, status) {
+  if (!["sent", "paid", "void", "open"].includes(status)) throw new Error("bad status");
+  const stamp = status === "sent" ? { sent_at: new Date().toISOString() } : status === "paid" ? { paid_at: new Date().toISOString() } : {};
+  await rest(`ad_invoices?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status, ...stamp }), headers: { Prefer: "return=minimal" } });
 }
 
 // contested no-shows, newest first: each with its order's every timestamp, and both accounts' track record
@@ -124,4 +129,4 @@ async function decideDispute(id, upheld, note) {
   await rest("rpc/decide_dispute", { method: "POST", body: JSON.stringify({ p_dispute: id, p_upheld: !!upheld, p_note: String(note || "").slice(0, 300) }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, disputes, decideDispute, liftTakeout, decideBoost };
+module.exports = { connected, overview, disputes, decideDispute, liftTakeout, setCampaign, setAccount, makeInvoices, setInvoice };

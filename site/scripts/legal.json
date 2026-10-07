@@ -111,7 +111,7 @@
     "paragraphs": [
      "• Account: name, username, email and mobile number (each confirmed with a code), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
-     "• Location: your precise location while you use FIG, to show nearby deals and confirm you're at the restaurant when you activate a deal or pick up an order. We keep the result of that check with the visit record. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
+     "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
      "• Activity: claims, verified visits, searches, takeout orders, chat messages, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Support: messages and reports you send us."

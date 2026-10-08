@@ -22,7 +22,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
-HIDDEN = {"404", "r"}  # not indexed, no breadcrumbs, not in the sitemap
+HIDDEN = {"404", "r", "paid", "stripe"}  # not indexed, no breadcrumbs, not in the sitemap
 
 NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
 
@@ -342,7 +342,7 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
 page("404", "Page not found", "This page doesn't exist.", body='''<p class="doc-kicker">404</p><h1>This page wandered off.</h1>
 <p class="lead-p">It may have moved, or the link has a typo.</p>
 <div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
-<a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to join, $1.50 a scan.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
+<a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to join and post deals.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
 
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<p class="doc-kicker">Shared with you</p><h1 id="r-title">Someone sent you a spot on FIG</h1>
@@ -351,6 +351,16 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 <a class="card-l" href="/#how"><b>How FIG works</b><span>Find, claim, show, save.</span></a></div>
 <script src="/js/r.js" defer></script>''')
 
+
+# Stripe sends people back here (takeout paid in the app, 2026-10-08): after paying for an order, and after setting up payouts
+page("paid", "Back to FIG", "Your takeout payment.", body='''<p class="doc-kicker">Takeout</p><h1>You’re all set. Head back to FIG.</h1>
+<p class="lead-p">Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.
+Didn’t finish paying? Open your order in FIG and tap Pay.</p>
+<div class="cards"><a class="card-l" href="/help"><b>Help center</b><span>Takeout, payments and refunds.</span></a></div>''')
+page("stripe", "Back to FIG", "Setting up payouts with Stripe.", body='''<p class="doc-kicker">For restaurants</p><h1>Back to FIG to finish up.</h1>
+<p class="lead-p">Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.
+If Stripe still needs something, tap the button there again to pick up where you left off.</p>
+<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What FIG costs, and takeout payments.</span></a></div>''')
 
 today = datetime.date.today().isoformat()
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"

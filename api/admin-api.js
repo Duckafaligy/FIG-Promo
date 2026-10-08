@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|ad-invoices|ad-invoice|decide-dispute|lift-takeout  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|ad-invoices|ad-invoice  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
 
@@ -24,11 +24,6 @@ module.exports = async (req, res) => {
     if (action === "premium") { await db.setPremium(body.owner, body.years ?? 0); return send(res, 200, { ok: true }); }
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
-    if (action === "lift-takeout") { await db.liftTakeout(body.id); return send(res, 200, { ok: true }); }
-    if (action === "decide-dispute") {
-      try { await db.decideDispute(body.id, body.upheld, body.note); } catch { return send(res, 409, { error: "Already decided, or not found." }); }
-      return send(res, 200, { ok: true });
-    }
   } catch (e) {
     return send(res, 502, { error: "The database didn't answer. Try again." });
   }

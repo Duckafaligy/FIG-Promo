@@ -1,6 +1,5 @@
 // The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Ads,
-// FIG's only income: every restaurant's ads, stop or restart one, account limits and holds, and the monthly invoices; and Disputes: contested no-shows with
-// every timestamp of the order and both accounts' track record).
+// FIG's only income: every restaurant's ads, stop or restart one, account limits and holds, and the monthly invoices).
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
 const BASE = `
@@ -129,7 +128,6 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="overview" class="on">Overview</button>
       <button data-v="restaurants">Restaurants <span class="badge" id="n-restaurants">–</span></button>
       <button data-v="reports">Reports <span class="badge" id="n-reports">–</span></button>
-      <button data-v="disputes">Disputes <span class="badge" id="n-disputes">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
       <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
@@ -157,34 +155,6 @@ const statusPill = (s) => s === "approved" ? '<span class="pill g">Live</span>' 
 
 // a time on the order, in Ontario time ("Oct 6, 6:42 p.m.")
 const when = (t) => t ? new Date(t).toLocaleString("en-CA", { timeZone: "America/Toronto", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "";
-function disputeCard(x) {
-  const o = x.order, dn = x.diner, r = x.restaurant;
-  const here = o.arrived_at && o.arrived_m != null && o.arrived_m <= 300;
-  const row = (label, t, cls, extra) => '<div class="' + (t ? "" : "no") + '">' + label + (extra ? ' <span class="muted">· ' + extra + "</span>" : "") + "</div><div>" + (t ? "<b" + (cls ? ' class="' + cls + '"' : "") + ">" + when(t) + "</b>" : '<span class="no">–</span>') + "</div>";
-  const checkin = o.arrived_at ? (o.arrived_m == null ? "location off" : o.arrived_m <= 300 ? o.arrived_m + " m away" : (o.arrived_m / 1000).toFixed(1) + " km away") : "";
-  // what the record says, in one line
-  const hint = o.picked_at ? ['g', "Scanned as picked up: the diner was there."]
-    : here ? ['g', "Checked in at the restaurant (" + o.arrived_m + " m) before the report."]
-    : o.arrived_at && o.arrived_m == null ? ['k', "Checked in with location off: no proof of where they were."]
-    : o.arrived_at ? ['r', "Checked in " + checkin + ": not at the restaurant."]
-    : ['r', "No check-in and no scan." + (o.nudged_at ? " The restaurant sent “We’re waiting” at " + when(o.nudged_at) + "." : " The restaurant never sent “We’re waiting”.")];
-  const kv = (k, v) => "<span>" + k + "</span><b>" + v + "</b>";
-  return '<div class="dsp"><div class="dsp-h"><h2>Order #' + esc(o.number) + " · " + esc(r.name) + '</h2><span class="muted">$' + Number(o.total || 0).toFixed(2) + " · contested " + ago(x.created_at) + "</span></div>" +
-    '<div class="quote"><b>' + esc(dn.name) + ' says:</b> “' + esc(x.reason) + "”</div>" +
-    '<div class="cols"><div class="box"><h3>Order timeline</h3><div class="tl">' +
-      row("Ordered", o.placed_at) + row("Accepted", o.accepted_at) + row("Pickup time set", o.pickup_at) + row("Marked ready", o.ready_at) +
-      row("“We’re waiting” sent", o.nudged_at) + row("Diner checked in", o.arrived_at, here ? "g" : "", checkin) + row("Scanned (picked up)", o.picked_at, "g") +
-      row("No-show reported", o.noshow_at, "r") + "</div></div>" +
-    '<div class="box"><h3>Diner</h3><div class="kv">' + kv("Name", esc(dn.name)) + kv("Username", "@" + esc(dn.username || "")) + kv("Email", esc(dn.email || "")) + kv("Joined", when(dn.created_at)) +
-      kv("Orders", dn.orders) + kv("Picked up", dn.picked) + kv("No-shows", dn.noshows) + kv("Check-ins", dn.checkins) + kv("Strikes now", dn.strikes) + kv("Takeout", dn.banned ? "Banned" : dn.suspended_until && Date.parse(dn.suspended_until) > Date.now() ? "Paused until " + when(dn.suspended_until) : "OK") + kv("Past contests", dn.disputes + (dn.disputes ? " (" + dn.upheld + " upheld)" : "")) + "</div></div>" +
-    '<div class="box"><h3>Restaurant</h3><div class="kv">' + kv("Name", esc(r.name)) + kv("City", esc(r.city || "")) + kv("Orders", r.orders) + kv("Picked up", r.picked) + kv("No-shows reported", r.noshows) +
-      kv("Wrong reports", (r.false_noshows || 0) + " of 3") + "</div></div></div>" +
-    '<div class="hint ' + hint[0] + '">' + esc(hint[1]) + "</div>" +
-    (x.status === "open"
-      ? '<div class="act"><input class="f" id="note-' + x.id + '" maxlength="300" placeholder="Note for the diner (optional)"><button class="btn g" data-up="' + x.id + '">Diner was right: remove strike, strike restaurant</button><button class="btn k" data-down="' + x.id + '">No-show stands</button></div>'
-      : '<p class="note" style="margin-top:12px">' + (x.status === "upheld" ? "Decided: the diner was right (strike removed, restaurant struck)" : "Decided: the no-show stands") + " · " + when(x.decided_at) + (x.note ? " · “" + esc(x.note) + "”" : "") + "</p>") +
-    "</div>";
-}
 
 const VIEWS = {
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
@@ -200,16 +170,10 @@ const VIEWS = {
     }), "No restaurants yet.")),
   reports: () => '<h1>Reports</h1><p class="lead muted">Visits diners or restaurants reported.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", esc(r.details), ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")),
-  disputes: () => '<h1>Disputes</h1><p class="lead muted">Diners who say a no-show was wrong. Check the timestamps, then decide. Diner right: their strike comes off and the restaurant gets a wrong-report strike (3 and its no-show reports stop).</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    (D.disputes.filter((x) => x.status === "open").map(disputeCard).join("") || '<div class="empty">No open disputes. Good news.</div>') +
-    (D.disputes.some((x) => x.status !== "open") ? '<div style="height:18px"></div><h2>Decided</h2>' + D.disputes.filter((x) => x.status !== "open").map(disputeCard).join("") : "")),
   leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + stat(D.suspended.length, "Takeout paused or off", "red") + "</div>" +
-    "<h2>Takeout paused or off</h2>" + table(["Diner", "Status", "No-shows (2 years)", ""], D.suspended.map((x) => ["<b>" + esc(x.name) + '</b><br><span class="muted">@' + esc(x.username || "") + " · " + esc(x.email || "") + "</span>",
-      x.banned ? '<span class="pill r">Banned</span>' : '<span class="pill">Paused until ' + when(x.suspended_until) + "</span>", x.noshows, '<button class="link" data-lift="' + x.user_id + '">Lift</button>']),
-      "Nobody’s takeout is paused. Two no-shows pause it for 2 weeks; each pause after that is longer (2 months, 6 months, 1 year), then it’s off for good.")),
+    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + "</div>"),
   ads: () => {
     const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
     const live = A.campaigns.filter((c) => c.status === "active");
@@ -242,22 +206,6 @@ function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
   $("#main").innerHTML = VIEWS[view]();
-  if (view === "diners" && D.connected) {
-    document.querySelectorAll("[data-lift]").forEach((b) => b.onclick = async () => {
-      if (!confirm("Lift this diner's takeout pause or ban? Earlier no-shows stop counting (they stay on the record).")) return;
-      await api("lift-takeout", { id: b.dataset.lift }); await load(); render();
-    });
-  }
-  if (view === "disputes" && D.connected) {
-    const decide = async (id, upheld) => {
-      if (!confirm(upheld ? "The diner was right? Their strike comes off and the restaurant gets a wrong-report strike." : "The no-show stands? The diner's strike stays.")) return;
-      const r = await api("decide-dispute", { id, upheld, note: ($("#note-" + id) || {}).value || "" });
-      if (r.error) alert(r.error);
-      await load(); render();
-    };
-    document.querySelectorAll("[data-up]").forEach((b) => b.onclick = () => decide(b.dataset.up, true));
-    document.querySelectorAll("[data-down]").forEach((b) => b.onclick = () => decide(b.dataset.down, false));
-  }
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));
@@ -272,7 +220,7 @@ function render() {
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-disputes", D.disputes.filter((x) => x.status === "open").length); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };

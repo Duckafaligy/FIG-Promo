@@ -27,7 +27,7 @@
      "• A claimed deal is yours until the restaurant ends the deal, or until a flash or dated deal is over.",
      "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
      "• The deal is used once staff scan it. That scan is a \"redemption\".",
-     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Takeout orders are paid to the restaurant when you pick up. Deals that allow takeout are applied to your order; dine-in only deals are not. If you don't collect an order, the restaurant can report a no-show. You can contest it. Two no-shows within 2 months pause takeout: for 2 weeks the first time, then 2 months, 6 months and 1 year if it happens again before your record clears, and after that takeout is off for good. A no-show counts for 2 months and stays on your record, which restaurants can see when you order."
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Takeout orders are paid to the restaurant when you pick up. Deals that allow takeout are applied to your order; dine-in only deals are not. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
     ]
    },
    {
@@ -228,7 +228,7 @@
     "heading": "4. What FIG costs",
     "paragraphs": [
      "• Joining FIG, setting up your page, going live, posting deals, verified scans, takeout, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
-          "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel. When you buy it through the App Store or Google Play, their payment and refund terms apply.",
+     "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel. When you buy it through the App Store or Google Play, their payment and refund terms apply.",
      "• You can pay for ads: sponsored spots on Home, in Deals near you, in search and on the map. Ads are optional and never needed to use FIG."
     ]
    },

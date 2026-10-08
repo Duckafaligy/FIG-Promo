@@ -425,7 +425,7 @@
         <div class="card" style="display:grid;gap:12px;max-width:640px">
           <span class="tag blue" style="justify-self:start">FIG Premium · $50 a year</span>
           <h2>See your whole area</h2>
-          <p class="muted">When diners near you claim deals, how that compares with your own scans, what they crave, food trends, and how many restaurants, deals and ads are around you. Premium also adds unlimited locations, weekly deal announcements to diners who crave your food, and a Premium badge.</p>
+          <p class="muted">When diners near you claim deals, how that compares with your own scans, what they crave, food trends, and how many restaurants, deals and ads are around you. Premium also adds unlimited locations, deal announcements every 2 hours to diners who crave your food, and a Premium badge.</p>
           <p><b>Get it in the FIG app:</b> Settings → FIG Premium. Everything else on FIG stays free.</p>
         </div>`);
       return;

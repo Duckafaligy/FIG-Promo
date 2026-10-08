@@ -1,7 +1,7 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no fees, no commission; up to 2 locations), optional FIG Premium $50/year (unlimited locations, weekly deal announcements, area insights, badge), ads pay per tap (from $0.30, daily budget,
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no fees, no commission; up to 2 locations), optional FIG Premium $50/year (unlimited locations, deal announcements every 2 hours, area insights, badge), ads pay per tap (from $0.30, daily budget,
 invoiced monthly), no AI features, codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 
@@ -80,7 +80,7 @@ POSTS = [
              ("Why Markham first", "<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants, busy plazas, and a lot of people who love finding a new place to eat. Richmond Hill is next.</p><p>If you own a restaurant in Markham, we'd love to set you up before launch. <a href=\"/#owners\">See how pricing works</a>.</p>"),
          ],
          faq=[("When does FIG launch?", "FIG is launching in Markham first. Download the app or join the waitlist on the home page to hear the moment it opens near you."),
-              ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can choose to run ads, paid per tap, or add FIG Premium for $50 a year: unlimited locations, weekly deal announcements to diners who crave their food, and area insights.")]),
+              ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can choose to run ads, paid per tap, or add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
          dek="Listing, deals, scans, takeout and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.",
@@ -88,11 +88,11 @@ POSTS = [
          points=["FIG is free for restaurants: listing, unlimited deals, every scan, takeout and chats. No commission, no fees.",
                  "FIG makes money from ads: a restaurant sets a daily budget and pays only when a diner taps, from about $0.30 a tap.",
                  "Ads run from the Ads Manager on the FIG website, are always labelled Sponsored, and show which diners actually came in.",
-                 "FIG Premium ($50 a year, optional) adds unlimited locations, a weekly deal announcement to diners who crave your food, area insights and a badge."],
+                 "FIG Premium ($50 a year, optional) adds unlimited locations, a deal announcement every 2 hours to diners who crave your food, area insights and a badge."],
          sections=[
              ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, takeout ordering, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p>"),
              ("How FIG makes money", "<p>When you want more diners, you can run an ad from the <a href=\"/ads\">Ads Manager</a>. Pick a goal (more diners, promote a deal, or fill quiet hours), who should see it (distance, days and hours, the foods they crave, new or returning diners) and a daily budget. You pay only when a diner taps your ad.</p><p>Like Facebook ads, each sponsored spot goes to a quick auction: ads with a fair bid, photos diners tap and good ratings win, and the winner pays just enough to beat the next ad, never more than its budget. Every paid spot is labelled Sponsored.</p>"),
-             ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement once a week to nearby diners whose cravings match your food and to everyone who saved you, area insights in the Ads Manager, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
+             ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement every 2 hours to nearby diners whose cravings match your food and to everyone who saved you, area insights in the Ads Manager, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
              ("You see what you get", "<p>Every ad shows its views, taps and the diners who came in within a week of tapping, day by day. Add up to three photos and FIG shows the one diners tap most. Before you spend a dollar, Insights shows when diners near you claim deals, what they crave, and how many places nearby advertise.</p>"),
              ("What an ad never does", "<ul><li>Change your deal or its price</li><li>Hide, remove or reorder reviews</li><li>Share any diner's details with you</li></ul><p>Read the full <a href=\"/business-terms\">business terms</a>.</p>"),
          ],

@@ -319,7 +319,7 @@
       4: () => { const photos = [...new Set([...(r?.photos || []), ...S.deals.map((x) => x.photo).filter(Boolean), ...(d.uploads || [])])];
         return `<h2>Photos and headline</h2><p class="muted" style="margin:6px 0 16px">Add up to 3. FIG rotates them and shows the one diners tap most.</p>
         ${d.creatives.map((c, i) => `<div class="card grey" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><h3>Version ${i + 1}</h3>${i ? `<button class="link" data-rmc="${i}">Remove</button>` : ""}</div>
-          <div class="photos">${photos.map((p) => `<button class="${c.photo === p ? "on" : ""}" data-photo="${i}" data-src="${esc(p)}" aria-label="Use this photo"><img src="${esc(p)}" alt=""></button>`).join("")}<label class="photos up" style="aspect-ratio:1;border-radius:10px;background:#fff;cursor:pointer;display:grid;place-items:center">+ Upload<input type="file" accept="image/*" data-up="${i}" hidden></label></div>
+          <div class="photos" data-drop="${i}">${photos.map((p) => `<button class="${c.photo === p ? "on" : ""}" data-photo="${i}" data-src="${esc(p)}" aria-label="Use this photo"><img src="${esc(p)}" alt=""></button>`).join("")}<label class="photos up" style="aspect-ratio:1;border-radius:10px;background:#fff;cursor:pointer;display:grid;place-items:center"><span>+ Upload<br><small>or drop one here</small></span><input type="file" accept="image/*" data-up="${i}" hidden></label></div>
           <div class="field" style="margin:12px 0 0"><label class="l" for="h${i}">Headline</label><input class="f" id="h${i}" data-head="${i}" maxlength="40" value="${esc(c.headline)}" placeholder="${esc(headline(i))}"></div></div>`).join("")}
         ${d.creatives.length < 3 ? `<button class="btn grey sm" id="addc">${I.plus}Add another version</button>` : ""}`; },
       5: () => `<h2>Review and launch</h2><div class="field" style="margin-top:14px"><label class="l" for="w-n">Ad name (only you see it)</label><input class="f" id="w-n" maxlength="60" value="${esc(d.name || GOALS[d.goal][0] + " · " + day(d.starts))}"></div>
@@ -363,16 +363,24 @@
     on("[data-rmc]", (el) => { d.creatives.splice(+el.dataset.rmc, 1); again(); });
     const addc = document.getElementById("addc"); if (addc) addc.onclick = () => { d.creatives.push({ photo: "", headline: "" }); again(); };
     document.querySelectorAll("[data-head]").forEach((el) => (el.oninput = () => { d.creatives[+el.dataset.head].headline = el.value; }));
-    document.querySelectorAll("[data-up]").forEach((el) => (el.onchange = async () => {
-      const file = el.files?.[0]; if (!file) return;
+    // a photo for version i: picked with the file chooser, or dragged onto that version's photos from the computer
+    const upload = async (file, i) => {
+      if (!file) return;
+      if (!file.type.startsWith("image/")) return toast("That isn’t a photo. Drop a JPG or PNG.");
       if (file.size > 8e6) return toast("That photo is too big (8 MB at most).");
       toast("Uploading…");
       const path = `${S.rid}/ad-${Date.now().toString(36)}.${(file.type.split("/")[1] || "jpg").replace("jpeg", "jpg")}`;
       const { error } = await db.storage.from("photos").upload(path, file, { contentType: file.type });
       if (error) return toast("Couldn’t upload that photo. Try another.");
       const url = db.storage.from("photos").getPublicUrl(path).data.publicUrl;
-      d.uploads = [...(d.uploads || []), url]; d.creatives[+el.dataset.up].photo = url; again();
-    }));
+      d.uploads = [...(d.uploads || []), url]; d.creatives[i].photo = url; again();
+    };
+    document.querySelectorAll("[data-up]").forEach((el) => (el.onchange = () => upload(el.files?.[0], +el.dataset.up)));
+    document.querySelectorAll("[data-drop]").forEach((el) => {
+      el.ondragover = (e) => { e.preventDefault(); el.classList.add("drop"); };
+      el.ondragleave = (e) => { if (!el.contains(e.relatedTarget)) el.classList.remove("drop"); };
+      el.ondrop = (e) => { e.preventDefault(); el.classList.remove("drop"); upload(e.dataTransfer?.files?.[0], +el.dataset.drop); };
+    });
     const val = (id) => document.getElementById(id);
     if (val("w-r")) val("w-r").oninput = (e) => { d.radius = +e.target.value; val("w-rv").textContent = d.radius + " km"; };
     if (val("w-r")) val("w-r").onchange = again;

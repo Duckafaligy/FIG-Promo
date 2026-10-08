@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|ad-invoices|ad-invoice|decide-dispute|lift-takeout  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|ad-invoices|ad-invoice|decide-dispute|lift-takeout  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
 
@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
     if (!db.connected()) return send(res, 409, { error: "The database isn't connected yet." });
     if (action === "ad-campaign") { await db.setCampaign(body.id, !!body.stop, body.note); return send(res, 200, { ok: true }); }
     if (action === "ad-account") { await db.setAccount(body.owner, body.limit ?? null, body.held ?? null); return send(res, 200, { ok: true }); }
+    if (action === "premium") { await db.setPremium(body.owner, body.years ?? 0); return send(res, 200, { ok: true }); }
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
     if (action === "lift-takeout") { await db.liftTakeout(body.id); return send(res, 200, { ok: true }); }

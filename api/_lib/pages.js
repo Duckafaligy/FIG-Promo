@@ -191,7 +191,13 @@ const VIEWS = {
     '<div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.reports, "Open reports", "red") + "</div>" +
     "<h2>Latest restaurants</h2>" + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
   restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Every restaurant on FIG, newest first. A restaurant goes live when it finishes setup.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
+    table(["Restaurant", "Cuisine", "City", "Status", "Joined", "FIG Premium"], D.restaurants.map((r) => {
+      // Premium ($50 a year) is per owner, for all their locations; the team can switch it on for a year, or off
+      const p = (D.premium || []).find((x) => x.owner_id === r.owner_id && new Date(x.premium_until) > new Date());
+      return ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at),
+        p ? '<span class="pill g">Until ' + esc(new Date(p.premium_until).toLocaleDateString("en-CA")) + '</span> <button class="link" data-prem="' + esc(r.owner_id) + '" data-years="0">Turn off</button>'
+          : '<button class="link" data-prem="' + esc(r.owner_id) + '" data-years="1">Give a year</button>'];
+    }), "No restaurants yet.")),
   reports: () => '<h1>Reports</h1><p class="lead muted">Visits diners or restaurants reported.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", esc(r.details), ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")),
   disputes: () => '<h1>Disputes</h1><p class="lead muted">Diners who say a no-show was wrong. Check the timestamps, then decide. Diner right: their strike comes off and the restaurant gets a wrong-report strike (3 and its no-show reports stop).</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
@@ -210,7 +216,7 @@ const VIEWS = {
     const lastMonth = new Date(); lastMonth.setDate(1); lastMonth.setMonth(lastMonth.getMonth() - 1);
     const ym = (d) => d.toISOString().slice(0, 7) + "-01";
     const st = (s) => s === "active" ? '<span class="pill g">Running</span>' : s === "stopped" ? '<span class="pill r">Stopped</span>' : '<span class="pill">' + esc(s) + "</span>";
-    return '<h1>Ads</h1><p class="lead muted">FIG’s only income. Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+    return '<h1>Ads</h1><p class="lead muted">Ad income (FIG Premium, $50 a year, is switched on under Restaurants). Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
       '<div class="stats">' + stat(live.length, "Ads running", "blue") + stat(m$(A.accounts.reduce((a, x) => a + Number(x.spent_month || 0), 0)), "Spent this month") + stat(A.invoices.filter((x) => x.status !== "paid" && x.status !== "void").length, "Invoices not paid", "red") + "</div>" +
       "<h2>Campaigns</h2>" + table(["Restaurant", "Ad", "Status", "Budget", "Views", "Taps", "Spent (month)", ""], A.campaigns.map((c) => [
         "<b>" + esc(c.restaurant) + '</b><br><span class="muted">' + esc(c.owner_email || "") + "</span>", esc(c.name) + '<br><span class="muted">' + esc(c.goal) + (c.note ? " · " + esc(c.note) : "") + "</span>", st(c.status),
@@ -256,6 +262,7 @@ function render() {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));
     document.querySelectorAll("[data-run]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.run, stop: false }, "Let this ad run again?"));
+    document.querySelectorAll("[data-prem]").forEach((b) => b.onclick = () => run("premium", { owner: b.dataset.prem, years: +b.dataset.years }, b.dataset.years === "0" ? "Turn off FIG Premium for this owner (all their locations)?" : "Switch on FIG Premium for a year for this owner (all their locations)?"));
     document.querySelectorAll("[data-limit]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.limit, limit: +$("#al-" + b.dataset.limit).value }));
     document.querySelectorAll("[data-hold]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.hold, held: b.dataset.held === "1" }, b.dataset.held === "1" ? "Hold all of this owner’s ads?" : "Lift the hold? Their ads can run again."));
     document.querySelectorAll("[data-mk]").forEach((b) => b.onclick = () => run("ad-invoices", { month: b.dataset.mk }, "Make (or update) the invoices for this month? Sent and paid ones aren’t changed."));

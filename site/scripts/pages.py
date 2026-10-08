@@ -360,7 +360,7 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid only by restaurants' ads: pay per tap, within a daily budget, always labelled Sponsored.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid by restaurants' ads (pay per tap, within a daily budget, always labelled Sponsored) and the optional FIG Premium ($50 a year: unlimited locations, weekly deal announcements, area insights).
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario

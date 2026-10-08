@@ -415,6 +415,21 @@
   // ------------------------------------------------------------------ insights: the bigger picture
   function insightsView() {
     const ins = S.insights || {};
+    // area insights are FIG Premium ($50 a year, bought in the FIG app): without it, a taste and what Premium adds
+    if (ins.premium === false) {
+      shell("insights", `<div class="head"><div><h1>Insights</h1><p>The bigger picture around ${esc(rest()?.name || "you")}, with FIG Premium.</p></div></div>
+        <div class="grid g4" style="margin-bottom:20px">
+          <div class="stat"><span>Diners on FIG in ${esc(rest()?.city || "your area")}</span><b>${int(ins.diners_area)}</b><em style="color:var(--slate)">${int(ins.diners_all)} across FIG</em></div>
+          <div class="stat"><span>Cost per tap here</span><b>${money(Math.max(ins.floor || 0.3, ins.cpc || 0))}</b><em style="color:var(--slate)">${pct(ins.ctr || 0.03, 1)} of views get tapped</em></div>
+        </div>
+        <div class="card" style="display:grid;gap:12px;max-width:640px">
+          <span class="tag blue" style="justify-self:start">FIG Premium · $50 a year</span>
+          <h2>See your whole area</h2>
+          <p class="muted">When diners near you claim deals, how that compares with your own scans, what they crave, food trends, and how many restaurants, deals and ads are around you. Premium also adds unlimited locations, weekly deal announcements to diners who crave your food, and a Premium badge.</p>
+          <p><b>Get it in the FIG app:</b> Settings → FIG Premium. Everything else on FIG stays free.</p>
+        </div>`);
+      return;
+    }
     const hours = Array.from({ length: 24 }, (_, h) => ({ h, area: ins.claim_hours?.find((x) => x.h === h)?.n || 0, mine: ins.my_hours?.find((x) => x.h === h)?.n || 0 }));
     const amax = Math.max(1, ...hours.map((x) => x.area)), mmax = Math.max(1, ...hours.map((x) => x.mine));
     const W = 720, H = 150, bw = W / 24;

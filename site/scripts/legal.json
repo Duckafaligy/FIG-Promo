@@ -148,6 +148,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
+     "• Stripe: card payments for takeout, and restaurants' payouts. To set up a restaurant's payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },
@@ -228,6 +229,7 @@
     "heading": "4. What FIG costs",
     "paragraphs": [
      "• Joining FIG, setting up your page, going live, posting deals, verified scans, takeout, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
+     "• Takeout paid in the app is paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe's terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
      "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel. When you buy it through the App Store or Google Play, their payment and refund terms apply.",
      "• You can pay for ads: sponsored spots on Home, in Deals near you, in search and on the map. Ads are optional and never needed to use FIG."
     ]

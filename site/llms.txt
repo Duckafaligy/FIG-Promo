@@ -1,22 +1,22 @@
 # FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners and for restaurants, with no commission. FIG is paid by restaurants' ads (pay per tap, within a daily budget, always labelled Sponsored) and the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights).
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on the bill. FIG is paid by restaurants' ads (pay per tap, within a daily budget, always labelled Sponsored), the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights), and 5% of the food on orders ahead diners pay for in the app.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, takeout ordering, chats, dashboard); optional ads from the Ads Manager (https://fig-promo.vercel.app/ads): pay per tap (auction, second price, $0.30 minimum), daily budget, targeting by distance, days/hours, foods and new vs returning diners, rotating photos, results down to diners who came in; invoiced monthly
-- How a deal works: claim (held 24 hours), show the QR code (refreshes every 5 minutes), pay the restaurant directly
-- Takeout: order ahead, pay at pickup, no delivery or service fees from FIG
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); orders ahead paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; optional ads from the Ads Manager (https://fig-promo.vercel.app/ads): pay per tap (auction, second price, $0.30 minimum), daily budget, targeting by distance, days/hours, foods and new vs returning diners, rotating photos, results down to diners who came in; invoiced monthly
+- How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
+- Order ahead: only with a deal that allows it; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages
 - [Home](https://fig-promo.vercel.app/): what FIG is, features, pricing
 - [About](https://fig-promo.vercel.app/about): the full story and FAQ
 - [Help center](https://fig-promo.vercel.app/help): answers for diners and restaurants
-- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.
+- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans and chats are free on FIG, with no commission on the bill. FIG is paid by restaurants' ads (only when a diner taps), the optional FIG Premium, and 5% of the food on orders ahead diners pay for in the app.
 - [How to find the best restaurant deals in Markham](https://fig-promo.vercel.app/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.
 - [Delivery app commissions vs FIG: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges nothing per diner. Here's how the two compare for a Markham restaurant.
 - [7 ways to fill slow hours at your restaurant](https://fig-promo.vercel.app/blog/fill-slow-hours-restaurant): Practical ideas for independent restaurants to bring in diners on quiet afternoons and weeknights, without giving away margin.

@@ -148,7 +148,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
-     "• Stripe: card payments for orders ahead, and restaurants' payouts. To set up a restaurant's payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
+     "• Stripe: card payments for orders ahead, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },
@@ -199,9 +199,10 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 7, 2026",
+  "updated": "Last updated October 9, 2026",
   "short": [
-   "FIG is free: joining, your page, deals, scans and chats. No commission.",
+   "FIG is free: joining, your page, deals, scans and chats. No commission on the bill.",
+   "Orders ahead paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
    "Ads are optional: you pay per tap, within the daily budget you set, invoiced monthly.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
@@ -228,8 +229,9 @@
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• Joining FIG, setting up your page, going live, posting deals, verified scans, orders ahead, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
-     "• Orders ahead paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe's terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
+     "• Joining FIG, setting up your page, going live, posting deals, verified scans, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
+     "• Orders ahead paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
+     "• When a diner pays for an order ahead in the app, FIG keeps 5% of the food before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. An order ahead the diner pays for at your counter has no FIG fee.",
      "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel. When you buy it through the App Store or Google Play, their payment and refund terms apply.",
      "• You can pay for ads: sponsored spots on Home, in Deals near you, in search and on the map. Ads are optional and never needed to use FIG."
     ]

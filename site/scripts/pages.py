@@ -22,7 +22,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
-HIDDEN = {"404", "r", "paid", "stripe"}  # not indexed, no breadcrumbs, not in the sitemap
+HIDDEN = {"404", "r", "paid", "stripe", "premium-on"}  # not indexed, no breadcrumbs, not in the sitemap
 
 NAV_LINKS = [("/#how", "How it works"), ("/#features", "Features"), ("/#catch", "What's the catch?"), ("/#owners", "For restaurants")]
 
@@ -352,15 +352,20 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 <script src="/js/r.js" defer></script>''')
 
 
-# Stripe sends people back here (takeout paid in the app, 2026-10-08): after paying for an order, and after setting up payouts
-page("paid", "Back to FIG", "Your takeout payment.", body='''<p class="doc-kicker">Takeout</p><h1>You’re all set. Head back to FIG.</h1>
+# Stripe sends people back here (orders ahead paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
+# and after FIG Premium (2026-10-09)
+page("paid", "Back to FIG", "Your order-ahead payment.", body='''<p class="doc-kicker">Order ahead</p><h1>You’re all set. Head back to FIG.</h1>
 <p class="lead-p">Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.
 Didn’t finish paying? Open your order in FIG and tap Pay.</p>
-<div class="cards"><a class="card-l" href="/help"><b>Help center</b><span>Takeout, payments and refunds.</span></a></div>''')
+<div class="cards"><a class="card-l" href="/help"><b>Help center</b><span>Ordering ahead, payments and refunds.</span></a></div>''')
 page("stripe", "Back to FIG", "Setting up payouts with Stripe.", body='''<p class="doc-kicker">For restaurants</p><h1>Back to FIG to finish up.</h1>
 <p class="lead-p">Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.
 If Stripe still needs something, tap the button there again to pick up where you left off.</p>
-<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What FIG costs, and takeout payments.</span></a></div>''')
+<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What FIG costs, and payments for orders ahead.</span></a></div>''')
+page("premium-on", "Back to FIG", "FIG Premium.", body='''<p class="doc-kicker">FIG Premium</p><h1>Thanks. Head back to FIG.</h1>
+<p class="lead-p">If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium
+to see it, or to cancel or change your card later. Changed your mind before paying? Nothing was charged.</p>
+<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What Premium includes, and renewals.</span></a></div>''')
 
 today = datetime.date.today().isoformat()
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"

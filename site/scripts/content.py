@@ -1,13 +1,13 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no commission on the bill; up to 2 locations; 5% of the food on orders ahead diners pay for in the app), optional FIG Premium $50/year (unlimited locations, deal announcements every 2 hours, area insights, badge), ads pay per tap (from $0.30, daily budget,
-invoiced monthly), no AI features, codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no commission on the bill; up to 2 locations; 5% of the food on orders ahead diners pay for in the app), optional FIG Premium $50/year (unlimited locations, deal announcements every 2 hours, area insights, menu from a photo, badge), no ads for now (user 2026-10-09),
+the only AI is reading a menu from a photo (Premium), codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
-    ("Is FIG free?", "Yes for diners, always. For restaurants, listing, deals, scans and chats are free, with no commission on the bill and no fee per diner. FIG makes money from restaurants' ads (only when a diner taps, always labelled Sponsored), the optional FIG Premium ($50 a year), and 5% of the food on orders ahead diners pay for in the app."),
+    ("Is FIG free?", "Yes for diners, always. For restaurants, listing, deals, scans and chats are free, with no commission on the bill and no fee per diner. FIG makes money from the optional FIG Premium ($50 a year) and 5% of the food on orders ahead diners pay for in the app."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario first, then Richmond Hill, then the rest of York Region and the Greater Toronto Area."),
     ("Who makes FIG?", "FIG Technologies Inc., a small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, order ahead and pick up. You never pay FIG anything."),
@@ -21,14 +21,14 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <li><b>What:</b> a mobile app (iPhone and Android) for finding and using deals at local restaurants.</li>
 <li><b>Where:</b> launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</li>
 <li><b>For diners:</b> free. Nothing to upgrade.</li>
-<li><b>For restaurants:</b> free deals and scans, with no commission on the bill. Orders ahead paid in the app: 5% of the food. Optional ads, paid per tap.</li>
+<li><b>For restaurants:</b> free deals and scans, with no commission on the bill. Orders ahead paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</li>
 <li><b>Company:</b> FIG Technologies Inc., Markham, Ontario.</li>
 </ul></div>
 
 <h2>Why FIG exists</h2>
 <p>Markham is one of the best places in Canada to eat. Dim sum, ramen, Hakka, Hong Kong cafés, Korean fried chicken, Indian sweets, bubble tea on every plaza. Most of the places that make it great are small and independent.</p>
 <p>Those owners all have the same problem: quiet hours. A full room at 7 pm, then a slow Tuesday afternoon. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>
-<p>FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it. We make money when a restaurant wants to be seen first and runs an ad (paying per tap), from the optional FIG Premium, and from 5% of the food on orders ahead diners pay for in the app.</p>
+<p>FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it. We make money from the optional FIG Premium and from 5% of the food on orders ahead diners pay for in the app.</p>
 
 <h2>How FIG works for diners</h2>
 <ol>
@@ -45,17 +45,17 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <li><b>Go live</b> for free.</li>
 <li><b>Post</b> a deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</li>
 <li><b>Scan</b> diners at the counter with any phone or tablet. Every scan is free.</li>
-<li><b>Advertise</b> when you want more diners: an ad in the <a href=\"/ads\">Ads Manager</a>, paid per tap. Optional.</li>
+<li><b>Go Premium</b> when you want more: unlimited locations, deal announcements and area insights, $50 a year. Optional.</li>
 </ol>
 <p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p>
 
 <h2>What makes FIG different</h2>
 <ul>
-<li><b>No commission on the bill.</b> Diners pay you, at your counter. FIG is paid by optional, clearly labelled ads, the optional FIG Premium ($50 a year), and 5% of the food on orders ahead diners pay for in the app.</li>
+<li><b>No commission on the bill.</b> Diners pay you, at your counter. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on orders ahead diners pay for in the app.</li>
 <li><b>Honest deals.</b> Every deal, timer and opening hour is set by the restaurant itself.</li>
 <li><b>Codes that can't be copied.</b> Rotating QR codes stop screenshots and resold deals.</li>
 <li><b>Private by default.</b> Restaurants never see a diner's phone number, even for an order ahead. Chats go through the app.</li>
-<li><b>Real reviews.</b> Only diners whose visit was scanned can review, and an ad never changes or removes a review.</li>
+<li><b>Real reviews.</b> Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</li>
 </ul>
 
 <h2>Local first</h2>
@@ -76,28 +76,28 @@ POSTS = [
                  "Diners find deals on a map, claim one and show a code at the counter. It's free for diners."],
          sections=[
              ("Markham deserves better than a cut of every bill", "<p>Markham is one of the best places in Canada to eat. Dim sum on Kennedy, ramen on Highway 7, Hong Kong cafés in every plaza, bubble tea on every corner. But the places that make it great are mostly small and independent, and they compete for attention with apps that take a percentage of every order.</p><p>Owners told us the same thing again and again: they have quiet hours they'd love to fill, but giving away a large share of each bill doesn't add up.</p>"),
-             ("So we flipped the model", "<p>On FIG, a restaurant posts its own deal, for the hours it wants, with its own daily cap. Diners find it on a map, claim it, and show a code at the counter. The diner pays the restaurant directly, and FIG takes nothing from the bill. Restaurants that want to be seen first can sponsor a spot for a week; that's how FIG is paid.</p><p>That means a deal on FIG is a decision the owner made, not a discount a platform forced on them. It also means the deals are real: the timer on a flash deal is the owner's timer.</p>"),
+             ("So we flipped the model", "<p>On FIG, a restaurant posts its own deal, for the hours it wants, with its own daily cap. Diners find it on a map, claim it, and show a code at the counter. The diner pays the restaurant directly, and FIG takes nothing from the bill. FIG is paid by an optional Premium plan for restaurants and a small fee on orders ahead paid in the app.</p><p>That means a deal on FIG is a decision the owner made, not a discount a platform forced on them. It also means the deals are real: the timer on a flash deal is the owner's timer.</p>"),
              ("Why Markham first", "<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants, busy plazas, and a lot of people who love finding a new place to eat. Richmond Hill is next.</p><p>If you own a restaurant in Markham, we'd love to set you up before launch. <a href=\"/#owners\">See how pricing works</a>.</p>"),
          ],
          faq=[("When does FIG launch?", "FIG is launching in Markham first. Download the app or join the waitlist on the home page to hear the moment it opens near you."),
-              ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can choose to run ads, paid per tap, or add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),
+              ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
-         dek="Listing, deals, scans and chats are free on FIG, with no commission on the bill. FIG is paid by restaurants' ads (only when a diner taps), the optional FIG Premium, and 5% of the food on orders ahead diners pay for in the app.",
-         keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant advertising Markham, pay per click restaurant ads",
+         dek="Listing, deals, scans and chats are free on FIG, with no commission on the bill. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on orders ahead diners pay for in the app.",
+         keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant deals app Markham, FIG Premium",
          points=["FIG is free for restaurants: listing, unlimited deals, every scan and chats. No commission on the bill.",
-                 "FIG makes money from ads: a restaurant sets a daily budget and pays only when a diner taps, from about $0.30 a tap.",
-                 "Ads run from the Ads Manager on the FIG website, are always labelled Sponsored, and show which diners actually came in.",
-                 "FIG Premium ($50 a year, optional) adds unlimited locations, a deal announcement every 2 hours to diners who crave your food, area insights and a badge."],
+                 "FIG makes money two ways: the optional FIG Premium ($50 a year), and 5% of the food on orders ahead diners pay for in the app.",
+                 "FIG Premium adds unlimited locations, a deal announcement every 2 hours to diners who crave your food, area insights, your menu typed up from a photo and a badge.",
+                 "Insights are free: your views, claims and the diners who came in, day by day."],
          sections=[
              ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, order ahead on your deals, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p><p>The one fee: when a diner orders ahead with your deal and pays in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, is paid out to you.</p>"),
-             ("How FIG makes money", "<p>When you want more diners, you can run an ad from the <a href=\"/ads\">Ads Manager</a>. Pick a goal (more diners, promote a deal, or fill quiet hours), who should see it (distance, days and hours, the foods they crave, new or returning diners) and a daily budget. You pay only when a diner taps your ad.</p><p>Like Facebook ads, each sponsored spot goes to a quick auction: ads with a fair bid, photos diners tap and good ratings win, and the winner pays just enough to beat the next ad, never more than its budget. Every paid spot is labelled Sponsored.</p>"),
-             ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement every 2 hours to nearby diners whose cravings match your food and to everyone who saved you, area insights in the Ads Manager, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
-             ("You see what you get", "<p>Every ad shows its views, taps and the diners who came in within a week of tapping, day by day. Add up to three photos and FIG shows the one diners tap most. Before you spend a dollar, Insights shows when diners near you claim deals, what they crave, and how many places nearby advertise.</p>"),
-             ("What an ad never does", "<ul><li>Change your deal or its price</li><li>Hide, remove or reorder reviews</li><li>Share any diner's details with you</li></ul><p>Read the full <a href=\"/business-terms\">business terms</a>.</p>"),
+             ("How FIG makes money", "<p>Two ways, and both are up to you. FIG Premium is $50 a year for your whole account. And when a diner orders ahead with your deal and pays in the app, FIG keeps 5% of the food. A diner who walks in with your deal costs you nothing.</p>"),
+             ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement every 2 hours to nearby diners whose cravings match your food and to everyone who saved you, area insights, your menu typed up from a photo, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
+             ("You see what you get", "<p>Insights are free for every restaurant: views of your page, claims, the diners who came in and who came back, day by day, and how each deal is doing. With Premium, area insights add when diners near you claim deals, what they crave and what's trending nearby.</p>"),
+             ("What paying FIG never does", "<ul><li>Change your deal or its price</li><li>Move you up in search or on the map</li><li>Hide, remove or reorder reviews</li><li>Share any diner's details with you</li></ul><p>Read the full <a href=\"/business-terms\">business terms</a>.</p>"),
          ],
-         faq=[("How much does FIG cost a restaurant?", "Nothing, unless you want more. Ads cost only when a diner taps, from about $0.30 a tap, within a daily budget you set, invoiced monthly. FIG Premium is $50 a year."),
-              ("Is there a contract?", "No. Pause or end an ad anytime. You're invoiced only for taps.")]),
+         faq=[("How much does FIG cost a restaurant?", "Nothing for dine-in deals. FIG Premium is optional, $50 a year. On orders ahead diners pay for in the app, FIG keeps 5% of the food (before tax)."),
+              ("Is there a contract?", "No. Premium renews yearly; cancel anytime and it stays on until the end of the year you paid for.")]),
 
     dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", topic="For diners",
          dek="A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.",
@@ -123,11 +123,11 @@ POSTS = [
                  "FIG isn't a delivery replacement: it fills dine-in and pickup during the hours a restaurant chooses."],
          sections=[
              ("How commission pricing works", "<p>Delivery platforms usually charge the restaurant a percentage of each order, plus sometimes marketing or promotion fees. The exact rate depends on the plan, but commissions in the 15% to 30% range are commonly reported. The more a restaurant sells through the app, the more it pays.</p>"),
-             ("A simple example", "<p>Take a $40 dinner order. At a 25% commission, the platform keeps $10 of it. Ten orders like that a week is $100 a week, or about $5,200 a year, in commission alone.</p><p>On FIG, those ten diners cost the restaurant nothing. They show a code and pay the restaurant directly. The only cost is the deal the owner chose to offer, and optional ads (paid per tap) if the owner wants to be seen first.</p>"),
+             ("A simple example", "<p>Take a $40 dinner order. At a 25% commission, the platform keeps $10 of it. Ten orders like that a week is $100 a week, or about $5,200 a year, in commission alone.</p><p>On FIG, those ten diners cost the restaurant nothing. They show a code and pay the restaurant directly. The only cost is the deal the owner chose to offer.</p>"),
              ("Different jobs", "<p>Delivery apps are good at getting food to someone's door. FIG does a different job: it brings people into the restaurant, or to the counter to pick up a deal ordered ahead, during the hours the owner wants to fill. Many restaurants will use both.</p>"),
-             ("What you control on FIG", "<ul><li>The deal itself: what, when and for whom</li><li>A daily cap, so a deal never gives away more than you planned</li><li>Pausing anytime, with one tap</li><li>Whether to advertise at all</li></ul><p><a href=\"/blog/how-fig-makes-money\">How FIG makes money</a>.</p>"),
+             ("What you control on FIG", "<ul><li>The deal itself: what, when and for whom</li><li>A daily cap, so a deal never gives away more than you planned</li><li>Pausing anytime, with one tap</li><li>Whether to pay FIG for anything at all</li></ul><p><a href=\"/blog/how-fig-makes-money\">How FIG makes money</a>.</p>"),
          ],
-         faq=[("Does FIG charge a commission?", "Not on dine-in: deals and scans are free, with no fee per diner. On orders ahead that diners pay for in the app, FIG keeps 5% of the food (before tax). Ads are optional and paid per tap."),
+         faq=[("Does FIG charge a commission?", "Not on dine-in: deals and scans are free, with no fee per diner. On orders ahead that diners pay for in the app, FIG keeps 5% of the food (before tax). FIG Premium is optional, $50 a year."),
               ("Does FIG do delivery?", "No. Diners eat in, or order ahead with a deal and pick it up.")]),
 
     dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", topic="For restaurants",

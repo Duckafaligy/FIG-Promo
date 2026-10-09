@@ -3,7 +3,7 @@
   "title": "Terms of service",
   "updated": "Last updated October 7, 2026",
   "short": [
-   "FIG is free for you, and for restaurants. Restaurants can pay to sponsor a spot, always labelled Sponsored.",
+   "FIG is free for you, and FIG doesn't show ads.",
    "A deal counts once staff scan your QR at the restaurant.",
    "One account per person. No sharing codes or faking visits."
   ],
@@ -43,9 +43,9 @@
     ]
    },
    {
-    "heading": "5. Sponsored spots",
+    "heading": "5. Ads",
     "paragraphs": [
-     "FIG is free for diners and restaurants. Restaurants can pay FIG to advertise a deal or their restaurant. Paid spots are always labelled Sponsored, and tapping the label says why you see it. Paying never changes a deal, its price or its reviews, and restaurants never get your details from it."
+     "FIG doesn't show ads. If we add them later, we'll update these terms first. A paid spot would always be labelled Sponsored, and would never change a deal, its price or its reviews."
     ]
    },
    {
@@ -127,7 +127,7 @@
      "• Send the alerts and emails you chose",
      "• Deliver chat messages between you and a restaurant. Phone numbers typed into a chat are hidden. The FIG team reads a chat only when someone reports it",
      "• Answer support requests and improve FIG",
-     "Sponsored spots are the same for everyone in an area: they never use your history. We don't sell your information or show you third-party ads based on it."
+     "FIG doesn't show ads. We don't sell your information or show you third-party ads based on it."
     ]
    },
    {
@@ -203,7 +203,7 @@
   "short": [
    "FIG is free: joining, your page, deals, scans and chats. No commission on the bill.",
    "Orders ahead paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
-   "Ads are optional: you pay per tap, within the daily budget you set, invoiced monthly.",
+   "FIG Premium is optional: $50 a year, cancel anytime.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
   ],
@@ -232,16 +232,13 @@
      "• Joining FIG, setting up your page, going live, posting deals, verified scans, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
      "• Orders ahead paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
      "• When a diner pays for an order ahead in the app, FIG keeps 5% of the food before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. An order ahead the diner pays for at your counter has no FIG fee.",
-     "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel. When you buy it through the App Store or Google Play, their payment and refund terms apply.",
-     "• You can pay for ads: sponsored spots on Home, in Deals near you, in search and on the map. Ads are optional and never needed to use FIG."
+     "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel; cancel anytime in FIG and it stays on until the end of the year you paid for. It's paid by card through Stripe, or, if you buy it through the App Store or Google Play, their payment and refund terms apply."
     ]
    },
    {
     "heading": "5. Ads",
     "paragraphs": [
-     "You make and manage ads in the FIG Ads Manager on our website. Each ad has a daily budget you set, and an optional maximum per tap. You pay only when a diner taps your ad. The price of a tap is set by a short auction among the ads competing for that spot: you pay just enough to beat the next ad, never more than your maximum, and never less than our minimum (currently $0.30 CAD). A diner tapping the same ad more than once in a day is charged once. Your spend never goes past the ad's daily budget or your account's monthly limit.",
-     "We send you an invoice for the previous month's taps at the start of each month, payable within 15 days. Prices are in CAD, plus applicable tax. If an invoice goes unpaid, we can put your ads on hold until it's paid.",
-     "Ads are always labelled Sponsored. An ad never changes your deal's terms or your reviews. We can decline or stop an ad that breaks these terms (for example, a photo that isn't your food or a deal you don't honour) and we'll tell you why. Results (views, taps, and diners who came in after tapping) are shown in the Ads Manager and in the app. If we charged a tap because of a problem on our side, we credit it on your next invoice."
+     "FIG doesn't sell ads right now. If we offer them later, it will be under separate terms you agree to first."
     ]
    },
    {
@@ -253,7 +250,7 @@
    {
     "heading": "7. Reviews",
     "paragraphs": [
-     "Paying for ads never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
+     "Paying FIG never changes, hides or removes reviews. You can reply to reviews in public. Don't offer anything in exchange for a review."
     ]
    },
    {

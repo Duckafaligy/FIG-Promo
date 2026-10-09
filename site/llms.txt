@@ -16,13 +16,13 @@
 - [Home](https://fig-promo.vercel.app/): what FIG is, features, pricing
 - [About](https://fig-promo.vercel.app/about): the full story and FAQ
 - [Help center](https://fig-promo.vercel.app/help): answers for diners and restaurants
-- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans, takeout and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.
+- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.
 - [How to find the best restaurant deals in Markham](https://fig-promo.vercel.app/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when to go, where to look and how to use FIG.
 - [Delivery app commissions vs FIG: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges nothing per diner. Here's how the two compare for a Markham restaurant.
 - [7 ways to fill slow hours at your restaurant](https://fig-promo.vercel.app/blog/fill-slow-hours-restaurant): Practical ideas for independent restaurants to bring in diners on quiet afternoons and weeknights, without giving away margin.
 - [Student food deals in Markham: eating out on a budget](https://fig-promo.vercel.app/blog/student-food-deals-markham): How high school and university students in Markham can eat out for less: after-school deals, group plans and budget filters.
 - [What are flash deals, and how do they work on FIG?](https://fig-promo.vercel.app/blog/flash-deals-explained): Flash deals are short, real-time restaurant deals posted during quiet hours. Here's how to catch them in Markham.
-- [Order ahead, pick up, skip the delivery fees](https://fig-promo.vercel.app/blog/takeout-without-delivery-fees): FIG takeout lets you order from a Markham restaurant's menu, watch it get made and pay at pickup, with no delivery or service fees.
+- [Order ahead with a deal, pick up, skip the delivery fees](https://fig-promo.vercel.app/blog/takeout-without-delivery-fees): Some FIG deals let you order ahead from a Markham restaurant's menu, watch it get made and pick it up, with no delivery or service fees.
 - [Why we built FIG](https://fig-promo.vercel.app/blog/why-we-built-fig): Markham has incredible independent restaurants. We wanted a way to find them that's fair to the owners too.
 
 ## Legal

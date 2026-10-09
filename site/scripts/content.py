@@ -10,7 +10,7 @@ ABOUT_FAQ = [
     ("Is FIG free?", "Yes, for diners and restaurants. FIG makes money only from restaurants' ads, which cost only when a diner taps and are always labelled Sponsored. There's no commission and no fee per diner."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario first, then Richmond Hill, then the rest of York Region and the Greater Toronto Area."),
     ("Who makes FIG?", "FIG Technologies Inc., a small team based in Markham, Ontario."),
-    ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. You eat in, or order takeout ahead and pick it up. You pay the restaurant directly, and FIG never takes a cut of the bill."),
+    ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, order ahead and pick up. You never pay FIG anything."),
 ]
 
 ABOUT = '''<p class="doc-kicker">About FIG</p>
@@ -37,7 +37,7 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <li><b>Show</b> your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</li>
 <li><b>Rate</b> the visit afterwards, so reviews on FIG come from real visits.</li>
 </ol>
-<p>You can also order takeout ahead and pay at pickup, message a restaurant before you go, and share a deal with your group chat so everyone can agree on where to eat.</p>
+<p>Some deals also let you order ahead and pick up, and you can message a restaurant before you go, and share a deal with your group chat so everyone can agree on where to eat.</p>
 
 <h2>How FIG works for restaurants</h2>
 <ol>
@@ -54,7 +54,7 @@ ABOUT = '''<p class="doc-kicker">About FIG</p>
 <li><b>No commission, no fees.</b> Diners pay you, at your counter. FIG is paid by optional, clearly labelled ads and the optional FIG Premium ($50 a year).</li>
 <li><b>Honest deals.</b> Every deal, timer and opening hour is set by the restaurant itself.</li>
 <li><b>Codes that can't be copied.</b> Rotating QR codes stop screenshots and resold deals.</li>
-<li><b>Private by default.</b> Restaurants never see a diner's phone number, even for takeout. Chats go through the app.</li>
+<li><b>Private by default.</b> Restaurants never see a diner's phone number, even for an order ahead. Chats go through the app.</li>
 <li><b>Real reviews.</b> Only diners whose visit was scanned can review, and an ad never changes or removes a review.</li>
 </ul>
 
@@ -83,14 +83,14 @@ POSTS = [
               ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can choose to run ads, paid per tap, or add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
-         dek="Listing, deals, scans, takeout and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.",
+         dek="Listing, deals, scans and chats are free on FIG, with no commission. FIG is paid by restaurants' ads, only when a diner taps, and by the optional FIG Premium.",
          keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant advertising Markham, pay per click restaurant ads",
-         points=["FIG is free for restaurants: listing, unlimited deals, every scan, takeout and chats. No commission, no fees.",
+         points=["FIG is free for restaurants: listing, unlimited deals, every scan and chats. No commission, no fees.",
                  "FIG makes money from ads: a restaurant sets a daily budget and pays only when a diner taps, from about $0.30 a tap.",
                  "Ads run from the Ads Manager on the FIG website, are always labelled Sponsored, and show which diners actually came in.",
                  "FIG Premium ($50 a year, optional) adds unlimited locations, a deal announcement every 2 hours to diners who crave your food, area insights and a badge."],
          sections=[
-             ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, takeout ordering, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p>"),
+             ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, order ahead on your deals, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p>"),
              ("How FIG makes money", "<p>When you want more diners, you can run an ad from the <a href=\"/ads\">Ads Manager</a>. Pick a goal (more diners, promote a deal, or fill quiet hours), who should see it (distance, days and hours, the foods they crave, new or returning diners) and a daily budget. You pay only when a diner taps your ad.</p><p>Like Facebook ads, each sponsored spot goes to a quick auction: ads with a fair bid, photos diners tap and good ratings win, and the winner pays just enough to beat the next ad, never more than its budget. Every paid spot is labelled Sponsored.</p>"),
              ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement every 2 hours to nearby diners whose cravings match your food and to everyone who saved you, area insights in the Ads Manager, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
              ("You see what you get", "<p>Every ad shows its views, taps and the diners who came in within a week of tapping, day by day. Add up to three photos and FIG shows the one diners tap most. Before you spend a dollar, Insights shows when diners near you claim deals, what they crave, and how many places nearby advertise.</p>"),
@@ -124,11 +124,11 @@ POSTS = [
          sections=[
              ("How commission pricing works", "<p>Delivery platforms usually charge the restaurant a percentage of each order, plus sometimes marketing or promotion fees. The exact rate depends on the plan, but commissions in the 15% to 30% range are commonly reported. The more a restaurant sells through the app, the more it pays.</p>"),
              ("A simple example", "<p>Take a $40 dinner order. At a 25% commission, the platform keeps $10 of it. Ten orders like that a week is $100 a week, or about $5,200 a year, in commission alone.</p><p>On FIG, those ten diners cost the restaurant nothing. They show a code and pay the restaurant directly. The only cost is the deal the owner chose to offer, and optional ads (paid per tap) if the owner wants to be seen first.</p>"),
-             ("Different jobs", "<p>Delivery apps are good at getting food to someone's door. FIG does a different job: it brings people into the restaurant, or to the counter for takeout pickup, during the hours the owner wants to fill. Many restaurants will use both.</p>"),
+             ("Different jobs", "<p>Delivery apps are good at getting food to someone's door. FIG does a different job: it brings people into the restaurant, or to the counter to pick up a deal ordered ahead, during the hours the owner wants to fill. Many restaurants will use both.</p>"),
              ("What you control on FIG", "<ul><li>The deal itself: what, when and for whom</li><li>A daily cap, so a deal never gives away more than you planned</li><li>Pausing anytime, with one tap</li><li>Whether to advertise at all</li></ul><p><a href=\"/blog/how-fig-makes-money\">How FIG makes money</a>.</p>"),
          ],
          faq=[("Does FIG charge a commission?", "No. FIG is free for restaurants, with no commission and no fee per diner. Ads are optional and paid per tap."),
-              ("Does FIG do delivery?", "No. Diners eat in or order takeout ahead and pick it up, paying the restaurant at the counter.")]),
+              ("Does FIG do delivery?", "No. Diners eat in, or order ahead with a deal and pick it up.")]),
 
     dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", topic="For restaurants",
          dek="Practical ideas for independent restaurants to bring in diners on quiet afternoons and weeknights, without giving away margin.",
@@ -142,7 +142,7 @@ POSTS = [
              ("3. Cap it", "<p>Set a daily limit. On FIG, a daily cap stops a deal automatically once it's been used that many times.</p>"),
              ("4. Go where people are deciding", "<p>Most people decide where to eat on their phone, often in a group chat. Being on a map of nearby deals at the moment they're deciding matters more than a poster in the window.</p>"),
              ("5. Use flash deals for surprise quiet spells", "<p>Rain, a cancelled booking, a slow lunch. A short flash deal tells nearby diners right now. <a href=\"/blog/flash-deals-explained\">How flash deals work</a>.</p>"),
-             ("6. Offer pickup", "<p>Takeout ordered ahead and picked up at the counter fills the kitchen without filling tables, and without delivery fees.</p>"),
+             ("6. Let your deals be ordered ahead", "<p>A deal diners can order ahead and pick up fills the kitchen without filling tables, and without delivery fees.</p>"),
              ("7. Measure and repeat", "<p>Track scans and new diners per deal. Keep the deals that bring new people in and pause the rest. FIG's dashboard shows this for every deal.</p>"),
          ],
          faq=[("What's the cheapest way to market a small restaurant?", "Target your slow hours with a specific, capped deal where diners are already looking. FIG does this for free."),
@@ -159,7 +159,7 @@ POSTS = [
              ("Set your budget once", "<p>When you sign up, tell FIG your budget and what you crave. The home feed and map then show deals that fit, nearest first, so you're not scrolling past $40 dinners.</p>"),
              ("Decide with your friends", "<p>Can't agree where to eat? Share a deal from FIG straight to your group chat. Everyone sees the same place, the same deal and how far it is.</p>"),
              ("Free is better", "<p>FIG is free for diners. Nothing to collect, nothing to upgrade: just deals.</p>"),
-             ("Ask before you go", "<p>Not sure if there's space for six, or if the deal works for takeout? Message the restaurant from the deal. Your phone number stays private.</p>"),
+             ("Ask before you go", "<p>Not sure if there's space for six, or if you can order the deal ahead? Message the restaurant from the deal. Your phone number stays private.</p>"),
          ],
          faq=[("Is FIG free for students?", "Yes. FIG is free for every diner, with nothing to upgrade."),
               ("Do I need a credit card?", "No. You claim deals in the app and pay the restaurant directly at the counter.")]),
@@ -179,18 +179,18 @@ POSTS = [
          faq=[("How long do flash deals last?", "The restaurant sets the length, usually an hour or two. The timer you see in the app is the real one."),
               ("Can I turn flash alerts off?", "Yes. Every alert in FIG can be turned off, and quiet hours at night are on by default.")]),
 
-    dict(slug="takeout-without-delivery-fees", screen="chat", title="Order ahead, pick up, skip the delivery fees", date="2026-10-04", topic="For diners",
-         dek="FIG takeout lets you order from a Markham restaurant's menu, watch it get made and pay at pickup, with no delivery or service fees.",
-         keywords="takeout without delivery fees, order ahead pickup Markham, takeout deals Markham, pickup orders",
-         points=["Order from the restaurant's menu in FIG and pay at the counter when you pick up.",
+    dict(slug="takeout-without-delivery-fees", screen="chat", title="Order ahead with a deal, pick up, skip the delivery fees", date="2026-10-04", topic="For diners",
+         dek="Some FIG deals let you order ahead from a Markham restaurant's menu, watch it get made and pick it up, with no delivery or service fees.",
+         keywords="order ahead deals Markham, pickup deals, no delivery fees, order ahead pickup Markham",
+         points=["Tap Order ahead on a deal that allows it, add what you want, and pick it up.",
                  "No delivery fee and no service fee from FIG.",
-                 "Deals apply to takeout unless the restaurant marks a deal dine-in only."],
+                 "Ordering ahead always comes with a deal: FIG is a deals app, not a takeout service."],
          sections=[
-             ("How it works", "<p>Open a restaurant in FIG, tap the menu and build your order. The restaurant accepts it and you can watch its status: new, cooking, ready. Head over, show your pickup code, pay at the counter and go.</p>"),
-             ("Why pickup is cheaper", "<p>There's no driver, so there's no delivery fee, and FIG doesn't add a service fee. You pay the menu price, minus any deal, straight to the restaurant.</p>"),
-             ("Deals still count", "<p>Deals work on takeout unless the restaurant says dine-in only.</p>"),
+             ("How it works", "<p>Find a deal marked Dine in or order ahead and tap Order ahead. The menu opens with the deal applied; add what you want. The restaurant accepts it and you can watch its status: new, cooking, ready. Head over, show your pickup code and go.</p>"),
+             ("Why pickup is cheaper", "<p>There's no driver, so there's no delivery fee, and FIG doesn't add a service fee. You pay the menu price, minus the deal.</p>"),
+             ("It starts with a deal", "<p>Only deals the restaurant allows to be ordered ahead have the button. Dine-in only deals are for eating in.</p>"),
              ("Private by default", "<p>The restaurant never sees your phone number. If you need to change something, message them from the order in the app.</p>"),
          ],
-         faq=[("Does FIG deliver?", "No. FIG takeout is order-ahead pickup. You collect the food and pay the restaurant at the counter."),
-              ("Is there a fee for ordering takeout on FIG?", "No. FIG doesn't charge diners delivery or service fees.")]),
+         faq=[("Does FIG deliver?", "No. You order ahead with a deal and pick the food up yourself."),
+              ("Is there a fee for ordering ahead on FIG?", "No. FIG doesn't charge diners anything: no delivery or service fees.")]),
 ]

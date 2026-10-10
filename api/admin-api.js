@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   if (action === "login") {
     // a short pause on every try slows guessing even before the lock
     await new Promise((r) => setTimeout(r, 400));
-    const out = login(req, body.password);
+    const out = await login(req, body.password);
     return send(res, out.status, out.body, out.headers || []);
   }
   if (action === "logout") return send(res, 200, { ok: true }, [logoutCookie()]);

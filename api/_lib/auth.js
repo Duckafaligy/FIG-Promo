@@ -2,14 +2,41 @@
 //   ADMIN_PASSWORD_HASH  "scrypt:<salt hex>:<hash hex>" (never the password itself)
 //   SESSION_SECRET       random string used to sign the session cookie
 // Lockout works like an iPhone passcode: 5 wrong tries, then 1 min, then 5, 15 and 60 minutes after each further miss.
-// ponytail: tries are counted per IP in this server's memory plus a signed cookie. A cold start forgets the memory part;
-// for a lock that survives everything, keep the count in a database (Supabase or Upstash) instead.
+// Tries are counted per IP in FIG's database (login_attempts, key "admin:<ip>"), so a cold start or a visitor who throws away
+// the cookie can't reset the lock (user 2026-10-10: harden). If the database can't be reached, this server's memory and the
+// signed cookie still count, so a database outage never locks the admin out.
 const crypto = require("crypto");
 
 const FREE_TRIES = 5;
 const LOCKS_MIN = [1, 5, 15, 60]; // minutes, after try 5, 6, 7, 8+
 const SESSION_HOURS = 8;
-const tries = new Map(); // ip -> { fails, until }
+const tries = new Map(); // ip -> { fails, until }: the fallback when the database can't be reached
+const DB = () => ({ url: (process.env.SUPABASE_URL || "").replace(/\/$/, ""), key: process.env.SUPABASE_SERVICE_ROLE_KEY || "" });
+
+/** The shared lock for an IP (database), or null when there's no database to ask. */
+async function dbState(ip_) {
+  const { url, key } = DB();
+  if (!url || !key) return null;
+  try {
+    const r = await fetch(`${url}/rest/v1/login_attempts?key=eq.${encodeURIComponent("admin:" + ip_)}&select=fails,last_at`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(3000) });
+    if (!r.ok) return null;
+    const [row] = await r.json();
+    if (!row) return { fails: 0, until: 0 };
+    const last = new Date(row.last_at).getTime();
+    if (Date.now() - last > 24 * 3_600_000) return { fails: 0, until: 0 }; // a day of quiet forgives
+    return { fails: row.fails, until: last + lockFor(row.fails) };
+  } catch { return null; }
+}
+async function dbWrite(ip_, fails) {
+  const { url, key } = DB();
+  if (!url || !key) return;
+  const h = { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" };
+  try {
+    if (fails === 0) await fetch(`${url}/rest/v1/login_attempts?key=eq.${encodeURIComponent("admin:" + ip_)}`, { method: "DELETE", headers: h, signal: AbortSignal.timeout(3000) });
+    else await fetch(`${url}/rest/v1/login_attempts?on_conflict=key`, { method: "POST", headers: h, body: JSON.stringify({ key: "admin:" + ip_, fails, last_at: new Date().toISOString() }), signal: AbortSignal.timeout(3000) });
+  } catch { /* the cookie and memory still count */ }
+}
 
 const ip = (req) => String(req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "?").split(",")[0].trim();
 const secret = () => process.env.SESSION_SECRET || "";
@@ -47,10 +74,11 @@ function passwordOk(password) {
 }
 
 /** The lock state for this visitor: from memory, and from their signed cookie (whichever is stricter). */
-function lockState(req) {
+async function lockState(req) {
   const mem = tries.get(ip(req)) || { fails: 0, until: 0 };
   const c = open(cookies(req).fig_admin_tries) || { fails: 0, until: 0 };
-  return { fails: Math.max(mem.fails, c.fails || 0), until: Math.max(mem.until, c.until || 0) };
+  const d = (await dbState(ip(req))) || { fails: 0, until: 0 };
+  return { fails: Math.max(mem.fails, c.fails || 0, d.fails), until: Math.max(mem.until, c.until || 0, d.until) };
 }
 function lockFor(fails) {
   if (fails < FREE_TRIES) return 0;
@@ -58,13 +86,14 @@ function lockFor(fails) {
 }
 
 /** Handles a sign-in attempt. Returns { status, body, headers }. */
-function login(req, password) {
+async function login(req, password) {
   const now = Date.now();
-  const st = lockState(req);
+  const st = await lockState(req);
   if (st.until > now) return { status: 429, body: { locked: true, retryIn: Math.ceil((st.until - now) / 1000) } };
   if (!secret() || !process.env.ADMIN_PASSWORD_HASH) return { status: 503, body: { error: "Admin isn't set up on the server yet." } };
   if (passwordOk(password)) {
     tries.delete(ip(req));
+    await dbWrite(ip(req), 0);
     return { status: 200, body: { ok: true }, headers: [
       cookie("fig_admin", seal({ exp: now + SESSION_HOURS * 3_600_000 }), SESSION_HOURS * 3600),
       cookie("fig_admin_tries", "", 0),
@@ -73,6 +102,7 @@ function login(req, password) {
   const fails = st.fails + 1;
   const until = now + lockFor(fails);
   tries.set(ip(req), { fails, until });
+  await dbWrite(ip(req), fails);
   const left = Math.max(0, FREE_TRIES - fails);
   return {
     status: 401,

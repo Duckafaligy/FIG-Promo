@@ -27,7 +27,7 @@
      "• A claimed deal is yours until the restaurant ends the deal, or until a flash or dated deal is over.",
      "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
      "• The deal is used once staff scan it. That scan is a \"redemption\".",
-     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals let you order ahead and pick up: an order ahead always comes with one of those deals, which is applied to it; dine-in only deals can't be. You pay the restaurant in the app or at pickup, whichever it has set up. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your order-ahead record (12 months), which restaurants can see when you order. Nobody reports it and ordering ahead is never switched off for it."
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order always comes with one of those deals, which is applied to it; dine-in only deals can't be. You pay the restaurant in the app or at pickup, whichever it has set up. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
     ]
    },
    {
@@ -111,8 +111,8 @@
     "paragraphs": [
      "• Account: name, username, email and mobile number (each confirmed with a code), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
-     "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on an order ahead, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
-     "• Activity: claims, verified visits, searches, orders ahead, chat messages, and the reviews and photos you post.",
+     "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
+     "• Activity: claims, verified visits, searches, takeout orders, chat messages, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Support: messages and reports you send us."
     ]
@@ -139,7 +139,7 @@
    {
     "heading": "5. What restaurants see",
     "paragraphs": [
-     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email, location or history. They never see your mobile number, not even for an order ahead: they reach you by chat or a notification in FIG. Reviews you post are public and show your first name and last initial."
+     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email, location or history. They never see your mobile number, not even for a takeout order: they reach you by chat or a notification in FIG. Reviews you post are public and show your first name and last initial."
     ]
    },
    {
@@ -148,7 +148,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
-     "• Stripe: card payments for orders ahead, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
+     "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },
@@ -202,7 +202,7 @@
   "updated": "Last updated October 9, 2026",
   "short": [
    "FIG is free: joining, your page, deals, scans and chats. No commission on the bill.",
-   "Orders ahead paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
+   "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
    "FIG Premium is optional: $50 a year, cancel anytime.",
    "Honour your live deals exactly as written.",
    "Only your enrolled staff devices can verify scans."
@@ -230,8 +230,8 @@
     "heading": "4. What FIG costs",
     "paragraphs": [
      "• Joining FIG, setting up your page, going live, posting deals, verified scans, chats and up to 2 locations are free. There's no commission on the bill, and no sign-up, monthly, listing or per-scan fees.",
-     "• Orders ahead paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
-     "• When a diner pays for an order ahead in the app, FIG keeps 5% of the food before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. An order ahead the diner pays for at your counter has no FIG fee.",
+     "• Takeout orders paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
+     "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. A takeout order the diner pays for at your counter has no FIG fee.",
      "• FIG Premium is optional: $50 CAD a year plus applicable tax, for your whole account and all its locations. It adds unlimited locations, deal announcements (one every 2 hours, to nearby diners whose cravings match your food and to diners who saved you; diners can turn them off), area insights, and a Premium badge that never changes your ranking. It renews yearly until you cancel; cancel anytime in FIG and it stays on until the end of the year you paid for. It's paid by card through Stripe, or, if you buy it through the App Store or Google Play, their payment and refund terms apply."
     ]
    },
@@ -262,7 +262,7 @@
    {
     "heading": "9. Diner information",
     "paragraphs": [
-     "You'll see a diner's first name, last initial and the deal they used, never their mobile number or email. Reach a diner only through FIG (chat, or \"We're waiting\" on an order ahead), and only to serve that deal or order. Don't contact diners outside FIG, and handle their information as Canadian privacy law requires."
+     "You'll see a diner's first name, last initial and the deal they used, never their mobile number or email. Reach a diner only through FIG (chat, or \"We're waiting\" on a takeout order), and only to serve that deal or order. Don't contact diners outside FIG, and handle their information as Canadian privacy law requires."
     ]
    },
    {

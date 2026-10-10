@@ -195,17 +195,17 @@ HELP = [
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, at the restaurant, like normal. FIG never takes payment for food."),
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
-        ("Do restaurants see my phone number?", "Never. Chats and orders ahead go through the app and your number stays private."),
-        ("Can I order ahead?", "Yes, with a deal that allows it. Tap Order ahead on the deal, add what you want, watch it get made, and pick it up. FIG is a deals app, so ordering ahead always comes with a deal."),
+        ("Do restaurants see my phone number?", "Never. Chats and takeout orders go through the app and your number stays private."),
+        ("Can I takeout?", "Yes, with a deal that allows it. Tap Takeout on the deal, add what you want, watch it get made, and pick it up. FIG is a deals app, so takeout always comes with a deal."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on the bill. On orders ahead diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
+        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on the bill. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
         ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the type, the days and hours, who it's for and an optional daily cap. You can pause it anytime."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
-        ("Can diners order ahead?", "Yes, with your deals. Add your menu (you can read it from a photo or a link), turn on order ahead, and choose which deals allow it. You scan their pickup code when they collect."),
+        ("Can diners order takeout?", "Yes, with your deals. Add your menu (you can read it from a photo or a link), turn on takeout, and choose which deals allow it. You scan their pickup code when they collect."),
         ("How do I stop?", "There's nothing to cancel. Pause your deals, or close your account in Settings anytime."),
     ]),
 ]
@@ -352,16 +352,16 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 <script src="/js/r.js" defer></script>''')
 
 
-# Stripe sends people back here (orders ahead paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
+# Stripe sends people back here (takeout orders paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
 # and after FIG Premium (2026-10-09)
-page("paid", "Back to FIG", "Your order-ahead payment.", body='''<p class="doc-kicker">Order ahead</p><h1>You’re all set. Head back to FIG.</h1>
+page("paid", "Back to FIG", "Your takeout payment.", body='''<p class="doc-kicker">Takeout</p><h1>You’re all set. Head back to FIG.</h1>
 <p class="lead-p">Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.
 Didn’t finish paying? Open your order in FIG and tap Pay.</p>
-<div class="cards"><a class="card-l" href="/help"><b>Help center</b><span>Ordering ahead, payments and refunds.</span></a></div>''')
+<div class="cards"><a class="card-l" href="/help"><b>Help center</b><span>Takeout, payments and refunds.</span></a></div>''')
 page("stripe", "Back to FIG", "Setting up payouts with Stripe.", body='''<p class="doc-kicker">For restaurants</p><h1>Back to FIG to finish up.</h1>
 <p class="lead-p">Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.
 If Stripe still needs something, tap the button there again to pick up where you left off.</p>
-<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What FIG costs, and payments for orders ahead.</span></a></div>''')
+<div class="cards"><a class="card-l" href="/business-terms"><b>Business terms</b><span>What FIG costs, and payments for takeout orders.</span></a></div>''')
 page("premium-on", "Back to FIG", "FIG Premium.", body='''<p class="doc-kicker">FIG Premium</p><h1>Thanks. Head back to FIG.</h1>
 <p class="lead-p">If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium
 to see it, or to cancel or change your card later. Changed your mind before paying? Nothing was charged.</p>
@@ -375,16 +375,16 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on the bill. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on orders ahead diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on the bill. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); orders ahead paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
-- Order ahead: only with a deal that allows it; pay in the app and pick up at the counter; no delivery, and no fees for diners
+- Takeout: only with a deal that allows it; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages

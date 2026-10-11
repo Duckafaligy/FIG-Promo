@@ -21,18 +21,27 @@ const count = async (path) => (await rest(path + (path.includes("?") ? "&" : "?"
 const safe = (p, fallback) => p.catch(() => fallback);
 
 async function overview() {
-  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads] = await Promise.all([
+  const since = new Date(Date.now() - 30 * 86400000).toISOString();
+  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads, support, owners, changes, orders30, ordersOpen] = await Promise.all([
     safe(count("profiles?role=eq.diner"), null),
     safe(count("restaurants"), null),
     safe(count("restaurants?status=eq.approved"), null),
     safe(count("reports?status=eq.open"), null),
     safe(rest("restaurants?select=id,owner_id,name,cuisine,city,status,created_at&order=created_at.desc&limit=100"), { rows: [] }),
-    safe(rest("billing_accounts?select=owner_id,premium_until,premium_source&premium_until=not.is.null"), { rows: [] }),
+    safe(rest("billing_accounts?select=owner_id,premium_until,premium_source,comped,payments_demo,stripe_ready,stripe_payouts"), { rows: [] }),
     safe(rest("reports?select=id,reason,details,at,status&order=at.desc&limit=100"), { rows: [] }),
     safe(rest("waitlist?select=created_at,role,email,phone,restaurant,area,source&order=created_at.desc&limit=500"), { rows: [] }),
+    // what people wrote through "Message us" in the app and on the website (user 2026-10-11: nobody could read these)
+    safe(rest("support_messages?select=id,email,topic,body,at,status&order=at.desc&limit=200"), { rows: [] }),
+    safe(rest("profiles?select=id,email,name&role=eq.business&limit=500"), { rows: [] }),
+    // who a restaurant is changed (name, address) or handed to (the hand-over feature's record)
+    safe(rest("restaurant_changes?select=id,restaurant_id,kind,before,after,at&order=at.desc&limit=40"), { rows: [] }),
+    safe(count(`orders?placed_at=gte.${since}`), null),
+    safe(count("orders?status=in.(unpaid,sent,accepted,ready)"), null),
   ]);
   return {
-    counts: { diners, restaurants, live, reports },
+    counts: { diners, restaurants, live, reports, orders30, ordersOpen, support: support.rows.filter((m) => m.status === "open").length },
+    support: support.rows, owners: owners.rows, changes: changes.rows,
     ads: await safe(ads(), { campaigns: [], accounts: [], invoices: [] }), restaurants: recentR.rows, premium: premiumRows.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
@@ -67,6 +76,11 @@ async function setPremium(owner, years) {
   if (!(y >= 0 && y <= 5)) throw new Error("bad years");
   await rest("rpc/set_premium", { method: "POST", body: JSON.stringify({ p_owner: uuid(owner), p_until: y ? new Date(Date.now() + y * 365 * 86400000).toISOString() : null, p_source: "fig" }) });
 }
+// a message from the inbox: answered, or open again
+async function setSupport(id, status) {
+  if (!["open", "answered"].includes(status)) throw new Error("bad status");
+  await rest(`support_messages?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status }), headers: { Prefer: "return=minimal" } });
+}
 async function makeInvoices(month) {
   if (!/^\d{4}-\d{2}-01$/.test(String(month))) throw new Error("bad month");
   await rest("rpc/make_ad_invoices", { method: "POST", body: JSON.stringify({ p_month: month }) });
@@ -77,4 +91,4 @@ async function setInvoice(id, status) {
   await rest(`ad_invoices?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status, ...stamp }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, setCampaign, setAccount, setPremium, makeInvoices, setInvoice };
+module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, makeInvoices, setInvoice };

@@ -128,6 +128,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="overview" class="on">Overview</button>
       <button data-v="restaurants">Restaurants <span class="badge" id="n-restaurants">–</span></button>
       <button data-v="reports">Reports <span class="badge" id="n-reports">–</span></button>
+      <button data-v="messages">Messages <span class="badge" id="n-messages">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
       <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
@@ -139,7 +140,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
 <script>
 const $ = (s) => document.querySelector(s);
 const esc = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const ago = (t) => { const m = Math.round((Date.now() - Date.parse(t)) / 60000); return m < 60 ? m + " min ago" : m < 1440 ? Math.round(m / 60) + " h ago" : Math.round(m / 1440) + " days ago"; };
+const ago = (t) => { const m = Math.round((Date.now() - Date.parse(t)) / 60000); if (m < 1) return "just now"; if (m < 60) return m + " min ago"; if (m < 1440) return Math.round(m / 60) + " h ago"; const d = Math.round(m / 1440); return d === 1 ? "yesterday" : d + " days ago"; };
 const LAUNCH = Date.parse("2027-01-01T00:00:00-05:00");
 const days = Math.max(0, Math.ceil((LAUNCH - Date.now()) / 86400000));
 let D = null, view = "overview";
@@ -156,18 +157,38 @@ const statusPill = (s) => s === "approved" ? '<span class="pill g">Live</span>' 
 // a time on the order, in Ontario time ("Oct 6, 6:42 p.m.")
 const when = (t) => t ? new Date(t).toLocaleString("en-CA", { timeZone: "America/Toronto", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "";
 
+// who changed a restaurant's name or address, and who handed a restaurant to whom (kept by the database, 3 changes in 30 days at most)
+function changesTable() {
+  const name = (id) => ((D.restaurants || []).find((r) => r.id === id) || {}).name || "a restaurant";
+  const who = (id) => ((D.owners || []).find((o) => o.id === id) || {}).email || "someone";
+  const rows = (D.changes || []).map((c) => c.kind === "transfer"
+    ? ['<span class="pill">Handed over</span>', "<b>" + esc(name(c.restaurant_id)) + "</b>", esc(who(c.before.owner)) + " → " + esc(who(c.after.owner) || c.after.to_email || ""), ago(c.at)]
+    : ['<span class="pill">Details changed</span>', "<b>" + esc(name(c.restaurant_id)) + "</b>", esc([c.before.name !== c.after.name ? c.before.name + " → " + c.after.name : "", c.before.address !== c.after.address ? c.before.address + " → " + c.after.address : ""].filter(Boolean).join(" · ") || "location moved"), ago(c.at)]);
+  return "<h2>Handovers and name changes</h2>" + table(["What", "Restaurant", "Detail", "When"], rows, "None yet. Changes to a restaurant’s name or address, and hand-overs between owners, are recorded here.");
+}
+
 const VIEWS = {
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.reports, "Open reports", "red") + "</div>" +
+    '<div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
+    stat(D.counts.ordersOpen, "Orders open now") + stat(D.counts.support, "Messages to answer", D.counts.support ? "red" : "") + stat(D.counts.reports, "Open reports", D.counts.reports ? "red" : "") + "</div>" +
     "<h2>Latest restaurants</h2>" + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
   restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Every restaurant on FIG, newest first. A restaurant goes live when it finishes setup.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["Restaurant", "Cuisine", "City", "Status", "Joined", "FIG Premium"], D.restaurants.map((r) => {
-      // Premium ($50 a year) is per owner, for all their locations; the team can switch it on for a year, or off
-      const p = (D.premium || []).find((x) => x.owner_id === r.owner_id && new Date(x.premium_until) > new Date());
-      return ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at),
-        p ? '<span class="pill g">Until ' + esc(new Date(p.premium_until).toLocaleDateString("en-CA")) + '</span> <button class="link" data-prem="' + esc(r.owner_id) + '" data-years="0">Turn off</button>'
-          : '<button class="link" data-prem="' + esc(r.owner_id) + '" data-years="1">Give a year</button>'];
-    }), "No restaurants yet.")),
+    table(["Restaurant", "Owner", "City", "Status", "Joined", "Payments", "FIG Premium"], D.restaurants.map((r) => {
+      // Premium ($50 a year) is per owner, for all their locations; the team can switch it on for a year, or off. Some accounts
+      // are free forever ("comped": the founder's and Star Chef's) and run on pretend payments, so FIG never charges them.
+      const b = (D.premium || []).find((x) => x.owner_id === r.owner_id) || {};
+      const on = b.premium_until && new Date(b.premium_until) > new Date();
+      const owner = (D.owners || []).find((o) => o.id === r.owner_id) || {};
+      const pay = b.payments_demo ? '<span class="pill">Pretend</span>' : b.stripe_ready && b.stripe_payouts ? '<span class="pill g">Live, ready</span>' : b.stripe_ready ? '<span class="pill">Live, bank needed</span>' : '<span class="pill">Not set up</span>';
+      const prem = b.comped ? '<span class="pill g">Free forever</span>'
+        : on ? '<span class="pill g">Until ' + esc(new Date(b.premium_until).toLocaleDateString("en-CA")) + (b.premium_source === "stripe" ? " · Stripe" : "") + '</span> <button class="link" data-prem="' + esc(r.owner_id) + '" data-years="0" data-src="' + esc(b.premium_source || "") + '">Turn off</button>'
+          : '<button class="link" data-prem="' + esc(r.owner_id) + '" data-years="1">Give a year</button>';
+      return ["<b>" + esc(r.name) + '</b><br><span class="muted">' + esc(r.cuisine || "") + "</span>", esc(owner.name || "") + '<br><span class="muted">' + esc(owner.email || "") + "</span>", esc(r.city), statusPill(r.status), ago(r.created_at), pay, prem];
+    }), "No restaurants yet.") + changesTable()),
+  messages: () => '<h1>Messages</h1><p class="lead muted">What people wrote through “Message us” in the app and on the website. Reply by email, then mark it answered.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
+    table(["From", "About", "Message", "When", ""], (D.support || []).map((m) => [
+      '<a href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '"><b>' + esc(m.email) + "</b></a>", esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
+      m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here.")),
   reports: () => '<h1>Reports</h1><p class="lead muted">Visits diners or restaurants reported.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", esc(r.details), ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")),
   leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
@@ -180,7 +201,7 @@ const VIEWS = {
     const lastMonth = new Date(); lastMonth.setDate(1); lastMonth.setMonth(lastMonth.getMonth() - 1);
     const ym = (d) => d.toISOString().slice(0, 7) + "-01";
     const st = (s) => s === "active" ? '<span class="pill g">Running</span>' : s === "stopped" ? '<span class="pill r">Stopped</span>' : '<span class="pill">' + esc(s) + "</span>";
-    return '<h1>Ads</h1><p class="lead muted">Ad income (FIG Premium, $50 a year, is switched on under Restaurants). Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+    return '<h1>Ads</h1><div class="empty" style="margin-bottom:18px"><b>Ads are switched off in the app for now.</b> Diners see no sponsored spots and restaurants can’t start an ad. This page stays ready for when they come back.</div><p class="lead muted">Ad income (FIG Premium, $50 a year, is switched on under Restaurants). Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
       '<div class="stats">' + stat(live.length, "Ads running", "blue") + stat(m$(A.accounts.reduce((a, x) => a + Number(x.spent_month || 0), 0)), "Spent this month") + stat(A.invoices.filter((x) => x.status !== "paid" && x.status !== "void").length, "Invoices not paid", "red") + "</div>" +
       "<h2>Campaigns</h2>" + table(["Restaurant", "Ad", "Status", "Budget", "Views", "Taps", "Spent (month)", ""], A.campaigns.map((c) => [
         "<b>" + esc(c.restaurant) + '</b><br><span class="muted">' + esc(c.owner_email || "") + "</span>", esc(c.name) + '<br><span class="muted">' + esc(c.goal) + (c.note ? " · " + esc(c.note) : "") + "</span>", st(c.status),
@@ -206,11 +227,17 @@ function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
   $("#main").innerHTML = VIEWS[view]();
+  if (D.connected) {
+    const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
+    document.querySelectorAll("[data-prem]").forEach((b) => b.onclick = () => run("premium", { owner: b.dataset.prem, years: +b.dataset.years }, b.dataset.years === "0"
+      ? (b.dataset.src === "stripe" ? "This owner pays for FIG Premium through Stripe. Turning it off here ends it now, but their card will keep being charged until the subscription is cancelled in Stripe. Turn it off anyway?" : "Turn off FIG Premium for this owner (all their locations)?")
+      : "Switch on FIG Premium for a year for this owner (all their locations)?"));
+    document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
+  }
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));
     document.querySelectorAll("[data-run]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.run, stop: false }, "Let this ad run again?"));
-    document.querySelectorAll("[data-prem]").forEach((b) => b.onclick = () => run("premium", { owner: b.dataset.prem, years: +b.dataset.years }, b.dataset.years === "0" ? "Turn off FIG Premium for this owner (all their locations)?" : "Switch on FIG Premium for a year for this owner (all their locations)?"));
     document.querySelectorAll("[data-limit]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.limit, limit: +$("#al-" + b.dataset.limit).value }));
     document.querySelectorAll("[data-hold]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.hold, held: b.dataset.held === "1" }, b.dataset.held === "1" ? "Hold all of this owner’s ads?" : "Lift the hold? Their ads can run again."));
     document.querySelectorAll("[data-mk]").forEach((b) => b.onclick = () => run("ad-invoices", { month: b.dataset.mk }, "Make (or update) the invoices for this month? Sent and paid ones aren’t changed."));
@@ -220,7 +247,7 @@ function render() {
 async function load() {
   D = await api("data");
   const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
+  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-messages", D.counts.support); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };

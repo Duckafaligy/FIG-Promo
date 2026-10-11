@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
     if (action === "ad-campaign") { await db.setCampaign(body.id, !!body.stop, body.note); return send(res, 200, { ok: true }); }
     if (action === "ad-account") { await db.setAccount(body.owner, body.limit ?? null, body.held ?? null); return send(res, 200, { ok: true }); }
     if (action === "premium") { await db.setPremium(body.owner, body.years ?? 0); return send(res, 200, { ok: true }); }
+    if (action === "support") { await db.setSupport(body.id, body.status); return send(res, 200, { ok: true }); }
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
   } catch (e) {

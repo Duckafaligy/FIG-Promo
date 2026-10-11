@@ -1,6 +1,10 @@
 // node api/_lib/check.js  -- checks the admin lock schedule, cookie signing and password hashing
 const assert = require("assert");
 const crypto = require("crypto");
+// never the live database: on Vercel the build has its keys, and the lock is kept there (admin:<ip>), so test misses
+// would pile up across builds and lock the made-up test address for good (every deploy failed with 429, 2026-10-11)
+delete process.env.SUPABASE_URL;
+delete process.env.SUPABASE_SERVICE_ROLE_KEY;
 process.env.SESSION_SECRET = "test-secret";
 const salt = crypto.randomBytes(16);
 process.env.ADMIN_PASSWORD_HASH = "scrypt:" + salt.toString("hex") + ":" + crypto.scryptSync("right", salt, 32).toString("hex");

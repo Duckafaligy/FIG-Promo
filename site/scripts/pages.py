@@ -191,19 +191,19 @@ page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
 HELP = [
     ("diners", "For diners", [
         ("Is FIG free?", "Yes, completely. Deals are free to claim and use."),
-        ("How do I use a deal?", "Claim it in the app (we hold it for 24 hours), then show the QR code at the counter when you order. Staff scan it, or type the 8 characters under it."),
+        ("How do I use a deal?", "Claim it in the app. It waits in your Voucher tab for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it."),
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
-        ("What do I pay?", "Just your bill, at the restaurant, like normal. FIG never takes payment for food."),
+        ("What do I pay?", "Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything."),
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
         ("Do restaurants see my phone number?", "Never. Chats and takeout orders go through the app and your number stays private."),
-        ("Can I takeout?", "Yes, with a deal that allows it. Tap Takeout on the deal, add what you want, watch it get made, and pick it up. FIG is a deals app, so takeout always comes with a deal."),
+        ("Can I order takeout?", "Yes, with a deal that allows it. Tap Takeout on the deal, add what you want, watch it get made, and pick it up. FIG is a deals app, so takeout always comes with a deal."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
         ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on the bill. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
         ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
-        ("How do I post a deal?", "In the app, open Deals and tap New. Pick the type, the days and hours, who it's for and an optional daily cap. You can pause it anytime."),
+        ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
         ("Can diners order takeout?", "Yes, with your deals. Add your menu (you can read it from a photo or a link), turn on takeout, and choose which deals allow it. You scan their pickup code when they collect."),
         ("How do I stop?", "There's nothing to cancel. Pause your deals, or close your account in Settings anytime."),

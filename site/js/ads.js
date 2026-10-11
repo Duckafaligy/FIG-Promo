@@ -6,6 +6,7 @@
 (() => {
   const cfg = window.FIG_ADS || {};
   const app = document.getElementById("app");
+  if (cfg.off) { app.innerHTML = '<div class="boot"><h1 style="margin:0 0 8px">Ads are off for now</h1><p>FIG isn’t running ads yet. Your page, deals and scans are free; <a href="/#owners">see how FIG works for restaurants</a>.</p></div>'; return; }
   if (!cfg.url || !window.supabase) { app.innerHTML = '<p class="boot">The Ads Manager can’t load right now. Try again in a minute.</p>'; return; }
   const db = window.supabase.createClient(cfg.url, cfg.key, { auth: { persistSession: true, storageKey: "fig-ads" } });
 

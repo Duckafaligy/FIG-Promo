@@ -183,11 +183,11 @@ const VIEWS = {
       const prem = b.comped ? '<span class="pill g">Free forever</span>'
         : on ? '<span class="pill g">Until ' + esc(new Date(b.premium_until).toLocaleDateString("en-CA")) + (b.premium_source === "stripe" ? " · Stripe" : "") + '</span> <button class="link" data-prem="' + esc(r.owner_id) + '" data-years="0" data-src="' + esc(b.premium_source || "") + '">Turn off</button>'
           : '<button class="link" data-prem="' + esc(r.owner_id) + '" data-years="1">Give a year</button>';
-      return ["<b>" + esc(r.name) + '</b><br><span class="muted">' + esc(r.cuisine || "") + "</span>", esc(owner.name || "") + '<br><span class="muted">' + esc(owner.email || "") + "</span>", esc(r.city), statusPill(r.status), ago(r.created_at), pay, prem];
+      return ["<b>" + esc(r.name) + '</b><br><span class="muted">' + esc(r.cuisine || "") + "</span>", esc(owner.name || "") + '<br><span class="muted">' + esc(owner.email || "") + '</span><br><button class="link" data-2fa="' + esc(r.owner_id) + '">Turn off two-step login</button>', esc(r.city), statusPill(r.status), ago(r.created_at), pay, prem];
     }), "No restaurants yet.") + changesTable()),
   messages: () => '<h1>Messages</h1><p class="lead muted">What people wrote through “Message us” in the app and on the website. Reply by email, then mark it answered.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["From", "About", "Message", "When", ""], (D.support || []).map((m) => [
-      '<a href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '"><b>' + esc(m.email) + "</b></a>", esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
+      '<a href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '"><b>' + esc(m.email) + '</b></a><br><button class="link" data-2fa-email="' + esc(m.email) + '">Turn off two-step login</button>', esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
       m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here.")),
   reports: () => '<h1>Reports</h1><p class="lead muted">Visits diners or restaurants reported.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", esc(r.details), ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")),
@@ -232,6 +232,11 @@ function render() {
     document.querySelectorAll("[data-prem]").forEach((b) => b.onclick = () => run("premium", { owner: b.dataset.prem, years: +b.dataset.years }, b.dataset.years === "0"
       ? (b.dataset.src === "stripe" ? "This owner pays for FIG Premium through Stripe. Turning it off here ends it now, but their card will keep being charged until the subscription is cancelled in Stripe. Turn it off anyway?" : "Turn off FIG Premium for this owner (all their locations)?")
       : "Switch on FIG Premium for a year for this owner (all their locations)?"));
+    document.querySelectorAll("[data-2fa],[data-2fa-email]").forEach((b) => b.onclick = async () => {
+      if (!confirm("Turn off two-step login for this person? Only after checking it is really them: they write from the account's email and know the phone number on it. They then sign in with their password alone, and can switch two-step login back on.")) return;
+      const r = await api("two-step-off", b.dataset["2fa"] ? { id: b.dataset["2fa"] } : { email: b.dataset["2faEmail"] });
+      alert(r.error || (r.found === false ? "No FIG account has that email." : r.removed ? r.removed + " authenticator(s) removed. They can sign in with the password now." : "That account had no two-step login to remove."));
+    });
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
   if (view === "ads" && D.connected) {

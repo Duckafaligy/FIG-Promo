@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|ad-invoices|ad-invoice  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
 
@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
     if (action === "ad-account") { await db.setAccount(body.owner, body.limit ?? null, body.held ?? null); return send(res, 200, { ok: true }); }
     if (action === "premium") { await db.setPremium(body.owner, body.years ?? 0); return send(res, 200, { ok: true }); }
     if (action === "support") { await db.setSupport(body.id, body.status); return send(res, 200, { ok: true }); }
+    if (action === "two-step-off") return send(res, 200, { ok: true, ...(await db.twoStepOff({ id: body.id, email: body.email })) });
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
   } catch (e) {

@@ -81,6 +81,26 @@ async function setSupport(id, status) {
   if (!["open", "answered"].includes(status)) throw new Error("bad status");
   await rest(`support_messages?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status }), headers: { Prefer: "return=minimal" } });
 }
+// Someone lost the phone with their authenticator app and wrote to FIG (check it's really them first: they write from the
+// account's email and know the phone number on it). Removes their authenticators, so they sign in with the password alone
+// and can switch two-step login on again. By account id, or by email (looked up in profiles).
+async function twoStepOff({ id, email }) {
+  let uid = id ? uuid(id) : null;
+  if (!uid) {
+    const e = String(email || "").trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+$/.test(e)) throw new Error("bad email");
+    uid = (await rest(`profiles?select=id&email=eq.${encodeURIComponent(e)}&limit=1`)).rows[0]?.id;
+    if (!uid) return { found: false, removed: 0 };
+  }
+  const auth = (method, path) => fetch(`${url()}/auth/v1/admin/users/${uid}/${path}`, { method, headers: { apikey: key(), Authorization: `Bearer ${key()}` } });
+  const list = await auth("GET", "factors");
+  if (!list.ok) throw new Error("factors " + list.status);
+  const body = await list.json();
+  const factors = Array.isArray(body) ? body : body.factors || [];
+  for (const f of factors) { const d = await auth("DELETE", `factors/${uuid(f.id)}`); if (!d.ok) throw new Error("factor " + d.status); }
+  console.log("admin: two-step login turned off for", uid, "authenticators:", factors.length); // the id only, never the email
+  return { found: true, removed: factors.length };
+}
 async function makeInvoices(month) {
   if (!/^\d{4}-\d{2}-01$/.test(String(month))) throw new Error("bad month");
   await rest("rpc/make_ad_invoices", { method: "POST", body: JSON.stringify({ p_month: month }) });
@@ -91,4 +111,4 @@ async function setInvoice(id, status) {
   await rest(`ad_invoices?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status, ...stamp }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, makeInvoices, setInvoice };
+module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice };

@@ -468,14 +468,14 @@
         <div class="stat"><span>Monthly limit</span><b>${a ? money(a.monthly_limit) : "—"}</b><em style="color:var(--slate)">ads pause when it’s reached</em></div>
         <div class="stat"><span>Account</span><b style="font-size:22px">${a ? (a.status === "held" ? "On hold" : "In good standing") : "Opens with your first ad"}</b></div>
       </div>
-      ${a ? `<div class="card grey" style="margin-bottom:16px"><div class="bar"><i style="width:${clamp((month / Math.max(1, a.monthly_limit)) * 100, 1, 100)}%"></i></div><p class="muted small" style="margin-top:8px">${money(month)} of ${money(a.monthly_limit)} this month. Need a higher limit? Email <a href="mailto:business@fig.app?subject=Ads%20limit">business@fig.app</a>.</p></div>` : ""}
+      ${a ? `<div class="card grey" style="margin-bottom:16px"><div class="bar"><i style="width:${clamp((month / Math.max(1, a.monthly_limit)) * 100, 1, 100)}%"></i></div><p class="muted small" style="margin-top:8px">${money(month)} of ${money(a.monthly_limit)} this month. Need a higher limit? <a href="/contact">Message us</a>.</p></div>` : ""}
       <h2 style="margin:24px 0 12px">Invoices</h2>
       ${S.invoices.length ? `<div class="tblwrap"><table class="tbl"><tr><th>Month</th><th>Amount</th><th>Status</th></tr>${S.invoices.map((x) => `<tr><td>${new Date(x.month + "T12:00:00").toLocaleDateString("en-CA", { month: "long", year: "numeric" })}</td><td><b>${money(x.amount)}</b></td><td><span class="tag ${x.status === "paid" ? "live" : x.status === "sent" ? "blue" : ""}">${{ open: "Being prepared", sent: "Sent", paid: "Paid", void: "Cancelled" }[x.status]}</span></td></tr>`).join("")}</table></div>`
         : `<div class="empty"><h3>No invoices yet</h3><p>Your first one arrives at the start of the month after your ads get taps.</p></div>`}
       <div class="card" style="margin-top:16px"><h3>How billing works</h3><ul class="muted" style="margin:10px 0 0;padding-left:18px;line-height:1.7">
         <li>You pay only for taps, at most your daily budget per ad, and never past your monthly limit.</li>
         <li>A diner tapping the same ad twice in a day is charged once.</li>
-        <li>The FIG team emails your invoice at the start of each month with how to pay. Questions: <a href="mailto:business@fig.app">business@fig.app</a>.</li>
+        <li>The FIG team emails your invoice at the start of each month with how to pay. Questions? <a href="/contact">Message us</a>.</li>
         <li>Listing, deals, scans, takeout and chats stay free.</li></ul></div>`);
     wire();
   }

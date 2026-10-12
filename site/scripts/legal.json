@@ -1,7 +1,7 @@
 {
  "terms": {
   "title": "Terms of service",
-  "updated": "Last updated October 10, 2026",
+  "updated": "Last updated October 11, 2026",
   "short": [
    "FIG is free for you, and FIG doesn't show ads.",
    "A deal counts once staff scan your QR at the restaurant.",
@@ -86,12 +86,11 @@
    }
   ],
   "contactAsk": "Questions about these terms?",
-  "contactLine": "legal@fig.app · FIG Technologies Inc., Markham, Ontario",
-  "email": "legal@fig.app"
+  "contactLine": "FIG Technologies Inc., Markham, Ontario"
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 10, 2026",
+  "updated": "Last updated October 11, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -103,7 +102,7 @@
    {
     "heading": "1. Who's responsible",
     "paragraphs": [
-     "FIG Technologies Inc. in Ontario, Canada is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions at privacy@fig.app."
+     "FIG Technologies Inc. in Ontario, Canada is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions sent with Message us in the app, or from the contact page at fig-promo.vercel.app/contact."
     ]
    },
    {
@@ -114,6 +113,8 @@
      "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
      "• Activity: claims, verified visits, searches, takeout orders, chat messages, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
+     "• Terms: which version of our terms you accepted, and when.",
+     "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
      "• Support: messages and reports you send us."
     ]
    },
@@ -149,6 +150,7 @@
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
+     "• Twilio: text messages, like the codes that confirm your mobile number or sign you in",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },
@@ -161,7 +163,7 @@
    {
     "heading": "8. How long we keep it",
     "paragraphs": [
-     "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days. Redemption records are kept without your name for up to 7 years, because restaurants are billed for them and tax law requires it."
+     "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days. We keep nightly backup copies for up to 30 days, so it's gone from those within 30 days too. Redemption records are kept without your name for up to 7 years, because restaurants are billed for them and tax law requires it."
     ]
    },
    {
@@ -177,7 +179,7 @@
    {
     "heading": "10. Keeping it safe",
     "paragraphs": [
-     "We encrypt data in transit, scramble passwords and limit who on our team can access data. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
+     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step login, so signing in also needs a code from an authenticator app. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
     ]
    },
    {
@@ -194,12 +196,11 @@
    }
   ],
   "contactAsk": "Questions about your privacy?",
-  "contactLine": "privacy@fig.app · Privacy Officer, FIG Technologies Inc., Markham, Ontario",
-  "email": "privacy@fig.app"
+  "contactLine": "Privacy Officer, FIG Technologies Inc., Markham, Ontario"
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 10, 2026",
+  "updated": "Last updated October 11, 2026",
   "short": [
    "FIG is free: joining, your page, deals, scans and chats. No commission on the bill.",
    "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
@@ -285,7 +286,6 @@
    }
   ],
   "contactAsk": "Questions about these terms?",
-  "contactLine": "business@fig.app · FIG Technologies Inc., Markham, Ontario",
-  "email": "business@fig.app"
+  "contactLine": "FIG Technologies Inc., Markham, Ontario"
  }
 }

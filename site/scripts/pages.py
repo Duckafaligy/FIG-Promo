@@ -152,7 +152,7 @@ def legal(slug, doc, extra=""):
 <h1>{e(doc["title"])}</h1>
 <div class="doc-short"><h2>The short version</h2><ul>{short}</ul></div>
 {secs}{extra}
-<p class="doc-contact">{e(doc["contactAsk"])} <a href="mailto:{e(doc["email"])}">{e(doc["email"])}</a><br><span>{e(doc["contactLine"])}</span></p>'''
+<p class="doc-contact">{e(doc["contactAsk"])} <a href="/contact">Message us</a><br><span>{e(doc["contactLine"])}</span></p>'''
     page(slug, doc["title"], doc["short"][0], body, group="Legal")
 
 
@@ -178,15 +178,26 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
                     "mainEntity": {"@type": "Organization", "name": "FIG Technologies Inc.", "url": SITE_URL, "foundingLocation": "Markham, Ontario",
                                    "areaServed": ["Markham, Ontario"], "description": "FIG is a restaurant deals app for Markham, Ontario."}}) + faq_ld(ABOUT_FAQ))
 
-page("contact", "Contact", "Get in touch with FIG.", '''<h1>Contact</h1>
-<p class="lead-p">A real person reads every message.</p>
+# a real inbox (user 2026-10-11): the @fig.app addresses never existed. The form goes to support_messages through
+# contact_fig (limited per address and per network), the same inbox as Message us in the app; the admin site shows it.
+page("contact", "Contact", "Message the FIG team. A real person reads every message.", '''<h1>Contact</h1>
+<p class="lead-p">A real person reads every message and replies by email, usually within 24 hours.</p>
+<form class="contact" novalidate>
+<label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+<label class="ct-field"><span>What's it about?</span><select name="topic">
+<option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
+</select></label>
+<label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Send message</button>
+<p class="form-msg" role="status" aria-live="polite"></p>
+</form>
 <div class="cards">
-<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, deals, scanning and Premium.</span><em>business@fig.app</em></a>
-<a class="card-l" href="mailto:privacy@fig.app"><b>Privacy</b><span>See or delete what we hold about you.</span><em>privacy@fig.app</em></a>
-<a class="card-l" href="mailto:legal@fig.app"><b>Legal</b><span>Terms and anything official.</span><em>legal@fig.app</em></a>
 <a class="card-l" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
+<div class="card-l"><b>In the app</b><span>Profile, then Help, then Message us. Restaurants: Settings, then Help for restaurants.</span><em>Same inbox</em></div>
 </div>
-<p>In the app, you can also message us from Profile, then Help, then Message us. We reply within 24 hours.</p>''')
+<script src="/js/config.js"></script>
+<script src="/js/contact-form.js" defer></script>''')
 
 HELP = [
     ("diners", "For diners", [

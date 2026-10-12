@@ -864,3 +864,14 @@ p.consent { cursor: default; padding-left: 22px; }
 .boostcard .bc-g { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .boostcard .bc-g p { margin: 0; padding: 10px 12px; background: #EFF1F4; border-radius: 12px; display: grid; }
 .boostcard .bc-g b { font-size: 22px; font-weight: 800; } .boostcard .bc-g span { color: #5C6470; font-size: 12px; }
+
+/* contact form */
+.contact { display: grid; gap: 16px; margin: 30px 0 10px; padding: 26px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
+.ct-field { display: grid; gap: 8px; font-size: 14px; font-weight: 700; color: var(--soft); }
+.ct-field input, .ct-field select, .ct-field textarea { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font: inherit; font-size: 16px; font-weight: 500; outline: none; transition: border-color .2s, box-shadow .3s; }
+.ct-field textarea { resize: vertical; min-height: 140px; line-height: 1.5; }
+.ct-field :focus { border-color: var(--cobalt); box-shadow: 0 0 0 4px rgba(30, 94, 255, .18); }
+.ct-field [aria-invalid=true] { border-color: #FF8A8E; }
+.contact .btn { justify-self: start; }
+.contact .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 520px) { .contact { padding: 18px; } .contact .btn { justify-self: stretch; } }

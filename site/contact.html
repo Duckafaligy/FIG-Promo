@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Contact · FIG</title>
-  <meta name="description" content="Get in touch with FIG.">
+  <meta name="description" content="Message the FIG team. A real person reads every message.">
   <meta name="keywords" content="FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#FFFFFF">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="FIG">
   <meta property="og:url" content="https://fig-promo.vercel.app/contact">
   <meta property="og:title" content="Contact · FIG">
-  <meta property="og:description" content="Get in touch with FIG.">
+  <meta property="og:description" content="Message the FIG team. A real person reads every message.">
   <meta property="og:image" content="https://fig-promo.vercel.app/assets/og.png">
   <link rel="alternate" type="application/rss+xml" title="The FIG blog" href="/feed.xml">
   <meta name="twitter:card" content="summary_large_image">
@@ -40,14 +40,23 @@
 </header>
 <main class="wrap doc">
 <h1>Contact</h1>
-<p class="lead-p">A real person reads every message.</p>
+<p class="lead-p">A real person reads every message and replies by email, usually within 24 hours.</p>
+<form class="contact" novalidate>
+<label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+<label class="ct-field"><span>What's it about?</span><select name="topic">
+<option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
+</select></label>
+<label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Send message</button>
+<p class="form-msg" role="status" aria-live="polite"></p>
+</form>
 <div class="cards">
-<a class="card-l" href="mailto:business@fig.app"><b>Restaurants</b><span>Getting set up, deals, scanning and Premium.</span><em>business@fig.app</em></a>
-<a class="card-l" href="mailto:privacy@fig.app"><b>Privacy</b><span>See or delete what we hold about you.</span><em>privacy@fig.app</em></a>
-<a class="card-l" href="mailto:legal@fig.app"><b>Legal</b><span>Terms and anything official.</span><em>legal@fig.app</em></a>
 <a class="card-l" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
+<div class="card-l"><b>In the app</b><span>Profile, then Help, then Message us. Restaurants: Settings, then Help for restaurants.</span><em>Same inbox</em></div>
 </div>
-<p>In the app, you can also message us from Profile, then Help, then Message us. We reply within 24 hours.</p>
+<script src="/js/config.js"></script>
+<script src="/js/contact-form.js" defer></script>
 </main>
 <footer class="foot">
   <div class="wrap">

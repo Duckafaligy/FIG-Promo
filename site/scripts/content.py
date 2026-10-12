@@ -184,7 +184,7 @@ POSTS = [
          keywords="takeout deals Markham, pickup deals, no delivery fees, takeout pickup Markham",
          points=["Tap Takeout on a deal that allows it, add what you want, and pick it up.",
                  "No delivery fee and no service fee from FIG.",
-                 "Takeout always comes with a deal: FIG is a deals app, and it doesn’t deliver."],
+                 "Some restaurants also take takeout at full price, with no deal needed. FIG doesn’t deliver."],
          sections=[
              ("How it works", "<p>Find a deal marked Dine in or takeout and tap Takeout. The menu opens with the deal applied; add what you want. The restaurant accepts it and you can watch its status: new, cooking, ready. Head over, show your pickup code and go.</p>"),
              ("Why pickup is cheaper", "<p>There's no driver, so there's no delivery fee, and FIG doesn't add a service fee. You pay the menu price, minus the deal.</p>"),

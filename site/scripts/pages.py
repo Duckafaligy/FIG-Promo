@@ -207,7 +207,7 @@ HELP = [
         ("What do I pay?", "Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything."),
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
         ("Do restaurants see my phone number?", "Never. Chats and takeout orders go through the app and your number stays private."),
-        ("Can I order takeout?", "Yes, with a deal that allows it. Tap Takeout on the deal, add what you want, watch it get made, and pick it up. FIG is a deals app, so takeout always comes with a deal."),
+        ("Can I order takeout?", "Yes. Tap Takeout on a deal that allows it, add what you want, watch it get made, and pick it up. Some restaurants also take takeout at full price: tap Order takeout on their page. FIG doesn't deliver."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
@@ -216,7 +216,7 @@ HELP = [
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
-        ("Can diners order takeout?", "Yes, with your deals. Add your menu (you can read it from a photo or a link), turn on takeout, and choose which deals allow it. You scan their pickup code when they collect."),
+        ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect."),
         ("How do I stop?", "There's nothing to cancel. Pause your deals, or close your account in Settings anytime."),
     ]),
 ]
@@ -395,7 +395,7 @@ LLMS = f"""# FIG
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
-- Takeout: only with a deal that allows it; pay in the app and pick up at the counter; no delivery, and no fees for diners
+- Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages

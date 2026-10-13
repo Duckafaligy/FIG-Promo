@@ -887,7 +887,6 @@ p.consent { cursor: default; padding-left: 22px; }
 :root { --ice: #EEF3FF; --ice-line: #DCE4F7; --ink: #0A1020; }
 .hero-phone { display: none; }
 @media (min-width: 1100px) {
-  .hero-phone { display: block; position: absolute; z-index: 1; right: max(var(--gutter), calc((100vw - var(--max)) / 2)); top: 50%; width: 320px; transform: translateY(-46%); }
   .hero-phone .phone { padding: 9px; border-radius: 50px; }
   .hero-phone .phone img { border-radius: 42px; }
   .hp-sticker { position: absolute; display: flex; align-items: center; gap: 10px; border-radius: 20px; box-shadow: 0 18px 40px rgba(10, 16, 32, .16); font-weight: 800; color: var(--ink); white-space: nowrap; }
@@ -1041,11 +1040,18 @@ p.consent { cursor: default; padding-left: 22px; }
 .motion .hp-cycle img:nth-child(4) { animation-delay: 10.5s; }
 @keyframes hpCycle { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 4%, 25% { opacity: 1; transform: none; } 29%, 100% { opacity: 0; transform: translateY(-8px) scale(.99); } }
 
-/* phones/tablets: the app phone sits under the hero buttons (no stickers) */
-@media (max-width: 1099px) {
+/* tablets in landscape, small laptops and up: the phone sits on the map beside the headline, sized to the VISIBLE height
+   below the navbar (svh: Safari's toolbars never clip it), so it never slides under the navbar and the map shows around it */
+@media (min-width: 980px) {
+  .hero-phone { display: block; position: absolute; z-index: 1; right: max(var(--gutter), calc((100vw - var(--max)) / 2)); top: calc(50% + 39px); transform: translateY(-50%);
+                width: clamp(200px, min(calc((100svh - 150px) / 2.17), calc(100vw - 620px - 3 * var(--gutter))), 320px); }
+}
+@media (max-width: 1099px) { .hp-sticker { display: none; } }
+/* phones/tablets in portrait: the app phone sits under the hero buttons (no stickers) */
+@media (max-width: 979px) {
   .hero { flex-direction: column; align-items: stretch; }
   .hero-copy { padding-bottom: 36px; }
-  .hero-phone { display: block; position: relative; z-index: 1; width: min(270px, 68vw); margin: 0 auto 56px; }
+  .hero-phone { display: block; position: relative; z-index: 1; width: min(270px, 68vw, calc((100svh - 150px) / 2.17)); margin: 0 auto 56px; }
   .hero-phone .phone { padding: 7px; border-radius: 40px; }
   .hero-phone .phone img { border-radius: 33px; }
   .hp-cycle img + img { top: 7px; left: 7px; width: calc(100% - 14px); }
@@ -1099,3 +1105,20 @@ p.consent { cursor: default; padding-left: 22px; }
 .qa[open] summary::after { content: ""; background: var(--cobalt) linear-gradient(#fff, #fff) center / 12px 2px no-repeat; }
 .qa[open] summary::before { transform: rotate(90deg); opacity: 0; }
 .qa summary:focus-visible { outline: 3px solid var(--volt); outline-offset: 2px; border-radius: 10px; }
+
+/* ---------- a loop whose autoplay was refused (Low Power Mode, data saver): one tap plays it ---------- */
+.vplay { position: absolute; z-index: 2; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; display: grid; place-items: center; padding: 0 0 0 3px;
+         border: 0; border-radius: 50%; background: rgba(10, 16, 32, .72); color: #fff; cursor: pointer; box-shadow: 0 10px 30px rgba(10, 16, 32, .3); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.vplay:hover { background: var(--cobalt); }
+.vplay:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+.cell.mini .vplay { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
+
+/* tablets in portrait: the map runs behind the phone too (a white band only behind the headline), so both show */
+@media (min-width: 600px) and (max-width: 979px) {
+  .hero-copy { z-index: 1; padding-top: calc(10svh + 90px); }
+  .hero-copy::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
+                       background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .94) 140px, rgba(255, 255, 255, .94) calc(100% - 50px), rgba(255, 255, 255, 0)); }
+  .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 90px, rgba(255, 255, 255, 0) calc(100% - 90px), #fff 100%); }
+  .hero-phone { margin-bottom: 64px; }
+}
+@media (min-width: 1100px) and (max-width: 1299px) { .hp-sticker.saved { right: -8px; } }

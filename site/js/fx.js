@@ -3,12 +3,22 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // video loops: phones in Low Power Mode or data saver refuse to autoplay, so retry on the first touch
+  // video loops: phones in Low Power Mode or data saver refuse to autoplay (and a scroll isn't a tap), so retry on the
+  // first tap and show a play button on each refused loop so it never just sits on its poster
   const blocked = new Set();
+  const playBtn = (v) => {
+    if (v.nextElementSibling?.classList.contains("vplay")) return;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "vplay"; b.setAttribute("aria-label", "Play video");
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+    b.addEventListener("click", (e) => { e.stopPropagation(); window.figPlay(v); });
+    v.after(b);
+  };
   window.figPlay = (v) => {
     v.muted = true; v.playsInline = true; v.autoplay = true;
     const p = v.play();
-    if (p) p.then(() => blocked.delete(v)).catch(() => blocked.add(v));
+    if (p) p.then(() => { blocked.delete(v); v.nextElementSibling?.classList.contains("vplay") && v.nextElementSibling.remove(); })
+      .catch(() => { blocked.add(v); playBtn(v); });
   };
   const retry = () => blocked.forEach((v) => {
     const r = v.getBoundingClientRect();

@@ -43,9 +43,6 @@
 /* ---------- Help: diners on white, restaurants on ice ---------- */
 .faq-head .pg-eye { margin-bottom: 14px; }
 .faq-head .side { margin-top: 14px; color: var(--muted); font-size: 17px; }
-/* site.css's older ".faq details" rules (padding, a turned "+") don't apply to these accordions */
-.faq-list details.qa { padding: 0; }
-.faq-list details.qa[open] summary::after { transform: none; }
 .section.ice .qa summary::after { background: #fff; }
 .section.ice .qa[open] summary::after { background: var(--cobalt); }
 .section.ice .faq-list, .section.ice .qa { border-color: var(--ice-line); }

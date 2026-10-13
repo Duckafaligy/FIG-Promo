@@ -482,10 +482,10 @@ button, input { font: inherit; color: inherit; }
 .card-l { display: grid; gap: 6px; padding: 22px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .25s, transform .3s var(--ease); }
 .card-l:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .card-l b { color: #fff; font-size: 18px; } .card-l span { color: var(--muted); } .card-l em { font-style: normal; color: var(--cobalt-2); font-weight: 700; }
-.faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+.faq details:not(.qa) { border-bottom: 1px solid var(--line); padding: 16px 0; }
 .faq summary { cursor: pointer; font-weight: 700; font-size: 17px; color: #fff; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
-.faq summary::after { content: "+"; color: var(--cobalt-2); font-size: 22px; line-height: 1; transition: transform .25s; }
-.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details:not(.qa) summary::after { content: "+"; color: var(--cobalt-2); font-size: 22px; line-height: 1; transition: transform .25s; }
+.faq details:not(.qa)[open] summary::after { transform: rotate(45deg); }
 .faq details p { margin: 10px 0 0; }
 .posts { display: grid; gap: 14px; margin-top: 30px; }
 .post-card { display: grid; gap: 8px; padding: 24px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .25s, transform .3s var(--ease); }

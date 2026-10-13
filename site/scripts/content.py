@@ -16,7 +16,7 @@ ABOUT_FAQ = [
 ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <h2 class="h2">FIG at a glance</h2>
 <dl class="ab-dl">
-<div><dt>What</dt><dd>A mobile app (iPhone, Android and the web) for finding and using deals at local restaurants.</dd></div>
+<div><dt>What</dt><dd>An app for finding and using deals at local restaurants. Use it on the web today; iPhone and Android apps are coming soon.</dd></div>
 <div><dt>Where</dt><dd>Launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</dd></div>
 <div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
 <div><dt>For restaurants</dt><dd>Free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</dd></div>

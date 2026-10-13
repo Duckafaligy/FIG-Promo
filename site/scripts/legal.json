@@ -11,7 +11,7 @@
    {
     "heading": "1. Who we are",
     "paragraphs": [
-     "FIG is a local deals app run by FIG Technologies Inc. in Ontario, Canada (\"FIG\", \"we\", \"us\"). These terms cover the FIG app and website. By creating an account, you agree to them and to our Privacy Policy."
+     "FIG is a local deals app based in Markham, Ontario, Canada (\"FIG\", \"we\", \"us\"). These terms cover the FIG app and website. By creating an account, you agree to them and to our Privacy Policy."
     ]
    },
    {
@@ -86,7 +86,7 @@
    }
   ],
   "contactAsk": "Questions about these terms?",
-  "contactLine": "FIG Technologies Inc., Markham, Ontario"
+  "contactLine": "FIG, Markham, Ontario"
  },
  "privacy": {
   "title": "Privacy policy",
@@ -102,7 +102,7 @@
    {
     "heading": "1. Who's responsible",
     "paragraphs": [
-     "FIG Technologies Inc. in Ontario, Canada is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions sent with Message us in the app, or from the contact page at fig-promo.vercel.app/contact."
+     "FIG, based in Markham, Ontario, Canada, is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions sent with Message us in the app, or from the contact page at fig-promo.vercel.app/contact."
     ]
    },
    {
@@ -196,7 +196,7 @@
    }
   ],
   "contactAsk": "Questions about your privacy?",
-  "contactLine": "Privacy Officer, FIG Technologies Inc., Markham, Ontario"
+  "contactLine": "Privacy Officer, FIG, Markham, Ontario"
  },
  "business-terms": {
   "title": "Business terms",
@@ -286,6 +286,6 @@
    }
   ],
   "contactAsk": "Questions about these terms?",
-  "contactLine": "FIG Technologies Inc., Markham, Ontario"
+  "contactLine": "FIG, Markham, Ontario"
  }
 }

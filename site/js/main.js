@@ -153,6 +153,9 @@
     } else v.pause();
   }), { threshold: 0.35 });
   $$("video[data-src]").forEach((v) => vio.observe(v));
+  // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
+  const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
+  $$("video[data-poster]").forEach((v) => pio.observe(v));
 
 
   // ---------- what's the catch: the tutorial video (diner or restaurant), nothing else ----------

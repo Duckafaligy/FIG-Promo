@@ -8,3 +8,8 @@
   --w-shadow-card: 0 14px 34px rgba(10, 16, 32, .10); --w-shadow-float: 0 24px 50px rgba(10, 16, 32, .16); --w-shadow-button: 0 12px 28px rgba(30, 94, 255, .32);
   --w-max: 1200px; --w-gutter: 24px; --w-nav: 68px;
 }
+:root {
+  --w-sidebar: 264px; --w-sidebar-collapsed: 76px; --w-panel: 400px; --w-rail: 360px;
+  --w-page: #FFFFFF; --w-soft: #F6F8FD; --w-card: #FFFFFF; --w-night: #0A1020; --w-night-card: #141A2B; --w-night-line: #252E44; --w-night-text: #F4F6FB; --w-night-muted: #A3ADBF;
+  --w-e1: 0 1px 2px rgba(10, 16, 32, .06), 0 2px 8px rgba(10, 16, 32, .05); --w-e2: 0 14px 34px rgba(10, 16, 32, .10); --w-e3: 0 24px 50px rgba(10, 16, 32, .16);
+}

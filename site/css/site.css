@@ -1141,3 +1141,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .nav-menu { width: 40px; height: 40px; }
 @media (max-width: 1099px), (pointer: coarse) { .nav-get { min-height: 44px; height: 44px; } .nav-menu { width: 44px; height: 44px; } }
 @media (max-width: 899px) { .nav { height: 60px; padding-left: 10px; } .nav .brand .logo { width: 30px; height: 30px; } }
+/* footer: the logo mark only, like the navbar (user 2026-10-13) */
+.foot .brand { position: relative; }
+.foot .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } /* still names the link */
+.foot .brand .logo { width: 40px; height: 40px; }

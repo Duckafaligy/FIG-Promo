@@ -140,11 +140,11 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 slug_id = lambda h: re.sub(r"[^a-z0-9]+", "-", h.lower()).strip("-")
 
 
-def hero(eye, title, lead="", side="", cls=""):
-    """A page's top: the eyebrow (a green dot and a cobalt label), a big title, a line under it, and something on the right."""
+def hero(title, lead="", side="", cls=""):
+    """A page's top: a big title, a line under it, and something on the right (no eyebrow label: the user had those removed, 2026-10-04)."""
     lead = f'<p class="pg-lead">{lead}</p>' if lead else ""
     return f'''<section class="pg-hero{" " + cls if cls else ""}"><div class="wrap pg-hero-in">
-<div class="pg-hero-text"><p class="pg-eye">{eye}</p><h1 class="pg-h1">{title}</h1>{lead}</div>{side}
+<div class="pg-hero-text"><h1 class="pg-h1">{title}</h1>{lead}</div>{side}
 </div></section>'''
 
 
@@ -152,11 +152,11 @@ def qa_list(qs, open_first=0):
     return '<div class="faq-list">' + "".join(f'<details class="qa"{" open" if k < open_first else ""}><summary>{e(q)}</summary><p>{e(a)}</p></details>' for k, (q, a) in enumerate(qs)) + "</div>"
 
 
-def back_to_fig(eye, title, lead, note, second, icon="✓", cls=""):
+def back_to_fig(title, lead, note, second, icon="✓", cls=""):
     """Where Stripe sends people back (and Ads off): one card over the faded map, Open FIG and one more link."""
     return f'''<section class="st"><div class="st-card">
 <div class="st-badge{" " + cls if cls else ""}" aria-hidden="true">{icon}</div>
-<p class="pg-eye">{eye}</p><h1 class="st-h1">{title}</h1><p class="st-lead">{lead}</p>{f'<p class="st-note">{note}</p>' if note else ""}
+<h1 class="st-h1">{title}</h1><p class="st-lead">{lead}</p>{f'<p class="st-note">{note}</p>' if note else ""}
 <div class="st-btns">{second}</div>
 </div></section>'''
 
@@ -185,7 +185,7 @@ def legal(slug, doc, extra=""):
     doc_html = (f'<div class="pg-short"><h2>The short version</h2><ul>{short}</ul></div>'
                 + "".join(f'<section class="lg-sec" id="{slug_id(h)}"><h2>{e(h)}</h2>{t}</section>' for h, t in secs)
                 + f'<div class="lg-ask"><div><b>{e(doc["contactAsk"])}</b><span>{e(doc["contactLine"])}</span></div><a class="btn" href="/contact">Contact us</a></div>')
-    body = (hero("Legal", e(doc["title"]), e(doc["updated"]), tabs if slug in dict(LEGAL_TABS) else "", cls="pg-hero-line")
+    body = (hero(e(doc["title"]), e(doc["updated"]), tabs if slug in dict(LEGAL_TABS) else "", cls="pg-hero-line")
             + f'<section class="section lg"><div class="wrap lg-grid">{rail}<article class="lg-doc">{doc_html}</article></div></section>')
     page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True)
 
@@ -195,7 +195,7 @@ legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The website waitlist", '''<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you asked for it when you signed up. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')])
 
-page("cookies", "Cookies", "What this website stores on your device.", group="Legal", wide=True, body=hero("Legal", "Cookies", "Last updated October 4, 2026", cls="pg-hero-line") + '''<section class="section lg"><div class="wrap"><article class="lg-doc lg-solo">
+page("cookies", "Cookies", "What this website stores on your device.", group="Legal", wide=True, body=hero("Cookies", "Last updated October 4, 2026", cls="pg-hero-line") + '''<section class="section lg"><div class="wrap"><article class="lg-doc lg-solo">
 <p>This website doesn't use advertising or tracking cookies, and there's no analytics script following you around.</p>
 <h2>What it does store</h2>
 <ul><li><b>Nothing, for most visitors.</b> Browsing the site and joining the waitlist don't set cookies.</li>
@@ -214,7 +214,7 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 # a real inbox (user 2026-10-11): the @fig.app addresses never existed. The form goes to support_messages through
 # contact_fig (limited per address and per network), the same inbox as Message us in the app; the admin site shows it.
 page("contact", "Contact", "Message the FIG team. A real person reads every message.", wide=True, body='''<section class="pg-hero ct-band"><div class="wrap ct-grid">
-<div class="pg-hero-text"><p class="pg-eye">Contact</p><h1 class="pg-h1">Talk to a real person.</h1>
+<div class="pg-hero-text"><h1 class="pg-h1">Talk to a real person.</h1>
 <p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p></div>
 <form class="contact ct-card" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
@@ -227,7 +227,7 @@ page("contact", "Contact", "Message the FIG team. A real person reads every mess
 <p class="form-msg" role="status" aria-live="polite"></p>
 </form>
 </div></section>
-<section class="section ct-more"><div class="wrap"><p class="pg-eye">Other ways</p><div class="ct-ways">
+<section class="section ct-more"><div class="wrap"><h2 class="h2 pg-sub">Other ways</h2><div class="ct-ways">
 <a class="ct-way" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
 <div class="ct-way"><b>In the app</b><span>Profile, then Help, then Message us. Restaurants: Settings, then Help for restaurants.</span><em class="leaf">Same inbox</em></div>
 </div></div></section>
@@ -256,11 +256,11 @@ HELP = [
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
-help_html = hero("Help center", "How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
+help_html = hero("How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
                  '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>", cls="pg-hero-line")
 for k, (anchor, title, qs) in enumerate(HELP):
     head, sub = HELP_HEAD[anchor]
-    help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head"><p class="pg-eye">{title}</p>'
+    help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
                   f'<h2 class="h2">{head}</h2><p class="side">{sub}</p></div>{qa_list(qs, 1 if k else 2)}</div></section>')
 help_html += '''<section class="section pg-tight"><div class="wrap"><div class="pg-dark">
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
@@ -374,7 +374,7 @@ def blog_pic(name):
 
 photo_of = lambda post, img: blog_pic(PHOTO[post["slug"]]) if post["slug"] in PHOTO else img
 chips = "".join(f'<button role="tab" aria-selected="{str(t == "All").lower()}" data-topic="{t}">{t.replace("For ", "").capitalize()}</button>' for t in ["All"] + [t for t in TOPICS if any(x["topic"] == t for x in POSTS)])
-blog = hero("The FIG blog", "Eat out for less.<br>Fill the quiet hours.", "", f'<div class="pg-pills blog-filter" role="tablist" aria-label="Filter posts">{chips}</div>')
+blog = hero("Eat out for less.<br>Fill the quiet hours.", "", f'<div class="pg-pills blog-filter" role="tablist" aria-label="Filter posts">{chips}</div>')
 rows = []
 items = []
 for k, post in enumerate(POSTS):
@@ -389,7 +389,7 @@ for k, post in enumerate(POSTS):
                  f'<span class="bl-text"><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
     else:
         rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}"><img src="{pic}" alt="" width="240" height="168" loading="lazy">'
-                    f'<span><span class="pg-kick{" leaf" if post["topic"] == "For diners" else ""}">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></span></a>')
+                    f'<span><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></span></a>')
     related = [x for x in POSTS if x is not post and x["topic"] == post["topic"]][:2] or [x for x in POSTS if x is not post][:2]
     body = (f'''<section class="ps-head"><div class="wrap"><a class="ps-back" href="/blog">← The FIG blog</a><p class="pg-kick">{e(kicker)}</p>
 <h1 class="ps-h1">{e(post["title"])}</h1><p class="ps-dek">{e(post["dek"])}</p><div class="post-by"><span>By the FIG team · Markham, Ontario · {read_min(post)} min read</span>{SHARE}</div></div></section>
@@ -398,7 +398,7 @@ for k, post in enumerate(POSTS):
             + "".join(f'<h2 id="{slug_id(h)}">{e(h)}</h2>{t}' for h, t in post["sections"])
             + '<h2>Questions</h2>' + qa_list(post["faq"])
             + "</article>" + end_cta(post)
-            + '<section class="section ps-more"><div class="wrap"><p class="pg-eye">Keep reading</p><div class="bl-list">'
+            + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
             + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img src="{photo_of(x, "")}" alt="" width="240" height="168" loading="lazy"><span><span class="pg-kick">{x["topic"]} · {nice_date(x["date"])}</span><b>{e(x["title"])}</b><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post["dek"], "keywords": post["keywords"],
@@ -440,14 +440,14 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 
 # Stripe sends people back here (takeout orders paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
 # and after FIG Premium (2026-10-09)
-page("paid", "Back to FIG", "Your takeout payment.", wide=True, body=back_to_fig("Takeout", "You’re all set. Head back to FIG.",
+page("paid", "Back to FIG", "Your takeout payment.", wide=True, body=back_to_fig("You’re all set. Head back to FIG.",
      "Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.",
      "Didn’t finish paying? Open your order in FIG and tap Pay.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/help">Help center</a>'))
-page("stripe", "Back to FIG", "Setting up payouts with Stripe.", wide=True, body=back_to_fig("For restaurants", "Back to FIG to finish up.",
+page("stripe", "Back to FIG", "Setting up payouts with Stripe.", wide=True, body=back_to_fig("Back to FIG to finish up.",
      "Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.",
      "If Stripe still needs something, tap the button there again to pick up where you left off.",
      '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>', icon="→", cls="go"))
-page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("FIG Premium", "Thanks. Head back to FIG.",
+page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("Thanks. Head back to FIG.",
      "If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium to see it, or to cancel or change your card later.",
      "Changed your mind before paying? Nothing was charged.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>'))
 

@@ -1,17 +1,16 @@
 /* The site's own pages in the light v2 look (2026-10-13, from the Paper file "FIG Website · Pages"): Help, Contact, the blog,
    the legal pages and the "back to FIG" pages Stripe returns to. Built by scripts/pages.py; Home and site.css are the base. */
 
-/* ---------- the top of a page: eyebrow, big title, a line, something on the right ---------- */
+/* ---------- the top of a page: a big title, a line, something on the right (no eyebrow labels, user 2026-10-04) ---------- */
 .pg-hero { padding: 150px 0 56px; }
 .pg-hero-line { border-bottom: 1px solid var(--line); }
 .pg-hero-in { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px 64px; }
 .pg-hero-text { display: grid; gap: 20px; max-width: 760px; }
-.pg-eye { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); }
-.pg-eye::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); flex-shrink: 0; }
 .pg-h1 { font-size: clamp(46px, 7.4vw, 96px); line-height: .98; font-weight: 800; letter-spacing: -0.055em; color: var(--ink); }
 .pg-lead { max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.6; font-weight: 500; color: var(--muted); }
-.pg-kick { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); }
-.pg-kick.leaf { color: #0B9E55; }
+/* the topic and date of a post: a quiet line, not a label */
+.pg-kick { font-size: 14px; font-weight: 600; color: var(--dim); }
+.pg-sub { margin-bottom: 28px; }
 
 /* pills: jump links, the legal documents, the blog's topics */
 .pg-pills { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -23,8 +22,8 @@
 
 /* "the short version" / "key points": a check list on ice */
 .pg-short { display: grid; gap: 14px; padding: 30px 34px; border-radius: 24px; background: var(--ice); }
-.pg-short h2 { font-size: 13px !important; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); margin: 0 !important; }
-.pg-short ul { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
+.pg-short h2 { font-size: 20px !important; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin: 0 !important; }
+.pg-short ul, .lg-doc .pg-short ul, .ps-body .pg-short ul { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
 .pg-short li { position: relative; padding-left: 34px; font-size: 17px; line-height: 1.55; font-weight: 600; color: var(--ink); margin: 0; }
 .pg-short li::before { content: ""; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 50%; background: var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
 
@@ -41,7 +40,6 @@
 .btn-soft:hover { background: #fff; border-color: var(--cobalt); box-shadow: none; }
 
 /* ---------- Help: diners on white, restaurants on ice ---------- */
-.faq-head .pg-eye { margin-bottom: 14px; }
 .faq-head .side { margin-top: 14px; color: var(--muted); font-size: 17px; }
 .section.ice .qa summary::after { background: #fff; }
 .section.ice .qa[open] summary::after { background: var(--cobalt); }
@@ -53,7 +51,6 @@
 .ct-card { margin: 0; padding: clamp(22px, 3vw, 40px); border-radius: 32px; background: #fff; border: 1px solid var(--ice-line); box-shadow: 0 30px 80px rgba(30, 94, 255, .10); }
 .ct-card .ct-field { color: var(--ink); }
 .ct-card .btn { justify-self: stretch; min-height: 56px; font-size: 17px; }
-.ct-more .pg-eye { margin-bottom: 22px; }
 .ct-ways { display: grid; gap: 16px; }
 .ct-way { display: grid; gap: 10px; align-content: start; padding: 30px; border-radius: 24px; background: var(--ice); border: 1px solid var(--ice-line); text-decoration: none; color: var(--ink); transition: border-color .25s, transform .3s var(--ease); }
 a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
@@ -83,7 +80,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 @media (min-width: 1000px) {
   .lg-grid { grid-template-columns: 280px minmax(0, 760px); gap: 96px; align-items: start; }
   .lg-rail { position: sticky; top: 110px; display: grid; gap: 2px; }
-  .lg-rail b { padding: 0 14px 12px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .lg-rail b { padding: 0 14px 10px; font-size: 16px; font-weight: 800; color: var(--ink); }
   .lg-rail a { padding: 9px 14px; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
   .lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
 }
@@ -129,9 +126,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ps-body ul { display: grid; gap: 8px; padding-left: 22px; list-style: disc; }
 .ps-body a:not(.btn) { color: var(--cobalt); font-weight: 700; }
 .ps-body .pg-short { margin-top: 0; }
-.ps-body .pg-short ul { list-style: none; padding: 0; }
 .ps-body .faq-list { margin-top: 20px; }
-.ps-more .pg-eye { margin-bottom: 18px; }
 
 /* ---------- back to FIG (Stripe's return pages): one card over the faded map ---------- */
 .st { display: flex; justify-content: center; padding: 150px var(--gutter) 120px;

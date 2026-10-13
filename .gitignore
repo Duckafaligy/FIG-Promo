@@ -2,6 +2,7 @@
 # Everything else in this folder (videos, app, documents, design tools) stays local.
 /*
 !/.gitignore
+!/.gitattributes
 !/site/
 !/vercel.json
 !/api/

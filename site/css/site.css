@@ -1058,7 +1058,8 @@ p.consent { cursor: default; padding-left: 22px; }
 .two-tone > span:first-child { display: block; }
 /* phones: the hero is taller now (the app phone sits under the buttons), so the map fades to white in fixed pixels above the copy instead of by percentage */
 @media (max-width: 979px) {
-  .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 110px, rgba(255, 255, 255, .9) calc(48svh - 70px), #fff calc(48svh - 10px)); }
+  .hero-copy { padding-top: 32svh; }
+  .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 90px, rgba(255, 255, 255, .9) calc(32svh - 50px), #fff calc(32svh + 4px)); }
 }
 .city.next { background: linear-gradient(180deg, rgba(238, 243, 255, .2), rgba(238, 243, 255, .7) 75%), url("/assets/map-fallback.webp") 20% 30% / 260% auto; }
 .city.next .city-name { background: rgba(255, 255, 255, .9); }
@@ -1074,3 +1075,5 @@ p.consent { cursor: default; padding-left: 22px; }
 .cell:focus-visible { outline: 3px solid var(--volt); outline-offset: -3px; }
 .foot-cols .foot-h { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin: 0 0 14px; font-weight: 700; }
 .ab-diners li span, .ab-diners > p { color: #fff; }
+/* MapLibre's own stylesheet now loads after this one (on idle) and sets .maplibregl-map { position: relative }: keep the hero map absolute */
+.hero .hero-map, .hero .hero-map.maplibregl-map { position: absolute; inset: -30px; }

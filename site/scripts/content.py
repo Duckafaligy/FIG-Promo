@@ -191,4 +191,21 @@ POSTS = [
          ],
          faq=[("Does FIG deliver?", "No. You takeout with a deal and pick the food up yourself."),
               ("Is there a fee for takeout on FIG?", "No. FIG doesn't charge diners anything: no delivery or service fees.")]),
+
+    dict(slug="date-night-markham-budget", screen="claim", title="Date night in Markham on a budget: 6 ways to do it", date="2026-10-13", topic="For diners",
+         dek="Looking for a cheap date night in Markham? Six practical ways to eat out well for less, from timing and neighbourhoods to finding live deals.",
+         keywords="date night Markham, cheap date ideas Markham, budget dinner Markham, Unionville date night, restaurant deals Markham",
+         points=["The cheapest date nights in Markham happen at off-peak times, like an early dinner or a weekday evening.",
+                 "Pick a neighbourhood first, then look for a live deal nearby, so you can walk between stops.",
+                 "FIG is free for diners and shows live Markham restaurant deals on a map, filtered by craving, budget and diet."],
+         sections=[
+             ("Go early or go midweek", "<p>A table at 6 pm on a Wednesday is usually easier to get, and cheaper, than 7:30 pm on a Saturday. Restaurants have empty seats in those hours, and that is when owners are most likely to post a deal. You also get a quieter room, which is better for talking.</p><p>Lunch is another good trick. Many places serve the same food at midday for less than they do at night, so a long weekend lunch can feel just like a dinner date without the dinner price.</p>"),
+             ("Pick a neighbourhood, then walk", "<p>Some parts of Markham are made for strolling. Main Street Unionville and Markham Village both have a short, walkable stretch of restaurants, cafés and dessert spots. Plan dinner at one place and dessert or a drink at another, and the evening feels bigger than the bill.</p><p>The Highway 7 corridor, Milliken, Cornell and Cathedraltown are more spread out, so choose one plaza and stay there.</p>"),
+             ("Split the evening into two small stops", "<p>Instead of one big dinner, try a shared plate or a main at one place and tea, coffee or dessert at another. Two small bills often come in lower than one big one, and each stop is its own little change of scene.</p><p>Skip the extras that add up quietly. Drinks, appetizers and sides can double a bill, so decide before you sit down what you will order. Sharing one dessert is a classic for a reason, and it gives you something to do with two spoons.</p>"),
+             ("Check for a live deal before you leave", "<p>Open FIG and look at the map. Live deals from Markham restaurants show up nearest first, and you can filter by craving, budget and diet, including halal, vegetarian, vegan and gluten-free. Claim a deal in one tap, show your code at the counter and pay the restaurant as usual. FIG is free for diners.</p><p>New to deal hunting? Read <a href=\"/blog/restaurant-deals-markham\">how to find the best restaurant deals in Markham</a>.</p>"),
+             ("Agree on the place together", "<p>Deciding where to eat can take longer than the meal. Share a deal from FIG to your partner's chat so you both see the same place, the same deal and how far it is. If you have a question, like whether a table is free, message the restaurant from the deal. Your phone number stays private.</p><p>It also helps to set a budget together before you leave home. Agreeing on a number ahead of time means nobody has to do the awkward math at the table.</p>"),
+             ("Know the fine print", "<p>Before you go, read the deal for its days, hours and any daily cap, since restaurants set these themselves. Show your code at the counter when you order, not after you pay. It refreshes every 5 minutes, so a screenshot will not work.</p><p>If you run a restaurant and want couples in your quiet hours, see <a href=\"/#owners\">how FIG works for restaurants</a>.</p>"),
+         ],
+         faq=[("How can I do a cheap date night in Markham?", "Go at off-peak times, stay in one walkable area such as Unionville or Markham Village, and check FIG for live restaurant deals nearby before you head out."),
+              ("Is FIG free to use for date night?", "Yes. FIG is free for diners. You pay the restaurant directly at the counter, like normal.")]),
 ]

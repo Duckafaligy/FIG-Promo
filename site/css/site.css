@@ -1,4 +1,4 @@
-@font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans.woff2") format("woff2"), url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
 
 :root {
   --bg: #0A0D14; --bg-2: #0E121B; --card: #141925; --card-2: #1A2132; --line: #232A3A; --line-2: #2E3648;
@@ -382,7 +382,10 @@ button, input { font: inherit; color: inherit; }
 
 /* ---------- motion (only when allowed) ---------- */
 .motion .reveal { opacity: 0; transform: translateY(28px); }
-.motion .intro { opacity: 0; transform: translateY(16px); }
+/* the hero text paints at once (it is the page's biggest text, so it must not wait for scripts); it only slides up */
+.motion .intro { animation: introUp .8s var(--ease) both; }
+.motion .intro + .intro { animation-delay: .1s; }
+@keyframes introUp { from { transform: translateY(16px); } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
@@ -1066,3 +1069,8 @@ p.consent { cursor: default; padding-left: 22px; }
 .lede .opens { color: var(--ink); font-weight: 700; white-space: nowrap; }
 .qa-group { margin: 34px 0 6px; font-size: 15px; font-weight: 800; color: var(--cobalt); }
 .qa-group:first-child { margin-top: 0; }
+
+/* keyboard focus on the feature cards (they clip overflow, so the ring sits inside); footer column labels are text now */
+.cell:focus-visible { outline: 3px solid var(--volt); outline-offset: -3px; }
+.foot-cols .foot-h { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin: 0 0 14px; font-weight: 700; }
+.ab-diners li span, .ab-diners > p { color: #fff; }

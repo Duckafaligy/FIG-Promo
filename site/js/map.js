@@ -9,8 +9,17 @@
     "36VQAEPPGHX17KWN8CCCS2KG07", "3QG0YSDTY4W552YE3N1VHZSED2", "40WEZ22K5FV8YNHPYPQ7J6EWNN", "5PF706P8NNHG3TW4ARWFD6T17Z",
     "5PGYW83TMVHGAXX3X0D7SE751X", "6H6JKMMDC87EF7KF7FPAEH08V6", "6KDKWJ5BS8PPF6PS0HQ93G0VFP", "6TNFWB2ZQZXHJQ5RSG17V1F10X"];
   window.FIG_PINS = PHOTOS.map((p) => `/assets/pins/${p}.jpg`);
-  if (!box || !window.maplibregl) return;
+  if (!box) return;
+  // the still map paints first; MapLibre (≈270 KB) loads once the page is idle, so it never delays the hero text
+  const CDN = "https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl";
+  const later = window.requestIdleCallback || ((f) => setTimeout(f, 1200));
+  later(() => {
+    const css = document.createElement("link"); css.rel = "stylesheet"; css.href = CDN + ".css"; document.head.appendChild(css);
+    const js = document.createElement("script"); js.src = CDN + ".js"; js.onload = start; document.head.appendChild(js);
+  }, { timeout: 2500 });
 
+  function start() {
+  if (!window.maplibregl) return;
   let map;
   try {
     map = new maplibregl.Map({
@@ -55,4 +64,5 @@
     }
     requestAnimationFrame(tick);
   });
+}
 })();

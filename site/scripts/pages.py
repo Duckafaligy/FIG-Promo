@@ -42,10 +42,10 @@ FOOTER = f'''<footer class="foot">
         {STORES}
       </div>
       <div class="foot-cols">
-        <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
-        <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
-        <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
+        <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
+        <div><p class="foot-h">Restaurants</p><a href="/#owners">Pricing</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
+        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a></div>
       </div>
     </div>
     <div class="foot-bottom">
@@ -249,8 +249,8 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on the bill. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
-        ("Do I need new equipment?", "No. Any phone or tablet with the FIG app can scan. Add staff and their devices in Settings."),
+        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
+        ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
@@ -348,7 +348,7 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 def end_cta(post):
     """The cobalt block at the end of a post: restaurants get listed, diners open FIG (the web app, 2026-10-13)."""
     if post["topic"] == "For restaurants":
-        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free to join. Free deals and scans, with no commission on the bill.</p>",
+        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free to join. Free deals and scans, with no commission on dine-in.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/sign-up-business">List your restaurant</a><a class="btn btn-lg btn-line" href="/#owners">See how pricing works</a>')
     else:
         words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners. Opens in Markham on January 1, 2027.</p>",
@@ -374,7 +374,18 @@ def blog_pic(name):
         im = Image.open(ROOT / "Media Assets" / "Assets" / "website" / "food" / f"{name}.jpg").convert("RGB")
         im.thumbnail((1600, 1600), Image.LANCZOS)
         im.save(out, quality=78, method=6)
+    small = BLOG_PICS / f"{name}-480.webp"
+    if not small.exists():
+        from PIL import Image
+        im = Image.open(out)
+        im.thumbnail((480, 4000), Image.LANCZOS)  # 480 wide, whatever its shape
+        im.save(small, quality=76, method=6)
     return f"/assets/blog/photos/{name}.webp"
+
+
+def thumb(pic):
+    """A row's photo: the 480 px copy, the full one for big screens with sharp displays."""
+    return f'src="{pic[:-5]}-480.webp" srcset="{pic[:-5]}-480.webp 480w, {pic} 1600w" sizes="(min-width: 720px) 240px, 112px"' if pic.startswith("/assets/blog/photos/") else f'src="{pic}"'
 
 
 photo_of = lambda post, img: blog_pic(PHOTO[post["slug"]]) if post["slug"] in PHOTO else img
@@ -393,7 +404,7 @@ for k, post in enumerate(POSTS):
                  f'<span class="bl-pic"><img src="{pic}" alt="" width="720" height="480"><i>Newest</i></span>'
                  f'<span class="bl-text"><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
     else:
-        rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}"><img src="{pic}" alt="" width="240" height="168" loading="lazy">'
+        rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
                     f'<span><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></span></a>')
     related = [x for x in POSTS if x is not post and x["topic"] == post["topic"]][:2] or [x for x in POSTS if x is not post][:2]
     body = (f'''<section class="ps-head"><div class="wrap"><a class="ps-back" href="/blog">← The FIG blog</a><p class="pg-kick">{e(kicker)}</p>
@@ -404,7 +415,7 @@ for k, post in enumerate(POSTS):
             + '<h2>Questions</h2>' + qa_list(post["faq"])
             + "</article>" + end_cta(post)
             + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
-            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img src="{photo_of(x, "")}" alt="" width="240" height="168" loading="lazy"><span><span class="pg-kick">{x["topic"]} · {nice_date(x["date"])}</span><b>{e(x["title"])}</b><p>{e(x["dek"])}</p></span></a>' for x in related)
+            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><span class="pg-kick">{x["topic"]} · {nice_date(x["date"])}</span><b>{e(x["title"])}</b><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post["dek"], "keywords": post["keywords"],
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",
@@ -465,7 +476,7 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on the bill. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Company: FIG Technologies Inc., Markham, Ontario

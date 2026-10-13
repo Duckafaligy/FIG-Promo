@@ -9,7 +9,7 @@
 .pg-h1 { font-size: clamp(46px, 7.4vw, 96px); line-height: .98; font-weight: 800; letter-spacing: -0.055em; color: var(--ink); }
 .pg-lead { max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.6; font-weight: 500; color: var(--muted); }
 /* the topic and date of a post: a quiet line, not a label */
-.pg-kick { font-size: 14px; font-weight: 600; color: var(--dim); }
+.pg-kick { font-size: 14px; font-weight: 600; color: #5B6680; } /* 4.5:1 on ice too */
 .pg-sub { margin-bottom: 28px; }
 
 /* pills: jump links, the legal documents, the blog's topics */
@@ -34,7 +34,7 @@
 .pg-cta { background: var(--cobalt); color: #fff; }
 .pg-dark h2, .pg-cta h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; margin-bottom: 10px; }
 .pg-dark p { max-width: 34em; color: #A3ADBF; font-size: 17px; line-height: 1.55; }
-.pg-cta p { max-width: 34em; color: #DDE7FF; font-size: 17px; line-height: 1.55; }
+.pg-cta p { max-width: 34em; color: #fff; font-size: 17px; line-height: 1.55; }
 .pg-dark-btns, .pg-cta-btns { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn-soft { background: #fff; color: var(--ink); border: 1px solid var(--line); }
 .btn-soft:hover { background: #fff; border-color: var(--cobalt); box-shadow: none; }
@@ -75,7 +75,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ct-way b { font-size: 26px; font-weight: 800; letter-spacing: -0.035em; }
 .ct-way span { color: var(--muted); font-size: 17px; line-height: 1.55; }
 .ct-way em { font-style: normal; font-weight: 800; color: var(--cobalt); }
-.ct-way em.leaf { color: #0B9E55; }
+.ct-way em.leaf { color: #087A42; }
 @media (min-width: 900px) { .ct-grid { grid-template-columns: 1fr 560px; gap: 80px; } .ct-ways { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- Legal: a contents rail beside the document ---------- */

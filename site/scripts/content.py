@@ -45,7 +45,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <li><b>Go live</b><span>For free.</span></li>
 <li><b>Post</b><span>A deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</span></li>
 <li><b>Scan</b><span>Diners at the counter with any phone or tablet. Every scan is free.</span></li>
-<li><b>Go Premium</b><span>When you want more: unlimited locations, deal announcements and area insights, $50 a year. Optional.</span></li>
+<li><b>Go Premium</b><span>When you want more: unlimited locations, deal announcements every 2 hours, area insights, your menu typed up from a photo and a Premium badge, $50 a year. Optional.</span></li>
 </ol><p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p></article>
 </div></section>
 
@@ -70,7 +70,7 @@ POSTS = [
          dek="Markham has incredible independent restaurants. We wanted a way to find them that's fair to the owners too.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app",
          points=["FIG is a restaurant deals app starting in Markham, Ontario.",
-                 "Restaurants post their own deals for free, with no commission on the bill.",
+                 "Restaurants post their own deals for free, with no commission on dine-in.",
                  "Diners find deals on a map, claim one and show a code at the counter. It's free for diners."],
          sections=[
              ("Markham deserves better than a cut of every bill", "<p>Markham is one of the best places in Canada to eat. Dim sum on Kennedy, ramen on Highway 7, Hong Kong cafés in every plaza, bubble tea on every corner. But the places that make it great are mostly small and independent, and they compete for attention with apps that take a percentage of every order.</p><p>Owners told us the same thing again and again: they have quiet hours they'd love to fill, but giving away a large share of each bill doesn't add up.</p>"),
@@ -81,15 +81,15 @@ POSTS = [
               ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
-         dek="Listing, deals, scans and chats are free on FIG, with no commission on the bill. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.",
+         dek="Listing, deals, scans and chats are free on FIG, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.",
          keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant deals app Markham, FIG Premium",
-         points=["FIG is free for restaurants: listing, unlimited deals, every scan and chats. No commission on the bill.",
+         points=["FIG is free for restaurants: listing, unlimited deals, every scan and chats. No commission on dine-in.",
                  "FIG makes money two ways: the optional FIG Premium ($50 a year), and 5% of the food on takeout orders diners pay for in the app.",
                  "FIG Premium adds unlimited locations, a deal announcement every 2 hours to diners who crave your food, area insights, your menu typed up from a photo and a badge.",
                  "Insights are free: your views, claims and the diners who came in, day by day."],
          sections=[
-             ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone or tablet, takeout on your deals, chats with diners and a dashboard of what's working. No commission on the bill, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p><p>The one fee: when a diner takeout orders with your deal and pays in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, is paid out to you.</p>"),
-             ("How FIG makes money", "<p>Two ways, and both are up to you. FIG Premium is $50 a year for your whole account. And when a diner takeout orders with your deal and pays in the app, FIG keeps 5% of the food. A diner who walks in with your deal costs you nothing.</p>"),
+             ("What's free", "<p>Everything you need to bring diners in: your page, unlimited everyday and flash deals, scanning diners at the counter on any phone, tablet or computer, takeout on your deals, chats with diners and a dashboard of what's working. No commission on dine-in, no fee per diner, no monthly fee.</p><p>A diner who uses your deal pays you, at your counter, the way they always do.</p><p>The one fee: when a diner orders takeout and pays in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, is paid out to you.</p>"),
+             ("How FIG makes money", "<p>Two ways, and both are up to you. FIG Premium is $50 a year for your whole account. And when a diner orders takeout and pays in the app, FIG keeps 5% of the food. A diner who walks in with your deal costs you nothing.</p>"),
              ("FIG Premium", "<p>For $50 a year, one plan covers every location on your account: unlimited locations (free accounts have up to 2), a deal announcement every 2 hours to nearby diners whose cravings match your food and to everyone who saved you, area insights, your menu typed up from a photo, and a FIG Premium badge on your page. The badge never moves you up in search or on the map.</p>"),
              ("You see what you get", "<p>Insights are free for every restaurant: views of your page, claims, the diners who came in and who came back, day by day, and how each deal is doing. With Premium, area insights add when diners near you claim deals, what they crave and what's trending nearby.</p>"),
              ("What paying FIG never does", "<ul><li>Change your deal or its price</li><li>Move you up in search or on the map</li><li>Hide, remove or reorder reviews</li><li>Share any diner's details with you</li></ul><p>Read the full <a href=\"/business-terms\">business terms</a>.</p>"),

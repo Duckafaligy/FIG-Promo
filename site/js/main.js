@@ -62,7 +62,6 @@
 
   if (motion) {
     rise($(".hero .rise"), 0.25);
-    gsap.to(".intro", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, delay: 0.55 });
     ScrollTrigger.batch(".reveal", { start: "top 88%", once: true,
       onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, overwrite: true }) });
   }

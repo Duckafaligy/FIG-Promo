@@ -27,8 +27,7 @@
   <!-- /seo -->
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="/assets/PlusJakartaSans.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
+  <link rel="preload" href="/assets/PlusJakartaSans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
@@ -102,7 +101,7 @@
         </div>
         <p class="side reveal">Real FIG screens with example restaurants. You pay the restaurant, like always.</p>
       </div>
-      <ol class="steps">
+      <ol class="steps" tabindex="0" aria-label="How it works, step by step">
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/map.webp" alt="FIG map with photo pins of nearby restaurants" loading="lazy" width="390" height="844"></div><span class="num">01</span><h3>Spot a deal on the map</h3><p>Every photo pin is a restaurant near you. Tap one to see what's on.</p></li>
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/claim.webp" alt="Claim sheet for 2-for-1 Dim Sum" loading="lazy" width="390" height="844"></div><span class="num">02</span><h3>Claim it in one tap</h3><p>It’s yours for as long as the deal runs. Nothing to pay, nothing to print.</p></li>
         <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/chat.webp" alt="Chat with the restaurant about a deal" loading="lazy" width="390" height="844"></div><span class="num">03</span><h3>Ask before you go</h3><p>Message the restaurant from your deal. Your number stays private.</p></li>
@@ -224,7 +223,7 @@
       </div>
       <div class="tutwrap reveal">
       <p class="tut-label"><span>Quick tutorial video</span><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 6c14-2 30 2 40 14 3 4 5 8 6 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M42 27l8 7 3-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-      <div class="tutvid" id="tut" aria-label="Tutorial video: how to use FIG">
+      <div class="tutvid" id="tut" role="region" aria-label="Tutorial video: how to use FIG">
         <video id="tut-video" muted loop playsinline preload="none" poster="/assets/clips/tut-diner.jpg" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video>
       </div>
       </div>
@@ -288,7 +287,7 @@
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>See what works. Grow with Premium.</h3>
-            <p>Insights are free: views, claims and the diners who came in, day by day. FIG Premium ($50 a year) adds unlimited locations, deal announcements every 2 hours, area insights and your menu typed up from a photo.</p>
+            <p>Insights are free: views, claims and the diners who came in, day by day. FIG Premium ($50 a year) adds unlimited locations, deal announcements every 2 hours, area insights, your menu typed up from a photo and a Premium badge on your page.</p>
           </div>
           <div class="panel slate"><div class="boostcard" role="img" aria-label="Example week of insights: 1,240 views, 31 claims, 18 diners who came in, 7 who came back">
             <p class="bc-k">Example · a week of insights</p>
@@ -296,7 +295,7 @@
           </div></div>
           <div class="drop slate" aria-hidden="true"><div class="drop-in">
             <h4>FIG Premium, $50 a year.</h4>
-            <ul><li>Unlimited locations</li><li>Deal announcements every 2 hours</li><li>Area insights</li><li>Menu from a photo</li></ul>
+            <ul><li>Unlimited locations</li><li>Deal announcements every 2 hours</li><li>Area insights</li><li>Menu from a photo</li><li>A Premium badge on your page</li></ul>
           </div></div>
         </article>
       </div>
@@ -369,10 +368,10 @@
         <div class="badges small"><a class="btn btn-sm" href="/app/">Open FIG on the web</a><span class="soon">App Store and Google Play: coming soon</span></div>
       </div>
       <div class="foot-cols">
-        <div><h3>Diners</h3><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><h3>Restaurants</h3><a href="/#owners">Pricing</a><a href="/#catch">Tutorial</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
-        <div><h3>Company</h3><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
-        <div><h3>Legal</h3><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/business-terms">Business terms</a><a href="/cookies">Cookies</a></div>
+        <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
+        <div><p class="foot-h">Restaurants</p><a href="/#owners">Pricing</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
+        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a></div>
       </div>
     </div>
     <div class="foot-bottom">
@@ -385,21 +384,20 @@
 <!-- giant wordmark, Chatbase-style -->
 <div class="mega" aria-hidden="true">
   <div class="mega-word">FIG</div>
-  <span class="sticker s1"><img src="/assets/food/golden-lantern.webp" alt=""></span>
-  <span class="sticker s2"><img src="/assets/food/chatime.webp" alt=""></span>
-  <span class="sticker s3"><img src="/assets/food/kinton-ramen.webp" alt=""></span>
-  <span class="sticker s4 seal"><img src="/assets/premium-seal.png" alt=""></span>
+  <span class="sticker s1"><img src="/assets/food/golden-lantern.webp" alt="" loading="lazy" decoding="async"></span>
+  <span class="sticker s2"><img src="/assets/food/chatime.webp" alt="" loading="lazy" decoding="async"></span>
+  <span class="sticker s3"><img src="/assets/food/kinton-ramen.webp" alt="" loading="lazy" decoding="async"></span>
+  <span class="sticker s4 seal"><img src="/assets/premium-seal.png" alt="" loading="lazy" decoding="async"></span>
   <span class="tagline">Eat local. Save fast.</span>
 </div>
 
-<script src="/js/config.js"></script>
-<script src="/js/contact.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
-<script src="/js/map.js"></script>
-<script src="/js/fx.js"></script>
-<script src="/js/main.js"></script>
+<script src="/js/config.js" defer></script>
+<script src="/js/contact.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+<script src="/js/map.js" defer></script>
+<script src="/js/fx.js" defer></script>
+<script src="/js/main.js" defer></script>
 </body>
 </html>

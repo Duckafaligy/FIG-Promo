@@ -960,3 +960,5 @@ p.consent { cursor: default; padding-left: 22px; }
 @keyframes hpIn { from { opacity: 0; translate: 0 40px; } }
 .get-app > * { min-width: 0; }
 .get-app .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.catch-no { display: block; }
+.band.dark .catch-no { color: #6E95FF; }

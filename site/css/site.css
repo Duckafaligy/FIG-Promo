@@ -1124,3 +1124,20 @@ p.consent { cursor: default; padding-left: 22px; }
 /* the phone keeps 48px+ from the screen edge (user: 'too close to the edge'), its stickers 30px+ */
 @media (min-width: 1100px) and (max-width: 1299px) { .hp-sticker.saved { right: -16px; } }
 @media (min-width: 1100px) and (max-width: 1199px) { .hp-sticker.deal { left: -96px; } }
+
+/* ---------- navbar polish (user 2026-10-13: "the logo itself, not the logo title"; one system with the web app's navbar):
+   the mark only (34px, 30 compact), links 15/600 ink at 70% with an ice pill for hover/current, 40px controls (44 on touch), all on one centre line ---------- */
+.nav { height: 64px; padding: 0 12px 0 14px; }
+.nav .brand { width: 44px; height: 44px; justify-content: center; gap: 0; border-radius: 999px; flex-shrink: 0; }
+.nav .brand span { display: none; }
+.nav .brand .logo { width: 34px; height: 34px; }
+.nav .brand:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+.nav-links { gap: 4px; }
+.nav-links a { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 999px; font-size: 15px; font-weight: 600; letter-spacing: -0.005em; color: rgba(10, 16, 32, .7); transition: color .2s, background .2s; }
+.nav-links a::after { display: none; }
+.nav-links a:hover, .nav-links a.on { color: var(--ink); background: var(--ice); }
+.nav-links a.on { color: var(--cobalt); }
+.nav-get { min-height: 40px; height: 40px; padding: 0 18px; font-size: 15px; }
+.nav-menu { width: 40px; height: 40px; }
+@media (max-width: 1099px), (pointer: coarse) { .nav-get { min-height: 44px; height: 44px; } .nav-menu { width: 44px; height: 44px; } }
+@media (max-width: 899px) { .nav { height: 60px; padding-left: 10px; } .nav .brand .logo { width: 30px; height: 30px; } }

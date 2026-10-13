@@ -207,7 +207,7 @@ page("cookies", "Cookies", "What this website stores on your device.", group="Le
 page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',
           "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and pay no commission on dine-in.",
-          '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" alt="" width="720" height="1360"></div>', "ab-hero")
+          '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" srcset="/assets/about/dumpling-house-360.webp 360w, /assets/about/dumpling-house.webp 720w" sizes="180px" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" srcset="/assets/about/brew-lab-360.webp 360w, /assets/about/brew-lab.webp 720w" sizes="180px" alt="" width="720" height="1360"></div>', "ab-hero")
      + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
      keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",

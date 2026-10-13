@@ -1065,3 +1065,4 @@ p.consent { cursor: default; padding-left: 22px; }
 .city.next { background: linear-gradient(180deg, rgba(238, 243, 255, .2), rgba(238, 243, 255, .7) 75%), url("/assets/map-fallback.webp") 20% 30% / 260% auto; }
 .city.next .city-name { background: rgba(255, 255, 255, .9); }
 .city.next .city-name b { font-size: 26px; }
+.badges .soon { display: block; flex-basis: 100%; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 600; }

@@ -1041,3 +1041,14 @@ p.consent { cursor: default; padding-left: 22px; }
 .motion .hp-cycle img:nth-child(3) { animation-delay: 7s; }
 .motion .hp-cycle img:nth-child(4) { animation-delay: 10.5s; }
 @keyframes hpCycle { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 4%, 25% { opacity: 1; transform: none; } 29%, 100% { opacity: 0; transform: translateY(-8px) scale(.99); } }
+
+/* phones/tablets: the app phone sits under the hero buttons (no stickers) */
+@media (max-width: 1099px) {
+  .hero { flex-direction: column; align-items: stretch; }
+  .hero-copy { padding-bottom: 36px; }
+  .hero-phone { display: block; position: relative; z-index: 1; width: min(270px, 68vw); margin: 0 auto 56px; }
+  .hero-phone .phone { padding: 7px; border-radius: 40px; }
+  .hero-phone .phone img { border-radius: 33px; }
+  .hp-cycle img + img { top: 7px; left: 7px; width: calc(100% - 14px); }
+  .hp-sticker { display: none; }
+}

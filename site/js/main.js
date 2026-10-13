@@ -245,3 +245,16 @@
   new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; sync(); }).observe(hero);
   if (end) new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; sync(); }).observe(end);
 })();
+
+// numbers strip: count up when it scrolls into view (226 places, 4 languages)
+(() => {
+  const nums = [...document.querySelectorAll(".stats b")].filter((b) => /^\d+$/.test(b.textContent.trim()) && +b.textContent > 1);
+  if (!nums.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    const el = e.target, end = +el.textContent, t0 = performance.now();
+    const step = (t) => { const k = Math.min(1, (t - t0) / 1400); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+    el.textContent = "0"; requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  nums.forEach((n) => io.observe(n));
+})();

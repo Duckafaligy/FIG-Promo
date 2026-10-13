@@ -235,3 +235,13 @@
     setTimeout(() => $("#owners").scrollIntoView(), 300);
   }
 })();
+
+// phones: the Open FIG bar slides up once the hero is gone, and steps aside at the closing band (it has the same buttons)
+(() => {
+  const bar = document.getElementById("mbar"), hero = document.querySelector(".hero"), end = document.querySelector(".closing");
+  if (!bar || !hero) return;
+  let pastHero = false, atEnd = false;
+  const sync = () => { const on = pastHero && !atEnd; bar.classList.toggle("on", on); bar.setAttribute("aria-hidden", on ? "false" : "true"); bar.tabIndex = on ? 0 : -1; };
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; sync(); }).observe(hero);
+  if (end) new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; sync(); }).observe(end);
+})();

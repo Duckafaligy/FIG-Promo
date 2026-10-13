@@ -1058,3 +1058,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .try:hover, .try:focus-visible { background: var(--cobalt); color: #fff; gap: 10px; }
 .two-tone { text-wrap: wrap; max-width: 24em; }
 .two-tone > span:first-child { display: block; }
+/* phones: the hero is taller now (the app phone sits under the buttons), so the map fades to white in fixed pixels above the copy instead of by percentage */
+@media (max-width: 979px) {
+  .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 110px, rgba(255, 255, 255, .9) calc(48svh - 70px), #fff calc(48svh - 10px)); }
+}

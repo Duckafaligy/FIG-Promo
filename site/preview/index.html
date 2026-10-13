@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>FIG web app · pick a direction (preview)</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/preview/preview.css">
+<style>
+  .pick { max-width: 1120px; margin: 0 auto; padding: 56px 24px 96px; }
+  .pick h1 { margin: 22px 0 10px; font-size: clamp(36px, 5vw, 56px); line-height: 1.04; letter-spacing: -0.05em; }
+  .pick > p { margin: 0; max-width: 40em; font-size: 18px; line-height: 1.6; color: var(--w-ink-muted); }
+  .dirs { display: grid; gap: 24px; margin-top: 40px; }
+  @media (min-width: 860px) { .dirs { grid-template-columns: 1fr 1fr; } }
+  .dir { display: grid; gap: 18px; padding: 26px; border-radius: var(--w-r-xl); background: var(--w-soft); border: 1px solid var(--w-ice-line); text-decoration: none; transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s; }
+  .dir:hover { transform: translateY(-4px); box-shadow: var(--w-e2); }
+  .dir .k { font-weight: 800; font-size: 13px; color: var(--w-cobalt); }
+  .dir h2 { margin: 0; font-size: 30px; letter-spacing: -0.04em; }
+  .dir p { margin: 0; color: var(--w-ink-muted); line-height: 1.6; }
+  .dir .shot { aspect-ratio: 16 / 10; border-radius: var(--w-r-lg); overflow: hidden; background: #fff; border: 1px solid var(--w-ice-line); }
+  .dir .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .dir .go { display: flex; flex-wrap: wrap; gap: 8px; }
+  .flow { margin-top: 64px; }
+  .flow h2 { font-size: 28px; letter-spacing: -0.03em; margin: 0 0 6px; }
+  .flow > p { margin: 0 0 18px; color: var(--w-ink-muted); }
+  .flow ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--w-ice-line); }
+  .flow li { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--w-ice-line); }
+  .flow li b { display: block; }
+  .flow li span { color: var(--w-ink-muted); font-size: 15px; }
+  .yn { display: flex; gap: 6px; }
+  .yn button { height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--w-ice-line); background: #fff; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .yn button.on[data-a="yes"] { background: var(--w-leaf); border-color: var(--w-leaf); color: #04331b; }
+  .yn button.on[data-a="no"] { background: #0A1020; border-color: #0A1020; color: #fff; }
+</style>
+</head>
+<body>
+<main class="pick">
+  <a class="logo" href="/"><img src="/assets/favicon.svg" alt="">FIG</a>
+  <h1>Pick a direction for FIG on the web.</h1>
+  <p>Same brand, two different shapes. Click through Home, Map and a restaurant in each, on a computer or as a phone (button at the bottom right). Nothing here is live; the restaurants and deals are examples.</p>
+  <div class="dirs">
+    <a class="dir" href="/preview/a/">
+      <span class="k">Direction A</span>
+      <h2>Light, like the website</h2>
+      <p>A top bar, lots of air and big photos. The map sits beside a list you can scroll. Feels like browsing a magazine of deals.</p>
+      <div class="shot"><img src="/preview/a/shot.webp" alt="Direction A, Home on a computer" onerror="this.remove()"></div>
+      <span class="go"><span class="chip on">Open Direction A →</span></span>
+    </a>
+    <a class="dir" href="/preview/b/">
+      <span class="k">Direction B</span>
+      <h2>A web dashboard</h2>
+      <p>A sidebar you always see, denser cards, and a map that fills the screen with the results floating on top. Feels like a tool you keep open.</p>
+      <div class="shot"><img src="/preview/b/shot.webp" alt="Direction B, Home on a computer" onerror="this.remove()"></div>
+      <span class="go"><span class="chip on">Open Direction B →</span></span>
+    </a>
+  </div>
+  <section class="flow" id="flow" hidden>
+    <h2>Changes to how things work on the web</h2>
+    <p>Tick the ones you want. Your ticks stay on this computer only.</p>
+    <ol id="flow-list"></ol>
+  </section>
+</main>
+<script src="/preview/flow.js" defer></script>
+<script src="/preview/preview.js" defer></script>
+</body>
+</html>

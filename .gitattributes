@@ -1,0 +1,2 @@
+# the web app build is generated output: store it byte for byte (no line-ending rewrites, no CRLF warnings)
+site/app/** -text

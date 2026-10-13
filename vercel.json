@@ -13,6 +13,78 @@
     {
       "source": "/r/:id",
       "destination": "/r"
+    },
+    {
+      "source": "/app/biz/chat/:id",
+      "destination": "/app/biz/chat/[id]"
+    },
+    {
+      "source": "/app/biz/order/:id",
+      "destination": "/app/biz/order/[id]"
+    },
+    {
+      "source": "/app/biz/preview/:id",
+      "destination": "/app/biz/preview/[id]"
+    },
+    {
+      "source": "/app/chat/:id",
+      "destination": "/app/chat/[id]"
+    },
+    {
+      "source": "/app/deal-used/:id",
+      "destination": "/app/deal-used/[id]"
+    },
+    {
+      "source": "/app/help/:id",
+      "destination": "/app/help/[id]"
+    },
+    {
+      "source": "/app/legal/:doc",
+      "destination": "/app/legal/[doc]"
+    },
+    {
+      "source": "/app/order/:id",
+      "destination": "/app/order/[id]"
+    },
+    {
+      "source": "/app/pickup/:id",
+      "destination": "/app/pickup/[id]"
+    },
+    {
+      "source": "/app/qr/:claim",
+      "destination": "/app/qr/[claim]"
+    },
+    {
+      "source": "/app/r/:id",
+      "destination": "/app/r/[id]"
+    },
+    {
+      "source": "/app/rate/:stamp",
+      "destination": "/app/rate/[stamp]"
+    },
+    {
+      "source": "/app/restaurant/:id",
+      "destination": "/app/restaurant/[id]"
+    },
+    {
+      "source": "/app/reviews/:id",
+      "destination": "/app/reviews/[id]"
+    },
+    {
+      "source": "/app/see-all/:list",
+      "destination": "/app/see-all/[list]"
+    },
+    {
+      "source": "/app/takeout/:id",
+      "destination": "/app/takeout/[id]"
+    },
+    {
+      "source": "/app/visit/:id",
+      "destination": "/app/visit/[id]"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "/app/index.html"
     }
   ],
   "headers": [
@@ -32,16 +104,47 @@
           "value": "DENY"
         },
         {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        }
+      ]
+    },
+    {
+      "source": "/((?!app(?:/|$)).*)",
+      "headers": [
+        {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), payment=()"
         },
         {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains"
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://tiles.openfreemap.org; worker-src 'self' blob:; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        }
+      ]
+    },
+    {
+      "source": "/app(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(self), microphone=(), geolocation=(self), payment=()"
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://tiles.openfreemap.org; worker-src 'self' blob:; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'sha256-67fhrP0+BkBqmgGGXTtgiVO/9EQs3QruYNU/7fnRkI8=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://tiles.openfreemap.org; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://tiles.openfreemap.org https://photon.komoot.io https://cdn.jsdelivr.net; worker-src 'self' blob: https://cdn.jsdelivr.net; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/app/_expo/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },

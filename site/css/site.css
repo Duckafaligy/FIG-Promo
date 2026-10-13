@@ -914,7 +914,9 @@ p.consent { cursor: default; padding-left: 22px; }
 
 .band.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
 .band.dark .h2 { color: #fff; }
-.band.dark .body, .band.dark .tut-label { color: #A3ADBF; }
+.band.dark .body { color: #A3ADBF; }
+.band.dark .tut-label { color: #fff; }
+.band.dark .tut-label span { color: var(--ink); }
 
 .nofees { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: -24px 0 40px; }
 .nofees li { display: flex; align-items: center; gap: 10px; font-weight: 700; }

@@ -1031,3 +1031,13 @@ p.consent { cursor: default; padding-left: 22px; }
 .ab-diff-grid span { color: var(--muted); font-size: 16px; line-height: 1.6; }
 @media (min-width: 720px) { .ab-diff-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .ab-diff-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* hero phone: Home → Map → Claim → QR on a loop, a soft crossfade with a little push (no JS) */
+.hp-cycle { position: relative; overflow: hidden; }
+.hp-cycle img + img { position: absolute; top: 9px; left: 9px; width: calc(100% - 18px); opacity: 0; }
+.motion .hp-cycle img { opacity: 0; animation: hpCycle 14s var(--ease) infinite both; }
+.motion .hp-cycle img:nth-child(1) { animation-delay: 0s; }
+.motion .hp-cycle img:nth-child(2) { animation-delay: 3.5s; }
+.motion .hp-cycle img:nth-child(3) { animation-delay: 7s; }
+.motion .hp-cycle img:nth-child(4) { animation-delay: 10.5s; }
+@keyframes hpCycle { 0% { opacity: 0; transform: translateY(14px) scale(.985); } 4%, 25% { opacity: 1; transform: none; } 29%, 100% { opacity: 0; transform: translateY(-8px) scale(.99); } }

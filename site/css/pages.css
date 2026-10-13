@@ -1,0 +1,150 @@
+/* The site's own pages in the light v2 look (2026-10-13, from the Paper file "FIG Website · Pages"): Help, Contact, the blog,
+   the legal pages and the "back to FIG" pages Stripe returns to. Built by scripts/pages.py; Home and site.css are the base. */
+
+/* ---------- the top of a page: eyebrow, big title, a line, something on the right ---------- */
+.pg-hero { padding: 150px 0 56px; }
+.pg-hero-line { border-bottom: 1px solid var(--line); }
+.pg-hero-in { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px 64px; }
+.pg-hero-text { display: grid; gap: 20px; max-width: 760px; }
+.pg-eye { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); }
+.pg-eye::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); flex-shrink: 0; }
+.pg-h1 { font-size: clamp(46px, 7.4vw, 96px); line-height: .98; font-weight: 800; letter-spacing: -0.055em; color: var(--ink); }
+.pg-lead { max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.6; font-weight: 500; color: var(--muted); }
+.pg-kick { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); }
+.pg-kick.leaf { color: #0B9E55; }
+
+/* pills: jump links, the legal documents, the blog's topics */
+.pg-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.pg-pills a, .pg-pills button { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff;
+  font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; cursor: pointer; transition: border-color .2s, background .2s, color .2s, transform .2s var(--ease); }
+.pg-pills a:hover, .pg-pills button:hover { border-color: var(--cobalt); }
+.pg-pills a:active, .pg-pills button:active { transform: scale(.96); }
+.pg-pills [aria-current="page"], .pg-pills [aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* "the short version" / "key points": a check list on ice */
+.pg-short { display: grid; gap: 14px; padding: 30px 34px; border-radius: 24px; background: var(--ice); }
+.pg-short h2 { font-size: 13px !important; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); margin: 0 !important; }
+.pg-short ul { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
+.pg-short li { position: relative; padding-left: 34px; font-size: 17px; line-height: 1.55; font-weight: 600; color: var(--ink); margin: 0; }
+.pg-short li::before { content: ""; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 50%; background: var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
+
+/* the one dark moment on a page, and the cobalt block */
+.pg-tight { padding-top: 0; }
+.pg-dark, .pg-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; padding: clamp(28px, 4vw, 48px); border-radius: 28px; }
+.pg-dark { background: var(--ink); color: #F4F6FB; }
+.pg-cta { background: var(--cobalt); color: #fff; }
+.pg-dark h2, .pg-cta h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; margin-bottom: 10px; }
+.pg-dark p { max-width: 34em; color: #A3ADBF; font-size: 17px; line-height: 1.55; }
+.pg-cta p { max-width: 34em; color: #DDE7FF; font-size: 17px; line-height: 1.55; }
+.pg-dark-btns, .pg-cta-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-soft { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.btn-soft:hover { background: #fff; border-color: var(--cobalt); box-shadow: none; }
+
+/* ---------- Help: diners on white, restaurants on ice ---------- */
+.faq-head .pg-eye { margin-bottom: 14px; }
+.faq-head .side { margin-top: 14px; color: var(--muted); font-size: 17px; }
+/* site.css's older ".faq details" rules (padding, a turned "+") don't apply to these accordions */
+.faq-list details.qa { padding: 0; }
+.faq-list details.qa[open] summary::after { transform: none; }
+.section.ice .qa summary::after { background: #fff; }
+.section.ice .qa[open] summary::after { background: var(--cobalt); }
+.section.ice .faq-list, .section.ice .qa { border-color: var(--ice-line); }
+
+/* ---------- Contact: the form card on an ice band ---------- */
+.ct-band { background: var(--ice); padding-bottom: 96px; }
+.ct-grid { display: grid; gap: 40px; align-items: start; }
+.ct-card { margin: 0; padding: clamp(22px, 3vw, 40px); border-radius: 32px; background: #fff; border: 1px solid var(--ice-line); box-shadow: 0 30px 80px rgba(30, 94, 255, .10); }
+.ct-card .ct-field { color: var(--ink); }
+.ct-card .btn { justify-self: stretch; min-height: 56px; font-size: 17px; }
+.ct-more .pg-eye { margin-bottom: 22px; }
+.ct-ways { display: grid; gap: 16px; }
+.ct-way { display: grid; gap: 10px; align-content: start; padding: 30px; border-radius: 24px; background: var(--ice); border: 1px solid var(--ice-line); text-decoration: none; color: var(--ink); transition: border-color .25s, transform .3s var(--ease); }
+a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
+.ct-way b { font-size: 26px; font-weight: 800; letter-spacing: -0.035em; }
+.ct-way span { color: var(--muted); font-size: 17px; line-height: 1.55; }
+.ct-way em { font-style: normal; font-weight: 800; color: var(--cobalt); }
+.ct-way em.leaf { color: #0B9E55; }
+@media (min-width: 900px) { .ct-grid { grid-template-columns: 1fr 560px; gap: 80px; } .ct-ways { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Legal: a contents rail beside the document ---------- */
+.lg { padding-top: 64px; }
+.lg-grid { display: grid; gap: 40px; }
+.lg-rail { display: none; }
+.lg-doc { display: grid; gap: 44px; max-width: 760px; }
+.lg-solo { margin: 0 auto; gap: 16px; }
+.lg-sec { display: grid; gap: 14px; scroll-margin-top: 110px; }
+.lg-doc h2 { font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin: 0; }
+.lg-doc p, .lg-doc li { font-size: 17px; line-height: 1.7; font-weight: 500; color: var(--muted); }
+.lg-doc ul { display: grid; gap: 8px; padding-left: 22px; list-style: disc; }
+.lg-doc a:not(.btn) { color: var(--cobalt); font-weight: 700; }
+.lg-bullet { position: relative; padding-left: 22px; }
+.lg-bullet::before { content: ""; position: absolute; left: 4px; top: .72em; width: 6px; height: 6px; border-radius: 50%; background: var(--cobalt); }
+.lg-ask { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding: 26px 30px; border-radius: 24px; border: 1px solid var(--line); }
+.lg-ask div { display: grid; gap: 4px; }
+.lg-ask b { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+.lg-ask span { color: var(--dim); font-size: 15px; }
+@media (min-width: 1000px) {
+  .lg-grid { grid-template-columns: 280px minmax(0, 760px); gap: 96px; align-items: start; }
+  .lg-rail { position: sticky; top: 110px; display: grid; gap: 2px; }
+  .lg-rail b { padding: 0 14px 12px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .lg-rail a { padding: 9px 14px; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
+  .lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
+}
+
+/* ---------- Blog: the newest post on ice, then photo rows ---------- */
+.post-card.bl-feature, .post-card.bl-row { padding: 0; border: 0; border-radius: 0; background: none; transform: none; }
+.bl-feature-band { padding: 80px 0; }
+.bl-feature { display: grid; gap: 28px; align-items: center; text-decoration: none; color: var(--ink); }
+.bl-pic { position: relative; display: block; border-radius: 32px; overflow: hidden; }
+.bl-pic img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .6s var(--ease); }
+.bl-feature:hover .bl-pic img { transform: scale(1.03); }
+.bl-pic i { position: absolute; left: 22px; top: 22px; padding: 8px 14px; border-radius: 999px; background: var(--volt); color: var(--ink); font-style: normal; font-weight: 800; font-size: 13px; }
+.bl-text { display: grid; gap: 16px; }
+.bl-text b { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; font-weight: 800; letter-spacing: -0.045em; color: var(--ink) !important; }
+.bl-text p { font-size: 18px; line-height: 1.65; color: var(--muted); margin: 0; }
+.bl-text em { font-style: normal; font-weight: 800; color: var(--cobalt); }
+@media (min-width: 980px) { .bl-feature { grid-template-columns: 720px 1fr; gap: 56px; } }
+.bl-rows { padding-top: 40px; }
+.bl-list { display: grid; }
+.bl-list > .bl-row:first-child { border-top: 1px solid var(--line); }
+.bl-row { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; padding: 22px 0 !important; border-bottom: 1px solid var(--line) !important; text-decoration: none; color: var(--ink); }
+.bl-row img { width: 112px; height: 84px; border-radius: 16px; object-fit: cover; transition: transform .4s var(--ease); }
+.bl-row:hover img { transform: scale(1.04); }
+.bl-row > span { display: grid; gap: 6px; min-width: 0; }
+.bl-row b { font-size: clamp(18px, 2vw, 24px); line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink) !important; transition: color .2s; }
+.bl-row:hover b { color: var(--cobalt) !important; }
+.bl-row p { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0; }
+@media (min-width: 720px) { .bl-row { grid-template-columns: 240px 1fr; gap: 32px; } .bl-row img { width: 240px; height: 168px; border-radius: 20px; } }
+@media (max-width: 719px) { .bl-row p { display: none; } }
+
+/* a post */
+.ps-head { padding: 140px 0 48px; text-align: center; }
+.ps-head .wrap { display: grid; justify-items: center; gap: 20px; max-width: 1000px; }
+.ps-back { font-weight: 700; color: var(--cobalt); text-decoration: none; }
+.ps-h1 { font-size: clamp(40px, 5.6vw, 72px); line-height: 1.02; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); }
+.ps-dek { max-width: 40em; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.6; font-weight: 500; color: var(--muted); }
+.ps-head .post-by { margin: 0; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.ps-cover { width: 100%; height: auto; aspect-ratio: 15 / 7; object-fit: cover; border-radius: 32px; }
+.ps-body { max-width: 760px; margin: 0 auto; padding: 72px var(--gutter) 96px; box-sizing: content-box; }
+.ps-body > * + * { margin-top: 18px; }
+.ps-body h2 { margin-top: 48px; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; font-weight: 800; letter-spacing: -0.035em; color: var(--ink); scroll-margin-top: 110px; }
+.ps-body p, .ps-body li { font-size: 18px; line-height: 1.72; font-weight: 500; color: var(--muted); }
+.ps-body ul { display: grid; gap: 8px; padding-left: 22px; list-style: disc; }
+.ps-body a:not(.btn) { color: var(--cobalt); font-weight: 700; }
+.ps-body .pg-short { margin-top: 0; }
+.ps-body .pg-short ul { list-style: none; padding: 0; }
+.ps-body .faq-list { margin-top: 20px; }
+.ps-more .pg-eye { margin-bottom: 18px; }
+
+/* ---------- back to FIG (Stripe's return pages): one card over the faded map ---------- */
+.st { display: flex; justify-content: center; padding: 150px var(--gutter) 120px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, .3) 26%, rgba(255, 255, 255, .3) 74%, #fff 100%), url("/assets/map-fallback.webp") center / cover; }
+.st-card { display: grid; justify-items: center; gap: 22px; width: 100%; max-width: 640px; padding: clamp(32px, 5vw, 56px); border-radius: 32px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(30, 94, 255, .12); text-align: center; }
+.st-badge { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; background: var(--volt); color: var(--ink); font-size: 40px; font-weight: 800; }
+.st-badge.go { background: var(--cobalt); color: #fff; }
+.st-h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.04; font-weight: 800; letter-spacing: -0.045em; color: var(--ink); }
+.st-lead { font-size: 18px; line-height: 1.6; color: var(--muted); }
+.st-note { font-size: 15px; font-weight: 600; color: var(--dim); }
+.st-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 6px; }
+@media (max-width: 520px) { .st-btns .btn { flex: 1 1 100%; } }
+@media (max-width: 600px) { .pg-short { padding: 22px; border-radius: 20px; } .ps-cover { aspect-ratio: 4 / 3; border-radius: 24px; } .pg-hero { padding-top: 120px; } }

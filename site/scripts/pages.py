@@ -259,12 +259,14 @@ HELP = [
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
+# a real app screen under each section's title: the diner's QR, the restaurant's dashboard (tablet)
+HELP_SHOT = {"diners": ('qr', "The QR a diner shows at the counter", "phone"), "restaurants": ('tdash', "A restaurant's FIG dashboard", "wide")}
 help_html = hero("How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
                  '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>", cls="pg-hero-line")
 for k, (anchor, title, qs) in enumerate(HELP):
     head, sub = HELP_HEAD[anchor]
     help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
-                  f'<h2 class="h2">{head}</h2><p class="side">{sub}</p></div>{qa_list(qs, 1 if k else 2)}</div></section>')
+                  f'<h2 class="h2">{head}</h2><p class="side">{sub}</p><figure class="help-shot {HELP_SHOT[anchor][2]}"><img src="/assets/screens/{HELP_SHOT[anchor][0]}.webp" alt="{HELP_SHOT[anchor][1]}"></figure></div>{qa_list(qs, 1 if k else 2)}</div></section>')
 help_html += '''<section class="section pg-tight"><div class="wrap"><div class="pg-dark">
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>

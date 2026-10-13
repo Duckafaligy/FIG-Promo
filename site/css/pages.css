@@ -41,6 +41,12 @@
 
 /* ---------- Help: diners on white, restaurants on ice ---------- */
 .faq-head .side { margin-top: 14px; color: var(--muted); font-size: 17px; }
+.help-shot { display: none; margin: 32px 0 0; }
+.help-shot img { width: 100%; border-radius: 30px; border: 8px solid #0A1020; box-shadow: 0 30px 60px rgba(10, 16, 32, .18); background: #0A1020; }
+.help-shot.phone { width: 200px; transform: rotate(-3deg); }
+.help-shot.wide { width: 100%; transform: rotate(2deg); }
+.help-shot.wide img { border-radius: 22px; border-width: 7px; }
+@media (min-width: 980px) { .help-shot { display: block; } }
 .section.ice .qa summary::after { background: #fff; }
 .section.ice .qa[open] summary::after { background: var(--cobalt); }
 .section.ice .faq-list, .section.ice .qa { border-color: var(--ice-line); }
@@ -51,6 +57,18 @@
 .ct-card { margin: 0; padding: clamp(22px, 3vw, 40px); border-radius: 32px; background: #fff; border: 1px solid var(--ice-line); box-shadow: 0 30px 80px rgba(30, 94, 255, .10); }
 .ct-card .ct-field { color: var(--ink); }
 .ct-card .btn { justify-self: stretch; min-height: 56px; font-size: 17px; }
+/* sent: the form steps back and a note rises in its place */
+.ct-card { position: relative; overflow: hidden; }
+.ct-card > * { transition: opacity .35s, transform .45s var(--ease); }
+.ct-card.sent > :not(.ct-done) { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+.ct-done { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 32px; text-align: center; animation: ctIn .55s .1s var(--ease) both; }
+.ct-done b { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); }
+.ct-done p { max-width: 24em; color: var(--muted); font-size: 17px; line-height: 1.55; margin: 0; }
+.ct-done .btn { justify-self: center !important; min-height: 48px !important; font-size: 15px !important; margin-top: 6px; }
+.ct-done-tick { width: 76px; height: 76px; border-radius: 50%; background: var(--volt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6L17.5 8.5' fill='none' stroke='%230A1020' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 40px no-repeat; animation: ctPop .6s .15s cubic-bezier(.3, 1.4, .5, 1) both; }
+@keyframes ctIn { from { opacity: 0; transform: translateY(16px); } }
+@keyframes ctPop { from { transform: scale(.4); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ct-done, .ct-done-tick { animation: none; } }
 .ct-ways { display: grid; gap: 16px; }
 .ct-way { display: grid; gap: 10px; align-content: start; padding: 30px; border-radius: 24px; background: var(--ice); border: 1px solid var(--ice-line); text-decoration: none; color: var(--ink); transition: border-color .25s, transform .3s var(--ease); }
 a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
@@ -107,6 +125,14 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .bl-row > span { display: grid; gap: 6px; min-width: 0; }
 .bl-row b { font-size: clamp(18px, 2vw, 24px); line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink) !important; transition: color .2s; }
 .bl-row:hover b { color: var(--cobalt) !important; }
+.bl-row b::after { content: "→"; display: inline-block; margin-left: 10px; opacity: 0; transform: translateX(-8px); transition: opacity .25s, transform .35s var(--ease); }
+.bl-row:hover b::after { opacity: 1; transform: none; }
+/* the topic filter: what's left rises back in, one after another */
+.bl-list > .post-card:not([hidden]) { animation: blIn .45s var(--ease) both; }
+.bl-list > .post-card:nth-child(2) { animation-delay: .04s; } .bl-list > .post-card:nth-child(3) { animation-delay: .08s; }
+.bl-list > .post-card:nth-child(4) { animation-delay: .12s; } .bl-list > .post-card:nth-child(n+5) { animation-delay: .16s; }
+@keyframes blIn { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .bl-list > .post-card { animation: none !important; } }
 .bl-row p { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0; }
 @media (min-width: 720px) { .bl-row { grid-template-columns: 240px 1fr; gap: 32px; } .bl-row img { width: 240px; height: 168px; border-radius: 20px; } }
 @media (max-width: 719px) { .bl-row p { display: none; } }

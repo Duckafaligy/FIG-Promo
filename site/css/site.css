@@ -987,3 +987,47 @@ p.consent { cursor: default; padding-left: 22px; }
 .doc a.btn { color: #fff; text-decoration: none; }
 .doc a.btn-ghost { color: var(--text); }
 .doc a.btn-volt { color: #0A1020; }
+
+/* ABOUT v2 (Paper "About · Desktop"): photo stack hero, at-a-glance on ice, the why with a pull quote,
+   two how-it-works cards (cobalt diners, ice restaurants), the six differences, FAQ */
+.ab-photos { display: none; }
+@media (min-width: 980px) {
+  .ab-hero .pg-hero-in { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+  .ab-photos { display: flex; align-items: flex-end; gap: 16px; flex-shrink: 0; }
+  .ab-photos img { width: 180px; height: 260px; object-fit: cover; border-radius: 28px; box-shadow: 0 24px 50px rgba(10, 16, 32, .14); }
+  .ab-photos img + img { height: 340px; }
+  .motion .ab-photos img { animation: hpIn 1s .3s var(--ease) both; }
+  .motion .ab-photos img + img { animation-delay: .45s; }
+}
+.ab-glance { margin-top: 64px; padding: 80px 0; background: var(--ice); }
+.ab-glance-in { display: grid; gap: 28px; }
+.ab-dl { margin: 0; }
+.ab-dl div { display: grid; gap: 4px; padding: 20px 0; border-bottom: 1px solid var(--ice-line); }
+.ab-dl div:last-child { border-bottom: 0; }
+.ab-dl dt { font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--cobalt); }
+.ab-dl dd { margin: 0; font-size: 18px; line-height: 1.55; font-weight: 500; }
+@media (min-width: 900px) { .ab-glance-in { grid-template-columns: 300px 1fr; gap: 80px; } .ab-dl div { grid-template-columns: 170px 1fr; gap: 24px; } }
+.ab-why-in { display: grid; gap: 40px; }
+.ab-why blockquote { margin: 22px 0 28px; font-weight: 800; font-size: clamp(30px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.04em; color: var(--ink); text-wrap: balance; }
+.ab-why img { width: 100%; height: auto; aspect-ratio: 26 / 15; object-fit: cover; border-radius: 28px; }
+.ab-why-text { display: grid; gap: 22px; align-content: start; color: var(--muted); font-size: 19px; line-height: 1.65; }
+.ab-why-text .ab-strong { color: var(--ink); font-weight: 600; }
+@media (min-width: 980px) { .ab-why-in { grid-template-columns: 1fr 1fr; gap: 80px; } .ab-why-text { padding-top: 64px; } }
+.ab-how-in { display: grid; gap: 20px; }
+.ab-col { display: grid; gap: 22px; align-content: start; padding: clamp(28px, 4vw, 44px); border-radius: 32px; background: var(--ice); }
+.ab-col h2 { font-weight: 800; font-size: 34px; letter-spacing: -0.04em; }
+.ab-col ol { display: grid; gap: 16px; }
+.ab-col li { display: grid; grid-template-columns: 116px 1fr; gap: 14px; font-size: 17px; line-height: 1.55; }
+.ab-col li b { font-weight: 800; font-size: 19px; color: var(--cobalt); }
+.ab-col li span, .ab-col > p { color: var(--muted); }
+.ab-diners { background: var(--cobalt); color: #fff; }
+.ab-diners li b { color: var(--volt); }
+.ab-diners li span, .ab-diners > p { color: rgba(255, 255, 255, .88); }
+@media (min-width: 900px) { .ab-how-in { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.ab-diff-grid { display: grid; gap: 36px 40px; margin-top: 44px; }
+.ab-diff-grid li { display: grid; gap: 8px; padding-top: 20px; border-top: 3px solid var(--ink); }
+.ab-diff-grid li:first-child { border-color: var(--cobalt); }
+.ab-diff-grid b { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
+.ab-diff-grid span { color: var(--muted); font-size: 16px; line-height: 1.6; }
+@media (min-width: 720px) { .ab-diff-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .ab-diff-grid { grid-template-columns: repeat(3, 1fr); } }

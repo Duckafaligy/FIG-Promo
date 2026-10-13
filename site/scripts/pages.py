@@ -205,7 +205,10 @@ page("cookies", "Cookies", "What this website stores on your device.", group="Le
 </article></div></section>''')
 
 page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
-     ABOUT.replace("{faq}", '<div class="faq">' + "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in ABOUT_FAQ) + "</div>"),
+     hero('The restaurant deals app for <span class="accent">Markham.</span>',
+          "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and keep every dollar of every bill.",
+          '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" alt="" width="720" height="1360"></div>', "ab-hero")
+     + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
      keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
                     "mainEntity": {"@type": "Organization", "name": "FIG Technologies Inc.", "url": SITE_URL, "foundingLocation": "Markham, Ontario",

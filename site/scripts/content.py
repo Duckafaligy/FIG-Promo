@@ -13,59 +13,57 @@ ABOUT_FAQ = [
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),
 ]
 
-ABOUT = '''<p class="doc-kicker">About FIG</p>
-<h1>FIG is the restaurant deals app for Markham.</h1>
-<p class="lead-p">Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and keep every dollar of every bill.</p>
+ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
+<h2 class="h2">FIG at a glance</h2>
+<dl class="ab-dl">
+<div><dt>What</dt><dd>A mobile app (iPhone, Android and the web) for finding and using deals at local restaurants.</dd></div>
+<div><dt>Where</dt><dd>Launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</dd></div>
+<div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
+<div><dt>For restaurants</dt><dd>Free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</dd></div>
+<div><dt>Company</dt><dd>FIG Technologies Inc., Markham, Ontario.</dd></div>
+</dl></div></section>
 
-<div class="doc-short"><h2>FIG at a glance</h2><ul>
-<li><b>What:</b> a mobile app (iPhone and Android) for finding and using deals at local restaurants.</li>
-<li><b>Where:</b> launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</li>
-<li><b>For diners:</b> free. Nothing to upgrade.</li>
-<li><b>For restaurants:</b> free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</li>
-<li><b>Company:</b> FIG Technologies Inc., Markham, Ontario.</li>
-</ul></div>
-
-<h2>Why FIG exists</h2>
+<section class="section ab-why"><div class="wrap ab-why-in">
+<div class="ab-why-side"><h2 class="h2">Why FIG exists</h2><blockquote>“A full room at 7 pm, then a slow Tuesday afternoon.”</blockquote>
+<img src="/assets/about/noodle-bar.webp" alt="Stir-fried noodles on a wooden plate" width="1040" height="600" loading="lazy"></div>
+<div class="ab-why-text">
 <p>Markham is one of the best places in Canada to eat. Dim sum, ramen, Hakka, Hong Kong cafés, Korean fried chicken, Indian sweets, bubble tea on every plaza. Most of the places that make it great are small and independent.</p>
-<p>Those owners all have the same problem: quiet hours. A full room at 7 pm, then a slow Tuesday afternoon. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>
-<p>FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it. We make money from the optional FIG Premium and from 5% of the food on takeout orders diners pay for in the app.</p>
+<p>Those owners all have the same problem: quiet hours. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>
+<p class="ab-strong">FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it.</p>
+<p>We make money from the optional FIG Premium and from 5% of the food on takeout orders diners pay for in the app.</p>
+</div></div></section>
 
-<h2>How FIG works for diners</h2>
-<ol>
-<li><b>Find</b> a live deal near you on the home feed or the map. Filter by craving, budget and diet (halal, vegetarian, vegan, gluten-free and more).</li>
-<li><b>Claim</b> it in one tap. It’s yours for as long as the deal runs.</li>
-<li><b>Show</b> your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</li>
-<li><b>Rate</b> the visit afterwards, so reviews on FIG come from real visits.</li>
-</ol>
-<p>Some deals also let you order takeout and pick up, and you can message a restaurant before you go, and share a deal with your group chat so everyone can agree on where to eat.</p>
+<section class="section ab-how"><div class="wrap ab-how-in">
+<article class="ab-col ab-diners"><h2>For diners</h2><ol>
+<li><b>Find</b><span>A live deal near you on the home feed or the map. Filter by craving, budget and diet (halal, vegetarian, vegan, gluten-free and more).</span></li>
+<li><b>Claim</b><span>In one tap. It’s yours for as long as the deal runs.</span></li>
+<li><b>Show</b><span>Your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</span></li>
+<li><b>Rate</b><span>The visit afterwards, so reviews on FIG come from real visits.</span></li>
+</ol><p>Some deals also let you order takeout and pick up. You can message a restaurant before you go, and share a deal with your group chat so everyone agrees on where to eat.</p></article>
+<article class="ab-col ab-owners"><h2>For restaurants</h2><ol>
+<li><b>Set up</b><span>Your page: photos, address, hours, cuisine and dietary options.</span></li>
+<li><b>Go live</b><span>For free.</span></li>
+<li><b>Post</b><span>A deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</span></li>
+<li><b>Scan</b><span>Diners at the counter with any phone or tablet. Every scan is free.</span></li>
+<li><b>Go Premium</b><span>When you want more: unlimited locations, deal announcements and area insights, $50 a year. Optional.</span></li>
+</ol><p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p></article>
+</div></section>
 
-<h2>How FIG works for restaurants</h2>
-<ol>
-<li><b>Set up</b> your page: photos, address, hours, cuisine and dietary options.</li>
-<li><b>Go live</b> for free.</li>
-<li><b>Post</b> a deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</li>
-<li><b>Scan</b> diners at the counter with any phone or tablet. Every scan is free.</li>
-<li><b>Go Premium</b> when you want more: unlimited locations, deal announcements and area insights, $50 a year. Optional.</li>
-</ol>
-<p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p>
+<section class="section ab-diff"><div class="wrap">
+<h2 class="h2">What makes FIG different.</h2>
+<ul class="ab-diff-grid">
+<li><b>No commission on the bill.</b><span>Diners pay you, at your counter. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.</span></li>
+<li><b>Honest deals.</b><span>Every deal, timer and opening hour is set by the restaurant itself.</span></li>
+<li><b>Codes that can't be copied.</b><span>Rotating QR codes stop screenshots and resold deals.</span></li>
+<li><b>Private by default.</b><span>Restaurants never see a diner's phone number, even for a takeout order. Chats go through the app.</span></li>
+<li><b>Real reviews.</b><span>Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</span></li>
+<li><b>Local first.</b><span>Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor first. Then Richmond Hill, Vaughan, Toronto and the rest of the GTA.</span></li>
+</ul></div></section>
 
-<h2>What makes FIG different</h2>
-<ul>
-<li><b>No commission on the bill.</b> Diners pay you, at your counter. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.</li>
-<li><b>Honest deals.</b> Every deal, timer and opening hour is set by the restaurant itself.</li>
-<li><b>Codes that can't be copied.</b> Rotating QR codes stop screenshots and resold deals.</li>
-<li><b>Private by default.</b> Restaurants never see a diner's phone number, even for a takeout order. Chats go through the app.</li>
-<li><b>Real reviews.</b> Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</li>
-</ul>
-
-<h2>Local first</h2>
-<p>We're starting with the neighbourhoods we know: Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor. Once Markham is running well, Richmond Hill is next, then Vaughan, Toronto and the rest of the GTA.</p>
-
-<h2>Questions people ask about FIG</h2>
+<section class="section ab-faq"><div class="wrap faq">
+<div class="faq-head"><h2 class="h2">Questions people ask about FIG</h2><p class="side">Restaurant owners: <a href="/#owners">see how pricing works</a>. Everyone else: <a href="/contact">say hello</a>, or read the <a href="/blog">blog</a>.</p></div>
 {faq}
-
-<h2>Get in touch</h2>
-<p>Restaurant owners: <a href="/#owners">see how pricing works</a>. Diners: <a href="/#how">see how it works</a>. Everyone else: <a href="/contact">say hello</a>, or read the <a href="/blog">blog</a>.</p>'''
+</div></section>'''
 
 POSTS = [
     dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", topic="News",

@@ -1,0 +1,10 @@
+/* The web look, shared with the FIG web app (app/src/ui/webTokens.ts holds the same values). Change both together. */
+:root {
+  --w-bg: #FFFFFF; --w-ice: #EEF3FF; --w-ice-line: #DCE4F7; --w-ink: #0A1020; --w-ink-muted: #4B5568; --w-dim: #66718A;
+  --w-cobalt: #1E5EFF; --w-cobalt-hover: #1550E6; --w-volt: #C8F135; --w-leaf: #14C86B; --w-leaf-text: #087A42; --w-danger: #D92D3A;
+  --w-font: "Jakarta", system-ui, sans-serif;
+  --w-h1: 56px; --w-h2: 40px; --w-h3: 24px; --w-lead: 19px; --w-body: 17px; --w-small: 14px; --w-label: 13px;
+  --w-r-sm: 12px; --w-r-md: 16px; --w-r-lg: 24px; --w-r-xl: 32px; --w-r-pill: 999px;
+  --w-shadow-card: 0 14px 34px rgba(10, 16, 32, .10); --w-shadow-float: 0 24px 50px rgba(10, 16, 32, .16); --w-shadow-button: 0 12px 28px rgba(30, 94, 255, .32);
+  --w-max: 1200px; --w-gutter: 24px; --w-nav: 68px;
+}

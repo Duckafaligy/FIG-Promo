@@ -1,3 +1,4 @@
+@import url("/css/tokens.css");
 @font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans.woff2") format("woff2"), url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
 
 :root {

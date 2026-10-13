@@ -875,3 +875,86 @@ p.consent { cursor: default; padding-left: 22px; }
 .contact .btn { justify-self: start; }
 .contact .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 @media (max-width: 520px) { .contact { padding: 18px; } .contact .btn { justify-self: stretch; } }
+
+/* =====================================================================
+   HOME v2 (2026-10-13, from the Paper "Home v2" design): phone on the hero map, numbers strip,
+   an ice band for How it works, a dark band for the tutorial, no-hidden-fees list, FAQ, cities, closing
+   ===================================================================== */
+:root { --ice: #EEF3FF; --ice-line: #DCE4F7; --ink: #0A1020; }
+.hero-phone { display: none; }
+@media (min-width: 1100px) {
+  .hero-phone { display: block; position: absolute; z-index: 1; right: max(var(--gutter), calc((100vw - var(--max)) / 2)); top: 50%; width: 320px; transform: translateY(-46%); }
+  .hero-phone .phone { padding: 9px; border-radius: 50px; }
+  .hero-phone .phone img { border-radius: 42px; }
+  .hp-sticker { position: absolute; display: flex; align-items: center; gap: 10px; border-radius: 20px; box-shadow: 0 18px 40px rgba(10, 16, 32, .16); font-weight: 800; color: var(--ink); white-space: nowrap; }
+  .hp-sticker.deal { left: -120px; top: 26%; padding: 10px 16px 10px 10px; background: #fff; border: 1px solid var(--ice-line); transform: rotate(-4deg); }
+  .hp-sticker.deal img { width: 46px; height: 46px; border-radius: 14px; object-fit: cover; }
+  .hp-sticker.deal span { display: grid; gap: 2px; font-size: 15px; }
+  .hp-sticker.deal small { font-weight: 600; font-size: 12px; color: var(--muted); }
+  .hp-sticker.saved { right: -34px; bottom: 16%; padding: 12px 18px; border-radius: 999px; background: var(--volt); font-size: 15px; transform: rotate(3deg); }
+  .motion .hp-sticker { animation: hpFloat 6s ease-in-out infinite; }
+  .motion .hp-sticker.saved { animation-delay: -3s; }
+}
+@keyframes hpFloat { 50% { translate: 0 -8px; } }
+
+.stats-wrap { padding: 40px 0 0; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--ice-line); }
+.stats li { display: grid; gap: 4px; padding: 26px 0; border-bottom: 1px solid var(--ice-line); }
+.stats b { font-weight: 800; font-size: clamp(40px, 6vw, 72px); line-height: 1; letter-spacing: -0.05em; color: var(--ink); }
+.stats b.accent { color: var(--cobalt); }
+.stats span { color: var(--muted); font-weight: 600; font-size: 15px; }
+@media (min-width: 900px) {
+  .stats { grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--ice-line); }
+  .stats li { padding: 36px 0 36px 36px; border-bottom: 0; border-left: 1px solid var(--ice-line); }
+  .stats li:first-child { padding-left: 0; border-left: 0; }
+}
+
+.section.ice { background: var(--ice); }
+.section.ice .step .phone { box-shadow: 0 24px 50px rgba(10, 16, 32, .14); }
+
+.band.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
+.band.dark .h2 { color: #fff; }
+.band.dark .body, .band.dark .tut-label { color: #A3ADBF; }
+
+.nofees { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: -24px 0 40px; }
+.nofees li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.nofees li::before { content: ""; width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; background: var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
+
+.faq { display: grid; gap: 32px; }
+.faq-head .side a { color: var(--cobalt); font-weight: 700; }
+.faq-list { border-top: 1px solid var(--ice-line); }
+.qa { border-bottom: 1px solid var(--ice-line); }
+.qa summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; cursor: pointer; list-style: none; font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--ice); font-size: 20px; transition: transform .3s var(--ease), background .3s, color .3s; }
+.qa[open] summary::after { content: "\2212"; background: var(--cobalt); color: #fff; }
+.qa summary:hover::after { transform: scale(1.08); }
+.qa p { padding: 0 56px 26px 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
+@media (min-width: 980px) { .faq { grid-template-columns: 360px 1fr; gap: 80px; align-items: start; } .faq-head { position: sticky; top: 120px; } }
+
+.cities { display: grid; gap: 16px; margin-top: 40px; }
+.city { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 180px; padding: 26px; border-radius: 28px; background: var(--ice); text-decoration: none; color: var(--ink); overflow: hidden; }
+.city b { font-size: 28px; font-weight: 800; letter-spacing: -0.04em; }
+.city.big { min-height: 300px; background: url("/assets/map-fallback.webp") 70% center / cover; }
+.city-name { display: grid; gap: 2px; align-self: flex-start; padding: 16px 20px; border-radius: 20px; background: rgba(255, 255, 255, .94); }
+.city-name b { font-size: 34px; }
+.city-name span { color: var(--muted); font-weight: 600; font-size: 15px; }
+.city-tag { align-self: flex-start; padding: 7px 14px; border-radius: 999px; background: #fff; color: var(--cobalt); font-weight: 800; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+.city-tag.live { background: var(--leaf); color: #06331C; }
+.city.ask { background: transparent; border: 2px dashed var(--ice-line); transition: border-color .3s, transform .3s var(--ease); }
+.city.ask span { color: var(--cobalt); font-weight: 700; }
+.city.ask:hover { border-color: var(--cobalt); transform: translateY(-3px); }
+@media (min-width: 900px) { .cities { grid-template-columns: 2fr 1fr 1fr; } .city.big { min-height: 360px; } }
+
+.closing .h2 { color: #fff; }
+.closing-btns { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+.btn-line { background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, .55); }
+.btn-line:hover { background: rgba(255, 255, 255, .12); box-shadow: none; }
+.get-app .badges .btn { margin-right: 4px; }
+/* the web app is live: "Open FIG" is the nav's one button at every width (the stores come later) */
+.nav-stores { display: none; }
+.nav-get { display: inline-flex; }
+.motion .hero-phone { animation: hpIn 1s .5s var(--ease) both; }
+@keyframes hpIn { from { opacity: 0; translate: 0 40px; } }
+.get-app > * { min-width: 0; }
+.get-app .badges { display: flex; flex-wrap: wrap; gap: 10px; }

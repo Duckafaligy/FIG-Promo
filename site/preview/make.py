@@ -58,7 +58,7 @@ def row(r, i=0):
     return f'''<a class="lrow{" sel" if i == 0 else ""}" href="rest.html"><div class="lph" style="background-image:url({PHOTO}/{ph}.webp)"></div>
 <div class="lt"><b>{n}</b><span class="dim">{cu} · {km} · ★ {st}</span><span class="deal sm">{deal}</span></div></a>'''
 
-FILES = {"home": "index.html", "map": "map.html", "rest": "rest.html", "owner": "owner.html"}
+FILES = {"home": "index.html", "map": "map.html", "rest": "rest.html", "owner": "owner.html", "homeplus": "home-plus.html", "restplus": "rest-plus.html"}
 CRAVE = [("Dim sum", "dumpling-house"), ("Korean BBQ", "seoul-house"), ("Ramen", "kinton-ramen"), ("Bubble tea", "chatime"), ("Pho", "pho-hung"), ("Sushi", "sakura-house")]
 def crave():
     return '<div class="crave">' + "".join(f'<a class="cv" href="map.html" style="background-image:url({PHOTO}/{ph}.webp)"><span>{n}</span></a>' for n, ph in CRAVE) + "</div>"
@@ -119,7 +119,7 @@ TABS_JS = '<script>document.querySelectorAll(".tab").forEach(t=>t.addEventListen
 
 def page(name, body, extra_css):
     d, kind = name.split("-"); folder = OUT / d.lower(); folder.mkdir(parents=True, exist_ok=True)
-    title = {"home": "Home", "map": "Map", "rest": "Golden Lantern", "owner": "For owners"}[kind]
+    title = {"home": "Home", "map": "Map", "rest": "Golden Lantern", "owner": "For owners", "homeplus": "Home (with photos)", "restplus": "Golden Lantern (with photos)"}[kind]
     (folder / FILES[kind]).write_text(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>{title} · Direction {d} · FIG preview</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/preview/preview.css"><style>{CSS}{extra_css}{FULL_CSS} a {{ color: inherit; text-decoration: none; }} .cols > *, .rcols > *, .two > *, .split > * {{ min-width: 0; }} .chips {{ max-width: 100%; overflow-x: auto; scrollbar-width: none; }}</style></head><body>{body}<div class="note">Preview · example restaurants</div><script src="/preview/preview.js" defer></script></body></html>""", encoding="utf-8")

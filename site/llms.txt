@@ -3,7 +3,7 @@
 > FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
-- Company: FIG Technologies Inc., Markham, Ontario
+- Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; no loyalty points, rewards or AI features

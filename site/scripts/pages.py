@@ -49,7 +49,7 @@ FOOTER = f'''<footer class="foot">
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 FIG Technologies Inc. · Markham, Ontario · <a class="admin-link" href="/admin">Are you the admin?</a></span>
+      <span>© 2026 FIG · Markham, Ontario · <a class="admin-link" href="/admin">Are you the admin?</a></span>
       <span>App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap. App Store is a trademark of Apple Inc. Google Play is a trademark of Google LLC.</span>
     </div>
   </div>
@@ -75,7 +75,7 @@ def head_meta(path, title, desc, extra="", og_type="website", image="/assets/og.
 index = re.sub(r'<footer class="foot">.*?</footer>', FOOTER, index, count=1, flags=re.S)
 index = re.sub(r'\n  <!-- seo -->.*?<!-- /seo -->', "", index, flags=re.S)
 ORG = json.dumps({"@context": "https://schema.org", "@graph": [
-    {"@type": "Organization", "name": "FIG Technologies Inc.", "url": SITE_URL, "logo": SITE_URL + "/assets/icons/icon-512.png",
+    {"@type": "Organization", "name": "FIG", "url": SITE_URL, "logo": SITE_URL + "/assets/icons/icon-512.png",
      "address": {"@type": "PostalAddress", "addressLocality": "Markham", "addressRegion": "ON", "addressCountry": "CA"}},
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
@@ -209,9 +209,9 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
           "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and pay no commission on dine-in.",
           '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" srcset="/assets/about/dumpling-house-360.webp 360w, /assets/about/dumpling-house.webp 720w" sizes="180px" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" srcset="/assets/about/brew-lab-360.webp 360w, /assets/about/brew-lab.webp 720w" sizes="180px" alt="" width="720" height="1360"></div>', "ab-hero")
      + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
-     keywords=BASE_KW + ", about FIG, FIG Technologies, Markham startup", group="Company",
+     keywords=BASE_KW + ", about FIG, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
-                    "mainEntity": {"@type": "Organization", "name": "FIG Technologies Inc.", "url": SITE_URL, "foundingLocation": "Markham, Ontario",
+                    "mainEntity": {"@type": "Organization", "name": "FIG", "url": SITE_URL, "foundingLocation": "Markham, Ontario",
                                    "areaServed": ["Markham, Ontario"], "description": "FIG is a restaurant deals app for Markham, Ontario."}}) + faq_ld(ABOUT_FAQ))
 
 # a real inbox (user 2026-10-11): the @fig.app addresses never existed. The form goes to support_messages through
@@ -421,7 +421,7 @@ for k, post in enumerate(POSTS):
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",
                "image": SITE_URL + img, "mainEntityOfPage": SITE_URL + url, "wordCount": len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split()),
                "author": {"@type": "Organization", "name": "FIG", "url": SITE_URL},
-               "publisher": {"@type": "Organization", "name": "FIG Technologies Inc.", "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/icons/icon-512.png"}}}
+               "publisher": {"@type": "Organization", "name": "FIG", "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/icons/icon-512.png"}}}
     page(url[1:], post["title"], post["dek"], body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img,
          extra_head=ld(article) + faq_ld(post["faq"]))
     items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
@@ -479,7 +479,7 @@ LLMS = f"""# FIG
 > FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
-- Company: FIG Technologies Inc., Markham, Ontario
+- Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
 - Diners: free; no loyalty points, rewards or AI features

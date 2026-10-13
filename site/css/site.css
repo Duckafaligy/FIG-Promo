@@ -1090,3 +1090,11 @@ p.consent { cursor: default; padding-left: 22px; }
 @keyframes chipIn { from { opacity: 0; transform: translateY(6px) scale(.96); } }
 /* sections sat 280 px apart on a computer: a little tighter */
 @media (min-width: 720px) { .section { padding: 112px 0; } }
+
+/* FAQ +/−: drawn, not typed (the − glyph sat low in its circle) */
+.qa summary::after { content: ""; background: var(--ice) linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat; color: var(--ink); }
+.qa summary::before { content: ""; position: absolute; right: 17px; width: 2px; height: 12px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease), opacity .3s; }
+.qa summary { position: relative; }
+.qa[open] summary::after { content: ""; background: var(--cobalt) linear-gradient(#fff, #fff) center / 12px 2px no-repeat; }
+.qa[open] summary::before { transform: rotate(90deg); opacity: 0; }
+.qa summary:focus-visible { outline: 3px solid var(--volt); outline-offset: 2px; border-radius: 10px; }

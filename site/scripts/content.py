@@ -9,7 +9,7 @@ ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
     ("Is FIG free?", "Yes for diners, always. For restaurants, listing, deals, scans and chats are free, with no commission on the bill and no fee per diner. FIG makes money from the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario first, then Richmond Hill, then the rest of York Region and the Greater Toronto Area."),
-    ("Who makes FIG?", "FIG Technologies Inc., a small team based in Markham, Ontario."),
+    ("Who makes FIG?", "A small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),
 ]
 
@@ -20,7 +20,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <div><dt>Where</dt><dd>Launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</dd></div>
 <div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
 <div><dt>For restaurants</dt><dd>Free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</dd></div>
-<div><dt>Company</dt><dd>FIG Technologies Inc., Markham, Ontario.</dd></div>
+<div><dt>Who</dt><dd>A small team in Markham, Ontario.</dd></div>
 </dl></div></section>
 
 <section class="section ab-why"><div class="wrap ab-why-in">

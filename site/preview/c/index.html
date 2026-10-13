@@ -1,0 +1,192 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Home · Direction C · FIG preview</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/preview/preview.css"><style>
+@font-face { font-family: "FIG Jakarta"; src: url("/assets/PlusJakartaSans.woff2") format("woff2"); font-weight: 200 800; }
+:root { --bg:#FFFFFF; --ice:#EEF3FF; --line:#DCE4F7; --ink:#0A1020; --muted:#4B5568; --dim:#66718A; --cobalt:#1E5EFF; --volt:#C8F135; --leaf:#14C86B; --leaft:#087A42; --soft:#F6F8FD; --night:#0A1020; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "FIG Jakarta", system-ui, sans-serif; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+img { display: block; }
+.h1 { font-weight: 800; letter-spacing: -0.05em; line-height: 1.02; }
+.h2 { font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; }
+.muted { color: var(--muted); } .dim { color: var(--dim); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 999px; background: var(--cobalt); color: #fff; font-weight: 800; font-size: 15px; border: 0; box-shadow: 0 12px 28px rgba(30,94,255,.28); white-space: nowrap; }
+.btn.sm { height: 38px; padding: 0 16px; font-size: 14px; box-shadow: none; }
+.btn.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.chip { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.chips { display: flex; gap: 8px; overflow: hidden; }
+.deal { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--volt); color: var(--ink); font-weight: 800; font-size: 13px; }
+.tag { display: inline-flex; padding: 4px 10px; border-radius: 999px; background: var(--ice); color: var(--cobalt); font-weight: 700; font-size: 12px; }
+.map { background: url("/assets/map-fallback.webp") center/cover; position: relative; overflow: hidden; }
+.pin { position: absolute; width: 46px; height: 46px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 8px 18px rgba(10,16,32,.28); background-size: cover; background-position: center; }
+.pin.deal-on { border-color: var(--volt); } .pin.pick { width: 60px; height: 60px; border-color: var(--cobalt); z-index: 2; }
+.search { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 18px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); color: var(--dim); font-weight: 600; font-size: 15px; }
+.label { font-size: 13px; font-weight: 700; color: var(--dim); }
+.note { position: fixed; right: 12px; bottom: 10px; font-size: 11px; color: var(--dim); background: rgba(255,255,255,.9); padding: 4px 8px; border-radius: 6px; z-index: 99; }
+
+html { scroll-behavior: smooth; } [id] { scroll-margin-top: 90px; }
+html.side-nav body { padding-left: 240px; }
+html.side-nav .nav { position: fixed; left: 0; top: 0; bottom: 0; width: 240px; height: auto; flex-direction: column; align-items: stretch; gap: 14px; padding: 22px 16px; border-bottom: 0; border-right: 1px solid var(--line); z-index: 30; }
+html.side-nav .nav .search { flex: 0 0 44px; max-width: none; } html.side-nav .nav .grow { display: none; }
+html.side-nav .nav .links { display: flex; flex-direction: column; align-items: stretch; gap: 4px; margin: 0; padding: 0; width: 100%; } html.side-nav .nav .links a { text-align: left; } html.side-nav .nav .search { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } html.side-nav .nav .links a { padding: 10px 14px; border-radius: 12px; }
+html.side-nav .nav .ic, html.side-nav .nav .av { align-self: flex-start; } html.side-nav .nav .av { margin-top: auto; }
+html.side-nav .full { height: 100vh; } html.side-nav .oside { top: 0; }
+@media (max-width: 700px) { html.side-nav body { padding-left: 0; } }
+
+.nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 22px; height: 68px; padding: 0 28px; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; }
+.brand img { width: 30px; height: 30px; }
+.nav .search { flex: 1; max-width: 460px; height: 44px; }
+.nav .grow { flex: 1; }
+.area { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); font-weight: 700; font-size: 14px; }
+.links { display: flex; gap: 4px; margin-left: auto; }
+.links span { padding: 10px 14px; border-radius: 999px; font-weight: 700; font-size: 15px; color: var(--muted); }
+.links .on { background: var(--ice); color: var(--cobalt); }
+.ic { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 16px; position: relative; }
+.ic .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: #D92D3A; border: 2px solid #fff; }
+.av { width: 40px; height: 40px; border-radius: 50%; background: var(--cobalt); color: #fff; display: grid; place-items: center; font-weight: 800; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+/* home */
+.hero { background: var(--ice); padding: 40px 0 36px; }
+.herog { display: grid; grid-template-columns: 1fr 470px; gap: 36px; align-items: center; }
+.hero .h1 { font-size: 52px; } .hero .h1 span { color: var(--cobalt); }
+.hero .search { margin-top: 20px; background: #fff; height: 52px; max-width: 600px; }
+.hero .chips { margin-top: 16px; flex-wrap: wrap; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tile { padding: 18px 20px; border-radius: 20px; background: #fff; border: 1px solid var(--line); display: grid; gap: 4px; }
+.tile b { font-size: 30px; letter-spacing: -0.04em; } .tile.c { background: var(--cobalt); border-color: var(--cobalt); color: #fff; } .tile.c .dim { color: #DDE7FF; }
+.tile.n { background: var(--night); border-color: var(--night); color: #fff; } .tile.n .dim { color: #A3ADBF; }
+.sec { padding-top: 36px; }
+.sech { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; } .sech .h2 { font-size: 28px; } .sech a { color: var(--cobalt); font-weight: 800; font-size: 14px; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.card { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.card .ph { height: 160px; background-size: cover; background-position: center; position: relative; }
+.card .deal { position: absolute; left: 12px; bottom: 12px; }
+.card .cb { padding: 13px 15px 16px; display: grid; gap: 4px; font-size: 14px; } .card .cb b { font-size: 16px; }
+.two { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; }
+.panel { border-radius: 24px; border: 1px solid var(--line); overflow: hidden; background: #fff; }
+.panel .map { height: 340px; }
+.panel h4 { padding: 16px 18px 6px; font-size: 17px; }
+.lrow { display: flex; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); align-items: center; }
+.lrow.sel { background: var(--ice); box-shadow: inset 4px 0 0 var(--cobalt); }
+.lph { width: 64px; height: 64px; border-radius: 14px; background-size: cover; background-position: center; flex-shrink: 0; }
+.lt { display: grid; gap: 3px; font-size: 13px; } .lt b { font-size: 15px; }
+.deal.sm { padding: 3px 9px; font-size: 11px; justify-self: start; }
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mini { display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 18px; border: 1px solid var(--line); }
+.mini .lph { width: 56px; height: 56px; }
+.launch { display: flex; gap: 12px; align-items: center; padding: 16px 20px; border-radius: 18px; background: var(--soft); border: 1px solid var(--line); margin-top: 24px; font-weight: 700; }
+/* map: floating results panel + collapsible filters rail */
+.full { position: relative; height: calc(100vh - 68px); }
+.full .map { position: absolute; inset: 0; }
+.rail { position: absolute; left: 20px; top: 20px; bottom: 20px; width: 72px; background: #fff; border-radius: 22px; box-shadow: 0 14px 34px rgba(10,16,32,.12); display: grid; align-content: start; gap: 6px; padding: 12px 8px; z-index: 3; justify-items: center; font-size: 11px; font-weight: 700; color: var(--dim); text-align: center; }
+.rail i { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-style: normal; font-size: 18px; background: var(--soft); color: var(--ink); }
+.rail i.on { background: var(--cobalt); color: #fff; }
+.float { position: absolute; left: 106px; top: 20px; bottom: 20px; width: 390px; background: #fff; border-radius: 24px; box-shadow: 0 24px 50px rgba(10,16,32,.18); display: flex; flex-direction: column; overflow: hidden; z-index: 3; }
+.float .top { padding: 18px 18px 12px; display: grid; gap: 12px; border-bottom: 1px solid var(--line); } .float .top .h2 { font-size: 22px; }
+.float .chips { flex-wrap: wrap; }
+.mapctl { position: absolute; right: 20px; top: 20px; display: grid; gap: 10px; justify-items: end; z-index: 3; }
+.zoom { display: grid; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(10,16,32,.12); }
+.zoom b { width: 44px; height: 44px; display: grid; place-items: center; font-size: 20px; border-bottom: 1px solid var(--line); }
+.peek { position: absolute; left: calc(106px + 390px + 24px); bottom: 24px; display: flex; gap: 14px; align-items: center; padding: 12px 14px; border-radius: 20px; background: #fff; box-shadow: 0 24px 50px rgba(10,16,32,.18); z-index: 3; }
+.peek .lph { width: 60px; height: 60px; }
+.credit { position: absolute; right: 10px; bottom: 8px; font-size: 11px; color: var(--dim); background: rgba(255,255,255,.85); padding: 2px 6px; border-radius: 4px; z-index: 3; }
+/* restaurant: gallery + two columns, tabs on the left */
+.gal { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 190px 190px; gap: 10px; margin-top: 24px; }
+.gal div { border-radius: 20px; background-size: cover; background-position: center; } .gal div:first-child { grid-row: span 2; }
+.cols { display: grid; grid-template-columns: 1fr 380px; gap: 40px; padding: 26px 0 60px; }
+.rname { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; } .rname .h1 { font-size: 46px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.tabs { display: flex; gap: 4px; margin-top: 26px; border-bottom: 1px solid var(--line); }
+.tab { padding: 14px 14px; font-weight: 800; font-size: 15px; color: var(--dim); border-bottom: 3px solid transparent; } .tab.on { color: var(--ink); border-color: var(--cobalt); }
+.dish { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; } .dish small { display: block; color: var(--dim); font-size: 13px; margin-top: 2px; }
+.dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.dc { padding: 18px; border-radius: 20px; border: 1px solid var(--line); display: grid; gap: 8px; } .dc b { font-size: 17px; }
+.rev { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; font-size: 14px; } .rev .reply { margin-left: 16px; padding: 10px 14px; border-radius: 14px; background: var(--soft); color: var(--muted); }
+.side { position: sticky; top: 88px; align-self: start; display: grid; gap: 14px; }
+.claim { padding: 22px; border-radius: 24px; border: 2px solid var(--cobalt); background: #fff; box-shadow: 0 14px 34px rgba(10,16,32,.08); display: grid; gap: 12px; } .claim b { font-size: 20px; }
+.box { padding: 18px; border-radius: 22px; background: var(--soft); border: 1px solid var(--line); display: grid; gap: 10px; font-size: 14px; } .box .map { height: 150px; border-radius: 16px; }
+/* owner: top navbar + owner sidebar */
+.owner { display: grid; grid-template-columns: 236px 1fr; min-height: calc(100vh - 68px); }
+.oside { border-right: 1px solid var(--line); padding: 20px 14px; display: grid; align-content: start; gap: 2px; background: var(--soft); }
+.oside .navi { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 12px; border-radius: 12px; font-weight: 700; font-size: 14px; color: var(--muted); }
+.oside .navi.on { background: #fff; color: var(--cobalt); box-shadow: 0 2px 8px rgba(10,16,32,.06); }
+.oside .navi .n { margin-left: auto; background: var(--cobalt); color: #fff; font-size: 11px; padding: 2px 7px; border-radius: 99px; }
+.oside .lbl { font-size: 12px; font-weight: 700; color: var(--dim); padding: 14px 12px 6px; }
+.obody { padding: 26px 30px 60px; min-width: 0; }
+.otiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 18px 0 22px; }
+.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.col { padding: 14px; border-radius: 20px; background: var(--soft); border: 1px solid var(--line); display: grid; align-content: start; gap: 10px; }
+.col h5 { font-size: 14px; display: flex; justify-content: space-between; }
+.ord { padding: 12px 14px; border-radius: 16px; background: #fff; border: 1px solid var(--line); display: grid; gap: 4px; font-size: 13px; } .ord b { font-size: 15px; }
+.chart { display: flex; align-items: flex-end; gap: 10px; height: 150px; padding: 10px 0 0; } .chart div { flex: 1; border-radius: 10px 10px 4px 4px; background: #DCE4F7; } .chart div.t { background: var(--cobalt); }
+.days { display: flex; gap: 10px; font-size: 12px; color: var(--dim); } .days span { flex: 1; text-align: center; }
+.drow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; } .drow b { font-size: 15px; } .drow .bar { flex: 1; height: 8px; border-radius: 99px; background: var(--ice); overflow: hidden; } .drow .bar i { display: block; height: 100%; background: var(--cobalt); border-radius: 99px; }
+.sw { width: 40px; height: 24px; border-radius: 99px; background: var(--leaf); position: relative; } .sw::after { content: ""; position: absolute; right: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; }
+/* phone: top bar + bottom bar */
+.bottombar { display: none; position: fixed; left: 0; right: 0; bottom: 0; height: 64px; background: #fff; border-top: 1px solid var(--line); justify-content: space-around; align-items: center; font-weight: 700; font-size: 12px; color: var(--dim); z-index: 20; }
+.bottombar .on { color: var(--cobalt); }
+@media (max-width: 700px) {
+  .nav { padding: 0 16px; gap: 10px; height: 60px; } .nav .search, .links, .area { display: none; } .nav .grow { flex: 1; }
+  .bottombar { display: flex; } .wrap { padding: 0 16px; } body { padding-bottom: 70px; }
+  .herog { grid-template-columns: 1fr; gap: 18px; } .hero { padding: 24px 0; } .hero .h1 { font-size: 36px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; } .card .ph { height: 120px; } .two, .three { grid-template-columns: 1fr; } .panel .map { height: 220px; }
+  .full { height: calc(100vh - 60px - 64px); } .rail { display: none; } .float { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 46%; border-radius: 24px 24px 0 0; } .peek { display: none; } .mapctl { top: 14px; right: 14px; }
+  .gal { grid-template-columns: 1fr; grid-template-rows: 220px; } .gal div:not(:first-child) { display: none; } .gal div:first-child { grid-row: auto; }
+  .cols { grid-template-columns: 1fr; gap: 20px; } .side { position: static; } .rname .h1 { font-size: 32px; } .rname { flex-direction: column; align-items: flex-start; } .dgrid { grid-template-columns: 1fr; }
+  .owner { grid-template-columns: 1fr; } .oside { display: none; } .obody { padding: 18px 16px 90px; } .otiles { grid-template-columns: 1fr 1fr; } .board { grid-template-columns: 1fr; }
+}
+
+.crave { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.cv { height: 150px; border-radius: 20px; background-size: cover; background-position: center; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 14px; color: #fff; font-weight: 800; font-size: 17px; transition: transform .3s; }
+.cv::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,16,32,0) 40%, rgba(10,16,32,.75)); }
+.cv span { position: relative; } .cv:hover { transform: translateY(-3px); }
+.np { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.np:last-child { border-bottom: 0; }
+.np .lph { width: 56px; height: 56px; border-radius: 14px; } .np .lt { flex: 1; } .np .tag { flex-shrink: 0; }
+.heart { color: #E5484D; font-size: 18px; }
+.box { padding: 22px; border-radius: 24px; border: 1px solid var(--line); background: #fff; }
+.box h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.act { display: grid; gap: 14px; font-size: 14px; margin-top: 12px; } .act div { display: flex; gap: 12px; align-items: center; } .act i { width: 36px; height: 36px; border-radius: 12px; background: var(--ice); display: grid; place-items: center; font-style: normal; flex-shrink: 0; }
+.revs { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start; }
+.rsum { display: grid; gap: 6px; padding: 20px; border-radius: 22px; background: var(--soft); border: 1px solid var(--line); }
+.rsum .big { font-size: 52px; letter-spacing: -0.05em; line-height: 1; }
+.bar { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; } .bar i { flex: 1; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; } .bar em { display: block; height: 100%; background: var(--cobalt); }
+.rvs { display: grid; gap: 14px; }
+.rv { padding: 18px 20px; border-radius: 20px; border: 1px solid var(--line); display: grid; gap: 8px; background: #fff; }
+.rvh { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; } .avs { width: 32px; height: 32px; border-radius: 50%; background: var(--ice); color: var(--cobalt); display: grid; place-items: center; font-weight: 800; }
+.rv p { line-height: 1.6; font-size: 15px; } .vf { font-size: 12px; color: var(--leaft); font-weight: 700; }
+.stars { color: #E89A00; letter-spacing: 1px; }
+.hrs { display: grid; gap: 2px; font-size: 14px; margin-top: 8px; } .hrs div { display: flex; justify-content: space-between; padding: 6px 10px; border-radius: 10px; } .hrs .today { background: var(--ice); font-weight: 800; }
+.pick { display: block; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(10,16,32,.14); }
+.pick .ph { height: 220px; background-size: cover; background-position: center; position: relative; }
+.pick .ph .deal { position: absolute; left: 16px; top: 16px; }
+.pick .pb { padding: 20px 22px 22px; display: grid; gap: 8px; } .pick .pb b { font-size: 22px; letter-spacing: -0.03em; }
+.pick .row { display: flex; gap: 10px; margin-top: 6px; } .pick .row .btn { flex: 1; }
+.hgrid { display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: center; }
+.tabp { display: none; } .tabp.on { display: block; }
+.tab { cursor: pointer; user-select: none; }
+@media (max-width: 700px) {
+  .crave { grid-template-columns: repeat(3, 1fr); gap: 10px; } .cv { height: 100px; font-size: 14px; padding: 10px; }
+  .three, .revs { grid-template-columns: 1fr; } .hgrid { grid-template-columns: 1fr; gap: 24px; } .pick .ph { height: 170px; }
+}
+ a { color: inherit; text-decoration: none; } .cols > *, .rcols > *, .two > *, .split > * { min-width: 0; } .chips { max-width: 100%; overflow-x: auto; scrollbar-width: none; }</style></head><body><script>document.body.dataset.flip = "1";</script><div class="nav"><a class="brand" href="./"><img src="/assets/favicon.svg" alt="">FIG</a><div class="search">⌕&nbsp; Search dishes, restaurants…</div><span class="area">◎ Markham ▾</span><div class="grow"></div><div class="links"><a href="./" class="on">Home</a><a href="map.html" class="">Map</a><a  class="">Deals</a><a  class="">Saved</a><a  class="">Chats</a><a href="owner.html" class="">For owners</a></div><span class="ic">🔔<span class="dot"></span></span><span class="av">A</span></div>
+<div class="bottombar"><a href="./" class="on">Home</a><a href="map.html" class="">Map</a><a  class="">Deals</a><a  class="">Saved</a><a  class="">Account</a></div>
+<div class="hero"><div class="wrap herog"><div><div class="h1">Good evening, Alex.<br><span>Where are we eating?</span></div>
+<div class="search">⌕&nbsp; Dim sum, ramen, bubble tea…</div><div class="chips"><span class="chip on">All</span><span class="chip">Dim sum</span><span class="chip">Ramen</span><span class="chip">Bubble tea</span><span class="chip">Pho</span><span class="chip">Sushi</span><span class="chip">Korean</span><span class="chip">Open now</span><span class="chip">Under $15</span></div></div>
+<div class="tiles"><div class="tile c"><span class="dim">Live deals near you</span><b>5</b></div><div class="tile"><span class="dim">Places on FIG nearby</span><b>8</b></div><div class="tile"><span class="dim">Your saved places</span><b>3</b></div><div class="tile n"><span class="dim">You've saved with FIG</span><b>$24</b></div></div></div></div>
+<div class="wrap"><div class="sec"><div class="sech"><span class="h2">Live now near you</span><a href="map.html">All deals →</a></div><div class="grid"><a class="card" href="rest.html"><div class="ph" style="background-image:url(/preview/img/golden-lantern.webp)"><span class="deal">2 for 1 dim sum</span></div>
+<div class="cb"><b>Golden Lantern</b><span class="dim">Dim sum · $$ · 0.8 km · ★ 4.7</span></div></a><a class="card" href="rest.html"><div class="ph" style="background-image:url(/preview/img/seoul-house.webp)"><span class="deal">20% off lunch sets</span></div>
+<div class="cb"><b>Seoul House</b><span class="dim">Korean BBQ · $$$ · 1.2 km · ★ 4.6</span></div></a><a class="card" href="rest.html"><div class="ph" style="background-image:url(/preview/img/kinton-ramen.webp)"><span class="deal">Free egg with any bowl</span></div>
+<div class="cb"><b>Noodle Bar</b><span class="dim">Ramen · $$ · 1.5 km · ★ 4.5</span></div></a><a class="card" href="rest.html"><div class="ph" style="background-image:url(/preview/img/chatime.webp)"><span class="deal">Buy 1, get 1 half price</span></div>
+<div class="cb"><b>Pearl Tea House</b><span class="dim">Bubble tea · $ · 0.4 km · ★ 4.4</span></div></a></div></div>
+<div class="sec"><div class="sech"><span class="h2">Around you</span><a href="map.html">Open the map →</a></div><div class="two"><div class="panel"><div class="map"><div class="pin pick" style="left:18%;top:30%;background-image:url(/preview/img/golden-lantern.webp)"></div><div class="pin deal-on" style="left:34%;top:52%;background-image:url(/preview/img/seoul-house.webp)"></div><div class="pin deal-on" style="left:52%;top:28%;background-image:url(/preview/img/kinton-ramen.webp)"></div><div class="pin deal-on" style="left:64%;top:60%;background-image:url(/preview/img/chatime.webp)"></div><div class="pin deal-on" style="left:44%;top:74%;background-image:url(/preview/img/pho-hung.webp)"></div><div class="pin deal-on" style="left:76%;top:36%;background-image:url(/preview/img/dumpling-house.webp)"></div><div class="pin deal-on" style="left:26%;top:70%;background-image:url(/preview/img/sakura-house.webp)"></div><div class="pin deal-on" style="left:84%;top:66%;background-image:url(/preview/img/wok-bar.webp)"></div></div></div><div class="panel"><h4>Nearest first</h4><a class="lrow sel" href="rest.html"><div class="lph" style="background-image:url(/preview/img/golden-lantern.webp)"></div>
+<div class="lt"><b>Golden Lantern</b><span class="dim">Dim sum · 0.8 km · ★ 4.7</span><span class="deal sm">2 for 1 dim sum</span></div></a><a class="lrow" href="rest.html"><div class="lph" style="background-image:url(/preview/img/seoul-house.webp)"></div>
+<div class="lt"><b>Seoul House</b><span class="dim">Korean BBQ · 1.2 km · ★ 4.6</span><span class="deal sm">20% off lunch sets</span></div></a><a class="lrow" href="rest.html"><div class="lph" style="background-image:url(/preview/img/kinton-ramen.webp)"></div>
+<div class="lt"><b>Noodle Bar</b><span class="dim">Ramen · 1.5 km · ★ 4.5</span><span class="deal sm">Free egg with any bowl</span></div></a><a class="lrow" href="rest.html"><div class="lph" style="background-image:url(/preview/img/chatime.webp)"></div>
+<div class="lt"><b>Pearl Tea House</b><span class="dim">Bubble tea · 0.4 km · ★ 4.4</span><span class="deal sm">Buy 1, get 1 half price</span></div></a></div></div></div>
+<div class="sec three"><div><div class="sech"><span class="h2" style="font-size:22px">Saved</span><a href="map.html">See all</a></div><div style="display:grid;gap:10px"><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/pho-hung.webp)"></div><div class="lt"><b>Pho Corner</b><span class="dim">Pho · 2.1 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/dumpling-house.webp)"></div><div class="lt"><b>Dumpling House</b><span class="dim">Dumplings · 1.9 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/sakura-house.webp)"></div><div class="lt"><b>Sakura House</b><span class="dim">Sushi · 2.4 km</span></div></a></div></div>
+<div><div class="sech"><span class="h2" style="font-size:22px">Recently viewed</span><a href="map.html">See all</a></div><div style="display:grid;gap:10px"><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/golden-lantern.webp)"></div><div class="lt"><b>Golden Lantern</b><span class="dim">Dim sum · 0.8 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/kinton-ramen.webp)"></div><div class="lt"><b>Noodle Bar</b><span class="dim">Ramen · 1.5 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/dumpling-house.webp)"></div><div class="lt"><b>Dumpling House</b><span class="dim">Dumplings · 1.9 km</span></div></a></div></div>
+<div><div class="sech"><span class="h2" style="font-size:22px">New on FIG</span><a href="map.html">See all</a></div><div style="display:grid;gap:10px"><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/wok-bar.webp)"></div><div class="lt"><b>Wok Bar</b><span class="dim">Noodles · 3.0 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/sakura-house.webp)"></div><div class="lt"><b>Sakura House</b><span class="dim">Sushi · 2.4 km</span></div></a><a class="mini" href="rest.html"><div class="lph" style="background-image:url(/preview/img/seoul-house.webp)"></div><div class="lt"><b>Seoul House</b><span class="dim">Korean BBQ · 1.2 km</span></div></a></div></div></div>
+<div class="launch"><span class="deal">Jan 1, 2027</span>FIG opens in Markham. Save places now and their first deals show up here.</div><div style="height:60px"></div></div><div class="note">Preview · example restaurants</div><script src="/preview/preview.js" defer></script></body></html>

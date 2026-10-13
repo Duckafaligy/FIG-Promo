@@ -12,7 +12,7 @@
   .pick h1 { margin: 22px 0 10px; font-size: clamp(36px, 5vw, 56px); line-height: 1.04; letter-spacing: -0.05em; }
   .pick > p { margin: 0; max-width: 40em; font-size: 18px; line-height: 1.6; color: var(--w-ink-muted); }
   .dirs { display: grid; gap: 24px; margin-top: 40px; }
-  @media (min-width: 860px) { .dirs { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 860px) { .dirs { grid-template-columns: 1fr 1fr; } .dir-c { grid-column: 1 / -1; grid-template-columns: 1fr 1.2fr; align-items: center; } .dir-c .shot { grid-row: 1 / span 4; grid-column: 2; } }
   .dir { display: grid; gap: 18px; padding: 26px; border-radius: var(--w-r-xl); background: var(--w-soft); border: 1px solid var(--w-ice-line); text-decoration: none; transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s; }
   .dir:hover { transform: translateY(-4px); box-shadow: var(--w-e2); }
   .dir .k { font-weight: 800; font-size: 13px; color: var(--w-cobalt); }
@@ -38,7 +38,7 @@
 <main class="pick">
   <a class="logo" href="/"><img src="/assets/favicon.svg" alt="">FIG</a>
   <h1>Pick a direction for FIG on the web.</h1>
-  <p>Same brand, two different shapes. Click through Home, Map and a restaurant in each, on a computer or as a phone (button at the bottom right). Nothing here is live; the restaurants and deals are examples.</p>
+  <p>Same brand, three shapes. C mixes A and B, as you asked. Click through Home, Map and a restaurant in each, on a computer or as a phone (button at the bottom right). Nothing here is live; the restaurants and deals are examples.</p>
   <div class="dirs">
     <a class="dir" href="/preview/a/">
       <span class="k">Direction A</span>
@@ -53,6 +53,13 @@
       <p>A sidebar you always see, denser cards, and a map that fills the screen with the results floating on top. Feels like a tool you keep open.</p>
       <div class="shot"><img src="/preview/b/shot.webp" alt="Direction B, Home on a computer" onerror="this.remove()"></div>
       <span class="go"><span class="chip on">Open Direction B →</span></span>
+    </a>
+    <a class="dir dir-c" href="/preview/c/">
+      <span class="k">Direction C · the mix</span>
+      <h2>Website feel, dashboard power</h2>
+      <p>A's top navbar and airy pages, with B's fuller pieces: stat tiles, a map beside a list, and results floating on the full map. A slim filters rail on the map; owners get their own sidebar ("For owners" in the navbar). Try "Sidebar" at the bottom right to see the navbar as a sidebar.</p>
+      <div class="shot"><img src="/preview/c/shot.webp" alt="Direction C, Home on a computer" onerror="this.remove()"></div>
+      <span class="go"><span class="chip on">Open Direction C →</span><span class="chip">+ an owner dashboard</span></span>
     </a>
   </div>
   <section class="flow" id="flow" hidden>

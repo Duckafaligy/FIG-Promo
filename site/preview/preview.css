@@ -39,3 +39,7 @@ button { font: inherit; }
 .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; text-decoration: none; }
 .logo img { width: 30px; height: 30px; }
 .note { margin: 48px 0 0; color: var(--w-dim); font-size: 13px; }
+@media (max-width: 600px) {
+  .pv-bar { left: 8px; right: 8px; bottom: 8px; justify-content: space-between; padding: 6px 6px 6px 12px; gap: 6px; font-size: 12px; }
+  .pv-seg { display: none; }
+}

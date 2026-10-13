@@ -58,13 +58,71 @@ def row(r, i=0):
     return f'''<a class="lrow{" sel" if i == 0 else ""}" href="rest.html"><div class="lph" style="background-image:url({PHOTO}/{ph}.webp)"></div>
 <div class="lt"><b>{n}</b><span class="dim">{cu} · {km} · ★ {st}</span><span class="deal sm">{deal}</span></div></a>'''
 
-FILES = {"home": "index.html", "map": "map.html", "rest": "rest.html"}
+FILES = {"home": "index.html", "map": "map.html", "rest": "rest.html", "owner": "owner.html"}
+CRAVE = [("Dim sum", "dumpling-house"), ("Korean BBQ", "seoul-house"), ("Ramen", "kinton-ramen"), ("Bubble tea", "chatime"), ("Pho", "pho-hung"), ("Sushi", "sakura-house")]
+def crave():
+    return '<div class="crave">' + "".join(f'<a class="cv" href="map.html" style="background-image:url({PHOTO}/{ph}.webp)"><span>{n}</span></a>' for n, ph in CRAVE) + "</div>"
+NEWP = [("Bowl Lab", "Poke bowls", "bowl-lab", "Joined this week"), ("Brew Lab", "Coffee", "brew-lab", "Joined 3 days ago"), ("Burger Co", "Burgers", "burger-co", "Joined 5 days ago"), ("Taco Stand", "Tacos", "alt-tacos", "Joined last week")]
+def newp():
+    return "".join(f'<a class="np" href="rest.html"><span class="lph" style="background-image:url({PHOTO}/{ph}.webp)"></span><span class="lt"><b>{n}</b><span class="dim">{c} · {w}</span></span><span class="tag">New</span></a>' for n, c, ph, w in NEWP)
+def saved():
+    return "".join(f'<a class="np" href="rest.html"><span class="lph" style="background-image:url({PHOTO}/{r[6]}.webp)"></span><span class="lt"><b>{r[0]}</b><span class="dim">{r[5]}</span></span><span class="heart">♥</span></a>' for r in (R[0], R[2], R[5]))
+REV = [("Mia", 5, "2 days ago", "Came for the 2-for-1 and stayed for the egg tarts. They scanned my code in a second."), ("Daniel", 5, "Last week", "Best xiao long bao in Markham. Lunch for two came in under $20 with the deal."), ("Priya", 4, "2 weeks ago", "Busy on weekends, but worth it. I messaged ahead about a table for four.")]
+def reviews():
+    bars = "".join(f'<div class="bar"><span>{s}</span><i><em style="width:{w}%"></em></i></div>' for s, w in [(5, 78), (4, 15), (3, 5), (2, 1), (1, 1)])
+    cards = "".join(f'<div class="rv"><div class="rvh"><span class="avs">{n[0]}</span><b>{n}</b><span class="stars">{"★" * s}</span><span class="dim">{d}</span></div><p class="muted">{x}</p><span class="vf">✓ Visit scanned with FIG</span></div>' for n, s, d, x in REV)
+    return f'<div class="revs"><div class="rsum"><b class="big">4.7</b><span class="stars">★★★★★</span><span class="dim">128 reviews from scanned visits</span>{bars}</div><div class="rvs">{cards}</div></div>'
+HOURS = [("Mon", "10 am – 9 pm"), ("Tue", "10 am – 9 pm"), ("Wed", "10 am – 9 pm"), ("Thu", "10 am – 9 pm"), ("Fri", "10 am – 10 pm"), ("Sat", "9 am – 10 pm"), ("Sun", "9 am – 9 pm")]
+def hours():
+    return '<div class="hrs">' + "".join(f'<div class="{"today" if d == "Tue" else ""}"><span>{d}</span><span>{h}</span></div>' for d, h in HOURS) + "</div>"
+def similar():
+    return f'<div class="grid">{"".join(card(r) for r in (R[5], R[3], R[6], R[7]))}</div>'
+def activity():
+    return '<div class="act"><div><i>🎟</i><span><b>3 deals claimed</b><br><span class="dim">You saved $24</span></span></div><div><i>★</i><span><b>2 reviews written</b><br><span class="dim">Thanks for helping others</span></span></div><div><i>💬</i><span><b>1 open chat</b><br><span class="dim">Golden Lantern replied</span></span></div></div>'
+FULL_CSS = """
+.crave { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.cv { height: 150px; border-radius: 20px; background-size: cover; background-position: center; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 14px; color: #fff; font-weight: 800; font-size: 17px; transition: transform .3s; }
+.cv::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,16,32,0) 40%, rgba(10,16,32,.75)); }
+.cv span { position: relative; } .cv:hover { transform: translateY(-3px); }
+.np { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.np:last-child { border-bottom: 0; }
+.np .lph { width: 56px; height: 56px; border-radius: 14px; } .np .lt { flex: 1; } .np .tag { flex-shrink: 0; }
+.heart { color: #E5484D; font-size: 18px; }
+.box { padding: 22px; border-radius: 24px; border: 1px solid var(--line); background: #fff; }
+.box h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.act { display: grid; gap: 14px; font-size: 14px; margin-top: 12px; } .act div { display: flex; gap: 12px; align-items: center; } .act i { width: 36px; height: 36px; border-radius: 12px; background: var(--ice); display: grid; place-items: center; font-style: normal; flex-shrink: 0; }
+.revs { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start; }
+.rsum { display: grid; gap: 6px; padding: 20px; border-radius: 22px; background: var(--soft); border: 1px solid var(--line); }
+.rsum .big { font-size: 52px; letter-spacing: -0.05em; line-height: 1; }
+.bar { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; } .bar i { flex: 1; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; } .bar em { display: block; height: 100%; background: var(--cobalt); }
+.rvs { display: grid; gap: 14px; }
+.rv { padding: 18px 20px; border-radius: 20px; border: 1px solid var(--line); display: grid; gap: 8px; background: #fff; }
+.rvh { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; } .avs { width: 32px; height: 32px; border-radius: 50%; background: var(--ice); color: var(--cobalt); display: grid; place-items: center; font-weight: 800; }
+.rv p { line-height: 1.6; font-size: 15px; } .vf { font-size: 12px; color: var(--leaft); font-weight: 700; }
+.stars { color: #E89A00; letter-spacing: 1px; }
+.hrs { display: grid; gap: 2px; font-size: 14px; margin-top: 8px; } .hrs div { display: flex; justify-content: space-between; padding: 6px 10px; border-radius: 10px; } .hrs .today { background: var(--ice); font-weight: 800; }
+.pick { display: block; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(10,16,32,.14); }
+.pick .ph { height: 220px; background-size: cover; background-position: center; position: relative; }
+.pick .ph .deal { position: absolute; left: 16px; top: 16px; }
+.pick .pb { padding: 20px 22px 22px; display: grid; gap: 8px; } .pick .pb b { font-size: 22px; letter-spacing: -0.03em; }
+.pick .row { display: flex; gap: 10px; margin-top: 6px; } .pick .row .btn { flex: 1; }
+.hgrid { display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: center; }
+.tabp { display: none; } .tabp.on { display: block; }
+.tab { cursor: pointer; user-select: none; }
+@media (max-width: 700px) {
+  .crave { grid-template-columns: repeat(3, 1fr); gap: 10px; } .cv { height: 100px; font-size: 14px; padding: 10px; }
+  .three, .revs { grid-template-columns: 1fr; } .hgrid { grid-template-columns: 1fr; gap: 24px; } .pick .ph { height: 170px; }
+}
+"""
+TABS_JS = '<script>document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));document.querySelectorAll(".tabp").forEach(p=>p.classList.toggle("on",p.dataset.t===t.dataset.t));scrollTo({top:0,behavior:"smooth"});}));</script>'
+
 def page(name, body, extra_css):
     d, kind = name.split("-"); folder = OUT / d.lower(); folder.mkdir(parents=True, exist_ok=True)
-    title = {"home": "Home", "map": "Map", "rest": "Golden Lantern"}[kind]
+    title = {"home": "Home", "map": "Map", "rest": "Golden Lantern", "owner": "For owners"}[kind]
     (folder / FILES[kind]).write_text(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>{title} · Direction {d} · FIG preview</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/preview/preview.css"><style>{CSS}{extra_css} a {{ color: inherit; text-decoration: none; }} .cols > *, .rcols > *, .two > *, .split > * {{ min-width: 0; }} .chips {{ max-width: 100%; overflow-x: auto; scrollbar-width: none; }}</style></head><body>{body}<div class="note">Preview · example restaurants</div><script src="/preview/preview.js" defer></script></body></html>""", encoding="utf-8")
+<link rel="stylesheet" href="/preview/preview.css"><style>{CSS}{extra_css}{FULL_CSS} a {{ color: inherit; text-decoration: none; }} .cols > *, .rcols > *, .two > *, .split > * {{ min-width: 0; }} .chips {{ max-width: 100%; overflow-x: auto; scrollbar-width: none; }}</style></head><body>{body}<div class="note">Preview · example restaurants</div><script src="/preview/preview.js" defer></script></body></html>""", encoding="utf-8")
 
 # ======================================================== Direction A: like the website (top nav, split views)
 A_CSS = """
@@ -152,12 +210,16 @@ def a_nav(on):
 
 chips = lambda on="All": '<div class="chips">' + "".join(f'<span class="chip{" on" if c == on else ""}">{c}</span>' for c in CHIPS) + "</div>"
 page("A-home", a_nav("Home") + f'''
-<div class="hero"><div class="wrap"><div class="h1">Good evening, Alex.<br><span>Where are we eating?</span></div>
-<div class="search" style="margin-top:22px;max-width:640px;background:#fff">⌕&nbsp; Dim sum, ramen, bubble tea…</div>{chips()}</div></div>
+<div class="hero"><div class="wrap hgrid"><div><div class="h1">Good evening, Alex.<br><span>Where are we eating?</span></div>
+<div class="search" style="margin-top:22px;max-width:640px;background:#fff">⌕&nbsp; Dim sum, ramen, bubble tea…</div>{chips()}</div><a class="pick" href="rest.html"><div class="ph" style="background-image:url({PHOTO}/golden-lantern.webp)"><span class="deal">Tonight's pick</span></div><div class="pb"><span class="label">Golden Lantern · Dim sum · 0.8 km</span><b>2 for 1 dim sum</b><span class="muted">Any two steamed baskets, the second free. Until 9 pm.</span><div class="row"><span class="btn">Claim</span><span class="btn ghost">See the menu</span></div></div></a></div></div>
 <div class="wrap"><div class="sec"><div class="sech"><span class="h2">Live now near you</span><a href="map.html">See all deals →</a></div>
 <div class="grid">{"".join(card(r) for r in R[:4])}</div></div>
+<div class="sec"><div class="sech"><span class="h2">What are you craving?</span><a href="map.html">All cuisines →</a></div>{crave()}</div>
 <div class="mapband"><div><span class="h2">8 places on the map</span><p>See every deal around Markham. Pins with a green ring have a deal on right now.</p><a class="btn" href="map.html">Open the map</a></div><div class="map">{pins(-1)}</div></div>
 <div class="sec"><div class="sech"><span class="h2">On FIG in Markham</span><a href="map.html">See all →</a></div><div class="grid">{"".join(card(r) for r in R[4:8])}</div>
+<div class="sec three"><div class="box"><h3>New on FIG</h3><p class="dim" style="font-size:14px">Places that just joined</p>{newp()}</div>
+<div class="box"><h3>Your saved places</h3><p class="dim" style="font-size:14px">We'll tell you when they post a deal</p>{saved()}</div>
+<div class="box"><h3>Your FIG</h3><p class="dim" style="font-size:14px">This month</p>{activity()}</div></div>
 <div class="launch"><span class="deal">Jan 1, 2027</span>FIG opens in Markham. Save places now and you'll see their first deals here.</div></div><div style="height:80px"></div></div>''', A_CSS)
 
 page("A-map", a_nav("Map") + f'''<div class="split"><div class="list"><div class="top"><span class="h2">8 places near Markham</span>{chips("All")}<span class="label">Nearest first · 5 with a deal now</span></div>
@@ -171,10 +233,13 @@ page("A-rest", a_nav("Home") + f'''<div class="wrap"><div class="gal"><div style
 <p class="muted" style="margin-top:16px;line-height:1.6;max-width:620px">Cantonese dim sum, steamed to order. 4350 Steeles Ave E, Markham · 0.8 km away.</p></div>
 <div class="menu"><span class="h2" style="font-size:28px">Menu</span><div class="chips" style="margin-top:14px"><span class="chip on">Steamed</span><span class="chip">Baked</span><span class="chip">Rice & noodles</span><span class="chip">Drinks</span></div>
 <h3>Steamed</h3><div class="dish"><span>Har gow<small>4 pieces · shrimp</small></span><b>$7.50</b></div><div class="dish"><span>Siu mai<small>4 pieces · pork & shrimp</small></span><b>$6.95</b></div><div class="dish"><span>Cheung fun<small>Rice rolls, beef</small></span><b>$8.25</b></div>
-<h3>Baked</h3><div class="dish"><span>Egg tarts<small>3 pieces</small></span><b>$6.50</b></div></div></div>
+<h3>Baked</h3><div class="dish"><span>Egg tarts<small>3 pieces</small></span><b>$6.50</b></div><div class="dish"><span>Char siu bao<small>3 pieces · BBQ pork</small></span><b>$6.25</b></div>
+<h3>Rice & noodles</h3><div class="dish"><span>Sticky rice in lotus leaf<small>2 pieces</small></span><b>$7.95</b></div><div class="dish"><span>Beef chow fun<small>Wok-fried, bean sprouts</small></span><b>$14.50</b></div></div>
+<div class="menu"><span class="h2" style="font-size:28px">Reviews</span><div style="margin-top:16px">{reviews()}</div></div></div>
 <div class="side"><div class="dcard hot"><span class="deal" style="justify-self:start">Deal · today until 9 pm</span><b>2 for 1 dim sum</b><span class="muted" style="font-size:14px;line-height:1.5">Any two steamed baskets, the second free. Dine in or takeout.</span><span class="btn">Claim this deal</span><span class="btn ghost">Order takeout</span></div>
 <div class="dcard"><b>Free egg tarts</b><span class="muted" style="font-size:14px">Mon–Thu · with any order</span><span class="btn ghost sm">Claim</span></div>
-<div class="map mini">{pins(0)}</div><span class="dim" style="font-size:13px">Hours: daily 10 am – 9 pm · (905) 555-0142</span></div></div></div>''', A_CSS)
+<div class="box"><h3>Hours</h3>{hours()}<p class="dim" style="font-size:13px;margin-top:10px">(905) 555-0142 · 4350 Steeles Ave E</p></div><div class="map mini">{pins(0)}</div><span class="btn ghost">💬 Message Golden Lantern</span></div></div>
+<div class="sec" style="padding-bottom:70px"><div class="sech"><span class="h2">Similar places nearby</span><a href="map.html">See on the map →</a></div>{similar()}</div></div>''', A_CSS)
 
 # ======================================================== Direction B: a web dashboard (sidebar, map-first, banner + tabs)
 B_CSS = """
@@ -266,7 +331,9 @@ page("B-home", b_shell("Home", f'''<div class="body"><div class="greet"><span cl
 <div class="chips">{"".join(f'<span class="chip{" on" if c == "All" else ""}">{c}</span>' for c in CHIPS)}</div>
 <div class="sech"><span class="h2">Live now</span><a href="map.html">All deals →</a></div><div class="grid">{"".join(card(r) for r in R[:4])}</div>
 <div class="sech"><span class="h2">Around you</span><a href="map.html">Open the map →</a></div>
-<div class="two"><div class="panel"><div class="map">{pins(0)}</div></div><div class="panel">{"".join(row(r, i) for i, r in enumerate(R[:4]))}</div></div></div>'''), B_CSS)
+<div class="two"><div class="panel"><div class="map">{pins(0)}</div></div><div class="panel">{"".join(row(r, i) for i, r in enumerate(R[:4]))}</div></div>
+<div class="sech"><span class="h2">What are you craving?</span><a href="map.html">All cuisines →</a></div>{crave()}
+<div class="three" style="margin-top:26px"><div class="box"><h3>New on FIG</h3><p class="dim" style="font-size:14px">Places that just joined</p>{newp()}</div><div class="box"><h3>Saved</h3><p class="dim" style="font-size:14px">We'll tell you when they post a deal</p>{saved()}</div><div class="box"><h3>Your FIG</h3><p class="dim" style="font-size:14px">This month</p>{activity()}</div></div></div>'''), B_CSS)
 
 page("B-map", b_shell("Map", f'''<div class="full"><div class="map">{pins(0)}</div>
 <div class="chipsf"><div class="chips">{"".join(f'<span class="chip{" on" if c == "All" else ""}">{c}</span>' for c in CHIPS)}</div></div>
@@ -274,9 +341,16 @@ page("B-map", b_shell("Map", f'''<div class="full"><div class="map">{pins(0)}</d
 <div class="mapctl"><span class="btn">◎&nbsp; Use my location</span><div class="zoom"><b>+</b><b style="border:0">−</b></div></div><span class="credit">© OpenMapTiles © OpenStreetMap</span></div>'''), B_CSS)
 
 page("B-rest", b_shell("Home", f'''<div class="banner" style="background-image:url({PHOTO}/golden-lantern.webp)"><div class="btext"><div><span class="h1">Golden Lantern</span><br><span>Dim sum · $$ · ★ 4.7 (128) · 0.8 km · Open until 9 pm</span></div><span class="btn">♡&nbsp; Save</span></div></div>
-<div class="tabs"><span class="tab on">Deals</span><span class="tab">Menu</span><span class="tab">Reviews</span><span class="tab">Info</span></div>
-<div class="body"><div class="rcols"><div><div class="dgrid"><div class="dcard hot"><span class="deal" style="justify-self:start">Today until 9 pm</span><b>2 for 1 dim sum</b><span class="muted" style="font-size:14px;line-height:1.5">Any two steamed baskets, the second free. Dine in or takeout.</span><span class="btn">Claim</span></div>
+<div class="tabs"><span class="tab on" data-t="d">Deals</span><span class="tab" data-t="m">Menu</span><span class="tab" data-t="r">Reviews (128)</span><span class="tab" data-t="i">Info</span></div>
+<div class="body"><div class="rcols"><div><div class="tabp on" data-t="d"><div class="dgrid"><div class="dcard hot"><span class="deal" style="justify-self:start">Today until 9 pm</span><b>2 for 1 dim sum</b><span class="muted" style="font-size:14px;line-height:1.5">Any two steamed baskets, the second free. Dine in or takeout.</span><span class="btn">Claim</span></div>
 <div class="dcard"><span class="tag" style="justify-self:start">Mon–Thu</span><b>Free egg tarts</b><span class="muted" style="font-size:14px">With any order</span><span class="btn ghost">Claim</span></div></div>
-<div class="sech"><span class="h2">Popular on the menu</span><a>Full menu →</a></div><div class="dish"><span>Har gow · 4 pieces</span><b>$7.50</b></div><div class="dish"><span>Siu mai · 4 pieces</span><b>$6.95</b></div><div class="dish"><span>Egg tarts · 3 pieces</span><b>$6.50</b></div></div>
-<div class="info"><b style="font-size:17px">Info</b><span class="muted">4350 Steeles Ave E, Markham</span><span class="muted">Daily 10 am – 9 pm · (905) 555-0142</span><div class="map">{pins(0)}</div><span class="btn ghost">Directions</span></div></div></div>''', top=True), B_CSS)
+<div class="sech"><span class="h2">Popular on the menu</span><a>Full menu →</a></div><div class="dish"><span>Har gow · 4 pieces</span><b>$7.50</b></div><div class="dish"><span>Siu mai · 4 pieces</span><b>$6.95</b></div><div class="dish"><span>Egg tarts · 3 pieces</span><b>$6.50</b></div>
+<div class="sech"><span class="h2">What people say</span><a>All reviews →</a></div>{reviews()}</div>
+<div class="tabp" data-t="m"><div class="sech" style="margin-top:0"><span class="h2">Steamed</span></div><div class="dish"><span>Har gow · 4 pieces</span><b>$7.50</b></div><div class="dish"><span>Siu mai · 4 pieces</span><b>$6.95</b></div><div class="dish"><span>Cheung fun · beef</span><b>$8.25</b></div><div class="dish"><span>Xiao long bao · 6 pieces</span><b>$8.95</b></div>
+<div class="sech"><span class="h2">Baked</span></div><div class="dish"><span>Egg tarts · 3 pieces</span><b>$6.50</b></div><div class="dish"><span>Char siu bao · 3 pieces</span><b>$6.25</b></div>
+<div class="sech"><span class="h2">Rice & noodles</span></div><div class="dish"><span>Sticky rice in lotus leaf</span><b>$7.95</b></div><div class="dish"><span>Beef chow fun</span><b>$14.50</b></div></div>
+<div class="tabp" data-t="r">{reviews()}</div>
+<div class="tabp" data-t="i"><div class="box"><h3>Hours</h3>{hours()}</div><div class="box" style="margin-top:14px"><h3>Good to know</h3><p class="muted" style="line-height:1.7">Halal options · Takeout · Groups welcome · Wheelchair access · Card and cash</p></div></div>
+<div class="sech"><span class="h2">Similar places nearby</span><a href="map.html">See on the map →</a></div>{similar()}</div>
+<div class="info"><b style="font-size:17px">Info</b><span class="muted">4350 Steeles Ave E, Markham</span><span class="muted">Daily 10 am – 9 pm · (905) 555-0142</span><div class="map">{pins(0)}</div><span class="btn ghost">Directions</span><span class="btn ghost">💬 Message</span></div></div></div>''' + TABS_JS, top=True), B_CSS)
 print("6 mocks written to", OUT)

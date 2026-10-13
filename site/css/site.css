@@ -1043,8 +1043,8 @@ p.consent { cursor: default; padding-left: 22px; }
 /* tablets in landscape, small laptops and up: the phone sits on the map beside the headline, sized to the VISIBLE height
    below the navbar (svh: Safari's toolbars never clip it), so it never slides under the navbar and the map shows around it */
 @media (min-width: 980px) {
-  .hero-phone { display: block; position: absolute; z-index: 1; right: max(var(--gutter), calc((100vw - var(--max)) / 2)); top: calc(50% + 39px); transform: translateY(-50%);
-                width: clamp(200px, min(calc((100svh - 150px) / 2.17), calc(100vw - 620px - 3 * var(--gutter))), 320px); }
+  .hero-phone { display: block; position: absolute; z-index: 1; right: max(48px, calc((100vw - var(--max)) / 2 + 40px)); top: calc(50% + 39px); transform: translateY(-50%);
+                width: clamp(200px, min(calc((100svh - 150px) / 2.17), calc(100vw - 620px - 48px - 3 * var(--gutter))), 320px); }
 }
 @media (max-width: 1099px) { .hp-sticker { display: none; } }
 /* phones/tablets in portrait: the app phone sits under the hero buttons (no stickers) */
@@ -1121,4 +1121,6 @@ p.consent { cursor: default; padding-left: 22px; }
   .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 90px, rgba(255, 255, 255, 0) calc(100% - 90px), #fff 100%); }
   .hero-phone { margin-bottom: 64px; }
 }
-@media (min-width: 1100px) and (max-width: 1299px) { .hp-sticker.saved { right: -8px; } }
+/* the phone keeps 48px+ from the screen edge (user: 'too close to the edge'), its stickers 30px+ */
+@media (min-width: 1100px) and (max-width: 1299px) { .hp-sticker.saved { right: -16px; } }
+@media (min-width: 1100px) and (max-width: 1199px) { .hp-sticker.deal { left: -96px; } }

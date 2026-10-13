@@ -4,10 +4,7 @@
   const box = document.getElementById("map");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const wide = () => innerWidth >= 980;
-  const PHOTOS = ["0EVQW1F2MSCJSTCDCG9YH93F6B", "0RYWBBV51KE94G17WYCQY5Q6HH", "14WZX6B42KWT8QRFSJ7NM4QQK9", "16V5JEZGGNE3NPX8DC2WNFT64K",
-    "25833J5ACM7EB0TJ5F5B8QSRSY", "2AN6E5P3GDC1QW4REMTDK6AY57", "2PA5R36RQX1KQMXAC89CX7B167", "32TXW2T9HVFKGNMKXGWPF57X4S",
-    "36VQAEPPGHX17KWN8CCCS2KG07", "3QG0YSDTY4W552YE3N1VHZSED2", "40WEZ22K5FV8YNHPYPQ7J6EWNN", "5PF706P8NNHG3TW4ARWFD6T17Z",
-    "5PGYW83TMVHGAXX3X0D7SE751X", "6H6JKMMDC87EF7KF7FPAEH08V6", "6KDKWJ5BS8PPF6PS0HQ93G0VFP", "6TNFWB2ZQZXHJQ5RSG17V1F10X"];
+  const PHOTOS = ["golden-lantern", "chatime", "kinton-ramen", "seoul-house", "dumpling-house", "brew-lab", "sakura-house", "pho-hung", "bowl-lab", "noodle-bar", "wok-bar", "burger-co", "alt-tacos", "alt-pizza", "alt-hotpot", "alt-banhmi"]; // Unsplash License, see assets/food/CREDITS.txt
   window.FIG_PINS = PHOTOS.map((p) => `/assets/pins/${p}.jpg`);
   if (!box) return;
   // the still map paints first; MapLibre (≈270 KB) loads once the page is idle, so it never delays the hero text

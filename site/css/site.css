@@ -974,3 +974,16 @@ p.consent { cursor: default; padding-left: 22px; }
   .mbar.on { transform: none; }
 }
 .closing .h2, .h2 { text-wrap: balance; }
+
+/* 404 and shared-link pages (v2) */
+.doc .lost-num, .lost-num { margin: 0 0 4px; font-weight: 800; font-size: clamp(96px, 18vw, 180px); line-height: .9; letter-spacing: -0.06em; color: var(--cobalt); }
+.r-bubble { display: inline-grid; gap: 2px; margin-bottom: 26px; padding: 14px 18px; border-radius: 22px 22px 22px 6px; background: #fff; border: 1px solid var(--ice-line); box-shadow: 0 14px 34px rgba(10, 16, 32, .12); transform: rotate(-2deg); }
+.r-bubble b { color: var(--cobalt); font-size: 13px; }
+.r-bubble span { font-weight: 600; font-size: 17px; }
+.r-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.r-app { margin-top: 18px; font-size: 15px; }
+.r-app a { color: var(--muted); font-weight: 600; }
+/* buttons inside document pages keep their own colours (.doc a would turn white text cobalt on cobalt) */
+.doc a.btn { color: #fff; text-decoration: none; }
+.doc a.btn-ghost { color: var(--text); }
+.doc a.btn-volt { color: #0A1020; }

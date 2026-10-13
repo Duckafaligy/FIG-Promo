@@ -18,8 +18,13 @@
   var open = document.getElementById('r-open');
   if (name) title.textContent = (from ? from + ' sent you ' : 'Check out ') + name + ' on FIG';
   else if (from) title.textContent = from + ' sent you a spot on FIG';
+  var web = document.getElementById('r-web'), fromEl = document.getElementById('r-from');
+  if (from && fromEl) fromEl.textContent = from;
+  if (name && web) web.textContent = 'See ' + name + ' on FIG';
   if (name) line.textContent = 'See ' + name + '’s live deals, claim one, and show your QR at the counter. Free for diners.';
   if (!ok) return;
+  // the web app shows the restaurant to anyone, signed in or not (app aa10d62)
+  if (web) web.href = '/app/r/' + id + (from ? '?from=' + encodeURIComponent(from) : '');
   var path = 'r/' + id + (from ? '?from=' + encodeURIComponent(from) : '');
   var ua = navigator.userAgent;
   if (/Android/i.test(ua)) {

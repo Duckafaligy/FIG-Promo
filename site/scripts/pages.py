@@ -425,16 +425,17 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
 
 
 # =====================================================================  404, site map, sitemap.xml, robots, manifest
-page("404", "Page not found", "This page doesn't exist.", body='''<p class="doc-kicker">404</p><h1>This page wandered off.</h1>
+page("404", "Page not found", "This page doesn't exist.", body='''<p class="lost-num" aria-hidden="true">404</p><h1>This page wandered off.</h1>
 <p class="lead-p">It may have moved, or the link has a typo.</p>
 <div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
 <a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to join and post deals.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
 
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
-page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<p class="doc-kicker">Shared with you</p><h1 id="r-title">Someone sent you a spot on FIG</h1>
+page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<div class="r-bubble" aria-hidden="true"><b id="r-from">A friend</b><span>dinner here?</span></div>
+<h1 id="r-title">Someone sent you a spot on FIG</h1>
 <p class="lead-p" id="r-line">Live deals from restaurants near you. Claim one, show your QR at the counter. Free for diners.</p>
-<div class="cards"><a class="card-l" id="r-open" href="/" hidden><b>Open in FIG</b><span>Already have the app? Open this restaurant there.</span></a><a class="card-l" href="/#join"><b>Join the waitlist</b><span>FIG opens in Markham on January 1, 2027.</span></a>
-<a class="card-l" href="/#how"><b>How FIG works</b><span>Find, claim, show, save.</span></a></div>
+<div class="r-actions"><a class="btn btn-lg" id="r-web" href="/app/">See it on FIG</a><a class="btn btn-lg btn-ghost" href="/#how">How FIG works</a></div>
+<p class="r-app"><a id="r-open" href="/" hidden>Have the FIG app? Open it there</a></p>
 <script src="/js/r.js" defer></script>''')
 
 

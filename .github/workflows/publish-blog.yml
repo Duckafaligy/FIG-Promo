@@ -1,0 +1,49 @@
+# Publishes scheduled blog posts. A post goes live when its publish_at (America/Toronto slots: 00:00, 06:00, 12:00, 18:00) has passed:
+# this job regenerates the site every 10 minutes, and when that changes any page (a post became due) it commits and pushes, which makes Vercel deploy.
+# Posts live in site/scripts/content.py with a publish_at; site/scripts/pages.py leaves out any post that is not due yet.
+# Nothing here needs a secret: it only uses the repository's own token. If a run fails you get GitHub's normal failure email.
+name: Publish scheduled blog posts
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@v5.3.0
+        with:
+          python-version: '3.12'
+      - name: Regenerate the site
+        run: |
+          python -m pip install --quiet pillow
+          python site/scripts/pages.py
+          # cover images made here can differ byte-for-byte from the committed ones (another Pillow build): keep the committed files, only NEW covers count
+          git ls-files -m site/assets | xargs -r git checkout --
+      - name: Commit and push only if something changed
+        run: |
+          if git diff --quiet -- site; then echo "nothing due"; exit 0; fi
+          changed=$(git diff --name-only -- site | wc -l)
+          echo "changed files: $changed"
+          # a normal publish touches a handful of files (the post, the index, the sitemap, a few teasers); a big diff means something else changed: stop and let a person look
+          if [ "$changed" -gt 40 ]; then echo "::error::$changed files changed: more than a publish should touch, not pushing"; git diff --stat -- site | tail -5; exit 1; fi
+          git config user.name "FIG publisher"
+          git config user.email "publisher@users.noreply.github.com"
+          git add site
+          git commit -m "Publish scheduled blog posts ($(TZ=America/Toronto date '+%Y-%m-%d %H:%M') Toronto)"
+          git pull --rebase origin main || true
+          git push origin HEAD:main
+      - name: Warn when the queue is running low (once a day, 09:00 Toronto; a failed run makes GitHub email you)
+        run: |
+          H=$(TZ=America/Toronto date +%H); M=$(TZ=America/Toronto date +%M)
+          if [ "$H" != "09" ] || [ "$M" -ge 10 ]; then exit 0; fi
+          left=$(python -c "import sys,datetime as d; sys.path.insert(0,'site/scripts'); from content import POSTS; n=d.datetime.now(d.timezone.utc); print(sum(1 for p in POSTS if p.get('publish_at') and d.datetime.fromisoformat(p['publish_at'])>n))")
+          echo "queued posts: $left"
+          if [ "$left" -lt 3 ]; then echo "::error::Only $left blog posts are queued: ask for the next batch"; exit 1; fi

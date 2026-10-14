@@ -1199,3 +1199,15 @@ details.qa > p { margin: -2px 0 0; }
 .boostcard .bc-g b { color: var(--ink); font-size: 26px; line-height: 1.1; letter-spacing: -0.02em; }
 .boostcard .bc-g p:first-child b { color: var(--cobalt); }
 .receipt p { color: #0E1116; }
+
+/* Closing FIG band on phones and tablets (user 2026-10-14: "looks chopped"): the whole word shows, the band is as tall as
+   the word, the four stickers make a tidy collage inside it, and the page ends clear of the home bar. Desktop is unchanged. */
+@media (max-width: 899px) {
+  .mega { height: auto; padding: 64px 0 calc(20px + env(safe-area-inset-bottom)); }
+  .mega-word { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: -0.14em auto -0.08em; font-size: min(52vw, 400px); } /* the letters fill 0.14-0.92em of the line */
+  .sticker { width: clamp(62px, 17vw, 104px); border-width: 4px; box-shadow: 0 8px 18px rgba(10, 16, 32, .3); }
+  .s1 { left: 5%; top: 50px; }
+  .s2 { left: auto; right: 5%; top: 40px; }
+  .s3 { right: 12%; top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); width: clamp(56px, 14vw, 88px); }
+  .s4 { left: 9%; right: auto; top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); width: clamp(56px, 14vw, 88px); }
+}

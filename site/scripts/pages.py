@@ -95,7 +95,8 @@ def crumbs(items):
         {"@type": "ListItem", "position": k + 1, "name": n, "item": SITE_URL + u} for k, (n, u) in enumerate(items)]}
 
 
-def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png"):
+# chrome="back": no site navbar, the page brings its own way back (the legal pages, user 2026-10-14: "remove it, and only add a back to landing page")
+def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png", chrome="nav"):
     path = "/" + slug
     if slug not in HIDDEN:
         extra_head = ld(crumbs([("Home", "/")] + (trail or []) + [(title, path)])) + extra_head
@@ -118,12 +119,12 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 <body class="sub">
 {SPRITE}
 <div class="bg" aria-hidden="true"><div class="bg-grid"></div></div>
-{nav(current)}
+{nav(current) if chrome == 'nav' else ''}
 <main{' class="page"' if wide else ' class="wrap doc"'}>
 {body}
 </main>
 {FOOTER}
-{MEGA}
+{MEGA if chrome == 'nav' else ''}
 <script src="/js/fx.js" defer></script>
 <script src="/js/sub.js" defer></script>
 </body>
@@ -185,7 +186,9 @@ def legal(slug, doc, extra=""):
     # a band pinned at the top: the title as big as every other page's, the date, the documents (user 2026-10-13/14: they stay
     # put and only the document scrolls, and the title is "enlarged like before"); under 1024 px it also holds the
     # "On this page" menu, from 1024 the contents are a column pinned right under it (js/legal.js keeps that line exact)
-    band = (f'<section class="lg-band"><div class="wrap lg-band-in"><div class="lg-title"><h1 class="lg-h1">{e(doc["title"])}</h1>'
+    band = ('<section class="lg-band"><div class="wrap lg-band-in">'
+            '<a class="lg-back" href="/"><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span>Back to FIG</span></a>'
+            f'<div class="lg-title"><h1 class="lg-h1">{e(doc["title"])}</h1>'
             f'<p class="lg-upd">{e(doc["updated"])}</p></div>{tabs if slug in dict(LEGAL_TABS) else ""}'
             '<button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'
             f'<nav class="lg-rail lg-menu" id="lg-toc" aria-label="On this page">{links}</nav></div></section>')
@@ -194,7 +197,7 @@ def legal(slug, doc, extra=""):
                 + "".join(f'<section class="lg-sec" id="{slug_id(h)}"><h2>{e(h)}</h2>{t}</section>' for h, t in secs)
                 + f'<div class="lg-ask"><div><b>{e(doc["contactAsk"])}</b><span>{e(doc["contactLine"])}</span></div><a class="btn" href="/contact">Contact us</a></div>')
     body = band + f'<section class="section lg lg-top"><div class="wrap lg-grid">{col}<article class="lg-doc">{doc_html}</article></div></section>'
-    page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>')
+    page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>', chrome="back")
 
 
 L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))

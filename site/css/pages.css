@@ -83,9 +83,16 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .lg { padding-top: 64px; }
 /* fixed, not sticky: it can't be pushed even by the footer at the end of a short page; the page starts under it */
 .lg-band { position: fixed; top: 0; left: 0; right: 0; z-index: 6; background: var(--bg, #fff); border-bottom: 1px solid var(--line); }
-.lg-band-in { position: relative; display: grid; gap: 12px; padding-top: 92px; padding-bottom: 12px; }
+.lg-band-in { position: relative; display: grid; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+/* no site navbar here (user 2026-10-14): one way back, at the top of the band, always in the same place */
+.lg-back { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 8px; margin-left: -8px;
+  border-radius: 999px; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; transition: background .2s; }
+.lg-back::before { content: "90"; font-size: 18px; color: var(--cobalt); }
+.lg-back:hover { background: var(--ice); }
+.lg-back:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+.lg-back .logo { width: 26px; height: 26px; }
 .lg-title { display: grid; gap: 6px; min-width: 0; }
-.lg-h1 { margin: 0; font-size: 40px; line-height: .98; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); }
+.lg-h1 { margin: 0; font-size: clamp(40px, 7.4vw, 60px); line-height: .98; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); }
 .lg-upd { margin: 0; font-size: 14px; font-weight: 600; color: var(--muted); }
 .lg-band .pg-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter); }
 .lg-band .pg-pills::-webkit-scrollbar { display: none; }
@@ -123,7 +130,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 @media (max-height: 560px) and (max-width: 1023px) { .lg-title { display: none; } }
 /* a short screen (a phone on its side, or zoomed in): the band stays small so the text keeps the room */
 @media (max-height: 620px) and (max-width: 1023px) {
-  .lg-band-in { gap: 6px; padding-top: 84px; padding-bottom: 8px; }
+  .lg-band-in { gap: 6px; padding-top: 8px; padding-bottom: 8px; }
   .lg-h1 { font-size: 30px; }
   .lg-upd { display: none; }
   .lg-band .pg-pills a { height: 36px; padding: 0 14px; font-size: 14px; }
@@ -131,8 +138,8 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 }
 @media (min-width: 1024px) {
   .section.lg-top { padding-top: calc(var(--lg-band, 240px) + 28px); }
-  .lg-band-in { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 32px; row-gap: 16px; padding-top: 110px; padding-bottom: 22px; }
-  .lg-h1 { font-size: clamp(56px, 5.6vw, 80px); }
+  .lg-band-in { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 32px; row-gap: 14px; padding-top: 20px; padding-bottom: 24px; }
+  .lg-h1 { font-size: clamp(56px, 6.7vw, 96px); }
   .lg-upd { font-size: 15px; }
   .lg-band .pg-pills { flex-wrap: wrap; justify-content: flex-end; overflow: visible; margin: 0; padding: 0 0 4px; }
   .lg-toc-btn, .lg-menu, .lg-band.open .lg-menu { display: none; }
@@ -141,7 +148,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
   .lg-col { display: grid; gap: 2px; position: sticky; top: calc(var(--lg-band, 240px) + 28px); align-self: start;
     max-height: calc(100dvh - var(--lg-band, 240px) - 44px); overflow: auto; overscroll-behavior: contain; }
   .lg-col b { display: block; padding: 0 14px 6px; font-size: 14px; font-weight: 800; color: var(--ink); }
-  .lg-col a { min-height: 40px; padding: 6px 14px; }
+  .lg-col a { min-height: 36px; padding: 5px 14px; } /* a mouse; touch screens keep 44 px (the coarse-pointer rule below) */
   .lg-sec { scroll-margin-top: calc(var(--lg-band, 240px) + 24px); }
 }
 .lg-doc { display: grid; gap: 44px; max-width: 760px; }

@@ -1,11 +1,11 @@
 # Publishes scheduled blog posts. A post goes live when its publish_at (America/Toronto slots: 00:00, 06:00, 12:00, 18:00) has passed:
-# this job regenerates the site every 10 minutes, and when that changes any page (a post became due) it commits and pushes, which makes Vercel deploy.
+# this job regenerates the site every 15 minutes (at :07, :22, :37, :52: GitHub delays or skips runs at the busy :00/:10 marks), and when that changes any page (a post became due) it commits and pushes, which makes Vercel deploy.
 # Posts live in site/scripts/content.py with a publish_at; site/scripts/pages.py leaves out any post that is not due yet.
 # Nothing here needs a secret: it only uses the repository's own token. If a run fails you get GitHub's normal failure email.
 name: Publish scheduled blog posts
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch: {}
 permissions:
   contents: write

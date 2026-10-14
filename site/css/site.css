@@ -945,10 +945,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .city-name span { color: var(--muted); font-weight: 600; font-size: 15px; }
 .city-tag { align-self: flex-start; padding: 7px 14px; border-radius: 999px; background: #fff; color: var(--cobalt); font-weight: 800; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
 .city-tag.live { background: var(--leaf); color: #06331C; }
-.city.ask { background: transparent; border: 2px dashed var(--ice-line); transition: border-color .3s, transform .3s var(--ease); }
-.city.ask span { color: var(--cobalt); font-weight: 700; }
-.city.ask:hover { border-color: var(--cobalt); transform: translateY(-3px); }
-@media (min-width: 900px) { .cities { grid-template-columns: 2fr 1fr 1fr; } .city.big { min-height: 360px; } }
+@media (min-width: 900px) { .cities { grid-template-columns: 3fr 2fr; } .city.big { min-height: 360px; } }
 
 .closing .h2 { color: #fff; }
 .closing-btns { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }

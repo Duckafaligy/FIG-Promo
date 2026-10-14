@@ -3,6 +3,14 @@
   "outputDirectory": "site",
   "rewrites": [
     {
+      "source": "/apple-touch-icon.png",
+      "destination": "/assets/icons/apple-touch-icon.png"
+    },
+    {
+      "source": "/apple-touch-icon-precomposed.png",
+      "destination": "/assets/icons/apple-touch-icon.png"
+    },
+    {
       "source": "/admin",
       "destination": "/api/admin"
     },
@@ -292,7 +300,7 @@
       "permanent": false
     },
     {
-      "source": "/preview/:path*",
+      "source": "/preview/(.*)",
       "destination": "/",
       "permanent": false
     }

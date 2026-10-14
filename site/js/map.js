@@ -47,7 +47,9 @@
     const you = document.createElement("div"); you.className = "you";
     new maplibregl.Marker({ element: you }).setLngLat(map.unproject([W * (wide() ? 0.7 : 0.5), H * (wide() ? 0.52 : 0.32)])).addTo(map);
 
-    if (reduce) return;
+    // phones and tablets: no drift. Turning the map redraws all of it every frame, which costs a phone ~1 s of main thread
+    // per few seconds (slow taps, battery) for a 4° sway nobody sees on a small screen
+    if (reduce || !matchMedia("(pointer: fine)").matches) return;
     // slow drift, nudged by the mouse; stops while the hero is off screen
     let on = true, tx = 0, ty = 0, cx = 0, cy = 0, t0 = performance.now();
     new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) requestAnimationFrame(tick); }).observe(box);

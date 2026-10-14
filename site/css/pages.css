@@ -87,7 +87,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 /* no site navbar here (user 2026-10-14): one way back, at the top of the band, always in the same place */
 .lg-back { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 8px; margin-left: -8px;
   border-radius: 999px; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; transition: background .2s; }
-.lg-back::before { content: "90"; font-size: 18px; color: var(--cobalt); }
+.lg-back-arrow { font-size: 18px; line-height: 1; color: var(--cobalt); }
 .lg-back:hover { background: var(--ice); }
 .lg-back:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
 .lg-back .logo { width: 26px; height: 26px; }
@@ -138,10 +138,12 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 }
 @media (min-width: 1024px) {
   .section.lg-top { padding-top: calc(var(--lg-band, 240px) + 28px); }
-  .lg-band-in { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 32px; row-gap: 14px; padding-top: 20px; padding-bottom: 24px; }
+  /* the title has the full width, so it stays on one line at 96 px; the documents sit on the row under the date */
+  .lg-band-in { grid-template-columns: minmax(0, 1fr); row-gap: 14px; padding-top: 20px; padding-bottom: 22px; }
+  .lg-h1 { white-space: nowrap; }
   .lg-h1 { font-size: clamp(56px, 6.7vw, 96px); }
   .lg-upd { font-size: 15px; }
-  .lg-band .pg-pills { flex-wrap: wrap; justify-content: flex-end; overflow: visible; margin: 0; padding: 0 0 4px; }
+  .lg-band .pg-pills { flex-wrap: wrap; justify-content: flex-start; overflow: visible; margin: 0; padding: 0; -webkit-mask-image: none; mask-image: none; }
   .lg-toc-btn, .lg-menu, .lg-band.open .lg-menu { display: none; }
   .lg-grid { grid-template-columns: 300px minmax(0, 760px); gap: 88px; align-items: start; }
   /* pinned exactly where it rests: right under the band */

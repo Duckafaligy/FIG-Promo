@@ -187,7 +187,7 @@ def legal(slug, doc, extra=""):
     # put and only the document scrolls, and the title is "enlarged like before"); under 1024 px it also holds the
     # "On this page" menu, from 1024 the contents are a column pinned right under it (js/legal.js keeps that line exact)
     band = ('<section class="lg-band"><div class="wrap lg-band-in">'
-            '<a class="lg-back" href="/"><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span>Back to FIG</span></a>'
+            '<a class="lg-back" href="/"><span class="lg-back-arrow" aria-hidden="true">&larr;</span><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span>Back to FIG</span></a>'
             f'<div class="lg-title"><h1 class="lg-h1">{e(doc["title"])}</h1>'
             f'<p class="lg-upd">{e(doc["updated"])}</p></div>{tabs if slug in dict(LEGAL_TABS) else ""}'
             '<button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'

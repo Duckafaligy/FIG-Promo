@@ -6,7 +6,7 @@ run: python site/scripts/pages.py
 - Sections that also live on the home page (how it works, features, restaurants) are copied from index.html, so they never drift.
 - SITE_URL is the address search engines see: change it once figpromo.com is connected.
 """
-import datetime, html, json, pathlib, re, sys
+import datetime, html, json, os, pathlib, re, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 
@@ -298,7 +298,19 @@ def read_min(post):
     return max(2, round(words / 220))
 
 
-POSTS.sort(key=lambda x: x["date"], reverse=True)
+# Scheduled posts (user 2026-10-14: "Schedule + reviewed batches"): a post with `publish_at` (ISO 8601 with its offset) is
+# left out of everything until then: no page, not in the blog, its topics, "Keep reading", the feed, the sitemap, llms.txt or
+# any structured data. FIG_NOW (ISO) stands in for the clock in tests. An hourly job runs this at the four slots.
+NOW = datetime.datetime.fromisoformat(os.environ["FIG_NOW"]) if os.environ.get("FIG_NOW") else datetime.datetime.now(datetime.timezone.utc)
+if NOW.tzinfo is None:
+    NOW = NOW.replace(tzinfo=datetime.timezone.utc)
+live = lambda post: not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW
+QUEUED = sorted((x for x in POSTS if not live(x)), key=lambda x: x["publish_at"])
+POSTS[:] = [x for x in POSTS if live(x)]
+for x in QUEUED:  # a page made before (an earlier FIG_NOW, or a post moved later) goes too
+    for f in (SITE / "blog" / f"{x['slug']}.html", SITE / "assets" / "blog" / f"{x['slug']}.jpg"):
+        f.unlink(missing_ok=True)
+POSTS.sort(key=lambda x: (x["date"], x.get("publish_at", "")), reverse=True)
 TOPICS = ["For diners", "For restaurants", "News"]
 
 
@@ -481,10 +493,14 @@ page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("T
      "If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium to see it, or to cancel or change your card later.",
      "Changed your mind before paying? Nothing was charged.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>'))
 
-today = datetime.date.today().isoformat()
+# the sitemap's dates are the posts' own: the same posts give the same file, so the hourly job commits real changes only
+POST_DATE = {f"/blog/{x['slug']}": x.get("updated", x["date"]) for x in POSTS}
+if POSTS:
+    POST_DATE["/blog"] = max(POST_DATE.values())
+lastmod = lambda p: f"<lastmod>{POST_DATE[p]}</lastmod>" if p in POST_DATE else ""
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"
 xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
-    f"  <url><loc>{SITE_URL}{'' if p == '/' else p}</loc><lastmod>{today}</lastmod><priority>{prio(p)}</priority></url>\n" for p, _, _ in PAGES) + "</urlset>\n"
+    f"  <url><loc>{SITE_URL}{'' if p == '/' else p}</loc>{lastmod(p)}<priority>{prio(p)}</priority></url>\n" for p, _, _ in PAGES) + "</urlset>\n"
 (SITE / "sitemap.xml").write_text(xml, encoding="utf-8")
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
@@ -523,3 +539,4 @@ if not (icons / "icon-512.png").exists():
     for name, size in (("apple-touch-icon.png", 180), ("icon-192.png", 192), ("icon-512.png", 512)):
         src.resize((size, size), Image.LANCZOS).save(icons / name, optimize=True)
 print(len(PAGES), "pages; sitemap.xml, robots.txt, site.webmanifest written")
+print(f"blog: published {len(POSTS)}, queued {len(QUEUED)}" + "".join(f"\n  {x['publish_at']}  {x['slug']}" for x in QUEUED))

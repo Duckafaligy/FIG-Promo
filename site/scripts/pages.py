@@ -166,7 +166,7 @@ def faq_ld(qs):
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qs]}) + "</script>"
 
 
-LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms")]
+LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms"), ("cookies", "Cookies")]
 
 
 def para(p):
@@ -181,17 +181,19 @@ def legal(slug, doc, extra=""):
         secs += [(h, t) for h, t in extra]
     tabs = '<nav class="pg-pills" aria-label="Legal documents">' + "".join(
         f'<a href="/{s}"{" aria-current=page" if s == slug else ""}>{t}</a>' for s, t in LEGAL_TABS) + "</nav>"
-    rail = '<nav class="lg-rail" id="lg-toc" aria-label="On this page"><b>On this page</b>' + "".join(f'<a href="#{slug_id(h)}">{e(h)}</a>' for h, _ in secs) + "</nav>"
-    # the title, the date, the documents and the contents stay in view; only the document scrolls (user 2026-10-13).
-    # A sticky column on a computer, a sticky bar with an "On this page" menu under 1024 px (js/legal.js)
-    side = (f'<aside class="lg-side"><div class="lg-head"><h1 class="lg-h1">{e(doc["title"])}</h1><p class="lg-upd">{e(doc["updated"])}</p>'
-            + (tabs if slug in dict(LEGAL_TABS) else "")
-            + '</div><button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'
-            + rail + "</aside>")
+    links = "".join(f'<a href="#{slug_id(h)}">{e(h)}</a>' for h, _ in secs)
+    # a band pinned at the top: the title as big as every other page's, the date, the documents (user 2026-10-13/14: they stay
+    # put and only the document scrolls, and the title is "enlarged like before"); under 1024 px it also holds the
+    # "On this page" menu, from 1024 the contents are a column pinned right under it (js/legal.js keeps that line exact)
+    band = (f'<section class="lg-band"><div class="wrap lg-band-in"><div class="lg-title"><h1 class="lg-h1">{e(doc["title"])}</h1>'
+            f'<p class="lg-upd">{e(doc["updated"])}</p></div>{tabs if slug in dict(LEGAL_TABS) else ""}'
+            '<button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'
+            f'<nav class="lg-rail lg-menu" id="lg-toc" aria-label="On this page">{links}</nav></div></section>')
+    col = f'<nav class="lg-rail lg-col" aria-label="Contents"><b>On this page</b>{links}</nav>'
     doc_html = (f'<div class="pg-short"><h2>The short version</h2><ul>{short}</ul></div>'
                 + "".join(f'<section class="lg-sec" id="{slug_id(h)}"><h2>{e(h)}</h2>{t}</section>' for h, t in secs)
                 + f'<div class="lg-ask"><div><b>{e(doc["contactAsk"])}</b><span>{e(doc["contactLine"])}</span></div><a class="btn" href="/contact">Contact us</a></div>')
-    body = f'<section class="section lg lg-top"><div class="wrap lg-grid">{side}<article class="lg-doc">{doc_html}</article></div></section>'
+    body = band + f'<section class="section lg lg-top"><div class="wrap lg-grid">{col}<article class="lg-doc">{doc_html}</article></div></section>'
     page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>')
 
 
@@ -200,14 +202,14 @@ legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The website waitlist", '''<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you asked for it when you signed up. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')])
 
-page("cookies", "Cookies", "What the FIG website and web app store on your device, why, and how to clear it. No ads, no tracking cookies.", group="Legal", wide=True, body=hero("Cookies", "Last updated October 4, 2026", cls="pg-hero-line") + '''<section class="section lg"><div class="wrap"><article class="lg-doc lg-solo">
-<p>This website doesn't use advertising or tracking cookies, and there's no analytics script following you around.</p>
-<h2>What it does store</h2>
-<ul><li><b>Nothing, for most visitors.</b> Browsing the site and joining the waitlist don't set cookies.</li>
-<li><b>FIG team only:</b> signing in to the admin page sets one secure, HttpOnly cookie that keeps you signed in for 8 hours, and one that counts wrong password tries.</li></ul>
-<h2>Things loaded from other services</h2>
-<p>The map tiles come from OpenFreeMap, the animation library from cdnjs and the map library from jsDelivr. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>
-</article></div></section>''')
+# Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
+legal("cookies", {"title": "Cookies", "updated": "Last updated October 14, 2026",
+                  "short": ["No advertising or tracking cookies, and no analytics script following you around.", "Most visitors get no cookies at all.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
+                  "sections": [], "contactAsk": "Questions about cookies?", "contactLine": "FIG, Markham, Ontario"},
+      [("What the website stores", "<ul><li><b>Nothing, for most visitors.</b> Browsing the site and joining the waitlist don't set cookies.</li>"
+        "<li><b>FIG team only:</b> signing in to the admin page sets one secure, HttpOnly cookie that keeps you signed in for 8 hours, and one that counts wrong password tries.</li></ul>"),
+       ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
+       ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap, the animation library from cdnjs and the map library from jsDelivr. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>")])
 
 page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',

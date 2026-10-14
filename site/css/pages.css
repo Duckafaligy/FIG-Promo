@@ -77,61 +77,61 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ct-way em.leaf { color: #087A42; }
 @media (min-width: 900px) { .ct-grid { grid-template-columns: 1fr 560px; gap: 80px; } .ct-ways { grid-template-columns: 1fr 1fr; } }
 
-/* ---------- Legal: the title, the documents and the contents stay in view; only the document scrolls (user 2026-10-13).
-   Under 1024 px: a sticky bar under the navbar (title, documents, an "On this page" menu); from 1024: a sticky column. ---------- */
+/* ---------- Legal (user 2026-10-13/14): a band pinned at the top with the title as big as every other page's, the date and
+   the documents; on a computer the contents column is pinned right under it (js/legal.js sets --lg-band to the band's height,
+   so the column's resting and pinned places are the same line). Only the document scrolls; nothing moves by a pixel. ---------- */
 .lg { padding-top: 64px; }
-.section.lg-top { padding-top: 0; }
-.lg-grid { display: grid; gap: 28px; }
-/* pinned from the top of the screen down, padded clear of the floating navbar, so no text shows around it */
-.lg-side { position: sticky; top: 0; z-index: 6; display: grid; gap: 10px; margin: 0 calc(var(--gutter) * -1); padding: 96px var(--gutter) 12px;
-  background: var(--bg, #fff); border-bottom: 1px solid var(--line); }
-.lg-head { display: grid; gap: 8px; min-width: 0; }
-.lg-h1 { margin: 0; font-size: 21px; line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
-.lg-upd { margin: -4px 0 0; font-size: 14px; font-weight: 600; color: var(--muted); }
-.lg-head .pg-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter); }
-.lg-head .pg-pills::-webkit-scrollbar { display: none; }
-.lg-head .pg-pills a { flex-shrink: 0; }
+/* fixed, not sticky: it can't be pushed even by the footer at the end of a short page; the page starts under it */
+.lg-band { position: fixed; top: 0; left: 0; right: 0; z-index: 6; background: var(--bg, #fff); border-bottom: 1px solid var(--line); }
+.lg-band-in { position: relative; display: grid; gap: 12px; padding-top: 92px; padding-bottom: 12px; }
+.lg-title { display: grid; gap: 6px; min-width: 0; }
+.lg-h1 { margin: 0; font-size: 40px; line-height: .98; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); }
+.lg-upd { margin: 0; font-size: 14px; font-weight: 600; color: var(--muted); }
+.lg-band .pg-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter); }
+.lg-band .pg-pills::-webkit-scrollbar { display: none; }
+.lg-band .pg-pills a { flex-shrink: 0; }
 .lg-toc-btn { position: relative; min-height: 44px; display: flex; align-items: center; gap: 6px; padding: 0 40px 0 14px; border-radius: 12px; border: 1px solid var(--line);
   background: #fff; font: inherit; font-size: 15px; font-weight: 800; color: var(--ink); cursor: pointer; text-align: left; min-width: 0; }
 .lg-toc-btn::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; margin-top: -6px; border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s; }
-.lg-side.open .lg-toc-btn::after { transform: rotate(-135deg); margin-top: -2px; }
+.lg-band.open .lg-toc-btn::after { transform: rotate(-135deg); margin-top: -2px; }
 .lg-toc-btn:focus-visible, .lg-rail a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
 .lg-toc-lbl { flex-shrink: 0; }
 .lg-toc-now { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 600; color: var(--muted); }
 .lg-toc-now:not(:empty)::before { content: "· "; }
 .lg-rail { display: none; }
 .lg-rail b { display: none; }
-.lg-side.open .lg-rail { display: grid; gap: 2px; position: absolute; left: var(--gutter); right: var(--gutter); top: calc(100% + 6px); max-height: min(60vh, 520px);
+.lg-band.open .lg-menu { display: grid; gap: 2px; position: absolute; left: var(--gutter); right: var(--gutter); top: calc(100% + 6px); max-height: min(60vh, 520px);
   overflow: auto; overscroll-behavior: contain; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 40px rgba(10, 16, 32, .16); }
 .lg-rail a { min-height: 44px; display: flex; align-items: center; padding: 8px 14px; border-radius: 12px; font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
 .lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
 .lg-rail a.on { background: var(--ice); color: #1550E6; font-weight: 700; }
-.lg-sec { display: grid; gap: 14px; scroll-margin-top: 230px; }
-/* a short screen (a phone on its side, or zoomed in): the pinned bar stays small so the text keeps the room */
+.section.lg-top { padding-top: calc(var(--lg-band, 288px) + 28px); }
+.lg-grid { display: grid; gap: 28px; }
+.lg-sec { display: grid; gap: 14px; scroll-margin-top: 300px; }
+.lg-sec:focus { outline: none; } /* focused after a jump so a screen reader reads on from there; no box drawn */
+/* a short screen (a phone on its side, or zoomed in): the band stays small so the text keeps the room */
 @media (max-height: 620px) and (max-width: 1023px) {
-  .lg-side { gap: 6px; padding-top: 88px; padding-bottom: 8px; }
-  .lg-h1 { font-size: 16px; }
+  .lg-band-in { gap: 6px; padding-top: 84px; padding-bottom: 8px; }
+  .lg-h1 { font-size: 30px; }
   .lg-upd { display: none; }
-  .lg-head { gap: 6px; }
-  .lg-head .pg-pills a { height: 36px; padding: 0 14px; font-size: 14px; }
-  .lg-sec { scroll-margin-top: 170px; }
+  .lg-band .pg-pills a { height: 36px; padding: 0 14px; font-size: 14px; }
+  .lg-sec { scroll-margin-top: 200px; }
 }
 @media (min-width: 1024px) {
-  .section.lg-top { padding-top: 128px; }
+  .section.lg-top { padding-top: calc(var(--lg-band, 240px) + 28px); }
+  .lg-band-in { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 32px; row-gap: 16px; padding-top: 110px; padding-bottom: 22px; }
+  .lg-h1 { font-size: clamp(56px, 5.6vw, 80px); }
+  .lg-upd { font-size: 15px; }
+  .lg-band .pg-pills { flex-wrap: wrap; justify-content: flex-end; overflow: visible; margin: 0; padding: 0 0 4px; }
+  .lg-toc-btn, .lg-menu, .lg-band.open .lg-menu { display: none; }
   .lg-grid { grid-template-columns: 300px minmax(0, 760px); gap: 88px; align-items: start; }
-  /* it sticks exactly where it rests (the section's 128 px top), so it never moves, scrolling either way (user 2026-10-14) */
-  .lg-side { top: 128px; align-self: start; gap: 22px; margin: 0; padding: 0 4px 16px 0; background: none; border: 0; max-height: calc(100dvh - 144px); overflow: auto; overscroll-behavior: contain; }
-  .lg-h1 { font-size: 34px; line-height: 1.1; letter-spacing: -0.04em; }
-  .lg-upd { margin: 0; font-size: 15px; }
-  .lg-head { gap: 14px; }
-  .lg-head .pg-pills { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
-  .lg-head .pg-pills a { height: 40px; padding: 0 16px; font-size: 14px; }
-  .lg-toc-btn { display: none; }
-  .lg-rail, .lg-side.open .lg-rail { display: grid; gap: 2px; position: static; max-height: none; overflow: visible; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: none; }
-  .lg-rail b { display: block; padding: 0 14px 6px; font-size: 14px; font-weight: 800; color: var(--ink); }
-  .lg-rail a { min-height: 40px; padding: 6px 14px; }
-  .lg-sec { scroll-margin-top: 112px; }
+  /* pinned exactly where it rests: right under the band */
+  .lg-col { display: grid; gap: 2px; position: sticky; top: calc(var(--lg-band, 240px) + 28px); align-self: start;
+    max-height: calc(100dvh - var(--lg-band, 240px) - 44px); overflow: auto; overscroll-behavior: contain; }
+  .lg-col b { display: block; padding: 0 14px 6px; font-size: 14px; font-weight: 800; color: var(--ink); }
+  .lg-col a { min-height: 40px; padding: 6px 14px; }
+  .lg-sec { scroll-margin-top: calc(var(--lg-band, 240px) + 24px); }
 }
 .lg-doc { display: grid; gap: 44px; max-width: 760px; }
 .lg-solo { margin: 0 auto; gap: 16px; }

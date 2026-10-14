@@ -143,15 +143,25 @@
     c.addEventListener("pointermove", (e) => { const r = c.getBoundingClientRect(); c.style.setProperty("--cx", e.clientX - r.left + "px"); c.style.setProperty("--cy", e.clientY - r.top + "px"); });
   });
 
-  // ---------- video loops: load and play only while on screen ----------
+  // ---------- video loops: loaded a screen and a half ahead, playing while on screen ----------
+  // (user 2026-10-14: they start on their own, already moving when you get there; the play button is only for a phone
+  // that refuses autoplay.) On a phone the bento row scrolls sideways, where a look-ahead can't see: each loop that's
+  // near or playing also loads the next card's. Data Saver: each loads only when it's on screen, as before.
+  const ahead = !(navigator.connection && navigator.connection.saveData);
+  const load = (v) => { if (v && !v.src) { v.preload = "auto"; v.src = v.dataset.src; } };
+  const next = (v) => v.closest(".cell")?.nextElementSibling?.querySelector("video[data-src]");
+  const lio = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    load(e.target); load(next(e.target)); lio.unobserve(e.target);
+  }), { rootMargin: "150% 0px" });
   const vio = new IntersectionObserver((es) => es.forEach((e) => {
     const v = e.target;
     if (e.isIntersecting) {
-      if (!v.src) v.src = v.dataset.src;
+      load(v); if (ahead) load(next(v));
       figPlay(v);
     } else v.pause();
-  }), { threshold: 0.35 });
-  $$("video[data-src]").forEach((v) => vio.observe(v));
+  }), { threshold: 0.1 });
+  $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
   // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
   const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
   $$("video[data-poster]").forEach((v) => pio.observe(v));
@@ -168,7 +178,7 @@
     const load = () => {
       $(".tutwrap").dataset.role = tab;
       tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
-      tutVideo.src = `/assets/clips/tut-${tab}.mp4`;
+      if (!tutVideo.src.endsWith(`/tut-${tab}.mp4`)) tutVideo.src = `/assets/clips/tut-${tab}.mp4`; // the look-ahead may have loaded it
       tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
       figPlay(tutVideo);
     };
@@ -185,6 +195,8 @@
     }).catch(() => {});
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
+  // loaded a screen and a half ahead, like the loops (the diner's side is the one that shows first)
+  if (ahead) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return tutVideo.pause();
     if (!tutRole) selectTab("diner"); else figPlay(tutVideo);

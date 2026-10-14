@@ -18,7 +18,8 @@
     v.muted = true; v.playsInline = true; v.autoplay = true;
     const p = v.play();
     if (p) p.then(() => { blocked.delete(v); v.nextElementSibling?.classList.contains("vplay") && v.nextElementSibling.remove(); })
-      .catch(() => { blocked.add(v); playBtn(v); });
+      // AbortError: a pause() (scrolled away) or a new src cut the play short; that's not the phone refusing autoplay
+      .catch((e) => { if (e && e.name === "AbortError") return; blocked.add(v); playBtn(v); });
   };
   const retry = () => blocked.forEach((v) => {
     const r = v.getBoundingClientRect();

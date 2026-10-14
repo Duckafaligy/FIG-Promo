@@ -1,0 +1,1 @@
+__d(function(g,r,i,a,m,e,d){"use strict";Object.defineProperty(e,'__esModule',{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return b}});var t=r(d[0]),n=r(d[1]),u=r(d[2]),s=r(d[3]);function b(){return(0,u.useWebWide)()?(0,s.jsx)(n.WebChats,{biz:!0}):(0,s.jsx)(t.ChatList,{biz:!0})}},1265,[983,986,918,2]);

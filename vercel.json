@@ -91,7 +91,7 @@
       "destination": "/app/visit/[id]"
     },
     {
-      "source": "/app/:path*",
+      "source": "/app/:path((?!_expo/).*)",
       "destination": "/app/+not-found"
     }
   ],

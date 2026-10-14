@@ -27,6 +27,8 @@
 
   let seed = 11;
   const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  // the pins are decoration: MapLibre makes each marker a role=button that can't be focused or used, so screen readers skip them
+  const deco = (m) => { const e = m.getElement(); e.removeAttribute("role"); e.removeAttribute("aria-label"); e.removeAttribute("tabindex"); e.setAttribute("aria-hidden", "true"); };
   map.on("load", () => {
     box.classList.add("ready");
     const W = box.clientWidth, H = box.clientHeight, minX = wide() ? 0.53 : 0.04, maxY = wide() ? 0.95 : 0.5;
@@ -42,10 +44,10 @@
       el.style.animationDelay = `${0.5 + Math.hypot(x - W * 0.7, y - H * 0.5) / 900}s`;
       el.innerHTML = `<img src="${window.FIG_PINS[i++ % PHOTOS.length]}" alt="">`;
       outer.appendChild(el);
-      new maplibregl.Marker({ element: outer }).setLngLat(map.unproject([x, y])).addTo(map);
+      deco(new maplibregl.Marker({ element: outer }).setLngLat(map.unproject([x, y])).addTo(map));
     }
     const you = document.createElement("div"); you.className = "you";
-    new maplibregl.Marker({ element: you }).setLngLat(map.unproject([W * (wide() ? 0.7 : 0.5), H * (wide() ? 0.52 : 0.32)])).addTo(map);
+    deco(new maplibregl.Marker({ element: you }).setLngLat(map.unproject([W * (wide() ? 0.7 : 0.5), H * (wide() ? 0.52 : 0.32)])).addTo(map));
 
     // phones and tablets: no drift. Turning the map redraws all of it every frame, which costs a phone ~1 s of main thread
     // per few seconds (slow taps, battery) for a 4° sway nobody sees on a small screen

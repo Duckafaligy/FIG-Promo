@@ -166,3 +166,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .st-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 6px; }
 @media (max-width: 520px) { .st-btns .btn { flex: 1 1 100%; } }
 @media (max-width: 600px) { .pg-short { padding: 22px; border-radius: 20px; } .ps-cover { aspect-ratio: 4 / 3; border-radius: 24px; } .pg-hero { padding-top: 120px; } }
+/* /about's For diners / For restaurants lists on a phone: the term on its own line, its text full width under it (28, 2026-10-13) */
+@media (max-width: 600px) { .ab-col ol { gap: 16px; } .ab-col li { grid-template-columns: 1fr; gap: 4px; } }
+/* the legal pages' side links: 44 px to tap on touch screens */
+@media (pointer: coarse), (max-width: 1099px) { .lg-rail a { min-height: 44px; display: flex; align-items: center; } }

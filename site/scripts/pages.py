@@ -195,7 +195,7 @@ legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The website waitlist", '''<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you asked for it when you signed up. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')])
 
-page("cookies", "Cookies", "What this website stores on your device.", group="Legal", wide=True, body=hero("Cookies", "Last updated October 4, 2026", cls="pg-hero-line") + '''<section class="section lg"><div class="wrap"><article class="lg-doc lg-solo">
+page("cookies", "Cookies", "What the FIG website and web app store on your device, why, and how to clear it. No ads, no tracking cookies.", group="Legal", wide=True, body=hero("Cookies", "Last updated October 4, 2026", cls="pg-hero-line") + '''<section class="section lg"><div class="wrap"><article class="lg-doc lg-solo">
 <p>This website doesn't use advertising or tracking cookies, and there's no analytics script following you around.</p>
 <h2>What it does store</h2>
 <ul><li><b>Nothing, for most visitors.</b> Browsing the site and joining the waitlist don't set cookies.</li>
@@ -271,7 +271,7 @@ help_html += '''<section class="section pg-tight"><div class="wrap"><div class="
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Answers for diners and restaurants using FIG.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]))
+page("help", "Help center", "Answers for diners and restaurants using FIG: claiming deals, QR codes, takeout, accounts and running deals.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]))
 
 
 
@@ -417,12 +417,12 @@ for k, post in enumerate(POSTS):
             + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
             + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><span class="pg-kick">{x["topic"]} · {nice_date(x["date"])}</span><b>{e(x["title"])}</b><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
-    article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post["dek"], "keywords": post["keywords"],
+    article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post.get("desc", post["dek"]), "keywords": post["keywords"],
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",
                "image": SITE_URL + img, "mainEntityOfPage": SITE_URL + url, "wordCount": len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split()),
                "author": {"@type": "Organization", "name": "FIG", "url": SITE_URL},
                "publisher": {"@type": "Organization", "name": "FIG", "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/icons/icon-512.png"}}}
-    page(url[1:], post["title"], post["dek"], body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img,
+    page(url[1:], post["title"], post.get("desc", post["dek"]), body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img,
          extra_head=ld(article) + faq_ld(post["faq"]))
     items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
     <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>

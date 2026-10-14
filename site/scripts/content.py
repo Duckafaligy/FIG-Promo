@@ -82,6 +82,7 @@ POSTS = [
 
     dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", topic="For restaurants",
          dek="Listing, deals, scans and chats are free on FIG, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.",
+         desc="Free for restaurants: listing, deals, scans and chats, no commission on dine-in. FIG earns from optional Premium and 5% of in-app takeout.",
          keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant deals app Markham, FIG Premium",
          points=["FIG is free for restaurants: listing, unlimited deals, every scan and chats. No commission on dine-in.",
                  "FIG makes money two ways: the optional FIG Premium ($50 a year), and 5% of the food on takeout orders diners pay for in the app.",

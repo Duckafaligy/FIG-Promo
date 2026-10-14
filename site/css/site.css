@@ -795,8 +795,12 @@ p.consent { cursor: default; padding-left: 22px; }
 @media (min-width: 1100px) { .nav-sheet { display: none; } }
 @media (max-width: 699px) { .nav-stores { display: none; } .nav-get { display: inline-flex; } }
 
-/* touch screens: the boxes open on tap */
-@media (hover: none) { .hint { display: block; font-size: 0; } .hint::after { content: "Tap to learn more"; font-size: 13px; } }
+/* touch screens: the boxes open on tap (fx.js says "Tap to learn more"); a tap leaves :hover stuck, so only .open opens them */
+@media (hover: none) {
+  .hint { display: block; }
+  .cell:hover:not(.open) .drop { clip-path: inset(0 0 100% 0); }
+  .cell:hover:not(.open) .drop :is(.drop-k, h4, li) { opacity: 0; transform: translateY(18px); }
+}
 
 @media (max-width: 719px) {
   .section { padding: 64px 0; }
@@ -928,13 +932,8 @@ p.consent { cursor: default; padding-left: 22px; }
 .faq { display: grid; gap: 32px; }
 .faq-head .side a { color: var(--cobalt); font-weight: 700; }
 .faq-list { border-top: 1px solid var(--ice-line); }
-.qa { border-bottom: 1px solid var(--ice-line); }
 .qa summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; cursor: pointer; list-style: none; font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); }
 .qa summary::-webkit-details-marker { display: none; }
-.qa summary::after { content: "+"; display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--ice); font-size: 20px; transition: transform .3s var(--ease), background .3s, color .3s; }
-.qa[open] summary::after { content: "\2212"; background: var(--cobalt); color: #fff; }
-.qa summary:hover::after { transform: scale(1.08); }
-.qa p { padding: 0 56px 26px 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
 @media (min-width: 980px) { .faq { grid-template-columns: 360px 1fr; gap: 80px; align-items: start; } .faq-head { position: sticky; top: 120px; } }
 
 .cities { display: grid; gap: 16px; margin-top: 40px; }
@@ -1075,8 +1074,6 @@ p.consent { cursor: default; padding-left: 22px; }
 
 /* launch date in the hero lede; FAQ grouped for diners / restaurants */
 .lede .opens { color: var(--ink); font-weight: 700; white-space: nowrap; }
-.qa-group { margin: 34px 0 6px; font-size: 15px; font-weight: 800; color: var(--cobalt); }
-.qa-group:first-child { margin-top: 0; }
 
 /* keyboard focus on the feature cards (they clip overflow, so the ring sits inside); footer column labels are text now */
 .cell:focus-visible { outline: 3px solid var(--volt); outline-offset: -3px; }
@@ -1098,13 +1095,6 @@ p.consent { cursor: default; padding-left: 22px; }
 /* sections sat 280 px apart on a computer: a little tighter */
 @media (min-width: 720px) { .section { padding: 112px 0; } }
 
-/* FAQ +/−: drawn, not typed (the − glyph sat low in its circle) */
-.qa summary::after { content: ""; background: var(--ice) linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat; color: var(--ink); }
-.qa summary::before { content: ""; position: absolute; right: 17px; width: 2px; height: 12px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease), opacity .3s; }
-.qa summary { position: relative; }
-.qa[open] summary::after { content: ""; background: var(--cobalt) linear-gradient(#fff, #fff) center / 12px 2px no-repeat; }
-.qa[open] summary::before { transform: rotate(90deg); opacity: 0; }
-.qa summary:focus-visible { outline: 3px solid var(--volt); outline-offset: 2px; border-radius: 10px; }
 
 /* ---------- a loop whose autoplay was refused (Low Power Mode, data saver): one tap plays it ---------- */
 .vplay { position: absolute; z-index: 2; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; display: grid; place-items: center; padding: 0 0 0 3px;
@@ -1156,3 +1146,59 @@ p.consent { cursor: default; padding-left: 22px; }
   .share { height: 44px; }
 }
 .faq-head .side { margin-top: 12px; }
+
+/* ---------- feature boxes, 2026-10-14: light words on the coloured panels, and a + button that opens them on any device ---------- */
+.drop.cobalt, .drop.slate, .drop.violet { color: #fff; }
+.drop.cobalt li, .drop.slate li, .drop.violet li { color: rgba(255, 255, 255, .92); }
+.drop.cobalt li::before, .drop.slate li::before, .drop.violet li::before { background: #C8F135; opacity: 1; }
+/* the glass card darkens a little so white stays readable over the bright blue and purple glows */
+.drop.cobalt .drop-in, .drop.violet .drop-in { background: rgba(8, 20, 70, .28); border-color: rgba(255, 255, 255, .24); }
+.drop.slate .drop-in { background: rgba(10, 16, 42, .38); }
+.two-tone .muted { color: #66718A; }
+.cell h3 { padding-right: 52px; }
+.cell-more { --s: var(--cobalt); position: absolute; z-index: 5; top: 14px; right: 14px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: linear-gradient(var(--s), var(--s)) center / 14px 2px no-repeat, linear-gradient(var(--s), var(--s)) center / 2px 14px no-repeat, var(--ice);
+  transition: background-color .25s, transform .4s var(--ease); }
+.cell-more:hover { background-color: #DCE6FF; }
+.cell-more:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+.cell.open .cell-more { --s: #fff; transform: rotate(45deg); background-color: rgba(255, 255, 255, .2); }
+.cell.open .cell-more:focus-visible { outline-color: #fff; }
+.cell:has(.drop.volt).open .cell-more { --s: var(--ink); background-color: rgba(10, 16, 32, .1); }
+.cell:has(.drop.volt).open .cell-more:focus-visible { outline-color: var(--ink); }
+/* open: the panel takes the taps (one closes it) so nothing under it, like a video's play button, fires by accident */
+.cell.open .drop { pointer-events: auto; cursor: pointer; }
+@media (max-width: 719px) { .cell-more { top: 10px; right: 10px; } }
+
+/* ---------- FAQ, 2026-10-14: card rows; the +/- is two drawn strokes in a fixed circle, nothing to clip ---------- */
+.faq-list { border-top: 0; display: grid; gap: 10px; }
+.qa { border: 1px solid var(--ice-line); border-radius: 18px; background: #fff; overflow: hidden; transition: border-color .25s, box-shadow .3s; }
+.qa:hover { border-color: #C3D2F7; }
+.qa[open] { border-color: #B9CCFF; box-shadow: 0 16px 40px rgba(30, 94, 255, .08); }
+.faq .qa summary { overflow: visible; }
+.qa summary { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 18px 18px 18px 22px;
+  font-size: clamp(17px, 2vw, 20px); line-height: 1.35; border-radius: 17px; }
+.qa summary::before { content: ""; order: 1; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(var(--cobalt), var(--cobalt)) center / 14px 2px no-repeat, linear-gradient(var(--cobalt), var(--cobalt)) center / 2px 14px no-repeat, var(--ice);
+  transition: background-color .3s, background-size .3s var(--ease); }
+.qa summary:hover::before { background-color: #DCE6FF; }
+.qa[open] summary::before {
+  background: linear-gradient(#fff, #fff) center / 14px 2px no-repeat, linear-gradient(#fff, #fff) center / 2px 0 no-repeat, var(--cobalt); }
+.qa summary:focus-visible { outline: 3px solid var(--cobalt); outline-offset: -3px; border-radius: 17px; }
+.qa p { padding: 0 22px 22px; max-width: 46em; color: var(--muted); font-size: 16px; line-height: 1.6; }
+details.qa > p { margin: -2px 0 0; }
+.qa-group { margin: 30px 0 4px; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
+.qa-group:first-child { margin-top: 0; }
+@media (max-width: 719px) { .qa summary { padding: 14px 14px 14px 18px; } .qa p { padding: 0 18px 18px; } }
+/* smooth open and close where the browser can animate to auto height */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    .qa { interpolate-size: allow-keywords; }
+    .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
+    .qa[open]::details-content { block-size: auto; }
+  }
+}
+/* insights example: the numbers are the point, so they read ink and big; the tag is a clear pill */
+.boostcard .bc-k { display: inline-block; padding: 5px 11px; border-radius: 999px; background: var(--ice); }
+.boostcard .bc-g b { color: var(--ink); font-size: 26px; line-height: 1.1; letter-spacing: -0.02em; }
+.boostcard .bc-g p:first-child b { color: var(--cobalt); }
+.receipt p { color: #0E1116; }

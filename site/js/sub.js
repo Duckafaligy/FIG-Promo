@@ -14,10 +14,8 @@
   }), { threshold: 0.35 });
   $$("video[data-src]").forEach((v) => io.observe(v));
 
-  const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
   $$(".cell").forEach((c) => {
     c.addEventListener("pointermove", (ev) => { const r = c.getBoundingClientRect(); c.style.setProperty("--cx", ev.clientX - r.left + "px"); c.style.setProperty("--cy", ev.clientY - r.top + "px"); });
-    if (!fine) c.addEventListener("click", () => c.classList.toggle("open"));
   });
 
   const shots = $$(".tablet img"), tabs = $$("[data-tshot]");

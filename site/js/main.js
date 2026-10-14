@@ -138,10 +138,9 @@
     el.addEventListener("pointerleave", () => { el.style.transform = ""; });
   });
 
-  // ---------- bento cells: spotlight, tap to open on touch ----------
+  // ---------- bento cells: spotlight (opening them is in fx.js) ----------
   $$(".cell").forEach((c) => {
     c.addEventListener("pointermove", (e) => { const r = c.getBoundingClientRect(); c.style.setProperty("--cx", e.clientX - r.left + "px"); c.style.setProperty("--cy", e.clientY - r.top + "px"); });
-    if (!finePointer) c.addEventListener("click", () => c.classList.toggle("open"));
   });
 
   // ---------- video loops: load and play only while on screen ----------

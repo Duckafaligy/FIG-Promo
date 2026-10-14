@@ -69,6 +69,31 @@
     mark();
   });
 
+  // feature boxes: a + button opens the panel (hover still does on a mouse), so tablets and phones can open it too.
+  // Tap the + or the open panel to close it, or press Esc.
+  const touch = matchMedia("(pointer: coarse)").matches;
+  const cells = $$(".cell").filter((c) => c.querySelector(".drop"));
+  const setCell = (c, open) => {
+    c.classList.toggle("open", open);
+    c.querySelector(".cell-more").setAttribute("aria-expanded", String(open));
+    c.querySelector(".drop").setAttribute("aria-hidden", String(!open));
+  };
+  cells.forEach((c, i) => {
+    const drop = c.querySelector(".drop"), b = document.createElement("button");
+    drop.id ||= "drop-" + i;
+    b.type = "button"; b.className = "cell-more";
+    b.setAttribute("aria-controls", drop.id);
+    b.setAttribute("aria-label", "More about " + (c.querySelector("h3")?.textContent.trim() || "this"));
+    c.removeAttribute("tabindex"); // the button is the keyboard stop now
+    c.prepend(b);
+    setCell(c, false);
+    b.addEventListener("click", (e) => { e.stopPropagation(); setCell(c, !c.classList.contains("open")); });
+    if (touch) c.addEventListener("click", (e) => { if (!e.target.closest("a, .vplay")) setCell(c, !c.classList.contains("open")); });
+    const hint = c.querySelector(".hint");
+    if (hint && touch) hint.textContent = "Tap to learn more";
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") cells.forEach((c) => c.classList.contains("open") && setCell(c, false)); });
+
   if (still) return;
 
   // press ripple from the exact point you tapped

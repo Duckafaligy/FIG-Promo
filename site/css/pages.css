@@ -120,7 +120,8 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 @media (min-width: 1024px) {
   .section.lg-top { padding-top: 128px; }
   .lg-grid { grid-template-columns: 300px minmax(0, 760px); gap: 88px; align-items: start; }
-  .lg-side { top: 96px; align-self: start; gap: 22px; margin: 0; padding: 0 4px 16px 0; background: none; border: 0; max-height: calc(100dvh - 112px); overflow: auto; overscroll-behavior: contain; }
+  /* it sticks exactly where it rests (the section's 128 px top), so it never moves, scrolling either way (user 2026-10-14) */
+  .lg-side { top: 128px; align-self: start; gap: 22px; margin: 0; padding: 0 4px 16px 0; background: none; border: 0; max-height: calc(100dvh - 144px); overflow: auto; overscroll-behavior: contain; }
   .lg-h1 { font-size: 34px; line-height: 1.1; letter-spacing: -0.04em; }
   .lg-upd { margin: 0; font-size: 15px; }
   .lg-head { gap: 14px; }

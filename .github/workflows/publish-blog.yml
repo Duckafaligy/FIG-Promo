@@ -12,6 +12,8 @@ permissions:
 concurrency:
   group: publish-blog
   cancel-in-progress: false
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
 jobs:
   publish:
     runs-on: ubuntu-latest

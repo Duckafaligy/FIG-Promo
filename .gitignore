@@ -17,3 +17,7 @@ env.txt
 
 .vercel
 .env*
+
+# compiled Python caches: never commit (they differ per Python version and would look like site changes)
+__pycache__/
+*.pyc

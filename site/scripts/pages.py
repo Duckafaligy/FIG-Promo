@@ -181,13 +181,18 @@ def legal(slug, doc, extra=""):
         secs += [(h, t) for h, t in extra]
     tabs = '<nav class="pg-pills" aria-label="Legal documents">' + "".join(
         f'<a href="/{s}"{" aria-current=page" if s == slug else ""}>{t}</a>' for s, t in LEGAL_TABS) + "</nav>"
-    rail = '<nav class="lg-rail" aria-label="On this page"><b>On this page</b>' + "".join(f'<a href="#{slug_id(h)}">{e(h)}</a>' for h, _ in secs) + "</nav>"
+    rail = '<nav class="lg-rail" id="lg-toc" aria-label="On this page"><b>On this page</b>' + "".join(f'<a href="#{slug_id(h)}">{e(h)}</a>' for h, _ in secs) + "</nav>"
+    # the title, the date, the documents and the contents stay in view; only the document scrolls (user 2026-10-13).
+    # A sticky column on a computer, a sticky bar with an "On this page" menu under 1024 px (js/legal.js)
+    side = (f'<aside class="lg-side"><div class="lg-head"><h1 class="lg-h1">{e(doc["title"])}</h1><p class="lg-upd">{e(doc["updated"])}</p>'
+            + (tabs if slug in dict(LEGAL_TABS) else "")
+            + '</div><button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'
+            + rail + "</aside>")
     doc_html = (f'<div class="pg-short"><h2>The short version</h2><ul>{short}</ul></div>'
                 + "".join(f'<section class="lg-sec" id="{slug_id(h)}"><h2>{e(h)}</h2>{t}</section>' for h, t in secs)
                 + f'<div class="lg-ask"><div><b>{e(doc["contactAsk"])}</b><span>{e(doc["contactLine"])}</span></div><a class="btn" href="/contact">Contact us</a></div>')
-    body = (hero(e(doc["title"]), e(doc["updated"]), tabs if slug in dict(LEGAL_TABS) else "", cls="pg-hero-line")
-            + f'<section class="section lg"><div class="wrap lg-grid">{rail}<article class="lg-doc">{doc_html}</article></div></section>')
-    page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True)
+    body = f'<section class="section lg lg-top"><div class="wrap lg-grid">{side}<article class="lg-doc">{doc_html}</article></div></section>'
+    page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>')
 
 
 L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))

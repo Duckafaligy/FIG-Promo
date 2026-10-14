@@ -10,6 +10,7 @@
 .pg-lead { max-width: 34em; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.6; font-weight: 500; color: var(--muted); }
 /* the topic and date of a post: a quiet line, not a label */
 .pg-kick { font-size: 14px; font-weight: 600; color: #5B6680; } /* 4.5:1 on ice too */
+.post-card .pg-kick { font-size: 14px; color: #5B6680; } /* the blog cards: site.css greys their spans (4.4:1); this reads at 5:1 */
 .pg-sub { margin-bottom: 28px; }
 
 /* pills: jump links, the legal documents, the blog's topics */
@@ -47,8 +48,6 @@
 .help-shot.wide { width: 100%; transform: rotate(2deg); }
 .help-shot.wide img { border-radius: 22px; border-width: 7px; }
 @media (min-width: 980px) { .help-shot { display: block; } }
-.section.ice .qa summary::after { background: #fff; }
-.section.ice .qa[open] summary::after { background: var(--cobalt); }
 .section.ice .faq-list, .section.ice .qa { border-color: var(--ice-line); }
 
 /* ---------- Contact: the form card on an ice band ---------- */
@@ -78,13 +77,63 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ct-way em.leaf { color: #087A42; }
 @media (min-width: 900px) { .ct-grid { grid-template-columns: 1fr 560px; gap: 80px; } .ct-ways { grid-template-columns: 1fr 1fr; } }
 
-/* ---------- Legal: a contents rail beside the document ---------- */
+/* ---------- Legal: the title, the documents and the contents stay in view; only the document scrolls (user 2026-10-13).
+   Under 1024 px: a sticky bar under the navbar (title, documents, an "On this page" menu); from 1024: a sticky column. ---------- */
 .lg { padding-top: 64px; }
-.lg-grid { display: grid; gap: 40px; }
+.section.lg-top { padding-top: 0; }
+.lg-grid { display: grid; gap: 28px; }
+/* pinned from the top of the screen down, padded clear of the floating navbar, so no text shows around it */
+.lg-side { position: sticky; top: 0; z-index: 6; display: grid; gap: 10px; margin: 0 calc(var(--gutter) * -1); padding: 96px var(--gutter) 12px;
+  background: var(--bg, #fff); border-bottom: 1px solid var(--line); }
+.lg-head { display: grid; gap: 8px; min-width: 0; }
+.lg-h1 { margin: 0; font-size: 21px; line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+.lg-upd { margin: -4px 0 0; font-size: 14px; font-weight: 600; color: var(--muted); }
+.lg-head .pg-pills { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; margin: 0 calc(var(--gutter) * -1); padding: 2px var(--gutter); }
+.lg-head .pg-pills::-webkit-scrollbar { display: none; }
+.lg-head .pg-pills a { flex-shrink: 0; }
+.lg-toc-btn { position: relative; min-height: 44px; display: flex; align-items: center; gap: 6px; padding: 0 40px 0 14px; border-radius: 12px; border: 1px solid var(--line);
+  background: #fff; font: inherit; font-size: 15px; font-weight: 800; color: var(--ink); cursor: pointer; text-align: left; min-width: 0; }
+.lg-toc-btn::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; margin-top: -6px; border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform .2s; }
+.lg-side.open .lg-toc-btn::after { transform: rotate(-135deg); margin-top: -2px; }
+.lg-toc-btn:focus-visible, .lg-rail a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+.lg-toc-lbl { flex-shrink: 0; }
+.lg-toc-now { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 600; color: var(--muted); }
+.lg-toc-now:not(:empty)::before { content: "· "; }
 .lg-rail { display: none; }
+.lg-rail b { display: none; }
+.lg-side.open .lg-rail { display: grid; gap: 2px; position: absolute; left: var(--gutter); right: var(--gutter); top: calc(100% + 6px); max-height: min(60vh, 520px);
+  overflow: auto; overscroll-behavior: contain; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 40px rgba(10, 16, 32, .16); }
+.lg-rail a { min-height: 44px; display: flex; align-items: center; padding: 8px 14px; border-radius: 12px; font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
+.lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
+.lg-rail a.on { background: var(--ice); color: #1550E6; box-shadow: inset 3px 0 0 var(--cobalt); }
+.lg-sec { display: grid; gap: 14px; scroll-margin-top: 230px; }
+/* a short screen (a phone on its side, or zoomed in): the pinned bar stays small so the text keeps the room */
+@media (max-height: 620px) and (max-width: 1023px) {
+  .lg-side { gap: 6px; padding-top: 88px; padding-bottom: 8px; }
+  .lg-h1 { font-size: 16px; }
+  .lg-upd { display: none; }
+  .lg-head { gap: 6px; }
+  .lg-head .pg-pills a { height: 36px; padding: 0 14px; font-size: 14px; }
+  .lg-sec { scroll-margin-top: 170px; }
+}
+@media (min-width: 1024px) {
+  .section.lg-top { padding-top: 128px; }
+  .lg-grid { grid-template-columns: 300px minmax(0, 760px); gap: 88px; align-items: start; }
+  .lg-side { top: 96px; align-self: start; gap: 22px; margin: 0; padding: 0 4px 16px 0; background: none; border: 0; max-height: calc(100dvh - 112px); overflow: auto; overscroll-behavior: contain; }
+  .lg-h1 { font-size: 34px; line-height: 1.1; letter-spacing: -0.04em; }
+  .lg-upd { margin: 0; font-size: 15px; }
+  .lg-head { gap: 14px; }
+  .lg-head .pg-pills { flex-wrap: wrap; overflow: visible; margin: 0; padding: 0; }
+  .lg-head .pg-pills a { height: 40px; padding: 0 16px; font-size: 14px; }
+  .lg-toc-btn { display: none; }
+  .lg-rail, .lg-side.open .lg-rail { display: grid; gap: 2px; position: static; max-height: none; overflow: visible; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: none; }
+  .lg-rail b { display: block; padding: 0 14px 6px; font-size: 14px; font-weight: 800; color: var(--ink); }
+  .lg-rail a { min-height: 40px; padding: 6px 14px; }
+  .lg-sec { scroll-margin-top: 112px; }
+}
 .lg-doc { display: grid; gap: 44px; max-width: 760px; }
 .lg-solo { margin: 0 auto; gap: 16px; }
-.lg-sec { display: grid; gap: 14px; scroll-margin-top: 110px; }
 .lg-doc h2 { font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin: 0; }
 .lg-doc p, .lg-doc li { font-size: 17px; line-height: 1.7; font-weight: 500; color: var(--muted); }
 .lg-doc ul { display: grid; gap: 8px; padding-left: 22px; list-style: disc; }
@@ -95,13 +144,6 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .lg-ask div { display: grid; gap: 4px; }
 .lg-ask b { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
 .lg-ask span { color: var(--dim); font-size: 15px; }
-@media (min-width: 1000px) {
-  .lg-grid { grid-template-columns: 280px minmax(0, 760px); gap: 96px; align-items: start; }
-  .lg-rail { position: sticky; top: 110px; display: grid; gap: 2px; }
-  .lg-rail b { padding: 0 14px 10px; font-size: 16px; font-weight: 800; color: var(--ink); }
-  .lg-rail a { padding: 9px 14px; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
-  .lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
-}
 
 /* ---------- Blog: the newest post on ice, then photo rows ---------- */
 .post-card.bl-feature, .post-card.bl-row { padding: 0; border: 0; border-radius: 0; background: none; transform: none; }

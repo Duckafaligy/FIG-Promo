@@ -239,3 +239,47 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 @media (max-width: 600px) { .ab-col ol { gap: 16px; } .ab-col li { grid-template-columns: 1fr; gap: 4px; } }
 /* the legal pages' side links: 44 px to tap on touch screens */
 @media (pointer: coarse), (max-width: 1099px) { .lg-rail a { min-height: 44px; display: flex; align-items: center; } }
+
+/* ---- long posts (2026-10-14): what's in the post, tables, callouts, the author; the list's meta line ---- */
+.bl-meta { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 0; }
+.ps-grid { display: block; }
+.ps-toc { max-width: 760px; margin: 40px auto 0; padding: 0 var(--gutter); box-sizing: content-box; }
+.ps-toc details { border: 1px solid var(--line); border-radius: 20px; padding: 18px 22px; background: #fff; }
+.ps-toc summary { cursor: pointer; font-size: 16px; font-weight: 800; color: var(--ink); list-style: none; }
+.ps-toc summary::-webkit-details-marker { display: none; }
+.ps-toc summary::after { content: "+"; float: right; color: var(--cobalt); font-weight: 800; }
+.ps-toc details[open] summary::after { content: "−"; }
+.ps-toc ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 8px; }
+.ps-toc a { color: var(--muted); font-size: 15px; font-weight: 600; line-height: 1.4; text-decoration: none; }
+.ps-toc a:hover, .ps-toc a:focus-visible { color: var(--cobalt); }
+.ps-grid .ps-body { padding-top: 40px; }
+@media (min-width: 1100px) {
+  .ps-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 760px) minmax(0, 1fr); gap: 0 40px; padding: 0 var(--gutter); }
+  .ps-toc { grid-column: 1; margin: 72px 0 0; padding: 0; justify-self: end; width: 100%; max-width: 260px; position: sticky; top: 110px; align-self: start; }
+  .ps-toc details { border: 0; padding: 0; background: none; }
+  .ps-toc summary { pointer-events: none; font-size: 14px; color: var(--ink); }
+  .ps-toc summary::after, .ps-toc details[open] summary::after { content: none; }
+  .ps-grid .ps-body { grid-column: 2; padding: 72px 0 96px; max-width: none; }
+}
+.ps-table { position: relative; overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; -webkit-overflow-scrolling: touch;
+  background: linear-gradient(90deg, #fff 30%, rgba(255,255,255,0)) left / 40px 100% no-repeat local, linear-gradient(270deg, #fff 30%, rgba(255,255,255,0)) right / 40px 100% no-repeat local,
+  radial-gradient(farthest-side at 0 50%, rgba(10,16,32,.12), transparent) left / 14px 100% no-repeat scroll, radial-gradient(farthest-side at 100% 50%, rgba(10,16,32,.12), transparent) right / 14px 100% no-repeat scroll; }
+.ps-table:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+.ps-table table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 16px; }
+.ps-table th, .ps-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); line-height: 1.45; color: var(--ink); vertical-align: top; }
+.ps-table th { font-weight: 800; background: var(--ice); }
+.ps-table tr:last-child td { border-bottom: 0; }
+/* a soft tint, a hairline all round, the bold title as the lead-in (no side stripe: the user turned that look down) */
+.callout { padding: 20px 24px; border-radius: 20px; background: var(--ice); border: 1px solid rgba(30, 94, 255, .18); }
+.callout b { display: block; font-size: 17px; font-weight: 800; color: var(--cobalt); margin-bottom: 6px; }
+.callout p { margin: 0; color: var(--ink) !important; font-size: 17px !important; }
+.callout.example { background: #F3FBEA; border-color: rgba(20, 200, 107, .28); }
+.callout.example b { color: #0B7A3E; }
+.callout.math { background: #F6F4FF; border-color: rgba(110, 86, 255, .22); }
+.callout.math b { color: #5B42E6; }
+.callout.math p { font-variant-numeric: tabular-nums; }
+.ps-author { display: flex; gap: 16px; align-items: flex-start; margin-top: 48px !important; padding: 22px 24px; border: 1px solid var(--line); border-radius: 20px; }
+.ps-author img { width: 44px; height: 44px; flex-shrink: 0; }
+.ps-author b { display: block; font-size: 16px; font-weight: 800; color: var(--ink); }
+.ps-author p { margin: 4px 0 0; font-size: 15px !important; line-height: 1.55 !important; }
+.ps-author a { color: var(--cobalt); font-weight: 700; }

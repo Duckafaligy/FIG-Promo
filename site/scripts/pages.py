@@ -293,6 +293,11 @@ def nice_date(iso):
     return f"{d:%B} {d.day}, {d.year}"
 
 
+def tables(html_):
+    """A table in a post scrolls sideways on a phone, inside a frame that fades at its edge, instead of squeezing."""
+    return re.sub(r"<table\b(.*?)</table>", lambda m: f'<div class="ps-table" tabindex="0" role="region" aria-label="Table"><table{m.group(1)}</table></div>', html_, flags=re.S)
+
+
 def read_min(post):
     words = len(re.sub(r"<[^>]+>", " ", " ".join(h for _, h in post["sections"])).split())
     return max(2, round(words / 220))
@@ -307,10 +312,19 @@ if NOW.tzinfo is None:
 live = lambda post: not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW
 QUEUED = sorted((x for x in POSTS if not live(x)), key=lambda x: x["publish_at"])
 POSTS[:] = [x for x in POSTS if live(x)]
-for x in QUEUED:  # a page made before (an earlier FIG_NOW, or a post moved later) goes too
-    for f in (SITE / "blog" / f"{x['slug']}.html", SITE / "assets" / "blog" / f"{x['slug']}.jpg"):
-        f.unlink(missing_ok=True)
+# a page of a post that isn't live (queued, moved later, or taken out of the list) goes, with its cover
+_live = {x["slug"] for x in POSTS}
+for f in [*(SITE / "blog").glob("*.html"), *(SITE / "assets" / "blog").glob("*.jpg")]:
+    if f.stem not in _live:
+        f.unlink()
 POSTS.sort(key=lambda x: (x["date"], x.get("publish_at", "")), reverse=True)
+# a live post's link to one still queued is plain text until that one goes live (fig-promo-28: it appears by itself then)
+if QUEUED:
+    _q = "|".join(re.escape(x["slug"]) for x in QUEUED)
+    _unlink = lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{_q})(?:[#?][^"]*)?"[^>]*>(.*?)</a>', lambda m: m.group(1), h, flags=re.S)
+    for x in POSTS:
+        x["sections"] = [(h, _unlink(t)) for h, t in x["sections"]]
+        x["faq"] = [(q, _unlink(ans)) for q, ans in x["faq"]]
 TOPICS = ["For diners", "For restaurants", "News"]
 
 
@@ -423,24 +437,30 @@ for k, post in enumerate(POSTS):
     img = cover(post)
     pic = photo_of(post, img)
     meta = f"{post['topic']} · {nice_date(post['date'])} · {read_min(post)} min read"
-    kicker = f"{post['topic']} · {nice_date(post['date'])}"
     if k == 0:
         blog += (f'<section class="section ice bl-feature-band"><div class="wrap"><a class="post-card bl-feature" href="{url}" data-topic="{post["topic"]}">'
                  f'<span class="bl-pic"><img src="{pic}" alt="" width="720" height="480"><i>Newest</i></span>'
-                 f'<span class="bl-text"><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
+                 f'<span class="bl-text"><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
     else:
         rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
-                    f'<span><span class="pg-kick">{kicker}</span><b>{e(post["title"])}</b><p>{e(post["dek"])}</p></span></a>')
-    related = [x for x in POSTS if x is not post and x["topic"] == post["topic"]][:2] or [x for x in POSTS if x is not post][:2]
-    body = (f'''<section class="ps-head"><div class="wrap"><a class="ps-back" href="/blog">← The FIG blog</a><p class="pg-kick">{e(kicker)}</p>
-<h1 class="ps-h1">{e(post["title"])}</h1><p class="ps-dek">{e(post["dek"])}</p><div class="post-by"><span>By the FIG team · Markham, Ontario · {read_min(post)} min read</span>{SHARE}</div></div></section>
+                    f'<span><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p></span></a>')
+    # three to read next: the same topic first, then the newest others (published ones only: POSTS is already the live list)
+    related = ([x for x in POSTS if x is not post and x["topic"] == post["topic"]] + [x for x in POSTS if x is not post and x["topic"] != post["topic"]])[:3]
+    toc = "".join(f'<li><a href="#{slug_id(h)}">{e(h)}</a></li>' for h, _ in post["sections"])
+    updated = post.get("updated", post["date"])
+    byline = f"By the FIG team · {post['topic']} · {'Updated ' if updated != post['date'] else ''}{nice_date(updated)} · {read_min(post)} min read"
+    body = (f'''<section class="ps-head"><div class="wrap"><a class="ps-back" href="/blog">← The FIG blog</a>
+<h1 class="ps-h1">{e(post["title"])}</h1><p class="ps-dek">{e(post["dek"])}</p><div class="post-by"><span>{e(byline)}</span>{SHARE}</div></div></section>
 <div class="wrap"><img class="ps-cover" src="{pic}" alt="{e(post["title"])}" width="1200" height="560"></div>'''
-            + '<article class="ps-body"><div class="pg-short"><h2>Key points</h2><ul>' + "".join(f"<li>{e(x)}</li>" for x in post["points"]) + "</ul></div>"
-            + "".join(f'<h2 id="{slug_id(h)}">{e(h)}</h2>{t}' for h, t in post["sections"])
-            + '<h2>Questions</h2>' + qa_list(post["faq"])
-            + "</article>" + end_cta(post)
+            # the article, with what's in it beside it on a computer (pinned) and at its top on a phone
+            + f'<div class="ps-grid"><nav class="ps-toc" aria-label="In this post"><details open><summary>In this post</summary><ol>{toc}<li><a href="#questions">Questions</a></li></ol></details></nav>'
+            + '<article class="ps-body"><div class="pg-short"><h2>Key takeaways</h2><ul>' + "".join(f"<li>{e(x)}</li>" for x in post.get("takeaways", post["points"])) + "</ul></div>"
+            + "".join(f'<h2 id="{slug_id(h)}">{e(h)}</h2>{tables(t)}' for h, t in post["sections"])
+            + '<h2 id="questions">Questions</h2>' + qa_list(post["faq"])
+            + '<aside class="ps-author"><img src="/assets/favicon.svg" alt="" width="44" height="44"><div><b>The FIG team</b><p>We build FIG in Markham, Ontario: live deals from local restaurants, free for diners. Questions or a correction? <a href="/contact">Write to us</a>.</p></div></aside>'
+            + "</article><div></div></div>" + end_cta(post)
             + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
-            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><span class="pg-kick">{x["topic"]} · {nice_date(x["date"])}</span><b>{e(x["title"])}</b><p>{e(x["dek"])}</p></span></a>' for x in related)
+            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><b>{e(x["title"])}</b><span class="bl-meta">{e(x["topic"])} · {nice_date(x["date"])} · {read_min(x)} min read</span><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post.get("desc", post["dek"]), "keywords": post["keywords"],
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",

@@ -38,7 +38,7 @@ FOOTER = f'''<footer class="foot">
     <div class="foot-top">
       <div class="foot-brand">
         <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
-        <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario. Richmond Hill next.</p>
+        <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario. Expanding to Richmond Hill and Vaughan Mills.</p>
         {STORES}
       </div>
       <div class="foot-cols">
@@ -486,7 +486,7 @@ LLMS = f"""# FIG
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: iPhone and Android
-- Launch area: Markham first, then Richmond Hill, then the rest of York Region and the GTA
+- Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly

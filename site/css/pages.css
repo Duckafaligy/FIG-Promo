@@ -64,7 +64,7 @@
 .ct-done b { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); }
 .ct-done p { max-width: 24em; color: var(--muted); font-size: 17px; line-height: 1.55; margin: 0; }
 .ct-done .btn { justify-self: center !important; min-height: 48px !important; font-size: 15px !important; margin-top: 6px; }
-.ct-done-tick { width: 76px; height: 76px; border-radius: 50%; background: var(--volt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6L17.5 8.5' fill='none' stroke='%230A1020' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 40px no-repeat; animation: ctPop .6s .15s cubic-bezier(.3, 1.4, .5, 1) both; }
+.ct-done-tick { width: 76px; height: 76px; border-radius: 50%; background: var(--volt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6L17.5 8.5' fill='none' stroke='%230A1020' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 40px no-repeat; animation: ctPop .6s .15s cubic-bezier(.25, 1, .5, 1) both; }
 @keyframes ctIn { from { opacity: 0; transform: translateY(16px); } }
 @keyframes ctPop { from { transform: scale(.4); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .ct-done, .ct-done-tick { animation: none; } }
@@ -106,7 +106,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
   overflow: auto; overscroll-behavior: contain; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 40px rgba(10, 16, 32, .16); }
 .lg-rail a { min-height: 44px; display: flex; align-items: center; padding: 8px 14px; border-radius: 12px; font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--muted); text-decoration: none; transition: background .2s, color .2s; }
 .lg-rail a:hover { background: var(--ice); color: var(--cobalt); }
-.lg-rail a.on { background: var(--ice); color: #1550E6; box-shadow: inset 3px 0 0 var(--cobalt); }
+.lg-rail a.on { background: var(--ice); color: #1550E6; font-weight: 700; }
 .lg-sec { display: grid; gap: 14px; scroll-margin-top: 230px; }
 /* a short screen (a phone on its side, or zoomed in): the pinned bar stays small so the text keeps the room */
 @media (max-height: 620px) and (max-width: 1023px) {

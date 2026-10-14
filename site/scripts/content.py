@@ -8,7 +8,7 @@ the only AI is reading a menu from a photo (Premium), codes refresh every 5 minu
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
     ("Is FIG free?", "Yes for diners, always. For restaurants, listing, deals, scans and chats are free, with no commission on the bill and no fee per diner. FIG makes money from the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app."),
-    ("Where is FIG available?", "FIG is launching in Markham, Ontario first, then Richmond Hill, then the rest of York Region and the Greater Toronto Area."),
+    ("Where is FIG available?", "FIG is launching in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
     ("Who makes FIG?", "A small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),
 ]
@@ -17,7 +17,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <h2 class="h2">FIG at a glance</h2>
 <dl class="ab-dl">
 <div><dt>What</dt><dd>An app for finding and using deals at local restaurants. Use it on the web today; iPhone and Android apps are coming soon.</dd></div>
-<div><dt>Where</dt><dd>Launching in Markham, Ontario. Richmond Hill next, then the rest of York Region and the GTA.</dd></div>
+<div><dt>Where</dt><dd>Markham first, expanding to Richmond Hill and Vaughan Mills.</dd></div>
 <div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
 <div><dt>For restaurants</dt><dd>Free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food. Optional FIG Premium, $50 a year.</dd></div>
 <div><dt>Who</dt><dd>A small team in Markham, Ontario.</dd></div>
@@ -57,7 +57,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <li><b>Codes that can't be copied.</b><span>Rotating QR codes stop screenshots and resold deals.</span></li>
 <li><b>Private by default.</b><span>Restaurants never see a diner's phone number, even for a takeout order. Chats go through the app.</span></li>
 <li><b>Real reviews.</b><span>Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</span></li>
-<li><b>Local first.</b><span>Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor first. Then Richmond Hill, Vaughan, Toronto and the rest of the GTA.</span></li>
+<li><b>Local first.</b><span>Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor first. Then expanding to Richmond Hill and Vaughan Mills.</span></li>
 </ul></div></section>
 
 <section class="section ab-faq"><div class="wrap faq">
@@ -75,7 +75,7 @@ POSTS = [
          sections=[
              ("Markham deserves better than a cut of every bill", "<p>Markham is one of the best places in Canada to eat. Dim sum on Kennedy, ramen on Highway 7, Hong Kong cafés in every plaza, bubble tea on every corner. But the places that make it great are mostly small and independent, and they compete for attention with apps that take a percentage of every order.</p><p>Owners told us the same thing again and again: they have quiet hours they'd love to fill, but giving away a large share of each bill doesn't add up.</p>"),
              ("So we flipped the model", "<p>On FIG, a restaurant posts its own deal, for the hours it wants, with its own daily cap. Diners find it on a map, claim it, and show a code at the counter. The diner pays the restaurant directly, and FIG takes nothing from the bill. FIG is paid by an optional Premium plan for restaurants and a small fee on takeout orders paid in the app.</p><p>That means a deal on FIG is a decision the owner made, not a discount a platform forced on them. It also means the deals are real: the timer on a flash deal is the owner's timer.</p>"),
-             ("Why Markham first", "<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants, busy plazas, and a lot of people who love finding a new place to eat. Richmond Hill is next.</p><p>If you own a restaurant in Markham, we'd love to set you up before launch. <a href=\"/#owners\">See how pricing works</a>.</p>"),
+             ("Why Markham first", "<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants, busy plazas, and a lot of people who love finding a new place to eat. Markham first, expanding to Richmond Hill and Vaughan Mills.</p><p>If you own a restaurant in Markham, we'd love to set you up before launch. <a href=\"/#owners\">See how pricing works</a>.</p>"),
          ],
          faq=[("When does FIG launch?", "FIG is launching in Markham first. Download the app or join the waitlist on the home page to hear the moment it opens near you."),
               ("Does FIG take a commission?", "No. FIG is free for restaurants and never takes a percentage of the bill. Restaurants can add FIG Premium for $50 a year: unlimited locations, deal announcements every 2 hours to diners who crave their food, and area insights.")]),

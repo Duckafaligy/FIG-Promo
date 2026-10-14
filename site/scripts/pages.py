@@ -272,7 +272,10 @@ HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and take
 # a real app screen under each section's title: the diner's QR, the restaurant's dashboard (tablet)
 HELP_SHOT = {"diners": ('qr', "The QR a diner shows at the counter", "phone"), "restaurants": ('tdash', "A restaurant's FIG dashboard", "wide")}
 help_html = hero("How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
-                 '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>", cls="pg-hero-line")
+                 '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>"
+                 # search the questions as you type (28's research: search is the main way into help); js/help.js
+                 + '<div class="hs-search"><input type="search" id="help-q" placeholder="Search the help center" aria-label="Search the help center" autocomplete="off">'
+                 + '<p class="hs-none" id="help-none" hidden>No match. <a href="/contact">Message us</a> and a real person replies within 24 hours.</p></div>', cls="pg-hero-line")
 for k, (anchor, title, qs) in enumerate(HELP):
     head, sub = HELP_HEAD[anchor]
     help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
@@ -281,7 +284,7 @@ help_html += '''<section class="section pg-tight"><div class="wrap"><div class="
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Answers for diners and restaurants using FIG: claiming deals, QR codes, takeout, accounts and running deals.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]))
+page("help", "Help center", "Answers for diners and restaurants using FIG: claiming deals, QR codes, takeout, accounts and running deals.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>')
 
 
 

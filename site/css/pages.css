@@ -18,6 +18,12 @@
 .pg-pills a, .pg-pills button { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff;
   font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; cursor: pointer; transition: border-color .2s, background .2s, color .2s, transform .2s var(--ease); }
 .pg-pills a:hover, .pg-pills button:hover { border-color: var(--cobalt); }
+/* Help: search the questions (js/help.js) */
+.hs-search { margin-top: 18px; max-width: 560px; }
+.hs-search input { width: 100%; height: 52px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: inherit; font-size: 16px; color: var(--ink); }
+.hs-search input:focus { outline: none; border-color: var(--cobalt); box-shadow: 0 0 0 3px rgba(30, 94, 255, .18); }
+.hs-none { margin: 12px 4px 0; font-size: 15px; color: var(--muted); }
+.hs-none a { color: var(--cobalt); font-weight: 700; }
 .pg-pills a:active, .pg-pills button:active { transform: scale(.96); }
 .pg-pills [aria-current="page"], .pg-pills [aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 

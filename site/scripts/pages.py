@@ -143,7 +143,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Live deals from Markham restaurants, one tap away. Free for diners, free to join for restaurants.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. Free to join, no commission on dine-in. Diners join January 1, 2027.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 (SITE / "index.html").write_text(index, encoding="utf-8")
 PAGES.append(("/", "Home", "Main"))
@@ -270,7 +270,7 @@ def legal(slug, doc, extra=""):
 L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))
 legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
-legal("privacy", L["privacy"], [("The website waitlist", '''<p>When you join the waitlist on this website we keep your email or mobile number, whether you're a diner or a restaurant, the area you picked, when you joined and which link brought you here. We use it only to tell you when FIG opens near you and to send FIG news, because you asked for it when you signed up. Every email has an unsubscribe link and you can reply STOP to any text. We never sell it or share it with restaurants or advertisers.</p>''')])
+legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app), whether you ticked “Email me when FIG opens in Markham”, and when you joined. We email you only if you ticked that box, to say FIG is open in Markham, and every email has an unsubscribe link. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
 
 # Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
 legal("cookies", {"title": "Cookies", "updated": "Last updated October 14, 2026",

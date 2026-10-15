@@ -132,6 +132,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
       <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
+      <button data-v="prospects">Prospects <span class="badge" id="n-prospects">–</span></button>
       <button data-v="blog">Blog <span class="badge" id="n-blog">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
@@ -196,6 +197,7 @@ const VIEWS = {
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div id="dinerbox">' + dinersHtml() + "</div>"),
+  prospects: () => '<h1>Prospects</h1><p class="lead muted">Every restaurant, cafe and takeaway in Markham. Search, shortlist the ones you want to approach yourself, and keep notes. Only the FIG team sees this.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="prosbox">' + prosHtml() + "</div>"),
   blog: () => '<h1>Blog</h1><p class="lead muted">Every post on the FIG blog. Take one down if you do not like it, or put it back.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>"),
   ads: () => {
     const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
@@ -294,6 +296,49 @@ function dinersWire() {
   };
 }
 
+// ---- Prospects: the places directory with the team's shortlist / status / note (through /api/admin-api -> prospect_list, prospect_set)
+let PRO = null; const PF = { q: "", kind: "", status: "", short: false, independent: true, hideFig: false, offset: 0 };
+const PSTATS = [["new", "Not contacted"], ["contacted", "Contacted"], ["interested", "Interested"], ["not-interested", "Not interested"], ["signed", "Signed up"]];
+const mapsUrl = (p) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.street + " Markham Ontario");
+function prosHtml() {
+  if (!PRO) return '<p class="muted">Loading…</p>';
+  if (PRO.error) return '<div class="empty"><b>Could not load this.</b><br>' + esc(PRO.error) + "</div>";
+  const kinds = '<option value="">All kinds</option>' + (PRO.kinds || []).map((k) => '<option value="' + esc(k) + '"' + (PF.kind === k ? " selected" : "") + ">" + esc(k.replace(/_/g, " ")) + "</option>").join("");
+  const stat2 = '<option value="">Any status</option>' + PSTATS.map((s) => '<option value="' + s[0] + '"' + (PF.status === s[0] ? " selected" : "") + ">" + s[1] + "</option>").join("");
+  const bar = '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 16px"><input class="f" id="pr-q" placeholder="Search name, street or postcode" value="' + esc(PF.q) + '" style="width:300px;height:44px"> <select class="f" id="pr-kind" style="height:44px">' + kinds + '</select> <select class="f" id="pr-status" style="height:44px">' + stat2 + '</select>' +
+    '<label><input type="checkbox" id="pr-short"' + (PF.short ? " checked" : "") + "> Shortlist only</label><label><input type=\\"checkbox\\" id=\\"pr-ind\\"" + (PF.independent ? " checked" : "") + "> Independents only (hide big chains)</label><label><input type=\\"checkbox\\" id=\\"pr-fig\\"" + (PF.hideFig ? " checked" : "") + "> Hide ones already on FIG</label> <button class=\\"btn\\" id=\\"pr-go\\" style=\\"height:44px\\">Search</button></div>";
+  const from = PRO.total ? PF.offset + 1 : 0, to = Math.min(PF.offset + 50, PRO.total);
+  const rows = (PRO.rows || []).map((p) => [
+    '<button class="link" data-star="' + esc(p.id) + '" data-on="' + (p.shortlisted ? 1 : 0) + '" title="Shortlist" style="font-size:24px;margin:0">' + (p.shortlisted ? "★" : "☆") + "</button>",
+    "<b>" + esc(p.name) + "</b>" + (p.chain ? ' <span class="pill">Chain</span>' : "") + (p.on_fig ? ' <span class="pill g">On FIG</span>' : "") + '<br><span class="muted">' + esc(p.street) + (p.postcode ? ", " + esc(p.postcode) : "") + '</span><br><a class="link" href="' + esc(mapsUrl(p)) + '" target="_blank" rel="noopener">Open in Maps</a>',
+    esc((p.kind || "").replace(/_/g, " ")),
+    '<select class="f" data-st="' + esc(p.id) + '" style="height:40px">' + PSTATS.map((s) => '<option value="' + s[0] + '"' + (p.status === s[0] ? " selected" : "") + ">" + s[1] + "</option>").join("") + "</select>" + (p.contacted_at ? '<br><span class="muted">First contact ' + ago(p.contacted_at) + "</span>" : ""),
+    '<input class="f" data-note="' + esc(p.id) + '" value="' + esc(p.note || "") + '" placeholder="Notes: who to ask for, when to come back" maxlength="500" style="width:100%;min-width:240px;height:40px">']);
+  return '<div class="stats">' + stat(PRO.places, "Places in Markham") + stat(PRO.shortlisted, "Shortlisted", "blue") + stat(PRO.contacted, "Contacted") + stat(PRO.interested, "Interested") + stat(PRO.signed, "On FIG") + "</div>" + bar +
+    '<p class="muted" style="margin:0 0 10px">' + PRO.total.toLocaleString("en-CA") + " places match. Showing " + from + "–" + to + ". Your shortlist comes first.</p>" +
+    table(["", "Place", "Kind", "Status", "Notes"], rows, "No places match.") +
+    '<div style="display:flex;gap:16px;margin:16px 0"><button class="link" id="pr-prev"' + (PF.offset ? "" : " disabled") + ">← Previous 50</button><button class=\\"link\\" id=\\"pr-next\\"" + (to < PRO.total ? "" : " disabled") + ">Next 50 →</button></div>";
+}
+async function prosLoad() {
+  PRO = await api("prospects-list", PF).catch(() => ({ error: "It did not load. Refresh to try again." }));
+  const n = $("#n-prospects"); if (n && PRO.shortlisted !== undefined) n.textContent = PRO.shortlisted;
+  if (view === "prospects" && $("#prosbox")) { $("#prosbox").innerHTML = prosHtml(); prosWire(); }
+}
+function prosWire() {
+  const read = () => { PF.q = ($("#pr-q") || {}).value || ""; PF.kind = ($("#pr-kind") || {}).value || ""; PF.status = ($("#pr-status") || {}).value || ""; PF.short = !!($("#pr-short") || {}).checked; PF.independent = !!($("#pr-ind") || {}).checked; PF.hideFig = !!($("#pr-fig") || {}).checked; };
+  const go = () => { read(); PF.offset = 0; prosLoad(); };
+  const g = $("#pr-go"); if (g) g.onclick = go;
+  const q = $("#pr-q"); if (q) q.onkeydown = (e) => { if (e.key === "Enter") go(); };
+  ["#pr-kind", "#pr-status", "#pr-short", "#pr-ind", "#pr-fig"].forEach((s) => { const el = $(s); if (el) el.onchange = go; });
+  const pv = $("#pr-prev"), nx = $("#pr-next");
+  if (pv) pv.onclick = () => { read(); PF.offset = Math.max(0, PF.offset - 50); prosLoad(); };
+  if (nx) nx.onclick = () => { read(); PF.offset += 50; prosLoad(); };
+  const save = async (body) => { const r = await api("prospects-set", body); if (r.error) alert(r.error); };
+  document.querySelectorAll("[data-star]").forEach((b) => b.onclick = async () => { const on = b.dataset.on === "1"; await save({ id: b.dataset.star, short: !on }); read(); prosLoad(); });
+  document.querySelectorAll("[data-st]").forEach((s) => s.onchange = async () => { await save({ id: s.dataset.st, status: s.value }); read(); prosLoad(); });
+  document.querySelectorAll("[data-note]").forEach((i) => i.onchange = () => save({ id: i.dataset.note, note: i.value }));
+}
+
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
@@ -312,6 +357,7 @@ function render() {
   }
   if (view === "blog" && D.connected) blogLoad();
   if (view === "diners" && D.connected) dinersLoad();
+  if (view === "prospects" && D.connected) prosLoad();
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));

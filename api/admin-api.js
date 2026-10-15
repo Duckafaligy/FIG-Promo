@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set|prospects-list|prospects-set  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
 const blog = require("./_lib/blog");
@@ -28,6 +28,8 @@ module.exports = async (req, res) => {
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "blog-list") return send(res, 200, { ok: true, ...(await blog.list()) });
     if (action === "blog-set") { const r = await db.setBlog(body.slug, { ...(body.hidden !== undefined ? { hidden: body.hidden } : {}), ...(body.publish_at !== undefined ? { publish_at: body.publish_at } : {}), ...(body.note !== undefined ? { note: body.note } : {}) }); return send(res, 200, { ok: true, ...r }); }
+    if (action === "prospects-list") return send(res, 200, { ok: true, ...(await db.prospects(body)) });
+    if (action === "prospects-set") return send(res, 200, { ok: true, ...(await db.setProspect(body.id, body)) });
     if (action === "diners-get") return send(res, 200, { ok: true, ...(await db.dinersState()) });
     if (action === "diners-set") return send(res, 200, { ok: true, ...(await db.setDinersOpen(body.open)) });
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }

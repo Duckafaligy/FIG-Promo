@@ -145,4 +145,22 @@ async function setDinersOpen(open) {
   return { open };
 }
 
-module.exports = { dinersState, setDinersOpen, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+// restaurant prospects: every place in the Markham directory, with the team's shortlist, status and note (server-only functions prospect_list / prospect_set)
+const PSTAT = ["new", "contacted", "interested", "not-interested", "signed"];
+async function prospects(f) {
+  f = f || {};
+  const body = { p_q: f.q ? String(f.q).slice(0, 80) : null, p_kind: f.kind ? String(f.kind).slice(0, 60) : null, p_status: PSTAT.includes(f.status) ? f.status : null,
+    p_short: !!f.short, p_independent: f.independent !== false, p_hide_fig: !!f.hideFig, p_off: Math.max(0, Math.min(5000, parseInt(f.offset, 10) || 0)), p_lim: 50 };
+  return (await rest("rpc/prospect_list", { method: "POST", body: JSON.stringify(body) })).rows;
+}
+async function setProspect(id, change) {
+  if (!/^osm:[A-Za-z0-9]{1,40}$/.test(String(id))) throw new Error("bad place");
+  const body = { p_place: id };
+  if ("short" in change) body.p_short = !!change.short;
+  if ("status" in change) { if (!PSTAT.includes(change.status)) throw new Error("bad status"); body.p_status = change.status; }
+  if ("note" in change) { if (change.note === "" || change.note === null) body.p_clear_note = true; else body.p_note = String(change.note).slice(0, 500); }
+  await rest("rpc/prospect_set", { method: "POST", body: JSON.stringify(body) });
+  return { saved: true };
+}
+
+module.exports = { prospects, setProspect, dinersState, setDinersOpen, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

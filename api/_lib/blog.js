@@ -42,8 +42,10 @@ async function list() {
     const status = o.hidden ? "taken-down" : when && Date.parse(when) > Date.now() ? "queued" : "live";
     return { slug: p.slug, title: p.title, topic: p.topic || "", date: p.date || "", words: p.words ?? null, status, visible, publish_at: when, hidden: !!o.hidden, overridden: !!(o.hidden || o.publish_at) };
   }));
+  // is the live blog wired to these controls yet (does it load the hide script and does the generator read the overrides)?
+  const hooks = await text(SITE + "/blog").then((h) => h.includes("blog-state.js"), () => false);
   out.sort((a, b) => (b.date || "").localeCompare(a.date || "") || a.slug.localeCompare(b.slug));
-  return { source, posts: out };
+  return { source, hooks, posts: out };
 }
 
 module.exports = { list };

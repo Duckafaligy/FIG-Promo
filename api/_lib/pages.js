@@ -242,7 +242,8 @@ function blogHtml() {
     if (p.status === "queued") return '<button class="link" data-bnow="' + s + '">Publish now</button><br><input class="f" type="datetime-local" id="bt-' + s + '" style="width:200px;height:38px;margin-top:6px"> <button class="link" data-btime="' + s + '">Save time</button>';
     return '<span style="display:flex;gap:16px;flex-wrap:wrap"><a class="link" href="/blog/' + s + '" target="_blank" rel="noopener">Open</a><button class="link red" style="margin:0" data-bdown="' + s + '">Take down</button></span>';
   };
-  return '<div class="stats">' + stat(live, "Posts live", "blue") + stat(queued, "Scheduled") + stat(down, "Taken down", down ? "red" : "") + stat(P.length, "Posts in total") + "</div>" +
+  const warn = BLOG.hooks === false ? '<div class="hint r" style="margin:0 0 16px"><b>Not connected to the live blog yet.</b> Your choices are saved here, but the site does not act on them until the next site update that connects this page. Taking a post down will do nothing visible before then.</div>' : "";
+  return warn + '<div class="stats">' + stat(live, "Posts live", "blue") + stat(queued, "Scheduled") + stat(down, "Taken down", down ? "red" : "") + stat(P.length, "Posts in total") + "</div>" +
     '<div class="empty" style="margin-bottom:18px"><b>How changes reach the site.</b> Taking a post down hides it for everyone within about a minute, and the next site update (within the hour) removes it completely. Publishing now or changing a time also takes effect at the next site update. Scheduled posts publish on their own at their time, at 12 am, 6 am, 12 pm or 6 pm Toronto time. Nothing here changes a post’s words.' +
     (BLOG.source === "live-site" ? "<br><br>Showing the posts on the live site for now (the full list with scheduled posts appears after the next site update)." : "") + "</div>" +
     table(["Post", "Status", "Date", "Words", ""], P.map((p) => [

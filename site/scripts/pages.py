@@ -6,7 +6,7 @@ run: python site/scripts/pages.py
 - Sections that also live on the home page (how it works, features, restaurants) are copied from index.html, so they never drift.
 - SITE_URL is the address search engines see: change it once figpromo.com is connected.
 """
-import datetime, html, json, os, pathlib, re, sys
+import datetime, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 
@@ -22,6 +22,69 @@ e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
 HIDDEN = {"404", "r", "paid", "stripe", "premium-on"}  # not indexed, no breadcrumbs, not in the sitemap
+
+# Scheduled posts (user 2026-10-14: "Schedule + reviewed batches"): a post with `publish_at` (ISO 8601 with its offset) is
+# left out of everything until then: no page, not in the blog, its topics, "Keep reading", the feed, the sitemap, llms.txt or
+# any structured data. FIG_NOW (ISO) stands in for the clock in tests. An hourly job runs this at the four slots.
+NOW = datetime.datetime.fromisoformat(os.environ["FIG_NOW"]) if os.environ.get("FIG_NOW") else datetime.datetime.now(datetime.timezone.utc)
+if NOW.tzinfo is None:
+    NOW = NOW.replace(tzinfo=datetime.timezone.utc)
+
+
+# The team's overrides from the admin's Blog page (user 2026-10-14: "if I don't like a post I can delete it"): a slug in
+# `hidden` is taken down (left out exactly like a queued post), `publish_at[slug]` replaces the post's own time. Read with the
+# public key the website already ships (js/config.js); the last good answer is kept in blog_overrides.cache.json, used when the
+# database can't be reached; with neither, no overrides. FIG_BLOG_OVERRIDES (a JSON file) stands in for the network in tests.
+def _overrides():
+    cache = pathlib.Path(__file__).with_name("blog_overrides.cache.json")
+    if os.environ.get("FIG_BLOG_OVERRIDES"):
+        return json.loads(pathlib.Path(os.environ["FIG_BLOG_OVERRIDES"]).read_text(encoding="utf-8"))
+    try:
+        cfg = (SITE / "js" / "config.js").read_text(encoding="utf-8")
+        url, key = re.search(r'supabaseUrl:\s*"([^"]+)"', cfg).group(1), re.search(r'supabaseKey:\s*"([^"]+)"', cfg).group(1)
+        req = urllib.request.Request(url + "/rest/v1/rpc/blog_overrides", data=b"{}", method="POST",
+                                     headers={"apikey": key, "Authorization": "Bearer " + key, "Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=8) as r:
+            ov = json.load(r)
+        if not isinstance(ov, dict):
+            raise ValueError("not an object")
+        ov = {"hidden": sorted(set(ov.get("hidden") or [])), "publish_at": dict(sorted((ov.get("publish_at") or {}).items()))}
+        text = json.dumps(ov, indent=1) + "\n"
+        if not cache.exists() or cache.read_text(encoding="utf-8") != text:
+            cache.write_text(text, encoding="utf-8", newline="\n")
+        return ov
+    except Exception as err:  # never fail the build over this
+        print(f"blog: WARNING overrides not reachable ({err}); using the last saved ones", file=sys.stderr)
+        try:
+            return json.loads(cache.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+
+
+_ov = _overrides()
+TAKEN_DOWN = set(_ov.get("hidden") or [])
+for _p in POSTS:
+    _p["source_publish_at"] = _p.get("publish_at")
+    if _p["slug"] in (_ov.get("publish_at") or {}):
+        _p["publish_at"] = _ov["publish_at"][_p["slug"]]
+        if not _p["publish_at"]:
+            del _p["publish_at"]
+live = lambda post: post["slug"] not in TAKEN_DOWN and (not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW)
+# every post that isn't live (queued or taken down): links to it are plain text on every page until it is
+NOT_LIVE = sorted(x["slug"] for x in POSTS if not live(x))
+_unlink = (lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{"|".join(re.escape(x) for x in NOT_LIVE)})(?:[#?][^"]*)?"[^>]*>(.*?)</a>', lambda m: m.group(1), h, flags=re.S)) if NOT_LIVE else (lambda h: h)
+
+# what the admin's Blog page lists (it reads this file from GitHub): every post, live, queued or taken down, newest first.
+# No clock in it, so it only changes when the posts or the overrides do.
+_words = lambda post: len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split())
+_manifest = {"generated": max((x["date"] for x in POSTS), default=""), "posts": [
+    {"slug": x["slug"], "title": x["title"], "topic": x["topic"], "date": x["date"], "publish_at": x["source_publish_at"],
+     "status": "taken-down" if x["slug"] in TAKEN_DOWN else "live" if live(x) else "queued", "words": _words(x), "dek": x["dek"]}
+    for x in sorted(POSTS, key=lambda x: (x["date"], x.get("source_publish_at") or ""), reverse=True)]}
+_mtext = json.dumps(_manifest, indent=1, ensure_ascii=False) + "\n"
+_mpath = pathlib.Path(__file__).with_name("blog_manifest.json")
+if not _mpath.exists() or _mpath.read_text(encoding="utf-8") != _mtext:
+    _mpath.write_text(_mtext, encoding="utf-8", newline="\n")
 
 # the nav is Home's own (index.html, Home v2 2026-10-13): every link scrolls to a section of Home, and its button opens the
 # web app. Every other page copies it as it is, so the two never drift.
@@ -95,6 +158,9 @@ def crumbs(items):
         {"@type": "ListItem", "position": k + 1, "name": n, "item": SITE_URL + u} for k, (n, u) in enumerate(items)]}
 
 
+BLOG_JS = '\n<script src="/js/blog-state.js" defer></script>'  # blog pages: hides a post taken down since the build
+
+
 # chrome="back": no site navbar, the page brings its own way back (the legal pages, user 2026-10-14: "remove it, and only add a back to landing page")
 def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png", chrome="nav"):
     path = "/" + slug
@@ -120,16 +186,17 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 {SPRITE}
 <div class="bg" aria-hidden="true"><div class="bg-grid"></div></div>
 {nav(current) if chrome == 'nav' else ''}
-<main{' class="page"' if wide else ' class="wrap doc"'}>
+<main{' class="page"' if wide else ' class="wrap doc"'}{f' data-post="{slug[5:]}"' if slug.startswith("blog/") else ""}>
 {body}
 </main>
 {FOOTER}
 {MEGA if chrome == 'nav' else ''}
 <script src="/js/fx.js" defer></script>
-<script src="/js/sub.js" defer></script>
+<script src="/js/sub.js" defer></script>{BLOG_JS if slug == "blog" or slug.startswith("blog/") else ""}
 </body>
 </html>
 '''
+    out = _unlink(out)
     p = SITE / (slug + ".html")
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(out, encoding="utf-8")
@@ -303,14 +370,8 @@ def read_min(post):
     return max(2, round(words / 220))
 
 
-# Scheduled posts (user 2026-10-14: "Schedule + reviewed batches"): a post with `publish_at` (ISO 8601 with its offset) is
-# left out of everything until then: no page, not in the blog, its topics, "Keep reading", the feed, the sitemap, llms.txt or
-# any structured data. FIG_NOW (ISO) stands in for the clock in tests. An hourly job runs this at the four slots.
-NOW = datetime.datetime.fromisoformat(os.environ["FIG_NOW"]) if os.environ.get("FIG_NOW") else datetime.datetime.now(datetime.timezone.utc)
-if NOW.tzinfo is None:
-    NOW = NOW.replace(tzinfo=datetime.timezone.utc)
-live = lambda post: not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW
-QUEUED = sorted((x for x in POSTS if not live(x)), key=lambda x: x["publish_at"])
+# the clock, the overrides and `live` are at the top; queued = not live yet and not taken down
+QUEUED = sorted((x for x in POSTS if not live(x) and x["slug"] not in TAKEN_DOWN), key=lambda x: x["publish_at"])
 POSTS[:] = [x for x in POSTS if live(x)]
 # a page of a post that isn't live (queued, moved later, or taken out of the list) goes, with its cover
 _live = {x["slug"] for x in POSTS}
@@ -319,9 +380,7 @@ for f in [*(SITE / "blog").glob("*.html"), *(SITE / "assets" / "blog").glob("*.j
         f.unlink()
 POSTS.sort(key=lambda x: (x["date"], x.get("publish_at", "")), reverse=True)
 # a live post's link to one still queued is plain text until that one goes live (fig-promo-28: it appears by itself then)
-if QUEUED:
-    _q = "|".join(re.escape(x["slug"]) for x in QUEUED)
-    _unlink = lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{_q})(?:[#?][^"]*)?"[^>]*>(.*?)</a>', lambda m: m.group(1), h, flags=re.S)
+if NOT_LIVE:
     for x in POSTS:
         x["sections"] = [(h, _unlink(t)) for h, t in x["sections"]]
         x["faq"] = [(q, _unlink(ans)) for q, ans in x["faq"]]
@@ -438,11 +497,11 @@ for k, post in enumerate(POSTS):
     pic = photo_of(post, img)
     meta = f"{post['topic']} · {nice_date(post['date'])} · {read_min(post)} min read"
     if k == 0:
-        blog += (f'<section class="section ice bl-feature-band"><div class="wrap"><a class="post-card bl-feature" href="{url}" data-topic="{post["topic"]}">'
+        blog += (f'<section class="section ice bl-feature-band"><div class="wrap"><a class="post-card bl-feature" href="{url}" data-topic="{post["topic"]}" data-post-card="{post["slug"]}">'
                  f'<span class="bl-pic"><img src="{pic}" alt="" width="720" height="480"><i>Newest</i></span>'
                  f'<span class="bl-text"><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
     else:
-        rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
+        rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}" data-post-card="{post["slug"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
                     f'<span><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p></span></a>')
     # three to read next: the same topic first, then the newest others (published ones only: POSTS is already the live list)
     related = ([x for x in POSTS if x is not post and x["topic"] == post["topic"]] + [x for x in POSTS if x is not post and x["topic"] != post["topic"]])[:3]
@@ -460,7 +519,7 @@ for k, post in enumerate(POSTS):
             + '<aside class="ps-author"><img src="/assets/favicon.svg" alt="" width="44" height="44"><div><b>The FIG team</b><p>We build FIG in Markham, Ontario: live deals from local restaurants, free for diners. Questions or a correction? <a href="/contact">Write to us</a>.</p></div></aside>'
             + "</article><div></div></div>" + end_cta(post)
             + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
-            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><b>{e(x["title"])}</b><span class="bl-meta">{e(x["topic"])} · {nice_date(x["date"])} · {read_min(x)} min read</span><p>{e(x["dek"])}</p></span></a>' for x in related)
+            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}" data-post-card="{x["slug"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><b>{e(x["title"])}</b><span class="bl-meta">{e(x["topic"])} · {nice_date(x["date"])} · {read_min(x)} min read</span><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post.get("desc", post["dek"]), "keywords": post["keywords"],
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",
@@ -559,4 +618,4 @@ if not (icons / "icon-512.png").exists():
     for name, size in (("apple-touch-icon.png", 180), ("icon-192.png", 192), ("icon-512.png", 512)):
         src.resize((size, size), Image.LANCZOS).save(icons / name, optimize=True)
 print(len(PAGES), "pages; sitemap.xml, robots.txt, site.webmanifest written")
-print(f"blog: published {len(POSTS)}, queued {len(QUEUED)}" + "".join(f"\n  {x['publish_at']}  {x['slug']}" for x in QUEUED))
+print(f"blog: published {len(POSTS)}, queued {len(QUEUED)}, taken down {len(TAKEN_DOWN & {x['slug'] for x in _manifest['posts']})}" + "".join(f"\n  {x['publish_at']}  {x['slug']}" for x in QUEUED))

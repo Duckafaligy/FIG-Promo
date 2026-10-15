@@ -1,0 +1,155 @@
+{
+ "generated": "2026-10-14",
+ "posts": [
+  {
+   "slug": "how-restaurant-deals-work",
+   "title": "How restaurant deals work on FIG, from claim to counter",
+   "topic": "For diners",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 588,
+   "dek": "Everything that happens between seeing a deal and paying the bill: claiming, the Voucher tab, the code at the counter, takeout, what happens when a deal ends, and rating the visit."
+  },
+  {
+   "slug": "slow-hour-deal-math",
+   "title": "How to run a slow-hour deal that makes money (with the math)",
+   "topic": "For restaurants",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 701,
+   "dek": "A slow-hour deal makes money when it fills seats that would otherwise be empty and covers its food cost. Here's the arithmetic: contribution per plate, the worst case, the cap, and how to tell new diners from regulars who'd have come anyway."
+  },
+  {
+   "slug": "deal-types-percent-dollar-2-for-1",
+   "title": "% off, $ off or 2-for-1? Pricing a restaurant deal",
+   "topic": "For restaurants",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 571,
+   "dek": "The four kinds of restaurant deal, side by side: what each costs you, what it feels like to a diner, and when to use it. With worked examples on a $14 dish."
+  },
+  {
+   "slug": "set-up-fig-menu-takeout",
+   "title": "Set up your FIG menu and takeout in 15 minutes",
+   "topic": "For restaurants",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 746,
+   "dek": "A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply."
+  },
+  {
+   "slug": "hst-registration-small-restaurants-ontario",
+   "title": "HST registration for small restaurants in Ontario: the $30,000 rule explained",
+   "topic": "For restaurants",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 653,
+   "dek": "When a small Ontario restaurant has to register for HST, what changes when it does, and how HST works on deals and takeout. Plain-language, with the Canada Revenue Agency's own rules linked."
+  },
+  {
+   "slug": "group-dining-deals",
+   "title": "Eating out as a group: picking a place, deals and splitting the bill",
+   "topic": "For diners",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 537,
+   "dek": "How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic."
+  },
+  {
+   "slug": "how-to-read-restaurant-reviews",
+   "title": "How to read a restaurant's reviews on FIG",
+   "topic": "For diners",
+   "date": "2026-10-14",
+   "publish_at": null,
+   "status": "live",
+   "words": 483,
+   "dek": "Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute."
+  },
+  {
+   "slug": "how-fig-makes-money",
+   "title": "FIG is free for restaurants. Here's how we make money",
+   "topic": "For restaurants",
+   "date": "2026-10-07",
+   "publish_at": null,
+   "status": "live",
+   "words": 832,
+   "dek": "Listing, deals, scans and chats are free on FIG, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app."
+  },
+  {
+   "slug": "restaurant-deals-markham",
+   "title": "How to find the best restaurant deals in Markham",
+   "topic": "For diners",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 782,
+   "dek": "A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them."
+  },
+  {
+   "slug": "delivery-app-commissions-vs-fig",
+   "title": "Delivery app commissions vs FIG: what restaurants keep",
+   "topic": "For restaurants",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 836,
+   "dek": "Delivery apps charge restaurants a percentage of every order. FIG charges nothing per dine-in diner and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order."
+  },
+  {
+   "slug": "fill-slow-hours-restaurant",
+   "title": "7 ways to fill slow hours at your restaurant",
+   "topic": "For restaurants",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 895,
+   "dek": "Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away."
+  },
+  {
+   "slug": "student-food-deals-markham",
+   "title": "Student food deals in Markham: eating out on a budget",
+   "topic": "For diners",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 760,
+   "dek": "How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free."
+  },
+  {
+   "slug": "flash-deals-explained",
+   "title": "What are flash deals, and how do they work on FIG?",
+   "topic": "For diners",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 821,
+   "dek": "Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends."
+  },
+  {
+   "slug": "takeout-without-delivery-fees",
+   "title": "Takeout with a deal, pick up, skip the delivery fees",
+   "topic": "For diners",
+   "date": "2026-10-04",
+   "publish_at": null,
+   "status": "live",
+   "words": 818,
+   "dek": "Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late."
+  },
+  {
+   "slug": "why-we-built-fig",
+   "title": "Why we built FIG",
+   "topic": "News",
+   "date": "2026-10-02",
+   "publish_at": null,
+   "status": "live",
+   "words": 898,
+   "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, free for restaurants to post deals, and no cut of a dine-in bill."
+  }
+ ]
+}

@@ -131,4 +131,18 @@ async function setBlog(slug, change) {
   return { saved: true };
 }
 
-module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+// the diner side switch (settings key diners_open: 'off' = only restaurants can use FIG; no row = open) and the diner waitlist (table diner_waitlist, closed to the public)
+async function dinersState() {
+  const flag = (await rest("settings?select=value&key=eq.diners_open")).rows[0];
+  const wl = (await rest("diner_waitlist?select=email,school,consent,joined_at&order=joined_at.desc&limit=1000")).rows;
+  const accounts = (await rest("profiles?select=id&role=eq.diner&admin=eq.false&limit=5000")).rows.length;
+  return { open: !flag || flag.value !== "off", waitlist: wl, accounts };
+}
+async function setDinersOpen(open) {
+  if (typeof open !== "boolean") throw new Error("bad open");
+  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "diners_open", value: open ? "on" : "off" }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  console.log("admin: diner side", open ? "opened" : "closed");
+  return { open };
+}
+
+module.exports = { dinersState, setDinersOpen, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

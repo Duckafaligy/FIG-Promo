@@ -195,7 +195,7 @@ const VIEWS = {
   leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + "</div>"),
+    '<div id="dinerbox">' + dinersHtml() + "</div>"),
   blog: () => '<h1>Blog</h1><p class="lead muted">Every post on the FIG blog. Take one down if you do not like it, or put it back.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>"),
   ads: () => {
     const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
@@ -263,6 +263,37 @@ function blogWire() {
   document.querySelectorAll("[data-btime]").forEach((b) => b.onclick = () => { const v = ($("#bt-" + b.dataset.btime) || {}).value; if (!v) return alert("Pick a date and time first."); set({ slug: b.dataset.btime, publish_at: new Date(v).toISOString() }); });
 }
 
+// ---- Diners: the switch that opens or closes the diner side, and the waitlist (table diner_waitlist through /api/admin-api)
+let DIN = null;
+function dinersHtml() {
+  if (!DIN) return '<p class="muted">Loading…</p>';
+  if (DIN.error) return '<div class="empty"><b>Could not load this.</b><br>' + esc(DIN.error) + "</div>";
+  const W = DIN.waitlist || [], agreed = W.filter((w) => w.consent).length;
+  const head = DIN.open
+    ? '<div class="hint" style="margin:0 0 18px"><b>The diner side is OPEN.</b> Everyone can sign up, browse, claim and order. <button class="link red" id="din-close" style="margin-left:12px">Close it to diners</button></div>'
+    : '<div class="hint r" style="margin:0 0 18px"><b>The diner side is CLOSED.</b> Only restaurants can use FIG; diners see "opening to restaurants first" and can join the waitlist. You (and any team account) can still try the diner side. <button class="link" id="din-open" style="margin-left:12px">Open it to diners</button></div>';
+  return head + '<div class="stats">' + stat(W.length, "On the waitlist", "blue") + stat(agreed, "Agreed to be emailed") + stat(DIN.accounts, "Diner accounts") + "</div>" +
+    '<div style="display:flex;gap:16px;margin:6px 0 14px;flex-wrap:wrap"><button class="link" id="din-copy">Copy the emails that agreed</button><button class="link" id="din-csv">Download as a table (CSV)</button></div>' +
+    table(["Email", "School", "May email", "Joined"], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""), w.consent ? '<span class="pill g">Yes</span>' : '<span class="pill">No</span>', ago(w.joined_at)]), "Nobody yet. The list fills once the app shows the waitlist form.");
+}
+async function dinersLoad() {
+  DIN = await api("diners-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
+  if (view === "diners" && $("#dinerbox")) { $("#dinerbox").innerHTML = dinersHtml(); dinersWire(); }
+}
+function dinersWire() {
+  const set = async (open, ask) => { if (!confirm(ask)) return; const r = await api("diners-set", { open }); if (r.error) alert(r.error); await dinersLoad(); };
+  const o = $("#din-open"), c = $("#din-close");
+  if (o) o.onclick = () => set(true, "Open FIG to diners now? Everyone can then sign up, browse, claim deals and order, right away. Only do this at launch.");
+  if (c) c.onclick = () => set(false, "Close the diner side? Diners will see 'opening to restaurants first' and cannot claim or order. Restaurants are not affected.");
+  const rows = (DIN && DIN.waitlist) || [];
+  const cp = $("#din-copy"); if (cp) cp.onclick = async () => { const t = rows.filter((w) => w.consent).map((w) => w.email).join(", "); try { await navigator.clipboard.writeText(t); alert(rows.filter((w) => w.consent).length + " emails copied."); } catch { prompt("Copy these:", t); } };
+  const cs = $("#din-csv"); if (cs) cs.onclick = () => {
+    const q = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    const csv = ["email,school,may_email,joined"].concat(rows.map((w) => [q(w.email), q(w.school), w.consent ? "yes" : "no", q(w.joined_at)].join(","))).join("\\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "fig-diner-waitlist.csv"; a.click();
+  };
+}
+
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
@@ -280,6 +311,7 @@ function render() {
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
   if (view === "blog" && D.connected) blogLoad();
+  if (view === "diners" && D.connected) dinersLoad();
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));

@@ -13,7 +13,7 @@
   if (auth) root.dataset.figScreen = "auth";
   // which screen the shell's skeleton draws until the app is here (+html.tsx), and which tab it lights
   const seg = path.split("/")[1] || "home";
-  root.dataset.figPath = auth ? "auth" : { home: "home", map: "map", search: "search", restaurant: "rest", r: "rest", voucher: "tab", saved: "tab", chats: "tab", deals: "tab", profile: "profile" }[seg] || "other";
+  root.dataset.figPath = auth ? "auth" : { home: "home", map: "map", search: "search", restaurant: "rest", r: "rest", voucher: "tab", saved: "tab", chats: "tab", deals: "tab", profile: "profile", settings: "settings" }[seg] || "other";
   root.dataset.figTab = seg === "deals" ? "voucher" : seg;
   // repeat visits open from the phone's copy, and work offline (/sw.js); after the page has loaded, never competing with it
   // (the first time, this page loaded before the worker: it's told what to save, so this page opens offline too)

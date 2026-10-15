@@ -111,4 +111,24 @@ async function setInvoice(id, status) {
   await rest(`ad_invoices?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status, ...stamp }), headers: { Prefer: "return=minimal" } });
 }
 
-module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice };
+
+// the blog's controls (table blog_overrides): a post taken down, or its go-live time moved. The blog is generated from the site's code;
+// these only say what to leave out or when to publish, so nothing here can change a post's words.
+const SLUG = /^[a-z0-9-]{1,100}$/;
+async function blogOverrides() { return (await rest("blog_overrides?select=slug,hidden,publish_at,note,updated_at&order=slug")).rows; }
+async function setBlog(slug, change) {
+  if (!SLUG.test(String(slug))) throw new Error("bad slug");
+  const cur = (await rest(`blog_overrides?select=slug,hidden,publish_at,note&slug=eq.${slug}`)).rows[0] || { hidden: false, publish_at: null, note: null };
+  const next = { hidden: cur.hidden, publish_at: cur.publish_at, note: cur.note };
+  if ("hidden" in change) next.hidden = !!change.hidden;
+  if ("publish_at" in change) {
+    if (change.publish_at === null) next.publish_at = null;
+    else { const t = Date.parse(change.publish_at); if (!(t > Date.now() - 86400000 && t < Date.now() + 366 * 86400000)) throw new Error("bad time"); next.publish_at = new Date(t).toISOString(); }
+  }
+  if ("note" in change) next.note = change.note ? String(change.note).slice(0, 300) : null;
+  if (!next.hidden && !next.publish_at) { await rest(`blog_overrides?slug=eq.${slug}`, { method: "DELETE", headers: { Prefer: "return=minimal" } }); return { cleared: true }; }
+  await rest("blog_overrides?on_conflict=slug", { method: "POST", body: JSON.stringify({ slug, ...next }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  return { saved: true };
+}
+
+module.exports = { connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

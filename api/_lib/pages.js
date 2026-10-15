@@ -132,6 +132,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
       <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
+      <button data-v="blog">Blog <span class="badge" id="n-blog">–</span></button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -195,6 +196,7 @@ const VIEWS = {
     table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
   diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     '<div class="stats">' + stat(D.counts.diners, "Diner accounts", "blue") + stat(D.waitlist, "Website waitlist") + "</div>"),
+  blog: () => '<h1>Blog</h1><p class="lead muted">Every post on the FIG blog. Take one down if you do not like it, or put it back.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>"),
   ads: () => {
     const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
     const live = A.campaigns.filter((c) => c.status === "active");
@@ -223,6 +225,43 @@ const VIEWS = {
   },
 };
 
+// ---- Blog: every post, whether it is live, and the team's controls (table blog_overrides through /api/admin-api). Words stay in the site's code; this only takes a post down, puts it back or moves its time.
+let BLOG = null;
+const blogWhen = (t) => t ? new Date(t).toLocaleString("en-CA", { timeZone: "America/Toronto", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "";
+function blogHtml() {
+  if (!BLOG) return '<p class="muted">Loading…</p>';
+  if (BLOG.error) return '<div class="empty"><b>Could not load the posts.</b><br>' + esc(BLOG.error) + "</div>";
+  const P = BLOG.posts || [];
+  const live = P.filter((p) => p.status === "live").length, queued = P.filter((p) => p.status === "queued").length, down = P.filter((p) => p.status === "taken-down").length;
+  const pill = (p) => p.status === "taken-down" ? '<span class="pill r">Taken down</span>' + (p.visible ? '<br><span class="note">Hidden for visitors now; removed completely at the next site update</span>' : "")
+    : p.status === "queued" ? '<span class="pill">Goes live ' + esc(blogWhen(p.publish_at)) + "</span>"
+    : p.visible === false ? '<span class="pill">Going live at the next site update</span>' : '<span class="pill g">Live</span>';
+  const acts = (p) => {
+    const s = esc(p.slug);
+    if (p.status === "taken-down") return '<button class="link" data-bup="' + s + '">Put back</button>';
+    if (p.status === "queued") return '<button class="link" data-bnow="' + s + '">Publish now</button><br><input class="f" type="datetime-local" id="bt-' + s + '" style="width:200px;height:38px;margin-top:6px"> <button class="link" data-btime="' + s + '">Save time</button>';
+    return '<span style="display:flex;gap:16px;flex-wrap:wrap"><a class="link" href="/blog/' + s + '" target="_blank" rel="noopener">Open</a><button class="link red" style="margin:0" data-bdown="' + s + '">Take down</button></span>';
+  };
+  return '<div class="stats">' + stat(live, "Posts live", "blue") + stat(queued, "Scheduled") + stat(down, "Taken down", down ? "red" : "") + stat(P.length, "Posts in total") + "</div>" +
+    '<div class="empty" style="margin-bottom:18px"><b>How changes reach the site.</b> Taking a post down hides it for everyone within about a minute, and the next site update (within the hour) removes it completely. Publishing now or changing a time also takes effect at the next site update. Scheduled posts publish on their own at their time, at 12 am, 6 am, 12 pm or 6 pm Toronto time. Nothing here changes a post’s words.' +
+    (BLOG.source === "live-site" ? "<br><br>Showing the posts on the live site for now (the full list with scheduled posts appears after the next site update)." : "") + "</div>" +
+    table(["Post", "Status", "Date", "Words", ""], P.map((p) => [
+      "<b>" + esc(p.title) + '</b><br><span class="muted mono">/blog/' + esc(p.slug) + "</span>" + (p.topic ? '<br><span class="muted">' + esc(p.topic) + "</span>" : ""),
+      pill(p), esc(p.date || ""), p.words ? p.words.toLocaleString("en-CA") : "–", acts(p)]), "No posts yet.");
+}
+async function blogLoad() {
+  BLOG = await api("blog-list").catch(() => ({ error: "The list did not load. Refresh to try again." }));
+  const n = $("#n-blog"); if (n) n.textContent = BLOG.posts ? BLOG.posts.filter((p) => p.status === "live").length : "–";
+  if (view === "blog" && $("#blogbox")) { $("#blogbox").innerHTML = blogHtml(); blogWire(); }
+}
+function blogWire() {
+  const set = async (body, ask) => { if (ask && !confirm(ask)) return; const r = await api("blog-set", body); if (r.error) alert(r.error); await blogLoad(); };
+  document.querySelectorAll("[data-bdown]").forEach((b) => b.onclick = () => set({ slug: b.dataset.bdown, hidden: true }, "Take this post down? It disappears for visitors within about a minute. You can put it back any time."));
+  document.querySelectorAll("[data-bup]").forEach((b) => b.onclick = () => set({ slug: b.dataset.bup, hidden: false }));
+  document.querySelectorAll("[data-bnow]").forEach((b) => b.onclick = () => set({ slug: b.dataset.bnow, publish_at: new Date(Date.now() - 60000).toISOString() }, "Publish this post now? It goes live at the next site update (within the hour)."));
+  document.querySelectorAll("[data-btime]").forEach((b) => b.onclick = () => { const v = ($("#bt-" + b.dataset.btime) || {}).value; if (!v) return alert("Pick a date and time first."); set({ slug: b.dataset.btime, publish_at: new Date(v).toISOString() }); });
+}
+
 function render() {
   document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
@@ -239,6 +278,7 @@ function render() {
     });
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
+  if (view === "blog" && D.connected) blogLoad();
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
     document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));

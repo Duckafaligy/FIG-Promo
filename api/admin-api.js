@@ -1,6 +1,7 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set  (POST, same origin; everything but login needs the session)
 const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
 const db = require("./_lib/db");
+const blog = require("./_lib/blog");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST" || !sameOrigin(req)) return send(res, 405, { error: "Not allowed." });
@@ -25,8 +26,11 @@ module.exports = async (req, res) => {
     if (action === "support") { await db.setSupport(body.id, body.status); return send(res, 200, { ok: true }); }
     if (action === "two-step-off") return send(res, 200, { ok: true, ...(await db.twoStepOff({ id: body.id, email: body.email })) });
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
+    if (action === "blog-list") return send(res, 200, { ok: true, ...(await blog.list()) });
+    if (action === "blog-set") { const r = await db.setBlog(body.slug, { ...(body.hidden !== undefined ? { hidden: body.hidden } : {}), ...(body.publish_at !== undefined ? { publish_at: body.publish_at } : {}), ...(body.note !== undefined ? { note: body.note } : {}) }); return send(res, 200, { ok: true, ...r }); }
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
   } catch (e) {
+    if (/^bad /.test(String(e.message))) return send(res, 400, { error: "That was not a valid request." }); // validation, not a database problem
     return send(res, 502, { error: "The database didn't answer. Try again." });
   }
   return send(res, 400, { error: "Unknown action." });

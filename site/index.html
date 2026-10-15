@@ -42,9 +42,9 @@
 
 <header class="nav" id="nav">
   <a class="brand" href="/" aria-label="FIG home"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
-  <nav class="nav-links" aria-label="Sections"><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#owners">For restaurants</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a></nav>
-  <div class="nav-end"><a class="btn btn-sm nav-get" href="/app/">Open FIG</a><button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span></button></div>
-  <div class="nav-sheet" id="nav-sheet"><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#owners">For restaurants</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a><div class="badges small"><a class="btn btn-sm" href="/app/">Open FIG on the web</a><span class="soon">App Store and Google Play: coming soon</span></div></div>
+  <nav class="nav-links" aria-label="Sections"><a href="/#owners">For restaurants</a><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a></nav>
+  <div class="nav-end"><a class="btn btn-sm nav-get" href="/app/sign-up-business">List your restaurant</a><button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span></button></div>
+  <div class="nav-sheet" id="nav-sheet"><a href="/#owners">For restaurants</a><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a><div class="badges small"><a class="btn btn-sm" href="/app/sign-up-business">List your restaurant</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div></div>
 </header>
 
 <main>
@@ -53,15 +53,15 @@
     <div class="hero-map" id="map" aria-hidden="true"><img src="/assets/map-fallback.webp" srcset="/assets/map-fallback-800.webp 800w, /assets/map-fallback.webp 1920w" sizes="100vw" alt="" class="map-fallback" fetchpriority="low"></div>
     <div class="hero-fade" aria-hidden="true"></div>
     <div class="wrap hero-copy" id="join">
-      <h1 class="display rise" aria-label="Local deals, one tap away.">
-        <span class="mask"><span class="line">Local deals,</span></span>
-        <span class="mask"><span class="line accent">one tap away.</span></span>
+      <h1 class="display rise" aria-label="Fill your quiet hours.">
+        <span class="mask"><span class="line">Fill your</span></span>
+        <span class="mask"><span class="line accent">quiet hours.</span></span>
       </h1>
-      <p class="lede intro">Deals from Markham restaurants, right on the map. Claim one, show your code at the counter, and save. Free for diners. <b class="opens">Opens January 1, 2027.</b></p>
+      <p class="lede intro">Post a deal for your slow hours and Markham diners find it on the map. Free to join, with no commission on dine-in. Set up now, and your page is ready when diners arrive. <b class="opens">Diners join January 1, 2027.</b></p>
       <div class="signup intro">
         <div class="signup-btns">
-          <a class="btn btn-lg" href="/app/sign-up">Sign up free</a>
-          <a class="btn btn-lg btn-ghost" href="#owners">I'm a business</a>
+          <a class="btn btn-lg" href="/app/sign-up-business">List your restaurant</a>
+          <a class="btn btn-lg btn-ghost" href="#waitlist">Join the diner waitlist</a>
         </div>
       </div>
     </div>
@@ -76,155 +76,6 @@
   <section class="strip" aria-label="Cuisines on FIG">
     <div class="marquee"><div class="marquee-track" data-marquee="0"></div></div>
     <div class="marquee reverse"><div class="marquee-track" data-marquee="1"></div></div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats-wrap" aria-label="FIG in numbers">
-    <div class="wrap"><ul class="stats">
-      <li class="reveal"><b class="accent">$0</b><span>for diners, always</span></li>
-      <li class="reveal"><b>5 min</b><span>and your code changes, so screenshots don't work</span></li>
-      <li class="reveal"><b>1 tap</b><span>to claim a deal</span></li>
-      <li class="reveal"><b>4</b><span>languages in the app</span></li>
-    </ul></div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section ice" id="how">
-    <div class="wrap">
-      <div class="head-row">
-        <div>
-          <h2 class="h2 reveal">From craving to counter in four taps.</h2>
-        </div>
-        <p class="side reveal">Real FIG screens with example restaurants. You pay the restaurant, like always.</p>
-      </div>
-      <ol class="steps" tabindex="0" aria-label="How it works, step by step">
-        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/map.webp" srcset="/assets/screens/map-390.webp 390w, /assets/screens/map.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="FIG map with photo pins of nearby restaurants" loading="lazy" width="390" height="844"></div><span class="num">01</span><h3>Spot a deal on the map</h3><p>Every photo pin is a restaurant near you. Tap one to see what's on.</p></li>
-        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/claim.webp" srcset="/assets/screens/claim-390.webp 390w, /assets/screens/claim.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="Claim sheet for 2-for-1 Dim Sum" loading="lazy" width="390" height="844"></div><span class="num">02</span><h3>Claim it in one tap</h3><p>It’s yours for as long as the deal runs. Nothing to pay, nothing to print.</p></li>
-        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/chat.webp" srcset="/assets/screens/chat-390.webp 390w, /assets/screens/chat.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="Chat with the restaurant about a deal" loading="lazy" width="390" height="844"></div><span class="num">03</span><h3>Ask before you go</h3><p>Message the restaurant from your deal. Your number stays private.</p></li>
-        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/qr.webp" srcset="/assets/screens/qr-390.webp 390w, /assets/screens/qr.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="QR code to show staff" loading="lazy" width="390" height="844"></div><span class="num">04</span><h3>Show your code</h3><p>Staff scan it at the counter. It changes every 5 minutes, so it only works for you.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- FEATURES BENTO: video loops, hover drops a panel over the whole box -->
-  <section class="section" id="features">
-    <div class="wrap">
-      <h2 class="h2 two-tone reveal"><span>Everything you need to eat out for less.</span> <span class="muted">Find it, filter it, share it, save.</span></h2>
-      <div class="bento">
-        <article class="cell wide" tabindex="0">
-          <div class="cell-text">
-            <h3>Your city, filtered.</h3>
-            <p>Set your cravings, budget and diet once. Every search fits you.</p>
-            <ul class="mini-chips" aria-label="Example filters"><li>Dim sum</li><li>Bubble tea</li><li class="on">Under $15</li><li>Halal</li><li>Vegetarian</li><li class="on">Open now</li></ul>
-            <a class="try" href="/app/search">Try the filters <span aria-hidden="true">&rarr;</span></a>
-            <span class="hint">Hover to learn more</span>
-          </div>
-          <div class="panel cobalt"><video data-src="/assets/clips/filters.mp4" data-poster="/assets/clips/filters.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
-          <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
-            <h4>Set it once. Every search fits you.</h4>
-            <ul><li>Pick cravings like dim sum, ramen or bubble tea</li><li>Choose a budget per person</li><li>Halal, vegetarian and allergy filters, always confirmed with staff</li><li>Change any of it, anytime</li></ul>
-          </div></div>
-        </article>
-        <article class="cell" tabindex="0">
-          <div class="cell-text">
-            <h3>Flash deals.</h3>
-            <p>Short deals that drop near you. The timer is real, set by the restaurant.</p>
-            <a class="try" href="/app/search">See what's live <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="panel volt"><video data-src="/assets/clips/flash.mp4" data-poster="/assets/clips/flash.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
-          <div class="drop volt" aria-hidden="true"><div class="drop-in">
-            <h4>Here for an hour. Gone after.</h4>
-            <ul><li>Live ones sit at the top of Search, with the timer</li><li>Claim it before the timer ends</li><li>Dine in, or takeout if the deal allows it</li></ul>
-          </div></div>
-        </article>
-        <article class="cell" tabindex="0">
-          <div class="cell-text">
-            <h3>Group chat, solved.</h3>
-            <p>Share a deal to the chat and everyone sees where you're going.</p>
-            <a class="try" href="/app/home">Find one to share <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="panel slate"><video data-src="/assets/clips/groupchat.mp4" data-poster="/assets/clips/groupchat.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
-          <div class="drop slate" aria-hidden="true"><div class="drop-in">
-            <h4>Stop the "where are we eating?" loop.</h4>
-            <ul><li>One link with the photo, deal and distance</li><li>Friends can open it without the app</li><li>Everyone sees the same deal</li></ul>
-          </div></div>
-        </article>
-        <article class="cell" tabindex="0">
-          <div class="cell-text">
-            <h3>Just ask.</h3>
-            <p>Message the restaurant from your deal. Table for four? Still on tonight?</p>
-            <a class="try" href="/app/home">Find a restaurant <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="panel cobalt"><video data-src="/assets/clips/justask.mp4" data-poster="/assets/clips/justask.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
-          <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
-            <h4>Ask before you go.</h4>
-            <ul><li>Opens right from your deal or your takeout order</li><li>Your phone number is never shared</li><li>Get a notification when they reply</li></ul>
-          </div></div>
-        </article>
-        <article class="cell" tabindex="0">
-          <div class="cell-text">
-            <h3>Takeout.</h3>
-            <p>Order takeout with a deal, or at full price where a restaurant takes it. Add what you want, and pick it up when it’s ready.</p>
-            <a class="try" href="/app/home">Browse menus <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="panel slate"><video data-src="/assets/clips/orderahead.mp4" data-poster="/assets/clips/orderahead.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
-          <div class="drop slate" aria-hidden="true"><div class="drop-in">
-            <h4>Skip the wait.</h4>
-            <ul><li>With a deal, or at full price</li><li>Live status: sent, accepted, being prepared, ready</li><li>Pay in the app or at pickup, as the restaurant sets up</li><li>Message the restaurant from your order</li></ul>
-          </div></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CHATS: a live conversation in the app's chat style -->
-  <section class="section" id="chats">
-    <div class="wrap chats">
-      <div class="phone big chatphone reveal" aria-label="Example chat between a diner and Golden Lantern">
-        <div class="cp">
-          <div class="cp-head">
-            <span class="cp-back"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="#0A1020" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <img src="/assets/food/golden-lantern.webp" alt="" width="40" height="40" loading="lazy" decoding="async">
-            <div><b>Golden Lantern</b><small>About 2-for-1 Dim Sum</small></div>
-          </div>
-          <div class="cp-body" id="cp-body">
-            <span class="cp-chip"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z" fill="none" stroke="#1E5EFF" stroke-width="2.2" stroke-linejoin="round"/></svg>2-for-1 Dim Sum</span>
-            <span class="cp-day">Today</span>
-          </div>
-          <div class="cp-compose"><span id="cp-input">Message Golden Lantern</span><i id="cp-send"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
-        </div>
-      </div>
-      <div class="chats-copy">
-        <h2 class="h2 reveal">Ask the restaurant before you go.</h2>
-        <p class="body reveal">Table for four? Still running tonight? Message them right from your deal. Your phone number is never shared.</p>
-        <ul class="points">
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>Your number stays private, always</li>
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.6 5.6l12.8 12.8" stroke="currentColor" stroke-width="2"/></svg></span>Block or report in two taps</li>
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>Opens right from your deal or your takeout order</li>
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>A notification the moment they reply</li>
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Remove any message on your side</li>
-          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Every chat in one Chats tab</li>
-        </ul>
-        <a class="try reveal" href="/app/home">Find a restaurant to ask <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT'S THE CATCH -->
-  <section class="section band dark" id="catch">
-    <div class="wrap catch">
-      <div class="catch-copy">
-        <h2 class="h2 reveal">What's the catch? <span class="accent catch-no">There isn't one.</span></h2>
-        <p class="body reveal">Watch exactly how FIG works, start to finish, in the real app.</p>
-        
-      </div>
-      <div class="tutwrap reveal">
-      <p class="tut-label"><span>Quick tutorial video</span><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 6c14-2 30 2 40 14 3 4 5 8 6 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M42 27l8 7 3-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-      <div class="tutvid" id="tut" role="region" aria-label="Tutorial video: how to use FIG">
-        <video id="tut-video" muted loop playsinline preload="none" data-poster="/assets/clips/tut-diner.jpg" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video>
-      </div>
-      </div>
-    </div>
   </section>
 
   <!-- RESTAURANTS -->
@@ -311,6 +162,151 @@
       </div>
     </div>
   </section>
+
+  <!-- STATS -->
+  <section class="stats-wrap" aria-label="FIG in numbers">
+    <div class="wrap"><ul class="stats">
+      <li class="reveal"><b class="accent">$0</b><span>for diners, always</span></li>
+      <li class="reveal"><b>5 min</b><span>and your code changes, so screenshots don't work</span></li>
+      <li class="reveal"><b>1 tap</b><span>to claim a deal</span></li>
+      <li class="reveal"><b>4</b><span>languages in the app</span></li>
+    </ul></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section ice" id="how">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <h2 class="h2 reveal">From craving to counter in four taps.</h2>
+        </div>
+        <p class="side reveal">Real FIG screens with example restaurants. You pay the restaurant, like always.</p>
+      </div>
+      <ol class="steps" tabindex="0" aria-label="How it works, step by step">
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/map.webp" srcset="/assets/screens/map-390.webp 390w, /assets/screens/map.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="FIG map with photo pins of nearby restaurants" loading="lazy" width="390" height="844"></div><span class="num">01</span><h3>Spot a deal on the map</h3><p>Every photo pin is a restaurant near you. Tap one to see what's on.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/claim.webp" srcset="/assets/screens/claim-390.webp 390w, /assets/screens/claim.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="Claim sheet for 2-for-1 Dim Sum" loading="lazy" width="390" height="844"></div><span class="num">02</span><h3>Claim it in one tap</h3><p>It’s yours for as long as the deal runs. Nothing to pay, nothing to print.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/chat.webp" srcset="/assets/screens/chat-390.webp 390w, /assets/screens/chat.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="Chat with the restaurant about a deal" loading="lazy" width="390" height="844"></div><span class="num">03</span><h3>Ask before you go</h3><p>Message the restaurant from your deal. Your number stays private.</p></li>
+        <li class="step reveal"><div class="phone tilt"><img src="/assets/screens/qr.webp" srcset="/assets/screens/qr-390.webp 390w, /assets/screens/qr.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="QR code to show staff" loading="lazy" width="390" height="844"></div><span class="num">04</span><h3>Show your code</h3><p>Staff scan it at the counter. It changes every 5 minutes, so it only works for you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FEATURES BENTO: video loops, hover drops a panel over the whole box -->
+  <section class="section" id="features">
+    <div class="wrap">
+      <h2 class="h2 two-tone reveal"><span>Everything you need to eat out for less.</span> <span class="muted">Find it, filter it, share it, save.</span></h2>
+      <div class="bento">
+        <article class="cell wide" tabindex="0">
+          <div class="cell-text">
+            <h3>Your city, filtered.</h3>
+            <p>Set your cravings, budget and diet once. Every search fits you.</p>
+            <ul class="mini-chips" aria-label="Example filters"><li>Dim sum</li><li>Bubble tea</li><li class="on">Under $15</li><li>Halal</li><li>Vegetarian</li><li class="on">Open now</li></ul>
+            <span class="hint">Hover to learn more</span>
+          </div>
+          <div class="panel cobalt"><video data-src="/assets/clips/filters.mp4" data-poster="/assets/clips/filters.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
+            <h4>Set it once. Every search fits you.</h4>
+            <ul><li>Pick cravings like dim sum, ramen or bubble tea</li><li>Choose a budget per person</li><li>Halal, vegetarian and allergy filters, always confirmed with staff</li><li>Change any of it, anytime</li></ul>
+          </div></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Flash deals.</h3>
+            <p>Short deals that drop near you. The timer is real, set by the restaurant.</p>
+          </div>
+          <div class="panel volt"><video data-src="/assets/clips/flash.mp4" data-poster="/assets/clips/flash.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="drop volt" aria-hidden="true"><div class="drop-in">
+            <h4>Here for an hour. Gone after.</h4>
+            <ul><li>Live ones sit at the top of Search, with the timer</li><li>Claim it before the timer ends</li><li>Dine in, or takeout if the deal allows it</li></ul>
+          </div></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Group chat, solved.</h3>
+            <p>Share a deal to the chat and everyone sees where you're going.</p>
+          </div>
+          <div class="panel slate"><video data-src="/assets/clips/groupchat.mp4" data-poster="/assets/clips/groupchat.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="drop slate" aria-hidden="true"><div class="drop-in">
+            <h4>Stop the "where are we eating?" loop.</h4>
+            <ul><li>One link with the photo, deal and distance</li><li>Friends can open it without the app</li><li>Everyone sees the same deal</li></ul>
+          </div></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Just ask.</h3>
+            <p>Message the restaurant from your deal. Table for four? Still on tonight?</p>
+          </div>
+          <div class="panel cobalt"><video data-src="/assets/clips/justask.mp4" data-poster="/assets/clips/justask.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="drop cobalt" aria-hidden="true"><div class="drop-in">
+            <h4>Ask before you go.</h4>
+            <ul><li>Opens right from your deal or your takeout order</li><li>Your phone number is never shared</li><li>Get a notification when they reply</li></ul>
+          </div></div>
+        </article>
+        <article class="cell" tabindex="0">
+          <div class="cell-text">
+            <h3>Takeout.</h3>
+            <p>Order takeout with a deal, or at full price where a restaurant takes it. Add what you want, and pick it up when it’s ready.</p>
+          </div>
+          <div class="panel slate"><video data-src="/assets/clips/orderahead.mp4" data-poster="/assets/clips/orderahead.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
+          <div class="drop slate" aria-hidden="true"><div class="drop-in">
+            <h4>Skip the wait.</h4>
+            <ul><li>With a deal, or at full price</li><li>Live status: sent, accepted, being prepared, ready</li><li>Pay in the app or at pickup, as the restaurant sets up</li><li>Message the restaurant from your order</li></ul>
+          </div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHATS: a live conversation in the app's chat style -->
+  <section class="section" id="chats">
+    <div class="wrap chats">
+      <div class="phone big chatphone reveal" aria-label="Example chat between a diner and Golden Lantern">
+        <div class="cp">
+          <div class="cp-head">
+            <span class="cp-back"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="#0A1020" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <img src="/assets/food/golden-lantern.webp" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <div><b>Golden Lantern</b><small>About 2-for-1 Dim Sum</small></div>
+          </div>
+          <div class="cp-body" id="cp-body">
+            <span class="cp-chip"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z" fill="none" stroke="#1E5EFF" stroke-width="2.2" stroke-linejoin="round"/></svg>2-for-1 Dim Sum</span>
+            <span class="cp-day">Today</span>
+          </div>
+          <div class="cp-compose"><span id="cp-input">Message Golden Lantern</span><i id="cp-send"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+        </div>
+      </div>
+      <div class="chats-copy">
+        <h2 class="h2 reveal">Ask the restaurant before you go.</h2>
+        <p class="body reveal">Table for four? Still running tonight? Message them right from your deal. Your phone number is never shared.</p>
+        <ul class="points">
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>Your number stays private, always</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.6 5.6l12.8 12.8" stroke="currentColor" stroke-width="2"/></svg></span>Block or report in two taps</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>Opens right from your deal or your takeout order</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>A notification the moment they reply</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Remove any message on your side</li>
+          <li class="reveal"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Every chat in one Chats tab</li>
+        </ul>
+        <a class="try reveal" href="#waitlist">Join the diner waitlist <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S THE CATCH -->
+  <section class="section band dark" id="catch">
+    <div class="wrap catch">
+      <div class="catch-copy">
+        <h2 class="h2 reveal">What's the catch? <span class="accent catch-no">There isn't one.</span></h2>
+        <p class="body reveal">Watch exactly how FIG works, start to finish, in the real app.</p>
+        
+      </div>
+      <div class="tutwrap reveal">
+      <p class="tut-label"><span>Quick tutorial video</span><svg width="56" height="40" viewBox="0 0 56 40" aria-hidden="true"><path d="M4 6c14-2 30 2 40 14 3 4 5 8 6 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M42 27l8 7 3-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+      <div class="tutvid" id="tut" role="region" aria-label="Tutorial video: how to use FIG">
+        <video id="tut-video" muted loop playsinline preload="none" data-poster="/assets/clips/tut-diner.jpg" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video>
+      </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ: the questions people ask most, answered right on Home -->
   <section class="section" id="faq">
     <div class="wrap faq">
@@ -319,18 +315,19 @@
         <p class="side reveal">Straight answers. More in the <a href="/help">help center</a>.</p>
       </div>
       <div class="faq-list">
+      <h3 class="qa-group">For restaurants</h3>
+      <details class="qa" open><summary>When can my restaurant join?</summary><p>Today. Sign up on the web, set up your page and post your first deal. Diners join on January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills.</p></details>
+      <details class="qa"><summary>What does FIG cost restaurants?</summary><p>Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe&#x27;s card fee comes off the same payment. FIG Premium is optional, $50 a year.</p></details>
+      <details class="qa"><summary>Do I need new equipment?</summary><p>No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Add staff and their devices in Settings.</p></details>
+      <details class="qa"><summary>When does my page go live?</summary><p>As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first.</p></details>
       <h3 class="qa-group">For diners</h3>
-      <details class="qa" open><summary>When does FIG open?</summary><p>January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. You can sign up and look around today, on the web at fig-promo.vercel.app/app.</p></details>
+      <details class="qa"><summary>When does FIG open for diners?</summary><p>January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Restaurants are setting up first. <a href="#waitlist">Join the waitlist</a> and tick the box to get an email the day it opens.</p></details>
       <details class="qa"><summary>Is FIG free?</summary><p>Yes, completely. Deals are free to claim and use, and you never pay FIG anything.</p></details>
       <details class="qa"><summary>How do I use a deal?</summary><p>Claim it in the app. It waits in your Voucher tab for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it.</p></details>
       <details class="qa"><summary>Can someone use my screenshot?</summary><p>No. Your code changes every 5 minutes, so only the live code on your phone works.</p></details>
       <details class="qa"><summary>What do I pay?</summary><p>Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything.</p></details>
       <details class="qa"><summary>Do restaurants see my phone number?</summary><p>Never. Chats and takeout orders go through the app and your number stays private.</p></details>
       <details class="qa"><summary>Can I order takeout?</summary><p>Yes. Tap Takeout on a deal that allows it, add what you want, watch it get made, and pick it up. Some restaurants also take takeout at full price: tap Order takeout on their page. FIG doesn&#x27;t deliver.</p></details>
-      <h3 class="qa-group">For restaurants</h3>
-      <details class="qa"><summary>What does FIG cost restaurants?</summary><p>Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe&#x27;s card fee comes off the same payment. FIG Premium is optional, $50 a year.</p></details>
-      <details class="qa"><summary>Do I need new equipment?</summary><p>No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Add staff and their devices in Settings.</p></details>
-      <details class="qa"><summary>When does my page go live?</summary><p>As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first.</p></details>
       </div>
     </div>
   </section>
@@ -349,8 +346,17 @@
   <!-- CLOSING -->
   <section class="section closing-wrap">
     <div class="wrap"><div class="closing reveal">
-      <div><h2 class="h2">Eat out for less, near you.</h2><p>Starting in Markham, Ontario. Expanding to Richmond Hill and Vaughan Mills.</p></div>
-      <div class="closing-side"><div class="closing-btns"><a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/app/sign-up-business">List your restaurant</a></div><div class="closing-qr"><img src="/assets/qr-app.svg" alt="QR code that opens FIG on your phone" width="104" height="104" loading="lazy"><span>On your computer?<br>Scan to open FIG on your phone.</span></div></div>
+      <div><h2 class="h2">Eat out for less, from January 1.</h2><p>Diners join on January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Leave your email to hold your spot.</p></div>
+      <div class="closing-side" id="waitlist">
+        <form class="join" novalidate>
+          <label class="field-pill light"><input aria-label="Email" name="email" type="email" autocomplete="email" placeholder="Your email" required maxlength="254"><button class="btn" type="submit">Join the waitlist</button></label>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="consent light"><input name="consent" type="checkbox">Email me when FIG opens. You can unsubscribe anytime.</label>
+          <p class="form-msg" role="status"></p>
+          <p class="wl-count"></p>
+        </form>
+        <div class="closing-btns"><a class="btn btn-lg btn-line" href="/app/sign-up-business">Own a restaurant? List it free</a></div>
+      </div>
     </div></div>
   </section>
 </main>
@@ -362,7 +368,7 @@
       <div class="foot-brand">
         <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
         <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario. Expanding to Richmond Hill and Vaughan Mills.</p>
-        <div class="badges small"><a class="btn btn-sm" href="/app/">Open FIG on the web</a><span class="soon">App Store and Google Play: coming soon</span></div>
+        <div class="badges small"><a class="btn btn-sm" href="/app/sign-up-business">List your restaurant</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div>
       </div>
       <div class="foot-cols">
         <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
@@ -389,7 +395,6 @@
 </div>
 
 <script src="/js/config.js" defer></script>
-<script src="/js/contact.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="/js/map.js" defer></script>

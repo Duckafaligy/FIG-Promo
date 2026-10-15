@@ -1211,3 +1211,12 @@ details.qa > p { margin: -2px 0 0; }
   .s3 { right: 12%; top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); width: clamp(56px, 14vw, 88px); }
   .s4 { left: 9%; right: auto; top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); width: clamp(56px, 14vw, 88px); }
 }
+
+/* the diner waitlist in the closing band (2026-10-15: restaurants first, diners join January 1, 2027) */
+.closing .join .btn { flex-shrink: 0; }
+.closing .wl-count:empty { display: none; }
+.closing .wl-count { margin-top: 10px; padding-left: 8px; font-size: 15px; font-weight: 700; }
+@media (max-width: 420px) { .closing .join .field-pill { flex-wrap: wrap; padding: 8px; border-radius: 28px; } .closing .join .field-pill input { padding-left: 12px; flex-basis: 100%; } .closing .join .btn { flex: 1; } }
+.closing .form-msg.ok { color: #fff; }
+.closing .form-msg.err { color: #FFD6D8; }
+@media (max-width: 520px) { .signup-btns .btn { flex: 1 1 100%; } }

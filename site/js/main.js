@@ -212,35 +212,35 @@
     if (e.isIntersecting && !stopped && motion) timer = setInterval(() => show((cur + 1) % shots.length), 3500);
   }, { threshold: 0.4 }).observe($(".tablet"));
 
-  // ---------- forms (waitlist: diners and restaurants) ----------
+  // ---------- the diner waitlist (2026-10-15: restaurants first, diners join January 1, 2027) ----------
   const cfg = window.FIG_CONFIG || {};
-  const src = new URLSearchParams(location.search).get("src") || (location.pathname.startsWith("/owners") ? "owners" : "site");
-  $$("form.join").forEach((form) => {
-    const msg = $(".form-msg", form), btn = $("button[type=submit]", form);
+  const rpc = (fn, body) => fetch(`${cfg.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST",
+    headers: { apikey: cfg.supabaseKey, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
+  const wl = $("#waitlist form");
+  if (wl) {
+    const msg = $(".form-msg", wl), btn = $("button[type=submit]", wl), email = wl.elements.email;
     const say = (t, kind) => { msg.textContent = t; msg.className = "form-msg " + (kind || ""); };
-    form.addEventListener("input", (e) => e.target.removeAttribute("aria-invalid"));
-    form.addEventListener("submit", async (ev) => {
+    // the count only shows once it's worth showing
+    rpc("site_mode").then((r) => r.ok && r.json()).then((m) => {
+      if (m && m.waitlist >= 25) $(".wl-count", wl).textContent = `${m.waitlist.toLocaleString("en-CA")} people are already waiting.`;
+    }).catch(() => {});
+    email.addEventListener("input", () => email.removeAttribute("aria-invalid"));
+    wl.addEventListener("submit", async (ev) => {
       ev.preventDefault();
-      if (form.elements.website.value) return; // bots fill the hidden field
-      const role = form.dataset.role;
-      const restaurant = role === "restaurant" ? form.elements.restaurant.value.trim() : null;
-      if (role === "restaurant" && !restaurant) { form.elements.restaurant.setAttribute("aria-invalid", "true"); form.elements.restaurant.focus(); return say("Add your restaurant's name.", "err"); }
-      const who = parseContact(form.elements.contact.value);
-      if (!who) { form.elements.contact.setAttribute("aria-invalid", "true"); form.elements.contact.focus(); return say("Enter an email, or a 10-digit mobile number.", "err"); }
-      if (!cfg.waitlist || !cfg.supabaseUrl || !cfg.supabaseKey) return say("Sign-ups open in the next few days. Check back soon!", "err");
+      if (wl.elements.website.value) return; // bots fill the hidden field
+      if (!email.value.trim() || !email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return say("Enter your email.", "err"); }
       btn.disabled = true; say("");
       try {
-        const r = await fetch(`${cfg.supabaseUrl}/rest/v1/waitlist`, { method: "POST",
-          headers: { apikey: cfg.supabaseKey, "Content-Type": "application/json", Prefer: "return=minimal" },
-          body: JSON.stringify({ role, ...who, restaurant, consent: true, source: src.slice(0, 60) }) });
-        if (!r.ok && r.status !== 409) throw new Error(r.status);
-        form.querySelectorAll("input, button, .consent").forEach((el) => (el.disabled = true));
-        say(role === "restaurant" ? `Thanks! We'll reach out to set up ${restaurant}.` : "You're on the list. We'll message you the day FIG opens in Markham.", "ok");
+        const r = await rpc("join_waitlist", { p_email: email.value.trim(), p_consent: wl.elements.consent.checked });
+        if (!r.ok) throw new Error(await r.text());
+        wl.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
+        say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");
       } catch (e) {
-        btn.disabled = false; say("Something went wrong. Try again in a moment.", "err");
+        btn.disabled = false;
+        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : "Something went wrong. Try again in a moment.", "err");
       }
     });
-  });
+  }
 
   // figpromo.com/owners: the link to open on your phone when you walk into a restaurant
   if (location.pathname.startsWith("/owners")) {

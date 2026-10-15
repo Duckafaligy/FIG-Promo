@@ -14,6 +14,14 @@
   // which screen the shell's skeleton draws until the app is here (+html.tsx), and which tab it lights
   const seg = path.split("/")[1] || "home";
   root.dataset.figPath = auth ? "auth" : { home: "home", map: "map", search: "search", restaurant: "rest", r: "rest", voucher: "tab", saved: "tab", chats: "tab", deals: "tab", profile: "profile", settings: "settings" }[seg] || "other";
+  // while the diner side is closed (2026-10-15) every diner page draws "FIG is opening to restaurants first" (no bar, no dock):
+  // the loading screen draws that too. What FIG said last time is kept here; unknown counts as closed.
+  // ponytail: on the first visit after diners open, one closed skeleton shows before Home; then it's remembered.
+  let open = null; try { open = localStorage.getItem("fig.dinersOpen"); } catch {}
+  if (open !== "1" && (/^(home|map|search|rest|tab|profile|settings)$/.test(root.dataset.figPath) || seg === "setup")) root.dataset.figPath = "closed";
+  addEventListener("load", () => fetch("https://frpoykqldlsysitiqnhz.supabase.co/rest/v1/rpc/site_mode", { method: "POST",
+    headers: { apikey: "sb_publishable_3YFOf3yQj010ppmatdj5-w_-H45r2se", "Content-Type": "application/json" }, body: "{}" })
+    .then((r) => r.json()).then((m) => { try { localStorage.setItem("fig.dinersOpen", m.diners_open ? "1" : "0"); } catch {} }).catch(() => {}));
   root.dataset.figTab = seg === "deals" ? "voucher" : seg;
   // repeat visits open from the phone's copy, and work offline (/sw.js); after the page has loaded, never competing with it
   // (the first time, this page loaded before the worker: it's told what to save, so this page opens offline too)

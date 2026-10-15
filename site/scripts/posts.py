@@ -354,10 +354,10 @@ POSTS = [
               ("Can I order takeout without a deal?", "Some restaurants take takeout at full price: tap Order takeout on their page."),
               ("Does the restaurant get my phone number?", "No. Restaurants see your first name and last initial, and talk to you through FIG's chat.")]),
 
-    # ---------------------------------------------------------------- new posts, queued for the user's review (one a day at
-    # 12:00 Toronto time; EDT is -04:00 until November 1). Each publishes on its own when pages.py runs after publish_at.
+    # ---------------------------------------------------------------- the first batch of new posts (user 2026-10-14: "just post it";
+    # the review gate is gone: a post without publish_at is live, and the admin page can hide one later)
 
-    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-16", publish_at="2026-10-16T12:00:00-04:00", topic="For diners",
+    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", topic="For diners",
          dek="Everything that happens between seeing a deal and paying the bill: claiming, the Voucher tab, the code at the counter, takeout, what happens when a deal ends, and rating the visit.",
          keywords="how restaurant deals work, claim restaurant deal, restaurant deal app how to, FIG voucher, QR code restaurant deal",
          points=["Find a deal on Home, the map or a restaurant's page, and tap Claim. It waits in your Voucher tab.",
@@ -394,7 +394,7 @@ POSTS = [
               ("Is FIG free?", "Yes, for every diner: no subscription, no fees and no ads.")]),
 
     # StatCan 2023 margin 3.6%; food cost 28-32% (Resy): sources at the top
-    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-17", publish_at="2026-10-17T12:00:00-04:00", topic="For restaurants",
+    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", topic="For restaurants",
          dek="A slow-hour deal makes money when it fills seats that would otherwise be empty and covers its food cost. Here's the arithmetic: contribution per plate, the worst case, the cap, and how to tell new diners from regulars who'd have come anyway.",
          keywords="happy hour deal restaurant profit, slow hour promotion, restaurant deal math, restaurant discount profitability, off-peak restaurant deals",
          points=["In an hour that would be empty, a deal only needs to cover its food cost to add money: rent and wages are paid either way.",
@@ -434,7 +434,7 @@ POSTS = [
               ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners is free, with no fee per diner.")]),
 
     # CRA: a store coupon reduces the price before GST/HST (RC4022): source at the top
-    dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-18", publish_at="2026-10-18T12:00:00-04:00", topic="For restaurants",
+    dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-14", topic="For restaurants",
          dek="The four kinds of restaurant deal, side by side: what each costs you, what it feels like to a diner, and when to use it. With worked examples on a $14 dish.",
          keywords="percent off vs dollar off, 2 for 1 deal restaurant, BOGO restaurant, restaurant promotion ideas, restaurant deal pricing",
          points=["% off scales with the bill: gentle on small orders, generous on big ones. Cap it for takeout.",
@@ -481,7 +481,7 @@ POSTS = [
 
     # Stripe 2.9% + CA$0.30: source at the top. HST number format 123456789 RT 0001 (9-digit BN, RT = GST/HST program, 4-digit
     #   reference): https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4022/general-information-gst-hst-registrants.html
-    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-19", publish_at="2026-10-19T12:00:00-04:00", topic="For restaurants",
+    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", topic="For restaurants",
          dek="A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply.",
          keywords="FIG restaurant setup, restaurant menu app, set up takeout restaurant, Stripe payouts restaurant, HST number restaurant app",
          points=["Sign up as a business, then follow the Get FIG ready checklist on your dashboard: it ticks itself as you go.",
@@ -525,7 +525,7 @@ POSTS = [
     #   https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/account-register-voluntarily.html
     # Ontario HST 13% and the $4 prepared food point-of-sale rebate (GI-064); coupons before tax (RC4022); BN format (RC4022):
     #   sources at the top
-    dict(slug="hst-registration-small-restaurants-ontario", screen="tdash", title="HST registration for small restaurants in Ontario: the $30,000 rule explained", date="2026-10-20", publish_at="2026-10-20T12:00:00-04:00", topic="For restaurants",
+    dict(slug="hst-registration-small-restaurants-ontario", screen="tdash", title="HST registration for small restaurants in Ontario: the $30,000 rule explained", date="2026-10-14", topic="For restaurants",
          dek="When a small Ontario restaurant has to register for HST, what changes when it does, and how HST works on deals and takeout. Plain-language, with the Canada Revenue Agency's own rules linked.",
          keywords="HST registration small business Ontario, small supplier $30,000, restaurant HST Ontario, GST/HST number restaurant, input tax credits restaurant",
          points=["You're a small supplier while your taxable sales stay at $30,000 or less over four consecutive calendar quarters. Above that, you must register.",
@@ -565,7 +565,7 @@ POSTS = [
               ("Do I need an HST number to use FIG?", "Only for takeout, which diners pay for in the app. Deals and scans work without one."),
               ("Is this tax advice?", "No. It's general information with links to the CRA. Talk to an accountant about your own situation.")]),
 
-    dict(slug="group-dining-deals", screen="chat", title="Eating out as a group: picking a place, deals and splitting the bill", date="2026-10-21", publish_at="2026-10-21T12:00:00-04:00", topic="For diners",
+    dict(slug="group-dining-deals", screen="chat", title="Eating out as a group: picking a place, deals and splitting the bill", date="2026-10-14", topic="For diners",
          dek="How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic.",
          keywords="group dining deals, where to eat with friends, split the bill, group restaurant Markham, 2 for 1 group deal",
          points=["Share one deal to the group chat instead of asking an open question: a concrete option ends the debate.",
@@ -596,7 +596,7 @@ POSTS = [
               ("When is the best time to eat out as a group?", "Quiet hours, like early weeknight dinners: more room, an easier kitchen, and more deals."),
               ("Do deals apply to the whole table?", "It depends on the deal: some are on specific dishes, some on the whole order. Check the deal, or message the restaurant before you go.")]),
 
-    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-22", publish_at="2026-10-22T12:00:00-04:00", topic="For diners",
+    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-14", topic="For diners",
          dek="Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute.",
          keywords="restaurant reviews, trustworthy restaurant reviews, how to read restaurant reviews, verified reviews restaurant app, FIG reviews",
          points=["Only diners whose visit was scanned can review a restaurant, so every review comes from a real visit.",

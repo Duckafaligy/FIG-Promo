@@ -171,7 +171,7 @@ function changesTable() {
 
 const VIEWS = {
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
-    '<div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
+    '<div id="launchbox">' + launchHtml() + '</div><div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
     stat(D.counts.ordersOpen, "Orders open now") + stat(D.counts.support, "Messages to answer", D.counts.support ? "red" : "") + stat(D.counts.reports, "Open reports", D.counts.reports ? "red" : "") + "</div>" +
     "<h2>Latest restaurants</h2>" + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
   restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Every restaurant on FIG, newest first. A restaurant goes live when it finishes setup.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
@@ -278,8 +278,23 @@ function dinersHtml() {
     '<div style="display:flex;gap:16px;margin:6px 0 14px;flex-wrap:wrap"><button class="link" id="din-copy">Copy the emails that agreed</button><button class="link" id="din-csv">Download as a table (CSV)</button></div>' +
     table(["Email", "School", "May email", "Joined"], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""), w.consent ? '<span class="pill g">Yes</span>' : '<span class="pill">No</span>', ago(w.joined_at)]), "Nobody yet. The list fills once the app shows the waitlist form.");
 }
+// the launch switch on the Overview: the same setting as the Diners tab (settings.diners_open), one click away from the front page
+function launchHtml() {
+  if (!DIN || DIN.error) return "";
+  const n = (DIN.waitlist || []).length;
+  return DIN.open
+    ? '<div class="hint" style="margin:0 0 18px"><b>FIG is OPEN to everyone.</b> Diners can sign up, browse, claim and order. <button class="link red" id="lnch-close" style="margin-left:12px">Close it to diners</button></div>'
+    : '<div class="hint r" style="margin:0 0 18px"><b>Launch switch: diners are locked out.</b> Only restaurants can use FIG; ' + n + (n === 1 ? " person is" : " people are") + ' on the diner waitlist. <button class="btn" id="lnch-open" style="height:40px;margin-left:12px">Open FIG to everyone</button></div>';
+}
+function launchWire() {
+  const set = async (open, ask) => { if (!confirm(ask)) return; const r = await api("diners-set", { open }); if (r.error) alert(r.error); await dinersLoad(); };
+  const o = $("#lnch-open"), c = $("#lnch-close");
+  if (o) o.onclick = () => set(true, "Open FIG to everyone now? Diners can then sign up, browse, claim deals and order right away. Do this only at launch. You can close it again here.");
+  if (c) c.onclick = () => set(false, "Close the diner side? Diners will see 'opening to restaurants first' and cannot claim or order. Restaurants are not affected.");
+}
 async function dinersLoad() {
   DIN = await api("diners-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
+  if (view === "overview" && $("#launchbox")) { $("#launchbox").innerHTML = launchHtml(); launchWire(); }
   if (view === "diners" && $("#dinerbox")) { $("#dinerbox").innerHTML = dinersHtml(); dinersWire(); }
 }
 function dinersWire() {
@@ -356,7 +371,7 @@ function render() {
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
   if (view === "blog" && D.connected) blogLoad();
-  if (view === "diners" && D.connected) dinersLoad();
+  if ((view === "diners" || view === "overview") && D.connected) dinersLoad();
   if (view === "prospects" && D.connected) prosLoad();
   if (view === "ads" && D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };

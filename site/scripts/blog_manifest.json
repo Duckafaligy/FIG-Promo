@@ -1,6 +1,46 @@
 {
- "generated": "2026-10-14",
+ "generated": "2026-10-19",
  "posts": [
+  {
+   "slug": "eating-out-dietary-needs-allergies-markham",
+   "title": "Eating out with dietary needs or allergies: filters, messages and what to ask",
+   "topic": "For diners",
+   "date": "2026-10-19",
+   "publish_at": "2026-10-19T12:00:00-04:00",
+   "status": "queued",
+   "words": 1085,
+   "dek": "Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, what to ask a restaurant before you go, and how to message them from FIG without sharing your phone number."
+  },
+  {
+   "slug": "train-staff-honour-fig-deal",
+   "title": "Train your staff to honour a FIG deal in 10 minutes",
+   "topic": "For restaurants",
+   "date": "2026-10-18",
+   "publish_at": "2026-10-18T12:00:00-04:00",
+   "status": "queued",
+   "words": 1076,
+   "dek": "A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet."
+  },
+  {
+   "slug": "compare-restaurant-deals-worth-it",
+   "title": "Is it a good deal? How to compare restaurant deals",
+   "topic": "For diners",
+   "date": "2026-10-17",
+   "publish_at": "2026-10-17T12:00:00-04:00",
+   "status": "queued",
+   "words": 1195,
+   "dek": "2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway."
+  },
+  {
+   "slug": "takeout-order-math-what-you-keep",
+   "title": "Takeout order math: what a restaurant keeps on a $12, $20, $40 or $60 order",
+   "topic": "For restaurants",
+   "date": "2026-10-16",
+   "publish_at": "2026-10-16T12:00:00-04:00",
+   "status": "queued",
+   "words": 1118,
+   "dek": "On FIG, takeout paid in the app costs 5% of the food plus Stripe's card fee. The $0.30 part of that fee is fixed, so small orders cost a bigger share. Here are the numbers on four order sizes, and what to do about them."
+  },
   {
    "slug": "how-restaurant-deals-work",
    "title": "How restaurant deals work on FIG, from claim to counter",

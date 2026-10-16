@@ -37,7 +37,7 @@
    "topic": "For restaurants",
    "date": "2026-10-16",
    "publish_at": "2026-10-16T12:00:00-04:00",
-   "status": "queued",
+   "status": "live",
    "words": 1118,
    "dek": "On FIG, takeout paid in the app costs 5% of the food plus Stripe's card fee. The $0.30 part of that fee is fixed, so small orders cost a bigger share. Here are the numbers on four order sizes, and what to do about them."
   },

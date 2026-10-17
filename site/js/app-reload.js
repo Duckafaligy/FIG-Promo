@@ -3,7 +3,7 @@
 // sessionStorage stops a loop; it clears after a minute of running fine, so the next deploy can reload again.
 (function () {
   var KEY = "fig.reloadedForDeploy";
-  var STALE = /Requiring unknown module|Loading chunk|ChunkLoadError|dynamically imported module|Unexpected token '<'/;
+  var STALE = /Requiring unknown module|Loading chunk|ChunkLoadError|dynamically imported module/;
   function reloadOnce() {
     try {
       if (sessionStorage.getItem(KEY)) return;
@@ -16,7 +16,8 @@
   addEventListener("error", function (e) {
     var t = e.target;
     if (t && t.tagName === "SCRIPT" && /\/_expo\//.test(t.src || "")) reloadOnce();
-    else if (STALE.test(e.message || "")) reloadOnce();
+    // an old chunk served as HTML fails to parse; only for the script errors, never a fetch that got an HTML page back
+    else if (STALE.test(e.message || "") || (/Unexpected token '<'/.test(e.message || "") && /\/_expo\//.test(e.filename || ""))) reloadOnce();
   }, true);
   addEventListener("unhandledrejection", function (e) {
     var r = e.reason;

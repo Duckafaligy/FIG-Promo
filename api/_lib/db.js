@@ -154,7 +154,7 @@ async function prospects(f) {
   return (await rest("rpc/prospect_list", { method: "POST", body: JSON.stringify(body) })).rows;
 }
 async function setProspect(id, change) {
-  if (!/^osm:[A-Za-z0-9]{1,40}$/.test(String(id))) throw new Error("bad place");
+  if (!/^(osm|fsq|ovt):[A-Za-z0-9_-]{1,60}$/.test(String(id))) throw new Error("bad place"); // all three map sources (FIX-LIST #27)
   const body = { p_place: id };
   if ("short" in change) body.p_short = !!change.short;
   if ("status" in change) { if (!PSTAT.includes(change.status)) throw new Error("bad status"); body.p_status = change.status; }

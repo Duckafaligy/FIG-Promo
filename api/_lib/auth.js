@@ -38,7 +38,8 @@ async function dbWrite(ip_, fails) {
   } catch { /* the cookie and memory still count */ }
 }
 
-const ip = (req) => String(req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "?").split(",")[0].trim();
+// the address Vercel saw (x-real-ip / x-vercel-forwarded-for are set by Vercel; a caller can prepend anything to x-forwarded-for) (FIX-LIST #28)
+const ip = (req) => String(req.headers["x-real-ip"] || req.headers["x-vercel-forwarded-for"] || req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "?").split(",")[0].trim();
 const secret = () => process.env.SESSION_SECRET || "";
 
 function sign(value) {

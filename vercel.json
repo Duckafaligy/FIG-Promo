@@ -227,6 +227,16 @@
   },
   "redirects": [
     {
+      "source": "/premium-on",
+      "destination": "/#owners",
+      "permanent": false
+    },
+    {
+      "source": "/premium-on/",
+      "destination": "/#owners",
+      "permanent": false
+    },
+    {
       "source": "/ads",
       "destination": "/#owners",
       "permanent": false

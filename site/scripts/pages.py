@@ -221,7 +221,7 @@ def qa_list(qs, open_first=0):
 
 
 def back_to_fig(title, lead, note, second, icon="✓", cls=""):
-    """Where Stripe sends people back (and Ads off): one card over the faded map, Open FIG and one more link."""
+    """Where Stripe sends people back: one card over the faded map, Open FIG and one more link."""
     return f'''<section class="st"><div class="st-card">
 <div class="st-badge{" " + cls if cls else ""}" aria-hidden="true">{icon}</div>
 <h1 class="st-h1">{title}</h1><p class="st-lead">{lead}</p>{f'<p class="st-note">{note}</p>' if note else ""}

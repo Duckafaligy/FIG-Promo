@@ -327,7 +327,7 @@ HELP = [
     ]),
     ("restaurants", "For restaurants", [
         ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment."),
-        ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Add staff and their devices in Settings."),
+        ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
         ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),

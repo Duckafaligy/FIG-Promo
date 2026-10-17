@@ -1,13 +1,13 @@
 # FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
@@ -25,7 +25,7 @@
 - [HST registration for small restaurants in Ontario: the $30,000 rule explained](https://fig-promo.vercel.app/blog/hst-registration-small-restaurants-ontario): When a small Ontario restaurant has to register for HST, what changes when it does, and how HST works on deals and takeout. Plain-language, with the Canada Revenue Agency's own rules linked.
 - [Eating out as a group: picking a place, deals and splitting the bill](https://fig-promo.vercel.app/blog/group-dining-deals): How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic.
 - [How to read a restaurant's reviews on FIG](https://fig-promo.vercel.app/blog/how-to-read-restaurant-reviews): Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute.
-- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals, scans and chats are free on FIG, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app.
+- [FIG is free for restaurants. Here's how we make money](https://fig-promo.vercel.app/blog/how-fig-makes-money): Listing, deals and scans are free on FIG, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.
 - [How to find the best restaurant deals in Markham](https://fig-promo.vercel.app/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them.
 - [Delivery app commissions vs FIG: what restaurants keep](https://fig-promo.vercel.app/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges nothing per dine-in diner and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.
 - [7 ways to fill slow hours at your restaurant](https://fig-promo.vercel.app/blog/fill-slow-hours-restaurant): Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away.

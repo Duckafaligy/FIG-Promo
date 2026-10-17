@@ -3,13 +3,13 @@
  "posts": [
   {
    "slug": "eating-out-dietary-needs-allergies-markham",
-   "title": "Eating out with dietary needs or allergies: filters, messages and what to ask",
+   "title": "Eating out with dietary needs or allergies: filters, calling ahead and what to ask",
    "topic": "For diners",
    "date": "2026-10-19",
    "publish_at": "2026-10-19T12:00:00-04:00",
    "status": "queued",
-   "words": 1085,
-   "dek": "Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, what to ask a restaurant before you go, and how to message them from FIG without sharing your phone number."
+   "words": 1019,
+   "dek": "Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order."
   },
   {
    "slug": "train-staff-honour-fig-deal",
@@ -18,7 +18,7 @@
    "date": "2026-10-18",
    "publish_at": "2026-10-18T12:00:00-04:00",
    "status": "queued",
-   "words": 1076,
+   "words": 1060,
    "dek": "A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet."
   },
   {
@@ -28,7 +28,7 @@
    "date": "2026-10-17",
    "publish_at": "2026-10-17T12:00:00-04:00",
    "status": "live",
-   "words": 1195,
+   "words": 1181,
    "dek": "2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway."
   },
   {
@@ -48,7 +48,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 588,
+   "words": 569,
    "dek": "Everything that happens between seeing a deal and paying the bill: claiming, the Voucher tab, the code at the counter, takeout, what happens when a deal ends, and rating the visit."
   },
   {
@@ -78,7 +78,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 746,
+   "words": 694,
    "dek": "A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply."
   },
   {
@@ -98,7 +98,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 537,
+   "words": 491,
    "dek": "How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic."
   },
   {
@@ -118,8 +118,8 @@
    "date": "2026-10-07",
    "publish_at": null,
    "status": "live",
-   "words": 832,
-   "dek": "Listing, deals, scans and chats are free on FIG, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year) and 5% of the food on takeout orders diners pay for in the app."
+   "words": 593,
+   "dek": "Listing, deals and scans are free on FIG, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app."
   },
   {
    "slug": "restaurant-deals-markham",
@@ -138,7 +138,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 836,
+   "words": 833,
    "dek": "Delivery apps charge restaurants a percentage of every order. FIG charges nothing per dine-in diner and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order."
   },
   {
@@ -148,7 +148,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 895,
+   "words": 866,
    "dek": "Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away."
   },
   {
@@ -158,7 +158,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 760,
+   "words": 727,
    "dek": "How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free."
   },
   {
@@ -168,7 +168,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 821,
+   "words": 790,
    "dek": "Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends."
   },
   {
@@ -178,7 +178,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 818,
+   "words": 779,
    "dek": "Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late."
   },
   {
@@ -188,7 +188,7 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 898,
+   "words": 830,
    "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, free for restaurants to post deals, and no cut of a dine-in bill."
   }
  ]

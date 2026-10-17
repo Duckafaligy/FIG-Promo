@@ -321,12 +321,12 @@ HELP = [
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything."),
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
-        ("Do restaurants see my phone number?", "Never. Chats and takeout orders go through the app and your number stays private."),
+        ("Do restaurants see my phone number?", "Never. Takeout orders go through the app and your number stays private."),
         ("Can I order takeout?", "Yes. Tap Takeout on a deal that allows it, add what you want, watch it get made, and pick it up. Some restaurants also take takeout at full price: tap Order takeout on their page. FIG doesn't deliver."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals, scans and chats are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. FIG Premium is optional, $50 a year."),
+        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Add staff and their devices in Settings."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
@@ -584,14 +584,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by the optional FIG Premium ($50 a year: unlimited locations, deal announcements every 2 hours, area insights, menu from a photo) and 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, chats, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
+- Restaurants: free (listing, unlimited everyday and flash deals, scans, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number

@@ -162,7 +162,7 @@
     "paragraphs": [
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
-     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits. Your saved places, claims, stamps and reviews can't come back. If you don't tick it, the records can't be linked to you again."
+     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims, stamps and reviews can't come back. If you don't tick it, the records can't be linked to you again."
     ]
    },
    {
@@ -204,7 +204,7 @@
    "FIG is free: joining, your page, deals and scans. No commission on the bill.",
    "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
    "Honour your live deals exactly as written.",
-   "Only you and the staff you invite can verify scans."
+   "Only you, the staff you invite, or a diner scanning your counter code (when you switch it on) can verify a deal."
   ],
   "sections": [
    {
@@ -237,7 +237,7 @@
    {
     "heading": "5. Wrong scans and disputes",
     "paragraphs": [
-     "You can report a scan you think is wrong within 14 days. We review it, and if it was a mistake we remove it."
+     "If you think a scan is wrong, message us within 14 days. We review it, and if it was a mistake we remove it."
     ]
    },
    {
@@ -275,7 +275,7 @@
    {
     "heading": "11. Changes and law",
     "paragraphs": [
-     "We'll give you at least 30 days' notice before changing the price. A new price applies from your next renewal. These terms follow Ontario law, and disputes go to the courts of Ontario."
+     "If we ever charge for something, we'll give you at least 30 days' notice first. These terms follow Ontario law, and disputes go to the courts of Ontario."
     ]
    }
   ],

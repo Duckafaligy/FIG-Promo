@@ -137,7 +137,7 @@
    {
     "heading": "5. What restaurants see",
     "paragraphs": [
-     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email, location or history. They never see your mobile number, not even for a takeout order: they reach you through a notification in FIG. Reviews you post are public and show your first name and last initial."
+     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email or location. When you order takeout, they see how many of your takeout orders in the last 12 months you picked up or missed, nothing else. They never see your mobile number, not even for a takeout order: they reach you through a notification in FIG. Reviews you post are public and show your first name and last initial."
     ]
    },
    {

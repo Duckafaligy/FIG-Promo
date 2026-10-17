@@ -71,6 +71,7 @@
   // ---------- chats: a diner and the restaurant texting, 3-5 s per message ----------
   (() => {
     const body = $("#cp-body"), input = $("#cp-input"), send = $("#cp-send");
+    if (!body) return; // the chat section is hidden for launch (2026-10-17)
     const PH = "Message Golden Lantern";
     const CONVO = [
       ["d", "Hi! Is the 2-for-1 dim sum still on tonight?"],

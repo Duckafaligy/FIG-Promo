@@ -279,10 +279,12 @@ function modeHtml() {
   if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch switch could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
   const n = (DIN.waitlist || []).length, inNow = DIN.cap ? Math.min(n, DIN.cap) : n;
   const say = DIN.mode === "off" ? "<b>Closed to diners.</b> Only restaurants can use FIG; diners join the waitlist. " + n + " waiting."
-    : DIN.mode === "waitlist" ? "<b>Founding members only.</b> " + inNow + " of " + n + " on the waitlist can get in" + (DIN.cap ? " (the first " + DIN.cap + ")" : "") + ", plus restaurants. Everyone else sees the waitlist."
+    : DIN.mode === "waitlist" ? "<b>Founding members only.</b> People on the waitlist" + (DIN.until ? " who joined before " + esc(new Date(DIN.until).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })) : "") + (DIN.cap ? " (the first " + DIN.cap + ")" : "") + " can get in, plus restaurants. Everyone else sees the waitlist."
     : "<b>Open to everyone.</b> Anyone can sign up, browse, claim and order.";
   const btn = (m) => '<button class="' + (DIN.mode === m[0] ? "btn" : "link") + '" data-mode="' + m[0] + '" style="height:40px' + (DIN.mode === m[0] ? "" : ";margin:0 6px") + '">' + m[1] + "</button>";
-  const cap = '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px"><span>Founding members: only the first</span><input class="f" id="cap-n" type="number" min="1" placeholder="all" value="' + (DIN.cap || "") + '" style="width:110px;height:40px"><span>on the waitlist</span><button class="link" id="cap-save">Save</button></div>';
+  const cap = '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px"><span>Founding members: only the first</span><input class="f" id="cap-n" type="number" min="1" placeholder="all" value="' + (DIN.cap || "") + '" style="width:110px;height:40px"><span>on the waitlist</span><button class="link" id="cap-save">Save</button></div>' +
+    '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px"><span>' + (DIN.until ? "The founding list closed " + esc(new Date(DIN.until).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })) + "." : "The founding list closes when you switch to Founding members.") + '</span>' +
+    '<button class="link" id="until-now">' + (DIN.until ? "Close it again now (let in who joined since)" : "Close the list now") + '</button>' + (DIN.until ? '<button class="link" id="until-clear">Reopen the list</button>' : "") + "</div>";
   return '<div class="hint' + (DIN.mode === "on" ? "" : " r") + '" style="margin:0 0 18px"><div style="margin-bottom:10px">' + say + '</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">' + MODES.map(btn).join("") + "</div>" + cap + "</div>";
 }
 function modeWire() {
@@ -292,6 +294,8 @@ function modeWire() {
     if (!confirm(MODE_ASK[m])) return;
     const r = await api("diners-set", { mode: m }); if (r.error) alert(r.error); await dinersLoad();
   });
+  const un = $("#until-now"); if (un) un.onclick = async () => { if (!confirm("Close the founding list now? Everyone on the waitlist so far is a founding member; people who join later wait.")) return; const r = await api("founding-until", { until: "now" }); if (r.error) alert(r.error); await dinersLoad(); };
+  const uc = $("#until-clear"); if (uc) uc.onclick = async () => { if (!confirm("Reopen the founding list? Then anyone who joins the waitlist (or makes an account) gets in while you're in Founding members mode.")) return; const r = await api("founding-until", { until: null }); if (r.error) alert(r.error); await dinersLoad(); };
   const cs = $("#cap-save"); if (cs) cs.onclick = async () => {
     const v = ($("#cap-n") || {}).value || "";
     const r = await api("founding-cap", { cap: v === "" ? null : Number(v) }); if (r.error) alert(r.error); await dinersLoad();

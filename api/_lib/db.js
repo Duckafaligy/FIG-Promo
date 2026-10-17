@@ -134,18 +134,28 @@ async function setBlog(slug, change) {
 // the diner side switch (settings key diners_open: 'off' = restaurants only, 'waitlist' = founding members only, 'on' or no row = everyone),
 // the founding cap (settings key founding_cap: only the first N on the waitlist; no row = all of it) and the diner waitlist (closed to the public)
 async function dinersState() {
-  const flags = (await rest("settings?select=key,value&key=in.(diners_open,founding_cap)")).rows;
+  const flags = (await rest("settings?select=key,value&key=in.(diners_open,founding_cap,founding_until)")).rows;
   const v = (k) => (flags.find((f) => f.key === k) || {}).value;
   const mode = v("diners_open") === "off" ? "off" : v("diners_open") === "waitlist" ? "waitlist" : "on";
   const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at&order=joined_at.desc&limit=5000")).rows;
   const accounts = (await rest("profiles?select=id&role=eq.diner&admin=eq.false&limit=5000")).rows.length;
-  return { mode, open: mode === "on", cap: v("founding_cap") ? Number(v("founding_cap")) : null, waitlist: wl, accounts };
+  return { mode, open: mode === "on", cap: v("founding_cap") ? Number(v("founding_cap")) : null, until: v("founding_until") || null, waitlist: wl, accounts };
 }
 async function setDinersMode(mode) {
   if (!["off", "waitlist", "on"].includes(mode)) throw new Error("bad mode");
   await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "diners_open", value: mode }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  // opening to founding members closes the list (the first time): who joined before now gets in, later sign-ups wait
+  if (mode === "waitlist" && !(await rest("settings?select=value&key=eq.founding_until")).rows.length) await setFoundingUntil("now");
   console.log("admin: diner side ->", mode);
   return { mode, open: mode === "on" };
+}
+// when the founding list closes: "now", or null to reopen it (everyone on the list, whenever they joined)
+async function setFoundingUntil(when) {
+  if (when === null) { await rest("settings?key=eq.founding_until", { method: "DELETE", headers: { Prefer: "return=minimal" } }); return { until: null }; }
+  if (when !== "now") throw new Error("bad until");
+  const at = new Date().toISOString();
+  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "founding_until", value: at }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  return { until: at };
 }
 async function setFoundingCap(cap) {
   if (cap === null || cap === "" || cap === undefined) {
@@ -176,4 +186,4 @@ async function setProspect(id, change) {
   return { saved: true };
 }
 
-module.exports = { prospects, setProspect, dinersState, setDinersMode, setFoundingCap, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

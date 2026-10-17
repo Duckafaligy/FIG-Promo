@@ -131,7 +131,6 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="messages">Messages <span class="badge" id="n-messages">–</span></button>
       <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
       <button data-v="diners">Diners</button>
-      <button data-v="ads">Ads <span class="badge" id="n-ads">–</span></button>
       <button data-v="prospects">Prospects <span class="badge" id="n-prospects">–</span></button>
       <button data-v="blog">Blog <span class="badge" id="n-blog">–</span></button>
     </div>
@@ -280,7 +279,8 @@ function dinersHtml() {
 }
 // the launch switch on the Overview: the same setting as the Diners tab (settings.diners_open), one click away from the front page
 function launchHtml() {
-  if (!DIN || DIN.error) return "";
+  if (!DIN) return "";
+  if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch switch could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
   const n = (DIN.waitlist || []).length;
   return DIN.open
     ? '<div class="hint" style="margin:0 0 18px"><b>FIG is OPEN to everyone.</b> Diners can sign up, browse, claim and order. <button class="link red" id="lnch-close" style="margin-left:12px">Close it to diners</button></div>'
@@ -288,7 +288,8 @@ function launchHtml() {
 }
 function launchWire() {
   const set = async (open, ask) => { if (!confirm(ask)) return; const r = await api("diners-set", { open }); if (r.error) alert(r.error); await dinersLoad(); };
-  const o = $("#lnch-open"), c = $("#lnch-close");
+  const o = $("#lnch-open"), c = $("#lnch-close"), t = $("#lnch-retry");
+  if (t) t.onclick = () => dinersLoad();
   if (o) o.onclick = () => set(true, "Open FIG to everyone now? Diners can then sign up, browse, claim deals and order right away. Do this only at launch. You can close it again here.");
   if (c) c.onclick = () => set(false, "Close the diner side? Diners will see 'opening to restaurants first' and cannot claim or order. Restaurants are not affected.");
 }
@@ -385,7 +386,7 @@ function render() {
 }
 async function load() {
   D = await api("data");
-  const set = (id, n) => { $(id).textContent = n == null ? "–" : n; };
+  const set = (id, n) => { const el = $(id); if (el) el.textContent = n == null ? "–" : n; };
   if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-messages", D.counts.support); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
 }
 document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view

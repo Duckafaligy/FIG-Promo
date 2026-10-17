@@ -217,6 +217,11 @@
   const cfg = window.FIG_CONFIG || {};
   const rpc = (fn, body) => fetch(`${cfg.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST",
     headers: { apikey: cfg.supabaseKey, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
+  // a creator's link (?src=name, 2026-10-17): kept for this tab so the waitlist form can say who sent them (first one wins)
+  try {
+    const src = (new URLSearchParams(location.search).get("src") || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+    if (src && !sessionStorage.getItem("fig.src")) sessionStorage.setItem("fig.src", src);
+  } catch {}
   const wl = $("#waitlist form");
   if (wl) {
     const msg = $(".form-msg", wl), btn = $("button[type=submit]", wl), email = wl.elements.email;
@@ -232,7 +237,8 @@
       if (!email.value.trim() || !email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return say("Enter your email.", "err"); }
       btn.disabled = true; say("");
       try {
-        const r = await rpc("join_waitlist", { p_email: email.value.trim(), p_consent: wl.elements.consent.checked });
+        let src = ""; try { src = sessionStorage.getItem("fig.src") || ""; } catch {}
+        const r = await rpc("join_waitlist", { p_email: email.value.trim(), p_consent: wl.elements.consent.checked, ...(src ? { p_source: src } : {}) });
         if (!r.ok) throw new Error(await r.text());
         wl.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
         say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");

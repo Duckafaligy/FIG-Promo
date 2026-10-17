@@ -6,6 +6,11 @@
   const T = { fr: "Retour à FIG", "zh-Hans": "返回 FIG", "zh-Hant": "返回 FIG" };
   const l = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
   const root = document.documentElement;
+  // a creator's link (?src=name, 2026-10-17): kept for this tab so the waitlist form can say who sent them (first one wins)
+  try {
+    const src = (new URLSearchParams(location.search).get("src") || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+    if (src && !sessionStorage.getItem("fig.src")) sessionStorage.setItem("fig.src", src);
+  } catch {}
   // the signed-out pages start in the shell's "auth" look (the app sets the same once it knows who's here), so the screen
   // doesn't drop 56 px under the "Back to FIG" bar after it loads (CLS 0.066 on /sign-in at phone width)
   const path = location.pathname.replace(/^\/app/, "");

@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
   <title>The FIG blog</title><link>https://fig-promo.vercel.app/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+  <item><title>Is it a good deal? How to compare restaurant deals</title><link>https://fig-promo.vercel.app/blog/compare-restaurant-deals-worth-it</link><guid>https://fig-promo.vercel.app/blog/compare-restaurant-deals-worth-it</guid>
+    <pubDate>Sat, 17 Oct 2026 12:00:00 -0400</pubDate><category>For diners</category><description>2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway.</description></item>
   <item><title>Takeout order math: what a restaurant keeps on a $12, $20, $40 or $60 order</title><link>https://fig-promo.vercel.app/blog/takeout-order-math-what-you-keep</link><guid>https://fig-promo.vercel.app/blog/takeout-order-math-what-you-keep</guid>
     <pubDate>Fri, 16 Oct 2026 12:00:00 -0400</pubDate><category>For restaurants</category><description>On FIG, takeout paid in the app costs 5% of the food plus Stripe&#x27;s card fee. The $0.30 part of that fee is fixed, so small orders cost a bigger share. Here are the numbers on four order sizes, and what to do about them.</description></item>
   <item><title>How restaurant deals work on FIG, from claim to counter</title><link>https://fig-promo.vercel.app/blog/how-restaurant-deals-work</link><guid>https://fig-promo.vercel.app/blog/how-restaurant-deals-work</guid>

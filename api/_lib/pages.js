@@ -266,32 +266,49 @@ function blogWire() {
 
 // ---- Diners: the switch that opens or closes the diner side, and the waitlist (table diner_waitlist through /api/admin-api)
 let DIN = null;
+// the launch switch, three ways (the user, 2026-10-17): Closed (restaurants only) / Founding members (the waitlist, optionally the first N, and
+// restaurants) / Everyone. The same control on the Overview and the Diners tab.
+const MODES = [["off", "Closed"], ["waitlist", "Founding members"], ["on", "Everyone"]];
+const MODE_ASK = {
+  off: "Close the diner side? Diners see 'opening to restaurants first' and join the waitlist. Restaurants aren't affected.",
+  waitlist: "Open FIG to founding members only? People on the waitlist (and restaurants) can sign in and use everything. Everyone else keeps seeing the waitlist.",
+  on: "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order right away. Do this only at the public launch.",
+};
+function modeHtml() {
+  if (!DIN) return "";
+  if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch switch could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
+  const n = (DIN.waitlist || []).length, inNow = DIN.cap ? Math.min(n, DIN.cap) : n;
+  const say = DIN.mode === "off" ? "<b>Closed to diners.</b> Only restaurants can use FIG; diners join the waitlist. " + n + " waiting."
+    : DIN.mode === "waitlist" ? "<b>Founding members only.</b> " + inNow + " of " + n + " on the waitlist can get in" + (DIN.cap ? " (the first " + DIN.cap + ")" : "") + ", plus restaurants. Everyone else sees the waitlist."
+    : "<b>Open to everyone.</b> Anyone can sign up, browse, claim and order.";
+  const btn = (m) => '<button class="' + (DIN.mode === m[0] ? "btn" : "link") + '" data-mode="' + m[0] + '" style="height:40px' + (DIN.mode === m[0] ? "" : ";margin:0 6px") + '">' + m[1] + "</button>";
+  const cap = '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px"><span>Founding members: only the first</span><input class="f" id="cap-n" type="number" min="1" placeholder="all" value="' + (DIN.cap || "") + '" style="width:110px;height:40px"><span>on the waitlist</span><button class="link" id="cap-save">Save</button></div>';
+  return '<div class="hint' + (DIN.mode === "on" ? "" : " r") + '" style="margin:0 0 18px"><div style="margin-bottom:10px">' + say + '</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">' + MODES.map(btn).join("") + "</div>" + cap + "</div>";
+}
+function modeWire() {
+  const t = $("#lnch-retry"); if (t) t.onclick = () => dinersLoad();
+  document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => {
+    const m = b.dataset.mode; if (DIN && DIN.mode === m) return;
+    if (!confirm(MODE_ASK[m])) return;
+    const r = await api("diners-set", { mode: m }); if (r.error) alert(r.error); await dinersLoad();
+  });
+  const cs = $("#cap-save"); if (cs) cs.onclick = async () => {
+    const v = ($("#cap-n") || {}).value || "";
+    const r = await api("founding-cap", { cap: v === "" ? null : Number(v) }); if (r.error) alert(r.error); await dinersLoad();
+  };
+}
+function launchHtml() { return modeHtml(); }
+function launchWire() { modeWire(); }
 function dinersHtml() {
   if (!DIN) return '<p class="muted">Loading…</p>';
   if (DIN.error) return '<div class="empty"><b>Could not load this.</b><br>' + esc(DIN.error) + "</div>";
   const W = DIN.waitlist || [], agreed = W.filter((w) => w.consent).length;
-  const head = DIN.open
-    ? '<div class="hint" style="margin:0 0 18px"><b>The diner side is OPEN.</b> Everyone can sign up, browse, claim and order. <button class="link red" id="din-close" style="margin-left:12px">Close it to diners</button></div>'
-    : '<div class="hint r" style="margin:0 0 18px"><b>The diner side is CLOSED.</b> Only restaurants can use FIG; diners see "opening to restaurants first" and can join the waitlist. You (and any team account) can still try the diner side. <button class="link" id="din-open" style="margin-left:12px">Open it to diners</button></div>';
-  return head + '<div class="stats">' + stat(W.length, "On the waitlist", "blue") + stat(agreed, "Agreed to be emailed") + stat(DIN.accounts, "Diner accounts") + "</div>" +
-    '<div style="display:flex;gap:16px;margin:6px 0 14px;flex-wrap:wrap"><button class="link" id="din-copy">Copy the emails that agreed</button><button class="link" id="din-csv">Download as a table (CSV)</button></div>' +
-    table(["Email", "School", "May email", "Joined"], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""), w.consent ? '<span class="pill g">Yes</span>' : '<span class="pill">No</span>', ago(w.joined_at)]), "Nobody yet. The list fills once the app shows the waitlist form.");
-}
-// the launch switch on the Overview: the same setting as the Diners tab (settings.diners_open), one click away from the front page
-function launchHtml() {
-  if (!DIN) return "";
-  if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch switch could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
-  const n = (DIN.waitlist || []).length;
-  return DIN.open
-    ? '<div class="hint" style="margin:0 0 18px"><b>FIG is OPEN to everyone.</b> Diners can sign up, browse, claim and order. <button class="link red" id="lnch-close" style="margin-left:12px">Close it to diners</button></div>'
-    : '<div class="hint r" style="margin:0 0 18px"><b>Launch switch: diners are locked out.</b> Only restaurants can use FIG; ' + n + (n === 1 ? " person is" : " people are") + ' on the diner waitlist. <button class="btn" id="lnch-open" style="height:40px;margin-left:12px">Open FIG to everyone</button></div>';
-}
-function launchWire() {
-  const set = async (open, ask) => { if (!confirm(ask)) return; const r = await api("diners-set", { open }); if (r.error) alert(r.error); await dinersLoad(); };
-  const o = $("#lnch-open"), c = $("#lnch-close"), t = $("#lnch-retry");
-  if (t) t.onclick = () => dinersLoad();
-  if (o) o.onclick = () => set(true, "Open FIG to everyone now? Diners can then sign up, browse, claim deals and order right away. Do this only at launch. You can close it again here.");
-  if (c) c.onclick = () => set(false, "Close the diner side? Diners will see 'opening to restaurants first' and cannot claim or order. Restaurants are not affected.");
+  const by = {}; W.forEach((w) => { const k = w.source || "website"; by[k] = (by[k] || 0) + 1; });
+  const sources = Object.entries(by).sort((a, b) => b[1] - a[1]);
+  return modeHtml() + '<div class="stats">' + stat(W.length, "On the waitlist", "blue") + stat(agreed, "Agreed to be emailed") + stat(DIN.accounts, "Diner accounts") + "</div>" +
+    "<h2>Where sign-ups came from</h2>" + table(["Link", "Sign-ups"], sources.map((x) => [esc(x[0]), String(x[1])]), "No sign-ups yet. Give each creator a link like fig-promo.vercel.app/?src=their-name#waitlist") +
+    '<div style="display:flex;gap:16px;margin:16px 0 14px;flex-wrap:wrap"><button class="link" id="din-copy">Copy the emails that agreed</button><button class="link" id="din-csv">Download as a table (CSV)</button></div>' +
+    table(["Email", "School", "May email", "From", "Joined"], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""), w.consent ? '<span class="pill g">Yes</span>' : '<span class="pill">No</span>', esc(w.source || "website"), ago(w.joined_at)]), "Nobody yet.");
 }
 async function dinersLoad() {
   DIN = await api("diners-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
@@ -299,15 +316,12 @@ async function dinersLoad() {
   if (view === "diners" && $("#dinerbox")) { $("#dinerbox").innerHTML = dinersHtml(); dinersWire(); }
 }
 function dinersWire() {
-  const set = async (open, ask) => { if (!confirm(ask)) return; const r = await api("diners-set", { open }); if (r.error) alert(r.error); await dinersLoad(); };
-  const o = $("#din-open"), c = $("#din-close");
-  if (o) o.onclick = () => set(true, "Open FIG to diners now? Everyone can then sign up, browse, claim deals and order, right away. Only do this at launch.");
-  if (c) c.onclick = () => set(false, "Close the diner side? Diners will see 'opening to restaurants first' and cannot claim or order. Restaurants are not affected.");
+  modeWire();
   const rows = (DIN && DIN.waitlist) || [];
   const cp = $("#din-copy"); if (cp) cp.onclick = async () => { const t = rows.filter((w) => w.consent).map((w) => w.email).join(", "); try { await navigator.clipboard.writeText(t); alert(rows.filter((w) => w.consent).length + " emails copied."); } catch { prompt("Copy these:", t); } };
   const cs = $("#din-csv"); if (cs) cs.onclick = () => {
     const q = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
-    const csv = ["email,school,may_email,joined"].concat(rows.map((w) => [q(w.email), q(w.school), w.consent ? "yes" : "no", q(w.joined_at)].join(","))).join("\\n");
+    const csv = ["email,school,may_email,source,joined"].concat(rows.map((w) => [q(w.email), q(w.school), w.consent ? "yes" : "no", q(w.source), q(w.joined_at)].join(","))).join("\\n");
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "fig-diner-waitlist.csv"; a.click();
   };
 }

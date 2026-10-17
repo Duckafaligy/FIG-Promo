@@ -131,18 +131,31 @@ async function setBlog(slug, change) {
   return { saved: true };
 }
 
-// the diner side switch (settings key diners_open: 'off' = only restaurants can use FIG; no row = open) and the diner waitlist (table diner_waitlist, closed to the public)
+// the diner side switch (settings key diners_open: 'off' = restaurants only, 'waitlist' = founding members only, 'on' or no row = everyone),
+// the founding cap (settings key founding_cap: only the first N on the waitlist; no row = all of it) and the diner waitlist (closed to the public)
 async function dinersState() {
-  const flag = (await rest("settings?select=value&key=eq.diners_open")).rows[0];
-  const wl = (await rest("diner_waitlist?select=email,school,consent,joined_at&order=joined_at.desc&limit=1000")).rows;
+  const flags = (await rest("settings?select=key,value&key=in.(diners_open,founding_cap)")).rows;
+  const v = (k) => (flags.find((f) => f.key === k) || {}).value;
+  const mode = v("diners_open") === "off" ? "off" : v("diners_open") === "waitlist" ? "waitlist" : "on";
+  const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at&order=joined_at.desc&limit=5000")).rows;
   const accounts = (await rest("profiles?select=id&role=eq.diner&admin=eq.false&limit=5000")).rows.length;
-  return { open: !flag || flag.value !== "off", waitlist: wl, accounts };
+  return { mode, open: mode === "on", cap: v("founding_cap") ? Number(v("founding_cap")) : null, waitlist: wl, accounts };
 }
-async function setDinersOpen(open) {
-  if (typeof open !== "boolean") throw new Error("bad open");
-  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "diners_open", value: open ? "on" : "off" }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
-  console.log("admin: diner side", open ? "opened" : "closed");
-  return { open };
+async function setDinersMode(mode) {
+  if (!["off", "waitlist", "on"].includes(mode)) throw new Error("bad mode");
+  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "diners_open", value: mode }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  console.log("admin: diner side ->", mode);
+  return { mode, open: mode === "on" };
+}
+async function setFoundingCap(cap) {
+  if (cap === null || cap === "" || cap === undefined) {
+    await rest("settings?key=eq.founding_cap", { method: "DELETE", headers: { Prefer: "return=minimal" } });
+    return { cap: null };
+  }
+  const n = Number(cap);
+  if (!Number.isInteger(n) || n < 1 || n > 1000000) throw new Error("bad cap");
+  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "founding_cap", value: String(n) }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  return { cap: n };
 }
 
 // restaurant prospects: every place in the Markham directory, with the team's shortlist, status and note (server-only functions prospect_list / prospect_set)
@@ -163,4 +176,4 @@ async function setProspect(id, change) {
   return { saved: true };
 }
 
-module.exports = { prospects, setProspect, dinersState, setDinersOpen, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { prospects, setProspect, dinersState, setDinersMode, setFoundingCap, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

@@ -240,8 +240,13 @@
         let src = ""; try { src = sessionStorage.getItem("fig.src") || ""; } catch {}
         const r = await rpc("join_waitlist", { p_email: email.value.trim(), p_consent: wl.elements.consent.checked, ...(src ? { p_source: src } : {}) });
         if (!r.ok) throw new Error(await r.text());
+        const said = await r.json().catch(() => "ok");
         wl.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
-        say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");
+        // founding members (2026-10-17): after the founding list closed the answer is 'ok-late', the same for any email
+        if (said === "ok-late") {
+          say("You're on the list. Founding members are in now; we'll let you in at the public launch. Already a founding member? ", "ok");
+          const a = document.createElement("a"); a.href = "/app/sign-in"; a.textContent = "Sign in"; msg.appendChild(a);
+        } else say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");
       } catch (e) {
         btn.disabled = false;
         say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : "Something went wrong. Try again in a moment.", "err");

@@ -317,10 +317,10 @@ page("contact", "Contact", "Message the FIG team. A real person reads every mess
 HELP = [
     ("diners", "For diners", [
         ("Is FIG free?", "Yes, completely. Deals are free to claim and use."),
-        ("How do I use a deal?", "Claim it in the app. It waits in your Voucher tab for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it."),
+        ("How do I use a deal?", "Claim it in the app. It waits on your Deals page for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it."),
         ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
         ("What do I pay?", "Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything."),
-        ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits in your Voucher tab."),
+        ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits on your Deals page."),
         ("Do restaurants see my phone number?", "Never. Takeout orders go through the app and your number stays private."),
         ("Can I order takeout?", "Yes. Tap Takeout on a deal that allows it, add what you want, watch it get made, and pick it up. Some restaurants also take takeout at full price: tap Order takeout on their page. FIG doesn't deliver."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),

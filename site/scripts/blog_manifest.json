@@ -18,7 +18,7 @@
    "date": "2026-10-18",
    "publish_at": "2026-10-18T12:00:00-04:00",
    "status": "queued",
-   "words": 1060,
+   "words": 1066,
    "dek": "A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet."
   },
   {
@@ -48,8 +48,8 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 569,
-   "dek": "Everything that happens between seeing a deal and paying the bill: claiming, the Voucher tab, the code at the counter, takeout, what happens when a deal ends, and rating the visit."
+   "words": 570,
+   "dek": "Everything that happens between seeing a deal and paying the bill: claiming, your Deals page, the code at the counter, takeout, what happens when a deal ends, and rating the visit."
   },
   {
    "slug": "slow-hour-deal-math",
@@ -78,7 +78,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 694,
+   "words": 695,
    "dek": "A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply."
   },
   {
@@ -128,7 +128,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 782,
+   "words": 784,
    "dek": "A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them."
   },
   {
@@ -188,7 +188,7 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 830,
+   "words": 831,
    "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, free for restaurants to post deals, and no cut of a dine-in bill."
   }
  ]

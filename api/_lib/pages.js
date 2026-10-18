@@ -266,40 +266,49 @@ function blogWire() {
 
 // ---- Diners: the switch that opens or closes the diner side, and the waitlist (table diner_waitlist through /api/admin-api)
 let DIN = null;
-// the launch switch, three ways (the user, 2026-10-17): Closed (restaurants only) / Founding members (the waitlist, optionally the first N, and
-// restaurants) / Everyone. The same control on the Overview and the Diners tab.
-const MODES = [["off", "Closed"], ["waitlist", "Founding members"], ["on", "Everyone"]];
+// The launch plan (the user, 2026-10-17), the same panel on the Overview and the Diners tab:
+// 1 collect the waitlist (closed) -> 2 the first N -> 3 the opening date (founding members get in by themselves then; the list closes then)
+// -> 4 everyone. The effective mode comes from the database (site_mode), so a passed opening date shows as open to founding members.
 const MODE_ASK = {
-  off: "Close the diner side? Diners see 'opening to restaurants first' and join the waitlist. Restaurants aren't affected.",
-  waitlist: "Open FIG to founding members only? People on the waitlist (and restaurants) can sign in and use everything. Everyone else keeps seeing the waitlist.",
-  on: "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order right away. Do this only at the public launch.",
+  off: "Close FIG to diners and collect the waitlist? Diners see the waitlist; restaurants aren't affected.",
+  waitlist: "Open to founding members now? People on the waitlist (the first N, if set) can sign in and use everything; the list closes now.",
+  on: "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order. This is the public launch.",
 };
+const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" });
+const localInput = (iso) => { if (!iso) return ""; const d = new Date(iso); const p = (n) => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); };
 function modeHtml() {
   if (!DIN) return "";
-  if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch switch could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
-  const n = (DIN.waitlist || []).length, inNow = DIN.cap ? Math.min(n, DIN.cap) : n;
-  const say = DIN.mode === "off" ? "<b>Closed to diners.</b> Only restaurants can use FIG; diners join the waitlist. " + n + " waiting."
-    : DIN.mode === "waitlist" ? "<b>Founding members only.</b> People on the waitlist" + (DIN.until ? " who joined before " + esc(new Date(DIN.until).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })) : "") + (DIN.cap ? " (the first " + DIN.cap + ")" : "") + " can get in, plus restaurants. Everyone else sees the waitlist."
-    : "<b>Open to everyone.</b> Anyone can sign up, browse, claim and order.";
-  const btn = (m) => '<button class="' + (DIN.mode === m[0] ? "btn" : "link") + '" data-mode="' + m[0] + '" style="height:40px' + (DIN.mode === m[0] ? "" : ";margin:0 6px") + '">' + m[1] + "</button>";
-  const cap = '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px"><span>Founding members: only the first</span><input class="f" id="cap-n" type="number" min="1" placeholder="all" value="' + (DIN.cap || "") + '" style="width:110px;height:40px"><span>on the waitlist</span><button class="link" id="cap-save">Save</button></div>' +
-    '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px"><span>' + (DIN.until ? "The founding list closed " + esc(new Date(DIN.until).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })) + "." : "The founding list closes when you switch to Founding members.") + '</span>' +
-    '<button class="link" id="until-now">' + (DIN.until ? "Close it again now (let in who joined since)" : "Close the list now") + '</button>' + (DIN.until ? '<button class="link" id="until-clear">Reopen the list</button>' : "") + "</div>";
-  return '<div class="hint' + (DIN.mode === "on" ? "" : " r") + '" style="margin:0 0 18px"><div style="margin-bottom:10px">' + say + '</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">' + MODES.map(btn).join("") + "</div>" + cap + "</div>";
+  if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch plan could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
+  const n = (DIN.waitlist || []).length, agreed = (DIN.waitlist || []).filter((w) => w.consent).length, eff = DIN.effective || DIN.mode;
+  const first = DIN.cap ? "the first " + DIN.cap.toLocaleString("en-CA") : "everyone";
+  const now = eff === "on" ? "<b>Right now: open to everyone.</b> Anyone can sign up, browse, claim and order."
+    : eff === "waitlist" ? "<b>Right now: founding members are in.</b> " + first.charAt(0).toUpperCase() + first.slice(1) + " on the waitlist" + (DIN.closes ? " who joined before " + esc(atText(DIN.closes)) : "") + " can use FIG, plus restaurants. Everyone else sees the waitlist."
+    : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(atText(DIN.opens)) + "." : "");
+  const row = (num, title, body) => '<div style="display:flex;gap:14px;padding:12px 0;border-top:1px solid #E3E8F2"><div style="flex:none;width:26px;height:26px;border-radius:50%;background:#1E5EFF;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">' + num + '</div><div style="flex:1"><div style="font-weight:800;margin-bottom:6px">' + title + "</div>" + body + "</div></div>";
+  const s1 = row(1, "Collect the waitlist", '<div class="muted" style="margin-bottom:8px">' + n.toLocaleString("en-CA") + " on the list · " + agreed.toLocaleString("en-CA") + " agreed to be emailed. Creator links: fig-promo.vercel.app/?src=their-name#waitlist</div>" +
+    (DIN.mode === "off" ? '<span class="pill g">Collecting now</span>' : '<button class="link" data-mode="off">Close FIG to diners and collect the waitlist</button>'));
+  const s2 = row(2, "How many get in first", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span>The first</span><input class="f" id="cap-n" type="number" min="1" placeholder="everyone" value="' + (DIN.cap || "") + '" style="width:120px;height:40px"><span>on the list</span><button class="link" id="cap-save">Save</button></div><div class="muted" style="margin-top:6px">Empty = everyone on the list. Raise it or clear it later to let the next wave in.</div>');
+  const s3 = row(3, "Opening date", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="f" id="opens-at" type="datetime-local" value="' + localInput(DIN.opens) + '" style="height:40px"><button class="link" id="opens-save">Save</button>' + (DIN.opens ? '<button class="link red" id="opens-clear">Clear</button>' : "") + "</div>" +
+    '<div class="muted" style="margin-top:6px">At this time FIG opens to the founding members by itself, and the list closes (later sign-ups wait for the next wave). The website shows the date. ' +
+    "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed on the Diners tab; every email needs FIG's name, a mailing address and an unsubscribe line.</div>" +
+    (eff === "waitlist" ? "" : '<div style="margin-top:8px"><button class="link" data-mode="waitlist">Or open to founding members now</button></div>'));
+  const s4 = row(4, "Everyone", eff === "on" ? '<span class="pill g">Open to everyone</span>' : '<button class="link" data-mode="on">Open FIG to everyone (public launch)</button>');
+  const extra = eff === "waitlist" ? '<div class="muted" style="margin-top:6px">The founding list ' + (DIN.closes ? "closed " + esc(atText(DIN.closes)) + ". " : "is open. ") + '<button class="link" id="until-now">Let in everyone who joined until now</button></div>' : "";
+  return '<div class="hint' + (eff === "on" ? "" : " r") + '" style="margin:0 0 18px"><div style="font-size:17px;font-weight:800;margin-bottom:4px">Launch plan</div><div style="margin-bottom:8px">' + now + "</div>" + s1 + s2 + s3 + s4 + extra + "</div>";
 }
 function modeWire() {
   const t = $("#lnch-retry"); if (t) t.onclick = () => dinersLoad();
-  document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => {
-    const m = b.dataset.mode; if (DIN && DIN.mode === m) return;
-    if (!confirm(MODE_ASK[m])) return;
-    const r = await api("diners-set", { mode: m }); if (r.error) alert(r.error); await dinersLoad();
-  });
-  const un = $("#until-now"); if (un) un.onclick = async () => { if (!confirm("Close the founding list now? Everyone on the waitlist so far is a founding member; people who join later wait.")) return; const r = await api("founding-until", { until: "now" }); if (r.error) alert(r.error); await dinersLoad(); };
-  const uc = $("#until-clear"); if (uc) uc.onclick = async () => { if (!confirm("Reopen the founding list? Then anyone who joins the waitlist (or makes an account) gets in while you're in Founding members mode.")) return; const r = await api("founding-until", { until: null }); if (r.error) alert(r.error); await dinersLoad(); };
-  const cs = $("#cap-save"); if (cs) cs.onclick = async () => {
-    const v = ($("#cap-n") || {}).value || "";
-    const r = await api("founding-cap", { cap: v === "" ? null : Number(v) }); if (r.error) alert(r.error); await dinersLoad();
+  const after = async (r) => { if (r && r.error) alert(r.error); await dinersLoad(); };
+  document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => { const m = b.dataset.mode; if (!confirm(MODE_ASK[m])) return; after(await api("diners-set", { mode: m })); });
+  const cs = $("#cap-save"); if (cs) cs.onclick = async () => { const v = ($("#cap-n") || {}).value || ""; after(await api("founding-cap", { cap: v === "" ? null : Number(v) })); };
+  const os = $("#opens-save"); if (os) os.onclick = async () => {
+    const v = ($("#opens-at") || {}).value || ""; if (!v) return alert("Pick a date and time first.");
+    const at = new Date(v); if (isNaN(at) || at < new Date()) return alert("Pick a time in the future.");
+    if (!confirm("Open to founding members on " + atText(at.toISOString()) + "? Until then FIG stays closed to diners and keeps collecting the waitlist.")) return;
+    after(await api("opens-at", { at: at.toISOString() }));
   };
+  const oc = $("#opens-clear"); if (oc) oc.onclick = async () => { if (!confirm("Clear the opening date?")) return; after(await api("opens-at", { at: null })); };
+  const un = $("#until-now"); if (un) un.onclick = async () => { if (!confirm("Let in everyone who has joined the list until now (within the first N, if set)? Later sign-ups still wait.")) return; after(await api("founding-until", { until: "now" })); };
 }
 function launchHtml() { return modeHtml(); }
 function launchWire() { modeWire(); }

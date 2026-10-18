@@ -278,16 +278,24 @@ const MODE_ASK = {
 };
 const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" });
 const localInput = (iso) => { if (!iso) return ""; const d = new Date(iso); const p = (n) => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); };
-// what the opening date does depends on where FIG is now (FIX-LIST #56): the help under it and its Save confirm say so
+// what the opening date does depends on where FIG is now (FIX-LIST #56): the help under it and its Save confirm say so.
+// The list closes at founding_closes() = coalesce(founding_until, opens_at): a founding cutoff, once set, always wins (#65).
+// The switch still "off" but founding members in = they got in because the date passed: a new date or Clear shuts them out again (#66).
+const dot = (s) => (s.endsWith(".") ? s : s + "."); // "12:00 a.m." already ends the sentence (#67)
+const openedByDate = () => DIN.mode === "off" && (DIN.effective || DIN.mode) === "waitlist";
+const passed = (iso) => !!iso && new Date(iso) <= new Date();
 function opensHelp(eff) {
   if (eff === "on") return "FIG is already open to everyone. The date only shows on the website as the launch date.";
-  if (eff === "waitlist") return DIN.until ? "The list already closes " + esc(atText(DIN.until)) + "; if this date is earlier, the list closes at this time instead (the earlier one wins)." : "The list closes at this time (later sign-ups wait for the next wave).";
-  return "At this time FIG opens to founding members by itself, and the list closes then (later sign-ups wait for the next wave).";
+  const cutoff = DIN.until ? "Your founding cutoff (" + esc(atText(DIN.until)) + ") " + (passed(DIN.until) ? "closed" : "closes") + " the list" : "";
+  if (openedByDate()) return "Founding members got in when this date passed" + (cutoff ? "; " + cutoff : ", and the list closed then") + ". Saving a new date or clearing it closes FIG to them again until that date. To change it without shutting them out, open FIG to everyone (step 4).";
+  if (eff === "waitlist") return cutoff ? cutoff + "; this date only shows on the website as the launch date." : "The list closes at this time (later sign-ups wait for the next wave).";
+  return "At this time FIG opens to founding members by itself" + (cutoff ? ". " + cutoff + "." : ", and the list closes then (later sign-ups wait for the next wave).");
 }
 function opensAsk(eff, when) {
   if (eff === "on") return "Show " + when + " on the website as the launch date? FIG is already open to everyone; this changes nothing else.";
-  if (eff === "waitlist") return DIN.until ? "Set the date to " + when + "? The list already closes " + atText(DIN.until) + "; the earlier of the two wins." : "Close the founding list on " + when + "? People who join after it wait for the next wave.";
-  return "Open to founding members on " + when + "? Until then FIG stays closed to diners and keeps collecting the waitlist; the list closes then.";
+  if (openedByDate()) return "Founding members are in now. Saving " + when + " closes FIG to them again until then. Save it anyway?";
+  if (eff === "waitlist") return DIN.until ? "Show " + when + " on the website as the launch date? Your founding cutoff (" + atText(DIN.until) + ") closes the list, so nothing else changes." : "Close the founding list on " + when + "? People who join after it wait for the next wave.";
+  return "Open to founding members on " + when + "? Until then FIG stays closed to diners and keeps collecting the waitlist" + (DIN.until ? "; your founding cutoff (" + atText(DIN.until) + ") closes the list." : "; the list closes then.");
 }
 function modeHtml() {
   if (!DIN) return "";
@@ -296,7 +304,7 @@ function modeHtml() {
   const first = DIN.cap ? "the first " + DIN.cap.toLocaleString("en-CA") : "everyone";
   const now = eff === "on" ? "<b>Right now: open to everyone.</b> Anyone can sign up, browse, claim and order."
     : eff === "waitlist" ? "<b>Right now: founding members are in.</b> " + first.charAt(0).toUpperCase() + first.slice(1) + " on the waitlist" + (DIN.closes ? " who joined before " + esc(atText(DIN.closes)) : "") + " can use FIG, plus restaurants. Everyone else sees the waitlist."
-    : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(atText(DIN.opens)) + "." : "");
+    : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(dot(atText(DIN.opens))) : "");
   const row = (num, title, body) => '<div style="display:flex;gap:14px;padding:12px 0;border-top:1px solid #E3E8F2"><div style="flex:none;width:26px;height:26px;border-radius:50%;background:#1E5EFF;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">' + num + '</div><div style="flex:1"><div style="font-weight:800;margin-bottom:6px">' + title + "</div>" + body + "</div></div>";
   const s1 = row(1, "Collect the waitlist", '<div class="muted" style="margin-bottom:8px">' + n.toLocaleString("en-CA") + " on the list · " + agreed.toLocaleString("en-CA") + " agreed to be emailed. Creator links: fig-promo.vercel.app/?src=their-name#waitlist</div>" +
     (eff === "off" ? '<span class="pill g">Collecting now</span>' : '<button class="link" data-mode="off">Close FIG to diners and collect the waitlist</button>'));
@@ -306,7 +314,7 @@ function modeHtml() {
     "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed on the Diners tab; every email needs FIG's name, a mailing address and an unsubscribe line.") + "</div>" +
     (eff === "waitlist" ? "" : '<div style="margin-top:8px"><button class="link" data-mode="waitlist">Or open to founding members now</button></div>'));
   const s4 = row(4, "Everyone", eff === "on" ? '<span class="pill g">Open to everyone</span>' : '<button class="link" data-mode="on">Open FIG to everyone (public launch)</button>');
-  const extra = eff === "waitlist" ? '<div class="muted" style="margin-top:6px">The founding list ' + (DIN.closes ? "closed " + esc(atText(DIN.closes)) + ". " : "is open. ") + '<button class="link" id="until-now">Let in everyone who joined until now</button></div>' : "";
+  const extra = eff === "waitlist" ? '<div class="muted" style="margin-top:6px">The founding list ' + (DIN.closes ? (passed(DIN.closes) ? "closed " : "closes ") + esc(dot(atText(DIN.closes))) + " " : "is open. ") + '<button class="link" id="until-now">Let in everyone who joined until now</button></div>' : "";
   return '<div class="hint' + (eff === "on" ? "" : " r") + '" style="margin:0 0 18px"><div style="font-size:17px;font-weight:800;margin-bottom:4px">Launch plan</div><div style="margin-bottom:8px">' + now + "</div>" + s1 + s2 + s3 + s4 + extra + "</div>";
 }
 function modeWire() {
@@ -320,7 +328,7 @@ function modeWire() {
     if (!confirm(opensAsk(DIN.effective || DIN.mode, atText(at.toISOString())))) return;
     after(await api("opens-at", { at: at.toISOString() }));
   };
-  const oc = $("#opens-clear"); if (oc) oc.onclick = async () => { if (!confirm("Clear the opening date?")) return; after(await api("opens-at", { at: null })); };
+  const oc = $("#opens-clear"); if (oc) oc.onclick = async () => { if (!confirm(openedByDate() ? "Founding members are in now. Clearing the date closes FIG to them again. Clear it anyway?" : "Clear the opening date?")) return; after(await api("opens-at", { at: null })); };
   const un = $("#until-now"); if (un) un.onclick = async () => { if (!confirm("Let in everyone who has joined the list until now (within the first N, if set)? Later sign-ups still wait.")) return; after(await api("founding-until", { until: "now" })); };
 }
 function launchHtml() { return modeHtml(); }

@@ -2,6 +2,8 @@
 <rss version="2.0"><channel>
   <title>The FIG blog</title><link>https://fig-promo.vercel.app/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+  <item><title>Train your staff to honour a FIG deal in 10 minutes</title><link>https://fig-promo.vercel.app/blog/train-staff-honour-fig-deal</link><guid>https://fig-promo.vercel.app/blog/train-staff-honour-fig-deal</guid>
+    <pubDate>Sun, 18 Oct 2026 12:00:00 -0400</pubDate><category>For restaurants</category><description>A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet.</description></item>
   <item><title>Is it a good deal? How to compare restaurant deals</title><link>https://fig-promo.vercel.app/blog/compare-restaurant-deals-worth-it</link><guid>https://fig-promo.vercel.app/blog/compare-restaurant-deals-worth-it</guid>
     <pubDate>Sat, 17 Oct 2026 12:00:00 -0400</pubDate><category>For diners</category><description>2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway.</description></item>
   <item><title>Takeout order math: what a restaurant keeps on a $12, $20, $40 or $60 order</title><link>https://fig-promo.vercel.app/blog/takeout-order-math-what-you-keep</link><guid>https://fig-promo.vercel.app/blog/takeout-order-math-what-you-keep</guid>

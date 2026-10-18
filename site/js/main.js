@@ -227,8 +227,15 @@
     const msg = $(".form-msg", wl), btn = $("button[type=submit]", wl), email = wl.elements.email;
     const say = (t, kind) => { msg.textContent = t; msg.className = "form-msg " + (kind || ""); };
     // the count only shows once it's worth showing
+    // the opening line (the user's words, 2026-10-17): the date and the order from site_mode; the HTML has a true fallback.
+    // An order, never exclusivity.
     rpc("site_mode").then((r) => r.ok && r.json()).then((m) => {
-      if (m && m.waitlist >= 25) $(".wl-count", wl).textContent = `${m.waitlist.toLocaleString("en-CA")} people are already waiting.`;
+      if (!m) return;
+      let when = "FIG opens in Markham soon.";
+      try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString("en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
+      const line = $(".wl-line", wl);
+      if (line) line.textContent = `${when} ${m.founding_cap ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first."}`;
+      if (m.waitlist >= 25) $(".wl-count", wl).append(` ${m.waitlist.toLocaleString("en-CA")} people are already waiting.`);
     }).catch(() => {});
     email.addEventListener("input", () => email.removeAttribute("aria-invalid"));
     wl.addEventListener("submit", async (ev) => {

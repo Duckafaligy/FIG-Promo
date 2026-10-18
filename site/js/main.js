@@ -231,6 +231,8 @@
     // An order, never exclusivity.
     rpc("site_mode").then((r) => r.ok && r.json()).then((m) => {
       if (!m) return;
+      // open to everyone and no launch date still ahead: nothing left to announce (FIX-LIST #56)
+      if ((m.mode || (m.diners_open ? "on" : "off")) === "on" && !(m.opens_at && new Date(m.opens_at) > new Date())) { $(".wl-count", wl).hidden = true; return; }
       let when = "FIG opens in Markham soon.";
       try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString("en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
       const line = $(".wl-line", wl);

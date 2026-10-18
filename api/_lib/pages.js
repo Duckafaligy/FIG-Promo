@@ -269,13 +269,26 @@ let DIN = null;
 // The launch plan (the user, 2026-10-17), the same panel on the Overview and the Diners tab:
 // 1 collect the waitlist (closed) -> 2 the first N -> 3 the opening date (founding members get in by themselves then; the list closes then)
 // -> 4 everyone. The effective mode comes from the database (site_mode), so a passed opening date shows as open to founding members.
+// waitlist: setDinersMode closes the list now only the first time; a cutoff already set stays (FIX-LIST #57)
 const MODE_ASK = {
-  off: "Close FIG to diners and collect the waitlist? Diners see the waitlist; restaurants aren't affected.",
-  waitlist: "Open to founding members now? People on the waitlist (the first N, if set) can sign in and use everything; the list closes now.",
-  on: "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order. This is the public launch.",
+  off: () => "Close FIG to diners and collect the waitlist? Diners see the waitlist; restaurants aren't affected.",
+  waitlist: () => "Open to founding members now? People on the waitlist (the first N, if set) can sign in and use everything; " +
+    (DIN.until ? "the list keeps its cutoff (" + atText(DIN.until) + "), so who joined before it gets in." : "the list closes now."),
+  on: () => "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order. This is the public launch.",
 };
 const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" });
 const localInput = (iso) => { if (!iso) return ""; const d = new Date(iso); const p = (n) => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); };
+// what the opening date does depends on where FIG is now (FIX-LIST #56): the help under it and its Save confirm say so
+function opensHelp(eff) {
+  if (eff === "on") return "FIG is already open to everyone. The date only shows on the website as the launch date.";
+  if (eff === "waitlist") return DIN.until ? "The list already closes " + esc(atText(DIN.until)) + "; if this date is earlier, the list closes at this time instead (the earlier one wins)." : "The list closes at this time (later sign-ups wait for the next wave).";
+  return "At this time FIG opens to founding members by itself, and the list closes then (later sign-ups wait for the next wave).";
+}
+function opensAsk(eff, when) {
+  if (eff === "on") return "Show " + when + " on the website as the launch date? FIG is already open to everyone; this changes nothing else.";
+  if (eff === "waitlist") return DIN.until ? "Set the date to " + when + "? The list already closes " + atText(DIN.until) + "; the earlier of the two wins." : "Close the founding list on " + when + "? People who join after it wait for the next wave.";
+  return "Open to founding members on " + when + "? Until then FIG stays closed to diners and keeps collecting the waitlist; the list closes then.";
+}
 function modeHtml() {
   if (!DIN) return "";
   if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch plan could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
@@ -286,11 +299,11 @@ function modeHtml() {
     : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(atText(DIN.opens)) + "." : "");
   const row = (num, title, body) => '<div style="display:flex;gap:14px;padding:12px 0;border-top:1px solid #E3E8F2"><div style="flex:none;width:26px;height:26px;border-radius:50%;background:#1E5EFF;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">' + num + '</div><div style="flex:1"><div style="font-weight:800;margin-bottom:6px">' + title + "</div>" + body + "</div></div>";
   const s1 = row(1, "Collect the waitlist", '<div class="muted" style="margin-bottom:8px">' + n.toLocaleString("en-CA") + " on the list · " + agreed.toLocaleString("en-CA") + " agreed to be emailed. Creator links: fig-promo.vercel.app/?src=their-name#waitlist</div>" +
-    (DIN.mode === "off" ? '<span class="pill g">Collecting now</span>' : '<button class="link" data-mode="off">Close FIG to diners and collect the waitlist</button>'));
+    (eff === "off" ? '<span class="pill g">Collecting now</span>' : '<button class="link" data-mode="off">Close FIG to diners and collect the waitlist</button>'));
   const s2 = row(2, "How many get in first", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span>The first</span><input class="f" id="cap-n" type="number" min="1" placeholder="everyone" value="' + (DIN.cap || "") + '" style="width:120px;height:40px"><span>on the list</span><button class="link" id="cap-save">Save</button></div><div class="muted" style="margin-top:6px">Empty = everyone on the list. Raise it or clear it later to let the next wave in.</div>');
   const s3 = row(3, "Opening date", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="f" id="opens-at" type="datetime-local" value="' + localInput(DIN.opens) + '" style="height:40px"><button class="link" id="opens-save">Save</button>' + (DIN.opens ? '<button class="link red" id="opens-clear">Clear</button>' : "") + "</div>" +
-    '<div class="muted" style="margin-top:6px">At this time FIG opens to the founding members by itself, and the list closes (later sign-ups wait for the next wave). The website shows the date. ' +
-    "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed on the Diners tab; every email needs FIG's name, a mailing address and an unsubscribe line.</div>" +
+    '<div class="muted" style="margin-top:6px">' + opensHelp(eff) + (eff === "on" ? "" : " The website shows the date. " +
+    "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed on the Diners tab; every email needs FIG's name, a mailing address and an unsubscribe line.") + "</div>" +
     (eff === "waitlist" ? "" : '<div style="margin-top:8px"><button class="link" data-mode="waitlist">Or open to founding members now</button></div>'));
   const s4 = row(4, "Everyone", eff === "on" ? '<span class="pill g">Open to everyone</span>' : '<button class="link" data-mode="on">Open FIG to everyone (public launch)</button>');
   const extra = eff === "waitlist" ? '<div class="muted" style="margin-top:6px">The founding list ' + (DIN.closes ? "closed " + esc(atText(DIN.closes)) + ". " : "is open. ") + '<button class="link" id="until-now">Let in everyone who joined until now</button></div>' : "";
@@ -299,12 +312,12 @@ function modeHtml() {
 function modeWire() {
   const t = $("#lnch-retry"); if (t) t.onclick = () => dinersLoad();
   const after = async (r) => { if (r && r.error) alert(r.error); await dinersLoad(); };
-  document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => { const m = b.dataset.mode; if (!confirm(MODE_ASK[m])) return; after(await api("diners-set", { mode: m })); });
+  document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => { const m = b.dataset.mode; if (!confirm(MODE_ASK[m]())) return; after(await api("diners-set", { mode: m })); });
   const cs = $("#cap-save"); if (cs) cs.onclick = async () => { const v = ($("#cap-n") || {}).value || ""; after(await api("founding-cap", { cap: v === "" ? null : Number(v) })); };
   const os = $("#opens-save"); if (os) os.onclick = async () => {
     const v = ($("#opens-at") || {}).value || ""; if (!v) return alert("Pick a date and time first.");
     const at = new Date(v); if (isNaN(at) || at < new Date()) return alert("Pick a time in the future.");
-    if (!confirm("Open to founding members on " + atText(at.toISOString()) + "? Until then FIG stays closed to diners and keeps collecting the waitlist.")) return;
+    if (!confirm(opensAsk(DIN.effective || DIN.mode, atText(at.toISOString())))) return;
     after(await api("opens-at", { at: at.toISOString() }));
   };
   const oc = $("#opens-clear"); if (oc) oc.onclick = async () => { if (!confirm("Clear the opening date?")) return; after(await api("opens-at", { at: null })); };

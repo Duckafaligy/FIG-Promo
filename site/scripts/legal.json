@@ -86,7 +86,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 17, 2026",
+  "updated": "Last updated October 18, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -137,7 +137,7 @@
    {
     "heading": "5. What restaurants see",
     "paragraphs": [
-     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email or location. When you order takeout, they see how many of your takeout orders in the last 12 months you picked up or missed, nothing else. They never see your mobile number, not even for a takeout order: they reach you through a notification in FIG. Reviews you post are public and show your first name and last initial."
+     "When staff scan your QR, the restaurant sees your first name and last initial, the deal, and the time. Their dashboard shows totals, like \"42 redemptions this week\", not who you are. Restaurants never see your email or location. When you order takeout, they see how many of your takeout orders in the last 12 months you picked up or missed, nothing else. They never see your mobile number, not even for a takeout order: they reach you only through FIG, for example \"We're waiting\" on a takeout order. Reviews you post are public and show your first name and last initial."
     ]
    },
    {
@@ -162,7 +162,7 @@
     "paragraphs": [
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
-     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims, stamps and reviews can't come back. If you don't tick it, the records can't be linked to you again."
+     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again."
     ]
    },
    {

@@ -6,7 +6,9 @@ const { signInPage, appPage } = require("./_lib/pages");
 
 // FIX-LIST #160: a fresh nonce on every response, so only the page's own two scripts run here (no 'unsafe-inline' for scripts).
 // The site-wide policy from vercel.json still comes too, and a browser enforces both, so this only ever narrows it.
-const policy = (nonce) => ["default-src 'self'", `script-src 'nonce-${nonce}'`, "style-src 'self' 'unsafe-inline'", "img-src 'self' data: blob:",
+// img-src: restaurant photos are in FIG's own Supabase storage (#163: without it every admin thumbnail was blocked); that host only
+const photos = () => { try { return " " + new URL(process.env.SUPABASE_URL).origin; } catch { return ""; } };
+const policy = (nonce) => ["default-src 'self'", `script-src 'nonce-${nonce}'`, "style-src 'self' 'unsafe-inline'", `img-src 'self' data: blob:${photos()}`,
   "connect-src 'self'", "frame-src 'self'", "frame-ancestors 'none'", "base-uri 'none'", "form-action 'self'", "object-src 'none'"].join("; ");
 
 module.exports = async (req, res) => {

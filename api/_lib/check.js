@@ -417,6 +417,10 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     const script = /script-src ([^;]*)/.exec(csp)[1];
     assert.ok(n1 && n2 && n1 !== n2, "a new nonce on every response");
     assert.strictEqual(r1.headers["Cross-Origin-Opener-Policy"], "same-origin", "COOP same-origin on /admin");
+    // every host the admin's views draw images from: the restaurants' photos, in the project's own storage (#163), and no wildcard
+    const img = (/img-src ([^;]*)/.exec(csp) || [])[1] || "";
+    assert.ok(img.split(" ").includes(new URL(process.env.SUPABASE_URL).origin), "img-src allows the photos' host: " + img);
+    assert.ok(!/\*|https:(?!\/\/)/.test(img), "img-src names hosts, no wildcard or bare https: " + img);
     assert.ok(!/unsafe-inline|unsafe-eval|\*/.test(script), "no 'unsafe-inline', 'unsafe-eval' or wildcard for scripts: " + script);
     const tags = [...r1.body.matchAll(/<script\b([^>]*)>/g)].map((m) => m[1]);
     assert.ok(tags.length > 0 && tags.every((t) => t.includes('nonce="' + n1 + '"')), "every script tag carries the response's nonce");

@@ -9,6 +9,10 @@ The home page map
   Map tiles: OpenFreeMap (https://openfreemap.org), style from OpenMapTiles (https://openmaptiles.org)
   MapLibre GL JS (https://maplibre.org), BSD-3-Clause, loaded from jsDelivr
 
+The home page's scroll animations
+  GSAP and ScrollTrigger 3.12.5 (https://gsap.com), (c) GreenSock, under GSAP's standard licence: https://gsap.com/standard-license
+  Served from this site (/js/vendor/), unchanged
+
 Icons
   Drawn for FIG in its own designs, on a 24 px grid in the style of Lucide (https://lucide.dev, ISC licence:
   https://lucide.dev/license). No icon font or third-party icon file is loaded.

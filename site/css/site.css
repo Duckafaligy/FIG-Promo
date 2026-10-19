@@ -1,5 +1,6 @@
 @import url("/css/tokens.css");
-@font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans.woff2") format("woff2"), url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
+/* the font: English and French letters plus the symbols FIG draws (FIX-LIST #123, 39 KB, was 61); other scripts use the system font */
+@font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans-latin.woff2") format("woff2"), url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
 
 :root {
   --bg: #0A0D14; --bg-2: #0E121B; --card: #141925; --card-2: #1A2132; --line: #232A3A; --line-2: #2E3648;

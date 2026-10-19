@@ -6,7 +6,7 @@ run: python site/scripts/pages.py
 - Sections that also live on the home page (how it works, features, restaurants) are copied from index.html, so they never drift.
 - SITE_URL is the address search engines see: change it once figpromo.com is connected.
 """
-import datetime, html, json, os, pathlib, re, sys, urllib.request
+import datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 
@@ -162,8 +162,10 @@ BLOG_JS = '\n<script src="/js/blog-state.js" defer></script>'  # blog pages: hid
 
 
 # chrome="back": no site navbar, the page brings its own way back (the legal pages, user 2026-10-14: "remove it, and only add a back to landing page")
-def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png", chrome="nav"):
+def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywords="", og_type="website", trail=None, image="/assets/og.png", chrome="nav", seo=None):
     path = "/" + slug
+    # the search title: " · FIG" only while it fits in 60 (FIX-LIST #106); seo= is a shorter one for a long headline
+    full = (seo or title) + (" · FIG" if len(seo or title) + 6 <= 60 else "")
     if slug not in HIDDEN:
         extra_head = ld(crumbs([("Home", "/")] + (trail or []) + [(title, path)])) + extra_head
     current = path if path in dict(NAV_LINKS) else ""
@@ -172,13 +174,13 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>{e(title)} · FIG</title>
+  <title>{e(full)}</title>
   <meta name="description" content="{e(desc)}">
   <meta name="keywords" content="{e(keywords or BASE_KW)}">
   <meta name="robots" content="{'noindex' if slug in HIDDEN else 'index, follow, max-image-preview:large'}">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-{head_meta(path, title + " · FIG", desc, extra_head, og_type, image)}
+{head_meta(path, full, desc, extra_head, og_type, image)}
   <link rel="stylesheet" href="/css/site.css">
   <link rel="stylesheet" href="/css/pages.css">
 </head>
@@ -236,6 +238,8 @@ def faq_ld(qs):
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qs]}) + "</script>"
 
 
+# a search description where the first short line is too thin (FIX-LIST #106: /terms's was 46 characters)
+LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG."}
 LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms"), ("cookies", "Cookies")]
 
 
@@ -244,7 +248,11 @@ def para(p):
     return f'<p class="lg-bullet">{e(p[1:].strip())}</p>' if p.startswith("•") else f"<p>{e(p)}</p>"
 
 
+LEGAL_DATES = {}
+
+
 def legal(slug, doc, extra=""):
+    LEGAL_DATES["/" + slug] = datetime.datetime.strptime(doc["updated"].replace("Last updated ", ""), "%B %d, %Y").date().isoformat()  # for the sitemap
     short = "".join(f"<li>{e(x)}</li>" for x in doc["short"])
     secs = [(s["heading"], "".join(para(p) for p in s["paragraphs"])) for s in doc["sections"]]
     if extra:  # (title, html) sections only this page has
@@ -266,7 +274,7 @@ def legal(slug, doc, extra=""):
                 + "".join(f'<section class="lg-sec" id="{slug_id(h)}"><h2>{e(h)}</h2>{t}</section>' for h, t in secs)
                 + f'<div class="lg-ask"><div><b>{e(doc["contactAsk"])}</b><span>{e(doc["contactLine"])}</span></div><a class="btn" href="/contact">Contact us</a></div>')
     body = band + f'<section class="section lg lg-top"><div class="wrap lg-grid">{col}<article class="lg-doc">{doc_html}</article></div></section>'
-    page(slug, doc["title"], doc["short"][0], body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>', chrome="back")
+    page(slug, doc["title"], LEGAL_DESC.get(slug, doc["short"][0]), body, group="Legal", wide=True, extra_head='\n  <script src="/js/legal.js" defer></script>', chrome="back")
 
 
 L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))
@@ -328,17 +336,21 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment."),
+        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
-        ("How do I post a deal?", "In the app, open Deals and tap New. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
-        ("When does my page go live?", "As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first."),
-        ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect."),
+        ("How do I post a deal?", "In the app, open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
+        ("When does my page go live?", "It's ready as soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first. Diners see it from January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
+        ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect. The diner's card is charged when you accept the order; decline it and nothing is charged."),
+        ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
+        ("What if a scan looks wrong?", "Message us from Help within 14 days. We review it, and if it was a mistake we remove it."),
+        ("Can I pause takeout in a rush?", "Yes. Tap Takeout: On on your dashboard or Orders to pause new orders for 20 or 40 minutes or until tomorrow's opening, or to add prep time. Orders already in aren't touched, and it comes back on by itself."),
         ("How do I stop?", "There's nothing to cancel. Pause your deals, or close your account in Settings anytime."),
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
 # a real app screen under each section's title: the diner's QR, the restaurant's dashboard (tablet)
+SHOT_SIZE = {"qr": (780, 1688), "tdash": (1600, 1112)}  # the screenshots' own sizes, so the page doesn't shift as they load (FIX-LIST #107)
 HELP_SHOT = {"diners": ('qr', "The QR a diner shows at the counter", "phone"), "restaurants": ('tdash', "A restaurant's FIG dashboard", "wide")}
 help_html = hero("How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
                  '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>"
@@ -348,7 +360,7 @@ help_html = hero("How can we help?", "Short answers to the questions people ask 
 for k, (anchor, title, qs) in enumerate(HELP):
     head, sub = HELP_HEAD[anchor]
     help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
-                  f'<h2 class="h2">{head}</h2><p class="side">{sub}</p><figure class="help-shot {HELP_SHOT[anchor][2]}"><img src="/assets/screens/{HELP_SHOT[anchor][0]}.webp" alt="{HELP_SHOT[anchor][1]}"></figure></div>{qa_list(qs, 1 if k else 2)}</div></section>')
+                  f'<h2 class="h2">{head}</h2><p class="side">{sub}</p><figure class="help-shot {HELP_SHOT[anchor][2]}"><img src="/assets/screens/{HELP_SHOT[anchor][0]}.webp" alt="{HELP_SHOT[anchor][1]}" width="{SHOT_SIZE[HELP_SHOT[anchor][0]][0]}" height="{SHOT_SIZE[HELP_SHOT[anchor][0]][1]}"></figure></div>{qa_list(qs, 1 if k else 2)}</div></section>')
 help_html += '''<section class="section pg-tight"><div class="wrap"><div class="pg-dark">
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
@@ -528,7 +540,7 @@ for k, post in enumerate(POSTS):
                "image": SITE_URL + img, "mainEntityOfPage": SITE_URL + url, "wordCount": len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split()),
                "author": {"@type": "Organization", "name": "FIG", "url": SITE_URL},
                "publisher": {"@type": "Organization", "name": "FIG", "logo": {"@type": "ImageObject", "url": SITE_URL + "/assets/icons/icon-512.png"}}}
-    page(url[1:], post["title"], post.get("desc", post["dek"]), body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img,
+    page(url[1:], post["title"], post.get("desc", post["dek"]), body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img, seo=post.get("seo"),
          extra_head=ld(article) + faq_ld(post["faq"]))
     items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
     <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
@@ -578,6 +590,10 @@ page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("T
 POST_DATE = {f"/blog/{x['slug']}": x.get("updated", x["date"]) for x in POSTS}
 if POSTS:
     POST_DATE["/blog"] = max(POST_DATE.values())
+# every other page (FIX-LIST #107): the legal pages from their own "Last updated" line; the rest from the date their words last changed
+# ponytail: hand-kept dates for 4 pages; bump the one you edit (a generated date would change the file every hourly run)
+POST_DATE.update({"/": "2026-10-19", "/about": "2026-10-19", "/contact": "2026-10-19", "/help": "2026-10-19"})
+POST_DATE.update(LEGAL_DATES)
 lastmod = lambda p: f"<lastmod>{POST_DATE[p]}</lastmod>" if p in POST_DATE else ""
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"
 xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
@@ -620,5 +636,22 @@ if not (icons / "icon-512.png").exists():
     src = Image.open(ROOT / "Media Assets" / "Assets" / "brand" / "fig-logo-profile-cobalt-1080.png").convert("RGB")
     for name, size in (("apple-touch-icon.png", 180), ("icon-192.png", 192), ("icon-512.png", 512)):
         src.resize((size, size), Image.LANCZOS).save(icons / name, optimize=True)
+# every page asks for the site's own /css and /js files by their content (?v=<hash>), so a browser keeps them for a year
+# (vercel.json: immutable when ?v= is there) and a new deploy's pages ask for the new files (FIX-LIST #124). /app has its own.
+_ver = {}
+def _stamp(m):
+    path = m.group(2)
+    if path not in _ver:
+        f = SITE / path.lstrip("/")
+        _ver[path] = hashlib.sha256(f.read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:10] if f.is_file() else ""  # the same on a Windows (CRLF) and a Linux checkout
+    return m.group(1) + path + (f"?v={_ver[path]}" if _ver[path] else "") + m.group(3)
+_ASSET = re.compile(r'((?:src|href)=")(/(?:css|js)/[^"?#]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")')
+for _f in SITE.rglob("*.html"):
+    if _f.relative_to(SITE).parts[0] == "app":
+        continue
+    _t = _f.read_text(encoding="utf-8")
+    _n = _ASSET.sub(_stamp, _t)
+    if _n != _t:
+        _f.write_text(_n, encoding="utf-8")
 print(len(PAGES), "pages; sitemap.xml, robots.txt, site.webmanifest written")
 print(f"blog: published {len(POSTS)}, queued {len(QUEUED)}, taken down {len(TAKEN_DOWN & {x['slug'] for x in _manifest['posts']})}" + "".join(f"\n  {x['publish_at']}  {x['slug']}" for x in QUEUED))

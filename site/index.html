@@ -23,8 +23,8 @@
   <!-- /seo -->
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="/assets/PlusJakartaSans.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/site.css">
+  <link rel="preload" href="/assets/PlusJakartaSans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css?v=1d6d90183e">
   <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
 </head>
 <body>
@@ -51,7 +51,7 @@
 <main id="main">
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero-map" id="map" aria-hidden="true"><img src="/assets/map-fallback.webp" srcset="/assets/map-fallback-800.webp 800w, /assets/map-fallback.webp 1920w" sizes="100vw" alt="" class="map-fallback" fetchpriority="low"></div><a class="map-credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>
+    <div class="hero-map" id="map" aria-hidden="true"><img src="/assets/map-fallback.webp" srcset="/assets/map-fallback-800.webp 800w, /assets/map-fallback.webp 1920w" sizes="100vw" alt="" class="map-fallback" fetchpriority="low" width="1920" height="1200"></div><a class="map-credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>
     <div class="hero-fade" aria-hidden="true"></div>
     <div class="wrap hero-copy" id="join">
       <h1 class="display rise" aria-label="Fill your quiet hours.">
@@ -68,7 +68,7 @@
     </div>
     <div class="hero-phone" aria-hidden="true">
       <div class="phone hp-cycle"><img src="/assets/screens/home.webp" srcset="/assets/screens/home-390.webp 390w, /assets/screens/home.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="" fetchpriority="high" width="390" height="844"><img src="/assets/screens/map.webp" srcset="/assets/screens/map-390.webp 390w, /assets/screens/map.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="" width="390" height="844" loading="lazy" fetchpriority="low" decoding="async"><img src="/assets/screens/claim.webp" srcset="/assets/screens/claim-390.webp 390w, /assets/screens/claim.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="" width="390" height="844" loading="lazy" fetchpriority="low" decoding="async"><img src="/assets/screens/qr.webp" srcset="/assets/screens/qr-390.webp 390w, /assets/screens/qr.webp 780w" sizes="(min-width: 1100px) 320px, 300px" alt="" width="390" height="844" loading="lazy" fetchpriority="low" decoding="async"></div>
-      <div class="hp-sticker deal"><img src="/assets/food/chatime.webp" alt=""><span><b>2 for 1 bubble tea</b><small>Flash · ends in 54 min</small></span></div>
+      <div class="hp-sticker deal"><img src="/assets/food/chatime.webp" alt="" width="160" height="160"><span><b>2 for 1 bubble tea</b><small>Flash · ends in 54 min</small></span></div>
       <div class="hp-sticker saved"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#0A1020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>You saved $6.50</div>
     </div>
   </section>
@@ -97,9 +97,9 @@
             <button role="tab" aria-selected="false" data-tshot="2">Verified</button>
           </div>
           <div class="tablet">
-            <img src="/assets/screens/tdash.webp" alt="FIG business dashboard" loading="lazy" class="on">
-            <img src="/assets/screens/tscanner.webp" alt="FIG staff scanner" loading="lazy">
-            <img src="/assets/screens/tverified.webp" alt="Scan verified at the counter" loading="lazy">
+            <img src="/assets/screens/tdash.webp" alt="FIG business dashboard" loading="lazy" class="on" width="1600" height="1112">
+            <img src="/assets/screens/tscanner.webp" alt="FIG staff scanner" loading="lazy" width="1600" height="1112">
+            <img src="/assets/screens/tverified.webp" alt="Scan verified at the counter" loading="lazy" width="1600" height="1112">
           </div>
         </div>
         <article class="cell tall reveal" tabindex="0">
@@ -116,7 +116,7 @@
           </div></div>
           <div class="drop volt" aria-hidden="true"><div class="drop-in">
             <h4>Free. Every diner, every day.</h4>
-            <ul><li>Post a deal in a minute</li><li>Staff scan diners at the counter</li><li>Set a daily cap or pause anytime</li><li>Every location, free</li></ul>
+            <ul><li>Post a deal in a minute</li><li>Staff scan diners at the counter</li><li>Set a daily cap or pause anytime</li><li>Up to 2 locations, free</li></ul>
           </div></div>
         </article>
       </div>
@@ -124,7 +124,7 @@
         <article class="cell" tabindex="0">
           <div class="cell-text">
             <h3>Fill your quiet hours.</h3>
-            <p>Post a deal for your slow afternoons. Diners see it on the map right away.</p>
+            <p>Post a deal for your slow afternoons. Diners see it on the map once FIG opens to them, January 1, 2027.</p>
             <a class="try" href="/app/sign-up-business">List your restaurant <span aria-hidden="true">&rarr;</span></a>
           </div>
           <div class="panel cobalt"><video data-src="/assets/clips/quiethours.mp4" data-poster="/assets/clips/quiethours.jpg" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback"></video></div>
@@ -151,13 +151,13 @@
       <ul class="perks">
         <li class="reveal"><b>$0 per diner</b><span>Every scan is free. No commission on dine-in.</span></li>
         <li class="reveal"><b>2 locations free</b><span>All under one sign-in.</span></li>
-        <li class="reveal"><b>Live right away</b><span>Your page goes live when you finish setup.</span></li>
+        <li class="reveal"><b>Ready right away</b><span>Your page is ready when you finish setup; diners see it from January 1, 2027.</span></li>
         <li class="reveal"><b>You're in control</b><span>Set daily caps and hours. Pause anytime.</span></li>
       </ul>
       <div class="get-app reveal">
         <div>
           <h3>Get your restaurant on FIG</h3>
-          <p>Sign up on the web or in the app and choose "I own a restaurant". Setup takes a few minutes, and your page goes live as soon as you finish.</p>
+          <p>Sign up on the web or in the app and choose "I own a restaurant". Setup takes a few minutes, and your page is ready as soon as you finish; diners see it from January 1, 2027. You’ll be asked for an HST number: add it later if you like, since only takeout paid in the app needs it.</p>
         </div>
         <div class="badges"><a class="btn btn-lg" href="/app/sign-up-business">List your restaurant</a><span class="soon">App Store and Google Play: coming soon</span></div>
       </div>
@@ -273,11 +273,11 @@
       <div class="faq-list">
       <h3 class="qa-group">For restaurants</h3>
       <details class="qa" open><summary>When can my restaurant join?</summary><p>Today. Sign up on the web, set up your page and post your first deal. Diners join on January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills.</p></details>
-      <details class="qa"><summary>What does FIG cost restaurants?</summary><p>Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe&#x27;s card fee comes off the same payment.</p></details>
+      <details class="qa"><summary>What does FIG cost restaurants?</summary><p>Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe&#x27;s card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days.</p></details>
       <details class="qa"><summary>Do I need new equipment?</summary><p>No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in.</p></details>
-      <details class="qa"><summary>When does my page go live?</summary><p>As soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first.</p></details>
+      <details class="qa"><summary>When does my page go live?</summary><p>It’s ready as soon as you finish setup: photos, address, hours and cuisine. Nothing to pay first. Diners see it from January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later.</p></details>
       <h3 class="qa-group">For diners</h3>
-      <details class="qa"><summary>When does FIG open for diners?</summary><p>January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Restaurants are setting up first. <a href="#waitlist">Join the waitlist</a> and tick the box to get an email the day it opens.</p></details>
+      <details class="qa"><summary>When does FIG open for diners?</summary><p>January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Restaurants are setting up first. When FIG opens, people on the list get in first, in the order they joined, before it opens to everyone. <a href="#waitlist">Join the waitlist</a> and tick the box to get an email the day it opens.</p></details>
       <details class="qa"><summary>Is FIG free?</summary><p>Yes, completely. Deals are free to claim and use, and you never pay FIG anything.</p></details>
       <details class="qa"><summary>How do I use a deal?</summary><p>Claim it in the app. It waits on your Deals page for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it.</p></details>
       <details class="qa"><summary>Can someone use my screenshot?</summary><p>No. Your code changes every 5 minutes, so only the live code on your phone works.</p></details>
@@ -302,7 +302,7 @@
   <!-- CLOSING -->
   <section class="section closing-wrap">
     <div class="wrap"><div class="closing reveal">
-      <div><h2 class="h2">Eat out for less, from January 1.</h2><p>Diners join on January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Leave your email to hold your spot.</p></div>
+      <div><h2 class="h2">Eat out for less, from January 1.</h2><p>Diners join on January 1, 2027, in Markham first, expanding to Richmond Hill and Vaughan Mills. Leave your email to hold your spot. When FIG opens, people on the list get in first, in the order they joined, before it opens to everyone.</p></div>
       <div class="closing-side" id="waitlist">
         <form class="join" novalidate>
           <label class="field-pill light"><input aria-label="Email" name="email" type="email" autocomplete="email" placeholder="Your email" required maxlength="254"><button class="btn" type="submit">Join the waitlist</button></label>
@@ -343,18 +343,18 @@
 <!-- giant wordmark, Chatbase-style -->
 <div class="mega" aria-hidden="true">
   <div class="mega-word">FIG</div>
-  <span class="sticker s1"><img src="/assets/food/golden-lantern.webp" alt="" loading="lazy" decoding="async"></span>
-  <span class="sticker s2"><img src="/assets/food/chatime.webp" alt="" loading="lazy" decoding="async"></span>
-  <span class="sticker s3"><img src="/assets/food/kinton-ramen.webp" alt="" loading="lazy" decoding="async"></span>
-  <span class="sticker s4"><img src="/assets/food/dumpling-house.webp" alt="" loading="lazy" decoding="async"></span>
+  <span class="sticker s1"><img src="/assets/food/golden-lantern.webp" alt="" loading="lazy" decoding="async" width="160" height="160"></span>
+  <span class="sticker s2"><img src="/assets/food/chatime.webp" alt="" loading="lazy" decoding="async" width="160" height="160"></span>
+  <span class="sticker s3"><img src="/assets/food/kinton-ramen.webp" alt="" loading="lazy" decoding="async" width="160" height="160"></span>
+  <span class="sticker s4"><img src="/assets/food/dumpling-house.webp" alt="" loading="lazy" decoding="async" width="160" height="160"></span>
   <span class="tagline">Eat local. Save fast.</span>
 </div>
 
-<script src="/js/config.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="/js/map.js" defer></script>
-<script src="/js/fx.js" defer></script>
-<script src="/js/main.js" defer></script>
+<script src="/js/config.js?v=d578c3d2f8" defer></script>
+<script src="/js/vendor/gsap-3.12.5.min.js?v=28033e449a" defer></script>
+<script src="/js/vendor/ScrollTrigger-3.12.5.min.js?v=ad33c2df9a" defer></script>
+<script src="/js/map.js?v=8f01ba2a8f" defer></script>
+<script src="/js/fx.js?v=24c4070950" defer></script>
+<script src="/js/main.js?v=3983152d6c" defer></script>
 </body>
 </html>

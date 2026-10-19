@@ -233,17 +233,18 @@
       if (!m) return;
       // open to everyone and no launch date still ahead: nothing left to announce (FIX-LIST #56)
       if ((m.mode || (m.diners_open ? "on" : "off")) === "on" && !(m.opens_at && new Date(m.opens_at) > new Date())) { $(".wl-count", wl).hidden = true; return; }
-      let when = "FIG opens in Markham soon.";
+      let when = "FIG opens in Markham on January 1, 2027."; // no date set yet: the date the site gives everywhere (FIX-LIST #137)
       try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString("en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
       const line = $(".wl-line", wl);
-      if (line) line.textContent = `${when} ${m.founding_cap ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first."}`;
+      if (line) line.textContent = `${when} ${m.founding_cap && m.mode === "waitlist" ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first."}`;
       if (m.waitlist >= 25) $(".wl-count", wl).append(` ${m.waitlist.toLocaleString("en-CA")} people are already waiting.`);
     }).catch(() => {});
     email.addEventListener("input", () => email.removeAttribute("aria-invalid"));
     wl.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       if (wl.elements.website.value) return; // bots fill the hidden field
-      if (!email.value.trim() || !email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return say("Enter your email.", "err"); }
+      // an empty field and a mistyped one get their own words (FIX-LIST #136)
+      if (!email.value.trim() || !email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return say(email.value.trim() ? "That email doesn't look right." : "Enter your email.", "err"); }
       btn.disabled = true; say("");
       try {
         let src = ""; try { src = sessionStorage.getItem("fig.src") || ""; } catch {}
@@ -258,7 +259,8 @@
         } else say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");
       } catch (e) {
         btn.disabled = false;
-        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : "Something went wrong. Try again in a moment.", "err");
+        // no answer at all (fetch throws a TypeError) is the connection, not FIG
+        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : e instanceof TypeError || !navigator.onLine ? "You seem to be offline. Check your connection and try again." : "Something went wrong. Try again in a moment.", "err");
       }
     });
   }

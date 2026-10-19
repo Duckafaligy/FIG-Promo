@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fig-promo.vercel.app</loc><priority>1.0</priority></url>
-  <url><loc>https://fig-promo.vercel.app/terms</loc><priority>0.4</priority></url>
-  <url><loc>https://fig-promo.vercel.app/business-terms</loc><priority>0.4</priority></url>
-  <url><loc>https://fig-promo.vercel.app/privacy</loc><priority>0.4</priority></url>
-  <url><loc>https://fig-promo.vercel.app/cookies</loc><priority>0.4</priority></url>
-  <url><loc>https://fig-promo.vercel.app/about</loc><priority>0.8</priority></url>
-  <url><loc>https://fig-promo.vercel.app/contact</loc><priority>0.6</priority></url>
-  <url><loc>https://fig-promo.vercel.app/help</loc><priority>0.8</priority></url>
+  <url><loc>https://fig-promo.vercel.app</loc><lastmod>2026-10-19</lastmod><priority>1.0</priority></url>
+  <url><loc>https://fig-promo.vercel.app/terms</loc><lastmod>2026-10-17</lastmod><priority>0.4</priority></url>
+  <url><loc>https://fig-promo.vercel.app/business-terms</loc><lastmod>2026-10-19</lastmod><priority>0.4</priority></url>
+  <url><loc>https://fig-promo.vercel.app/privacy</loc><lastmod>2026-10-19</lastmod><priority>0.4</priority></url>
+  <url><loc>https://fig-promo.vercel.app/cookies</loc><lastmod>2026-10-19</lastmod><priority>0.4</priority></url>
+  <url><loc>https://fig-promo.vercel.app/about</loc><lastmod>2026-10-19</lastmod><priority>0.8</priority></url>
+  <url><loc>https://fig-promo.vercel.app/contact</loc><lastmod>2026-10-19</lastmod><priority>0.6</priority></url>
+  <url><loc>https://fig-promo.vercel.app/help</loc><lastmod>2026-10-19</lastmod><priority>0.8</priority></url>
   <url><loc>https://fig-promo.vercel.app/blog/train-staff-honour-fig-deal</loc><lastmod>2026-10-18</lastmod><priority>0.6</priority></url>
   <url><loc>https://fig-promo.vercel.app/blog/compare-restaurant-deals-worth-it</loc><lastmod>2026-10-17</lastmod><priority>0.6</priority></url>
   <url><loc>https://fig-promo.vercel.app/blog/takeout-order-math-what-you-keep</loc><lastmod>2026-10-16</lastmod><priority>0.6</priority></url>

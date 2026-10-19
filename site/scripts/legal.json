@@ -239,7 +239,7 @@
      "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. A takeout order the diner pays for at your counter has no FIG fee.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
      "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its 5% fee, and we’ll tell you at least 30 days before that starts.",
-     "• Paid extras (FIG Premium) aren't available yet. If we offer them, we'll show the price and what's included before you buy anything."
+     "• Paid extras aren't available yet. If we offer any, we'll show the price and what's included before you buy anything."
     ]
    },
    {

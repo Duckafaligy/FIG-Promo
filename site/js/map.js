@@ -7,12 +7,14 @@
   const PHOTOS = ["golden-lantern", "chatime", "kinton-ramen", "seoul-house", "dumpling-house", "brew-lab", "sakura-house", "pho-hung", "bowl-lab", "noodle-bar", "wok-bar", "burger-co", "alt-tacos", "alt-pizza", "alt-hotpot", "alt-banhmi"]; // Unsplash License, see assets/food/CREDITS.txt
   window.FIG_PINS = PHOTOS.map((p) => `/assets/pins/${p}.jpg`);
   if (!box) return;
-  // the still map paints first; MapLibre (≈270 KB) loads once the page is idle, so it never delays the hero text
-  const CDN = "https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl";
+  // the still map paints first; MapLibre loads once the page is idle, so it never delays the hero text. The same pinned build as
+  // the web app (6.11.2, /app/maplibre-load.js and its worker), so a visitor who goes on to /app doesn't download it twice (FIX-LIST #127)
+  const LIB = "https://cdn.jsdelivr.net/npm/maplibre-gl@6.11.2/dist";
   const later = window.requestIdleCallback || ((f) => setTimeout(f, 1200));
   later(() => {
-    const css = document.createElement("link"); css.rel = "stylesheet"; css.href = CDN + ".css"; document.head.appendChild(css);
-    const js = document.createElement("script"); js.src = CDN + ".js"; js.onload = start; document.head.appendChild(js);
+    const css = document.createElement("link"); css.rel = "stylesheet"; css.href = LIB + "/maplibre-gl.css"; document.head.appendChild(css);
+    addEventListener("fig-maplibre", start, { once: true });
+    const js = document.createElement("script"); js.type = "module"; js.src = "/app/maplibre-load.js"; document.head.appendChild(js);
   }, { timeout: 2500 });
 
   function start() {

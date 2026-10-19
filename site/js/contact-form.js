@@ -10,7 +10,7 @@
     ev.preventDefault();
     if (form.elements.website.value) return; // bots fill the hidden field
     const { email, topic, body } = form.elements;
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) return bad(email, "Enter your email, so we can reply.");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) return bad(email, email.value.trim() ? "That email doesn't look right." : "Enter your email, so we can reply.");
     if (body.value.trim().length < 5) return bad(body, "Write a few words about what you need.");
     if (!cfg.supabaseUrl || !cfg.supabaseKey) return say("Messages open in the next few days. Check back soon!", "err");
     btn.disabled = true; say(""); btn.textContent = "Sending…";
@@ -28,7 +28,7 @@
       form.append(done); form.classList.add("sent");
     } catch (e) {
       btn.disabled = false; btn.textContent = "Send message";
-      say(e.message === "slow" ? "That's a lot of messages at once. Try again in an hour." : "Something went wrong. Try again in a moment.", "err");
+      say(e.message === "slow" ? "That's a lot of messages at once. Try again in an hour." : e instanceof TypeError || !navigator.onLine ? "You seem to be offline. Check your connection and try again." : "Something went wrong. Try again in a moment.", "err");
     }
   });
 })();

@@ -240,6 +240,10 @@
       if (m.waitlist >= 25) $(".wl-count", wl).append(` ${m.waitlist.toLocaleString("en-CA")} people are already waiting.`);
     }).catch(() => {});
     email.addEventListener("input", () => email.removeAttribute("aria-invalid"));
+    // joining needs the email consent (FIX-LIST #103): Join stays off until the box is ticked (the database refuses without it too)
+    const ok = () => { btn.disabled = !wl.elements.consent.checked; };
+    wl.elements.consent.addEventListener("change", ok); ok();
+    addEventListener("pageshow", ok); // back/forward restores a ticked box: Join follows it
     wl.addEventListener("submit", async (ev) => {
       ev.preventDefault();
       if (wl.elements.website.value) return; // bots fill the hidden field
@@ -256,11 +260,12 @@
         if (said === "ok-late") {
           say("You're on the list. Founding members are in now; we'll let you in at the public launch. Already a founding member? ", "ok");
           const a = document.createElement("a"); a.href = "/app/sign-in"; a.textContent = "Sign in"; msg.appendChild(a);
-        } else say(wl.elements.consent.checked ? "You're on the list. We'll email you the day FIG opens." : "You're on the list.", "ok");
+        } else say("You're on the list. We'll email you the day FIG opens.", "ok");
       } catch (e) {
         btn.disabled = false;
         // no answer at all (fetch throws a TypeError) is the connection, not FIG
-        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : e instanceof TypeError || !navigator.onLine ? "You seem to be offline. Check your connection and try again." : "Something went wrong. Try again in a moment.", "err");
+        btn.disabled = !wl.elements.consent.checked;
+        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : /consent-needed/.test(e.message) ? "Tick the box to agree to emails from FIG, then join." : e instanceof TypeError || !navigator.onLine ? "You seem to be offline. Check your connection and try again." : "Something went wrong. Try again in a moment.", "err");
       }
     });
   }

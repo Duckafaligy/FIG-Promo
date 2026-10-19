@@ -246,5 +246,26 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
   await assert.rejects(db.setFoundingUntil("2020-01-01"), /bad until/, "until takes only now or null");
   await db.setFoundingUntil(null); assert.ok(!table.settings.has("founding_until"), "clearing until removes it");
   console.log("ok: launch plan settings: empty = everyone, 0 / junk refused, dates clear");
+  // the waitlist emails' unsubscribe links (FIX-LIST #103): a token per email, only it unsubscribes, the same page for anything
+  {
+    const unsub = require("./unsub"), dbm = require("./db"), handler = require("../unsubscribe");
+    const done = []; const real = dbm.waitlistUnsubscribe; dbm.waitlistUnsubscribe = async (e) => { done.push(e); return { found: true }; };
+    const t = unsub.token("Ana@Example.com");
+    assert.strictEqual(t, unsub.token(" ana@example.com "), "one token per address, however it's typed");
+    assert.ok(unsub.valid("ana@example.com", t) && !unsub.valid("bo@example.com", t) && !unsub.valid("ana@example.com", t.slice(0, -1) + (t.endsWith("A") ? "B" : "A")) && !unsub.valid("ana@example.com", ""), "only its own token");
+    assert.ok(unsub.link("https://fig-promo.vercel.app", "Ana@Example.com").endsWith("/api/unsubscribe?e=ana%40example.com&t=" + t));
+    const hit = async (method, e, tok, ipAddr = "7.7.7.7") => { const res = { statusCode: 0, headers: {}, setHeader(k, v) { this.headers[k] = v; }, end(b) { this.body = b; } };
+      await handler({ method, url: "/api/unsubscribe?e=" + encodeURIComponent(e) + "&t=" + encodeURIComponent(tok), headers: { "x-real-ip": ipAddr } }, res); return res; };
+    const g = await hit("GET", "ana@example.com", t);
+    assert.ok(g.statusCode === 200 && /<form method="post"/.test(g.body) && done.length === 0, "opening the link changes nothing (a mail scanner may open it)");
+    const bad = await hit("POST", "bo@example.com", t), good = await hit("POST", "ana@example.com", t);
+    assert.deepStrictEqual(done, ["ana@example.com"], "only the right token unsubscribes");
+    assert.strictEqual(bad.body.replace(/bo@example\.com/g, "X"), good.body.replace(/ana@example\.com/g, "X"), "the same answer either way (no probing)");
+    assert.ok(!/<script/i.test((await hit("GET", "<script>x</script>@a.b", "z")).body), "the address is escaped");
+    for (let i = 0; i < 31; i++) await hit("POST", "ana@example.com", t, "6.6.6.6");
+    assert.strictEqual(done.length, 31, "30 an hour per address, then nothing more is done");
+    dbm.waitlistUnsubscribe = real;
+    console.log("ok: unsubscribe links: one token per address, GET changes nothing, only the right token unsubscribes, same answer, escaped, rate-limited");
+  }
   console.log("ok: admin auth");
 })().catch((e) => { console.error(e); process.exit(1); });

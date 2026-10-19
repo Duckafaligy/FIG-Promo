@@ -269,6 +269,18 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ps-table th, .ps-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); line-height: 1.45; color: var(--ink); vertical-align: top; }
 .ps-table th { font-weight: 800; background: var(--ice); }
 .ps-table tr:last-child td { border-bottom: 0; }
+/* a phone: each row is a card, each cell a "label / value" pair, the header kept for screen readers only (#203: nothing cut off) */
+@media (max-width: 640px) {
+  .ps-table { overflow: visible; border: 0; border-radius: 0; background: none; }
+  .ps-table table, .ps-table tbody, .ps-table tr, .ps-table td { display: block; width: 100%; min-width: 0; }
+  .ps-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .ps-table tr { margin-bottom: 12px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; }
+  .ps-table tr:last-child { margin-bottom: 0; }
+  .ps-table td, .ps-table tr:last-child td { padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .ps-table td:last-child, .ps-table tr:last-child td:last-child { border-bottom: 0; }
+  .ps-table td:first-child { background: var(--ice); font-weight: 800; }
+  .ps-table td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-size: 13px; font-weight: 700; color: var(--muted); }
+}
 /* a soft tint, a hairline all round, the bold title as the lead-in (no side stripe: the user turned that look down) */
 .callout { padding: 20px 24px; border-radius: 20px; background: var(--ice); border: 1px solid rgba(30, 94, 255, .18); }
 .callout b { display: block; font-size: 17px; font-weight: 800; color: var(--cobalt); margin-bottom: 6px; }

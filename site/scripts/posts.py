@@ -2,7 +2,7 @@
 # Every fact about FIG here is true of the app today (src/content/help.ts, Settings → Get paid, the business terms).
 # Every outside fact has its source URL in a comment next to it. No invented numbers, customers, quotes or restaurants:
 # worked examples say they're examples, with round numbers anyone can redo with their own.
-# Fields: slug, screen (the share image), title, date (first published), updated, topic, dek, desc (optional), keywords,
+# Fields: slug, screen (the share image), title, date (first published), updated, topic, group (one of GROUPS), dek, desc (optional), keywords,
 # points (the "Key takeaways" box), sections [(h2, html)], faq [(q, a)] (also the FAQPage data), publish_at (queued posts:
 # ISO with its offset; pages.py leaves a post out until then). Inside sections: plain <table>, and
 # <div class="callout tip|example|math"><b>Title</b>…</div>.
@@ -24,8 +24,18 @@
 
 UPDATED = "2026-10-14"
 
+# The blog's four groups (FIX-LIST #145): /blog is laid out by them (a section each, its anchor the slug) and Home's
+# "Good to know" cards link to them. Every post has a `group`, one of these slugs (pages.py stops the build otherwise).
+# The descriptions are true today; no "free for restaurants".
+GROUPS = [
+    ("eat-out-for-less", "Eat out for less", "How deals on FIG work, and how to tell a good one."),
+    ("fill-quiet-hours", "Fill your quiet hours", "Deal ideas for slow hours, the math behind them, and getting your team ready."),
+    ("takeout-and-money", "Takeout & money", "What a takeout order leaves a restaurant, with the fees and HST in plain numbers."),
+    ("fig-in-markham", "FIG in Markham", "Local guides, and why FIG starts here."),
+]
+
 POSTS = [
-    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated=UPDATED, topic="News",
+    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated=UPDATED, topic="News", group="fig-in-markham",
          dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, free for restaurants to post deals, and no cut of a dine-in bill.",
          desc="Why FIG exists: a restaurant deals app for Markham that's free for diners, free for restaurants to post deals and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
@@ -63,7 +73,7 @@ POSTS = [
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
               ("Do I need the app to use FIG?", "You can use FIG on the web at fig-promo.vercel.app/app today. The App Store and Google Play apps are coming soon.")]),
 
-    dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", updated=UPDATED, topic="For restaurants",
+    dict(slug="how-fig-makes-money", screen="tdash", title="FIG is free for restaurants. Here's how we make money", date="2026-10-07", updated=UPDATED, topic="For restaurants", group="takeout-and-money",
          dek="Listing, deals and scans are free on FIG, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.",
          desc="Free for restaurants: listing, deals and scans, no commission on dine-in. FIG earns 5% of in-app takeout.",
          keywords="FIG pricing, free restaurant app, no commission restaurant app, restaurant deals app Markham",
@@ -115,7 +125,7 @@ POSTS = [
     #   York University Markham Campus in Markham Centre, opened Fall 2024: https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/ ;
     #   Toogood Pond steps from Main Street Unionville: https://www.blogto.com/travel/2023/03/unionville-ontario/ ;
     #   communities (Unionville, Markham Village, Cornell, Milliken, Cathedraltown): https://en.wikipedia.org/wiki/History_of_Markham,_Ontario
-    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated=UPDATED, topic="For diners",
+    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated=UPDATED, topic="For diners", group="fig-in-markham",
          dek="A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them.",
          desc="How to eat out for less in Markham, Ontario: when restaurants post deals, where to look, and how to find and use them on FIG.",
          keywords="restaurant deals Markham, Markham food deals, cheap eats Markham, Markham restaurants, Unionville restaurants, Pacific Mall food",
@@ -155,7 +165,7 @@ POSTS = [
               ("Do claimed deals expire?", "Not on their own. A claim works for as long as the deal runs. It ends only when the restaurant ends the deal, or a flash or dated deal is over."),
               ("Is FIG only in Markham?", "Markham first, expanding to Richmond Hill and Vaughan Mills.")]),
 
-    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated=UPDATED, topic="For restaurants",
+    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated=UPDATED, topic="For restaurants", group="takeout-and-money",
          dek="Delivery apps charge restaurants a percentage of every order. FIG charges nothing per dine-in diner and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
          desc="Delivery apps take a share of every order. FIG takes nothing on dine-in and 5% of the food on in-app takeout. The published Canadian rates, side by side.",
          keywords="delivery app commission Canada, Uber Eats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
@@ -207,7 +217,7 @@ POSTS = [
               ("Does paying FIG improve my ranking?", "No. Nothing you pay FIG moves a restaurant up in search or on the map.")]),
 
     # Food cost 28-32% (Resy/US Foods) and StatCan 3.6% margin: sources at the top
-    dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", updated=UPDATED, topic="For restaurants",
+    dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", updated=UPDATED, topic="For restaurants", group="fill-quiet-hours",
          dek="Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away.",
          desc="Low-cost ways for independent restaurants to fill quiet afternoons and weeknights, with the math to make sure a deal adds money.",
          keywords="fill slow hours restaurant, restaurant marketing ideas, slow restaurant days, increase restaurant traffic, Markham restaurant marketing, happy hour ideas",
@@ -248,7 +258,7 @@ POSTS = [
     # York University Markham Campus (Markham Centre, opened Fall 2024): https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/
     # Pacific Mall Heritage Town food court: https://en.wikipedia.org/wiki/Pacific_Mall
     # Ontario $4 prepared food point-of-sale rebate (GI-064): source at the top
-    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated=UPDATED, topic="For diners",
+    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated=UPDATED, topic="For diners", group="fig-in-markham",
          dek="How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free.",
          desc="How Markham students can eat out for less: when deals show up, setting a real budget, deciding as a group, and why FIG is free.",
          keywords="student food deals Markham, cheap eats for students, after school food Markham, budget restaurants Markham, bubble tea deals Markham, York University Markham food",
@@ -282,7 +292,7 @@ POSTS = [
               ("Is food under $4 really taxed less?", "In Ontario, yes: qualifying prepared food and drinks sold for $4 or less in total get the 8% provincial part of the HST rebated at the till, so only the 5% GST applies."),
               ("When can I start using FIG deals?", "Deals start in Markham on January 1, 2027. You can explore the map and restaurants now.")]),
 
-    dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", updated=UPDATED, topic="For diners",
+    dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", updated=UPDATED, topic="For diners", group="eat-out-for-less",
          dek="Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends.",
          desc="Flash deals are short restaurant deals posted during quiet spells. How they work, how to catch one, and what happens to a claim when the timer ends.",
          keywords="flash deals restaurants, last minute restaurant deals, happy hour Markham, real time food deals, flash deal app",
@@ -319,7 +329,7 @@ POSTS = [
               ("Can a restaurant post a flash deal for takeout?", "A restaurant chooses whether each deal is dine-in only or also takeout."),
               ("Do flash deals cost restaurants anything?", "No. Posting deals and scanning diners on FIG is free.")]),
 
-    dict(slug="takeout-without-delivery-fees", screen="qr", title="Takeout with a deal, pick up, skip the delivery fees", date="2026-10-04", updated=UPDATED, topic="For diners",
+    dict(slug="takeout-without-delivery-fees", screen="qr", title="Takeout with a deal, pick up, skip the delivery fees", date="2026-10-04", updated=UPDATED, topic="For diners", group="takeout-and-money",
          dek="Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late.",
          desc="Some FIG deals let you order takeout from a Markham restaurant and pick it up yourself, with no delivery or service fees. How it works and what it costs.",
          keywords="takeout deals Markham, pickup deals, no delivery fees, takeout pickup Markham, order ahead Markham",
@@ -352,7 +362,7 @@ POSTS = [
     # ---------------------------------------------------------------- the first batch of new posts (user 2026-10-14: "just post it";
     # the review gate is gone: a post without publish_at is live, and the admin page can hide one later)
 
-    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", topic="For diners",
+    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", topic="For diners", group="eat-out-for-less",
          dek="Everything that happens between seeing a deal and paying the bill: claiming, your Deals page, the code at the counter, takeout, what happens when a deal ends, and rating the visit.",
          desc="From seeing a deal to paying the bill: claiming, your Deals page, the code at the counter, takeout, when a deal ends, and rating the visit.",
          keywords="how restaurant deals work, claim restaurant deal, restaurant deal app how to, FIG voucher, QR code restaurant deal",
@@ -390,7 +400,7 @@ POSTS = [
               ("Is FIG free?", "Yes, for every diner: no subscription, no fees and no ads.")]),
 
     # StatCan 2023 margin 3.6%; food cost 28-32% (Resy): sources at the top
-    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", topic="For restaurants",
+    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
          dek="A slow-hour deal makes money when it fills seats that would otherwise be empty and covers its food cost. Here's the arithmetic: contribution per plate, the worst case, the cap, and how to tell new diners from regulars who'd have come anyway.",
          desc="A slow-hour deal makes money when it fills empty seats and covers its food cost. The math: contribution per plate, the worst case and the daily cap.",
          keywords="happy hour deal restaurant profit, slow hour promotion, restaurant deal math, restaurant discount profitability, off-peak restaurant deals",
@@ -431,7 +441,7 @@ POSTS = [
               ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners is free, with no fee per diner.")]),
 
     # CRA: a store coupon reduces the price before GST/HST (RC4022): source at the top
-    dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-14", topic="For restaurants",
+    dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
          dek="The four kinds of restaurant deal, side by side: what each costs you, what it feels like to a diner, and when to use it. With worked examples on a $14 dish.",
          desc="The four kinds of restaurant deal side by side: what each costs you, how it feels to a diner and when to use it, worked on a $14 dish.",
          keywords="percent off vs dollar off, 2 for 1 deal restaurant, BOGO restaurant, restaurant promotion ideas, restaurant deal pricing",
@@ -479,7 +489,7 @@ POSTS = [
 
     # Stripe 2.9% + CA$0.30: source at the top. HST number format 123456789 RT 0001 (9-digit BN, RT = GST/HST program, 4-digit
     #   reference): https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4022/general-information-gst-hst-registrants.html
-    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", topic="For restaurants",
+    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
          dek="A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply.",
          desc="A step-by-step guide for owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts.",
          keywords="FIG restaurant setup, restaurant menu app, set up takeout restaurant, Stripe payouts restaurant, HST number restaurant app",
@@ -522,7 +532,7 @@ POSTS = [
     #   https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/account-register-voluntarily.html
     # Ontario HST 13% and the $4 prepared food point-of-sale rebate (GI-064); coupons before tax (RC4022); BN format (RC4022):
     #   sources at the top
-    dict(slug="hst-registration-small-restaurants-ontario", screen="tdash", title="HST registration for small restaurants in Ontario: the $30,000 rule explained", date="2026-10-14", topic="For restaurants",
+    dict(slug="hst-registration-small-restaurants-ontario", screen="tdash", title="HST registration for small restaurants in Ontario: the $30,000 rule explained", date="2026-10-14", topic="For restaurants", group="takeout-and-money",
          dek="When a small Ontario restaurant has to register for HST, what changes when it does, and how HST works on deals and takeout. Plain-language, with the Canada Revenue Agency's own rules linked.",
          desc="When a small Ontario restaurant must register for HST, what changes when it does, and how HST works on deals and takeout, with CRA's rules linked.",
          seo="HST registration for small Ontario restaurants: $30,000 rule",
@@ -564,7 +574,7 @@ POSTS = [
               ("Do I need an HST number to use FIG?", "Only for takeout, which diners pay for in the app. Deals and scans work without one."),
               ("Is this tax advice?", "No. It's general information with links to the CRA. Talk to an accountant about your own situation.")]),
 
-    dict(slug="group-dining-deals", screen="map", title="Eating out as a group: picking a place, deals and splitting the bill", date="2026-10-14", topic="For diners",
+    dict(slug="group-dining-deals", screen="map", title="Eating out as a group: picking a place, deals and splitting the bill", date="2026-10-14", topic="For diners", group="eat-out-for-less",
          dek="How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic.",
          desc="Getting a group from 'where should we eat?' to a table: deciding fast, making deals work for everyone and splitting the bill fairly.",
          seo="Eating out as a group: deals and splitting the bill",
@@ -597,7 +607,7 @@ POSTS = [
               ("When is the best time to eat out as a group?", "Quiet hours, like early weeknight dinners: more room, an easier kitchen, and more deals."),
               ("Do deals apply to the whole table?", "It depends on the deal: some are on specific dishes, some on the whole order. Check the deal, or call the restaurant before you go.")]),
 
-    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-14", topic="For diners",
+    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-14", topic="For diners", group="eat-out-for-less",
          dek="Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute.",
          desc="Reviews on FIG come only from diners whose visit was scanned. How ratings, likes and replies work, and how to read a page in a minute.",
          keywords="restaurant reviews, trustworthy restaurant reviews, how to read restaurant reviews, verified reviews restaurant app, FIG reviews",
@@ -635,7 +645,7 @@ POSTS = [
     # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
 
     # Stripe 2.9% + CA$0.30, Ontario HST 13%: sources at the top. All fee arithmetic below is on the food after any deal, tax added on top.
-    dict(slug="takeout-order-math-what-you-keep", screen="tscanner", title="Takeout order math: what a restaurant keeps on a $12, $20, $40 or $60 order", date="2026-10-16", publish_at="2026-10-16T12:00:00-04:00", topic="For restaurants",
+    dict(slug="takeout-order-math-what-you-keep", screen="tscanner", title="Takeout order math: what a restaurant keeps on a $12, $20, $40 or $60 order", date="2026-10-16", publish_at="2026-10-16T12:00:00-04:00", topic="For restaurants", group="takeout-and-money",
          dek="On FIG, takeout paid in the app costs 5% of the food plus Stripe's card fee. The $0.30 part of that fee is fixed, so small orders cost a bigger share. Here are the numbers on four order sizes, and what to do about them.",
          desc="In-app takeout on FIG costs 5% of the food plus Stripe's card fee. Its fixed $0.30 weighs more on small orders: the numbers on four order sizes.",
          seo="Takeout order math: what a restaurant keeps per order",
@@ -682,7 +692,7 @@ POSTS = [
               ("Can I stop takeout when the kitchen is busy?", "Yes. Pause takeout for a set time or until tomorrow, or add prep time, in one tap."),
               ("Is dine-in with a deal charged the same way?", "No. A diner who uses your deal at the counter pays you directly and FIG takes nothing from that bill.")]),
 
-    dict(slug="compare-restaurant-deals-worth-it", screen="claim", title="Is it a good deal? How to compare restaurant deals", date="2026-10-17", publish_at="2026-10-17T12:00:00-04:00", topic="For diners",
+    dict(slug="compare-restaurant-deals-worth-it", screen="claim", title="Is it a good deal? How to compare restaurant deals", date="2026-10-17", publish_at="2026-10-17T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
          dek="2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway.",
          desc="2-for-1, 20% off, $3 off or a free drink: which saves the most? A plain way to compare restaurant deals, with worked examples.",
          keywords="is this restaurant deal worth it, compare restaurant deals, 2 for 1 vs percent off, how to save money eating out, restaurant discount math, Markham restaurant deals",
@@ -725,7 +735,7 @@ POSTS = [
               ("What if a deal runs out before I get there?", "A daily cap can end a deal for the day, and a flash deal ends with its timer. An expired claim never counts against you."),
               ("How do I check that a deal fits my order?", "Open the deal and check the dishes, days, hours and whether it is dine in or takeout. You can also call the restaurant before you go.")]),
 
-    dict(slug="train-staff-honour-fig-deal", screen="tscanner", title="Train your staff to honour a FIG deal in 10 minutes", date="2026-10-18", publish_at="2026-10-18T12:00:00-04:00", topic="For restaurants",
+    dict(slug="train-staff-honour-fig-deal", screen="tscanner", title="Train your staff to honour a FIG deal in 10 minutes", date="2026-10-18", publish_at="2026-10-18T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
          dek="A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet.",
          desc="A ten-minute training plan so counter staff know what to do with a FIG deal: the two ways to scan, what to check, what to say, and a cheat sheet.",
          keywords="train restaurant staff, scan QR code restaurant deal, restaurant counter code, staff training restaurant promotion, FIG for restaurants, honour restaurant coupon",
@@ -774,7 +784,7 @@ POSTS = [
               ("Do staff need to count how many times a deal was used?", "No. The daily cap you set stops the deal automatically once it has been used that many times."),
               ("Do restaurants see diners' phone numbers?", "No. On orders and reviews you see a first name and last initial.")]),
 
-    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", publish_at="2026-10-19T12:00:00-04:00", topic="For diners",
+    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", publish_at="2026-10-19T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order.",
          desc="Halal, vegetarian, vegan, gluten-free or an allergy: using diet filters as a start, and what to ask a restaurant before you go and when you order.",
          seo="Eating out with dietary needs or allergies in Markham",

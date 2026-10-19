@@ -26,11 +26,28 @@
   }));
 })();
 
-// blog: topic filter and share button
-document.querySelectorAll("[data-topic]").forEach((b) => b.tagName === "BUTTON" && b.addEventListener("click", () => {
-  document.querySelectorAll(".blog-filter button").forEach((x) => x.setAttribute("aria-selected", String(x === b)));
-  document.querySelectorAll(".post-card").forEach((c) => (c.hidden = b.dataset.topic !== "All" && c.dataset.topic !== b.dataset.topic));
-}));
+// blog: one group at a time (FIX-LIST #145). The groups are plain sections with their own anchors (/blog#fill-quiet-hours),
+// so without this script every link still lands on its group; with it, a pill or an anchor shows just that group
+(() => {
+  const pills = document.querySelectorAll(".blog-filter a[data-group]");
+  if (!pills.length) return;
+  const band = document.querySelector(".bl-feature-band");
+  const show = (g, jump) => {
+    pills.forEach((p) => p.setAttribute("aria-current", String(p.dataset.group === g)));
+    document.querySelectorAll(".bl-group").forEach((s) => (s.hidden = g !== "all" && s.id !== g));
+    if (band) band.hidden = g !== "all";
+    if (jump && g !== "all") document.getElementById(g).scrollIntoView({ block: "start" });
+  };
+  const fromHash = () => { const g = location.hash.slice(1); show(document.getElementById(g)?.classList.contains("bl-group") ? g : "all", true); };
+  pills.forEach((p) => p.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    const g = p.dataset.group;
+    history.replaceState(null, "", g === "all" ? location.pathname : "#" + g);
+    show(g, false);
+  }));
+  addEventListener("hashchange", fromHash);
+  fromHash();
+})();
 document.querySelectorAll("[data-share]").forEach((b) => b.addEventListener("click", async () => {
   const data = { title: document.title, url: location.href };
   try {

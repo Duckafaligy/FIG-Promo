@@ -25,7 +25,7 @@
 .hs-none { margin: 12px 4px 0; font-size: 15px; color: var(--muted); }
 .hs-none a { color: var(--cobalt); font-weight: 700; }
 .pg-pills a:active, .pg-pills button:active { transform: scale(.96); }
-.pg-pills [aria-current="page"], .pg-pills [aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.pg-pills [aria-current="page"], .pg-pills [aria-current="true"], .pg-pills [aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 
 /* "the short version" / "key points": a check list on ice */
 .pg-short { display: grid; gap: 14px; padding: 30px 34px; border-radius: 24px; background: var(--ice); }
@@ -283,3 +283,9 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ps-author b { display: block; font-size: 16px; font-weight: 800; color: var(--ink); }
 .ps-author p { margin: 4px 0 0; font-size: 15px !important; line-height: 1.55 !important; }
 .ps-author a { color: var(--cobalt); font-weight: 700; }
+
+/* the blog by group (FIX-LIST #145): a plain section per group, its anchor the group's slug; sub.js shows one at a time */
+.bl-group { padding: 56px 0 8px; scroll-margin-top: 96px; }
+.bl-feature-band + .bl-group { padding-top: 72px; }
+.bl-gh { margin: 0; }
+.bl-gd { margin: 10px 0 26px; max-width: 40em; color: var(--muted); font-size: 17px; line-height: 1.6; }

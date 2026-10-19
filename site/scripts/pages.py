@@ -9,6 +9,13 @@ run: python site/scripts/pages.py
 import datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
+from posts import GROUPS
+
+# every post belongs to exactly one of the blog's groups (FIX-LIST #145): a missing or unknown one stops the build, so no post
+# (a queued one included) can go out ungrouped
+_bad = [x["slug"] for x in POSTS if x.get("group") not in {g for g, _, _ in GROUPS}]
+if _bad:
+    sys.exit(f"pages.py: these posts have no group (or one that isn't in GROUPS): {', '.join(_bad)}")
 
 SITE_URL = "https://fig-promo.vercel.app"
 SITE = pathlib.Path(__file__).resolve().parents[1]
@@ -77,8 +84,8 @@ _unlink = (lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{"|".join(re.escape(x) fo
 # what the admin's Blog page lists (it reads this file from GitHub): every post, live, queued or taken down, newest first.
 # No clock in it, so it only changes when the posts or the overrides do.
 _words = lambda post: len(re.sub(r"<[^>]+>", " ", " ".join(t for _, t in post["sections"])).split())
-_manifest = {"generated": max((x["date"] for x in POSTS), default=""), "posts": [
-    {"slug": x["slug"], "title": x["title"], "topic": x["topic"], "date": x["date"], "publish_at": x["source_publish_at"],
+_manifest = {"generated": max((x["date"] for x in POSTS), default=""), "groups": [g for g, _, _ in GROUPS], "posts": [
+    {"slug": x["slug"], "title": x["title"], "topic": x["topic"], "group": x["group"], "date": x["date"], "publish_at": x["source_publish_at"],
      "status": "taken-down" if x["slug"] in TAKEN_DOWN else "live" if live(x) else "queued", "words": _words(x), "dek": x["dek"]}
     for x in sorted(POSTS, key=lambda x: (x["date"], x.get("source_publish_at") or ""), reverse=True)]}
 _mtext = json.dumps(_manifest, indent=1, ensure_ascii=False) + "\n"
@@ -145,6 +152,34 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
 index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. Free to join, no commission on dine-in. Diners join January 1, 2027.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
+
+# ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
+# Each card's loop (site/assets/loops/<group>.mp4 + -poster.webp) shows only once its files exist: the poster first, the video
+# loaded and played only while it's on screen (main.js), never with reduced motion. A loop over ~400 KB stops the build.
+LOOPS = SITE / "assets" / "loops"
+def _vis(slug):
+    mp4, poster = LOOPS / f"{slug}.mp4", LOOPS / f"{slug}-poster.webp"
+    if mp4.exists() and mp4.stat().st_size > 450_000:
+        sys.exit(f"pages.py: {mp4.name} is {mp4.stat().st_size // 1000} KB; a Home loop must stay under ~400 KB")
+    if mp4.exists() and poster.exists():
+        return (f'<video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/{slug}-poster.webp" '
+                f'data-loop="/assets/loops/{slug}.mp4" disablepictureinpicture disableremoteplayback></video>')
+    if poster.exists():
+        return f'<img src="/assets/loops/{slug}-poster.webp" alt="" width="800" height="500" loading="lazy">'
+    return '<svg class="gtk-mark"><use href="#logo"/></svg>'
+GTK = ("<!-- good-to-know: written by pages.py from posts.py GROUPS (FIX-LIST #145) -->\n"
+       '  <section class="section ice gtk" id="good-to-know">\n    <div class="wrap">\n'
+       '      <h2 class="h2 reveal">Good to know</h2>\n      <p class="body gtk-sub reveal">Short reads for diners and restaurants.</p>\n'
+       '      <div class="gtk-grid reveal">' + "".join(
+           f'<a class="gtk-card" href="/blog#{g}"><span class="gtk-vis" aria-hidden="true">{_vis(g)}</span>'
+           f'<span class="gtk-text"><b>{e(t)}</b><span>{e(d)}</span><em>Learn more <i aria-hidden="true">→</i></em></span></a>' for g, t, d in GROUPS) + "</div>\n"
+       '      <div class="gtk-wide reveal"><div><h3>Everything we write, in one place.</h3><nav class="gtk-pills" aria-label="Blog groups">'
+       + "".join(f'<a href="/blog#{g}">{e(t)}</a>' for g, t, _ in GROUPS) + "</nav></div>"
+       '<a class="btn btn-lg btn-ink gtk-all" href="/blog">Read the blog <span aria-hidden="true">→</span></a></div>\n'
+       "    </div>\n  </section>\n  <!-- /good-to-know -->")
+index, _n = re.subn(r'<!-- good-to-know.*?<!-- /good-to-know -->', lambda m: GTK, index, flags=re.S)
+if _n != 1:
+    sys.exit("pages.py: index.html needs one <!-- good-to-know --> … <!-- /good-to-know --> block (between #catch and #faq)")
 (SITE / "index.html").write_text(index, encoding="utf-8")
 PAGES.append(("/", "Home", "Main"))
 
@@ -398,7 +433,6 @@ if NOT_LIVE:
     for x in POSTS:
         x["sections"] = [(h, _unlink(t)) for h, t in x["sections"]]
         x["faq"] = [(q, _unlink(ans)) for q, ans in x["faq"]]
-TOPICS = ["For diners", "For restaurants", "News"]
 
 
 def cover(post):
@@ -501,9 +535,13 @@ def thumb(pic):
 
 
 photo_of = lambda post, img: blog_pic(PHOTO[post["slug"]]) if post["slug"] in PHOTO else img
-chips = "".join(f'<button role="tab" aria-selected="{str(t == "All").lower()}" data-topic="{t}">{t.replace("For ", "").capitalize()}</button>' for t in ["All"] + [t for t in TOPICS if any(x["topic"] == t for x in POSTS)])
-blog = hero("Eat out for less.<br>Fill the quiet hours.", "", f'<div class="pg-pills blog-filter" role="tablist" aria-label="Filter posts">{chips}</div>')
-rows = []
+# laid out by group (FIX-LIST #145): a plain section per group (its anchor the slug, so /blog#fill-quiet-hours opens it), its
+# published posts newest first; the pills are links to them, and sub.js shows one group at a time. A group with nothing live yet
+# is left out, pill and all.
+LIVE_GROUPS = [(g, t, d) for g, t, d in GROUPS if any(x["group"] == g for x in POSTS)]
+chips = '<a href="/blog" data-group="all" aria-current="true">All</a>' + "".join(f'<a href="#{g}" data-group="{g}">{e(t)}</a>' for g, t, _ in LIVE_GROUPS)
+blog = hero("Eat out for less.<br>Fill the quiet hours.", "", f'<nav class="pg-pills blog-filter" aria-label="Blog groups">{chips}</nav>')
+rows = {g: [] for g, _, _ in GROUPS}
 items = []
 for k, post in enumerate(POSTS):
     url = f"/blog/{post['slug']}"
@@ -514,8 +552,8 @@ for k, post in enumerate(POSTS):
         blog += (f'<section class="section ice bl-feature-band"><div class="wrap"><a class="post-card bl-feature" href="{url}" data-topic="{post["topic"]}" data-post-card="{post["slug"]}">'
                  f'<span class="bl-pic"><img src="{pic}" alt="" width="720" height="480"><i>Newest</i></span>'
                  f'<span class="bl-text"><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p><em>Read the post</em></span></a></div></section>')
-    else:
-        rows.append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}" data-post-card="{post["slug"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
+    # every post in its group's list (the newest too, under its band)
+    rows[post["group"]].append(f'<a class="post-card bl-row" href="{url}" data-topic="{post["topic"]}" data-post-card="{post["slug"]}"><img {thumb(pic)} alt="" width="240" height="168" loading="lazy">'
                     f'<span><b>{e(post["title"])}</b><span class="bl-meta">{e(meta)}</span><p>{e(post["dek"])}</p></span></a>')
     # three to read next: the same topic first, then the newest others (published ones only: POSTS is already the live list)
     related = ([x for x in POSTS if x is not post and x["topic"] == post["topic"]] + [x for x in POSTS if x is not post and x["topic"] != post["topic"]])[:3]
@@ -546,7 +584,8 @@ for k, post in enumerate(POSTS):
     <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
 """)
 page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for independent restaurants, from the FIG team.",
-     blog + '<section class="section bl-rows"><div class="wrap bl-list">' + "".join(rows) + "</div></section>", group="Blog", wide=True,
+     blog + "".join(f'<section class="section bl-group" id="{g}"><div class="wrap"><h2 class="h2 bl-gh">{e(t)}</h2><p class="bl-gd">{e(d)}</p>'
+                    f'<div class="bl-list">{"".join(rows[g])}</div></div></section>' for g, t, d in LIVE_GROUPS), group="Blog", wide=True,
      keywords=BASE_KW + ", Markham food blog, restaurant marketing blog",
      extra_head=ld({"@context": "https://schema.org", "@type": "Blog", "name": "The FIG blog", "url": SITE_URL + "/blog",
                     "blogPost": [{"@type": "BlogPosting", "headline": x["title"], "url": f"{SITE_URL}/blog/{x['slug']}", "datePublished": x["date"]} for x in POSTS]}))

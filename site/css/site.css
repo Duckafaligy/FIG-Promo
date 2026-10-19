@@ -865,7 +865,7 @@ p.consent { cursor: default; padding-left: 22px; }
   .foot-cols { gap: 24px 16px; }
   .foot-bottom { margin-top: 36px; }
 }
-@media (max-width: 719px) { .blog-filter { flex-wrap: nowrap; } .blog-filter button { padding: 0 14px; font-size: 14px; height: 38px; white-space: nowrap; } }
+@media (max-width: 719px) { .blog-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .blog-filter a, .blog-filter button { flex-shrink: 0; padding: 0 14px; font-size: 14px; height: 44px; white-space: nowrap; } }
 
 /* owners: an example day's receipt and a sample boost card (2026-10-07: FIG is free; boosts are the only price) */
 .receipt { align-self: center; width: min(280px, 86%); margin-bottom: 26px; padding: 20px 20px 16px; background: #fff; color: #0E1116; border-radius: 10px; box-shadow: 0 12px 30px rgba(14,17,22,.14); font-size: 15px; }
@@ -1234,3 +1234,34 @@ details.qa > p { margin: -2px 0 0; }
 /* the home map's data credit (FIX-LIST #96, OpenStreetMap's ODbL) */
 .map-credit { position: absolute; right: 16px; top: 92px; z-index: 2; padding: 2px 8px; border-radius: 8px; background: rgba(255, 255, 255, .85); color: #2A3346; font-size: 11px; text-decoration: none; }
 .map-credit:hover, .map-credit:focus-visible { text-decoration: underline; }
+
+/* ---------- Home: Good to know (FIX-LIST #145): the blog's groups as cards over a loop, then the whole blog ----------
+   one link per card; the lift, the bolder headline and the arrow on the Snap curve (220ms cubic-bezier(.2,.8,.2,1)) */
+.gtk .gtk-sub { margin-top: 12px; max-width: 34em; color: var(--muted); }
+.gtk-grid { display: grid; gap: 20px; margin-top: 40px; }
+.gtk-card, .gtk-wide { border-radius: 24px; background: #fff; border: 1px solid var(--ice-line); box-shadow: 0 10px 30px rgba(10, 16, 32, .06); }
+.gtk-card { display: grid; grid-template-rows: auto 1fr; overflow: hidden; color: var(--text); text-decoration: none;
+  transition: transform .22s cubic-bezier(.2, .8, .2, 1), box-shadow .22s cubic-bezier(.2, .8, .2, 1); }
+.gtk-card:hover, .gtk-card:focus-visible { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(10, 16, 32, .11); }
+.gtk-card:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
+.gtk-vis { display: grid; place-items: center; aspect-ratio: 16 / 10; overflow: hidden; background: var(--card); border-bottom: 1px solid var(--ice-line); }
+.gtk-vis video, .gtk-vis img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gtk-mark { width: 72px; height: 72px; opacity: .22; }
+.gtk-text { display: grid; gap: 8px; align-content: start; padding: 24px 26px 26px; }
+.gtk-text b { font-size: clamp(20px, 2vw, 24px); line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; transition: font-weight .22s cubic-bezier(.2, .8, .2, 1); }
+.gtk-text > span { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.gtk-text em { margin-top: 8px; font-style: normal; font-size: 15px; font-weight: 700; color: var(--cobalt); }
+.gtk-text em i { display: inline-block; font-style: normal; transition: transform .22s cubic-bezier(.2, .8, .2, 1); }
+.gtk-card:hover .gtk-text b, .gtk-card:focus-visible .gtk-text b { font-weight: 800; }
+.gtk-card:hover .gtk-text em i, .gtk-card:focus-visible .gtk-text em i { transform: translateX(5px); }
+.gtk-wide { display: grid; gap: 24px; align-items: center; margin-top: 20px; padding: 30px 26px; }
+.gtk-wide h3 { margin: 0; color: var(--text); font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
+.gtk-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.gtk-pills a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--soft); font-size: 14px; font-weight: 600; text-decoration: none; transition: border-color .22s, color .22s; }
+.gtk-pills a:hover { border-color: var(--cobalt); color: var(--cobalt); }
+.gtk-all { justify-self: start; }
+@media (min-width: 760px) {
+  .gtk-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .gtk-wide { grid-template-columns: 1fr auto; margin-top: 24px; padding: 40px 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .gtk-card, .gtk-text b, .gtk-text em i { transition: none; } .gtk-card:hover, .gtk-card:focus-visible { transform: none; } }

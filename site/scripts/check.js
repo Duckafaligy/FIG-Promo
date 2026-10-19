@@ -36,3 +36,15 @@ console.log("ok: contact parser");
   }
   console.log("ok: Home's map origins allowed by its CSP");
 }
+
+// the blog's groups (FIX-LIST #145): every post, queued ones too, sits in one of the four groups, and /blog has a section for
+// each group with something live (its anchor the group's slug); Home's cards link to the same groups
+const man = JSON.parse(fs.readFileSync(path.join(__dirname, "blog_manifest.json"), "utf8"));
+assert.strictEqual(man.groups.length, 4);
+for (const p of man.posts) assert.ok(man.groups.includes(p.group), `${p.slug}: no group, or one that isn't in GROUPS`);
+const blogHtml = fs.readFileSync(path.join(__dirname, "..", "blog.html"), "utf8"), homeHtml = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+for (const g of man.groups) {
+  if (man.posts.some((p) => p.group === g && p.status === "live")) assert.ok(blogHtml.includes(`id="${g}"`), `/blog has no section #${g}`);
+  assert.ok(homeHtml.includes(`href="/blog#${g}"`), `Home doesn't link /blog#${g}`);
+}
+console.log("ok: blog groups");

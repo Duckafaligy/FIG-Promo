@@ -163,6 +163,17 @@
     } else v.pause();
   }), { threshold: 0.1 });
   $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
+  // "Good to know" loops (FIX-LIST #145): each loads only once its card is on screen, plays while it is, pauses off it;
+  // with reduced motion only the poster shows
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const gio = new IntersectionObserver((es) => es.forEach((e) => {
+      const v = e.target;
+      if (!e.isIntersecting) return v.pause();
+      if (!v.src) v.src = v.dataset.loop;
+      v.play().catch(() => {}); // refused (Low Power Mode, data saver): the poster stays
+    }), { threshold: 0.25 });
+    $$("video.gtk-loop").forEach((v) => gio.observe(v));
+  }
   // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
   const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
   $$("video[data-poster]").forEach((v) => pio.observe(v));

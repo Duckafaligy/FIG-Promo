@@ -371,7 +371,7 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "One flat plan: $29.99 a month from the day FIG opens to diners, before tax, for your page, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants lock in less: $9.99 a month for the first 12 months, or $59.99 for the first year, paid now as a deposit (refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027 and your plan hasn't started). On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
+        ("What does FIG cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for your pages, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants lock in less: $9.99 a month for the first 12 months, or $59.99 for the first year, paid now as a deposit (refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027 and your plan hasn't started). On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
@@ -642,14 +642,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants $9.99 a month for the first 12 months or $59.99 for the first year), with no commission on dine-in. FIG also keeps 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one plan covering all their restaurants ($29.99 a month or $299.99 a year from launch; founding restaurants $9.99 a month for the first 12 months, or $59.99 for the first year then $299.99 a year), with no commission on dine-in. FIG also keeps 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: one flat plan, $29.99 a month from the day FIG opens to diners, before tax; founding prices before launch: $9.99 a month for the first 12 months, or $59.99 for the first year (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
+- Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; with no plan 30 days after that, pages and deals pause until one is taken (nothing deleted); founding prices before launch: $9.99 a month for the first 12 months, or $59.99 for the first year then $299.99 a year (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number

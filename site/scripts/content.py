@@ -1,13 +1,13 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners; restaurants pay one flat plan ($29.99 a month from launch; founding $9.99 a month for 12 months or $59.99 the first year; no commission on the bill; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners; restaurants pay one plan for all their restaurants ($29.99 a month or $299.99 a year from launch; founding $9.99 a month for 12 months, or $59.99 the first year then $299.99 a year; 30 days' grace after launch, then pages pause; no commission on the bill; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
 codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
-    ("Is FIG free?", "Yes for diners, always. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants lock in less before launch), with no commission on the bill and no fee per diner. FIG also keeps 5% of the food on takeout orders diners pay for in the app."),
+    ("Is FIG free?", "Yes for diners, always. Restaurants pay one plan for all their restaurants ($29.99 a month or $299.99 a year from launch; founding restaurants lock in less before launch), with no commission on the bill and no fee per diner. FIG also keeps 5% of the food on takeout orders diners pay for in the app."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
     ("Who makes FIG?", "A small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),

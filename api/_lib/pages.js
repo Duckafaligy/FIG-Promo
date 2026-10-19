@@ -23,7 +23,7 @@ input.f:focus, select.f:focus { border-color: #1E5EFF; } input.f:focus-visible, 
 const head = (title, extra) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>${title}</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><style>${BASE}${extra}</style></head>`;
 
-function signInPage() {
+function signInPage(nonce = "") { // nonce: the response's own (api/admin.js, FIX-LIST #160)
   return head("FIG Admin", `
 body { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
 .card { width: 100%; max-width: 420px; padding: 32px; border-radius: 24px; background: #fff; box-shadow: 0 30px 60px rgba(10,16,32,.08); }
@@ -54,7 +54,7 @@ label { display: block; margin: 22px 0 8px; font-weight: 700; font-size: 14px; }
   <a class="back" href="/">Back to FIG</a>
 </form>
 <div class="card" id="enrol" hidden aria-live="polite"></div>
-<script>
+<script nonce="${nonce}">
 const f = document.getElementById("f"), pw = document.getElementById("pw"), go = document.getElementById("go"), msg = document.getElementById("msg");
 let timer, step = "password"; // "code" once the password is right and the authenticator step is on (FIX-LIST #83)
 function codeStep(on, j) {
@@ -401,7 +401,7 @@ dl.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8
   .seg button { padding: 0 8px; } .toasts { left: 16px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); align-items: stretch; }
 }`;
 
-function appPage() {
+function appPage(nonce = "") {
   const navBtn = ([v, label]) => `<button data-v="${v}"${v === "overview" ? ' class="on" aria-current="page"' : ""}>${icon(v)}<span class="label">${label}</span><span class="badge" id="n-${v}" hidden>–</span></button>`;
   const tabBtn = ([v, label]) => `<button data-v="${v}"${v === "overview" ? ' class="on"' : ""}>${icon(v, 22)}${label}${v === "inbox" ? '<span class="badge hot" id="t-inbox" hidden></span>' : ""}</button>`;
   return head("FIG Admin", APP_CSS) + `<body>
@@ -428,7 +428,7 @@ function appPage() {
 <nav class="tabbar" id="tabbar" aria-label="Admin">${TABS.map(tabBtn).join("")}<button id="more-btn" aria-haspopup="true" aria-expanded="false">${icon("more", 22)}More</button></nav>
 <div class="sheet" id="sheet" hidden><button data-v="calendar">${icon("calendar")}Calendar</button><button data-v="blog">${icon("blog")}Blog</button><button data-v="security">${icon("security")}Security</button><button id="out2">${icon("out")}Sign out</button></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
-<script>${CLIENT}</script></body></html>`;
+<script nonce="${nonce}">${CLIENT}</script></body></html>`;
 }
 
 // the page's own script. String.raw keeps every backslash as written; it must hold no "\${" and no backtick

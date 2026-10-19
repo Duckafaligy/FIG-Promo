@@ -410,6 +410,17 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
   }
   assert.notStrictEqual((await call(api, "data", { fig_admin: good })).statusCode, 401, "a real session gets in (the probe isn't refusing everything)");
   for (const [what, c] of Object.entries(tries)) { const r = await call(page, "", c, { method: "GET" }); assert.ok(!/id="nav"/.test(r.body), "/admin shows the sign-in card with " + what); }
+  // FIX-LIST #160: /admin's own policy runs only its own scripts, by a nonce that's new every time; no inline handlers anywhere
+  for (const c of [{}, { fig_admin: good }]) {
+    const r1 = await call(page, "", c, { method: "GET" }), r2 = await call(page, "", c, { method: "GET" });
+    const csp = r1.headers["Content-Security-Policy"] || "", n1 = (/'nonce-([^']+)'/.exec(csp) || [])[1], n2 = (/'nonce-([^']+)'/.exec(r2.headers["Content-Security-Policy"] || "") || [])[1];
+    const script = /script-src ([^;]*)/.exec(csp)[1];
+    assert.ok(n1 && n2 && n1 !== n2, "a new nonce on every response");
+    assert.ok(!/unsafe-inline|unsafe-eval|\*/.test(script), "no 'unsafe-inline', 'unsafe-eval' or wildcard for scripts: " + script);
+    const tags = [...r1.body.matchAll(/<script\b([^>]*)>/g)].map((m) => m[1]);
+    assert.ok(tags.length > 0 && tags.every((t) => t.includes('nonce="' + n1 + '"')), "every script tag carries the response's nonce");
+    assert.ok(!/\son[a-z]+="/i.test(r1.body), "no inline event handlers (a nonce can't cover them)");
+  }
   console.log(`ok: probe: ${refused}/${total} refused across ${actions.length - open.length} signed-in actions (no cookie, forged, other secret, expired, old version, cross-origin, GET); /admin shows only the sign-in card`);
   // a tracking link's QR (FIX-LIST #105): only this site's own ?src= links; anything else is refused
   const qrOf = async (url) => { const r = await call(api, "qr", { fig_admin: good }, { body: { url } }); return [r.statusCode, JSON.parse(r.body || "{}")]; };

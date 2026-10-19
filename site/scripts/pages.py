@@ -410,8 +410,19 @@ def nice_date(iso):
 
 
 def tables(html_):
-    """A table in a post scrolls sideways on a phone, inside a frame that fades at its edge, instead of squeezing."""
-    return re.sub(r"<table\b(.*?)</table>", lambda m: f'<div class="ps-table" tabindex="0" role="region" aria-label="Table"><table{m.group(1)}</table></div>', html_, flags=re.S)
+    """A table in a post: a framed table on a wide screen; on a phone (pages.css, <= 640 px) each row becomes a card of label/value
+    lines, the label being the column's header, carried on every cell as data-label (#203: nothing cut off at 390)."""
+    def one(m):
+        t = m.group(0)
+        head = t.split("</thead>")[0] if "</thead>" in t else ""
+        labels = [html.escape(html.unescape(re.sub(r"<[^>]+>", "", h)).strip(), quote=True) for h in re.findall(r"<th\b[^>]*>(.*?)</th>", head, flags=re.S)]
+        def row(r):
+            n = iter(range(len(labels) + 99))
+            return re.sub(r"<td\b", lambda c: (lambda k: f'<td data-label="{labels[k]}"' if k < len(labels) and labels[k] else "<td")(next(n)), r.group(0))
+        if labels:
+            t = re.sub(r"<tr\b.*?</tr>", row, t, flags=re.S)
+        return f'<div class="ps-table" tabindex="0" role="region" aria-label="Table">{t}</div>'
+    return re.sub(r"<table\b.*?</table>", one, html_, flags=re.S)
 
 
 def read_min(post):

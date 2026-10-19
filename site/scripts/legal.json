@@ -152,7 +152,7 @@
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
-     "• OpenFreeMap (map tiles), jsDelivr and cdnjs (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
+     "• OpenFreeMap (map tiles), jsDelivr (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },

@@ -16,7 +16,7 @@ h1,h2,h3,p { margin: 0; } button, input { font: inherit; color: inherit; }
 .btn:disabled { opacity: .55; cursor: default; }
 .btn.sm { height: 38px; padding: 0 16px; font-size: 14px; }
 input.f, select.f { width: 100%; height: 48px; padding: 0 16px; border-radius: 12px; border: 1.5px solid #7D8798; background: #fff; font-size: 16px; outline: none; }
-input.f:focus, select.f:focus { border-color: #1E5EFF; }
+input.f:focus, select.f:focus { border-color: #1E5EFF; } input.f:focus-visible, select.f:focus-visible { outline: 3px solid #1E5EFF; outline-offset: 2px; }
 .muted { color: #66718A; }
 :focus-visible { outline: 3px solid #1E5EFF; outline-offset: 2px; }`;
 
@@ -292,6 +292,11 @@ td .sub, .sub { display: block; color: var(--muted); font-size: 12px; margin-top
 @keyframes spin { to { transform: rotate(360deg); } }
 input.f, select.f { height: 36px; border-radius: 10px; border: 1px solid var(--edge); background: var(--panel); color: var(--text); font-size: 14px; padding: 0 12px; outline: none; }
 input.f:focus, select.f:focus { border-color: var(--accent); }
+/* FIX-LIST #159: every field shows the focus ring, not only a border colour; a skip link; text only screen readers get */
+input.f:focus-visible, select.f:focus-visible, .search input:focus-visible, .dialog textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.palette input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; padding: 8px 14px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-weight: 700; text-decoration: none; } .skip:focus { top: 8px; }
 .tabs { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 16px; border-radius: 12px; background: var(--line2); max-width: 100%; overflow-x: auto; }
 .tabs button { height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: none; color: var(--muted); font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; transition: background .15s var(--snap), color .15s var(--snap); }
 .tabs button.on { background: var(--panel); color: var(--text); box-shadow: var(--shadow); }
@@ -397,9 +402,10 @@ dl.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8
 }`;
 
 function appPage() {
-  const navBtn = ([v, label]) => `<button data-v="${v}"${v === "overview" ? ' class="on"' : ""}>${icon(v)}<span class="label">${label}</span><span class="badge" id="n-${v}" hidden>–</span></button>`;
+  const navBtn = ([v, label]) => `<button data-v="${v}"${v === "overview" ? ' class="on" aria-current="page"' : ""}>${icon(v)}<span class="label">${label}</span><span class="badge" id="n-${v}" hidden>–</span></button>`;
   const tabBtn = ([v, label]) => `<button data-v="${v}"${v === "overview" ? ' class="on"' : ""}>${icon(v, 22)}${label}${v === "inbox" ? '<span class="badge hot" id="t-inbox" hidden></span>' : ""}</button>`;
   return head("FIG Admin", APP_CSS) + `<body>
+<a class="skip" href="#main">Skip to the content</a>
 <div class="shell">
   <aside class="side">
     <div class="brand">${LOGO}FIG <span>Admin</span></div>
@@ -416,7 +422,7 @@ function appPage() {
       <div class="grow"><h1 id="title">Overview</h1><span class="sub" id="sub"></span></div>
       <div class="actions" id="actions"></div>
     </header>
-    <main id="main"></main>
+    <main id="main" tabindex="-1"></main>
   </div>
 </div>
 <nav class="tabbar" id="tabbar" aria-label="Admin">${TABS.map(tabBtn).join("")}<button id="more-btn" aria-haspopup="true" aria-expanded="false">${icon("more", 22)}More</button></nav>
@@ -503,13 +509,13 @@ function table(heads, rows, empty, search, open) {
   const n = heads.map((h) => Array.isArray(h) && h[1] === "n");
   const box = search ? '<div class="tools"><label class="search">' + ic("search", 18) + '<input type="search" data-filter placeholder="' + esc(search) + '" aria-label="' + esc(search) + '"></label></div>' : "";
   if (!rows.length) return box + emptyState(empty[0], empty[1]);
-  return box + '<div class="tbl rise"' + R() + '><table><thead><tr>' + heads.map((h, i) => "<th" + (n[i] ? ' class="n"' : "") + ">" + (Array.isArray(h) ? h[0] : h) + "</th>").join("") + "</tr></thead><tbody>" +
+  return box + '<div class="tbl rise"' + R() + '><table><thead><tr>' + heads.map((h, i) => '<th scope="col"' + (n[i] ? ' class="n"' : "") + ">" + (Array.isArray(h) ? h[0] : h) + "</th>").join("") + "</tr></thead><tbody>" +
     rows.map((r, j) => "<tr" + (open ? ' data-open="' + esc(open[j]) + '"' : "") + ">" + r.map((c, i) => "<td" + (n[i] ? ' class="n"' : "") + ">" + c + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>";
 }
 const statusPill = (s) => s === "approved" ? '<span class="pill g">Live</span>' : s === "rejected" ? '<span class="pill">Hidden</span>' : '<span class="pill b">In setup</span>';
 const dealPill = (s) => s === "live" ? '<span class="pill g">Live</span>' : s === "scheduled" ? '<span class="pill b">Scheduled</span>' : s === "paused" ? '<span class="pill">Paused</span>' : '<span class="pill">Ended</span>';
 const thumb = (r, big) => { const p = (r.photos || [])[0]; return p && /^(https:|[/])/.test(p) ? '<img class="thumb' + (big ? " big" : "") + '" src="' + esc(p) + '" alt="" loading="lazy">' : '<span class="thumb' + (big ? " big" : "") + '" aria-hidden="true">' + esc((r.name || "?").trim().charAt(0).toUpperCase()) + "</span>"; };
-const tabs = (v, list) => '<div class="tabs" role="tablist">' + list.map(([k, label]) => '<button role="tab" data-sub="' + v + ":" + k + '" aria-selected="' + (SUB[v] === k) + '"' + (SUB[v] === k ? ' class="on"' : "") + ">" + label + "</button>").join("") + "</div>";
+const tabs = (v, list) => '<div class="tabs" role="group" aria-label="Show">' + list.map(([k, label]) => '<button data-sub="' + v + ":" + k + '" aria-pressed="' + (SUB[v] === k) + '"' + (SUB[v] === k ? ' class="on"' : "") + ">" + label + "</button>").join("") + "</div>";
 
 // ---- charts: hand-built SVG with axes, gridlines and a hover read-out (any pointer, touch too)
 let CHARTS = [];
@@ -519,6 +525,18 @@ function chartBox(spec) { CHARTS.push(spec); return '<div class="chart" data-cha
 function legend(series) { return series.length > 1 ? '<div class="legend">' + series.map((s) => '<span><i style="background:' + s.color + '"></i>' + esc(s.name) + "</span>").join("") + "</div>" : ""; }
 function chartCard(title, big, spec) { return card("chartcard", '<div class="head"><b>' + title + '</b><span class="big">' + big + "</span></div>" + legend(spec.series) + chartBox(spec)); }
 const niceStep = (v) => { if (v <= 1) return 1; const p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p; };
+// a chart in words (FIX-LIST #159): a per-day count (bars) by its total and its busiest day; a level (lines, areas: the list's
+// size, deals running, running totals) by where it ended and where it started
+function chartText(s) {
+  const fmt = (v) => (s.money ? money(v) : num(v));
+  const span = s.keys.length ? dayLabel(s.keys[0]) + " to " + dayLabel(s.keys[s.keys.length - 1]) : "";
+  return (s.label ? s.label + ". " : "") + span + ". " + s.series.map((x) => {
+    const v = x.values;
+    if (x.kind !== "bar") return x.name + ": " + fmt(v[v.length - 1] || 0) + " now, from " + fmt(v[0] || 0);
+    const total = v.reduce((a, n) => a + n, 0), top = Math.max(0, ...v), at = v.indexOf(top);
+    return x.name + ": " + fmt(total) + " in all" + (top > 0 && at >= 0 ? ", most on " + dayLabel(s.keys[at]) + " (" + fmt(top) + ")" : "");
+  }).join("; ") + ".";
+}
 function drawChart(el, s) {
   const W = Math.max(240, el.clientWidth), H = el.clientHeight, L = 44, Rp = 8, T = 8, B = 24, iw = W - L - Rp, ih = H - T - B, n = s.keys.length;
   const bars = s.series.some((x) => x.kind === "bar");
@@ -538,7 +556,7 @@ function drawChart(el, s) {
     if (x.kind === "area") { const under = lo.map((v, i) => X(i).toFixed(1) + "," + Y(v).toFixed(1)).reverse(); g += '<polygon points="' + pts.concat(under).join(" ") + '" fill="' + x.color + '" fill-opacity="' + (s.stack ? 0.55 : 0.12) + '"/>'; }
     g += '<polyline points="' + pts.join(" ") + '" fill="none" stroke="' + x.color + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
   });
-  el.innerHTML = '<svg width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(s.label || "") + '">' + g + '<line class="cross" x1="0" x2="0" y1="' + T + '" y2="' + (T + ih) + '" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/></svg><div class="tip" hidden></div>';
+  el.innerHTML = '<svg width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(chartText(s)) + '">' + g + '<line class="cross" x1="0" x2="0" y1="' + T + '" y2="' + (T + ih) + '" stroke="var(--faint)" stroke-dasharray="3 3" visibility="hidden"/></svg><div class="tip" hidden></div>';
   const tip = $(".tip", el), cross = $(".cross", el);
   el.onpointermove = (e) => {
     const x = e.clientX - el.getBoundingClientRect().left;
@@ -736,7 +754,7 @@ function inboxHtml() {
 function inboxRows() {
   const items = inboxItems(), box = $("#ib-rows"); if (!box) return;
   if (SEL && !items.some((x) => x.kind + x.id === SEL)) SEL = null;
-  box.innerHTML = items.length ? items.map((x) => '<button class="msg' + (x.kind + x.id === SEL ? " on" : "") + '" data-pick="' + x.kind + x.id + '"><div class="l1">' + (x.open ? '<span class="new" aria-label="Open"></span>' : "") + "<b>" + esc(x.who) + '</b><span class="note">' + ago(x.at) + '</span></div><div class="snip"><b>' + esc(x.title) + "</b> · " + esc(x.text) + "</div></button>").join("")
+  box.innerHTML = items.length ? items.map((x) => '<button class="msg' + (x.kind + x.id === SEL ? " on" : "") + '"' + (x.kind + x.id === SEL ? ' aria-current="true"' : "") + ' data-pick="' + x.kind + x.id + '"><div class="l1">' + (x.open ? '<span class="new" aria-hidden="true"></span><span class="sr">Open: </span>' : "") + "<b>" + esc(x.who) + '</b><span class="note">' + ago(x.at) + '</span></div><div class="snip"><b>' + esc(x.title) + "</b> · " + esc(x.text) + "</div></button>").join("")
     : '<div class="empty"><b>' + (SUB.inbox === "open" ? "Nothing to answer" : "Nothing here") + "</b>" + (SUB.inbox === "open" ? "New messages from “Message us” land here." : "Try another filter or clear the search.") + "</div>";
   $$("[data-pick]", box).forEach((b) => b.onclick = () => { SEL = b.dataset.pick; inboxRows(); inboxThread(); });
 }
@@ -795,8 +813,8 @@ function calendarHtml() {
   for (let i = 0; i < cells; i++) {
     const d = new Date(start); d.setDate(start.getDate() + i);
     const key = d.toLocaleDateString("en-CA"), mine = ev.filter((e) => e.day === key), cap = week ? 20 : 3;
-    grid += '<div class="day' + (!week && d.getMonth() !== month ? " out" : "") + (key === today ? " today" : "") + '"><div class="n">' + d.getDate() + "</div>" +
-      mine.slice(0, cap).map((e) => '<button class="ev ' + e.kind + '" title="' + esc(e.label) + '"' + (e.slug ? ' data-post="' + esc(e.slug) + '"' : e.rid ? ' data-go="r:' + esc(e.rid) + '"' : "") + ">" + esc(e.label) + "</button>").join("") +
+    grid += '<div class="day' + (!week && d.getMonth() !== month ? " out" : "") + (key === today ? " today" : "") + '"><div class="n"><span aria-hidden="true">' + d.getDate() + '</span><span class="sr">' + d.toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" }) + "</span></div>" +
+      mine.slice(0, cap).map((e) => '<button class="ev ' + e.kind + '" title="' + esc(e.label) + '" aria-label="' + esc(e.label + ", " + d.toLocaleDateString("en-CA", { month: "long", day: "numeric" })) + '"' + (e.slug ? ' data-post="' + esc(e.slug) + '"' : e.rid ? ' data-go="r:' + esc(e.rid) + '"' : "") + ">" + esc(e.label) + "</button>").join("") +
       (mine.length > cap ? '<span class="note">+' + (mine.length - cap) + " more</span>" : "") + "</div>";
   }
   return '<div class="tools"><button class="b secondary icon" data-cal="-1" aria-label="Earlier">' + ic("back", 18) + '</button><b style="font-size:16px;min-width:180px;text-align:center">' + title + '</b><button class="b secondary icon" data-cal="1" aria-label="Later">' + ic("chevron", 18) + '</button><button class="b ghost" data-cal="0">Today</button>' +
@@ -1300,7 +1318,7 @@ function wireAll() {
   drawCharts();
 }
 function render() {
-  $$("#nav button, #tabbar button[data-v], #sec, #sheet button[data-v]").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
+  $$("#nav button, #tabbar button[data-v], #sec, #sheet button[data-v]").forEach((b) => { b.classList.toggle("on", b.dataset.v === view); if (b.dataset.v === view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
   $("#sheet").hidden = true; $("#more-btn").setAttribute("aria-expanded", "false");
   topBar();
   rise = 0; CHARTS = []; $("#main").classList.remove("still");

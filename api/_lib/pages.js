@@ -905,7 +905,7 @@ function paidHtml() {
     '<button class="switch' + (PS.on ? " on" : "") + '" id="ps-on" role="switch" aria-checked="' + !!PS.on + '" aria-label="Founding offer"><span></span></button></div>';
   const start = PS.startsAt
     ? '<div class="wl-row"><div class="wl-k"><b>Billing starts ' + esc(longDay(PS.startsAt)) + '</b><span class="note">Each deposit pays its first month or year from that day. New founding plans are closed.</span></div></div>'
-    : '<div class="mo"><b>Start billing</b><div class="ctl"><input class="f" id="ps-at" type="date" min="' + dayIn(15) + '" max="' + dayIn(360) + '" aria-label="Billing start day"><button class="b primary" id="ps-start">Start billing</button></div>' +
+    : '<div class="mo"><b>Start billing</b><div class="ctl"><input class="f" id="ps-at" type="date" style="width:200px" min="' + dayIn(15) + '" max="' + dayIn(360) + '" aria-label="Billing start day"><button class="b primary" id="ps-start">Start billing</button></div>' +
       '<div class="note">The day FIG opens to diners, 15 to 360 days from today. Tell every owner the date in writing at least 14 days before. Each deposit then pays its first month or year from that day, and new founding plans close. It can’t be undone here.</div></div>';
   const d = PS.daysToNoLaunch;
   const march = '<div class="wl-row"><div class="wl-k"><b>March 1, 2027 refund</b><span class="note">' + (PS.opened ? "FIG has opened to diners, so this doesn’t apply."

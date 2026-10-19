@@ -182,7 +182,7 @@ async function ads() {
   const names = new Map(accounts.rows.map((a) => [a.owner_id, a]));
   return { campaigns: campaigns.rows, accounts: accounts.rows, invoices: invoices.rows.map((x) => ({ ...x, owner: names.get(x.owner_id) || {} })) };
 }
-const uuid = (id) => { if (!/^[0-9a-f-]{36}$/i.test(String(id))) throw new Error("bad id"); return id; };
+const uuid = (id) => { if (typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id)) throw new Error("bad id"); return id; }; // a string only (#153)
 // stop an ad (with a note the owner sees) or let it run again
 async function setCampaign(id, stop, note) {
   await rest(`campaigns?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify(stop ? { status: "stopped", note: String(note || "").slice(0, 300) || null } : { status: "active", note: null }), headers: { Prefer: "return=minimal" } });

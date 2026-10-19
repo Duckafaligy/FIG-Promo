@@ -2,7 +2,8 @@
 //   ADMIN_PASSWORD_HASH  "scrypt:<salt hex>:<hash hex>" (never the password itself)
 //   SESSION_SECRET       random string used to sign the session cookie
 //   ADMIN_TOTP_SECRET    optional: an authenticator secret (base32) that overrides the one kept in the database
-//   ADMIN_TOTP_RESET     the user's way back (set to 1 in Vercel, redeploy): the next password sign-in sets up a new phone
+//   ADMIN_TOTP_RESET     the user's way back (a new value each time, e.g. today's date; redeploy): while "Require a code" is on,
+//                        the next password sign-in sets up a new phone (each value once)
 // Lockout works like an iPhone passcode: 5 wrong tries, then 1 min, then 5, 15 and 60 minutes after each further miss.
 // Tries are counted per IP in FIG's database (login_attempts, key "admin:<ip>"), so a cold start or a visitor who throws away
 // the cookie can't reset the lock (user 2026-10-10: harden). If the database can't be reached, this server's memory and the
@@ -13,7 +14,9 @@
 //   password or the code, so a botnet can't lock the owner out with it. Checked before any password work;
 // - a session version (settings admin_session_version) sealed into the session and device cookies: "Sign out everywhere" bumps
 //   it and every older cookie stops working. If the database can't say, the cookies' own expiry decides, as before;
-// - the second step is ALWAYS on (FIX-LIST #103, the user 2026-10-19): the password only opens a 5-minute code step: a code from
+// - the second step (FIX-LIST #103) is on once the user turns on "Require a code at every sign-in" in Security (settings
+//   admin_twostep_required; off until then: the password signs in, plus the code step when a working authenticator is saved).
+//   While it's on, the password only opens a 5-minute code step: a code from
 //   the authenticator app (each one works once: settings admin_totp_last_step, or memory when the database is down), one of 8
 //   one-time backup codes (settings admin_backup_codes, SHA-256 only), or a code sent to the admin's own email or phone
 //   (6 digits, 10 minutes, one use, 3 sends an hour, hash only). With nothing set up yet (or the user's ADMIN_TOTP_RESET=1), the
@@ -228,6 +231,7 @@ async function login(req, password) {
     // OFF (the user turns it on in Security, FIX-LIST #103): as before, the code step only when a working authenticator is saved
     // (or ADMIN_TOTP_SECRET); no set-up from the password alone, and the reset flag does nothing
     const sec = await secretState();
+    if (sec.down) return { status: 503, body: { error: DOWN } }; // fail closed: a saved phone that can't be read now is never skipped (#152)
     if (sec.secret) return { status: 200, body: { needCode: true, ...(await contacts()) }, headers: [cookie("fig_admin_step", seal({ step: 1, exp: now + CODE_MIN * 60_000, v: v ?? 0 }), CODE_MIN * 60)] };
     return welcome(req, now, v);
   }

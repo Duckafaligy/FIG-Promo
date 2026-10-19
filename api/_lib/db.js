@@ -219,6 +219,9 @@ async function supportRemove(id) {
   const r = await rest(`support_messages?id=eq.${uuid(id)}`, { method: "DELETE", headers: { Prefer: "return=representation" } });
   return { found: r.rows.length > 0 };
 }
+/** Free text from the public (a school, a link's source) for the admin: letters, digits, spaces and . , ' ’ - & @ ( ) only,
+ *  one space at a time, at most 80 characters (FIX-LIST #170: never a formula or markup). */
+const tidyText = (t) => (t == null ? t : String(t).normalize("NFC").replace(/\s+/g, " ").replace(/[^\p{L}\p{N} .,'’&@()\-]/gu, "").replace(/ +/g, " ").trim().slice(0, 80));
 async function setSupport(id, status) {
   if (!["open", "answered"].includes(status)) throw new Error("bad status");
   await rest(`support_messages?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status }), headers: { Prefer: "return=minimal" } });
@@ -280,7 +283,9 @@ async function dinersState() {
   const site = (await rest("rpc/site_mode", { method: "POST", body: "{}" })).rows || {}; // the effective mode (a passed opening date opens it)
   const v = (k) => (flags.find((f) => f.key === k) || {}).value;
   const mode = v("diners_open") === "off" ? "off" : v("diners_open") === "waitlist" ? "waitlist" : "on";
-  const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at,consent_at,unsubscribed_at&order=joined_at.desc&limit=5000")).rows;
+  // what a person typed (their school) or a link carried (the source) reaches the admin tidied (FIX-LIST #170)
+  const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at,consent_at,unsubscribed_at&order=joined_at.desc&limit=5000")).rows
+    .map((w) => ({ ...w, school: tidyText(w.school), source: tidyText(w.source) }));
   const accounts = (await rest("profiles?select=id&role=eq.diner&admin=eq.false&limit=5000")).rows.length;
   return { mode, effective: site.mode || mode, open: (site.mode || mode) === "on", cap: v("founding_cap") ? Number(v("founding_cap")) : null, until: v("founding_until") || null, opens: v("opens_at") || null, closes: site.founding_until || null, waitlist: wl, accounts };
 }
@@ -351,4 +356,4 @@ async function agreedEmails() {
   return (await rest("diner_waitlist?select=email&consent=is.true&order=joined_at&limit=20000")).rows.map((r) => r.email);
 }
 
-module.exports = { agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

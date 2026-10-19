@@ -990,15 +990,18 @@ function dinersWire() {
   modeWire();
   const rows = (DIN && DIN.waitlist) || [];
   // the launch email goes out by hand: each person with their own unsubscribe link, ready for a mail merge (FIX-LIST #103)
+  // a CSV cell (FIX-LIST #170): quoted, and a cell that starts like a formula (= + - @, a tab or a CR) gets a ' in front, so a
+  // spreadsheet shows it as text instead of running it (a school typed as =WEBSERVICE(...) could send the list's emails out)
+  const csvCell = (v) => { let t = String(v == null ? "" : v); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return '"' + t.split('"').join('""') + '"'; };
   const cp = $("#din-copy"); if (cp) cp.onclick = () => busy(cp, async () => {
     const r = await api("agreed-csv"); if (!r || !r.rows) return toast((r && r.error) || "It didn't load. Try again.", true);
-    const q = (v) => '"' + String(v).split('"').join('""') + '"';
+    const q = csvCell;
     const csv = ["email,unsubscribe_link"].concat(r.rows.map((x) => q(x.email) + "," + q(x.unsubscribe))).join(String.fromCharCode(10));
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "fig-waitlist-agreed.csv"; a.click();
     toast(r.rows.length + " people. Put each one's link in their email.");
   });
   const cs = $("#din-csv"); if (cs) cs.onclick = () => {
-    const q = (v) => '"' + String(v == null ? "" : v).split('"').join('""') + '"';
+    const q = csvCell;
     const csv = ["email,school,may_email,source,joined"].concat(rows.map((w) => [q(w.email), q(w.school), w.consent ? "yes" : "no", q(w.source), q(w.joined_at)].join(","))).join(String.fromCharCode(10));
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "fig-diner-waitlist.csv"; a.click();
   };

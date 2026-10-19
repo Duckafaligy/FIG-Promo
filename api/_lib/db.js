@@ -358,7 +358,7 @@ async function agreedEmails() {
 
 // ---- the founding pre-sale (FIX-LIST #141): the presale-admin Supabase function does the Stripe work with FIG's own key; the admin
 // only asks it, with the service key, and only for these four things
-const PRESALE_DO = new Set(["list", "start-billing", "admin-refund", "refund-all"]);
+const PRESALE_DO = new Set(["list", "start-billing", "admin-refund", "refund-all", "comp"]);
 async function presale(action, body = {}) {
   if (!PRESALE_DO.has(action)) throw new Error("bad action");
   const r = await fetch(`${url()}/functions/v1/presale-admin`, { method: "POST", headers: { apikey: key(), Authorization: `Bearer ${key()}`, "Content-Type": "application/json" }, body: JSON.stringify({ ...body, action }) });
@@ -385,5 +385,10 @@ async function presaleStart(at) {
 }
 const presaleRefund = async (owner, force) => presale("admin-refund", { owner: uuid(owner), force: force === true }); // one plan per owner (#27)
 const presaleRefundAll = async () => presale("refund-all");
+/** FIG's comp for an owner (#141): on or off, with the reason the database keeps. */
+const presaleComp = async (owner, on, note) => {
+  if (typeof on !== "boolean") throw new Error("bad comp");
+  return presale("comp", { owner: uuid(owner), on, note: String(note || "").trim().slice(0, 200) });
+};
 
-module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, presaleComp, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

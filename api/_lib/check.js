@@ -550,6 +550,11 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
       sent.length = 0;
       await dbm.presaleRefund("22222222-2222-4222-8222-222222222222", "true");
       assert.deepStrictEqual(sent[0].body, { owner: "22222222-2222-4222-8222-222222222222", force: false, action: "admin-refund" }, "force only when it's true itself");
+      sent.length = 0;
+      await dbm.presaleComp("22222222-2222-4222-8222-222222222222", true, "  Founding partner  ");
+      assert.deepStrictEqual(sent[0].body, { owner: "22222222-2222-4222-8222-222222222222", on: true, note: "Founding partner", action: "comp" }, "the comp: owner, on, the reason");
+      await assert.rejects(dbm.presaleComp("22222222-2222-4222-8222-222222222222", "true", "x"), /bad comp/, "on is a boolean");
+      await assert.rejects(dbm.presaleComp("x'; drop", true, "x"), /bad id/);
       answer = { status: 404, body: { code: "NOT_FOUND", message: "Requested function was not found" } };
       assert.strictEqual((await dbm.presaleState()).error, "not-deployed", "no function yet: said plainly");
       answer = { status: 400, body: { error: "too-soon" } };

@@ -85,6 +85,7 @@ module.exports = async (req, res) => {
     if (action === "presale-start") return send(res, 200, { ok: true, ...(await db.presaleStart(body.at)) });
     if (action === "presale-refund") return send(res, 200, { ok: true, ...(await db.presaleRefund(body.owner, body.force)) });
     if (action === "presale-refund-all") return send(res, 200, { ok: true, ...(await db.presaleRefundAll()) });
+    if (action === "presale-comp") return send(res, 200, { ok: true, ...(await db.presaleComp(body.owner, body.on, body.note)) });
   } catch (e) {
     // validation, not a database problem; the cap says what it takes (FIX-LIST #105)
     if (/^bad /.test(String(e.message))) return send(res, 400, { error: e.message === "bad cap" ? "Type a whole number from 1 to 1,000,000, or leave it empty for everyone."

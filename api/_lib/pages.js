@@ -888,7 +888,7 @@ const PS_STATUS = { trialing: ["Deposit held", "b"], active: ["Paying", "g"], pa
 const PS_WORDS = { "too-soon": "Pick a day at least 14 days from today.", "too-far": "Pick a day within 360 days.", "not-set-up": "The live Stripe prices aren’t set yet.",
   "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.", "payment-not-found": "Stripe hasn’t shown this deposit’s payment yet. Try again in a few minutes, or refund it in Stripe.",
   "not-subscribed": "There’s no plan for this restaurant.", "too-early": "Every deposit can be refunded from March 1, 2027.",
-  "opened": "FIG has opened to diners, so the March 1 refund doesn’t apply.", "not-deployed": "The presale functions aren’t deployed yet." };
+  "opened": "FIG has opened to diners, so the March 1 refund doesn’t apply.", "note-needed": "Say why, in a few words.", "not-deployed": "The presale functions aren’t deployed yet." };
 const psWord = (e) => PS_WORDS[e] || e;
 const longDay = (t) => t ? new Date(t).toLocaleDateString("en-CA", { timeZone: "America/Toronto", dateStyle: "long" }) : "";
 const dayIn = (n) => dayKey(Date.now() + n * 86400000);
@@ -914,22 +914,24 @@ function paidHtml() {
     '<button class="b danger" id="ps-all"' + (PS.opened || !(d <= 0) ? " disabled" : "") + ">Refund every deposit</button></div>";
   const minis = '<div class="grid three">' + mini("Founding plans", num(kept.length)) + mini("Deposits held", money(held)) +
     mini("Annual · monthly", num(kept.filter((p) => p.plan === "annual").length) + " · " + num(kept.filter((p) => p.plan === "monthly").length)) + "</div>";
-  // the plan rule (#28): the launch moment, read-only (kept the first time FIG opened to everyone), and who has no plan
-  const opened = PS.launch
-    ? '<div class="wl-row"><div class="wl-k"><b>Diners opened to everyone ' + esc(longDay(PS.launch)) + '</b><span class="note">Kept from the first time, never moved. A restaurant with no plan pauses for diners 30 days later, on ' + esc(longDay(Date.parse(PS.launch) + 30 * 86400000)) + ', until its owner takes a plan. Pretend-payment and comped owners never pause.</span></div></div>'
-    : '<div class="wl-row"><div class="wl-k"><b>Diners haven’t opened to everyone yet</b><span class="note">The first time you open FIG to everyone (Waitlist, switched off), restaurants get 30 days to take a plan, then those without one pause for diners until they do. That moment can’t be undone.</span></div></div>';
-  const noPlan = (PS.noPlan || []).length
-    ? "<h2>No plan <span class=\"count\">" + num(PS.noPlan.length) + "</span></h2>" + table(["Owner", ["Restaurants", "n"], "State", "Grace ends"], PS.noPlan.map((o) => [
-        "<b>" + esc(o.email || "An owner") + "</b>", num(o.restaurants),
-        o.state === "paused" ? '<span class="pill r">Paused for diners</span>' : '<span class="pill b">In grace</span>',
-        esc(longDay(o.grace_ends))]), ["Everyone has a plan", ""], "Search owners")
-    : "";
-  return problem + card("wl-plan", sw + start + march + opened) + minis + noPlan +
+  // the entitlement gate (#141): since when plans are required, and every owner with a restaurant: works or locked, why, and FIG's comp
+  const gate = '<div class="wl-row"><div class="wl-k"><b>' + (PS.plansRequired ? "Plans are required" : "Plans aren’t required yet") + '</b><span class="note">' + (PS.plansRequired
+      ? "Since the founding offer was first switched on. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. Pretend-payment and comped owners work."
+      : "From the first time you switch the founding offer on, a restaurant needs a plan to go live. That can’t be undone here.") + "</span></div></div>";
+  const why = (o) => o.payments_demo ? "Pretend payments" : o.comped ? "FIG’s comp" : o.premium_until && Date.parse(o.premium_until) > Date.now() ? "Paid plan" : o.state === "ok" ? (PS.plansRequired ? "Card retrying" : "Plans not required yet") : "No plan";
+  const everyone = (PS.owners || []).length ? "<h2>All restaurants <span class=\"count\">" + num(PS.owners.length) + "</span></h2>" + table(["Owner", ["Restaurants", "n"], "State", "Why", ""], PS.owners.map((o) => [
+      "<b>" + esc(o.email || "An owner") + "</b>", num(o.restaurants) + '<span class="sub">' + num(o.live) + " live</span>",
+      o.state === "locked" ? '<span class="pill r">Locked</span>' : '<span class="pill g">Works</span>', esc(why(o)),
+      o.payments_demo ? "" : '<button class="b secondary" data-pscomp="' + esc(o.owner_id) + '" data-on="' + (o.comped ? "0" : "1") + '">' + (o.comped ? "Remove comp" : "Comp") + "</button>"]),
+      ["No restaurants yet", ""], "Search owners") : "";
+  return problem + card("wl-plan", sw + start + march + gate) + minis +
     // one plan per owner, covering all their restaurants (the user, #27): the row is the owner; where it started and how many it covers
     table(["Owner", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
       // an annual plan stays "trialing" at Stripe through its paid first year: once its start day has passed it's paying (#186)
       const started = !!p.starts_at && Date.parse(p.starts_at) <= Date.now();
-      const st = p.refunded_at ? ["Refunded", ""] : p.status === "trialing" && started ? PS_STATUS.active : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
+      // cancelled with no start day yet: it ends one period after the start day (Stripe's date is only the placeholder, never shown)
+      const st = p.refunded_at ? ["Refunded", ""] : p.cancel_at && p.status !== "canceled" ? [p.starts_at ? "Cancelled · ends " + longDay(p.cancel_at) : "Cancelled · ends one period after the start day", ""]
+        : p.status === "trialing" && started ? PS_STATUS.active : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
       const n = p.restaurant_count || 0;
       return ["<b>" + esc((p.profiles || {}).email || "An owner") + '</b><span class="sub">' + num(n) + (n === 1 ? " restaurant" : " restaurants") + ((p.restaurants || {}).name ? " · started at " + esc(p.restaurants.name) : "") + "</span>",
         (p.kind === "regular" ? esc(p.plan === "annual" ? "Regular yearly" : "Regular monthly") + '<span class="sub">' + (p.plan === "annual" ? "$299.99/yr" : "$29.99/mo") + "</span>"
@@ -938,7 +940,7 @@ function paidHtml() {
         p.starts_at ? esc(longDay(p.starts_at)) : '<span class="sub">When billing starts</span>',
         p.deposit_cents ? money(p.deposit_cents / 100) + '<span class="sub">' + (p.refunded_at ? "Refunded " + esc(longDay(p.refunded_at)) : left > 0 ? num(left) + (left === 1 ? " day" : " days") + " to refund" : "Paid " + esc(longDay(p.deposit_paid_at))) + "</span>" : "–",
         p.refunded_at || !p.deposit_cents ? "" : '<button class="b secondary" data-psref="' + esc(p.owner_id) + '" data-late="' + (left > 0 ? "0" : "1") + '">Refund</button>'];
-    }), ["No founding plans yet", "When an owner pays a founding deposit, it shows up here."], "Search restaurants or owners");
+    }), ["No founding plans yet", "When an owner pays a founding deposit, it shows up here."], "Search restaurants or owners") + everyone;
 }
 async function paidLoad() {
   PS = await api("presale-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
@@ -970,6 +972,15 @@ function paidWire() {
     if (!(await ask({ title: "Refund " + name + "’s deposit?", body: esc((late ? "The 14 days have passed, so this refund is FIG’s choice, not the owner’s right. " : "") + "The whole deposit goes back to their card and the plan is cancelled now."), ok: late ? "Refund anyway" : "Refund", danger: true }))) return;
     run(b, "presale-refund", { owner: p.owner_id, force: late }, () => "Refunded. It reaches their card in 5 to 10 days.");
   });
+  // FIG's comp: works without a plan; a reason is required and kept with the change
+  $$("[data-pscomp]").forEach((b) => b.onclick = async () => {
+    const on = b.dataset.on === "1", o = (PS.owners || []).find((x) => x.owner_id === b.dataset.pscomp) || {};
+    const note = await ask({ title: (on ? "Comp " : "Remove the comp for ") + (o.email || "this owner") + "?", body: esc(on ? "They work without a plan: going live, deals, scanning and takeout. Say why; it’s kept with the change." : "Without a plan they lock at once and diners stop seeing their places. Say why; it’s kept with the change."),
+      ok: on ? "Comp" : "Remove comp", danger: !on, input: '<input class="f" id="dlg-comp" maxlength="200" autocomplete="off" aria-label="Why">' });
+    if (note === false) return;
+    if (String(note).trim().length < 3) return toast("Say why, in a few words.", true);
+    run(b, "presale-comp", { owner: o.owner_id, on, note: String(note).trim() }, () => (on ? "Comped." : "Comp removed."));
+  });
   const all = $("#ps-all"); if (all) all.onclick = async () => {
     const w = PS.refundAllWould || { count: 0, cents: 0 };
     if (!w.count) return toast("No plan is waiting for its start, so there's nothing to refund.", true);
@@ -991,7 +1002,7 @@ const MODE_ASK = {
   off: () => "Diners will only be able to join the waitlist (anyone already using FIG as a diner sees it too); restaurants aren't affected.",
   waitlist: () => (DIN.cap ? "The first " + DIN.cap.toLocaleString("en-CA") + " on the waitlist" : "Everyone on the waitlist") + " can sign in and use everything now, as founding members; " +
     (DIN.until ? "the list keeps its cutoff (" + atText(DIN.until) + "), so who joined before it gets in." : "the list closes now."),
-  on: () => "This opens FIG to diners and starts the 30-day plan grace for restaurants. It can't be undone. Anyone can sign up, browse, claim deals and order: this is the public launch.",
+  on: () => "FIG opens to everyone: anyone can sign up, browse, claim deals and order. This is the public launch.",
 };
 const MODE_OK = { off: "Turn waitlist mode on", waitlist: "Let them in", on: "Turn waitlist mode off" };
 const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Toronto" });

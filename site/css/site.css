@@ -70,7 +70,7 @@ button, input { font: inherit; color: inherit; }
 .field-pill.light { background: #fff; border-color: #fff; }
 .field-pill.light input { color: #0A1020; }
 .field-pill.light input::placeholder { color: #5B6779; }
-.consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; padding-left: 8px; font-size: 13px; line-height: 1.5; color: var(--muted); cursor: pointer; }
+.consent { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; margin-top: 8px; padding: 6px 0 6px 8px; box-sizing: border-box; font-size: 13px; line-height: 1.5; color: var(--muted); cursor: pointer; }
 .consent input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; accent-color: var(--cobalt); }
 .consent.light { color: #fff; }
 /* who asks and how to reach them, under the waitlist box (FIX-LIST #95) */

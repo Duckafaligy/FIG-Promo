@@ -12,6 +12,7 @@ const policy = (nonce) => ["default-src 'self'", `script-src 'nonce-${nonce}'`, 
 module.exports = async (req, res) => {
   const nonce = crypto.randomBytes(16).toString("base64");
   res.setHeader("Content-Security-Policy", policy(nonce));
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin"); // no other site's window keeps a handle on this one (FIX-LIST #160 e)
   return send(res, 200, (await signedIn(req)) ? appPage(nonce) : signInPage(nonce));
 };
 module.exports.policy = policy;

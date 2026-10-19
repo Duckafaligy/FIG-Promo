@@ -416,6 +416,7 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     const csp = r1.headers["Content-Security-Policy"] || "", n1 = (/'nonce-([^']+)'/.exec(csp) || [])[1], n2 = (/'nonce-([^']+)'/.exec(r2.headers["Content-Security-Policy"] || "") || [])[1];
     const script = /script-src ([^;]*)/.exec(csp)[1];
     assert.ok(n1 && n2 && n1 !== n2, "a new nonce on every response");
+    assert.strictEqual(r1.headers["Cross-Origin-Opener-Policy"], "same-origin", "COOP same-origin on /admin");
     assert.ok(!/unsafe-inline|unsafe-eval|\*/.test(script), "no 'unsafe-inline', 'unsafe-eval' or wildcard for scripts: " + script);
     const tags = [...r1.body.matchAll(/<script\b([^>]*)>/g)].map((m) => m[1]);
     assert.ok(tags.length > 0 && tags.every((t) => t.includes('nonce="' + n1 + '"')), "every script tag carries the response's nonce");

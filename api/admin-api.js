@@ -79,9 +79,17 @@ module.exports = async (req, res) => {
     if (action === "opens-at") return send(res, 200, { ok: true, ...(await db.setOpensAt(body.at === null ? null : String(body.at || ""))) });
     if (action === "founding-until") return send(res, 200, { ok: true, ...(await db.setFoundingUntil(body.until === null ? null : "now")) });
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
+    // the founding pre-sale (FIX-LIST #141): the plans, the switch, start billing, refunds (the Stripe work is the presale-admin function's)
+    if (action === "presale-get") return send(res, 200, { ok: true, ...(await db.presaleState()) });
+    if (action === "presale-switch") return send(res, 200, { ok: true, ...(await db.setPresaleOn(body.on)) });
+    if (action === "presale-start") return send(res, 200, { ok: true, ...(await db.presaleStart(body.at)) });
+    if (action === "presale-refund") return send(res, 200, { ok: true, ...(await db.presaleRefund(body.owner, body.force)) });
+    if (action === "presale-refund-all") return send(res, 200, { ok: true, ...(await db.presaleRefundAll()) });
+    if (action === "presale-comp") return send(res, 200, { ok: true, ...(await db.presaleComp(body.owner, body.on, body.note)) });
   } catch (e) {
     // validation, not a database problem; the cap says what it takes (FIX-LIST #105)
-    if (/^bad /.test(String(e.message))) return send(res, 400, { error: e.message === "bad cap" ? "Type a whole number from 1 to 1,000,000, or leave it empty for everyone." : "That was not a valid request." });
+    if (/^bad /.test(String(e.message))) return send(res, 400, { error: e.message === "bad cap" ? "Type a whole number from 1 to 1,000,000, or leave it empty for everyone."
+      : e.message === "bad presale-not-ready" ? "The founding offer isn't ready: the presale functions must be deployed and the four live prices set first." : "That was not a valid request." });
     return send(res, 502, { error: "The database didn't answer. Try again." });
   }
   return send(res, 400, { error: "Unknown action." });

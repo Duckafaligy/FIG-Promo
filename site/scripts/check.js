@@ -1,5 +1,5 @@
 // node site/scripts/check.js  -- checks the email/phone parser used by the waitlist form
-const assert = require("assert");
+const assert = require("assert"), fs = require("fs"), path = require("path");
 const { parseContact } = require("../js/contact.js");
 
 assert.deepStrictEqual(parseContact(" Me@Example.com "), { email: "me@example.com" });
@@ -11,3 +11,28 @@ assert.strictEqual(parseContact("not@email"), null);
 assert.strictEqual(parseContact("0123456789"), null);
 assert.strictEqual(parseContact(""), null);
 console.log("ok: contact parser");
+
+// Home's hero map can't be blocked by the site's own security policy again (FIX-LIST #144: since #127 MapLibre's worker couldn't
+// load its code, and the map stayed blank). Every outside origin the map's files use must be allowed, in the directive that
+// governs that use, by the Content-Security-Policy vercel.json sends for "/" (the page that loads map.js).
+{
+  const site = path.join(__dirname, "..");
+  const vercel = JSON.parse(fs.readFileSync(path.join(site, "..", "vercel.json"), "utf8"));
+  const rule = vercel.headers.find((h) => new RegExp(`^${h.source}$`).test("/") && h.headers.some((x) => x.key === "Content-Security-Policy"));
+  assert.ok(rule, 'vercel.json: no Content-Security-Policy for "/"');
+  const csp = Object.fromEntries(rule.headers.find((x) => x.key === "Content-Security-Policy").value.split(";").map((d) => d.trim().split(/\s+/)).filter((d) => d[0]).map(([k, ...v]) => [k, v]));
+  const read = (f) => fs.readFileSync(path.join(site, f), "utf8");
+  const origin = (u) => new URL(u).origin;
+  const needs = [];
+  const map = read("js/map.js");
+  for (const m of map.matchAll(/const LIB = "(https:[^"]+)"/g)) needs.push(["style-src", origin(m[1]), "map.js's stylesheet"]);
+  for (const m of map.matchAll(/style: "(https:[^"]+)"/g)) needs.push(["connect-src", origin(m[1]), "map.js's map style and tiles"]);
+  for (const m of read("app/maplibre-load.js").matchAll(/from '(https:[^']+)'/g)) needs.push(["script-src", origin(m[1]), "maplibre-load.js's import"]);
+  for (const m of read("app/maplibre-worker.js").matchAll(/import '(https:[^']+)'/g)) needs.push(["worker-src", origin(m[1]), "the worker's import"]);
+  assert.ok(needs.length >= 4, "map.js, maplibre-load.js or the worker no longer name their origins the way this check reads them");
+  for (const [dir, o, why] of needs) {
+    const list = csp[dir] || csp["default-src"] || [];
+    assert.ok(list.includes(o), `vercel.json: "/" ${dir} must allow ${o} (${why}), or Home's map is blocked`);
+  }
+  console.log("ok: Home's map origins allowed by its CSP");
+}

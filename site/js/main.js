@@ -148,6 +148,9 @@
   // (user 2026-10-14: they start on their own, already moving when you get there; the play button is only for a phone
   // that refuses autoplay.) On a phone the bento row scrolls sideways, where a look-ahead can't see: each loop that's
   // near or playing also loads the next card's. Data Saver: each loads only when it's on screen, as before.
+  // reduced motion (FIX-LIST #154): no Home video loads or plays by itself; each shows its poster (the tutorial can still be
+  // played with its own controls, and only then is its file fetched)
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ahead = !(navigator.connection && navigator.connection.saveData);
   const load = (v) => { if (v && !v.src) { v.preload = "auto"; v.src = v.dataset.src; } };
   const next = (v) => v.closest(".cell")?.nextElementSibling?.querySelector("video[data-src]");
@@ -162,10 +165,10 @@
       figPlay(v);
     } else v.pause();
   }), { threshold: 0.1 });
-  $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
+  if (!still) $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
   // "Good to know" loops (FIX-LIST #145): each loads only once its card is on screen, plays while it is, pauses off it;
   // with reduced motion only the poster shows
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (!still) {
     const gio = new IntersectionObserver((es) => es.forEach((e) => {
       const v = e.target;
       if (!e.isIntersecting) return v.pause();
@@ -180,7 +183,6 @@
   // figPlay and the loops above won't start a video while it's on, and the map's drift stays still)
   const mt = $(".motion-toggle");
   if (mt) {
-    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const onScreen = (v) => { const r = v.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; };
     const set = (p) => {
       root.classList.toggle("paused", p);
@@ -189,7 +191,7 @@
       $$("video").forEach((v) => {
         if (p) { v.pause(); if (v.readyState) v.currentTime = 0; } // back to the start, as still as its poster
         else if (onScreen(v)) { // on again: what's on screen plays (loading it first if it came into view while paused)
-          if (v.classList.contains("gtk-loop") && still) return; // reduced motion: the Good to know loops never load
+          if (still) return; // reduced motion: nothing loads or plays by itself (#154)
           if (!v.src && (v.dataset.loop || v.dataset.src)) v.src = v.dataset.loop || v.dataset.src;
           if (v.src) v.classList.contains("gtk-loop") ? v.play().catch(() => {}) : figPlay(v);
         }
@@ -214,9 +216,10 @@
     const load = () => {
       $(".tutwrap").dataset.role = tab;
       tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
+      if (still) { tutVideo.preload = "none"; tutVideo.controls = true; } // reduced motion: the poster, and play only if they choose to
       if (!tutVideo.src.endsWith(`/tut-${tab}.mp4`)) tutVideo.src = `/assets/clips/tut-${tab}.mp4`; // the look-ahead may have loaded it
       tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
-      figPlay(tutVideo);
+      if (!still) figPlay(tutVideo);
     };
     if (first || !root.classList.contains("motion")) return load();
     // switching point of view: the card flips over and comes back as the other side
@@ -232,10 +235,10 @@
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   // loaded a screen and a half ahead, like the loops (the diner's side is the one that shows first)
-  if (ahead) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
+  if (ahead && !still) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return tutVideo.pause();
-    if (!tutRole) selectTab("diner"); else figPlay(tutVideo);
+    if (!tutRole) selectTab("diner"); else if (!still) figPlay(tutVideo);
   }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------

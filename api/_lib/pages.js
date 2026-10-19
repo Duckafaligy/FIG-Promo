@@ -932,7 +932,8 @@ function paidHtml() {
       const st = p.refunded_at ? ["Refunded", ""] : p.status === "trialing" && started ? PS_STATUS.active : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
       const n = p.restaurant_count || 0;
       return ["<b>" + esc((p.profiles || {}).email || "An owner") + '</b><span class="sub">' + num(n) + (n === 1 ? " restaurant" : " restaurants") + ((p.restaurants || {}).name ? " · started at " + esc(p.restaurants.name) : "") + "</span>",
-        esc(PLAN_NAME[p.plan] || p.plan) + '<span class="sub">' + esc(PLAN_PRICE[p.plan] || "") + "</span>",
+        (p.kind === "regular" ? esc(p.plan === "annual" ? "Regular yearly" : "Regular monthly") + '<span class="sub">' + (p.plan === "annual" ? "$299.99/yr" : "$29.99/mo") + "</span>"
+          : esc(PLAN_NAME[p.plan] || p.plan) + '<span class="sub">' + esc(PLAN_PRICE[p.plan] || "") + "</span>"),
         '<span class="pill ' + st[1] + '">' + esc(st[0]) + "</span>" + (p.paid_through ? '<span class="sub">Paid through ' + esc(longDay(p.paid_through)) + "</span>" : ""),
         p.starts_at ? esc(longDay(p.starts_at)) : '<span class="sub">When billing starts</span>',
         p.deposit_cents ? money(p.deposit_cents / 100) + '<span class="sub">' + (p.refunded_at ? "Refunded " + esc(longDay(p.refunded_at)) : left > 0 ? num(left) + (left === 1 ? " day" : " days") + " to refund" : "Paid " + esc(longDay(p.deposit_paid_at))) + "</span>" : "–",

@@ -536,5 +536,41 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     assert.strictEqual(dbm.tidyText("x".repeat(200)).length, 80);
     console.log("ok: waitlist CSVs: formulas made text; free text tidied for the admin");
   }
+  // FIX-LIST #141: the admin asks presale-admin only for its four actions, with the service key; the switch turns on only when ready
+  {
+    const dbm = require("./db"), realFetch = global.fetch, sent = [];
+    let answer = { status: 200, body: { rows: [], ready: false } }, presaleOn = "off";
+    process.env.SUPABASE_URL = process.env.SUPABASE_URL || "https://example.supabase.co"; process.env.SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "service-key-test";
+    global.fetch = async (u, o = {}) => {
+      if (String(u).includes("/functions/v1/presale-admin")) { sent.push({ u: String(u), o, body: JSON.parse(o.body) }); return new Response(JSON.stringify(answer.body), { status: answer.status }); }
+      if (String(u).includes("/rest/v1/settings")) { if ((o.method || "GET") === "POST") presaleOn = JSON.parse(o.body).value; return new Response(JSON.stringify((o.method || "GET") === "POST" ? [] : [{ value: presaleOn }]), { status: 200 }); }
+      throw new Error("unexpected fetch " + u);
+    };
+    try {
+      assert.deepStrictEqual((await dbm.presaleState()).on, false);
+      assert.strictEqual(sent[0].o.headers.apikey, process.env.SUPABASE_SERVICE_ROLE_KEY, "the service key goes to the function");
+      await assert.rejects(dbm.setPresaleOn(true), /bad presale-not-ready/, "the prices aren't set: it stays off");
+      assert.strictEqual(presaleOn, "off");
+      answer = { status: 200, body: { rows: [], ready: true } };
+      assert.deepStrictEqual(await dbm.setPresaleOn(true), { on: true }); assert.strictEqual(presaleOn, "on");
+      assert.deepStrictEqual(await dbm.setPresaleOn(false), { on: false }); assert.strictEqual(presaleOn, "off", "off always works");
+      await assert.rejects(dbm.setPresaleOn("yes"), /bad switch/);
+      await assert.rejects(dbm.presaleRefund("x'; drop", true), /bad id/, "an owner is a uuid");
+      await assert.rejects(dbm.presaleStart("soon"), /bad date/);
+      sent.length = 0;
+      await dbm.presaleRefund("22222222-2222-4222-8222-222222222222", "true");
+      assert.deepStrictEqual(sent[0].body, { owner: "22222222-2222-4222-8222-222222222222", force: false, action: "admin-refund" }, "force only when it's true itself");
+      sent.length = 0;
+      await dbm.presaleComp("22222222-2222-4222-8222-222222222222", true, "  Founding partner  ");
+      assert.deepStrictEqual(sent[0].body, { owner: "22222222-2222-4222-8222-222222222222", on: true, note: "Founding partner", action: "comp" }, "the comp: owner, on, the reason");
+      await assert.rejects(dbm.presaleComp("22222222-2222-4222-8222-222222222222", "true", "x"), /bad comp/, "on is a boolean");
+      await assert.rejects(dbm.presaleComp("x'; drop", true, "x"), /bad id/);
+      answer = { status: 404, body: { code: "NOT_FOUND", message: "Requested function was not found" } };
+      assert.strictEqual((await dbm.presaleState()).error, "not-deployed", "no function yet: said plainly");
+      answer = { status: 400, body: { error: "too-soon" } };
+      assert.strictEqual((await dbm.presaleStart("2026-10-20")).error, "too-soon", "the function's own refusal comes through");
+    } finally { global.fetch = realFetch; }
+    console.log("ok: presale admin: only its four actions, with the service key; on only when ready; ids, dates and force checked; not deployed said plainly");
+  }
   console.log("ok: admin auth");
 })().catch((e) => { console.error(e); process.exit(1); });

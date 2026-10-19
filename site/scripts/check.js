@@ -63,3 +63,20 @@ console.log("ok: blog groups");
   }
   console.log("ok: CSP names FIG's own database host");
 }
+
+// framing (FIX-LIST #164): the blog may be framed by FIG's own pages (the admin's blog preview), nothing else by anyone; every
+// path gets exactly one X-Frame-Options and one frame-ancestors
+{
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
+  const frame = (p) => {
+    const xfo = [], fa = [];
+    for (const h of vercel.headers) if (new RegExp(`^${h.source}$`).test(p)) for (const x of h.headers) {
+      if (x.key === "X-Frame-Options") xfo.push(x.value);
+      if (x.key === "Content-Security-Policy") fa.push((/frame-ancestors ([^;]*)/.exec(x.value) || [])[1]);
+    }
+    return [xfo, fa];
+  };
+  for (const p of ["/blog", "/blog/how-fig-makes-money"]) assert.deepStrictEqual(frame(p), [["SAMEORIGIN"], ["'self'"]], p + " can be framed by FIG's own pages only");
+  for (const p of ["/", "/about", "/admin", "/blogger", "/app/welcome", "/contact"]) assert.deepStrictEqual(frame(p), [["DENY"], ["'none'"]], p + " can't be framed");
+  console.log("ok: framing: the blog by FIG's own pages only, everything else by nobody");
+}

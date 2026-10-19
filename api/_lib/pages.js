@@ -886,7 +886,7 @@ const PLAN_NAME = { monthly: "Founding monthly", annual: "Founding annual" };
 const PLAN_PRICE = { monthly: "$9.99/mo to month 12, then $29.99/mo", annual: "$59.99 the first year, then $29.99/mo" };
 const PS_STATUS = { trialing: ["Deposit paid", "b"], active: ["Paying", "g"], past_due: ["Payment failed", "r"], unpaid: ["Unpaid", "r"], canceled: ["Cancelled", ""], incomplete: ["Not finished", ""] };
 const PS_WORDS = { "too-soon": "Pick a day at least 14 days from today.", "too-far": "Pick a day within 360 days.", "not-set-up": "The live Stripe prices aren’t set yet.",
-  "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.",
+  "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.", "payment-not-found": "Stripe hasn’t shown this deposit’s payment yet. Try again in a few minutes, or refund it in Stripe.",
   "not-subscribed": "There’s no plan for this restaurant.", "too-early": "Every deposit can be refunded from March 1, 2027.",
   "opened": "FIG has opened to diners, so the March 1 refund doesn’t apply.", "not-deployed": "The presale functions aren’t deployed yet." };
 const psWord = (e) => PS_WORDS[e] || e;

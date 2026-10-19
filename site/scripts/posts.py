@@ -93,8 +93,8 @@ POSTS = [
 <tr><td>All your locations, under one sign-in</td><td>Included</td></tr>
 <tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's card fee</td></tr>
 </tbody></table>
-<p>No contract and no setup fee. Cancel any time in Settings: a monthly plan stops at the end of the month you've paid for, and an annual plan runs to the end of its year.</p>"""),
-             ("Founding prices, before launch", """<p>Restaurants that join before FIG opens to diners can lock in a founding price: <strong>$9.99 a month</strong> for the first 12 months, then $29.99 a month, or <strong>$59.99 for the first year</strong> (about $5 a month), then $29.99 a month. You pay the first month or year now, as a deposit, and it starts on the day FIG opens to diners; we'll tell you that date in writing at least 14 days before. You get the whole deposit back if you cancel within 14 days of paying, or if FIG hasn't opened to diners by March 1, 2027. Prices are before tax. The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
+<p>No contract and no setup fee. Monthly: cancel any time; it ends at the end of the month you've paid. Annual: it runs its year, then you can stop.</p>"""),
+             ("Founding prices, before launch", """<p>Restaurants that join before FIG opens to diners can lock in a founding price: <strong>$9.99 a month</strong> for the first 12 months, then $29.99 a month, or <strong>$59.99 for the first year</strong> (about $5 a month), then $29.99 a month. You pay the first month or year now, as a deposit, and it starts on the day FIG opens to diners; we'll tell you that date in writing at least 14 days before. You get the whole deposit back if you cancel within 14 days of paying, or if FIG hasn't opened to diners by March 1, 2027. Prices are before tax, plus HST once FIG is registered. The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
              # Stripe 2.9% + CA$0.30 domestic cards (source at the top); HST 13% Ontario
              ("Takeout paid in the app: 5% of the food", """<p>When a diner orders takeout and pays in the app, the payment goes through Stripe. FIG keeps 5% of the food before tax, Stripe's card fee comes off the same payment, and the rest, including the HST, is paid out to you. The HST is yours to remit, as with any sale.</p>
 <div class="callout math"><b>A $30 takeout order in Markham</b><table><thead><tr><th></th><th>Amount</th></tr></thead><tbody>
@@ -118,7 +118,7 @@ POSTS = [
               ("Is there a commission on dine-in?", "No. A diner who uses your deal pays you at the counter, and FIG takes nothing from that bill. There's no fee per diner."),
               ("Who pays Stripe's fee on takeout?", "It comes off the same in-app payment, before the payout: 2.9% + $0.30 on Canadian cards, Stripe's published rate. On a $33.90 payment that's about $1.28."),
               ("Does FIG collect HST for me?", "The diner pays the HST with the order and it's paid out to you with the rest. It's yours to remit. Your HST number goes on every takeout receipt, with your restaurant as the seller."),
-              ("Is there a contract?", "No. There's no contract and no setup fee. Cancel any time in Settings: a monthly plan stops at the end of the paid month, and an annual plan runs to the end of its year."),
+              ("Is there a contract?", "No. There's no contract and no setup fee. Monthly: cancel any time; it ends at the end of the month you've paid. Annual: it runs its year, then you can stop."),
               ("Can I pay to rank higher?", "No. Nothing you pay FIG changes where you appear in search or on the map, or what your reviews say.")]),
 
     # Places: Main Street Unionville https://en.wikipedia.org/wiki/Main_Street_Unionville ; Markham Village and its Main Street,

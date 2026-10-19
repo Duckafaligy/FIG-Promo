@@ -291,9 +291,13 @@ async function dinersState() {
 }
 async function setDinersMode(mode) {
   if (!["off", "waitlist", "on"].includes(mode)) throw new Error("bad mode");
+  const was = ((await rest("settings?select=value&key=eq.diners_open")).rows[0] || {}).value || "on"; // no row = everyone
   await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "diners_open", value: mode }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
-  // opening to founding members closes the list (the first time): who joined before now gets in, later sign-ups wait
-  if (mode === "waitlist" && !(await rest("settings?select=value&key=eq.founding_until")).rows.length) await setFoundingUntil("now");
+  // the founding cutoff belongs to one opening to founding members (FIX-LIST #184): opening to them (from off or on) closes the
+  // list now, every time, so who joined before now gets in and later sign-ups wait; off or on clears it, so a later opening (by
+  // the switch or the opening date) never inherits an old cutoff. Waitlist again while already on waitlist keeps it.
+  if (mode !== "waitlist") await setFoundingUntil(null);
+  else if (was !== "waitlist") await setFoundingUntil("now");
   console.log("admin: diner side ->", mode);
   return { mode, open: mode === "on" };
 }

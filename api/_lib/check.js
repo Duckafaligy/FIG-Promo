@@ -485,7 +485,17 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
   await db.setFoundingUntil("now"); assert.ok(table.settings.has("founding_until"), "let in until now saves");
   await assert.rejects(db.setFoundingUntil("2020-01-01"), /bad until/, "until takes only now or null");
   await db.setFoundingUntil(null); assert.ok(!table.settings.has("founding_until"), "clearing until removes it");
-  console.log("ok: launch plan settings: empty = everyone, 0 / junk refused, dates clear");
+  // FIX-LIST #184: the founding cutoff belongs to one opening: waitlist from off sets it now, off clears it, a second opening sets a new one
+  const until = () => (table.settings.get("founding_until") || {}).value;
+  await db.setDinersMode("off"); assert.strictEqual(until(), undefined, "off: no cutoff");
+  await db.setDinersMode("waitlist"); const cut1 = until(); assert.ok(cut1, "opening to founding members closes the list now");
+  await new Promise((r) => setTimeout(r, 5));
+  await db.setDinersMode("waitlist"); assert.strictEqual(until(), cut1, "waitlist again keeps the cutoff");
+  await db.setDinersMode("off"); assert.strictEqual(until(), undefined, "back to off clears it");
+  await db.setDinersMode("waitlist"); assert.ok(until() && until() > cut1, "a second opening gets a new cutoff, not the old one");
+  await db.setDinersMode("on"); assert.strictEqual(until(), undefined, "everyone: no cutoff");
+  await db.setDinersMode("off");
+  console.log("ok: launch plan settings: empty = everyone, 0 / junk refused, dates clear; the founding cutoff belongs to one opening (#184)");
   // the waitlist emails' unsubscribe links (FIX-LIST #103): a token per email, only it unsubscribes, the same page for anything
   {
     const unsub = require("./unsub"), dbm = require("./db"), handler = require("../unsubscribe");

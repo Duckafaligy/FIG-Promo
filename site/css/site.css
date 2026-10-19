@@ -945,7 +945,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .cities { display: grid; gap: 16px; margin-top: 40px; }
 .city { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 180px; padding: 26px; border-radius: 28px; background: var(--ice); text-decoration: none; color: var(--ink); overflow: hidden; }
 .city b { font-size: 28px; font-weight: 800; letter-spacing: -0.04em; }
-.city.big { min-height: 300px; background: url("/assets/map-fallback.webp") 70% center / cover; }
+.city.big { min-height: 300px; background: url("/assets/map-fallback-800.webp") 70% center / cover; background-image: image-set(url("/assets/map-fallback-800.webp") 1x, url("/assets/map-fallback.webp") 2x); } /* the 24 KB copy unless the screen is sharp (FIX-LIST #162) */
 .city-name { display: grid; gap: 2px; align-self: flex-start; padding: 16px 20px; border-radius: 20px; background: rgba(255, 255, 255, .94); }
 .city-name b { font-size: 34px; }
 .city-name span { color: var(--muted); font-weight: 600; font-size: 15px; }
@@ -1070,7 +1070,8 @@ p.consent { cursor: default; padding-left: 22px; }
   .hero-copy { padding-top: 32svh; }
   .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .25) 0, rgba(255, 255, 255, 0) 90px, rgba(255, 255, 255, .9) calc(32svh - 50px), #fff calc(32svh + 4px)); }
 }
-.city.next { background: linear-gradient(180deg, rgba(238, 243, 255, .2), rgba(238, 243, 255, .7) 75%), url("/assets/map-fallback.webp") 20% 30% / 260% auto; }
+.city.next { background: linear-gradient(180deg, rgba(238, 243, 255, .2), rgba(238, 243, 255, .7) 75%), url("/assets/map-fallback-800.webp") 20% 30% / 260% auto;
+  background-image: linear-gradient(180deg, rgba(238, 243, 255, .2), rgba(238, 243, 255, .7) 75%), image-set(url("/assets/map-fallback-800.webp") 1x, url("/assets/map-fallback.webp") 2x); }
 .city.next .city-name { background: rgba(255, 255, 255, .9); }
 .city.next .city-name b { font-size: 26px; }
 .badges .soon { display: block; flex-basis: 100%; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 600; }

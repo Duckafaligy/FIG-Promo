@@ -15,16 +15,34 @@ delete process.env.ADMIN_TOTP_SECRET;
 const salt = crypto.randomBytes(16);
 process.env.ADMIN_PASSWORD_HASH = "scrypt:" + salt.toString("hex") + ":" + crypto.scryptSync("right", salt, 32).toString("hex");
 
-// the fake database: the two tables auth.js uses (settings, login_attempts); "down" makes every call fail
+// the fake database: the two tables auth.js uses (settings, login_attempts) and the two functions from FIX-LIST #84
+// (rpcOn = false: as before that migration). "down" makes every call fail; failSave makes saving that settings key fail.
 const table = { settings: new Map(), login_attempts: new Map() };
-let down = false;
+let down = false, rpcOn = false, failSave = "";
 global.fetch = async (url, opts = {}) => {
   if (down) throw new Error("database down");
   const u = new URL(url);
   const name = u.pathname.split("/").pop();
+  const json = (rows) => ({ ok: true, status: 200, json: async () => rows, text: async () => JSON.stringify(rows) });
+  if (u.pathname.includes("/rpc/")) {
+    if (!rpcOn) return { ok: false, status: 404, json: async () => ({}) };
+    const a = JSON.parse(opts.body);
+    if (name === "admin_login_miss") { // one statement in Postgres: no await between the read and the write here either
+      const row = table.login_attempts.get(a.p_key);
+      const fails = !row || Date.parse(row.last_at) < Date.now() - a.p_window_hours * 3_600_000 ? 1 : row.fails + 1;
+      table.login_attempts.set(a.p_key, { key: a.p_key, fails, last_at: new Date().toISOString() });
+      return json(fails);
+    }
+    if (name === "admin_totp_use") {
+      const cur = table.settings.get("admin_totp_last_step");
+      if (cur && Number(cur.value) >= a.p_step) return json(false);
+      table.settings.set("admin_totp_last_step", { key: "admin_totp_last_step", value: String(a.p_step) });
+      return json(true);
+    }
+  }
   const t = table[name];
   if (!t) throw new Error("the check touched " + u.pathname);
-  const json = (rows) => ({ ok: true, status: 200, json: async () => rows, text: async () => JSON.stringify(rows) });
+  if (opts.method === "POST" && failSave && JSON.parse(opts.body).key === failSave) return { ok: false, status: 500, json: async () => ({}) };
   const key = (u.searchParams.get("key") || "").replace(/^eq\./, "");
   if (!opts.method || opts.method === "GET") return json(t.has(key) ? [t.get(key)] : []);
   if (opts.method === "DELETE") { t.delete(key); return json([]); }
@@ -37,7 +55,7 @@ const { login, loginCode, signedIn, logoutEverywhere, enrolStart, enrolConfirm, 
 const jar = (headers = []) => Object.fromEntries(headers.map((h) => { const [kv] = h.split(";"); const i = kv.indexOf("="); return [kv.slice(0, i), decodeURIComponent(kv.slice(i + 1))]; }));
 const asCookie = (c) => Object.entries(c).filter(([, v]) => v).map(([k, v]) => k + "=" + encodeURIComponent(v)).join("; ");
 const reqFrom = (ip, c = {}) => ({ headers: { "x-real-ip": ip, cookie: asCookie(c) } });
-const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempts.clear(); down = false; delete process.env.ADMIN_TOTP_SECRET; };
+const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempts.clear(); down = false; failSave = ""; delete process.env.ADMIN_TOTP_SECRET; };
 
 (async () => {
   // the lock schedule, cookies, password
@@ -146,6 +164,29 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
   for (let i = 0; i < 4; i++) await loginCode(reqFrom("6.6.6.6", stepCookie), "123456");
   assert.ok((await loginCode(reqFrom("6.6.6.6", stepCookie), "123456")).body.locked, "wrong codes share the per-address lock");
   console.log("ok: code step off until ADMIN_TOTP_SECRET is set; then required (even on a known device), one use per code, backup codes once each");
+
+  // FIX-LIST #84 with the migration in: misses counted in one statement, a code used once even when sent twice at once,
+  // and a right backup code that couldn't be crossed off isn't a wrong try
+  fresh(); rpcOn = true;
+  await Promise.all(Array.from({ length: 12 }, (_, i) => login(reqFrom("10.5.0." + i), "nope")));
+  assert.strictEqual(table.login_attempts.get("admin:*").fails, 12, "12 misses at once count 12");
+  await Promise.all(Array.from({ length: 3 }, () => login(reqFrom("10.6.0.1"), "nope")));
+  assert.strictEqual(table.login_attempts.get("admin:10.6.0.1").fails, 3, "3 misses at once from one address count 3");
+  fresh(); rpcOn = true;
+  process.env.ADMIN_TOTP_SECRET = s;
+  const step2 = jar((await login(reqFrom("8.8.8.8"), "right")).headers);
+  const twice = totp.codeAt(totp.unbase32(s), Math.floor(Date.now() / 30000));
+  const both = await Promise.all([loginCode(reqFrom("8.8.8.8", step2), twice), loginCode(reqFrom("8.8.8.8", step2), twice)]);
+  assert.deepStrictEqual(both.map((x) => x.status).sort(), [200, 401], "the same code sent twice at once passes once");
+  _test.reset(); // another server: its memory hasn't seen the code, the database has
+  assert.strictEqual((await loginCode(reqFrom("8.8.8.11", step2), twice)).status, 401, "the database's compare-and-set blocks it on another server");
+  table.settings.set("admin_backup_codes", { key: "admin_backup_codes", value: JSON.stringify(e.body.backup.slice(1).map(totp.hashBackup)) });
+  failSave = "admin_backup_codes";
+  const unsaved = await loginCode(reqFrom("8.8.8.12", step2), e.body.backup[1]);
+  assert.ok(unsaved.status === 503 && /didn’t save it as used/.test(unsaved.body.error), "a right backup code that can't be crossed off gets the database message");
+  assert.ok(!table.login_attempts.get("admin:8.8.8.12"), "and isn't counted as a wrong try");
+  failSave = ""; rpcOn = false;
+  console.log("ok: #84 counters are atomic (12 at once count 12), a code passes once even sent twice at once, an unsaved backup code isn't a wrong try");
 
   // the probe: every admin-api action refuses without a real, current session, and cross-origin
   fresh();

@@ -58,6 +58,23 @@ async function dbWrite(who, fails) {
     else await fetch(`${url}/rest/v1/login_attempts?on_conflict=key`, { method: "POST", headers: h, body: JSON.stringify({ key: "admin:" + who, fails, last_at: new Date().toISOString() }), signal: AbortSignal.timeout(3000) });
   } catch { /* the cookie and memory still count */ }
 }
+/** A database function (FIX-LIST #84): its answer, or undefined when it can't be called (no database, or the function isn't there yet). */
+async function rpc(fn, args) {
+  const { url, key } = DB();
+  if (!url || !key) return undefined;
+  try {
+    const r = await fetch(`${url}/rest/v1/rpc/${fn}`, { method: "POST", headers: H(key, { "Content-Type": "application/json" }), body: JSON.stringify(args), signal: AbortSignal.timeout(3000) });
+    return r.ok ? r.json() : undefined;
+  } catch { return undefined; }
+}
+/** One more miss for "admin:<who>", counted in one statement (admin_login_miss); null when the database can't count it. */
+async function dbMiss(who, windowHours, fallback) {
+  const n = await rpc("admin_login_miss", { p_key: "admin:" + who, p_window_hours: windowHours });
+  if (typeof n === "number") return n;
+  // ponytail: until that migration is in, read-then-write: two misses at the same instant can count as one
+  await dbWrite(who, fallback);
+  return null;
+}
 /** A settings value: the text, undefined when there's no row, or null when the database can't say. */
 async function getSetting(name) {
   const { url, key } = DB();
@@ -87,12 +104,10 @@ async function globalState() {
   return Date.now() - g.last > GLOBAL.hourMs ? { fails: 0, last: 0 } : g; // an hour with no misses starts over
 }
 const globalUntil = (g) => (g.fails >= GLOBAL.fails ? g.last + GLOBAL.lockMs : 0);
-// ponytail: read, then write, so two misses at the same instant can count as one; fine for a throttle
 async function globalMiss() {
   const g = await globalState();
-  const next = { fails: g.fails + 1, last: Date.now() };
-  tries.set(GLOBAL.key, next);
-  await dbWrite(GLOBAL.key, next.fails);
+  const counted = await dbMiss(GLOBAL.key, GLOBAL.hourMs / 3_600_000, g.fails + 1);
+  tries.set(GLOBAL.key, { fails: counted ?? g.fails + 1, last: Date.now() });
 }
 
 /** The admin session version (1 when unset), or null when the database can't say. */
@@ -168,10 +183,9 @@ async function gate(req, now, v) {
 }
 /** A wrong password or code: counts for this address and (unless a known device) globally. */
 async function miss(req, st, known, now, wrong) {
-  const fails = st.fails + 1;
+  const fails = Math.max(st.fails + 1, (await dbMiss(ip(req), 24, st.fails + 1)) ?? 0); // a day of quiet forgives, as dbState
   const until = now + lockFor(fails);
   tries.set(ip(req), { fails, until });
-  await dbWrite(ip(req), fails);
   if (!known) await globalMiss();
   const left = Math.max(0, FREE_TRIES - fails);
   return {
@@ -216,15 +230,22 @@ async function codeOk(code, now) {
     const i = left.findIndex((h) => String(h).length === want.length && crypto.timingSafeEqual(Buffer.from(String(h)), want));
     if (i < 0) return false;
     left.splice(i, 1);
-    return setSetting("admin_backup_codes", JSON.stringify(left)); // used up only if that saved
+    // used up only if that saved; a right code that couldn't be crossed off isn't a wrong try (FIX-LIST #84)
+    return (await setSetting("admin_backup_codes", JSON.stringify(left))) || "That backup code is right, but the database didn’t save it as used. Try again in a minute, or use the code from your authenticator app.";
   }
   const step = totp.matchStep(process.env.ADMIN_TOTP_SECRET, typed, now);
   if (step === null) return false;
-  const saved = await getSetting("admin_totp_last_step");
-  const last = Math.max(lastStepMem, Number(saved) || 0);
-  if (step <= last) return false; // used already: a replayed code is a wrong one
-  lastStepMem = step;
-  await setSetting("admin_totp_last_step", step);
+  if (step <= lastStepMem) return false; // used already: a replayed code is a wrong one
+  // compare-and-set in one statement, so the same code sent twice at once passes once (FIX-LIST #84)
+  const fresh = await rpc("admin_totp_use", { p_step: step });
+  if (fresh === false) return false;
+  if (fresh === undefined) {
+    // ponytail: the database can't (or the function isn't there yet): read-then-write, plus this server's memory
+    const saved = await getSetting("admin_totp_last_step");
+    if (step <= (Number(saved) || 0)) return false;
+    await setSetting("admin_totp_last_step", step);
+  }
+  lastStepMem = Math.max(lastStepMem, step);
   return true;
 }
 /** The code after the password. */

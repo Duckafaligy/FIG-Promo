@@ -214,8 +214,10 @@ function securityWire() {
 const VIEWS = {
   security: () => securityHtml(),
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
-    '<div id="launchbox">' + launchLine() + '</div><div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
-    stat(D.counts.ordersOpen, "Orders open now") + stat(D.counts.support, "Messages to answer", D.counts.support ? "red" : "") + stat(D.counts.reports, "Open reports", D.counts.reports ? "red" : "") + "</div>" +
+    '<div id="launchbox">' + launchLine() + "</div>" + needsYou() +
+    '<div class="stats">' + stat(D.counts.live, "Restaurants live", "blue") + stat(setup().length, "Restaurants in setup") + stat(D.counts.dealsLive, "Deals live now") +
+    stat(D.counts.waitlist, "On the waitlist" + (D.counts.waitlist7 ? " · " + D.counts.waitlist7 + " new this week" : "")) + stat(D.counts.claims7, "Deals claimed this week") + stat(D.counts.scans7, "Scanned at the counter this week") +
+    stat(D.counts.diners, "Diner accounts") + stat(D.counts.orders30, "Takeout orders, 30 days") + '<div class="stat"><b id="q-posts">–</b><span>Posts queued</span></div></div>' +
     '<div class="line"><h2>Latest restaurants</h2><button class="link" data-go="restaurants">See all</button></div>' + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
   restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Who’s on FIG, and the places you could bring on.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
     tabs("restaurants", [["fig", "On FIG · " + D.restaurants.length], ["outreach", "Outreach · " + D.leads.length + (D.leads.length === 1 ? " lead" : " leads")]]) +
@@ -238,6 +240,18 @@ const VIEWS = {
           '<a class="link" href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '">' + esc(m.email) + '</a><br><button class="link" data-2fa-email="' + esc(m.email) + '">Turn off two-step login</button>', esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
           m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here."))),
 };
+// restaurants that started setup but aren't live (paused ones excluded), and the ones stuck there 3 days or more
+const setup = () => D.restaurants.filter((r) => r.status !== "approved" && r.status !== "rejected");
+// the Overview's "Needs you": what's waiting on the team, each one a link to where it's dealt with
+function needsYou() {
+  const stuck = setup().filter((r) => Date.now() - Date.parse(r.created_at) >= 3 * 86400000);
+  const items = [];
+  if (D.counts.support) items.push('<button class="link" data-go="inbox:messages">' + D.counts.support + (D.counts.support === 1 ? " message" : " messages") + " to answer</button>");
+  if (D.counts.reports) items.push('<button class="link" data-go="inbox:reports">' + D.counts.reports + (D.counts.reports === 1 ? " open report" : " open reports") + "</button>");
+  stuck.forEach((r) => items.push('<button class="link" data-go="restaurants:fig">' + esc(r.name) + "</button> has been in setup for " + Math.floor((Date.now() - Date.parse(r.created_at)) / 86400000) + " days"));
+  return '<div class="hint"><div style="font-size:17px;font-weight:800;margin-bottom:6px">Needs you</div>' +
+    (items.length ? items.map((x) => '<div style="padding:6px 0">' + x + "</div>").join("") : '<span class="muted">Nothing right now.</span>') + "</div>";
+}
 // Restaurants > Outreach: restaurants that left their details on the website, then every place in Markham to approach
 function outreachHtml() {
   return "<h2>Leads from the website</h2>" + table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. Restaurants that fill in the website’s form show up here.") +
@@ -272,6 +286,7 @@ function blogHtml() {
 async function blogLoad() {
   BLOG = await api("blog-list").catch(() => ({ error: "The list did not load. Refresh to try again." }));
   const n = $("#n-blog"); if (n) n.textContent = BLOG.posts ? BLOG.posts.filter((p) => p.status === "live").length : "–";
+  const q = $("#q-posts"); if (q) q.textContent = BLOG.posts ? BLOG.posts.filter((p) => p.status === "queued").length : "–";
   if (view === "blog" && $("#blogbox")) { $("#blogbox").innerHTML = blogHtml(); blogWire(); }
 }
 function blogWire() {
@@ -431,7 +446,7 @@ function prosWire() {
 }
 
 // links that move to another view (the Overview's "See all" and "The launch plan")
-function goWire() { document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => { view = b.dataset.go; render(); scrollTo(0, 0); }); }
+function goWire() { document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => { const [v, k] = b.dataset.go.split(":"); view = v; if (k) SUB[v] = k; render(); scrollTo(0, 0); }); }
 function render() {
   document.querySelectorAll("#nav button, #sec").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
@@ -448,7 +463,7 @@ function render() {
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
   if (view === "security") securityWire();
-  if (view === "blog" && D.connected) blogLoad();
+  if ((view === "blog" || view === "overview") && D.connected) blogLoad();
   if ((view === "waitlist" || view === "overview") && D.connected) dinersLoad();
   if (view === "restaurants" && SUB.restaurants === "outreach" && D.connected) prosLoad();
 }

@@ -22,7 +22,8 @@ const safe = (p, fallback) => p.catch(() => fallback);
 
 async function overview() {
   const since = new Date(Date.now() - 30 * 86400000).toISOString();
-  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads, support, owners, changes, orders30, ordersOpen] = await Promise.all([
+  const week = new Date(Date.now() - 7 * 86400000).toISOString();
+  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads, support, owners, changes, orders30, ordersOpen, dealsLive, claims7, scans7, waitlist, waitlist7] = await Promise.all([
     safe(count("profiles?role=eq.diner"), null),
     safe(count("restaurants"), null),
     safe(count("restaurants?status=eq.approved"), null),
@@ -38,17 +39,23 @@ async function overview() {
     safe(rest("restaurant_changes?select=id,restaurant_id,kind,before,after,at&order=at.desc&limit=40"), { rows: [] }),
     safe(count(`orders?placed_at=gte.${since}`), null),
     safe(count("orders?status=in.(unpaid,sent,accepted,ready)"), null),
+    // the Overview's week (FIX-LIST #83 review): deals running, claims and counter scans in 7 days, the diner waitlist
+    safe(count("deals?status=eq.live"), null),
+    safe(count(`claims?claimed_at=gte.${week}`), null),
+    safe(count(`stamps?at=gte.${week}`), null),
+    safe(count("diner_waitlist"), null),
+    safe(count(`diner_waitlist?joined_at=gte.${week}`), null),
   ]);
   return {
-    counts: { diners, restaurants, live, reports, orders30, ordersOpen, support: support.rows.filter((m) => m.status === "open").length },
+    counts: { diners, restaurants, live, reports, orders30, ordersOpen, dealsLive, claims7, scans7, waitlist, waitlist7, support: support.rows.filter((m) => m.status === "open").length },
     support: support.rows, owners: owners.rows, changes: changes.rows,
-    ads: await safe(ads(), { campaigns: [], accounts: [], invoices: [] }), restaurants: recentR.rows, premium: premiumRows.rows, reports: recentRep.rows,
+    restaurants: recentR.rows, premium: premiumRows.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
   };
 }
 
-// ads (FIG's only income: restaurants pay per tap, the team invoices monthly): every campaign with its results, every
-// ad account with this month's spend, and the invoices
+// ads (restaurants pay per tap, the team invoices monthly): every campaign with its results, every ad account with this
+// month's spend, and the invoices. Dormant while ads are off in the app (ADS_ON): the admin page doesn't show them (FIX-LIST #83)
 async function ads() {
   const [campaigns, accounts, invoices] = await Promise.all([
     rest("rpc/admin_campaigns", { method: "POST", body: "{}" }),

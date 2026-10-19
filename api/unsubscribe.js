@@ -23,14 +23,16 @@ h1{font-size:24px;margin:0 0 8px}p{color:#4A5568;margin:0 0 18px}button{font:inh
 module.exports = async (req, res) => {
   const q = new URL(req.url, "https://fig.invalid").searchParams;
   const email = String(q.get("e") || "").slice(0, 254), t = String(q.get("t") || "").slice(0, 64);
+  // the page repeats the address only when it looks like one, so a crafted link can't put any words it likes on FIG's page (#172)
+  const shown = /^[^\s@<>"'`]{1,64}@[^\s@<>"'`]{1,190}\.[A-Za-z]{2,24}$/.test(email) ? email : "this address";
   if (req.method === "POST") {
     const now = Date.now(), who = ip(req), r = tries.get(who);
     const n = r && now - r.since < 3_600_000 ? r.n + 1 : 1;
     tries.set(who, { n, since: r && n > 1 ? r.since : now });
     if (n <= 30 && unsub.valid(email, t)) { try { await db.waitlistUnsubscribe(email); } catch { /* the same answer; FIG can do it by hand */ } }
-    return send(res, 200, page("Unsubscribed", `<h1>You're unsubscribed</h1><p>FIG won't email ${esc(email || "this address")} about the waitlist again. Changed your mind? Join the list again on <a href="/">fig-promo.vercel.app</a>.</p>`));
+    return send(res, 200, page("Unsubscribed", `<h1>You're unsubscribed</h1><p>FIG won't email ${esc(shown)} about the waitlist again. Changed your mind? Join the list again on <a href="/">fig-promo.vercel.app</a>.</p>`));
   }
   if (req.method !== "GET" && req.method !== "HEAD") return send(res, 405, page("Not allowed", "<h1>Not allowed</h1>"));
-  return send(res, 200, page("Unsubscribe", `<h1>Stop FIG's emails?</h1><p>FIG won't email ${esc(email || "this address")} about the waitlist again. You keep your place on the list.</p>` +
-    `<form method="post" action="/api/unsubscribe?e=${encodeURIComponent(email)}&amp;t=${encodeURIComponent(t)}"><button type="submit">Unsubscribe</button></form>`));
+  return send(res, 200, page("Unsubscribe", `<h1>Stop FIG's emails?</h1><p>FIG won't email ${esc(shown)} about the waitlist again. You keep your place on the list.</p>` +
+    `<form method="post" action="/api/unsubscribe?e=${encodeURIComponent(shown === email ? email : "")}&amp;t=${encodeURIComponent(t)}"><button type="submit">Unsubscribe</button></form>`));
 };

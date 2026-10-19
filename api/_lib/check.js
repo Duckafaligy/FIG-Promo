@@ -502,6 +502,10 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     assert.deepStrictEqual(done, ["ana@example.com"], "only the right token unsubscribes");
     assert.strictEqual(bad.body.replace(/bo@example\.com/g, "X"), good.body.replace(/ana@example\.com/g, "X"), "the same answer either way (no probing)");
     assert.ok(!/<script/i.test((await hit("GET", "<script>x</script>@a.b", "z")).body), "the address is escaped");
+    // #172: only something that looks like an address is repeated; any other words in e= never reach the page
+    const crafted = await hit("GET", "Your FIG account is locked. Call 555-0100 now", "z");
+    assert.ok(!/locked|555-0100/.test(crafted.body) && /this address/.test(crafted.body), "a sentence in e= isn't shown");
+    assert.ok(/ana@example\.com/.test((await hit("GET", "ana@example.com", "z")).body), "a real address is");
     for (let i = 0; i < 31; i++) await hit("POST", "ana@example.com", t, "6.6.6.6");
     assert.strictEqual(done.length, 31, "30 an hour per address, then nothing more is done");
     dbm.waitlistUnsubscribe = real;

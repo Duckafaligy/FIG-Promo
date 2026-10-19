@@ -1274,7 +1274,8 @@ function wireActions(root) {
   });
   $$("[data-filter]", root).forEach((inp) => inp.oninput = () => {
     const t = inp.closest(".tools").nextElementSibling, q = inp.value.trim().toLowerCase();
-    if (t) $$("tbody tr", t).forEach((tr) => { tr.hidden = !!q && !tr.textContent.toLowerCase().includes(q); });
+    // the row's own words, not its hidden "Open ..." button (#166: "open" matched every row)
+    if (t) $$("tbody tr", t).forEach((tr) => { const own = tr.textContent.replace((tr.querySelector(".row-open") || {}).textContent || "", ""); tr.hidden = !!q && !own.toLowerCase().includes(q); });
   });
   if (!D || !D.connected) return;
   $$("[data-2fa],[data-2fa-email]", root).forEach((b) => b.onclick = async () => {

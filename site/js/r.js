@@ -12,8 +12,9 @@
   var STORE = { ios: '', android: '' }; // e.g. https://apps.apple.com/app/id1234567890 and https://play.google.com/store/apps/details?id=com.figtechnologies.fig
   var PACKAGE = 'com.figtechnologies.fig';
   var id = location.pathname.split('/')[2] || '';
-  // a first name: letters, spaces, ' . -, 30 at most; nothing that calls itself FIG
-  var from = (new URLSearchParams(location.search).get('from') || '').replace(/[^\p{L}\p{M} '’.-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 30);
+  // a first name, all the app ever sends: one word of letters (an apostrophe or hyphen inside is fine), 20 at most; nothing that
+  // calls itself FIG (FIX-LIST #173: no sentence a crafted link could put on the page)
+  var from = ((new URLSearchParams(location.search).get('from') || '').trim().split(/\s+/)[0] || '').replace(/[^\p{L}\p{M}'’-]/gu, '').slice(0, 20);
   if (/fig/i.test(from)) from = '';
   var title = document.getElementById('r-title');
   var line = document.getElementById('r-line');

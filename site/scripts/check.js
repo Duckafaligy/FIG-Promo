@@ -55,6 +55,8 @@ console.log("ok: blog groups");
   const host = new URL(/supabaseUrl:\s*"([^"]+)"/.exec(fs.readFileSync(path.join(__dirname, "..", "js", "config.js"), "utf8"))[1]).host;
   const csps = vercel.headers.flatMap((h) => h.headers.filter((x) => x.key === "Content-Security-Policy").map((x) => [h.source, x.value]));
   for (const [src, v] of csps) assert.ok(!/\*\.supabase\.co/.test(v), `vercel.json ${src}: a *.supabase.co wildcard`);
+  // nothing loads from Google Fonts (FIX-LIST #160 d: the site and the app ship their own font files), so no CSP allows it
+  for (const [src, v] of csps) assert.ok(!/fonts\.g(oogleapis|static)\.com/.test(v), `vercel.json ${src}: Google Fonts is allowed but nothing uses it`);
   for (const p of ["/", "/app/welcome"]) {
     const v = (csps.find(([src]) => new RegExp(`^${src}$`).test(p)) || [])[1] || "";
     assert.ok(new RegExp(`connect-src [^;]*https://${host.replace(/\./g, "\.")}`).test(v), `vercel.json: ${p} connect-src names ${host}`);

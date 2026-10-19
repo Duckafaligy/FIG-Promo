@@ -884,7 +884,7 @@ function blogWire(root) {
 let PS = null;
 const PLAN_NAME = { monthly: "Founding monthly", annual: "Founding annual" };
 const PLAN_PRICE = { monthly: "$9.99/mo to month 12, then $29.99/mo", annual: "$59.99 the first year, then $29.99/mo" };
-const PS_STATUS = { trialing: ["Deposit paid", "b"], active: ["Paying", "g"], past_due: ["Payment failed", "r"], unpaid: ["Unpaid", "r"], canceled: ["Cancelled", ""], incomplete: ["Not finished", ""] };
+const PS_STATUS = { trialing: ["Deposit held", "b"], active: ["Paying", "g"], past_due: ["Payment failed", "r"], unpaid: ["Unpaid", "r"], canceled: ["Cancelled", ""], incomplete: ["Not finished", ""] };
 const PS_WORDS = { "too-soon": "Pick a day at least 14 days from today.", "too-far": "Pick a day within 360 days.", "not-set-up": "The live Stripe prices aren’t set yet.",
   "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.", "payment-not-found": "Stripe hasn’t shown this deposit’s payment yet. Try again in a few minutes, or refund it in Stripe.",
   "not-subscribed": "There’s no plan for this restaurant.", "too-early": "Every deposit can be refunded from March 1, 2027.",
@@ -916,7 +916,9 @@ function paidHtml() {
     mini("Annual · monthly", num(kept.filter((p) => p.plan === "annual").length) + " · " + num(kept.filter((p) => p.plan === "monthly").length)) + "</div>";
   return problem + card("wl-plan", sw + start + march) + minis +
     table(["Restaurant", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
-      const st = p.refunded_at ? ["Refunded", ""] : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
+      // an annual plan stays "trialing" at Stripe through its paid first year: once its start day has passed it's paying (#186)
+      const started = !!p.starts_at && Date.parse(p.starts_at) <= Date.now();
+      const st = p.refunded_at ? ["Refunded", ""] : p.status === "trialing" && started ? PS_STATUS.active : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
       return ["<b>" + esc((p.restaurants || {}).name || "A restaurant") + '</b><span class="sub">' + esc((p.profiles || {}).email || "") + "</span>",
         esc(PLAN_NAME[p.plan] || p.plan) + '<span class="sub">' + esc(PLAN_PRICE[p.plan] || "") + "</span>",
         '<span class="pill ' + st[1] + '">' + esc(st[0]) + "</span>" + (p.paid_through ? '<span class="sub">Paid through ' + esc(longDay(p.paid_through)) + "</span>" : ""),
@@ -956,7 +958,9 @@ function paidWire() {
     run(b, "presale-refund", { restaurant: p.restaurant_id, force: late }, () => "Refunded. It reaches their card in 5 to 10 days.");
   });
   const all = $("#ps-all"); if (all) all.onclick = async () => {
-    const typed = await ask({ title: "Refund every deposit?", body: esc("Every plan that hasn’t started is refunded in full and cancelled. Type REFUND ALL to confirm."),
+    const w = PS.refundAllWould || { count: 0, cents: 0 };
+    if (!w.count) return toast("No plan is waiting for its start, so there's nothing to refund.", true);
+    const typed = await ask({ title: "Refund " + num(w.count) + (w.count === 1 ? " deposit" : " deposits") + ", " + money(w.cents / 100) + "?", body: esc("Each plan that hasn’t started (" + num(w.count) + ", " + money(w.cents / 100) + " in all) is refunded in full and cancelled. Plans already paying are left alone. Type REFUND ALL to confirm."),
       ok: "Refund every deposit", danger: true, input: '<input class="f" id="dlg-all" autocomplete="off" aria-label="Type REFUND ALL">' });
     if (typed === false) return;
     if (!typedOk(typed, "REFUND ALL")) return toast("Type REFUND ALL to confirm.", true);

@@ -519,7 +519,7 @@ for k, post in enumerate(POSTS):
             + '<aside class="ps-author"><img src="/assets/favicon.svg" alt="" width="44" height="44"><div><b>The FIG team</b><p>We build FIG in Markham, Ontario: live deals from local restaurants, free for diners. Questions or a correction? <a href="/contact">Write to us</a>.</p></div></aside>'
             + "</article><div></div></div>" + end_cta(post)
             + '<section class="section ps-more"><div class="wrap"><h2 class="h2 pg-sub">Keep reading</h2><div class="bl-list">'
-            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}" data-post-card="{x["slug"]}"><img {thumb(photo_of(x, ""))} alt="" width="240" height="168" loading="lazy"><span><b>{e(x["title"])}</b><span class="bl-meta">{e(x["topic"])} · {nice_date(x["date"])} · {read_min(x)} min read</span><p>{e(x["dek"])}</p></span></a>' for x in related)
+            + "".join(f'<a class="post-card bl-row" href="/blog/{x["slug"]}" data-topic="{x["topic"]}" data-post-card="{x["slug"]}"><img {thumb(photo_of(x, cover(x)))} alt="" width="240" height="168" loading="lazy"><span><b>{e(x["title"])}</b><span class="bl-meta">{e(x["topic"])} · {nice_date(x["date"])} · {read_min(x)} min read</span><p>{e(x["dek"])}</p></span></a>' for x in related)
             + "</div></div></section>")
     article = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post["title"], "description": post.get("desc", post["dek"]), "keywords": post["keywords"],
                "datePublished": post["date"], "dateModified": post.get("updated", post["date"]), "articleSection": post["topic"], "inLanguage": "en-CA",

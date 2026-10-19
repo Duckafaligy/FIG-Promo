@@ -53,7 +53,8 @@ module.exports = async (req, res) => {
     if (action === "founding-until") return send(res, 200, { ok: true, ...(await db.setFoundingUntil(body.until === null ? null : "now")) });
     if (action === "ad-invoice") { await db.setInvoice(body.id, body.status); return send(res, 200, { ok: true }); }
   } catch (e) {
-    if (/^bad /.test(String(e.message))) return send(res, 400, { error: "That was not a valid request." }); // validation, not a database problem
+    // validation, not a database problem; the cap says what it takes (FIX-LIST #105)
+    if (/^bad /.test(String(e.message))) return send(res, 400, { error: e.message === "bad cap" ? "Type a whole number from 1 to 1,000,000, or leave it empty for everyone." : "That was not a valid request." });
     return send(res, 502, { error: "The database didn't answer. Try again." });
   }
   return send(res, 400, { error: "Unknown action." });

@@ -309,7 +309,7 @@ const MODE_ASK = {
     (DIN.until ? "the list keeps its cutoff (" + atText(DIN.until) + "), so who joined before it gets in." : "the list closes now."),
   on: () => "Open FIG to everyone now? Anyone can sign up, browse, claim deals and order. This is the public launch.",
 };
-const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" });
+const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Toronto" });
 const localInput = (iso) => { if (!iso) return ""; const d = new Date(iso); const p = (n) => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); };
 // what the opening date does depends on where FIG is now (FIX-LIST #56): the help under it and its Save confirm say so.
 // The list closes at founding_closes() = coalesce(founding_until, opens_at): a founding cutoff, once set, always wins (#65).
@@ -365,7 +365,14 @@ function modeWire() {
   const t = $("#lnch-retry"); if (t) t.onclick = () => dinersLoad();
   const after = async (r) => { if (r && r.error) alert(r.error); await dinersLoad(); };
   document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = async () => { const m = b.dataset.mode; if (!confirm(MODE_ASK[m]())) return; after(await api("diners-set", { mode: m })); });
-  const cs = $("#cap-save"); if (cs) cs.onclick = async () => { const v = ($("#cap-n") || {}).value || ""; after(await api("founding-cap", { cap: v === "" ? null : Number(v) })); };
+  // empty = everyone (null). A number field reads "" for text it can't parse ("5,000"): refused, never saved as everyone; clearing a
+  // set number asks first, like every other launch-plan change (FIX-LIST #105)
+  const cs = $("#cap-save"); if (cs) cs.onclick = async () => {
+    const f = $("#cap-n"), v = f.value.trim();
+    if (f.validity.badInput || (v !== "" && !(Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 1000000))) return alert("Type a whole number from 1 to 1,000,000, or leave it empty for everyone.");
+    if (v === "" && DIN.cap && !confirm("Let everyone on the list in? With no number, everyone on the list gets in as a founding member, not just the first " + DIN.cap.toLocaleString("en-CA") + ".")) return;
+    after(await api("founding-cap", { cap: v === "" ? null : Number(v) }));
+  };
   const os = $("#opens-save"); if (os) os.onclick = async () => {
     const v = ($("#opens-at") || {}).value || ""; if (!v) return alert("Pick a date and time first.");
     const at = new Date(v); if (isNaN(at) || at < new Date()) return alert("Pick a time in the future.");

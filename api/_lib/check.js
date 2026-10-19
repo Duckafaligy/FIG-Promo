@@ -23,7 +23,7 @@ global.fetch = async (url, opts = {}) => {
   if (down) throw new Error("database down");
   const u = new URL(url);
   const name = u.pathname.split("/").pop();
-  const json = (rows) => ({ ok: true, status: 200, json: async () => rows, text: async () => JSON.stringify(rows) });
+  const json = (rows) => ({ ok: true, status: 200, headers: new Map(), json: async () => rows, text: async () => JSON.stringify(rows) });
   if (u.pathname.includes("/rpc/")) {
     if (!rpcOn) return { ok: false, status: 404, json: async () => ({}) };
     const a = JSON.parse(opts.body);
@@ -231,5 +231,20 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
     }
     console.log("ok: QR codes match the qrcode package module for module (" + n + " codes, versions 1-10, all 8 masks)");
   }
+  // the launch plan's settings (FIX-LIST #105): empty / null clears to "everyone", 0 and junk are refused, a number saves, clearing again works
+  fresh();
+  const db = require("./db");
+  const cap = () => (table.settings.get("founding_cap") || {}).value;
+  for (const empty of [null, "", undefined]) { await db.setFoundingCap(250); assert.strictEqual(cap(), "250", "a number saves"); assert.deepStrictEqual(await db.setFoundingCap(empty), { cap: null }, "empty saves as everyone (" + empty + ")"); assert.strictEqual(cap(), undefined, "no row = everyone"); }
+  for (const bad of [0, -5, 1.5, "abc", "5,000", 2e6]) await assert.rejects(db.setFoundingCap(bad), /bad cap/, "the cap refuses " + bad);
+  assert.strictEqual(cap(), undefined, "a refused cap leaves it as it was");
+  await db.setOpensAt(new Date(Date.now() + 86400000).toISOString()); assert.ok(table.settings.has("opens_at"), "a future opening date saves");
+  await assert.rejects(db.setOpensAt(new Date(Date.now() - 86400000).toISOString()), /bad date/, "a past date is refused");
+  await assert.rejects(db.setOpensAt("not a date"), /bad date/, "junk is refused");
+  await db.setOpensAt(null); assert.ok(!table.settings.has("opens_at"), "clearing the opening date removes it");
+  await db.setFoundingUntil("now"); assert.ok(table.settings.has("founding_until"), "let in until now saves");
+  await assert.rejects(db.setFoundingUntil("2020-01-01"), /bad until/, "until takes only now or null");
+  await db.setFoundingUntil(null); assert.ok(!table.settings.has("founding_until"), "clearing until removes it");
+  console.log("ok: launch plan settings: empty = everyone, 0 / junk refused, dates clear");
   console.log("ok: admin auth");
 })().catch((e) => { console.error(e); process.exit(1); });

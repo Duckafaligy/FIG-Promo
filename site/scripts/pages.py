@@ -172,7 +172,7 @@ GTK = ("<!-- good-to-know: written by pages.py from posts.py GROUPS (FIX-LIST #1
        '      <h2 class="h2 reveal">Good to know</h2>\n      <p class="body gtk-sub reveal">Short reads for diners and restaurants.</p>\n'
        '      <div class="gtk-grid reveal">' + "".join(
            f'<a class="gtk-card" href="/blog#{g}"><span class="gtk-vis" aria-hidden="true">{_vis(g)}</span>'
-           f'<span class="gtk-text"><b>{e(t)}</b><span>{e(d)}</span><em>Learn more <i aria-hidden="true">→</i></em></span></a>' for g, t, d in GROUPS) + "</div>\n"
+           f'<div class="gtk-text"><h3>{e(t)}</h3><p>{e(d)}</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a>' for g, t, d in GROUPS) + "</div>\n"
        '      <div class="gtk-wide reveal"><div><h3>Everything we write, in one place.</h3><nav class="gtk-pills" aria-label="Blog groups">'
        + "".join(f'<a href="/blog#{g}">{e(t)}</a>' for g, t, _ in GROUPS) + "</nav></div>"
        '<a class="btn btn-lg btn-ink gtk-all" href="/blog">Read the blog <span aria-hidden="true">→</span></a></div>\n'

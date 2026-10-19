@@ -15,6 +15,7 @@
     v.after(b);
   };
   window.figPlay = (v) => {
+    if (document.documentElement.classList.contains("paused")) return; // "Pause animations" is on (FIX-LIST #149)
     v.muted = true; v.playsInline = true; v.autoplay = true;
     const p = v.play();
     if (p) p.then(() => { blocked.delete(v); v.nextElementSibling?.classList.contains("vplay") && v.nextElementSibling.remove(); })

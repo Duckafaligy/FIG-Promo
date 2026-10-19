@@ -63,13 +63,13 @@
     // visible and the mouse has moved in the last 1.5 s, at 30 fps; otherwise there's no frame loop at all. A moving mouse or
     // the hero coming back starts it again; the sway picks up where it stopped.
     let seen = false, raf = 0, tx = 0, ty = 0, cx = 0, cy = 0, moved = 0, last = 0, drift = 0;
-    const run = () => { if (!raf && seen && !document.hidden && performance.now() - moved < 1500) raf = requestAnimationFrame(tick); };
+    const run = () => { if (!raf && seen && !document.hidden && !document.documentElement.classList.contains("paused") && performance.now() - moved < 1500) raf = requestAnimationFrame(tick); };
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; run(); }).observe(box);
     document.addEventListener("visibilitychange", run);
     addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * -26; ty = (e.clientY / innerHeight - 0.5) * -18; moved = performance.now(); run(); }, { passive: true });
     function tick(now) {
       raf = 0;
-      if (!seen || document.hidden || now - moved > 1500) { last = 0; return; }
+      if (!seen || document.hidden || document.documentElement.classList.contains("paused") || now - moved > 1500) { last = 0; return; }
       if (now - last >= 33) {
         drift += last ? Math.min(now - last, 100) : 0; last = now;
         cx += (tx - cx) * 0.1; cy += (ty - cy) * 0.1;

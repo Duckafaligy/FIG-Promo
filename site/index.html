@@ -24,8 +24,8 @@
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/PlusJakartaSans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/site.css?v=fa37eb04fe">
-  <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
+  <link rel="stylesheet" href="/css/site.css?v=f979ea2259">
+  <script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion"); try { if (sessionStorage.getItem("fig.paused") === "1") document.documentElement.classList.add("paused"); } catch (e) {}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -64,6 +64,7 @@
           <a class="btn btn-lg" href="/app/welcome">Sign up</a>
           <a class="btn btn-lg btn-ghost" href="#waitlist">Join the diner waitlist</a>
         </div>
+        <button class="motion-toggle" type="button" aria-pressed="false"><span class="mt-ic" aria-hidden="true"></span>Pause animations</button>
       </div>
     </div>
     <div class="hero-phone" aria-hidden="true">
@@ -268,7 +269,7 @@
     <div class="wrap">
       <h2 class="h2 reveal">Good to know</h2>
       <p class="body gtk-sub reveal">Short reads for diners and restaurants.</p>
-      <div class="gtk-grid reveal"><a class="gtk-card" href="/blog#eat-out-for-less"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/eat-out-for-less-poster.webp" data-loop="/assets/loops/eat-out-for-less.mp4" disablepictureinpicture disableremoteplayback></video></span><span class="gtk-text"><b>Eat out for less</b><span>How deals on FIG work, and how to tell a good one.</span><em>Learn more <i aria-hidden="true">→</i></em></span></a><a class="gtk-card" href="/blog#fill-quiet-hours"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/fill-quiet-hours-poster.webp" data-loop="/assets/loops/fill-quiet-hours.mp4" disablepictureinpicture disableremoteplayback></video></span><span class="gtk-text"><b>Fill your quiet hours</b><span>Deal ideas for slow hours, the math behind them, and getting your team ready.</span><em>Learn more <i aria-hidden="true">→</i></em></span></a><a class="gtk-card" href="/blog#takeout-and-money"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/takeout-and-money-poster.webp" data-loop="/assets/loops/takeout-and-money.mp4" disablepictureinpicture disableremoteplayback></video></span><span class="gtk-text"><b>Takeout &amp; money</b><span>What a takeout order leaves a restaurant, with the fees and HST in plain numbers.</span><em>Learn more <i aria-hidden="true">→</i></em></span></a><a class="gtk-card" href="/blog#fig-in-markham"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/fig-in-markham-poster.webp" data-loop="/assets/loops/fig-in-markham.mp4" disablepictureinpicture disableremoteplayback></video></span><span class="gtk-text"><b>FIG in Markham</b><span>Local guides, and why FIG starts here.</span><em>Learn more <i aria-hidden="true">→</i></em></span></a></div>
+      <div class="gtk-grid reveal"><a class="gtk-card" href="/blog#eat-out-for-less"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/eat-out-for-less-poster.webp" data-loop="/assets/loops/eat-out-for-less.mp4" disablepictureinpicture disableremoteplayback></video></span><div class="gtk-text"><h3>Eat out for less</h3><p>How deals on FIG work, and how to tell a good one.</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a><a class="gtk-card" href="/blog#fill-quiet-hours"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/fill-quiet-hours-poster.webp" data-loop="/assets/loops/fill-quiet-hours.mp4" disablepictureinpicture disableremoteplayback></video></span><div class="gtk-text"><h3>Fill your quiet hours</h3><p>Deal ideas for slow hours, the math behind them, and getting your team ready.</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a><a class="gtk-card" href="/blog#takeout-and-money"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/takeout-and-money-poster.webp" data-loop="/assets/loops/takeout-and-money.mp4" disablepictureinpicture disableremoteplayback></video></span><div class="gtk-text"><h3>Takeout &amp; money</h3><p>What a takeout order leaves a restaurant, with the fees and HST in plain numbers.</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a><a class="gtk-card" href="/blog#fig-in-markham"><span class="gtk-vis" aria-hidden="true"><video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/fig-in-markham-poster.webp" data-loop="/assets/loops/fig-in-markham.mp4" disablepictureinpicture disableremoteplayback></video></span><div class="gtk-text"><h3>FIG in Markham</h3><p>Local guides, and why FIG starts here.</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a></div>
       <div class="gtk-wide reveal"><div><h3>Everything we write, in one place.</h3><nav class="gtk-pills" aria-label="Blog groups"><a href="/blog#eat-out-for-less">Eat out for less</a><a href="/blog#fill-quiet-hours">Fill your quiet hours</a><a href="/blog#takeout-and-money">Takeout &amp; money</a><a href="/blog#fig-in-markham">FIG in Markham</a></nav></div><a class="btn btn-lg btn-ink gtk-all" href="/blog">Read the blog <span aria-hidden="true">→</span></a></div>
     </div>
   </section>
@@ -364,8 +365,8 @@
 <script src="/js/config.js?v=d578c3d2f8" defer></script>
 <script src="/js/vendor/gsap-3.12.5.min.js?v=28033e449a" defer></script>
 <script src="/js/vendor/ScrollTrigger-3.12.5.min.js?v=ad33c2df9a" defer></script>
-<script src="/js/map.js?v=35dd1e1e5f" defer></script>
-<script src="/js/fx.js?v=24c4070950" defer></script>
-<script src="/js/main.js?v=5e5eba0144" defer></script>
+<script src="/js/map.js?v=2da6b5fa9c" defer></script>
+<script src="/js/fx.js?v=7a82aafad0" defer></script>
+<script src="/js/main.js?v=7897487688" defer></script>
 </body>
 </html>

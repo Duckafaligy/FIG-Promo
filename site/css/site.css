@@ -1248,12 +1248,12 @@ details.qa > p { margin: -2px 0 0; }
 .gtk-vis video, .gtk-vis img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .gtk-mark { width: 72px; height: 72px; opacity: .22; }
 .gtk-text { display: grid; gap: 8px; align-content: start; padding: 24px 26px 26px; }
-.gtk-text b { font-size: clamp(20px, 2vw, 24px); line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; transition: font-weight .22s cubic-bezier(.2, .8, .2, 1); }
-.gtk-text > span { color: var(--muted); font-size: 15px; line-height: 1.55; }
-.gtk-text em { margin-top: 8px; font-style: normal; font-size: 15px; font-weight: 700; color: var(--cobalt); }
-.gtk-text em i { display: inline-block; font-style: normal; transition: transform .22s cubic-bezier(.2, .8, .2, 1); }
-.gtk-card:hover .gtk-text b, .gtk-card:focus-visible .gtk-text b { font-weight: 800; }
-.gtk-card:hover .gtk-text em i, .gtk-card:focus-visible .gtk-text em i { transform: translateX(5px); }
+.gtk-text h3 { margin: 0; color: var(--text); font-size: clamp(20px, 2vw, 24px); line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; transition: font-weight .22s cubic-bezier(.2, .8, .2, 1); }
+.gtk-text p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.gtk-more { margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--cobalt); }
+.gtk-more i { display: inline-block; font-style: normal; transition: transform .22s cubic-bezier(.2, .8, .2, 1); }
+.gtk-card:hover .gtk-text h3, .gtk-card:focus-visible .gtk-text h3 { font-weight: 800; }
+.gtk-card:hover .gtk-more i, .gtk-card:focus-visible .gtk-more i { transform: translateX(5px); }
 .gtk-wide { display: grid; gap: 24px; align-items: center; margin-top: 20px; padding: 30px 26px; }
 .gtk-wide h3 { margin: 0; color: var(--text); font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; }
 .gtk-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
@@ -1264,4 +1264,14 @@ details.qa > p { margin: -2px 0 0; }
   .gtk-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .gtk-wide { grid-template-columns: 1fr auto; margin-top: 24px; padding: 40px 48px; }
 }
-@media (prefers-reduced-motion: reduce) { .gtk-card, .gtk-text b, .gtk-text em i { transition: none; } .gtk-card:hover, .gtk-card:focus-visible { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .gtk-card, .gtk-text h3, .gtk-more i { transition: none; } .gtk-card:hover, .gtk-card:focus-visible { transform: none; } }
+
+/* ---------- Pause animations (FIX-LIST #149, WCAG 2.2.2): one button on Home stops every loop on the page for the visit:
+   the videos go back to their first frame, the endless CSS loops stop (the hero phone shows its first screen) ---------- */
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 0 4px; border: 0; background: none; color: var(--soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.motion-toggle:hover { color: var(--cobalt); }
+.mt-ic { width: 10px; height: 12px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; box-sizing: border-box; }
+.motion-toggle[aria-pressed="true"] .mt-ic { width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent currentColor; }
+.paused .marquee-track { animation-play-state: paused !important; }
+.paused .hp-sticker, .paused .bub.typing i, .paused .hp-cycle img { animation: none !important; }
+.paused .hp-cycle img:first-child { opacity: 1; transform: none; }

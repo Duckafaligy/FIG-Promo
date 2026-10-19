@@ -39,7 +39,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <li><b>Claim</b><span>In one tap. It’s yours for as long as the deal runs.</span></li>
 <li><b>Show</b><span>Your code at the counter. It refreshes every 5 minutes, so a screenshot can't be reused.</span></li>
 <li><b>Rate</b><span>The visit afterwards, so reviews on FIG come from real visits.</span></li>
-</ol><p>Some deals also let you order takeout and pick up. You can share a deal with your group chat so everyone agrees on where to eat.</p></article>
+</ol><p>Some deals also let you order takeout and pick up. You can send a restaurant's link to your group chat: it opens the place's page on FIG with its live deals, so everyone agrees on where to eat.</p></article>
 <article class="ab-col ab-owners"><h2>For restaurants</h2><ol>
 <li><b>Set up</b><span>Your page: photos, address, hours, cuisine and dietary options.</span></li>
 <li><b>Go live</b><span>For free.</span></li>

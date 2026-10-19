@@ -227,7 +227,8 @@ def back_to_fig(title, lead, note, second, icon="✓", cls=""):
 <div class="st-badge{" " + cls if cls else ""}" aria-hidden="true">{icon}</div>
 <h1 class="st-h1">{title}</h1><p class="st-lead">{lead}</p>{f'<p class="st-note">{note}</p>' if note else ""}
 <div class="st-btns">{second}</div>
-</div></section>'''
+</div></section>
+<script src="/js/back.js" defer></script>'''
 
 
 def faq_ld(qs):
@@ -557,7 +558,7 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 <p class="lead-p" id="r-line">Live deals from restaurants near you. Claim one, show your QR at the counter. Free for diners.</p>
 <div class="r-actions"><a class="btn btn-lg" id="r-web" href="/app/">See it on FIG</a><a class="btn btn-lg btn-ghost" href="/#how">How FIG works</a></div>
 <p class="r-app"><a id="r-open" href="/" hidden>Have the FIG app? Open it there</a></p>
-<script src="/js/r.js" defer></script>''')
+<script src="/js/config.js" defer></script><script src="/js/r.js" defer></script>''')
 
 
 # Stripe sends people back here (takeout orders paid in the app, 2026-10-08): after paying for an order, after setting up payouts,

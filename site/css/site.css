@@ -936,6 +936,17 @@ p.consent { cursor: default; padding-left: 22px; }
 
 .nofees { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: -24px 0 40px; }
 .nofees li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+/* the founding plan's prices (FIX-LIST #141) */
+.plans { display: grid; gap: 16px; margin: 0 0 16px; }
+.plan { padding: 22px 24px; border-radius: 20px; background: var(--card); border: 1px solid var(--line-2); }
+.plan.feat { border-color: var(--cobalt); }
+.plan h3 { font-size: 17px; }
+.plan-p { margin-top: 10px; font-size: 36px; font-weight: 800; line-height: 1.1; color: var(--text); }
+.plan-p span { margin-left: 4px; font-size: 16px; font-weight: 600; color: var(--muted); }
+.plan-s { margin-top: 8px; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.plans-note { max-width: 860px; margin: 0 0 40px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.plans-note a { color: var(--text); text-decoration: underline; }
+@media (min-width: 900px) { .plans { grid-template-columns: repeat(3, 1fr); } }
 .nofees li::before { content: ""; width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; background: var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
 
 .faq { display: grid; gap: 32px; }

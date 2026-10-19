@@ -1,13 +1,13 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners and restaurants (no commission on the bill; up to 2 locations; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners; restaurants pay one flat plan ($29.99 a month from launch; founding $9.99 a month for 12 months or $59.99 the first year; no commission on the bill; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
 codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
-    ("Is FIG free?", "Yes for diners, always. For restaurants, listing, deals and scans are free, with no commission on the bill and no fee per diner. FIG makes money from 5% of the food on takeout orders diners pay for in the app."),
+    ("Is FIG free?", "Yes for diners, always. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants pay less before launch), with no commission on the bill and no fee per diner. FIG also keeps 5% of the food on takeout orders diners pay for in the app."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
     ("Who makes FIG?", "A small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),
@@ -19,7 +19,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <div><dt>What</dt><dd>An app for finding and using deals at local restaurants. Use it on the web today; iPhone and Android apps are coming soon.</dd></div>
 <div><dt>Where</dt><dd>Markham first, expanding to Richmond Hill and Vaughan Mills.</dd></div>
 <div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
-<div><dt>For restaurants</dt><dd>Free deals and scans, with no commission on the bill. Takeout orders paid in the app: 5% of the food.</dd></div>
+<div><dt>For restaurants</dt><dd>Deals and scans in one flat plan, with no commission on the bill. Takeout orders paid in the app: 5% of the food.</dd></div>
 <div><dt>Who</dt><dd>A small team in Markham, Ontario.</dd></div>
 </dl></div></section>
 
@@ -30,7 +30,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <p>Markham is one of the best places in Canada to eat. Dim sum, ramen, Hakka, Hong Kong cafés, Korean fried chicken, Indian sweets, bubble tea on every plaza. Most of the places that make it great are small and independent.</p>
 <p>Those owners all have the same problem: quiet hours. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>
 <p class="ab-strong">FIG is built the other way around. The restaurant decides the deal, the days, the hours and how many a day. Diners walk in and pay the restaurant like normal. FIG charges the restaurant nothing for any of it.</p>
-<p>We make money from 5% of the food on takeout orders diners pay for in the app.</p>
+<p>We make money from restaurants' flat monthly plan, and from 5% of the food on takeout orders diners pay for in the app.</p>
 </div></div></section>
 
 <section class="section ab-how"><div class="wrap ab-how-in">
@@ -42,16 +42,16 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 </ol><p>Some deals also let you order takeout and pick up. You can send a restaurant's link to your group chat: it opens the place's page on FIG with its live deals, so everyone agrees on where to eat.</p></article>
 <article class="ab-col ab-owners"><h2>For restaurants</h2><ol>
 <li><b>Set up</b><span>Your page: photos, address, hours, cuisine and dietary options.</span></li>
-<li><b>Go live</b><span>For free.</span></li>
+<li><b>Go live</b><span>In a few minutes.</span></li>
 <li><b>Post</b><span>A deal for the hours you want to fill, with an optional daily cap. Pause it anytime.</span></li>
-<li><b>Scan</b><span>Diners at the counter with any phone or tablet. Every scan is free.</span></li>
+<li><b>Scan</b><span>Diners at the counter with any phone or tablet. No fee per scan.</span></li>
 </ol><p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p></article>
 </div></section>
 
 <section class="section ab-diff"><div class="wrap">
 <h2 class="h2">What makes FIG different.</h2>
 <ul class="ab-diff-grid">
-<li><b>No commission on the bill.</b><span>Diners pay you, at your counter. FIG is paid by 5% of the food on takeout orders diners pay for in the app.</span></li>
+<li><b>No commission on the bill.</b><span>Diners pay you, at your counter. FIG is paid by a flat monthly plan, and by 5% of the food on takeout orders diners pay for in the app.</span></li>
 <li><b>Honest deals.</b><span>Every deal, timer and opening hour is set by the restaurant itself.</span></li>
 <li><b>Codes that can't be copied.</b><span>Rotating QR codes stop screenshots and resold deals.</span></li>
 <li><b>Private by default.</b><span>Restaurants never see a diner's phone number, even for a takeout order.</span></li>

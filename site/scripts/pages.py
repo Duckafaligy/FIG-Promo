@@ -150,7 +150,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. Free to join, no commission on dine-in. Diners join January 1, 2027.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding restaurants: $9.99 a month or $59.99 for the first year. Diners join January 1, 2027.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
@@ -326,9 +326,9 @@ legal("cookies", {"title": "Cookies", "updated": "Last updated October 19, 2026"
        ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
        ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>")])
 
-page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
+page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, with one flat plan for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',
-          "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants join free, post deals free and pay no commission on dine-in.",
+          "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants pay one flat plan and no commission on dine-in.",
           '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" srcset="/assets/about/dumpling-house-360.webp 360w, /assets/about/dumpling-house.webp 720w" sizes="180px" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" srcset="/assets/about/brew-lab-360.webp 360w, /assets/about/brew-lab.webp 720w" sizes="180px" alt="" width="720" height="1360"></div>', "ab-hero")
      + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
      keywords=BASE_KW + ", about FIG, Markham startup", group="Company",
@@ -371,7 +371,7 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "Nothing for dine-in. Joining, your page, deals and scans are free, with no commission on dine-in. On takeout orders diners pay for in the app, FIG keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
+        ("What does FIG cost?", "One flat plan: $29.99 a month from the day FIG opens to diners, before tax, for your page, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants lock in less: $9.99 a month for the first 12 months, or $59.99 for the first year, paid now as a deposit (refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027). On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
@@ -494,7 +494,7 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 def end_cta(post):
     """The cobalt block at the end of a post: restaurants get listed, diners open FIG (the web app, 2026-10-13)."""
     if post["topic"] == "For restaurants":
-        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free to join. Free deals and scans, with no commission on dine-in.</p>",
+        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Deals and scans in one flat plan, with no commission on dine-in. Founding prices before launch.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See how pricing works</a>')
     else:
         words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners. Opens in Markham on January 1, 2027.</p>",
@@ -601,7 +601,7 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
 page("404", "Page not found", "This page doesn't exist.", body='''<p class="lost-num" aria-hidden="true">404</p><h1>This page wandered off.</h1>
 <p class="lead-p">It may have moved, or the link has a typo.</p>
 <div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
-<a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to join and post deals.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
+<a class="card-l" href="/#owners"><b>For restaurants</b><span>Post deals diners can find.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
 
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<div class="r-bubble" aria-hidden="true"><b id="r-from">A friend</b><span>dinner here?</span></div>
@@ -642,14 +642,14 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants $9.99 a month for the first 12 months or $59.99 for the first year), with no commission on dine-in. FIG also keeps 5% of the food on takeout orders diners pay for in the app.
 
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: iPhone and Android
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: free (listing, unlimited everyday and flash deals, scans, dashboard); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; free insights (views, claims, diners who came in and came back); no ads
+- Restaurants: one flat plan, $29.99 a month from the day FIG opens to diners, before tax; founding prices before launch: $9.99 a month for the first 12 months, or $59.99 for the first year (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number

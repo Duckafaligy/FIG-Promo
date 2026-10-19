@@ -121,13 +121,22 @@ function penalty(m) {
   return p;
 }
 
-/** An SVG of the code with a 4-module white border. */
-function svg(text, px = 220) {
+// FIG's tile (the logo on a white rounded square), as on the site's app QR (site/assets/qr-app.svg)
+const TILE = '<path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/>';
+/** The tile's square, in modules: about a fifth of the code across (under 5% of it: level M rebuilds up to 15%). check.js decodes codes with it. */
+const tileBox = (size) => { const w = Math.round(size * 0.22) | 1, at = (size - w) / 2; return { at, w }; };
+
+/** An SVG of the code with a 4-module white border. opts.tile: FIG's tile in the middle (tracking links); opts.label: what it opens. */
+function svg(text, px = 220, opts = {}) {
   const { size, dark } = make(text);
+  const t = opts.tile ? tileBox(size) : null;
+  const under = (r, c) => t && r >= t.at && r < t.at + t.w && c >= t.at && c < t.at + t.w;
   let d = "";
-  dark.forEach((row, r) => row.forEach((on, c) => { if (on) d += `M${c + 4} ${r + 4}h1v1h-1z`; }));
+  dark.forEach((row, r) => row.forEach((on, c) => { if (on && !under(r, c)) d += `M${c + 4} ${r + 4}h1v1h-1z`; }));
   const n = size + 8;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" width="${px}" height="${px}" shape-rendering="crispEdges" role="img" aria-label="QR code for your authenticator app"><rect width="${n}" height="${n}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
+  const tile = t ? `<rect x="${t.at + 4 - 0.3}" y="${t.at + 4 - 0.3}" width="${t.w + 0.6}" height="${t.w + 0.6}" rx="${(t.w * 0.2).toFixed(2)}" fill="#fff"/><svg x="${t.at + 4 + 0.3}" y="${t.at + 4 + 0.3}" width="${t.w - 0.6}" height="${t.w - 0.6}" viewBox="743 716 100 100" shape-rendering="geometricPrecision">${TILE}</svg>` : "";
+  const label = String(opts.label || "QR code for your authenticator app").replace(/[<>&"]/g, "");
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" width="${px}" height="${px}" shape-rendering="crispEdges" role="img" aria-label="${label}"><rect width="${n}" height="${n}" fill="#fff"/><path d="${d}" fill="#000"/>${tile}</svg>`;
 }
 
-module.exports = { make, svg };
+module.exports = { make, svg, tileBox };

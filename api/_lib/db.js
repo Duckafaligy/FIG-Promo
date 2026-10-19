@@ -20,20 +20,133 @@ async function rest(path, opts = {}) {
 const count = async (path) => (await rest(path + (path.includes("?") ? "&" : "?") + "select=id&limit=1")).count;
 const safe = (p, fallback) => p.catch(() => fallback);
 
+// FIX-LIST #85 v2: the admin's charts and detail panels. Read-only. Days are Toronto calendar days ("2026-10-19").
+const dayKey = (t) => new Date(t).toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+// ponytail: steps back 24 h from now, so within an hour of midnight on a DST day one date can repeat; fine for a chart
+const dayKeys = (n) => Array.from({ length: n }, (_, i) => dayKey(Date.now() - (n - 1 - i) * 86400000));
+function bucketer(keys) {
+  const at = new Map(keys.map((k, i) => [k, i]));
+  return (rows, col, val) => {
+    const out = new Array(keys.length).fill(0);
+    for (const r of rows) { const i = at.get(dayKey(r[col])); if (i !== undefined) out[i] += val ? Number(r[val]) || 0 : 1; }
+    return out.map((v) => Math.round(v * 100) / 100);
+  };
+}
+// the end of a deal, from what's stored: when it was ended, a flash deal's end, or the last day of a one-day / until deal
+const dealEnd = (d) => d.ended_at || (d.flash && d.ends_at) || ((d.repeats === "once" || d.repeats === "until") && d.until_at) || null;
+
+/** 90 days of the numbers behind the Overview's charts, and the deals for the calendar. */
+// ponytail: reads up to the row limits below (90 days of rows); move the counting into the database if they're ever reached
+async function charts() {
+  const keys = dayKeys(90), from = new Date(Date.now() - 91 * 86400000).toISOString(), by = bucketer(keys);
+  const [wl, wlTotal, cl, st, dl, od, rs] = await Promise.all([
+    rest(`diner_waitlist?select=joined_at&joined_at=gte.${from}&limit=20000`),
+    count("diner_waitlist"),
+    rest(`claims?select=claimed_at&claimed_at=gte.${from}&limit=50000`),
+    rest(`stamps?select=at&at=gte.${from}&limit=50000`),
+    rest("deals?select=id,title,restaurant_id,status,flash,ends_at,until_at,repeats,created_at,ended_at,restaurants(name)&order=created_at.desc&limit=2000"),
+    rest(`orders?select=placed_at,total,fig_fee,status&placed_at=gte.${from}&limit=20000`),
+    rest("restaurants?select=created_at,status&limit=5000"),
+  ]);
+  // Growth (FIX-LIST #103): every day since the first sign-up of any kind, new per day; the page adds them up
+  // ponytail: up to 20,000 rows each; a count per day in the database if FIG ever gets there
+  const [gw, gd] = await Promise.all([
+    rest("diner_waitlist?select=joined_at&order=joined_at&limit=20000"),
+    rest("profiles?select=created_at&role=eq.diner&admin=eq.false&order=created_at&limit=20000"),
+  ]);
+  const firsts = [gw.rows[0] && gw.rows[0].joined_at, gd.rows[0] && gd.rows[0].created_at, ...rs.rows.map((r) => r.created_at)].filter(Boolean).map((t) => Date.parse(t));
+  const span = firsts.length ? Math.max(1, Math.ceil((Date.now() - Math.min(...firsts)) / 86400000) + 1) : 1;
+  const gkeys = dayKeys(Math.max(span, 7)), gby = bucketer(gkeys);
+  const fresh = by(wl.rows, "joined_at");
+  let run = wlTotal - fresh.reduce((a, b) => a + b, 0);
+  const cumulative = fresh.map((n) => (run += n));
+  // a deal counts on a day it had started (and wasn't still only scheduled) and hadn't ended
+  const running = keys.map((k) => dl.rows.filter((d) => d.status !== "scheduled" && dayKey(d.created_at) <= k && !(dealEnd(d) && dayKey(dealEnd(d)) < k)).length);
+  const placed = od.rows.filter((o) => o.status !== "unpaid");
+  const picked = od.rows.filter((o) => o.status === "picked");
+  // restaurants by the day they joined, split by their status today (approval dates aren't stored)
+  const upTo = (status) => keys.map((k) => rs.rows.filter((r) => (status === "setup" ? r.status === "pending" : r.status === status) && dayKey(r.created_at) <= k).length);
+  return {
+    keys,
+    waitlist: { total: cumulative, fresh },
+    claims: by(cl.rows, "claimed_at"), scans: by(st.rows, "at"), deals: running,
+    orders: { placed: by(placed, "placed_at"), value: by(picked, "placed_at", "total"), fees: by(picked, "placed_at", "fig_fee") },
+    restaurants: { live: upTo("approved"), setup: upTo("setup"), hidden: upTo("rejected") },
+    growth: { keys: gkeys, waitlist: gby(gw.rows, "joined_at"), diners: gby(gd.rows, "created_at"), restaurants: gby(rs.rows, "created_at") },
+    calendar: dl.rows.slice(0, 400).map((d) => ({ id: d.id, title: d.title, restaurant_id: d.restaurant_id, restaurant: (d.restaurants || {}).name || "", status: d.status, start: d.created_at, end: dealEnd(d) })),
+  };
+}
+
+/** One restaurant for its side panel: only the fields it shows. */
+async function restaurantDetail(id) {
+  uuid(id);
+  const keys = dayKeys(30), from = new Date(Date.now() - 31 * 86400000).toISOString(), by = bucketer(keys);
+  const [r, deals, staff, menu, orders, reports, scans] = await Promise.all([
+    rest(`restaurants?id=eq.${id}&select=id,owner_id,name,cuisine,address,city,phone,status,created_at,photos,hours,takeout`),
+    rest(`deals?restaurant_id=eq.${id}&select=id,title,status,flash,ends_at,until_at,repeats,created_at,ended_at&order=created_at.desc&limit=50`),
+    rest(`staff?restaurant_id=eq.${id}&select=name,email,role,status&order=invited_at`),
+    count(`menu_items?restaurant_id=eq.${id}`),
+    rest(`orders?restaurant_id=eq.${id}&select=number,status,total,placed_at&order=placed_at.desc&limit=20`),
+    rest(`reports?restaurant_id=eq.${id}&select=reason,details,at,status&order=at.desc&limit=20`),
+    rest(`stamps?restaurant_id=eq.${id}&at=gte.${from}&select=at&limit=20000`),
+  ]);
+  const row = r.rows[0];
+  if (!row) return { found: false };
+  const ids = deals.rows.map((d) => d.id);
+  const [owner, bill, claims] = await Promise.all([
+    rest(`profiles?id=eq.${uuid(row.owner_id)}&select=name,email`),
+    rest(`billing_accounts?owner_id=eq.${uuid(row.owner_id)}&select=payments_demo,stripe_ready,stripe_payouts`),
+    ids.length ? rest(`claims?deal_id=in.(${ids.join(",")})&claimed_at=gte.${from}&select=claimed_at&limit=20000`) : { rows: [] },
+  ]);
+  const b = bill.rows[0] || {};
+  return {
+    found: true,
+    restaurant: { id: row.id, owner_id: row.owner_id, name: row.name, cuisine: row.cuisine, address: row.address, city: row.city, phone: row.phone, status: row.status, created_at: row.created_at, photos: (row.photos || []).slice(0, 3), takeout: row.takeout },
+    owner: owner.rows[0] || {}, staff: staff.rows,
+    setup: [["3 photos or more", (row.photos || []).length >= 3], ["Address", !!row.address], ["Opening hours", (row.hours || []).some(Boolean)], ["Menu", menu > 0], ["A deal", deals.rows.length > 0],
+      ...(row.takeout ? [["Takeout payments", !!(b.payments_demo || (b.stripe_ready && b.stripe_payouts))]] : [])],
+    deals: deals.rows.map((d) => ({ id: d.id, title: d.title, status: d.status, start: d.created_at, end: dealEnd(d) })),
+    orders: orders.rows, reports: reports.rows,
+    series: { keys, claims: by(claims.rows, "claimed_at"), scans: by(scans.rows, "at") },
+  };
+}
+
+/** Who wrote or reported something, for the inbox: their account, their restaurants and their latest orders. */
+async function personDetail(id) {
+  uuid(id);
+  const [p, places, orders] = await Promise.all([
+    rest(`profiles?id=eq.${id}&select=name,role,created_at`),
+    rest(`restaurants?owner_id=eq.${id}&select=id,name,status`),
+    rest(`orders?user_id=eq.${id}&select=number,status,total,placed_at,restaurant_id&order=placed_at.desc&limit=5`),
+  ]);
+  return p.rows[0] ? { found: true, person: p.rows[0], restaurants: places.rows, orders: orders.rows } : { found: false };
+}
+
+// a 14-day daily series and this week against the week before, from the rows' times (FIX-LIST #85: the Overview's
+// sparklines and deltas). Read-only. ponytail: reads up to 10,000 rows of 28 days; a database count per day if it ever grows past that
+async function series(table, col) {
+  const from = new Date(Date.now() - 28 * 86400000).toISOString();
+  const rows = (await rest(`${table}?select=${col}&${col}=gte.${from}&order=${col}.desc&limit=10000`)).rows;
+  const ago = rows.map((r) => Math.floor((Date.now() - Date.parse(r[col])) / 86400000)).filter((d) => d >= 0 && d < 28);
+  const n = (a, b) => ago.filter((d) => d >= a && d < b).length;
+  return { days: Array.from({ length: 14 }, (_, i) => n(13 - i, 14 - i)), week: n(0, 7), prev: n(7, 14) };
+}
+
 async function overview() {
   const since = new Date(Date.now() - 30 * 86400000).toISOString();
   const week = new Date(Date.now() - 7 * 86400000).toISOString();
-  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads, support, owners, changes, orders30, ordersOpen, dealsLive, claims7, scans7, waitlist, waitlist7] = await Promise.all([
+  const none = { days: [], week: null, prev: null };
+  const [diners, restaurants, live, reports, recentR, premiumRows, recentRep, leads, support, owners, changes, orders30, ordersOpen, dealsLive, claims7, scans7, waitlist, waitlist7, sWait, sClaims, sScans] = await Promise.all([
     safe(count("profiles?role=eq.diner"), null),
     safe(count("restaurants"), null),
     safe(count("restaurants?status=eq.approved"), null),
     safe(count("reports?status=eq.open"), null),
-    safe(rest("restaurants?select=id,owner_id,name,cuisine,city,status,created_at&order=created_at.desc&limit=100"), { rows: [] }),
+    safe(rest("restaurants?select=id,owner_id,name,cuisine,city,status,created_at,photos&order=created_at.desc&limit=100"), { rows: [] }),
     safe(rest("billing_accounts?select=owner_id,premium_until,premium_source,comped,payments_demo,stripe_ready,stripe_payouts"), { rows: [] }),
-    safe(rest("reports?select=id,reason,details,at,status&order=at.desc&limit=100"), { rows: [] }),
+    safe(rest("reports?select=id,reason,details,at,status,user_id,restaurant_id,claim_id&order=at.desc&limit=100"), { rows: [] }),
     safe(rest("waitlist?select=created_at,role,email,phone,restaurant,area,source&order=created_at.desc&limit=500"), { rows: [] }),
     // what people wrote through "Message us" in the app and on the website (user 2026-10-11: nobody could read these)
-    safe(rest("support_messages?select=id,email,topic,body,at,status&order=at.desc&limit=200"), { rows: [] }),
+    safe(rest("support_messages?select=id,email,topic,body,at,status,user_id&order=at.desc&limit=200"), { rows: [] }),
     safe(rest("profiles?select=id,email,name&role=eq.business&limit=500"), { rows: [] }),
     // who a restaurant is changed (name, address) or handed to (the hand-over feature's record)
     safe(rest("restaurant_changes?select=id,restaurant_id,kind,before,after,at&order=at.desc&limit=40"), { rows: [] }),
@@ -45,9 +158,13 @@ async function overview() {
     safe(count(`stamps?at=gte.${week}`), null),
     safe(count("diner_waitlist"), null),
     safe(count(`diner_waitlist?joined_at=gte.${week}`), null),
+    safe(series("diner_waitlist", "joined_at"), none),
+    safe(series("claims", "claimed_at"), none),
+    safe(series("stamps", "at"), none),
   ]);
   return {
     counts: { diners, restaurants, live, reports, orders30, ordersOpen, dealsLive, claims7, scans7, waitlist, waitlist7, support: support.rows.filter((m) => m.status === "open").length },
+    series: { waitlist: sWait, claims: sClaims, scans: sScans },
     support: support.rows, owners: owners.rows, changes: changes.rows,
     restaurants: recentR.rows, premium: premiumRows.rows, reports: recentRep.rows,
     leads: leads.rows.filter((l) => l.role === "restaurant"), waitlist: leads.rows.filter((l) => l.role === "diner").length,
@@ -220,4 +337,18 @@ async function setProspect(id, change) {
   return { saved: true };
 }
 
-module.exports = { waitlistUnsubscribe, waitlistRemove, supportRemove, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+// where people came from (FIX-LIST #105): the ?src= tag on the waitlist and on accounts, and accounts' answers to "How did you
+// hear about FIG?". Accounts: null until the #105 migration is in (the columns aren't there yet). Test accounts left out.
+async function sources() {
+  const wl = (await rest("diner_waitlist?select=source,joined_at&order=joined_at.desc&limit=20000")).rows;
+  let accounts = null;
+  try { accounts = (await rest("profiles?select=role,source,heard_from,heard_from_note,created_at&admin=eq.false&order=created_at.desc&limit=20000")).rows; } catch { /* before the migration */ }
+  return { waitlist: wl.map((w) => ({ source: w.source, at: w.joined_at })), accounts: accounts && accounts.map((a) => ({ role: a.role, source: a.source, heard: a.heard_from, note: a.heard_from_note, at: a.created_at })) };
+}
+
+/** The waitlist emails that agreed to be emailed (and haven't unsubscribed), oldest first: who gets the launch email. */
+async function agreedEmails() {
+  return (await rest("diner_waitlist?select=email&consent=is.true&order=joined_at&limit=20000")).rows.map((r) => r.email);
+}
+
+module.exports = { agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

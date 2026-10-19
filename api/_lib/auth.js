@@ -1,7 +1,8 @@
 // FIG admin: password check, lockout and sessions. Everything secret lives in Vercel environment variables:
 //   ADMIN_PASSWORD_HASH  "scrypt:<salt hex>:<hash hex>" (never the password itself)
 //   SESSION_SECRET       random string used to sign the session cookie
-//   ADMIN_TOTP_SECRET    the authenticator app's secret (base32). Unset = no code step (FIX-LIST #83: the user sets it themselves)
+//   ADMIN_TOTP_SECRET    optional: an authenticator secret (base32) that overrides the one kept in the database
+//   ADMIN_TOTP_RESET     the user's way back (set to 1 in Vercel, redeploy): the next password sign-in sets up a new phone
 // Lockout works like an iPhone passcode: 5 wrong tries, then 1 min, then 5, 15 and 60 minutes after each further miss.
 // Tries are counted per IP in FIG's database (login_attempts, key "admin:<ip>"), so a cold start or a visitor who throws away
 // the cookie can't reset the lock (user 2026-10-10: harden). If the database can't be reached, this server's memory and the
@@ -12,11 +13,15 @@
 //   password or the code, so a botnet can't lock the owner out with it. Checked before any password work;
 // - a session version (settings admin_session_version) sealed into the session and device cookies: "Sign out everywhere" bumps
 //   it and every older cookie stops working. If the database can't say, the cookies' own expiry decides, as before;
-// - with ADMIN_TOTP_SECRET set, the password only opens a 5-minute code step: a code from the authenticator app (each one works
-//   once: settings admin_totp_last_step, or memory when the database is down) or one of 8 one-time backup codes (settings
-//   admin_backup_codes, SHA-256 only; they need the database).
+// - the second step is ALWAYS on (FIX-LIST #103, the user 2026-10-19): the password only opens a 5-minute code step: a code from
+//   the authenticator app (each one works once: settings admin_totp_last_step, or memory when the database is down), one of 8
+//   one-time backup codes (settings admin_backup_codes, SHA-256 only), or a code sent to the admin's own email or phone
+//   (6 digits, 10 minutes, one use, 3 sends an hour, hash only). With nothing set up yet (or the user's ADMIN_TOTP_RESET=1), the
+//   password opens a 15-minute set-up instead: scan, a code, the backup codes saved, then the secret is stored (encrypted,
+//   second.js) and only then a session starts. The secret is never saved before a right code AND "I saved the codes".
 const crypto = require("crypto");
 const totp = require("./totp");
+const second = require("./second");
 
 const FREE_TRIES = 5;
 const LOCKS_MIN = [1, 5, 15, 60]; // minutes, after try 5, 6, 7, 8+
@@ -24,6 +29,9 @@ const SESSION_HOURS = 8;
 const GLOBAL = { key: "*", fails: 20, hourMs: 3_600_000, lockMs: 5 * 60_000 };
 const DEVICE_DAYS = 90;
 const CODE_MIN = 5; // the time to type the code after the password
+const ENROL_MIN = 15; // the time to set up the authenticator after the password
+const DOWN = "The database isn't answering, so the second step can't be checked. Try again in a minute.";
+const UNREADABLE = "The saved authenticator can't be read (the server's secret changed). Set ADMIN_TOTP_RESET=1 in Vercel, redeploy, and sign in to set up your phone again.";
 const tries = new Map(); // ip (or "*") -> { fails, until | last }: the fallback when the database can't be reached
 let lastStepMem = 0; // the last authenticator step used, when the database can't keep it
 const DB = () => ({ url: (process.env.SUPABASE_URL || "").replace(/\/$/, ""), key: process.env.SUPABASE_SERVICE_ROLE_KEY || "" });
@@ -214,13 +222,71 @@ async function login(req, password) {
   if (stop) return stop;
   if (!secret() || !process.env.ADMIN_PASSWORD_HASH) return { status: 503, body: { error: "Admin isn't set up on the server yet." } };
   if (!passwordOk(password)) return miss(req, st, known, now, "Wrong password.");
-  // the code step (a known device doesn't skip it): the password alone only opens the code box for a few minutes
-  if (process.env.ADMIN_TOTP_SECRET) return { status: 200, body: { needCode: true }, headers: [cookie("fig_admin_step", seal({ step: 1, exp: now + CODE_MIN * 60_000, v: v ?? 0 }), CODE_MIN * 60)] };
-  return welcome(req, now, v);
+  const on = await twoStepRequired();
+  if (on === null && !process.env.ADMIN_TOTP_SECRET) return { status: 503, body: { error: DOWN } }; // can't tell: never guess "off"
+  if (!on) {
+    // OFF (the user turns it on in Security, FIX-LIST #103): as before, the code step only when a working authenticator is saved
+    // (or ADMIN_TOTP_SECRET); no set-up from the password alone, and the reset flag does nothing
+    const sec = await secretState();
+    if (sec.secret) return { status: 200, body: { needCode: true, ...(await contacts()) }, headers: [cookie("fig_admin_step", seal({ step: 1, exp: now + CODE_MIN * 60_000, v: v ?? 0 }), CODE_MIN * 60)] };
+    return welcome(req, now, v);
+  }
+  // ON: always a second step (a known device doesn't skip it): the password alone only opens the code box, or the set-up
+  const sec = await secretState();
+  if (sec.down) return { status: 503, body: { error: DOWN } };
+  if (sec.unreadable) return { status: 503, body: { error: UNREADABLE } };
+  if (sec.none) return { status: 200, body: { needEnrol: true, mail: second.mailOn(), text: second.textOn() }, headers: [cookie("fig_admin_step", seal({ step: 1, enrol: 1, exp: now + ENROL_MIN * 60_000, v: v ?? 0 }), ENROL_MIN * 60)] };
+  return { status: 200, body: { needCode: true, ...(await contacts()), ...((await resetUsed()) ? { resetUsed: true } : {}) }, headers: [cookie("fig_admin_step", seal({ step: 1, exp: now + CODE_MIN * 60_000, v: v ?? 0 }), CODE_MIN * 60)] };
+}
+/** The authenticator's secret: { secret }, { none } (nothing set up yet, or the user's reset flag), { down } or { unreadable }. */
+async function secretState() {
+  if (process.env.ADMIN_TOTP_SECRET) return { secret: process.env.ADMIN_TOTP_SECRET };
+  // the user's reset flag works ONCE per value (Agent #4): when its set-up completes the value is recorded, and a used value is
+  // never honoured again, whatever deploys follow; resetting again takes a NEW value (the card says: today's date)
+  if (process.env.ADMIN_TOTP_RESET && (await twoStepRequired()) === true) { // only while the two-step is required
+    const used = await usedResets();
+    if (used === null) return { down: true };
+    if (!used.includes(process.env.ADMIN_TOTP_RESET)) return { none: true, reset: true };
+  }
+  const v = await getSetting("admin_totp_secret_enc");
+  if (v === null) return { down: true };
+  if (v === undefined) return { none: true };
+  const secret = second.decrypt(v);
+  return secret ? { secret } : { unreadable: true };
+}
+/** "Require a code at every sign-in" (FIX-LIST #103 DESIGN, the user 2026-10-19): off until the user turns it on in Security.
+ *  true / false, or null when the database can't say. */
+async function twoStepRequired() {
+  const v = await getSetting("admin_twostep_required");
+  return v === null ? null : v === "on";
+}
+/** The reset values already used (a list), or null when the database can't say. */
+async function usedResets() {
+  const v = await getSetting("admin_totp_reset_used");
+  if (v === null) return null;
+  try { const l = JSON.parse(v || "[]"); return Array.isArray(l) ? l.map(String) : []; } catch { return []; }
+}
+/** The flag is set but its value was already used: it does nothing, and the pages say to set a new one or delete it. */
+async function resetUsed() {
+  if (!process.env.ADMIN_TOTP_RESET) return false;
+  const used = await usedResets();
+  return !!used && used.includes(process.env.ADMIN_TOTP_RESET);
+}
+/** The flag is set but used (or a phone is set up anyway): every admin page shows a red line until it's deleted in Vercel. */
+async function resetLeftOn() {
+  if (!process.env.ADMIN_TOTP_RESET) return false;
+  return (await resetUsed()) || !!(await getSetting("admin_totp_secret_enc"));
+}
+/** Which "send me a code" ways the code step offers: on the server, with an address saved (never the address itself). */
+async function contacts() {
+  const out = {};
+  if (second.mailOn() && await getSetting("admin_email")) out.mail = true;
+  if (second.textOn() && await getSetting("admin_phone")) out.text = true;
+  return out;
 }
 
-/** An authenticator code (once only) or a backup code: true, false, or a message when it can't be checked. */
-async function codeOk(code, now) {
+/** An authenticator code (once only), a backup code or a code sent by email / text: true, false, or a message when it can't be checked. */
+async function codeOk(code, now, secret) {
   const typed = String(code || "").trim();
   if (totp.looksBackup(typed)) {
     const saved = await getSetting("admin_backup_codes");
@@ -233,8 +299,8 @@ async function codeOk(code, now) {
     // used up only if that saved; a right code that couldn't be crossed off isn't a wrong try (FIX-LIST #84)
     return (await setSetting("admin_backup_codes", JSON.stringify(left))) || "That backup code is right, but the database didn’t save it as used. Try again in a minute, or use the code from your authenticator app.";
   }
-  const step = totp.matchStep(process.env.ADMIN_TOTP_SECRET, typed, now);
-  if (step === null) return false;
+  const step = totp.matchStep(secret, typed, now);
+  if (step === null) return sentCodeOk(typed, now);
   if (step <= lastStepMem) return false; // used already: a replayed code is a wrong one
   // compare-and-set in one statement, so the same code sent twice at once passes once (FIX-LIST #84)
   const fresh = await rpc("admin_totp_use", { p_step: step });
@@ -248,6 +314,39 @@ async function codeOk(code, now) {
   lastStepMem = Math.max(lastStepMem, step);
   return true;
 }
+/** A code sent to the admin's email or phone: once, within 10 minutes. */
+async function sentCodeOk(typed, now) {
+  if (!/^\d{6}$/.test(typed)) return false;
+  const saved = await getSetting("admin_contact_code");
+  if (!saved) return false;
+  let c; try { c = JSON.parse(saved); } catch { return false; }
+  if (!c.h || !(c.exp > now) || !second.sameHash(c.h, second.hashCode(typed))) return false;
+  return (await setSetting("admin_contact_code", "{}")) || DOWN; // used up only once that's saved
+}
+/** "Email me a code" / "Text me a code" in the code step: the same answer whether it was sent or not, and every send counts
+ *  toward the global throttle; at most 3 an hour. Only to the address saved at set-up, never one typed here. */
+async function sendLoginCode(req, via) {
+  const now = Date.now();
+  const v = await version();
+  const { stop } = await gate(req, now, v);
+  if (stop) return stop;
+  const step = open(cookies(req).fig_admin_step);
+  if (!step || step.step !== 1 || step.enrol || !current(step, v, now)) return { status: 401, body: { error: "Sign in again.", again: true }, headers: [cookie("fig_admin_step", "", 0)] };
+  const way = via === "text" ? "text" : "mail";
+  const same = { status: 200, body: { ok: true, sent: way === "text" ? "If texts are set up, a code is on its way to the admin phone." : "If email codes are set up, a code is on its way to the admin email." } };
+  await globalMiss();
+  if (!(way === "text" ? second.textOn() : second.mailOn())) return same;
+  const to = await getSetting(way === "text" ? "admin_phone" : "admin_email");
+  if (!to) return same;
+  let sends = []; try { sends = JSON.parse((await getSetting("admin_contact_sends")) || "[]").filter((t) => t > now - 3_600_000); } catch { /* start over */ }
+  if (sends.length >= 3) return same;
+  const code = second.newCode();
+  if (!(await setSetting("admin_contact_sends", JSON.stringify(sends.concat(now))))) return same;
+  if (!(await setSetting("admin_contact_code", JSON.stringify({ h: second.hashCode(code), exp: now + 10 * 60_000 })))) return same;
+  await second.sendCode(way === "text" ? "text" : "email", to, code);
+  return same;
+}
+
 /** The code after the password. */
 async function loginCode(req, code) {
   const now = Date.now();
@@ -255,8 +354,10 @@ async function loginCode(req, code) {
   const { st, known, stop } = await gate(req, now, v);
   if (stop) return stop;
   const step = open(cookies(req).fig_admin_step);
-  if (!process.env.ADMIN_TOTP_SECRET || !step || step.step !== 1 || !current(step, v, now)) return { status: 401, body: { error: "Sign in again.", again: true }, headers: [cookie("fig_admin_step", "", 0)] };
-  const ok = await codeOk(code, now);
+  if (!step || step.step !== 1 || step.enrol || !current(step, v, now)) return { status: 401, body: { error: "Sign in again.", again: true }, headers: [cookie("fig_admin_step", "", 0)] };
+  const sec = await secretState();
+  if (!sec.secret) return { status: 503, body: { error: sec.unreadable ? UNREADABLE : sec.none ? "Sign in again to set up the authenticator." : DOWN } };
+  const ok = await codeOk(code, now, sec.secret);
   if (typeof ok === "string") return { status: 503, body: { error: ok } };
   if (!ok) return miss(req, st, known, now, "Wrong code.");
   return welcome(req, now, v);
@@ -275,21 +376,141 @@ async function logoutEverywhere() {
   return [logoutCookie(), cookie("fig_admin_device", "", 0)];
 }
 
-// setting up the authenticator (signed in only): a new secret waits in a 10-minute sealed cookie (never the database or a log)
-// until a code from the app proves it was added; then 8 backup codes, and the Vercel step for the user
-function enrolStart() {
-  const s = totp.newSecret();
-  return { secret: s, uri: totp.uri(s), cookie: cookie("fig_admin_enrol", seal({ s, exp: Date.now() + 10 * 60_000 }), 600) };
+// setting up the authenticator (FIX-LIST #103): right after the password when nothing is set up (the step cookie says enrol), or
+// signed in to move it to a new phone. The new secret and everything else wait in a 15-minute ENCRYPTED cookie until the last
+// step; the database gets them only after a right code AND "I saved the backup codes". A contact (email / phone) is optional and
+// only saved once a code sent to it comes back.
+const ENROL = "fig_admin_enrol";
+const enrolCookie = (e) => cookie(ENROL, second.encrypt(JSON.stringify(e)), ENROL_MIN * 60);
+function readEnrol(req) {
+  const raw = cookies(req)[ENROL];
+  const e = raw && second.decrypt(raw);
+  try { const o = e && JSON.parse(e); return o && o.exp > Date.now() ? o : null; } catch { return null; }
 }
-async function enrolConfirm(req, code) {
-  const e = open(cookies(req).fig_admin_enrol);
-  if (!e || !(e.exp > Date.now()) || !e.s) return { status: 400, body: { error: "That set-up timed out. Start again." } };
-  const step = totp.matchStep(e.s, code);
-  if (step === null) return { status: 400, body: { error: "That code didn't match. Check the app and try the newest code." } };
+/** Who may set up: a signed-in session, or the enrol step from a right password while nothing is set up. */
+async function enrolWho(req) {
+  if (await signedIn(req)) return { session: true };
+  const now = Date.now(), v = await version();
+  const step = open(cookies(req).fig_admin_step);
+  if (!step || step.step !== 1 || !step.enrol || !current(step, v, now)) return null;
+  if ((await twoStepRequired()) !== true) return null; // while off, set-up happens only signed in (Security), never from the password alone
+  const sec = await secretState();
+  return sec.none ? { session: false, v, reset: !!sec.reset } : null; // one was set up meanwhile: back to the code step
+}
+const notNow = { status: 401, body: { error: "Sign in again.", again: true } };
+async function enrolStart(req, code) {
+  const who = await enrolWho(req);
+  if (!who) return notNow;
+  if (who.session) {
+    // replacing the phone: a code from the current one (or a backup code) first, so a borrowed open session can't swap it
+    const now = Date.now(), v = await version(), sec = await secretState();
+    if (sec.down) return { status: 503, body: { error: DOWN } };
+    if (sec.secret) { // nothing working set up yet (none, or one it can't read): the session is enough to set up the first
+      const { st, known, stop } = await gate(req, now, v);
+      if (stop) return stop;
+      const ok = await codeOk(code, now, sec.secret);
+      if (typeof ok === "string") return { status: 503, body: { error: ok } };
+      if (!ok) return miss(req, st, known, now, "Type a code from your current phone, or a backup code.");
+    }
+  }
+  const s = totp.newSecret();
+  return { status: 200, body: { ok: true, secret: s, uri: totp.uri(s), mail: second.mailOn(), text: second.textOn() }, headers: [enrolCookie({ s, exp: Date.now() + ENROL_MIN * 60_000 })] };
+}
+async function enrolCode(req, code) {
+  const who = await enrolWho(req), e = readEnrol(req);
+  if (!who) return notNow;
+  if (!e || !e.s) return { status: 400, body: { error: "That set-up timed out. Start again." } };
+  const now = Date.now();
+  const step = totp.matchStep(e.s, code, now);
+  if (step === null) {
+    if (who.session) return { status: 400, body: { error: "That code didn't match. Check the app and try the newest code." } };
+    const { st, known, stop } = await gate(req, now, who.v);
+    return stop || miss(req, st, known, now, "That code didn't match. Check the app and try the newest code."); // counts, like a wrong sign-in code
+  }
   const backup = totp.backupCodes();
-  const saved = (await setSetting("admin_backup_codes", JSON.stringify(backup.map(totp.hashBackup)))) && (await setSetting("admin_totp_last_step", step));
-  lastStepMem = step;
-  return { status: 200, body: { ok: true, secret: e.s, env: "ADMIN_TOTP_SECRET", backup: saved ? backup : null }, headers: [cookie("fig_admin_enrol", "", 0)] };
+  return { status: 200, body: { ok: true, backup }, headers: [enrolCookie({ ...e, ok: 1, step, bh: backup.map(totp.hashBackup) })] };
+}
+/** An email or phone for "send me a code": a code goes to it now; it's saved only when that code comes back. */
+async function enrolContact(req, via, to) {
+  const who = await enrolWho(req), e = readEnrol(req) || (who && who.session ? { exp: Date.now() + ENROL_MIN * 60_000 } : null);
+  if (!who) return notNow;
+  if (!e || (!who.session && !e.ok)) return { status: 400, body: { error: "Set up the authenticator first." } };
+  const way = via === "text" ? "text" : "email";
+  if (!(way === "text" ? second.textOn() : second.mailOn())) return { status: 400, body: { error: way === "text" ? "Texts aren't set up on the server yet." : "Email codes can't be sent: the server has no email sender set up yet (Resend)." } };
+  const addr = second.cleanTo(way, to);
+  if (!addr) return { status: 400, body: { error: way === "text" ? "Type the number with its country code, like +1 647 555 0123." : "Check the email address." } };
+  const now = Date.now();
+  let sends = []; try { sends = JSON.parse((await getSetting("admin_contact_sends")) || "[]").filter((t) => t > now - 3_600_000); } catch { /* start over */ }
+  if (sends.length >= 3) return { status: 429, body: { error: "3 codes were sent in the last hour. Try again later." } };
+  await setSetting("admin_contact_sends", JSON.stringify(sends.concat(now)));
+  const code = second.newCode();
+  if (!(await second.sendCode(way, addr, code))) return { status: 502, body: { error: way === "text" ? "The text didn't go out. Check the number and try again." : "The email didn't go out. Check the address and try again." } };
+  return { status: 200, body: { ok: true, to: second.mask(way, addr) }, headers: [enrolCookie({ ...e, contact: { via: way, to: addr, h: second.hashCode(code), exp: now + 10 * 60_000, n: 0 } })] };
+}
+async function enrolContactOk(req, code) {
+  const who = await enrolWho(req), e = readEnrol(req);
+  if (!who) return notNow;
+  const c = e && e.contact;
+  if (!c || !(c.exp > Date.now()) || c.n >= 5) return { status: 400, body: { error: "That code expired. Send a new one." } };
+  if (!second.sameHash(c.h, second.hashCode(code))) return { status: 400, body: { error: "That code didn't match." }, headers: [enrolCookie({ ...e, contact: { ...c, n: c.n + 1 } })] };
+  const key = c.via === "text" ? "admin_phone" : "admin_email";
+  if (who.session && !e.ok) { // signed in, changing only the address: saved now
+    if (!(await setSetting(key, c.to))) return { status: 503, body: { error: DOWN } };
+    return { status: 200, body: { ok: true, saved: true, to: second.mask(c.via, c.to) }, headers: [cookie(ENROL, "", 0)] };
+  }
+  return { status: 200, body: { ok: true, to: second.mask(c.via, c.to) }, headers: [enrolCookie({ ...e, contact: undefined, contactOk: { key, to: c.to } })] };
+}
+/** The last step: only after a right code and "I saved the backup codes". Everything is saved, the secret last; then a session. */
+async function enrolDone(req, saved) {
+  const who = await enrolWho(req), e = readEnrol(req);
+  if (!who) return notNow;
+  if (!e || !e.ok || !e.s) return { status: 400, body: { error: "That set-up timed out. Start again." } };
+  if (saved !== true) return { status: 400, body: { error: "Tick that you saved the backup codes first." } };
+  const ok = (await setSetting("admin_backup_codes", JSON.stringify(e.bh))) && (await setSetting("admin_totp_last_step", e.step)) &&
+    (!e.contactOk || (await setSetting(e.contactOk.key, e.contactOk.to))) && (await setSetting("admin_totp_secret_enc", second.encrypt(e.s)));
+  if (!ok) return { status: 503, body: { error: "The database didn't save it, so nothing changed. Try again in a minute." } };
+  lastStepMem = Math.max(lastStepMem, e.step);
+  if (who.session) {
+    // a new phone: every other session and remembered device signs out (a new session version); this browser stays in
+    try { await bumpVersion(); } catch { return { status: 503, body: { error: "The new phone is set up, but other browsers couldn't be signed out. Use Sign out everywhere." }, headers: [cookie(ENROL, "", 0)] }; }
+    const out = await welcome(req, Date.now(), await version());
+    out.headers.push(cookie(ENROL, "", 0));
+    return out;
+  }
+  if (who.reset) { const used = (await usedResets()) || []; await setSetting("admin_totp_reset_used", JSON.stringify(used.concat(process.env.ADMIN_TOTP_RESET))); } // that value has done its one job
+  const out = await welcome(req, Date.now(), who.v);
+  if (who.reset) out.body.removeFlag = true;
+  out.headers.push(cookie(ENROL, "", 0));
+  return out;
+}
+/** Security's "Require a code at every sign-in" (FIX-LIST #103 DESIGN). Signed in only, and always with a right code (from the
+ *  authenticator, or a backup code). On only once a working authenticator is saved WITH its backup codes (they're saved only after
+ *  "I saved the backup codes"), so it can never lock the user out; off again needs a session plus a code too. */
+async function setTwoStep(req, on, code) {
+  if (!(await signedIn(req))) return notNow;
+  const now = Date.now(), v = await version();
+  const sec = await secretState();
+  if (sec.down) return { status: 503, body: { error: DOWN } };
+  if (on === true) {
+    if (!sec.secret) return { status: 400, body: { error: "Set up an authenticator first." } };
+    let codes = null; try { codes = JSON.parse((await getSetting("admin_backup_codes")) || "null"); } catch { /* none */ }
+    if (!Array.isArray(codes) || !codes.length) return { status: 400, body: { error: "Set up the authenticator here first, so you have backup codes." } };
+  } else if (on !== false) return { status: 400, body: { error: "That was not a valid request." } };
+  if (!sec.secret && !totp.looksBackup(String(code || "").trim())) return { status: 400, body: { error: "Type a backup code." } };
+  const { st, known, stop } = await gate(req, now, v);
+  if (stop) return stop;
+  const ok = await codeOk(code, now, sec.secret);
+  if (typeof ok === "string") return { status: 503, body: { error: ok } };
+  if (!ok) return miss(req, st, known, now, "Wrong code.");
+  if (!(await setSetting("admin_twostep_required", on ? "on" : "off"))) return { status: 503, body: { error: "The database didn't save it, so nothing changed. Try again in a minute." } };
+  return { status: 200, body: { ok: true, on } };
+}
+/** For the Security page: what's set up (never a secret or a whole address). */
+async function secondState() {
+  const [enc, email, phone, codes] = await Promise.all([getSetting("admin_totp_secret_enc"), getSetting("admin_email"), getSetting("admin_phone"), getSetting("admin_backup_codes")]);
+  let left = null; try { left = JSON.parse(codes || "[]").length; } catch { /* unknown */ }
+  return { required: await twoStepRequired(), env: !!process.env.ADMIN_TOTP_SECRET, reset: !!process.env.ADMIN_TOTP_RESET, resetUsed: await resetUsed(), saved: !!enc, mail: second.mailOn(), text: second.textOn(),
+    email: second.mask("email", email), phone: second.mask("text", phone), backupLeft: codes === null ? null : left };
 }
 
 function send(res, status, body, headers = []) {
@@ -314,5 +535,5 @@ function sameOrigin(req) {
   return !o || o === `https://${req.headers.host}`;
 }
 
-module.exports = { login, loginCode, signedIn, logoutCookie, logoutEverywhere, enrolStart, enrolConfirm, send, readJson, sameOrigin,
+module.exports = { setTwoStep, twoStepRequired, resetLeftOn, login, loginCode, sendLoginCode, signedIn, logoutCookie, logoutEverywhere, enrolStart, enrolCode, enrolContact, enrolContactOk, enrolDone, secondState, send, readJson, sameOrigin,
   _test: { seal, open, lockFor, passwordOk, GLOBAL, reset: () => { tries.clear(); lastStepMem = 0; } } };

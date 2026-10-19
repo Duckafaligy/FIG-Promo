@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
     if (action === "presale-get") return send(res, 200, { ok: true, ...(await db.presaleState()) });
     if (action === "presale-switch") return send(res, 200, { ok: true, ...(await db.setPresaleOn(body.on)) });
     if (action === "presale-start") return send(res, 200, { ok: true, ...(await db.presaleStart(body.at)) });
-    if (action === "presale-refund") return send(res, 200, { ok: true, ...(await db.presaleRefund(body.restaurant, body.force)) });
+    if (action === "presale-refund") return send(res, 200, { ok: true, ...(await db.presaleRefund(body.owner, body.force)) });
     if (action === "presale-refund-all") return send(res, 200, { ok: true, ...(await db.presaleRefundAll()) });
   } catch (e) {
     // validation, not a database problem; the cap says what it takes (FIX-LIST #105)

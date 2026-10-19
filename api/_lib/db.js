@@ -383,7 +383,7 @@ async function presaleStart(at) {
   if (!Number.isFinite(t)) throw new Error("bad date");
   return presale("start-billing", { at: new Date(t).toISOString() });
 }
-const presaleRefund = async (restaurant, force) => presale("admin-refund", { restaurant: uuid(restaurant), force: force === true });
+const presaleRefund = async (owner, force) => presale("admin-refund", { owner: uuid(owner), force: force === true }); // one plan per owner (#27)
 const presaleRefundAll = async () => presale("refund-all");
 
 module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

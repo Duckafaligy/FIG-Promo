@@ -545,11 +545,11 @@ const fresh = () => { _test.reset(); table.settings.clear(); table.login_attempt
       assert.deepStrictEqual(await dbm.setPresaleOn(true), { on: true }); assert.strictEqual(presaleOn, "on");
       assert.deepStrictEqual(await dbm.setPresaleOn(false), { on: false }); assert.strictEqual(presaleOn, "off", "off always works");
       await assert.rejects(dbm.setPresaleOn("yes"), /bad switch/);
-      await assert.rejects(dbm.presaleRefund("x'; drop", true), /bad id/, "a restaurant is a uuid");
+      await assert.rejects(dbm.presaleRefund("x'; drop", true), /bad id/, "an owner is a uuid");
       await assert.rejects(dbm.presaleStart("soon"), /bad date/);
       sent.length = 0;
       await dbm.presaleRefund("22222222-2222-4222-8222-222222222222", "true");
-      assert.deepStrictEqual(sent[0].body, { restaurant: "22222222-2222-4222-8222-222222222222", force: false, action: "admin-refund" }, "force only when it's true itself");
+      assert.deepStrictEqual(sent[0].body, { owner: "22222222-2222-4222-8222-222222222222", force: false, action: "admin-refund" }, "force only when it's true itself");
       answer = { status: 404, body: { code: "NOT_FOUND", message: "Requested function was not found" } };
       assert.strictEqual((await dbm.presaleState()).error, "not-deployed", "no function yet: said plainly");
       answer = { status: 400, body: { error: "too-soon" } };

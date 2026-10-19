@@ -883,7 +883,7 @@ function blogWire(root) {
 // only as FIG's choice, said so), and every deposit's refund (from March 1, 2027 while FIG is closed to diners, typed REFUND ALL).
 let PS = null;
 const PLAN_NAME = { monthly: "Founding monthly", annual: "Founding annual" };
-const PLAN_PRICE = { monthly: "$9.99/mo to month 12, then $29.99/mo", annual: "$59.99 the first year, then $29.99/mo" };
+const PLAN_PRICE = { monthly: "$9.99/mo to month 12, then $29.99/mo", annual: "$59.99 the first year, then $299.99/yr" };
 const PS_STATUS = { trialing: ["Deposit held", "b"], active: ["Paying", "g"], past_due: ["Payment failed", "r"], unpaid: ["Unpaid", "r"], canceled: ["Cancelled", ""], incomplete: ["Not finished", ""] };
 const PS_WORDS = { "too-soon": "Pick a day at least 14 days from today.", "too-far": "Pick a day within 360 days.", "not-set-up": "The live Stripe prices aren’t set yet.",
   "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.", "payment-not-found": "Stripe hasn’t shown this deposit’s payment yet. Try again in a few minutes, or refund it in Stripe.",
@@ -915,16 +915,18 @@ function paidHtml() {
   const minis = '<div class="grid three">' + mini("Founding plans", num(kept.length)) + mini("Deposits held", money(held)) +
     mini("Annual · monthly", num(kept.filter((p) => p.plan === "annual").length) + " · " + num(kept.filter((p) => p.plan === "monthly").length)) + "</div>";
   return problem + card("wl-plan", sw + start + march) + minis +
-    table(["Restaurant", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
+    // one plan per owner, covering all their restaurants (the user, #27): the row is the owner; where it started and how many it covers
+    table(["Owner", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
       // an annual plan stays "trialing" at Stripe through its paid first year: once its start day has passed it's paying (#186)
       const started = !!p.starts_at && Date.parse(p.starts_at) <= Date.now();
       const st = p.refunded_at ? ["Refunded", ""] : p.status === "trialing" && started ? PS_STATUS.active : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
-      return ["<b>" + esc((p.restaurants || {}).name || "A restaurant") + '</b><span class="sub">' + esc((p.profiles || {}).email || "") + "</span>",
+      const n = p.restaurant_count || 0;
+      return ["<b>" + esc((p.profiles || {}).email || "An owner") + '</b><span class="sub">' + num(n) + (n === 1 ? " restaurant" : " restaurants") + ((p.restaurants || {}).name ? " · started at " + esc(p.restaurants.name) : "") + "</span>",
         esc(PLAN_NAME[p.plan] || p.plan) + '<span class="sub">' + esc(PLAN_PRICE[p.plan] || "") + "</span>",
         '<span class="pill ' + st[1] + '">' + esc(st[0]) + "</span>" + (p.paid_through ? '<span class="sub">Paid through ' + esc(longDay(p.paid_through)) + "</span>" : ""),
         p.starts_at ? esc(longDay(p.starts_at)) : '<span class="sub">When billing starts</span>',
         p.deposit_cents ? money(p.deposit_cents / 100) + '<span class="sub">' + (p.refunded_at ? "Refunded " + esc(longDay(p.refunded_at)) : left > 0 ? num(left) + (left === 1 ? " day" : " days") + " to refund" : "Paid " + esc(longDay(p.deposit_paid_at))) + "</span>" : "–",
-        p.refunded_at || !p.deposit_cents ? "" : '<button class="b secondary" data-psref="' + esc(p.restaurant_id) + '" data-late="' + (left > 0 ? "0" : "1") + '">Refund</button>'];
+        p.refunded_at || !p.deposit_cents ? "" : '<button class="b secondary" data-psref="' + esc(p.owner_id) + '" data-late="' + (left > 0 ? "0" : "1") + '">Refund</button>'];
     }), ["No founding plans yet", "When an owner pays a founding deposit, it shows up here."], "Search restaurants or owners");
 }
 async function paidLoad() {
@@ -952,10 +954,10 @@ function paidWire() {
     run(st, "presale-start", { at: at.toISOString() }, (r) => "Billing starts " + day + ": " + num(r.moved || 0) + (r.moved === 1 ? " plan" : " plans") + " moved." + many(r));
   };
   $$("[data-psref]").forEach((b) => b.onclick = async () => {
-    const p = (PS.rows || []).find((x) => x.restaurant_id === b.dataset.psref) || {}, late = b.dataset.late === "1";
-    const name = (p.restaurants || {}).name || "this restaurant";
+    const p = (PS.rows || []).find((x) => x.owner_id === b.dataset.psref) || {}, late = b.dataset.late === "1";
+    const name = (p.profiles || {}).email || "this owner";
     if (!(await ask({ title: "Refund " + name + "’s deposit?", body: esc((late ? "The 14 days have passed, so this refund is FIG’s choice, not the owner’s right. " : "") + "The whole deposit goes back to their card and the plan is cancelled now."), ok: late ? "Refund anyway" : "Refund", danger: true }))) return;
-    run(b, "presale-refund", { restaurant: p.restaurant_id, force: late }, () => "Refunded. It reaches their card in 5 to 10 days.");
+    run(b, "presale-refund", { owner: p.owner_id, force: late }, () => "Refunded. It reaches their card in 5 to 10 days.");
   });
   const all = $("#ps-all"); if (all) all.onclick = async () => {
     const w = PS.refundAllWould || { count: 0, cents: 0 };

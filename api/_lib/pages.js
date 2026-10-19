@@ -1,19 +1,23 @@
-// The admin pages (from the Paper designs: Admin 00 Sign in, 01 Overview, 02 Restaurants, 03 Reports, 04 Leads; plus Ads,
-// FIG's only income: every restaurant's ads, stop or restart one, account limits and holds, and the monthly invoices).
+// The admin pages. Redone for FIX-LIST #83 (user 2026-10-18: "only include blogs, waitlist, restaurants, overview, and whatever
+// also makes sense; remodel everything"): Overview, Restaurants (+ Outreach), Waitlist, Blog, Inbox (Messages + Reports), and
+// Security under the account, in the website's look (site/css/tokens.css) and at phone width. Hidden while they're switched off
+// in the app, with their server actions left in admin-api.js: FIG Premium (PREMIUM_ON) and Ads (ADS_ON).
+// The client script below sits inside a template literal: a backslash in it must be written twice.
 const LOGO = `<svg width="30" height="30" viewBox="743 716 100 100" aria-hidden="true"><path fill="#1E5EFF" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/><path fill="#1E5EFF" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/><path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/></svg>`;
 
 const BASE = `
 @font-face { font-family: "Jakarta"; src: url("/assets/PlusJakartaSans.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
 *,*::before,*::after { box-sizing: border-box; } html,body { margin: 0; }
-body { font-family: "Jakarta", system-ui, sans-serif; color: #0A1020; background: #F4F6FB; -webkit-font-smoothing: antialiased; }
+body { font-family: "Jakarta", system-ui, sans-serif; color: #0A1020; background: #EEF3FF; -webkit-font-smoothing: antialiased; }
 h1,h2,h3,p { margin: 0; } button, input { font: inherit; color: inherit; }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; }
-.btn { height: 48px; padding: 0 22px; border: 0; border-radius: 999px; background: #1E5EFF; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; }
+.btn { height: 48px; padding: 0 22px; border: 0; border-radius: 999px; background: #1E5EFF; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 12px 28px rgba(30,94,255,.24); }
+.btn:hover { background: #1550E6; }
 .btn:disabled { opacity: .55; cursor: default; }
 .btn.sm { height: 38px; padding: 0 16px; font-size: 14px; }
-input.f { width: 100%; height: 48px; padding: 0 16px; border-radius: 12px; border: 1.5px solid transparent; background: #F2F5FA; font-size: 16px; outline: none; }
-input.f:focus { border-color: #1E5EFF; background: #EAF0FF; }
-.muted { color: #5B6779; }
+input.f, select.f { width: 100%; height: 48px; padding: 0 16px; border-radius: 12px; border: 1.5px solid #DCE4F7; background: #fff; font-size: 16px; outline: none; }
+input.f:focus, select.f:focus { border-color: #1E5EFF; }
+.muted { color: #66718A; }
 :focus-visible { outline: 3px solid #1E5EFF; outline-offset: 2px; }`;
 
 const head = (title, extra) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,73 +83,66 @@ f.addEventListener("submit", async (e) => {
 
 function appPage() {
   return head("FIG Admin", `
-.shell { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
-aside { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 6px; padding: 24px 16px; background: #fff; border-right: 1px solid #E2E7EF; }
+.shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
+aside { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 6px; padding: 24px 16px; background: #fff; border-right: 1px solid #DCE4F7; }
 aside .brand { padding: 0 10px 22px; }
-.nav button { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 42px; padding: 0 12px; border: 0; border-radius: 12px; background: none; text-align: left; font-weight: 600; font-size: 15px; cursor: pointer; }
-.nav button:hover { background: #F2F5FA; }
-.nav button.on { background: #EAF0FF; color: #1E5EFF; font-weight: 800; }
-.badge { min-width: 22px; height: 22px; padding: 0 7px; border-radius: 99px; background: #E2E7EF; color: #0A1020; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
-.nav button.on .badge { background: #1E5EFF; color: #fff; }
-.who { margin-top: auto; padding: 0 10px; font-size: 13px; }
+.nav button { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: none; text-align: left; font-weight: 700; font-size: 15px; cursor: pointer; }
+.nav button:hover { background: #EEF3FF; }
+.nav button.on { background: #0A1020; color: #fff; }
+.badge { min-width: 24px; height: 22px; padding: 0 8px; border-radius: 99px; background: #EEF3FF; color: #0A1020; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
+.badge.hot, .nav button.on .badge { background: #C8F135; color: #0A1020; }
+.who { margin-top: auto; padding: 0 12px; font-size: 13px; color: #66718A; }
 .who button { margin-top: 8px; border: 0; background: none; padding: 0; color: #1E5EFF; font-weight: 700; cursor: pointer; font-size: 13px; }
-main { padding: 36px 36px 60px; background: #fff; min-width: 0; }
-h1 { font-size: 36px; letter-spacing: -0.03em; } .lead { margin-top: 6px; font-size: 16px; }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 26px 0 30px; }
-.stat { padding: 22px; border-radius: 18px; background: #F2F5FA; } .stat b { display: block; font-size: 34px; letter-spacing: -0.03em; } .stat span { color: #5B6779; font-size: 14px; }
-.stat.blue b { color: #1E5EFF; } .stat.red b { color: #C9353A; }
-h2 { font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px; }
-.tbl { border: 1px solid #E2E7EF; border-radius: 16px; overflow: hidden; margin-bottom: 30px; }
+.who button.on { color: #0A1020; text-decoration: underline; text-underline-offset: 3px; }
+main { padding: 40px 40px 72px; min-width: 0; max-width: 1240px; }
+h1 { font-size: 40px; letter-spacing: -0.035em; line-height: 1.1; } .lead { margin-top: 8px; font-size: 17px; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; margin: 24px 0 22px; border-radius: 999px; background: #fff; border: 1px solid #DCE4F7; max-width: 100%; overflow-x: auto; }
+.tabs button { height: 38px; padding: 0 16px; border: 0; border-radius: 999px; background: none; font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; }
+.tabs button.on { background: #1E5EFF; color: #fff; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 26px 0 32px; }
+.stat { padding: 22px; border-radius: 24px; background: #fff; box-shadow: 0 1px 2px rgba(10,16,32,.06), 0 2px 8px rgba(10,16,32,.05); }
+.stat b { display: block; font-size: 36px; letter-spacing: -0.03em; } .stat span { color: #66718A; font-size: 14px; }
+.stat.blue b { color: #1E5EFF; } .stat.red b { color: #D92D3A; }
+h2 { font-size: 22px; letter-spacing: -0.02em; margin: 6px 0 12px; }
+.tbl { border-radius: 24px; overflow: hidden; margin-bottom: 32px; background: #fff; box-shadow: 0 1px 2px rgba(10,16,32,.06), 0 2px 8px rgba(10,16,32,.05); }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th { background: #F2F5FA; text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #5B6779; padding: 13px 18px; }
-td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
-.pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 800; background: #EAF0FF; color: #1A52E0; }
-.used { color: #067A55; font-weight: 800; }
-.pill.g { background: #E3F7EF; color: #067A55; } .pill.r { background: #FDECEC; color: #B4282D; } .pill.k { background: #F2F5FA; color: #5B6779; }
+th { text-align: left; font-size: 13px; font-weight: 700; color: #66718A; padding: 14px 18px; border-bottom: 1px solid #DCE4F7; }
+td { padding: 15px 18px; border-top: 1px solid #EEF3FF; vertical-align: top; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 800; background: #EEF3FF; color: #1E5EFF; }
+.pill.g { background: #E3F7EF; color: #087A42; } .pill.r { background: #FDECEC; color: #B4282D; } .pill.k { background: #EEF3FF; color: #66718A; }
 .mono { font-family: ui-monospace, Consolas, monospace; font-weight: 700; letter-spacing: .02em; }
-.empty { padding: 26px; border-radius: 16px; background: #F2F5FA; color: #5B6779; font-size: 15px; line-height: 1.6; }
+.empty { padding: 26px; border-radius: 24px; background: #fff; color: #66718A; font-size: 15px; line-height: 1.6; margin-bottom: 18px; }
 .empty b { color: #0A1020; }
-.make { padding: 22px; border: 1px solid #E2E7EF; border-radius: 18px; margin-bottom: 28px; }
-.row { display: grid; grid-template-columns: 1fr 140px 140px auto; gap: 12px; align-items: end; margin-top: 14px; }
-.row label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-.new { margin-top: 16px; padding: 18px; border-radius: 14px; background: #C8F135; display: none; }
-.spot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 22px; border-radius: 18px; background: #EAF0FF; margin-bottom: 16px; } .spot h2 { margin: 0 0 4px; } .spot .btn { flex-shrink: 0; width: auto; margin: 0; }
-#q-new { margin: 0 0 28px; } .big .codes span { font-size: 26px; padding: 12px 18px; }
-.new .codes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; } .new .codes span { background: #fff; padding: 8px 12px; border-radius: 10px; }
-.link { border: 0; background: none; padding: 0; color: #1E5EFF; font-weight: 800; cursor: pointer; } .link.red { color: #C9353A; margin-left: 14px; }
-.note { font-size: 13px; color: #5B6779; }
-.dsp { border: 1px solid #E2E7EF; border-radius: 20px; padding: 22px; margin-bottom: 18px; }
-.dsp-h { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: baseline; }
-.dsp-h h2 { margin: 0; }
-.quote { margin: 14px 0; padding: 14px 16px; border-radius: 14px; background: #F2F5FA; font-size: 15px; line-height: 1.5; }
-.cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; }
-.box { padding: 16px; border-radius: 14px; border: 1px solid #E2E7EF; font-size: 14px; }
-.box h3 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #5B6779; margin: 0 0 10px; }
-.tl { display: grid; grid-template-columns: 1fr max-content; gap: 6px 12px; } .tl .no { color: #9AA4B2; }
-.tl b.g { color: #067A55; } .tl b.r { color: #C9353A; }
-.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; } .kv span { color: #5B6779; white-space: nowrap; } .kv b { text-align: right; overflow-wrap: anywhere; }
-.hint { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-size: 14px; font-weight: 700; }
-.hint.g { background: #E3F7EF; color: #067A55; } .hint.r { background: #FDECEC; color: #B4282D; } .hint.k { background: #F2F5FA; color: #0A1020; }
+.link { border: 0; background: none; padding: 0; color: #1E5EFF; font-weight: 800; cursor: pointer; text-decoration: none; } .link.red { color: #D92D3A; margin-left: 14px; }
+.link:disabled { color: #A3ADBF; cursor: default; }
+.note { font-size: 13px; color: #66718A; }
+.red { color: #D92D3A; }
+.line { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.hint { margin-top: 14px; padding: 16px 18px; border-radius: 20px; font-size: 14px; background: #fff; line-height: 1.5; }
+.hint.g { background: #E3F7EF; color: #087A42; } .hint.r { border: 1.5px solid #1E5EFF; } .hint.k { color: #0A1020; }
 .act { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
 .act input { flex: 1; min-width: 200px; }
-.btn.g { background: #067A55; } .btn.k { background: #0A1020; }
-@media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
-@media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { position: static; height: auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 14px 16px; border-right: 0; border-bottom: 1px solid #E2E7EF; } aside .brand { padding: 0; } .who { grid-column: 2; grid-row: 1; text-align: right; } .nav { grid-column: 1 / -1; display: flex; gap: 6px; overflow-x: auto; margin: 0 -16px; padding: 0 16px; } .nav button { width: auto; flex-shrink: 0; gap: 8px; } .stats { grid-template-columns: 1fr 1fr; } .row { grid-template-columns: 1fr; } main { padding: 24px 18px; } .tbl { overflow-x: auto; } }`) + `<body>
+.btn.k { background: #0A1020; box-shadow: none; }
+label input[type=checkbox] { margin-right: 6px; }
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  aside { z-index: 5; height: auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid #DCE4F7; }
+  aside .brand { padding: 0; } .who { grid-column: 2; grid-row: 1; text-align: right; padding: 0; } .who br { display: none; } .who button { margin: 0 0 0 4px; }
+  .nav { grid-column: 1 / -1; display: flex; gap: 6px; overflow-x: auto; margin: 0 -16px; padding: 0 16px; } .nav button { width: auto; flex-shrink: 0; gap: 8px; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 12px; } .stat { padding: 16px; border-radius: 20px; } .stat b { font-size: 28px; }
+  main { padding: 24px 16px 56px; } h1 { font-size: 30px; } .tbl { overflow-x: auto; border-radius: 20px; } td, th { padding: 12px 14px; }
+}`) + `<body>
 <div class="shell">
   <aside>
     <div class="brand">${LOGO}FIG Admin</div>
     <div class="nav" id="nav">
       <button data-v="overview" class="on">Overview</button>
       <button data-v="restaurants">Restaurants <span class="badge" id="n-restaurants">–</span></button>
-      <button data-v="reports">Reports <span class="badge" id="n-reports">–</span></button>
-      <button data-v="messages">Messages <span class="badge" id="n-messages">–</span></button>
-      <button data-v="leads">Leads <span class="badge" id="n-leads">–</span></button>
-      <button data-v="diners">Diners</button>
-      <button data-v="prospects">Prospects <span class="badge" id="n-prospects">–</span></button>
+      <button data-v="waitlist">Waitlist <span class="badge" id="n-waitlist">–</span></button>
       <button data-v="blog">Blog <span class="badge" id="n-blog">–</span></button>
-      <button data-v="security">Security</button>
+      <button data-v="inbox">Inbox <span class="badge" id="n-inbox">–</span></button>
     </div>
-    <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
+    <div class="who">Brendan · Owner<br><button id="sec" data-v="security">Security</button> · <button id="out">Sign out</button></div>
   </aside>
   <main id="main"><p class="muted">Loading…</p></main>
 </div>
@@ -156,6 +153,8 @@ const ago = (t) => { const m = Math.round((Date.now() - Date.parse(t)) / 60000);
 const LAUNCH = Date.parse("2027-01-01T00:00:00-05:00");
 const days = Math.max(0, Math.ceil((LAUNCH - Date.now()) / 86400000));
 let D = null, view = "overview";
+const SUB = { restaurants: "fig", inbox: "messages" }; // the switch on Restaurants (On FIG / Outreach) and Inbox (Messages / Reports)
+const tabs = (v, list) => '<div class="tabs" role="tablist">' + list.map(([k, label]) => '<button role="tab" data-sub="' + v + ":" + k + '" aria-selected="' + (SUB[v] === k) + '"' + (SUB[v] === k ? ' class="on"' : "") + ">" + label + "</button>").join("") + "</div>";
 const api = (what, body) => fetch("/api/admin-api?do=" + what, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })
   .then(async (r) => { if (r.status === 401) location.reload(); return r.json(); });
 
@@ -215,61 +214,35 @@ function securityWire() {
 const VIEWS = {
   security: () => securityHtml(),
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
-    '<div id="launchbox">' + launchHtml() + '</div><div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
+    '<div id="launchbox">' + launchLine() + '</div><div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
     stat(D.counts.ordersOpen, "Orders open now") + stat(D.counts.support, "Messages to answer", D.counts.support ? "red" : "") + stat(D.counts.reports, "Open reports", D.counts.reports ? "red" : "") + "</div>" +
-    "<h2>Latest restaurants</h2>" + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
-  restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Every restaurant on FIG, newest first. A restaurant goes live when it finishes setup.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["Restaurant", "Owner", "City", "Status", "Joined", "Payments", "FIG Premium"], D.restaurants.map((r) => {
-      // Premium ($50 a year) is per owner, for all their locations; the team can switch it on for a year, or off. Some accounts
-      // are free forever ("comped": the founder's and Star Chef's) and run on pretend payments, so FIG never charges them.
-      const b = (D.premium || []).find((x) => x.owner_id === r.owner_id) || {};
-      const on = b.premium_until && new Date(b.premium_until) > new Date();
-      const owner = (D.owners || []).find((o) => o.id === r.owner_id) || {};
-      const pay = b.payments_demo ? '<span class="pill">Pretend</span>' : b.stripe_ready && b.stripe_payouts ? '<span class="pill g">Live, ready</span>' : b.stripe_ready ? '<span class="pill">Live, bank needed</span>' : '<span class="pill">Not set up</span>';
-      const prem = b.comped ? '<span class="pill g">Free forever</span>'
-        : on ? '<span class="pill g">Until ' + esc(new Date(b.premium_until).toLocaleDateString("en-CA")) + (b.premium_source === "stripe" ? " · Stripe" : "") + '</span> <button class="link" data-prem="' + esc(r.owner_id) + '" data-years="0" data-src="' + esc(b.premium_source || "") + '">Turn off</button>'
-          : '<button class="link" data-prem="' + esc(r.owner_id) + '" data-years="1">Give a year</button>';
-      return ["<b>" + esc(r.name) + '</b><br><span class="muted">' + esc(r.cuisine || "") + "</span>", esc(owner.name || "") + '<br><span class="muted">' + esc(owner.email || "") + '</span><br><button class="link" data-2fa="' + esc(r.owner_id) + '">Turn off two-step login</button>', esc(r.city), statusPill(r.status), ago(r.created_at), pay, prem];
-    }), "No restaurants yet.") + changesTable()),
-  messages: () => '<h1>Messages</h1><p class="lead muted">What people wrote through “Message us” in the app and on the website. Reply by email, then mark it answered.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["From", "About", "Message", "When", ""], (D.support || []).map((m) => [
-      '<a href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '"><b>' + esc(m.email) + '</b></a><br><button class="link" data-2fa-email="' + esc(m.email) + '">Turn off two-step login</button>', esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
-      m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here.")),
-  reports: () => '<h1>Reports</h1><p class="lead muted">Visits diners or restaurants reported.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", esc(r.details), ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")),
-  leads: () => '<h1>Restaurant leads</h1><p class="lead muted">Restaurants that left their details on the website.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED :
-    table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. They arrive from the website's sign-up form once the waitlist table is set up.")),
-  diners: () => '<h1>Diners</h1><p class="lead muted">People signed up to FIG and on the website waitlist.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-    '<div id="dinerbox">' + dinersHtml() + "</div>"),
-  prospects: () => '<h1>Prospects</h1><p class="lead muted">Every restaurant, cafe and takeaway in Markham. Search, shortlist the ones you want to approach yourself, and keep notes. Only the FIG team sees this.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="prosbox">' + prosHtml() + "</div>"),
-  blog: () => '<h1>Blog</h1><p class="lead muted">Every post on the FIG blog. Take one down if you do not like it, or put it back.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>"),
-  ads: () => {
-    const A = D.ads || { campaigns: [], accounts: [], invoices: [] }, m$ = (n) => "$" + Number(n || 0).toFixed(2);
-    const live = A.campaigns.filter((c) => c.status === "active");
-    const lastMonth = new Date(); lastMonth.setDate(1); lastMonth.setMonth(lastMonth.getMonth() - 1);
-    const ym = (d) => d.toISOString().slice(0, 7) + "-01";
-    const st = (s) => s === "active" ? '<span class="pill g">Running</span>' : s === "stopped" ? '<span class="pill r">Stopped</span>' : '<span class="pill">' + esc(s) + "</span>";
-    return '<h1>Ads</h1><div class="empty" style="margin-bottom:18px"><b>Ads are switched off in the app for now.</b> Diners see no sponsored spots and restaurants can’t start an ad. This page stays ready for when they come back.</div><p class="lead muted">Ad income (FIG Premium, $50 a year, is switched on under Restaurants). Restaurants make ads on fig-promo.vercel.app/ads and pay per tap (the auction’s second price, from $0.30). Invoice each owner at the start of the month.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
-      '<div class="stats">' + stat(live.length, "Ads running", "blue") + stat(m$(A.accounts.reduce((a, x) => a + Number(x.spent_month || 0), 0)), "Spent this month") + stat(A.invoices.filter((x) => x.status !== "paid" && x.status !== "void").length, "Invoices not paid", "red") + "</div>" +
-      "<h2>Campaigns</h2>" + table(["Restaurant", "Ad", "Status", "Budget", "Views", "Taps", "Spent (month)", ""], A.campaigns.map((c) => [
-        "<b>" + esc(c.restaurant) + '</b><br><span class="muted">' + esc(c.owner_email || "") + "</span>", esc(c.name) + '<br><span class="muted">' + esc(c.goal) + (c.note ? " · " + esc(c.note) : "") + "</span>", st(c.status),
-        m$(c.daily_budget) + "/day" + (c.bid ? '<br><span class="muted">max ' + m$(c.bid) + "</span>" : ""), c.views, c.taps + '<br><span class="muted">' + (c.views ? (100 * c.taps / c.views).toFixed(1) : "0") + "%</span>", m$(c.spend_month),
-        c.status === "stopped" ? '<button class="link" data-run="' + c.id + '">Let it run</button>' : c.status === "active" || c.status === "paused" ? '<input class="f" id="cn-' + c.id + '" maxlength="300" placeholder="Why (the owner sees it)" style="width:170px"> <button class="link" data-stop="' + c.id + '">Stop</button>' : ""]),
-        "No ads yet. They appear here the moment a restaurant launches one.") +
-      "<h2>Ad accounts</h2>" + table(["Owner", "Restaurants", "This month", "Monthly limit", "Status", ""], A.accounts.map((a) => [
-        "<b>" + esc(a.name || "") + '</b><br><span class="muted">' + esc(a.email || "") + "</span>", esc(a.restaurants || ""), m$(a.spent_month),
-        '<input class="f" id="al-' + a.owner_id + '" type="number" min="0" step="10" value="' + Number(a.monthly_limit) + '" style="width:100px"> <button class="link" data-limit="' + a.owner_id + '">Save</button>',
-        a.status === "held" ? '<span class="pill r">On hold</span>' : '<span class="pill g">Active</span>',
-        '<button class="link" data-hold="' + a.owner_id + '" data-held="' + (a.status === "held" ? "0" : "1") + '">' + (a.status === "held" ? "Lift hold" : "Hold all ads") + "</button>"]),
-        "No ad accounts yet. One opens with a restaurant’s first ad.") +
-      '<h2>Invoices</h2><div class="act" style="margin:0 0 14px"><button class="btn" data-mk="' + ym(lastMonth) + '">Make invoices for ' + lastMonth.toLocaleDateString("en-CA", { month: "long" }) + '</button><button class="btn k" data-mk="' + ym(new Date()) + '">Preview this month so far</button></div>' +
-      table(["Owner", "Month", "Amount", "Status", ""], A.invoices.map((x) => [
-        "<b>" + esc(x.owner.name || "") + '</b><br><span class="muted">' + esc(x.owner.email || "") + "</span>", esc(new Date(x.month + "T12:00:00").toLocaleDateString("en-CA", { month: "long", year: "numeric" })), "<b>" + m$(x.amount) + "</b>",
-        { open: '<span class="pill">To send</span>', sent: '<span class="pill">Sent ' + (x.sent_at ? when(x.sent_at) : "") + "</span>", paid: '<span class="pill g">Paid ' + (x.paid_at ? when(x.paid_at) : "") + "</span>", void: '<span class="pill r">Cancelled</span>' }[x.status],
-        x.status === "open" ? '<button class="link" data-inv="' + x.id + '" data-to="sent">Mark sent</button>' : x.status === "sent" ? '<button class="link" data-inv="' + x.id + '" data-to="paid">Mark paid</button> <button class="link" style="margin-left:12px" data-inv="' + x.id + '" data-to="void">Cancel</button>' : ""]),
-        "No invoices yet. Make them at the start of each month; each owner’s taps for that month become one invoice."));
-  },
+    '<div class="line"><h2>Latest restaurants</h2><button class="link" data-go="restaurants">See all</button></div>' + table(["Restaurant", "Cuisine", "City", "Status", "Joined"], D.restaurants.slice(0, 6).map((r) => ["<b>" + esc(r.name) + "</b>", esc(r.cuisine), esc(r.city), statusPill(r.status), ago(r.created_at)]), "No restaurants yet.")),
+  restaurants: () => '<h1>Restaurants</h1><p class="lead muted">Who’s on FIG, and the places you could bring on.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+    tabs("restaurants", [["fig", "On FIG · " + D.restaurants.length], ["outreach", "Outreach · " + D.leads.length + (D.leads.length === 1 ? " lead" : " leads")]]) +
+    (SUB.restaurants === "outreach" ? outreachHtml()
+      : '<p class="muted" style="margin:-8px 0 14px">Newest first. A restaurant goes live when it finishes setup.</p>' +
+        table(["Restaurant", "Owner", "City", "Status", "Joined", "Payments"], D.restaurants.map((r) => {
+          const b = (D.premium || []).find((x) => x.owner_id === r.owner_id) || {};
+          const owner = (D.owners || []).find((o) => o.id === r.owner_id) || {};
+          const pay = b.payments_demo ? '<span class="pill k">Pretend</span>' : b.stripe_ready && b.stripe_payouts ? '<span class="pill g">Live, ready</span>' : b.stripe_ready ? '<span class="pill">Live, bank needed</span>' : '<span class="pill k">Not set up</span>';
+          return ["<b>" + esc(r.name) + '</b><br><span class="muted">' + esc(r.cuisine || "") + "</span>", esc(owner.name || "") + '<br><span class="muted">' + esc(owner.email || "") + '</span><br><button class="link" data-2fa="' + esc(r.owner_id) + '">Turn off two-step login</button>', esc(r.city), statusPill(r.status), ago(r.created_at), pay];
+        }), "No restaurants yet.") + changesTable())),
+  waitlist: () => '<h1>Waitlist</h1><p class="lead muted">The launch plan, and the diners waiting to get in.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="dinerbox">' + dinersHtml() + "</div>"),
+  blog: () => '<h1>Blog</h1><p class="lead muted">Every post on the FIG blog. Take one down if you don’t like it, or put it back.</p><div style="height:24px"></div>' + (!D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>"),
+  inbox: () => '<h1>Inbox</h1><p class="lead muted">What people wrote to FIG, and visits that were reported.</p>' + (!D.connected ? '<div style="height:24px"></div>' + NOT_CONNECTED :
+    tabs("inbox", [["messages", "Messages" + (D.counts.support ? " · " + D.counts.support + " open" : "")], ["reports", "Reports" + (D.counts.reports ? " · " + D.counts.reports + " open" : "")]]) +
+    (SUB.inbox === "reports"
+      ? table(["Reason", "Details", "When", "Status"], D.reports.map((r) => ["<b>" + esc(r.reason) + "</b>", '<div style="max-width:520px;white-space:pre-wrap">' + esc(r.details) + "</div>", ago(r.at), r.status === "open" ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>']), "No reports. Good news.")
+      : '<p class="muted" style="margin:-8px 0 14px">From “Message us” in the app and on the website. Reply by email, then mark it answered.</p>' +
+        table(["From", "About", "Message", "When", ""], (D.support || []).map((m) => [
+          '<a class="link" href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '">' + esc(m.email) + '</a><br><button class="link" data-2fa-email="' + esc(m.email) + '">Turn off two-step login</button>', esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
+          m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here."))),
 };
+// Restaurants > Outreach: restaurants that left their details on the website, then every place in Markham to approach
+function outreachHtml() {
+  return "<h2>Leads from the website</h2>" + table(["Restaurant", "Contact", "Area", "Received", "From"], D.leads.map((l) => ["<b>" + esc(l.restaurant) + "</b>", esc(l.email || l.phone), esc(l.area), ago(l.created_at), esc(l.source)]), "No leads yet. Restaurants that fill in the website’s form show up here.") +
+    '<h2>Every place in Markham</h2><p class="muted" style="margin:-4px 0 14px">Search, shortlist the ones to approach yourself, and keep notes. Only the FIG team sees this.</p><div id="prosbox">' + prosHtml() + "</div>";
+}
 
 // ---- Blog: every post, whether it is live, and the team's controls (table blog_overrides through /api/admin-api). Words stay in the site's code; this only takes a post down, puts it back or moves its time.
 let BLOG = null;
@@ -331,8 +304,9 @@ const openedByDate = () => DIN.mode === "off" && (DIN.effective || DIN.mode) ===
 const passed = (iso) => !!iso && new Date(iso) <= new Date();
 function opensHelp(eff) {
   if (eff === "on") return "FIG is already open to everyone. The date only shows on the website as the launch date.";
-  const cutoff = DIN.until ? "Your founding cutoff (" + esc(atText(DIN.until)) + ") " + (passed(DIN.until) ? "closed" : "closes") + " the list" : "";
-  if (openedByDate()) return "Founding members got in when this date passed" + (cutoff ? "; y" + cutoff.slice(1) : ", and the list closed then") + ". Saving a new date closes FIG to them again until that date; clearing it closes FIG to them again until you set a new date. To change it without shutting them out, open FIG to everyone (step 4).";
+  const cutoffOf = (your) => DIN.until ? your + " founding cutoff (" + esc(atText(DIN.until)) + ") " + (passed(DIN.until) ? "closed" : "closes") + " the list" : "";
+  const cutoff = cutoffOf("Your");
+  if (openedByDate()) return "Founding members got in when this date passed" + (cutoff ? "; " + cutoffOf("your") : ", and the list closed then") + ". Saving a new date closes FIG to them again until that date; clearing it closes FIG to them again until you set a new date. To change it without shutting them out, open FIG to everyone (step 4).";
   if (eff === "waitlist") return cutoff ? cutoff + "; this date only shows on the website as the launch date." : "The list closes at this time (later sign-ups wait for the next wave).";
   return "At this time FIG opens to founding members by itself" + (cutoff ? ". " + cutoff + "." : ", and the list closes then (later sign-ups wait for the next wave).");
 }
@@ -342,21 +316,31 @@ function opensAsk(eff, when) {
   if (eff === "waitlist") return DIN.until ? "Show " + when + " on the website as the launch date? Your founding cutoff (" + atText(DIN.until) + ") closes the list, so nothing else changes." : "Close the founding list on " + when + "? People who join after it wait for the next wave.";
   return "Open to founding members on " + when + "? Until then FIG stays closed to diners and keeps collecting the waitlist" + (DIN.until ? "; your founding cutoff (" + atText(DIN.until) + ") closes the list." : "; the list closes then.");
 }
+function nowText(eff, first) {
+  return eff === "on" ? "<b>Right now: open to everyone.</b> Anyone can sign up, browse, claim and order."
+    : eff === "waitlist" ? "<b>Right now: founding members are in.</b> " + first.charAt(0).toUpperCase() + first.slice(1) + " on the waitlist" + (DIN.closes ? " who joined before " + esc(atText(DIN.closes)) : "") + " can use FIG, plus restaurants. Everyone else sees the waitlist."
+    : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(dot(atText(DIN.opens))) : "");
+}
+// the Overview's line: where the launch stands, and the way to the full plan on Waitlist
+function launchLine() {
+  if (!DIN) return '<div class="hint"><span class="muted">Loading the launch plan…</span></div>';
+  if (DIN.error) return '<div class="hint"><b>The launch plan could not load.</b> <button class="link" data-go="waitlist">Open Waitlist</button></div>';
+  const eff = DIN.effective || DIN.mode;
+  return '<div class="hint line"><span>' + nowText(eff, DIN.cap ? "the first " + DIN.cap.toLocaleString("en-CA") : "everyone") + " " + (DIN.waitlist || []).length.toLocaleString("en-CA") + ' on the list.</span><button class="link" data-go="waitlist">The launch plan</button></div>';
+}
 function modeHtml() {
   if (!DIN) return "";
   if (DIN.error) return '<div class="hint r" style="margin:0 0 18px"><b>The launch plan could not load.</b> ' + esc(DIN.error) + ' <button class="link" id="lnch-retry" style="margin-left:12px">Try again</button></div>';
   const n = (DIN.waitlist || []).length, agreed = (DIN.waitlist || []).filter((w) => w.consent).length, eff = DIN.effective || DIN.mode;
   const first = DIN.cap ? "the first " + DIN.cap.toLocaleString("en-CA") : "everyone";
-  const now = eff === "on" ? "<b>Right now: open to everyone.</b> Anyone can sign up, browse, claim and order."
-    : eff === "waitlist" ? "<b>Right now: founding members are in.</b> " + first.charAt(0).toUpperCase() + first.slice(1) + " on the waitlist" + (DIN.closes ? " who joined before " + esc(atText(DIN.closes)) : "") + " can use FIG, plus restaurants. Everyone else sees the waitlist."
-    : "<b>Right now: collecting the waitlist.</b> Only restaurants can use FIG; diners join the list." + (DIN.opens ? " Opens to founding members " + esc(dot(atText(DIN.opens))) : "");
+  const now = nowText(eff, first);
   const row = (num, title, body) => '<div style="display:flex;gap:14px;padding:12px 0;border-top:1px solid #E3E8F2"><div style="flex:none;width:26px;height:26px;border-radius:50%;background:#1E5EFF;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">' + num + '</div><div style="flex:1"><div style="font-weight:800;margin-bottom:6px">' + title + "</div>" + body + "</div></div>";
   const s1 = row(1, "Collect the waitlist", '<div class="muted" style="margin-bottom:8px">' + n.toLocaleString("en-CA") + " on the list · " + agreed.toLocaleString("en-CA") + " agreed to be emailed. Creator links: fig-promo.vercel.app/?src=their-name#waitlist</div>" +
     (eff === "off" ? '<span class="pill g">Collecting now</span>' : '<button class="link" data-mode="off">Close FIG to diners and collect the waitlist</button>'));
   const s2 = row(2, "How many get in first", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span>The first</span><input class="f" id="cap-n" type="number" min="1" placeholder="everyone" value="' + (DIN.cap || "") + '" style="width:120px;height:40px"><span>on the list</span><button class="link" id="cap-save">Save</button></div><div class="muted" style="margin-top:6px">Empty = everyone on the list. Raise it or clear it later to let the next wave in.</div>');
   const s3 = row(3, "Opening date", '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="f" id="opens-at" type="datetime-local" value="' + localInput(DIN.opens) + '" style="height:40px"><button class="link" id="opens-save">Save</button>' + (DIN.opens ? '<button class="link red" id="opens-clear">Clear</button>' : "") + "</div>" +
     '<div class="muted" style="margin-top:6px">' + opensHelp(eff) + (eff === "on" ? "" : " The website shows the date." + (openedByDate() ? "" : " " +
-    "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed on the Diners tab; every email needs FIG's name, a mailing address and an unsubscribe line.")) + "</div>" +
+    "Send the launch email before it: it isn't sent automatically. Copy the emails that agreed, below; every email needs FIG's name, a mailing address and an unsubscribe line.")) + "</div>" +
     (eff === "waitlist" ? "" : '<div style="margin-top:8px"><button class="link" data-mode="waitlist">Or open to founding members now</button></div>'));
   const s4 = row(4, "Everyone", eff === "on" ? '<span class="pill g">Open to everyone</span>' : '<button class="link" data-mode="on">Open FIG to everyone (public launch)</button>');
   const extra = eff === "waitlist" ? '<div class="muted" style="margin-top:6px">The founding list ' + (DIN.closes ? (passed(DIN.closes) ? "closed " : "closes ") + esc(dot(atText(DIN.closes))) + " " : "is open. ") + '<button class="link" id="until-now">Let in everyone who joined until now</button></div>' : "";
@@ -376,8 +360,6 @@ function modeWire() {
   const oc = $("#opens-clear"); if (oc) oc.onclick = async () => { if (!confirm(openedByDate() ? "Founding members are in now. Clearing the date closes FIG to them again until you set a new date. Clear it anyway?" : "Clear the opening date?")) return; after(await api("opens-at", { at: null })); };
   const un = $("#until-now"); if (un) un.onclick = async () => { if (!confirm("Let in everyone who has joined the list until now (within the first N, if set)? Later sign-ups still wait.")) return; after(await api("founding-until", { until: "now" })); };
 }
-function launchHtml() { return modeHtml(); }
-function launchWire() { modeWire(); }
 function dinersHtml() {
   if (!DIN) return '<p class="muted">Loading…</p>';
   if (DIN.error) return '<div class="empty"><b>Could not load this.</b><br>' + esc(DIN.error) + "</div>";
@@ -391,8 +373,9 @@ function dinersHtml() {
 }
 async function dinersLoad() {
   DIN = await api("diners-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
-  if (view === "overview" && $("#launchbox")) { $("#launchbox").innerHTML = launchHtml(); launchWire(); }
-  if (view === "diners" && $("#dinerbox")) { $("#dinerbox").innerHTML = dinersHtml(); dinersWire(); }
+  const n = $("#n-waitlist"); if (n && DIN.waitlist) n.textContent = DIN.waitlist.length;
+  if (view === "overview" && $("#launchbox")) { $("#launchbox").innerHTML = launchLine(); goWire(); }
+  if (view === "waitlist" && $("#dinerbox")) { $("#dinerbox").innerHTML = dinersHtml(); dinersWire(); }
 }
 function dinersWire() {
   modeWire();
@@ -430,8 +413,7 @@ function prosHtml() {
 }
 async function prosLoad() {
   PRO = await api("prospects-list", PF).catch(() => ({ error: "It did not load. Refresh to try again." }));
-  const n = $("#n-prospects"); if (n && PRO.shortlisted !== undefined) n.textContent = PRO.shortlisted;
-  if (view === "prospects" && $("#prosbox")) { $("#prosbox").innerHTML = prosHtml(); prosWire(); }
+  if (view === "restaurants" && SUB.restaurants === "outreach" && $("#prosbox")) { $("#prosbox").innerHTML = prosHtml(); prosWire(); }
 }
 function prosWire() {
   const read = () => { PF.q = ($("#pr-q") || {}).value || ""; PF.kind = ($("#pr-kind") || {}).value || ""; PF.status = ($("#pr-status") || {}).value || ""; PF.short = !!($("#pr-short") || {}).checked; PF.independent = !!($("#pr-ind") || {}).checked; PF.hideFig = !!($("#pr-fig") || {}).checked; };
@@ -448,15 +430,16 @@ function prosWire() {
   document.querySelectorAll("[data-note]").forEach((i) => i.onchange = () => save({ id: i.dataset.note, note: i.value }));
 }
 
+// links that move to another view (the Overview's "See all" and "The launch plan")
+function goWire() { document.querySelectorAll("[data-go]").forEach((b) => b.onclick = () => { view = b.dataset.go; render(); scrollTo(0, 0); }); }
 function render() {
-  document.querySelectorAll("#nav button").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
+  document.querySelectorAll("#nav button, #sec").forEach((b) => b.classList.toggle("on", b.dataset.v === view));
   const on = $("#nav .on"); if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
   $("#main").innerHTML = VIEWS[view]();
+  goWire();
+  document.querySelectorAll("[data-sub]").forEach((b) => b.onclick = () => { const [v, k] = b.dataset.sub.split(":"); SUB[v] = k; render(); });
   if (D.connected) {
     const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
-    document.querySelectorAll("[data-prem]").forEach((b) => b.onclick = () => run("premium", { owner: b.dataset.prem, years: +b.dataset.years }, b.dataset.years === "0"
-      ? (b.dataset.src === "stripe" ? "This owner pays for FIG Premium through Stripe. Turning it off here ends it now, but their card will keep being charged until the subscription is cancelled in Stripe. Turn it off anyway?" : "Turn off FIG Premium for this owner (all their locations)?")
-      : "Switch on FIG Premium for a year for this owner (all their locations)?"));
     document.querySelectorAll("[data-2fa],[data-2fa-email]").forEach((b) => b.onclick = async () => {
       if (!confirm("Turn off two-step login for this person? Only after checking it is really them: they write from the account's email and know the phone number on it. They then sign in with their password alone, and can switch two-step login back on.")) return;
       const r = await api("two-step-off", b.dataset["2fa"] ? { id: b.dataset["2fa"] } : { email: b.dataset["2faEmail"] });
@@ -466,26 +449,21 @@ function render() {
   }
   if (view === "security") securityWire();
   if (view === "blog" && D.connected) blogLoad();
-  if ((view === "diners" || view === "overview") && D.connected) dinersLoad();
-  if (view === "prospects" && D.connected) prosLoad();
-  if (view === "ads" && D.connected) {
-    const run = async (what, body, ask) => { if (ask && !confirm(ask)) return; const r = await api(what, body); if (r.error) alert(r.error); await load(); render(); };
-    document.querySelectorAll("[data-stop]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.stop, stop: true, note: ($("#cn-" + b.dataset.stop) || {}).value || "" }, "Stop this ad? It stops showing now, and the owner sees your note."));
-    document.querySelectorAll("[data-run]").forEach((b) => b.onclick = () => run("ad-campaign", { id: b.dataset.run, stop: false }, "Let this ad run again?"));
-    document.querySelectorAll("[data-limit]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.limit, limit: +$("#al-" + b.dataset.limit).value }));
-    document.querySelectorAll("[data-hold]").forEach((b) => b.onclick = () => run("ad-account", { owner: b.dataset.hold, held: b.dataset.held === "1" }, b.dataset.held === "1" ? "Hold all of this owner’s ads?" : "Lift the hold? Their ads can run again."));
-    document.querySelectorAll("[data-mk]").forEach((b) => b.onclick = () => run("ad-invoices", { month: b.dataset.mk }, "Make (or update) the invoices for this month? Sent and paid ones aren’t changed."));
-    document.querySelectorAll("[data-inv]").forEach((b) => b.onclick = () => run("ad-invoice", { id: b.dataset.inv, status: b.dataset.to }));
-  }
+  if ((view === "waitlist" || view === "overview") && D.connected) dinersLoad();
+  if (view === "restaurants" && SUB.restaurants === "outreach" && D.connected) prosLoad();
 }
 async function load() {
   D = await api("data");
   const set = (id, n) => { const el = $(id); if (el) el.textContent = n == null ? "–" : n; };
-  if (D.connected) { set("#n-restaurants", D.counts.restaurants); set("#n-reports", D.counts.reports); set("#n-messages", D.counts.support); set("#n-leads", D.leads.length); set("#n-ads", ((D.ads || {}).campaigns || []).filter((x) => x.status === "active").length); }
+  if (D.connected) {
+    set("#n-restaurants", D.counts.restaurants);
+    const open = (D.counts.support || 0) + (D.counts.reports || 0);
+    set("#n-inbox", open); const nb = $("#n-inbox"); if (nb) nb.classList.toggle("hot", open > 0);
+  }
 }
-document.querySelectorAll("#nav button").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
+document.querySelectorAll("#nav button, #sec").forEach((b) => b.onclick = () => { view = b.dataset.v; if (D) render(); }); // before the data arrives, load() renders the chosen view
 $("#out").onclick = async () => { await api("logout"); location.reload(); };
-load().then(render).catch(() => { $("#main").innerHTML = '<div class="empty">Couldn\\'t load. Refresh to try again.</div>'; });
+load().then(() => { render(); if (D.connected && view !== "waitlist" && view !== "overview") dinersLoad(); }).catch(() => { $("#main").innerHTML = '<div class="empty">Couldn\\'t load. Refresh to try again.</div>'; });
 </script></body></html>`;
 }
 

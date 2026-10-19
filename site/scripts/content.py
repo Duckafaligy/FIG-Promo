@@ -1,7 +1,7 @@
 """About page and blog posts. Plain facts, written so people, search engines and AI answer engines can quote them.
 
 Each post: slug, screen (an app screenshot in assets/screens for the cover), title, ISO date, topic, dek (meta description), keywords, key points (the quotable summary),
-sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners; restaurants pay one plan for all their restaurants ($29.99 a month or $299.99 a year from launch; founding $9.99 a month for 12 months, or $59.99 the first year then $299.99 a year; 30 days' grace after launch, then pages pause; no commission on the bill; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
+sections [(h2, html)], faq [(q, a)]. Keep every number in line with the app: free for diners; restaurants pay one plan for all their restaurants ($29.99 a month or $299.99 a year from launch; founding $9.99 a month for 12 months, or $59.99 the first year then $299.99 a year; a plan needed to go live, refunds within 14 days of the first payment; no commission on the bill; 5% of the food on takeout orders diners pay for in the app), FIG Premium, chat and announcements are HIDDEN for launch (the CEO 2026-10-17: don't mention them), no ads for now (user 2026-10-09),
 codes refresh every 5 minutes, claims last until the restaurant ends the deal, no loyalty points or rewards.
 """
 

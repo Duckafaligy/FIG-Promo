@@ -380,7 +380,7 @@ HELP = [
         ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
         ("What if a scan looks wrong?", "Message us from Help within 14 days. We review it, and if it was a mistake we remove it."),
         ("Can I pause takeout in a rush?", "Yes. Tap Takeout: On on your dashboard or Orders to pause new orders for 20 or 40 minutes or until tomorrow's opening, or to add prep time. Orders already in aren't touched, and it comes back on by itself."),
-        ("How do I stop?", "Monthly: cancel any time, it ends at the end of the month you've paid. Annual: it runs its year, then you can stop. You can also pause your deals, or close your account in Settings."),
+        ("How do I stop?", "Cancel in Settings: that stops the renewal, and you keep full access until the end of the month or year you've paid. Within 14 days of your first payment you can get a full refund instead. You can also pause your deals, or close your account in Settings."),
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
@@ -649,7 +649,7 @@ LLMS = f"""# FIG
 - Platforms: iPhone and Android
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; with no plan 30 days after that, pages and deals pause until one is taken (nothing deleted); founding prices before launch: $9.99 a month for the first 12 months, or $59.99 for the first year then $299.99 a year (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
+- Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding prices before launch: $9.99 a month for the first 12 months, or $59.99 for the first year then $299.99 a year (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number

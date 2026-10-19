@@ -84,6 +84,24 @@ async function setPremium(owner, years) {
   await rest("rpc/set_premium", { method: "POST", body: JSON.stringify({ p_owner: uuid(owner), p_until: y ? new Date(Date.now() + y * 365 * 86400000).toISOString() : null, p_source: "fig" }) });
 }
 // a message from the inbox: answered, or open again
+// someone asks to stop the emails, or to be forgotten (FIX-LIST #95, CASL and PIPEDA requests): by the email on the list
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const listEmail = (e) => { const x = String(e || "").trim().toLowerCase(); if (x.length > 254 || !EMAIL.test(x)) throw new Error("bad email"); return x; };
+/** No more emails: consent off, and when they asked. They stay on the list (their place in line keeps). */
+async function waitlistUnsubscribe(email) {
+  const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "PATCH", body: JSON.stringify({ consent: false, unsubscribed_at: new Date().toISOString() }), headers: { Prefer: "return=representation" } });
+  return { found: r.rows.length > 0 };
+}
+/** Off the list for good (their row is deleted). */
+async function waitlistRemove(email) {
+  const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "DELETE", headers: { Prefer: "return=representation" } });
+  return { found: r.rows.length > 0 };
+}
+/** A message deleted for good (someone asked for it, or it was spam). */
+async function supportRemove(id) {
+  const r = await rest(`support_messages?id=eq.${uuid(id)}`, { method: "DELETE", headers: { Prefer: "return=representation" } });
+  return { found: r.rows.length > 0 };
+}
 async function setSupport(id, status) {
   if (!["open", "answered"].includes(status)) throw new Error("bad status");
   await rest(`support_messages?id=eq.${uuid(id)}`, { method: "PATCH", body: JSON.stringify({ status }), headers: { Prefer: "return=minimal" } });
@@ -145,7 +163,7 @@ async function dinersState() {
   const site = (await rest("rpc/site_mode", { method: "POST", body: "{}" })).rows || {}; // the effective mode (a passed opening date opens it)
   const v = (k) => (flags.find((f) => f.key === k) || {}).value;
   const mode = v("diners_open") === "off" ? "off" : v("diners_open") === "waitlist" ? "waitlist" : "on";
-  const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at&order=joined_at.desc&limit=5000")).rows;
+  const wl = (await rest("diner_waitlist?select=email,school,consent,source,joined_at,consent_at,unsubscribed_at&order=joined_at.desc&limit=5000")).rows;
   const accounts = (await rest("profiles?select=id&role=eq.diner&admin=eq.false&limit=5000")).rows.length;
   return { mode, effective: site.mode || mode, open: (site.mode || mode) === "on", cap: v("founding_cap") ? Number(v("founding_cap")) : null, until: v("founding_until") || null, opens: v("opens_at") || null, closes: site.founding_until || null, waitlist: wl, accounts };
 }
@@ -202,4 +220,4 @@ async function setProspect(id, change) {
   return { saved: true };
 }
 
-module.exports = { prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { waitlistUnsubscribe, waitlistRemove, supportRemove, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

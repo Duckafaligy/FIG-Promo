@@ -1,4 +1,4 @@
-// /api/admin-api?do=login|login-code|logout|logout-all|totp-start|totp-confirm|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set|founding-cap|founding-until|opens-at|prospects-list|prospects-set  (POST, same origin; everything but login needs the session)
+// /api/admin-api?do=login|login-code|logout|logout-all|totp-start|totp-confirm|data|ad-campaign|ad-account|premium|support|support-remove|waitlist-unsubscribe|waitlist-remove|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set|founding-cap|founding-until|opens-at|prospects-list|prospects-set  (POST, same origin; everything but login needs the session)
 const { login, loginCode, signedIn, logoutCookie, logoutEverywhere, enrolStart, enrolConfirm, send, readJson, sameOrigin } = require("./_lib/auth");
 const qr = require("./_lib/qr");
 const db = require("./_lib/db");
@@ -36,6 +36,10 @@ module.exports = async (req, res) => {
     if (action === "ad-account") { await db.setAccount(body.owner, body.limit ?? null, body.held ?? null); return send(res, 200, { ok: true }); }
     if (action === "premium") { await db.setPremium(body.owner, body.years ?? 0); return send(res, 200, { ok: true }); }
     if (action === "support") { await db.setSupport(body.id, body.status); return send(res, 200, { ok: true }); }
+    // requests to stop the emails or to be forgotten (FIX-LIST #95): writes, so only behind the session check above
+    if (action === "waitlist-unsubscribe") return send(res, 200, { ok: true, ...(await db.waitlistUnsubscribe(body.email)) });
+    if (action === "waitlist-remove") return send(res, 200, { ok: true, ...(await db.waitlistRemove(body.email)) });
+    if (action === "support-remove") return send(res, 200, { ok: true, ...(await db.supportRemove(body.id)) });
     if (action === "two-step-off") return send(res, 200, { ok: true, ...(await db.twoStepOff({ id: body.id, email: body.email })) });
     if (action === "ad-invoices") { await db.makeInvoices(body.month); return send(res, 200, { ok: true }); }
     if (action === "blog-list") return send(res, 200, { ok: true, ...(await blog.list()) });

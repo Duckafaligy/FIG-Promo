@@ -238,7 +238,7 @@ const VIEWS = {
       : '<p class="muted" style="margin:-8px 0 14px">From “Message us” in the app and on the website. Reply by email, then mark it answered.</p>' +
         table(["From", "About", "Message", "When", ""], (D.support || []).map((m) => [
           '<a class="link" href="mailto:' + esc(m.email) + "?subject=" + encodeURIComponent("FIG: " + (m.topic || "your message")) + '">' + esc(m.email) + '</a><br><button class="link" data-2fa-email="' + esc(m.email) + '">Turn off two-step login</button>', esc(m.topic), '<div style="max-width:520px;white-space:pre-wrap">' + esc(m.body) + "</div>", ago(m.at),
-          m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>']), "No messages. When someone writes to FIG, it shows up here."))),
+          (m.status === "open" ? '<button class="link" data-sup="' + esc(m.id) + '" data-to="answered">Mark answered</button>' : '<span class="pill g">Answered</span> <button class="link" data-sup="' + esc(m.id) + '" data-to="open">Reopen</button>') + '<br><button class="link red" style="margin:6px 0 0" data-sup-remove="' + esc(m.id) + '">Remove</button>']), "No messages. When someone writes to FIG, it shows up here."))),
 };
 // restaurants that started setup but aren't live (paused ones excluded), and the ones stuck there 3 days or more
 const setup = () => D.restaurants.filter((r) => r.status !== "approved" && r.status !== "rejected");
@@ -384,7 +384,10 @@ function dinersHtml() {
   return modeHtml() + '<div class="stats">' + stat(W.length, "On the waitlist", "blue") + stat(agreed, "Agreed to be emailed") + stat(DIN.accounts, "Diner accounts") + "</div>" +
     "<h2>Where sign-ups came from</h2>" + table(["Link", "Sign-ups"], sources.map((x) => [esc(x[0]), String(x[1])]), "No sign-ups yet. Give each creator a link like fig-promo.vercel.app/?src=their-name#waitlist") +
     '<div style="display:flex;gap:16px;margin:16px 0 14px;flex-wrap:wrap"><button class="link" id="din-copy">Copy the emails that agreed</button><button class="link" id="din-csv">Download as a table (CSV)</button></div>' +
-    table(["Email", "School", "May email", "From", "Joined"], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""), w.consent ? '<span class="pill g">Yes</span>' : '<span class="pill">No</span>', esc(w.source || "website"), ago(w.joined_at)]), "Nobody yet.");
+    table(["Email", "School", "May email", "From", "Joined", ""], W.slice(0, 300).map((w) => [esc(w.email), esc(w.school || ""),
+      w.consent ? '<span class="pill g">Yes</span>' + (w.consent_at ? '<br><span class="note">ticked ' + esc(when(w.consent_at)) + "</span>" : "") : '<span class="pill">No</span>' + (w.unsubscribed_at ? '<br><span class="note">unsubscribed ' + esc(when(w.unsubscribed_at)) + "</span>" : ""),
+      esc(w.source || "website"), ago(w.joined_at),
+      (w.consent ? '<button class="link" data-wl-unsub="' + esc(w.email) + '">Unsubscribe</button> ' : "") + '<button class="link red" data-wl-remove="' + esc(w.email) + '">Remove</button>']), "Nobody yet.");
 }
 async function dinersLoad() {
   DIN = await api("diners-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
@@ -396,6 +399,10 @@ function dinersWire() {
   modeWire();
   const rows = (DIN && DIN.waitlist) || [];
   const cp = $("#din-copy"); if (cp) cp.onclick = async () => { const t = rows.filter((w) => w.consent).map((w) => w.email).join(", "); try { await navigator.clipboard.writeText(t); alert(rows.filter((w) => w.consent).length + " emails copied."); } catch { prompt("Copy these:", t); } };
+  // a request to stop the emails, or to be forgotten (FIX-LIST #95)
+  const wl = async (what, email, ask) => { if (!confirm(ask)) return; const r = await api(what, { email }); if (r.error) alert(r.error); await dinersLoad(); };
+  document.querySelectorAll("[data-wl-unsub]").forEach((b) => b.onclick = () => wl("waitlist-unsubscribe", b.dataset.wlUnsub, "Stop emailing " + b.dataset.wlUnsub + "? They stay on the list in the same place; joining again ticked opts them back in."));
+  document.querySelectorAll("[data-wl-remove]").forEach((b) => b.onclick = () => wl("waitlist-remove", b.dataset.wlRemove, "Remove " + b.dataset.wlRemove + " from the waitlist for good? Their place in line is gone."));
   const cs = $("#din-csv"); if (cs) cs.onclick = () => {
     const q = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
     const csv = ["email,school,may_email,source,joined"].concat(rows.map((w) => [q(w.email), q(w.school), w.consent ? "yes" : "no", q(w.source), q(w.joined_at)].join(","))).join("\\n");
@@ -461,6 +468,7 @@ function render() {
       alert(r.error || (r.found === false ? "No FIG account has that email." : r.removed ? r.removed + " authenticator(s) removed. They can sign in with the password now." : "That account had no two-step login to remove."));
     });
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
+    document.querySelectorAll("[data-sup-remove]").forEach((b) => b.onclick = () => run("support-remove", { id: b.dataset.supRemove }, "Delete this message for good? Do it when they asked to be forgotten, or it's spam."));
   }
   if (view === "security") securityWire();
   if ((view === "blog" || view === "overview") && D.connected) blogLoad();

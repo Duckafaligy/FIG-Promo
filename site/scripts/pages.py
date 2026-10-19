@@ -112,7 +112,7 @@ FOOTER = f'''<footer class="foot">
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 FIG · Markham, Ontario · <a class="admin-link" href="/admin">Are you the admin?</a></span>
+      <span>© 2026 FIG · Markham, Ontario</span>
       <span>App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap. App Store is a trademark of Apple Inc. Google Play is a trademark of Google LLC.</span>
     </div>
   </div>
@@ -273,11 +273,11 @@ legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app), whether you ticked “Email me when FIG opens in Markham”, when you joined, and which link brought you, if any. We email you only if you ticked that box, to say FIG is open in Markham. Every email comes from FIG, Markham, Ontario, and has an unsubscribe link: you can withdraw your consent anytime, through that link or by messaging us. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
 
 # Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
-legal("cookies", {"title": "Cookies", "updated": "Last updated October 14, 2026",
+legal("cookies", {"title": "Cookies", "updated": "Last updated October 18, 2026",
                   "short": ["No advertising or tracking cookies, and no analytics script following you around.", "Most visitors get no cookies at all.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
                   "sections": [], "contactAsk": "Questions about cookies?", "contactLine": "FIG, Markham, Ontario"},
       [("What the website stores", "<ul><li><b>Nothing, for most visitors.</b> Browsing the site and joining the waitlist don't set cookies.</li>"
-        "<li><b>FIG team only:</b> signing in to the admin page sets one secure, HttpOnly cookie that keeps you signed in for 8 hours, and one that counts wrong password tries.</li></ul>"),
+        "<li><b>FIG team only:</b> signing in to the admin page sets secure, HttpOnly cookies: one keeps you signed in for 8 hours, one remembers that browser for 90 days, one counts wrong tries, and short-lived ones (10 minutes at most) hold a sign-in or set-up step.</li></ul>"),
        ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
        ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap, the animation library from cdnjs and the map library from jsDelivr. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>")])
 
@@ -581,7 +581,8 @@ prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help
 xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
     f"  <url><loc>{SITE_URL}{'' if p == '/' else p}</loc>{lastmod(p)}<priority>{prio(p)}</priority></url>\n" for p, _, _ in PAGES) + "</urlset>\n"
 (SITE / "sitemap.xml").write_text(xml, encoding="utf-8")
-(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
+# no /admin line: it would only point at it; the admin pages carry noindex instead (FIX-LIST #83)
+(SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
 > FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Free for restaurants to list, post deals and scan, with no commission on dine-in. FIG is paid by 5% of the food on takeout orders diners pay for in the app.

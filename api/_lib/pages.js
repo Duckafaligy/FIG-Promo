@@ -34,7 +34,7 @@ label { display: block; margin: 22px 0 8px; font-weight: 700; font-size: 14px; }
   <div class="brand">${LOGO}FIG Admin</div>
   <h1>Sign in</h1>
   <p class="sub muted">Only the FIG team gets in.</p>
-  <label for="pw">Password</label>
+  <label for="pw" id="pw-l">Password</label>
   <input class="f" id="pw" name="password" type="password" autocomplete="current-password" required autofocus>
   <button class="btn" id="go" type="submit">Sign in</button>
   <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -42,7 +42,14 @@ label { display: block; margin: 22px 0 8px; font-weight: 700; font-size: 14px; }
 </form>
 <script>
 const f = document.getElementById("f"), pw = document.getElementById("pw"), go = document.getElementById("go"), msg = document.getElementById("msg");
-let timer;
+let timer, step = "password"; // "code" once the password is right and the authenticator step is on (FIX-LIST #83)
+function codeStep(on) {
+  step = on ? "code" : "password";
+  document.getElementById("pw-l").textContent = on ? "Code from your authenticator app" : "Password";
+  pw.type = on ? "text" : "password"; pw.autocomplete = on ? "one-time-code" : "current-password"; pw.inputMode = on ? "numeric" : "text";
+  pw.placeholder = on ? "6 digits, or a backup code" : "";
+  go.textContent = on ? "Continue" : "Sign in"; pw.value = ""; pw.focus();
+}
 function locked(sec) {
   clearInterval(timer); go.disabled = true; pw.disabled = true; msg.className = "msg lock";
   const end = Date.now() + sec * 1000;
@@ -55,9 +62,12 @@ function locked(sec) {
 }
 f.addEventListener("submit", async (e) => {
   e.preventDefault(); go.disabled = true; msg.textContent = "";
-  const r = await fetch("/api/admin-api?do=login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw.value }) }).catch(() => null);
+  const code = step === "code";
+  const r = await fetch("/api/admin-api?do=" + (code ? "login-code" : "login"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(code ? { code: pw.value } : { password: pw.value }) }).catch(() => null);
   const j = r ? await r.json().catch(() => ({})) : {};
   pw.value = "";
+  if (j.needCode) { go.disabled = false; return codeStep(true); }
+  if (j.again) codeStep(false);
   if (r && r.ok) return location.reload();
   if (j.locked) return locked(j.retryIn);
   go.disabled = false; msg.className = "msg err";
@@ -133,6 +143,7 @@ td { padding: 15px 18px; border-top: 1px solid #E2E7EF; }
       <button data-v="diners">Diners</button>
       <button data-v="prospects">Prospects <span class="badge" id="n-prospects">–</span></button>
       <button data-v="blog">Blog <span class="badge" id="n-blog">–</span></button>
+      <button data-v="security">Security</button>
     </div>
     <div class="who">Brendan · Owner<br><button id="out">Sign out</button></div>
   </aside>
@@ -168,7 +179,41 @@ function changesTable() {
   return "<h2>Handovers and name changes</h2>" + table(["What", "Restaurant", "Detail", "When"], rows, "None yet. Changes to a restaurant’s name or address, and hand-overs between owners, are recorded here.");
 }
 
+// sign-in protection (FIX-LIST #83): the authenticator app and "Sign out everywhere"
+function securityHtml() {
+  return '<h1>Security</h1><p class="lead muted">Only you get in: your password, then a code from your phone.</p>' +
+    '<h2>Authenticator app</h2><p>' + (D.totp ? '<span class="pill g">On</span> Signing in asks for a code from your authenticator app after the password.' : '<span class="pill">Off</span> Signing in uses the password only.') + '</p>' +
+    '<div id="totp"><button class="btn" id="totp-go">' + (D.totp ? "Move it to a new phone" : "Set up an authenticator app") + '</button></div>' +
+    '<h2>Sign out everywhere</h2><p class="muted">Signs out every browser, this one too, and forgets every remembered device. Use it if a computer was lost or you think someone else signed in.</p>' +
+    '<button class="btn k" id="out-all">Sign out everywhere</button>';
+}
+function securityWire() {
+  const box = $("#totp");
+  $("#out-all").onclick = async () => {
+    if (!confirm("Sign out every browser, including this one?")) return;
+    const r = await api("logout-all"); if (r.error) return alert(r.error); location.reload();
+  };
+  $("#totp-go").onclick = async () => {
+    const r = await api("totp-start"); if (r.error) return alert(r.error);
+    box.innerHTML = '<ol><li>Open an authenticator app on your phone (Google Authenticator, Microsoft Authenticator, 1Password…) and add an account.</li>' +
+      '<li>Scan this code, or type the key below.</li></ol><div style="margin:14px 0">' + r.qr + '</div>' +
+      '<p>Key: <b style="font-family:monospace;letter-spacing:.06em">' + esc(r.secret) + '</b></p>' +
+      '<label for="totp-c"><b>Then type the 6-digit code the app shows</b></label><div class="act"><input class="f" id="totp-c" inputmode="numeric" autocomplete="one-time-code" maxlength="6"><button class="btn" id="totp-ok">Check the code</button></div>' +
+      '<p class="muted">This set-up times out in 10 minutes. Nothing changes until the last step.</p>';
+    $("#totp-ok").onclick = async () => {
+      const c = await api("totp-confirm", { code: $("#totp-c").value });
+      if (c.error) return alert(c.error);
+      box.innerHTML = '<p><span class="pill g">The code matched</span></p>' +
+        (c.backup ? '<h2>Your backup codes</h2><p>Each one works once, if your phone is lost. Save them somewhere safe now: they are not shown again.</p><p style="font-family:monospace;font-size:16px;line-height:1.9">' + c.backup.map(esc).join("<br>") + '</p>'
+          : '<p class="red">The backup codes couldn’t be saved (the database didn’t answer). Start again before you switch it on.</p>') +
+        '<h2>Last step: switch it on in Vercel</h2><ol><li>Vercel → fig-promo → Settings → Environment Variables → Add.</li><li>Name: <b>' + esc(c.env) + '</b>. Value: <b style="font-family:monospace">' + esc(c.secret) + '</b>. Environment: Production. Mark it Sensitive.</li><li>Redeploy (Deployments → the latest → Redeploy).</li></ol>' +
+        '<p class="muted">Until then, signing in stays password only. Afterwards, sign in once in a private window to check it, before you close this one.</p>';
+    };
+  };
+}
+
 const VIEWS = {
+  security: () => securityHtml(),
   overview: () => '<h1>Overview</h1><p class="lead muted">Before launch · ' + days + ' days to January 1, 2027</p>' + (!D.connected ? NOT_CONNECTED :
     '<div id="launchbox">' + launchHtml() + '</div><div class="stats">' + stat(D.counts.diners, "Diners signed up", "blue") + stat(D.counts.live, "Restaurants live") + stat(D.counts.orders30, "Takeout orders, 30 days") +
     stat(D.counts.ordersOpen, "Orders open now") + stat(D.counts.support, "Messages to answer", D.counts.support ? "red" : "") + stat(D.counts.reports, "Open reports", D.counts.reports ? "red" : "") + "</div>" +
@@ -419,6 +464,7 @@ function render() {
     });
     document.querySelectorAll("[data-sup]").forEach((b) => b.onclick = () => run("support", { id: b.dataset.sup, status: b.dataset.to }));
   }
+  if (view === "security") securityWire();
   if (view === "blog" && D.connected) blogLoad();
   if ((view === "diners" || view === "overview") && D.connected) dinersLoad();
   if (view === "prospects" && D.connected) prosLoad();

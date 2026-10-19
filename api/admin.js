@@ -3,4 +3,4 @@
 const { signedIn, send } = require("./_lib/auth");
 const { signInPage, appPage } = require("./_lib/pages");
 
-module.exports = (req, res) => send(res, 200, signedIn(req) ? appPage() : signInPage());
+module.exports = async (req, res) => send(res, 200, (await signedIn(req)) ? appPage() : signInPage());

@@ -1,5 +1,6 @@
-// /api/admin-api?do=login|logout|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set|founding-cap|founding-until|opens-at|prospects-list|prospects-set  (POST, same origin; everything but login needs the session)
-const { login, signedIn, logoutCookie, send, readJson, sameOrigin } = require("./_lib/auth");
+// /api/admin-api?do=login|login-code|logout|logout-all|totp-start|totp-confirm|data|ad-campaign|ad-account|premium|support|two-step-off|ad-invoices|ad-invoice|blog-list|blog-set|diners-get|diners-set|founding-cap|founding-until|opens-at|prospects-list|prospects-set  (POST, same origin; everything but login needs the session)
+const { login, loginCode, signedIn, logoutCookie, logoutEverywhere, enrolStart, enrolConfirm, send, readJson, sameOrigin } = require("./_lib/auth");
+const qr = require("./_lib/qr");
 const db = require("./_lib/db");
 const blog = require("./_lib/blog");
 
@@ -14,11 +15,22 @@ module.exports = async (req, res) => {
     const out = await login(req, body.password);
     return send(res, out.status, out.body, out.headers || []);
   }
+  if (action === "login-code") {
+    await new Promise((r) => setTimeout(r, 400));
+    const out = await loginCode(req, body.code);
+    return send(res, out.status, out.body, out.headers || []);
+  }
   if (action === "logout") return send(res, 200, { ok: true }, [logoutCookie()]);
-  if (!signedIn(req)) return send(res, 401, { error: "Sign in again." });
+  if (!(await signedIn(req))) return send(res, 401, { error: "Sign in again." });
+  // everything below re-checks the session on the server, every time (FIX-LIST #83)
+  if (action === "logout-all") {
+    try { return send(res, 200, { ok: true }, await logoutEverywhere()); } catch { return send(res, 502, { error: "The database didn't answer, so nothing changed. Try again." }); }
+  }
+  if (action === "totp-start") { const e = enrolStart(); return send(res, 200, { ok: true, on: !!process.env.ADMIN_TOTP_SECRET, secret: e.secret, qr: qr.svg(e.uri) }, [e.cookie]); }
+  if (action === "totp-confirm") { const out = await enrolConfirm(req, body.code); return send(res, out.status, out.body, out.headers || []); }
 
   try {
-    if (action === "data") return send(res, 200, db.connected() ? { connected: true, ...(await db.overview()) } : { connected: false });
+    if (action === "data") return send(res, 200, { totp: !!process.env.ADMIN_TOTP_SECRET, ...(db.connected() ? { connected: true, ...(await db.overview()) } : { connected: false }) });
     if (!db.connected()) return send(res, 409, { error: "The database isn't connected yet." });
     if (action === "ad-campaign") { await db.setCampaign(body.id, !!body.stop, body.note); return send(res, 200, { ok: true }); }
     if (action === "ad-account") { await db.setAccount(body.owner, body.limit ?? null, body.held ?? null); return send(res, 200, { ok: true }); }

@@ -86,7 +86,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 18, 2026",
+  "updated": "Last updated October 19, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -112,7 +112,8 @@
      "• Device: phone model, app version, notification token and crash reports.",
      "• Terms: which version of our terms you accepted, and when.",
      "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
-     "• Support: messages and reports you send us."
+     "• Support: messages and reports you send us.",
+     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which creator link brought you to the waitlist (until you close the tab), and an offline copy of the website's pages. No tracking or advertising cookies."
     ]
    },
    {
@@ -131,7 +132,7 @@
    {
     "heading": "4. Dietary needs",
     "paragraphs": [
-     "Dietary needs can say something about your health or beliefs, so we treat them as sensitive. They're only used to filter deals for you. They're never shared with restaurants."
+     "Dietary needs can say something about your health or beliefs, so we treat them as sensitive. They're only used to filter places and deals for you, and they're never shared, with restaurants or anyone else."
     ]
    },
    {
@@ -146,15 +147,18 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting",
+     "• Resend: sends FIG's emails, so it gets your email address and what the email says",
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
+     "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
+     "• OpenFreeMap (map tiles), jsDelivr and cdnjs (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
      "• Apple and Google: sign-in, maps, notifications"
     ]
    },
    {
     "heading": "7. Where your data lives",
     "paragraphs": [
-     "Some of these companies store data outside Canada, mostly in the United States. There, it's protected by our contracts but also covered by local law."
+     "Some of these companies store data outside Canada, mostly in the United States. There, it's protected by our contracts but also covered by local law. Address searches go to Komoot in Germany, where the European Union's privacy law applies."
     ]
    },
    {
@@ -172,6 +176,7 @@
      "• Download it in Privacy & terms",
      "• Turn off location, alerts or personalised picks",
      "• Delete your account at any time",
+     "• No account (on the waitlist, or you wrote to us)? Ask for a copy of your information, a correction or its deletion through the contact page (choose Privacy or my data). We answer within 30 days",
      "Not happy with our answer? You can complain to the Office of the Privacy Commissioner of Canada."
     ]
    },

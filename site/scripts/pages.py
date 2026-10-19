@@ -183,10 +183,11 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body class="sub">
+<a class="skip" href="#main">Skip to content</a>
 {SPRITE}
 <div class="bg" aria-hidden="true"><div class="bg-grid"></div></div>
 {nav(current) if chrome == 'nav' else ''}
-<main{' class="page"' if wide else ' class="wrap doc"'}{f' data-post="{slug[5:]}"' if slug.startswith("blog/") else ""}>
+<main id="main"{' class="page"' if wide else ' class="wrap doc"'}{f' data-post="{slug[5:]}"' if slug.startswith("blog/") else ""}>
 {body}
 </main>
 {FOOTER}

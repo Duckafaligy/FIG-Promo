@@ -3,7 +3,7 @@
 
 :root {
   --bg: #0A0D14; --bg-2: #0E121B; --card: #141925; --card-2: #1A2132; --line: #232A3A; --line-2: #2E3648;
-  --text: #F4F6FB; --soft: #C9D0DC; --muted: #A3ADBF; --dim: #7D879A;
+  --text: #F4F6FB; --soft: #C9D0DC; --muted: #A3ADBF; --dim: #7D879A; --field-edge: #6B7487;
   --cobalt: #1E5EFF; --cobalt-2: #4A7DFF; --volt: #C8F135; --leaf: #14C86B; --violet: #6E56FF; --ice: #EAF0FF;
   --r-xl: 32px; --r-lg: 24px; --r-md: 16px;
   --gutter: 20px; --max: 1200px;
@@ -337,7 +337,7 @@ button, input { font: inherit; color: inherit; }
 .owner-form { max-width: none; margin-top: 0; padding: 30px; border-radius: var(--r-xl); background: var(--card); border: 1px solid var(--line); }
 .owner-form h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 18px; }
 .owner-fields { display: grid; gap: 10px; }
-.owner-fields input { height: 54px; padding: 0 18px; border-radius: 14px; border: 1px solid var(--line-2); background: var(--bg); font-size: 16px; outline: none; transition: border-color .2s, box-shadow .2s; }
+.owner-fields input { height: 54px; padding: 0 18px; border-radius: 14px; border: 1px solid var(--field-edge); background: var(--bg); font-size: 16px; outline: none; transition: border-color .2s, box-shadow .2s; }
 .owner-fields input:focus { border-color: var(--volt); box-shadow: 0 0 0 4px rgba(200, 241, 53, .15); }
 .owner-fields .btn { min-height: 54px; }
 @media (min-width: 900px) {
@@ -585,7 +585,8 @@ button, input { font: inherit; color: inherit; }
    ===================================================================== */
 :root {
   --bg: #FFFFFF; --bg-2: #F7F9FC; --card: #F4F6FB; --card-2: #EEF2F8; --line: #E2E7EF; --line-2: #D5DCE6;
-  --text: #0A1020; --soft: #2A3346; --muted: #5B6779; --dim: #66718A;
+  /* dim reads at 4.8:1 or more on every tinted card; field-edge gives form fields a 3:1 outline (FIX-LIST #92) */
+  --text: #0A1020; --soft: #2A3346; --muted: #5B6779; --dim: #5F6A82; --field-edge: #7D8798;
   --cobalt-2: #1E5EFF;
   color-scheme: light;
 }
@@ -595,7 +596,7 @@ button, input { font: inherit; color: inherit; }
 .two-tone .muted { color: #8A94A6; }
 :focus-visible { outline-color: var(--cobalt); }
 .btn:hover, .btn-volt:hover { box-shadow: 0 8px 24px rgba(10, 16, 32, .14); }
-.field-pill { background: rgba(255, 255, 255, .94); border-color: var(--line-2); box-shadow: 0 10px 30px rgba(10, 16, 32, .06); }
+.field-pill { background: rgba(255, 255, 255, .94); border-color: var(--field-edge); box-shadow: 0 10px 30px rgba(10, 16, 32, .06); }
 .form-msg.err { color: #C9353A; } .form-msg.ok { color: #0B7E58; }
 [aria-invalid="true"] { box-shadow: inset 0 0 0 1.5px #C9353A !important; }
 
@@ -876,7 +877,7 @@ p.consent { cursor: default; padding-left: 22px; }
 /* contact form */
 .contact { display: grid; gap: 16px; margin: 30px 0 10px; padding: 26px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
 .ct-field { display: grid; gap: 8px; font-size: 14px; font-weight: 700; color: var(--soft); }
-.ct-field input, .ct-field select, .ct-field textarea { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--text); font: inherit; font-size: 16px; font-weight: 500; outline: none; transition: border-color .2s, box-shadow .3s; }
+.ct-field input, .ct-field select, .ct-field textarea { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--field-edge); background: var(--bg-2); color: var(--text); font: inherit; font-size: 16px; font-weight: 500; outline: none; transition: border-color .2s, box-shadow .3s; }
 .ct-field textarea { resize: vertical; min-height: 140px; line-height: 1.5; }
 .ct-field :focus { border-color: var(--cobalt); box-shadow: 0 0 0 4px rgba(30, 94, 255, .18); }
 .ct-field [aria-invalid=true] { border-color: #FF8A8E; }
@@ -1220,3 +1221,7 @@ details.qa > p { margin: -2px 0 0; }
 .closing .form-msg.ok { color: #fff; }
 .closing .form-msg.err { color: #FFD6D8; }
 @media (max-width: 520px) { .signup-btns .btn { flex: 1 1 100%; } }
+
+/* a keyboard user can jump past the navigation (FIX-LIST #92, WCAG 2.4.1) */
+.skip { position: absolute; left: 16px; top: -80px; z-index: 1000; padding: 12px 18px; border-radius: 12px; background: var(--cobalt); color: #fff; font-weight: 800; text-decoration: none; }
+.skip:focus { top: 16px; }

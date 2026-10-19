@@ -54,18 +54,25 @@
     // phones and tablets: no drift. Turning the map redraws all of it every frame, which costs a phone ~1 s of main thread
     // per few seconds (slow taps, battery) for a 4° sway nobody sees on a small screen
     if (reduce || !matchMedia("(pointer: fine)").matches) return;
-    // slow drift, nudged by the mouse; stops while the hero is off screen
-    let on = true, tx = 0, ty = 0, cx = 0, cy = 0, t0 = performance.now();
-    new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) requestAnimationFrame(tick); }).observe(box);
-    addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * -26; ty = (e.clientY / innerHeight - 0.5) * -18; }, { passive: true });
+    // slow drift, nudged by the mouse (FIX-LIST #144: the hero lagged): it runs only while the hero is on screen, the tab is
+    // visible and the mouse has moved in the last 1.5 s, at 30 fps; otherwise there's no frame loop at all. A moving mouse or
+    // the hero coming back starts it again; the sway picks up where it stopped.
+    let seen = false, raf = 0, tx = 0, ty = 0, cx = 0, cy = 0, moved = 0, last = 0, drift = 0;
+    const run = () => { if (!raf && seen && !document.hidden && performance.now() - moved < 1500) raf = requestAnimationFrame(tick); };
+    new IntersectionObserver(([e]) => { seen = e.isIntersecting; run(); }).observe(box);
+    document.addEventListener("visibilitychange", run);
+    addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth - 0.5) * -26; ty = (e.clientY / innerHeight - 0.5) * -18; moved = performance.now(); run(); }, { passive: true });
     function tick(now) {
-      if (!on) return;
-      cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
-      box.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
-      map.setBearing(Math.sin((now - t0) / 9000) * 4);
-      requestAnimationFrame(tick);
+      raf = 0;
+      if (!seen || document.hidden || now - moved > 1500) { last = 0; return; }
+      if (now - last >= 33) {
+        drift += last ? Math.min(now - last, 100) : 0; last = now;
+        cx += (tx - cx) * 0.1; cy += (ty - cy) * 0.1;
+        box.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+        map.setBearing(Math.sin(drift / 9000) * 4);
+      }
+      raf = requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
   });
 }
 })();

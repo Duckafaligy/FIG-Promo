@@ -175,7 +175,7 @@ const NAV = [["overview", "Overview"], ["restaurants", "Restaurants"], ["waitlis
 const TABS = [["overview", "Overview"], ["restaurants", "Restaurants"], ["waitlist", "Waitlist"], ["inbox", "Support"]]; // a phone: these four, and More for the rest
 
 const APP_CSS = `
-:root { --bg: #F6F8FC; --panel: #FFFFFF; --line: #E4E9F2; --line2: #EEF2F8; --text: #0A1020; --muted: #66718A; --faint: #687286; --edge: #7D8798;
+:root { --bg: #F6F8FC; --panel: #FFFFFF; --line: #E4E9F2; --line2: #EEF2F8; --text: #0A1020; --muted: #5F6A82; --faint: #636E84; --edge: #7D8798;
   --accent: #1E5EFF; --accent-hover: #1550E6; --accent-soft: #EEF3FF; --on-accent: #FFFFFF; --lime: #C8F135; --good: #0B7A3E; --good-soft: #E6F6EC;
   --bad: #C8323C; --bad-soft: #FDECEC; --hover: #F3F6FB; --sk: #EDF1F7; --scrim: rgba(10,16,32,.32); --shadow: 0 1px 2px rgba(10,16,32,.04), 0 1px 1px rgba(10,16,32,.03);
   --float: 0 24px 60px rgba(10,16,32,.18); --c1: #1E5EFF; --c2: #66718A; --c3: #14A85A; --c4: #8A95A9; --c5: #C27A10; --c6: #8B5CF6; --c7: #E5484D; --c8: #0D93A1; --snap: cubic-bezier(.2,.8,.2,1); color-scheme: light; }
@@ -296,6 +296,7 @@ input.f:focus, select.f:focus { border-color: var(--accent); }
 input.f:focus-visible, select.f:focus-visible, .search input:focus-visible, .dialog textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .palette input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+tr:has(.row-open:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; } /* the row's button is hidden: its row shows the ring */
 .skip { position: absolute; left: 8px; top: -60px; z-index: 50; padding: 8px 14px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-weight: 700; text-decoration: none; } .skip:focus { top: 8px; }
 .tabs { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 16px; border-radius: 12px; background: var(--line2); max-width: 100%; overflow-x: auto; }
 .tabs button { height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: none; color: var(--muted); font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap; transition: background .15s var(--snap), color .15s var(--snap); }
@@ -509,7 +510,8 @@ function table(heads, rows, empty, search, open) {
   const n = heads.map((h) => Array.isArray(h) && h[1] === "n");
   const box = search ? '<div class="tools"><label class="search">' + ic("search", 18) + '<input type="search" data-filter placeholder="' + esc(search) + '" aria-label="' + esc(search) + '"></label></div>' : "";
   if (!rows.length) return box + emptyState(empty[0], empty[1]);
-  return box + '<div class="tbl rise"' + R() + '><table><thead><tr>' + heads.map((h, i) => '<th scope="col"' + (n[i] ? ' class="n"' : "") + ">" + (Array.isArray(h) ? h[0] : h) + "</th>").join("") + "</tr></thead><tbody>" +
+  const name = (TITLES[view] || "Table") + ": " + heads.map((h) => (Array.isArray(h) ? h[0] : h)).filter(Boolean).join(", ");
+  return box + '<div class="tbl rise"' + R() + '><table aria-label="' + esc(name) + '"><thead><tr>' + heads.map((h, i) => '<th scope="col"' + (n[i] ? ' class="n"' : "") + ">" + (Array.isArray(h) ? h[0] : h) + "</th>").join("") + "</tr></thead><tbody>" +
     rows.map((r, j) => "<tr" + (open ? ' data-open="' + esc(open[j]) + '"' : "") + ">" + r.map((c, i) => "<td" + (n[i] ? ' class="n"' : "") + ">" + c + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>";
 }
 const statusPill = (s) => s === "approved" ? '<span class="pill g">Live</span>' : s === "rejected" ? '<span class="pill">Hidden</span>' : '<span class="pill b">In setup</span>';
@@ -756,7 +758,7 @@ function inboxRows() {
   if (SEL && !items.some((x) => x.kind + x.id === SEL)) SEL = null;
   box.innerHTML = items.length ? items.map((x) => '<button class="msg' + (x.kind + x.id === SEL ? " on" : "") + '"' + (x.kind + x.id === SEL ? ' aria-current="true"' : "") + ' data-pick="' + x.kind + x.id + '"><div class="l1">' + (x.open ? '<span class="new" aria-hidden="true"></span><span class="sr">Open: </span>' : "") + "<b>" + esc(x.who) + '</b><span class="note">' + ago(x.at) + '</span></div><div class="snip"><b>' + esc(x.title) + "</b> · " + esc(x.text) + "</div></button>").join("")
     : '<div class="empty"><b>' + (SUB.inbox === "open" ? "Nothing to answer" : "Nothing here") + "</b>" + (SUB.inbox === "open" ? "New messages from “Message us” land here." : "Try another filter or clear the search.") + "</div>";
-  $$("[data-pick]", box).forEach((b) => b.onclick = () => { SEL = b.dataset.pick; inboxRows(); inboxThread(); });
+  $$("[data-pick]", box).forEach((b) => b.onclick = async () => { SEL = b.dataset.pick; inboxRows(); await inboxThread(); const h = $("#ib-h"); if (h) h.focus(); }); // read where you are (FIX-LIST #165)
 }
 async function inboxThread() {
   const box = $("#ib-thread"), wrap = $(".inbox"); if (!box) return;
@@ -769,7 +771,7 @@ async function inboxThread() {
     '<dl class="kv"><dt>Name</dt><dd>' + esc(c.person.name || "–") + "</dd><dt>Account</dt><dd>" + (c.person.role === "business" ? "Restaurant side" : "Diner") + ", since " + fullDate(c.person.created_at) + "</dd>" +
     (c.restaurants.length ? "<dt>Restaurants</dt><dd>" + c.restaurants.map((p) => '<button class="link" data-go="r:' + esc(p.id) + '">' + esc(p.name) + "</button>").join(", ") + "</dd>" : "") +
     (c.orders.length ? "<dt>Latest orders</dt><dd>" + c.orders.map((o) => esc(o.number) + " · " + esc(o.status) + " · " + money(o.total) + " · " + when(o.placed_at)).join("<br>") + "</dd>" : "") + "</dl>";
-  const head = '<button class="b ghost back" data-back>' + ic("back", 18) + 'Back</button><div class="line" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><b style="font-size:16px">' + esc(x.title) + '</b><span class="sub">' + (x.kind === "m" ? esc(x.m.email) : "Report about " + esc(x.who)) + " · " + fullDate(x.at) + "</span></div>" +
+  const head = '<button class="b ghost back" data-back>' + ic("back", 18) + 'Back</button><div class="line" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h2 id="ib-h" tabindex="-1" style="font-size:16px;margin:0">' + esc(x.title) + '</h2><span class="sub">' + (x.kind === "m" ? esc(x.m.email) : "Report about " + esc(x.who)) + " · " + fullDate(x.at) + "</span></div>" +
     (x.kind === "m" ? (x.open ? '<span class="pill b">Open</span>' : '<span class="pill g">Answered</span>') : x.open ? '<span class="pill r">Open</span>' : '<span class="pill g">Settled</span>') + "</div>";
   const actions = x.kind === "m"
     ? '<div class="ctl"><a class="b primary" href="mailto:' + esc(x.m.email) + "?subject=" + encodeURIComponent("FIG: " + (x.m.topic || "your message")) + '">' + ic("mail", 18) + "Reply by email</a>" +
@@ -1261,7 +1263,15 @@ function go(target) {
 function badge(v, n) { const el = $("#n-" + v); if (el) { el.textContent = n == null ? "–" : n; el.hidden = n == null; } }
 function wireActions(root) {
   $$("[data-go]", root).forEach((b) => b.onclick = () => go(b.dataset.go));
-  $$("tr[data-open]", root).forEach((tr) => { tr.tabIndex = 0; tr.onclick = (e) => { if (!e.target.closest("button, a, input, select")) go(tr.dataset.open); }; tr.onkeydown = (e) => { if (e.key === "Enter") go(tr.dataset.open); }; });
+  $$("tr[data-open]", root).forEach((tr) => {
+    tr.onclick = (e) => { if (!e.target.closest("button, a, input, select")) go(tr.dataset.open); };
+    // keyboard and screen readers: a button (Enter and Space, "Open <name>"), not a focusable row (FIX-LIST #165)
+    const b = document.createElement("button"); b.className = "sr row-open"; b.type = "button";
+    const c0 = tr.cells[0], named = c0 && (c0.querySelector("b") || c0); // the name, not a thumbnail's letter
+    b.textContent = "Open " + ((named && named.innerText.split("\n").map((t) => t.trim()).find((t) => t.length > 1)) || "details");
+    b.onclick = (e) => { e.stopPropagation(); go(tr.dataset.open); };
+    if (tr.cells[0]) tr.cells[0].prepend(b);
+  });
   $$("[data-filter]", root).forEach((inp) => inp.oninput = () => {
     const t = inp.closest(".tools").nextElementSibling, q = inp.value.trim().toLowerCase();
     if (t) $$("tbody tr", t).forEach((tr) => { tr.hidden = !!q && !tr.textContent.toLowerCase().includes(q); });

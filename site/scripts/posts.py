@@ -73,7 +73,7 @@ POSTS = [
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
               ("Do I need the app to use FIG?", "You can use FIG on the web at fig-promo.vercel.app/app today. The App Store and Google Play apps are coming soon.")]),
 
-    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated=UPDATED, topic="For restaurants", group="takeout-and-money",
+    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-19", topic="For restaurants", group="takeout-and-money",
          dek="Restaurants pay FIG one flat monthly plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
          desc="One plan for all a restaurant owner's places ($29.99 a month or $299.99 a year from launch; founding prices before), no commission on dine-in, and 5% of in-app takeout.",
          keywords="FIG pricing, restaurant app monthly plan, no commission restaurant app, restaurant deals app Markham",

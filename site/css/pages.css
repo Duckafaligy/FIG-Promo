@@ -245,7 +245,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .ps-grid { display: block; }
 .ps-toc { max-width: 760px; margin: 40px auto 0; padding: 0 var(--gutter); box-sizing: content-box; }
 .ps-toc details { border: 1px solid var(--line); border-radius: 20px; padding: 18px 22px; background: #fff; }
-.ps-toc summary { cursor: pointer; font-size: 16px; font-weight: 800; color: var(--ink); list-style: none; }
+.ps-toc summary { cursor: pointer; font-size: 16px; font-weight: 800; color: var(--ink); list-style: none; min-height: 44px; display: flex; align-items: center; justify-content: space-between; } /* 44 px to tap (#204) */
 .ps-toc summary::-webkit-details-marker { display: none; }
 .ps-toc summary::after { content: "+"; float: right; color: var(--cobalt); font-weight: 800; }
 .ps-toc details[open] summary::after { content: "−"; }

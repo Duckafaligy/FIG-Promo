@@ -99,7 +99,8 @@ button, input { font: inherit; color: inherit; }
 .store:hover { transform: translateY(-2px); }
 .nav-stores .store img { height: 36px; }
 @media (max-width: 420px) { .nav-stores .store img { height: 30px; } .nav { padding-left: 14px; } }
-@media (min-width: 1100px) { .nav-links { display: flex; } }
+@media (min-width: 700px) { .nav-links { display: flex; } } /* tablets too: the links, not the menu (user 2026-10-19) */
+@media (min-width: 700px) and (max-width: 1099px) { .nav-links { gap: 18px; } .nav-links a { font-size: 14px; } }
 
 /* ---------- hero ---------- */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
@@ -800,8 +801,8 @@ p.consent { cursor: default; padding-left: 22px; }
 .nav-sheet > a:active { background: var(--card); }
 .nav-sheet .badges.small { margin: 0; padding: 10px 8px 6px; border-top: 1px solid var(--line); }
 .nav.open .nav-sheet { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
-@media (max-width: 1099px) { .nav-menu { display: flex; } }
-@media (min-width: 1100px) { .nav-sheet { display: none; } }
+@media (max-width: 699px) { .nav-menu { display: flex; } }
+@media (min-width: 700px) { .nav-sheet { display: none; } }
 @media (max-width: 699px) { .nav-stores { display: none; } .nav-get { display: inline-flex; } }
 
 /* touch screens: the boxes open on tap (fx.js says "Tap to learn more"); a tap leaves :hover stuck, so only .open opens them */

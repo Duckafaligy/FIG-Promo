@@ -48,3 +48,16 @@ for (const g of man.groups) {
   assert.ok(homeHtml.includes(`href="/blog#${g}"`), `Home doesn't link /blog#${g}`);
 }
 console.log("ok: blog groups");
+
+// the database by name, not a wildcard (FIX-LIST #160 b): every CSP names FIG's own Supabase project in connect-src, never *.supabase.co
+{
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
+  const host = new URL(/supabaseUrl:\s*"([^"]+)"/.exec(fs.readFileSync(path.join(__dirname, "..", "js", "config.js"), "utf8"))[1]).host;
+  const csps = vercel.headers.flatMap((h) => h.headers.filter((x) => x.key === "Content-Security-Policy").map((x) => [h.source, x.value]));
+  for (const [src, v] of csps) assert.ok(!/\*\.supabase\.co/.test(v), `vercel.json ${src}: a *.supabase.co wildcard`);
+  for (const p of ["/", "/app/welcome"]) {
+    const v = (csps.find(([src]) => new RegExp(`^${src}$`).test(p)) || [])[1] || "";
+    assert.ok(new RegExp(`connect-src [^;]*https://${host.replace(/\./g, "\.")}`).test(v), `vercel.json: ${p} connect-src names ${host}`);
+  }
+  console.log("ok: CSP names FIG's own database host");
+}

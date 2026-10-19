@@ -155,6 +155,7 @@ async function enrol(first) {
 const ICON = {
   overview: '<path d="M4 4h6v7H4zM14 4h6v4h-6zM14 12h6v8h-6zM4 15h6v5H4z"/>',
   restaurants: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
+  paid: '<path d="M3 6h18v12H3zM3 10h18M7 15h4"/>',
   waitlist: '<path d="M16 19v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9.5 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM21 19v-1a4 4 0 00-3-3.9M16 3.1a3.5 3.5 0 010 6.8"/>',
   calendar: '<path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/>',
   blog: '<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/>',
@@ -171,7 +172,7 @@ const ICON = {
   mail: '<path d="M4 6h16v12H4zM4 7l8 6 8-6"/>',
 };
 const icon = (n, size = 20) => `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
-const NAV = [["overview", "Overview"], ["restaurants", "Restaurants"], ["waitlist", "Waitlist"], ["calendar", "Calendar"], ["blog", "Blog"], ["inbox", "Support"]];
+const NAV = [["overview", "Overview"], ["restaurants", "Restaurants"], ["paid", "Paid restaurants"], ["waitlist", "Waitlist"], ["calendar", "Calendar"], ["blog", "Blog"], ["inbox", "Support"]];
 const TABS = [["overview", "Overview"], ["restaurants", "Restaurants"], ["waitlist", "Waitlist"], ["inbox", "Support"]]; // a phone: these four, and More for the rest
 
 const APP_CSS = `
@@ -427,7 +428,7 @@ function appPage(nonce = "") {
   </div>
 </div>
 <nav class="tabbar" id="tabbar" aria-label="Admin">${TABS.map(tabBtn).join("")}<button id="more-btn" aria-haspopup="true" aria-expanded="false">${icon("more", 22)}More</button></nav>
-<div class="sheet" id="sheet" hidden><button data-v="calendar">${icon("calendar")}Calendar</button><button data-v="blog">${icon("blog")}Blog</button><button data-v="security">${icon("security")}Security</button><button id="out2">${icon("out")}Sign out</button></div>
+<div class="sheet" id="sheet" hidden><button data-v="paid">${icon("paid")}Paid restaurants</button><button data-v="calendar">${icon("calendar")}Calendar</button><button data-v="blog">${icon("blog")}Blog</button><button data-v="security">${icon("security")}Security</button><button id="out2">${icon("out")}Sign out</button></div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 <script nonce="${nonce}">${CLIENT}</script></body></html>`;
 }
@@ -449,7 +450,7 @@ const LAUNCH = Date.parse("2027-01-01T00:00:00-05:00");
 const days = Math.max(0, Math.ceil((LAUNCH - Date.now()) / 86400000));
 let D = null, view = "overview", CH = null, RANGE = 30, UPDATED = 0;
 const SUB = { restaurants: "fig", inbox: "open" };
-const TITLES = { overview: "Overview", restaurants: "Restaurants", waitlist: "Waitlist", calendar: "Calendar", blog: "Blog", inbox: "Support", security: "Security" };
+const TITLES = { overview: "Overview", restaurants: "Restaurants", paid: "Paid restaurants", waitlist: "Waitlist", calendar: "Calendar", blog: "Blog", inbox: "Support", security: "Security" };
 const ICONS = __ICONS__;
 const ic = (n, size) => '<svg class="ic" width="' + (size || 20) + '" height="' + (size || 20) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[n] + "</svg>";
 const api = (what, body) => fetch("/api/admin-api?do=" + what, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })
@@ -650,6 +651,7 @@ const VIEWS = {
           }), ["No restaurants yet", "Share the website’s restaurant sign-up; new ones show up here as they join."], "Search restaurants or owners", D.restaurants.map((r) => "r:" + r.id)) + changesTable());
   },
   waitlist: () => !D.connected ? NOT_CONNECTED : '<div id="dinerbox">' + dinersHtml() + "</div>",
+  paid: () => !D.connected ? NOT_CONNECTED : paidHtml(),
   calendar: () => !D.connected ? NOT_CONNECTED : calendarHtml(),
   blog: () => !D.connected ? NOT_CONNECTED : '<div id="blogbox">' + blogHtml() + "</div>",
   inbox: () => !D.connected ? NOT_CONNECTED : '<p class="note" style="margin:-4px 0 14px">Messages people send from Help or Contact, and reports about restaurants or orders.</p>' + inboxHtml(),
@@ -874,6 +876,92 @@ function blogWire(root) {
   $$("[data-bup]", root).forEach((b) => b.onclick = () => set(b, { slug: b.dataset.bup, hidden: false }));
   $$("[data-bnow]", root).forEach((b) => b.onclick = () => set(b, { slug: b.dataset.bnow, publish_at: new Date(Date.now() - 60000).toISOString() }, { title: "Publish this post now?", body: "It goes live at the next site update (within the hour).", ok: "Publish now" }));
   $$("[data-btime]", root).forEach((b) => b.onclick = () => { const v = ($("#bt-" + b.dataset.btime, root) || {}).value; if (!v) return toast("Pick a date and time first.", true); set(b, { slug: b.dataset.btime, publish_at: new Date(v).toISOString() }); });
+}
+
+// ---- Paid restaurants: the founding pre-sale (FIX-LIST #141) through /api/admin-api; the Stripe work is the presale-admin function's.
+// The switch (on only when ready), Start billing (a day 15 to 360 days ahead, typed START), each deposit's refund (after the 14 days
+// only as FIG's choice, said so), and every deposit's refund (from March 1, 2027 while FIG is closed to diners, typed REFUND ALL).
+let PS = null;
+const PLAN_NAME = { monthly: "Founding monthly", annual: "Founding annual" };
+const PLAN_PRICE = { monthly: "$9.99/mo to month 12, then $29.99/mo", annual: "$59.99 the first year, then $29.99/mo" };
+const PS_STATUS = { trialing: ["Deposit paid", "b"], active: ["Paying", "g"], past_due: ["Payment failed", "r"], unpaid: ["Unpaid", "r"], canceled: ["Cancelled", ""], incomplete: ["Not finished", ""] };
+const PS_WORDS = { "too-soon": "Pick a day at least 14 days from today.", "too-far": "Pick a day within 360 days.", "not-set-up": "The live Stripe prices aren’t set yet.",
+  "deposit-locked": "The 14 days have passed.", "already-refunded": "That deposit was already refunded.", "not-paid": "No deposit was paid for this plan.",
+  "not-subscribed": "There’s no plan for this restaurant.", "too-early": "Every deposit can be refunded from March 1, 2027.",
+  "opened": "FIG has opened to diners, so the March 1 refund doesn’t apply.", "not-deployed": "The presale functions aren’t deployed yet." };
+const psWord = (e) => PS_WORDS[e] || e;
+const longDay = (t) => t ? new Date(t).toLocaleDateString("en-CA", { timeZone: "America/Toronto", dateStyle: "long" }) : "";
+const dayIn = (n) => dayKey(Date.now() + n * 86400000);
+const refundLeft = (p) => p.deposit_paid_at ? Math.ceil((Date.parse(p.deposit_paid_at) + 14 * 86400000 - Date.now()) / 86400000) : null;
+function paidHtml() {
+  if (!PS) return skeleton(8);
+  const rows = PS.rows || [], kept = rows.filter((p) => !p.refunded_at && p.status !== "canceled");
+  const held = kept.reduce((s, p) => s + (p.deposit_cents || 0), 0) / 100;
+  const problem = PS.error ? '<div class="hint r"><b>Not ready yet.</b> ' + esc(psWord(PS.error)) + "</div>"
+    : !PS.ready ? '<div class="hint r"><b>Not ready yet.</b> The four live Stripe prices aren’t set, so the offer can’t be turned on.</div>' : "";
+  const sw = '<div class="wl-row"><div class="wl-k"><b>Founding offer</b><span class="note">' + (PS.on
+      ? "On: owners see “Lock in your founding spot” in Settings and can pay a deposit."
+      : "Off: owners can’t start a plan. Plans already paid keep working, and refunds and billing still run.") + "</span></div>" +
+    '<button class="switch' + (PS.on ? " on" : "") + '" id="ps-on" role="switch" aria-checked="' + !!PS.on + '" aria-label="Founding offer"><span></span></button></div>';
+  const start = PS.startsAt
+    ? '<div class="wl-row"><div class="wl-k"><b>Billing starts ' + esc(longDay(PS.startsAt)) + '</b><span class="note">Each deposit pays its first month or year from that day. New founding plans are closed.</span></div></div>'
+    : '<div class="mo"><b>Start billing</b><div class="ctl"><input class="f" id="ps-at" type="date" min="' + dayIn(15) + '" max="' + dayIn(360) + '" aria-label="Billing start day"><button class="b primary" id="ps-start">Start billing</button></div>' +
+      '<div class="note">The day FIG opens to diners, 15 to 360 days from today. Tell every owner the date in writing at least 14 days before. Each deposit then pays its first month or year from that day, and new founding plans close. It can’t be undone here.</div></div>';
+  const d = PS.daysToNoLaunch;
+  const march = '<div class="wl-row"><div class="wl-k"><b>March 1, 2027 refund</b><span class="note">' + (PS.opened ? "FIG has opened to diners, so this doesn’t apply."
+      : d > 0 ? "If FIG hasn’t opened to diners by March 1, 2027 (" + num(d) + " days from now), every deposit for a plan that hasn’t started is refunded in full. The button works from that day."
+      : "FIG hasn’t opened to diners by March 1, 2027: refund every deposit for a plan that hasn’t started.") + "</span></div>" +
+    '<button class="b danger" id="ps-all"' + (PS.opened || !(d <= 0) ? " disabled" : "") + ">Refund every deposit</button></div>";
+  const minis = '<div class="grid three">' + mini("Founding plans", num(kept.length)) + mini("Deposits held", money(held)) +
+    mini("Annual · monthly", num(kept.filter((p) => p.plan === "annual").length) + " · " + num(kept.filter((p) => p.plan === "monthly").length)) + "</div>";
+  return problem + card("wl-plan", sw + start + march) + minis +
+    table(["Restaurant", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
+      const st = p.refunded_at ? ["Refunded", ""] : PS_STATUS[p.status] || [p.status, ""], left = refundLeft(p);
+      return ["<b>" + esc((p.restaurants || {}).name || "A restaurant") + '</b><span class="sub">' + esc((p.profiles || {}).email || "") + "</span>",
+        esc(PLAN_NAME[p.plan] || p.plan) + '<span class="sub">' + esc(PLAN_PRICE[p.plan] || "") + "</span>",
+        '<span class="pill ' + st[1] + '">' + esc(st[0]) + "</span>" + (p.paid_through ? '<span class="sub">Paid through ' + esc(longDay(p.paid_through)) + "</span>" : ""),
+        p.starts_at ? esc(longDay(p.starts_at)) : '<span class="sub">When billing starts</span>',
+        p.deposit_cents ? money(p.deposit_cents / 100) + '<span class="sub">' + (p.refunded_at ? "Refunded " + esc(longDay(p.refunded_at)) : left > 0 ? num(left) + (left === 1 ? " day" : " days") + " to refund" : "Paid " + esc(longDay(p.deposit_paid_at))) + "</span>" : "–",
+        p.refunded_at || !p.deposit_cents ? "" : '<button class="b secondary" data-psref="' + esc(p.restaurant_id) + '" data-late="' + (left > 0 ? "0" : "1") + '">Refund</button>'];
+    }), ["No founding plans yet", "When an owner pays a founding deposit, it shows up here."], "Search restaurants or owners");
+}
+async function paidLoad() {
+  PS = await api("presale-get").catch(() => ({ error: "It did not load. Refresh to try again." }));
+  if (view === "paid") paint();
+}
+// a typed word for the two big actions: the dialog's field, compared without case
+const typedOk = (v, word) => typeof v === "string" && v.trim().toUpperCase() === word;
+function paidWire() {
+  const run = async (btn, what, body, done) => { await busy(btn, async () => { const r = await api(what, body); if (r && r.error) toast(psWord(r.error), true); else toast(done(r || {})); }); await paidLoad(); };
+  const many = (r) => (r.failed && r.failed.length ? " " + num(r.failed.length) + " didn’t go through: try again." : "");
+  const sw = $("#ps-on"); if (sw) sw.onclick = async () => {
+    const on = sw.getAttribute("aria-checked") !== "true";
+    if (!(await ask(on ? { title: "Turn the founding offer on?", body: "Owners can pay a real deposit from now on. Turn it on only after the test-mode run passed, with the live prices set and the website’s prices published.", ok: "Turn it on" }
+      : { title: "Turn the founding offer off?", body: "No new founding plans. Plans already paid keep working, and refunds and billing still run.", ok: "Turn it off", danger: true }))) return;
+    run(sw, "presale-switch", { on }, () => on ? "The founding offer is on." : "The founding offer is off.");
+  };
+  const st = $("#ps-start"); if (st) st.onclick = async () => {
+    const v = ($("#ps-at") || {}).value || ""; if (!v) return toast("Pick the day first.", true);
+    const at = new Date(v + "T00:00:00"), day = at.toLocaleDateString("en-CA", { dateStyle: "long" });
+    const typed = await ask({ title: "Start billing on " + day + "?", body: esc("Each deposit’s first month or year starts that day, and the next charge follows it. New founding plans close. Have you told every owner in writing, at least 14 days before? Type START to confirm."),
+      ok: "Start billing", danger: true, input: '<input class="f" id="dlg-start" autocomplete="off" aria-label="Type START">' });
+    if (typed === false) return;
+    if (!typedOk(typed, "START")) return toast("Type START to confirm.", true);
+    run(st, "presale-start", { at: at.toISOString() }, (r) => "Billing starts " + day + ": " + num(r.moved || 0) + (r.moved === 1 ? " plan" : " plans") + " moved." + many(r));
+  };
+  $$("[data-psref]").forEach((b) => b.onclick = async () => {
+    const p = (PS.rows || []).find((x) => x.restaurant_id === b.dataset.psref) || {}, late = b.dataset.late === "1";
+    const name = (p.restaurants || {}).name || "this restaurant";
+    if (!(await ask({ title: "Refund " + name + "’s deposit?", body: esc((late ? "The 14 days have passed, so this refund is FIG’s choice, not the owner’s right. " : "") + "The whole deposit goes back to their card and the plan is cancelled now."), ok: late ? "Refund anyway" : "Refund", danger: true }))) return;
+    run(b, "presale-refund", { restaurant: p.restaurant_id, force: late }, () => "Refunded. It reaches their card in 5 to 10 days.");
+  });
+  const all = $("#ps-all"); if (all) all.onclick = async () => {
+    const typed = await ask({ title: "Refund every deposit?", body: esc("Every plan that hasn’t started is refunded in full and cancelled. Type REFUND ALL to confirm."),
+      ok: "Refund every deposit", danger: true, input: '<input class="f" id="dlg-all" autocomplete="off" aria-label="Type REFUND ALL">' });
+    if (typed === false) return;
+    if (!typedOk(typed, "REFUND ALL")) return toast("Type REFUND ALL to confirm.", true);
+    run(all, "presale-refund-all", {}, (r) => num(r.refunded || 0) + " refunded." + many(r));
+  };
 }
 
 // ---- Waitlist: the launch plan and the list (diner_waitlist through /api/admin-api)
@@ -1324,6 +1412,7 @@ function wireAll() {
   wireActions(document);
   if (view === "security") securityWire();
   if (view === "waitlist") dinersWire();
+  if (view === "paid") paidWire();
   if (view === "waitlist" || view === "overview") sourcesWire();
   $$("[data-gr]").forEach((b) => b.onclick = () => { GR = +b.dataset.gr; paint(); });
   if (view === "blog") blogWire(document);
@@ -1344,6 +1433,7 @@ function render() {
   if ((view === "overview" || view === "calendar") && !CH) chartsLoad();
   if ((view === "overview" || view === "waitlist") && !SRC) sourcesLoad();
   if (view === "restaurants" && SUB.restaurants === "outreach") prosLoad();
+  if (view === "paid" && !PS) paidLoad();
 }
 async function chartsLoad() {
   CH = await api("charts").catch(() => null);

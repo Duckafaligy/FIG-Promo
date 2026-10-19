@@ -356,4 +356,34 @@ async function agreedEmails() {
   return (await rest("diner_waitlist?select=email&consent=is.true&order=joined_at&limit=20000")).rows.map((r) => r.email);
 }
 
-module.exports = { tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+// ---- the founding pre-sale (FIX-LIST #141): the presale-admin Supabase function does the Stripe work with FIG's own key; the admin
+// only asks it, with the service key, and only for these four things
+const PRESALE_DO = new Set(["list", "start-billing", "admin-refund", "refund-all"]);
+async function presale(action, body = {}) {
+  if (!PRESALE_DO.has(action)) throw new Error("bad action");
+  const r = await fetch(`${url()}/functions/v1/presale-admin`, { method: "POST", headers: { apikey: key(), Authorization: `Bearer ${key()}`, "Content-Type": "application/json" }, body: JSON.stringify({ ...body, action }) });
+  const out = await r.json().catch(() => null);
+  return !out || (!r.ok && !out.error) ? { error: "not-deployed" } : out; // no function there yet: Supabase's own 404
+}
+/** The page: the switch (settings presale_on) and the plans; the plans can't load before the function is deployed. */
+async function presaleState() {
+  const on = ((await rest("settings?select=value&key=eq.presale_on")).rows[0] || {}).value === "on";
+  return { on, ...(await presale("list").catch(() => ({ error: "not-deployed" }))) };
+}
+/** The offer on or off. On only once the function answers and the four live prices are set (its "ready"); off always works. */
+async function setPresaleOn(on) {
+  if (typeof on !== "boolean") throw new Error("bad switch");
+  if (on) { const l = await presale("list").catch(() => null); if (!l || l.error || !l.ready) throw new Error("bad presale-not-ready"); }
+  await rest("settings?on_conflict=key", { method: "POST", body: JSON.stringify({ key: "presale_on", value: on ? "on" : "off" }), headers: { Prefer: "resolution=merge-duplicates,return=minimal" } });
+  return { on };
+}
+/** Start billing on a day (the function checks 14 to 360 days ahead), one deposit's refund (force: after the 14 days), every deposit's. */
+async function presaleStart(at) {
+  const t = Date.parse(String(at || ""));
+  if (!Number.isFinite(t)) throw new Error("bad date");
+  return presale("start-billing", { at: new Date(t).toISOString() });
+}
+const presaleRefund = async (restaurant, force) => presale("admin-refund", { restaurant: uuid(restaurant), force: force === true });
+const presaleRefundAll = async () => presale("refund-all");
+
+module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

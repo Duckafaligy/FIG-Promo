@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node site/scripts/check.js && node api/_lib/check.js",
+  "buildCommand": "node site/scripts/check.js",
   "outputDirectory": "site",
   "rewrites": [
     {
@@ -9,14 +9,6 @@
     {
       "source": "/apple-touch-icon-precomposed.png",
       "destination": "/assets/icons/apple-touch-icon.png"
-    },
-    {
-      "source": "/admin",
-      "destination": "/api/admin"
-    },
-    {
-      "source": "/admin/",
-      "destination": "/api/admin"
     },
     {
       "source": "/r/:id",

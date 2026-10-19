@@ -14,7 +14,7 @@
    "group": "fig-in-markham",
    "date": "2026-10-19",
    "publish_at": "2026-10-19T12:00:00-04:00",
-   "status": "queued",
+   "status": "live",
    "words": 1019,
    "dek": "Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order."
   },
@@ -136,7 +136,7 @@
    "date": "2026-10-07",
    "publish_at": null,
    "status": "live",
-   "words": 774,
+   "words": 803,
    "dek": "Restaurants pay FIG one flat monthly plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food."
   },
   {
@@ -213,7 +213,7 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 860,
+   "words": 861,
    "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill."
   }
  ]

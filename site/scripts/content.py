@@ -7,7 +7,7 @@ codes refresh every 5 minutes, claims last until the restaurant ends the deal, n
 
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a restaurant deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter to save."),
-    ("Is FIG free?", "Yes for diners, always. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants pay less before launch), with no commission on the bill and no fee per diner. FIG also keeps 5% of the food on takeout orders diners pay for in the app."),
+    ("Is FIG free?", "Yes for diners, always. Restaurants pay one flat plan ($29.99 a month from launch; founding restaurants lock in less before launch), with no commission on the bill and no fee per diner. FIG also keeps 5% of the food on takeout orders diners pay for in the app."),
     ("Where is FIG available?", "FIG is launching in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
     ("Who makes FIG?", "A small team based in Markham, Ontario."),
     ("Is FIG a delivery app?", "No. FIG brings diners into the restaurant. It’s a live-deals app: you eat in, or, when a deal allows it, takeout and pick up. You never pay FIG anything."),

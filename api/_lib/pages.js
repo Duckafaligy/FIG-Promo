@@ -914,7 +914,17 @@ function paidHtml() {
     '<button class="b danger" id="ps-all"' + (PS.opened || !(d <= 0) ? " disabled" : "") + ">Refund every deposit</button></div>";
   const minis = '<div class="grid three">' + mini("Founding plans", num(kept.length)) + mini("Deposits held", money(held)) +
     mini("Annual · monthly", num(kept.filter((p) => p.plan === "annual").length) + " · " + num(kept.filter((p) => p.plan === "monthly").length)) + "</div>";
-  return problem + card("wl-plan", sw + start + march) + minis +
+  // the plan rule (#28): the launch moment, read-only (kept the first time FIG opened to everyone), and who has no plan
+  const opened = PS.launch
+    ? '<div class="wl-row"><div class="wl-k"><b>Diners opened to everyone ' + esc(longDay(PS.launch)) + '</b><span class="note">Kept from the first time, never moved. A restaurant with no plan pauses for diners 30 days later, on ' + esc(longDay(Date.parse(PS.launch) + 30 * 86400000)) + ', until its owner takes a plan. Pretend-payment and comped owners never pause.</span></div></div>'
+    : '<div class="wl-row"><div class="wl-k"><b>Diners haven’t opened to everyone yet</b><span class="note">The first time you open FIG to everyone (Waitlist, switched off), restaurants get 30 days to take a plan, then those without one pause for diners until they do. That moment can’t be undone.</span></div></div>';
+  const noPlan = (PS.noPlan || []).length
+    ? "<h2>No plan <span class=\"count\">" + num(PS.noPlan.length) + "</span></h2>" + table(["Owner", ["Restaurants", "n"], "State", "Grace ends"], PS.noPlan.map((o) => [
+        "<b>" + esc(o.email || "An owner") + "</b>", num(o.restaurants),
+        o.state === "paused" ? '<span class="pill r">Paused for diners</span>' : '<span class="pill b">In grace</span>',
+        esc(longDay(o.grace_ends))]), ["Everyone has a plan", ""], "Search owners")
+    : "";
+  return problem + card("wl-plan", sw + start + march + opened) + minis + noPlan +
     // one plan per owner, covering all their restaurants (the user, #27): the row is the owner; where it started and how many it covers
     table(["Owner", "Plan", "Status", "First period starts", ["Deposit", "n"], ""], rows.map((p) => {
       // an annual plan stays "trialing" at Stripe through its paid first year: once its start day has passed it's paying (#186)
@@ -980,7 +990,7 @@ const MODE_ASK = {
   off: () => "Diners will only be able to join the waitlist (anyone already using FIG as a diner sees it too); restaurants aren't affected.",
   waitlist: () => (DIN.cap ? "The first " + DIN.cap.toLocaleString("en-CA") + " on the waitlist" : "Everyone on the waitlist") + " can sign in and use everything now, as founding members; " +
     (DIN.until ? "the list keeps its cutoff (" + atText(DIN.until) + "), so who joined before it gets in." : "the list closes now."),
-  on: () => "FIG opens to everyone: anyone can sign up, browse, claim deals and order. This is the public launch.",
+  on: () => "This opens FIG to diners and starts the 30-day plan grace for restaurants. It can't be undone. Anyone can sign up, browse, claim deals and order: this is the public launch.",
 };
 const MODE_OK = { off: "Turn waitlist mode on", waitlist: "Let them in", on: "Turn waitlist mode off" };
 const atText = (iso) => new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Toronto" });

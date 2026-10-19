@@ -1,0 +1,14 @@
+FIG (fig-promo.vercel.app): what the website uses that others made, and their licences.
+
+Plus Jakarta Sans (the typeface)
+  Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)
+  SIL Open Font License 1.1: /assets/OFL.txt
+
+The home page map
+  Map data (c) OpenStreetMap contributors, under the Open Database License: https://www.openstreetmap.org/copyright
+  Map tiles: OpenFreeMap (https://openfreemap.org), style from OpenMapTiles (https://openmaptiles.org)
+  MapLibre GL JS (https://maplibre.org), BSD-3-Clause, loaded from jsDelivr
+
+Icons
+  Drawn for FIG in its own designs, on a 24 px grid in the style of Lucide (https://lucide.dev, ISC licence:
+  https://lucide.dev/license). No icon font or third-party icon file is loaded.

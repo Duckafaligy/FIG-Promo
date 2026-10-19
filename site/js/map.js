@@ -24,6 +24,8 @@
     map = new maplibregl.Map({
       container: box, style: "https://tiles.openfreemap.org/styles/positron", center: [-79.302, 43.8555],
       zoom: wide() ? 13.8 : 13.3, interactive: false, attributionControl: false, fadeDuration: 0,
+      // a 2x or 3x screen drew 4-9x the pixels for a map that sits under the hero's fade; 1.5 looks the same (FIX-LIST #144)
+      pixelRatio: Math.min(devicePixelRatio || 1, 1.5),
     });
   } catch (e) { return; } // no WebGL: the still image stays
 

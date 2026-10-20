@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19",
+ "generated": "2026-10-23",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "takeout-rush-pause-prep-time-deals-per-order",
+   "title": "Takeout during a rush: pause, prep time and deals per order",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-10-23",
+   "publish_at": "2026-10-23T12:00:00-04:00",
+   "status": "queued",
+   "words": 1121,
+   "dek": "Takeout should fill the kitchen in quiet hours, not hurt the dining room at your peak. How to use pause, prep time and deals per order on FIG, with a simple capacity sum."
+  },
+  {
+   "slug": "date-night-markham-deals-budget",
+   "title": "Date night in Markham for less: a plan, with the math",
+   "topic": "For diners",
+   "group": "fig-in-markham",
+   "date": "2026-10-22",
+   "publish_at": "2026-10-22T12:00:00-04:00",
+   "status": "queued",
+   "words": 1036,
+   "dek": "A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards."
+  },
+  {
+   "slug": "fig-premium-worth-it-restaurants",
+   "title": "Is FIG Premium worth $50 a year? A break-even check for restaurants",
+   "topic": "For restaurants",
+   "group": "takeout-and-money",
+   "date": "2026-10-21",
+   "publish_at": "2026-10-21T12:00:00-04:00",
+   "status": "queued",
+   "words": 1093,
+   "dek": "FIG Premium is $50 CAD a year. Here is what it includes, the break-even sum in plain numbers, and who should skip it, so you can decide with your own receipts."
+  },
+  {
+   "slug": "deal-wont-scan-troubleshooting-diners",
+   "title": "Deal not working at the counter? What to check and what to say",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-10-20",
+   "publish_at": "2026-10-20T12:00:00-04:00",
+   "status": "live",
+   "words": 1282,
+   "dek": "A code that will not scan, a deal that seems to be over, a pickup that went wrong: the usual reasons a FIG deal does not apply at the counter, what to try first, and how to ask politely."
+  },
   {
    "slug": "eating-out-dietary-needs-allergies-markham",
    "title": "Eating out with dietary needs or allergies: filters, calling ahead and what to ask",

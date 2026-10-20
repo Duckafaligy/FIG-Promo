@@ -827,4 +827,217 @@ POSTS = [
               ("Can I use a deal on a dish that suits my diet?", "That depends on what the deal covers. Check the deal, or call the restaurant to ask whether it can apply to a dish you can eat."),
               ("Can I add a note about my diet to a takeout order?", "Call the restaurant after you order to tell them. Check the bag against your order when you collect it."),
               ("Is this medical advice?", "No. It is general information. Follow your doctor's guidance for your own allergy.")]),
+
+    # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
+
+    dict(slug="deal-wont-scan-troubleshooting-diners", screen="qr", title="Deal not working at the counter? What to check and what to say", date="2026-10-20", publish_at="2026-10-20T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
+         dek="A code that will not scan, a deal that seems to be over, a pickup that went wrong: the usual reasons a FIG deal does not apply at the counter, what to try first, and how to ask politely.",
+         desc="A FIG code that will not scan, a deal that seems over or a missed pickup: the usual reasons, what to try first and how to ask politely.",
+         seo="Restaurant deal not working at the counter: what to check",
+         keywords="QR code not scanning restaurant, restaurant deal not working, coupon not accepted restaurant, FIG deal troubleshooting, counter code restaurant, claim restaurant deal problem",
+         points=["Most counter problems come from the same few things: a dim screen, a screenshot, the wrong hours or a deal that has reached its daily cap.",
+                 "Open your Deals page and tap Show QR yourself. Staff can scan it, or type the short code if a camera will not read the screen.",
+                 "If the restaurant uses a counter code, tap Scan the counter on your claimed deal and point your camera at their screen.",
+                 "Check the deal's days, hours, dishes and dine-in or takeout setting before you go. The restaurant sets all of them.",
+                 "Stay friendly. The person at the counter wants to apply your deal, and a calm question gets the fastest answer."],
+         sections=[
+             ("The short answer", """<p>If a FIG deal will not apply at the counter, check three things in this order: that you are showing the live code from your Deals page (not a screenshot), that the deal is running right now on those days and hours for those dishes, and that it has not reached its daily cap. If the code still will not scan, staff can type the short code, or you can scan the restaurant's own counter code if it has one.</p>
+<p>This guide goes through what to check before you leave, what to try at the till, and how to ask in a way that gets a quick, kind answer. Deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>"""),
+             ("Before you leave: a 30-second check", """<p>Most problems are easier to fix on your couch than at a busy till. Before you head out:</p>
+<ul><li><strong>Open the deal.</strong> Read the days and hours. Many deals run only in quiet hours, such as weekday afternoons and early evenings.</li><li><strong>Check the dishes.</strong> Some deals cover the whole order. Others cover specific dishes from the restaurant's menu.</li><li><strong>Check dine in or takeout.</strong> A dine-in deal is for eating at the restaurant. A deal that also allows takeout is ordered in the app.</li><li><strong>Look at your Deals page.</strong> Your claim should be there, with the deal's name. If it says Expired, the deal ended.</li><li><strong>Charge your phone and turn the screen brightness up.</strong> A dim screen is the most common reason a camera cannot read a code.</li></ul>
+<p>A claim has no time limit of its own. It works for as long as the deal runs, so you can claim at home and go when it suits you. <a href="/blog/how-restaurant-deals-work">How a deal works, from claim to counter</a>.</p>"""),
+             ("The code will not scan", """<p>Staff scan your code with the restaurant side of FIG on a phone, tablet or computer. If it does not work the first time, try these in order:</p>
+<ol><li><strong>Show the live code.</strong> Open your Deals page and tap Show QR. The code keeps changing, so a screenshot or a photo of the code will not scan. Only the live code in your own app works.</li><li><strong>Raise the brightness</strong> and hold the phone steady, close to the scanner but not touching it. Take off a glare-heavy screen protector if you can.</li><li><strong>Let them try again.</strong> A scanner that is moving, or a lens with a fingerprint on it, often fails once and works the second time.</li><li><strong>Offer the short code.</strong> If a camera will not cooperate, there is a short code that staff can type in instead. Ask if they would like to try that.</li></ol>
+<p>None of these steps needs you to be the expert. The staff member at the counter can try the same things, and a restaurant that has trained its team will know what to do. <a href="/blog/train-staff-honour-fig-deal">What restaurants are taught</a>.</p>"""),
+             ("The restaurant uses a counter code", """<p>Some restaurants show their own code on a screen at the counter, and it changes all the time. You scan it yourself, so the staff member does not have to do anything.</p>
+<ol><li>Open your Deals page and find the claimed deal.</li><li>Tap Scan the counter.</li><li>Point your camera at the restaurant's code, and hold steady until it confirms.</li></ol>
+<p>If you cannot see a counter code, ask. Many restaurants use staff scanning at the till and the counter code at the table, so the one that works may depend on where you are standing.</p>"""),
+             ("What you see, why it happens, and what to do", """<table><thead><tr><th>What you see</th><th>Likely reason</th><th>What to try</th></tr></thead><tbody>
+<tr><td>The camera will not read your code</td><td>Dim screen, glare or a screenshot</td><td>Show the live QR from your Deals page, raise the brightness, or ask staff to type the short code</td></tr>
+<tr><td>Your counter scan does nothing</td><td>You are not on the claimed deal, or the code on their screen is out of view</td><td>Tap Scan the counter on the claimed deal, and make sure the restaurant's whole code is in the frame</td></tr>
+<tr><td>Staff say the deal is not running</td><td>You are outside its days or hours</td><td>Read the deal's days and hours together. Come back in the window, or ask whether the restaurant is willing to honour it as a courtesy</td></tr>
+<tr><td>The deal shows as Expired</td><td>The restaurant ended it, or a flash or dated deal is over</td><td>Look for another live deal nearby. Expired claims never count against you</td></tr>
+<tr><td>The deal has run out for the day</td><td>The restaurant's daily cap was reached</td><td>Try earlier next time. Popular deals can run out</td></tr>
+<tr><td>The dish you want is not covered</td><td>The deal is on specific dishes</td><td>Check the menu on the restaurant's page, or order the covered dish</td></tr>
+</tbody></table>
+<p>One thing to know: a courtesy is the restaurant's decision. The app tells staff what the deal is, but the owner decides what to do in a gray area, and the answer can reasonably be no.</p>"""),
+             ("Check your bill", """<p>A deal should be visible on the receipt. In Ontario, HST (13%) is worked out on the price after the restaurant's own discount, the same way a store coupon lowers the price before tax. So a deal also lowers your tax. This is general information, not tax advice.</p>
+<div class="callout math"><b>Example: an $18 dish with $4 off</b><ul><li>$18.00 &minus; $4.00 = $14.00.</li><li>HST at 13% of $14.00 = $1.82.</li><li>You should pay $15.82 for the dish.</li><li>Without the deal it would be $18.00 + $2.34 = $20.34.</li></ul><p>These are round example prices. If your total is closer to $20.34 than $15.82, ask kindly to look at the line. A cleared mistake takes a minute at the till and much longer to fix later.</p></div>"""),
+             ("Takeout and pickup problems", """<p>If you ordered takeout with a deal, the deal is already applied in the app, so there is nothing to scan for it. What you need is your pickup code. A few things that help:</p>
+<ul><li><strong>Tap I'm here when you arrive.</strong> It tells the restaurant you are outside, and it keeps the order from counting as missed.</li><li><strong>Show your pickup code</strong> so staff can scan it.</li><li><strong>Check the bag</strong> against your order before you leave. Allergies and changes are worth confirming with a quick call. <a href="/blog/takeout-without-delivery-fees">How takeout with a deal works</a>.</li><li><strong>If you will be late</strong>, still tap I'm here when you reach the door. An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see a diner's missed pickups.</li><li><strong>Need to change something?</strong> Call the restaurant. They can also tell you if they are waiting on you.</li></ul>"""),
+             ("What to say at the counter", """<p>Staff are juggling a line, a kitchen and a till, and a short, friendly sentence helps them help you. Some examples you can copy and change:</p>
+<div class="callout example"><b>Things you can say</b><ul><li>"I claimed the 2-for-1 on FIG. Should I show the code or scan yours?"</li><li>"The camera is not reading my screen. Could you try the short code?"</li><li>"Is this deal on all the dishes, or only on the noodles?"</li><li>"I think the deal is for weekday afternoons. Is today one of those?"</li></ul></div>
+<p>If the answer is no, thank them anyway. Next time, you will know what to look for, and the next person in line will have a better afternoon.</p>"""),
+             ("Still stuck? Two ways to follow up", """<p>You can message the restaurant from the app, or contact FIG through the <a href="/contact">contact page</a>. When you write, say which deal it was, the day and the time, and what you saw on your screen. A short, factual message helps the restaurant fix its own settings if a deal was posted with the wrong hours.</p>
+<p>After a scanned visit you can rate it. Only diners whose visit was scanned can review, so a rating describes a real visit. Rate the food and the visit, and mention the deal if it was handled well. <a href="/blog/how-to-read-restaurant-reviews">How reviews work on FIG</a>.</p>"""),
+         ],
+         faq=[("Why will my FIG QR code not scan?", "Usually a dim screen, glare or a screenshot. Open your Deals page, tap Show QR, raise the brightness and hold the phone steady. If it still fails, staff can type the short code."),
+              ("Can I use a screenshot of my code?", "No. The code keeps changing, so only the live code in your own app can be scanned."),
+              ("What is the counter code?", "Some restaurants show their own code on a screen at the counter, and it keeps changing. Tap Scan the counter on your claimed deal and point your camera at it."),
+              ("Why did the restaurant say my deal is not running?", "Each deal has its own days, hours and dishes, set by the restaurant. Check them in the app, and remember a daily cap can end a deal for the day."),
+              ("Does an expired claim count against me?", "No. An expired claim shows as Expired on your Deals page for a day and leaves the list. It never counts against you."),
+              ("What happens if I miss a takeout pickup?", "An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tapping I'm here when you arrive keeps it from counting as missed."),
+              ("Can I message a restaurant about a deal?", "Yes. You can message the restaurant from the app. Say which deal, the day and what you saw.")]),
+
+    dict(slug="fig-premium-worth-it-restaurants", screen="tdash", title="Is FIG Premium worth $50 a year? A break-even check for restaurants", date="2026-10-21", publish_at="2026-10-21T12:00:00-04:00", topic="For restaurants", group="takeout-and-money",
+         dek="FIG Premium is $50 CAD a year. Here is what it includes, the break-even sum in plain numbers, and who should skip it, so you can decide with your own receipts.",
+         desc="FIG Premium costs $50 CAD a year. What it includes, a break-even sum with round example numbers, and which restaurants can skip it.",
+         seo="FIG Premium for restaurants: is $50 a year worth it?",
+         keywords="FIG Premium, restaurant app subscription, is it worth it restaurant app, multi-location restaurant app, restaurant menu from photo, Markham restaurant marketing",
+         points=["FIG Premium is $50 CAD a year, about $4.17 a month. Posting deals on FIG is free, with no commission on deals.",
+                 "Premium includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge.",
+                 "On a $20 dish with $4 off, a new diner in an empty hour leaves about $10 after a 30% food cost. Five of those cover the year.",
+                 "Premium is worth most to owners with several locations or a menu they would rather not type in by hand.",
+                 "If you have one location, a short menu and no wish for the extras, you can post deals for free and see for yourself."],
+         sections=[
+             ("The short answer", """<p>FIG Premium costs $50 CAD a year, which is about $4.17 a month. It is optional: restaurants post deals on FIG for free, with no commission on deals, and Premium adds extras on top. For a single-location restaurant with a short menu, it may not be needed at first. For an owner with several locations, or a long menu to enter, it can pay for itself quickly.</p>
+<p>This post lists what Premium includes, does the break-even sum with round example numbers you can redo with your own, and says who should skip it. Nothing here promises a number of new diners. Only your own receipts can tell you that.</p>"""),
+             ("What Premium includes", """<table><thead><tr><th>Feature</th><th>What it means in practice</th></tr></thead><tbody>
+<tr><td>Unlimited locations</td><td>Every location you own can be on FIG under one sign-in</td></tr>
+<tr><td>Deal announcements every 2 hours</td><td>Deal announcements, available every 2 hours</td></tr>
+<tr><td>Area insights</td><td>Insights about your area, alongside your own numbers</td></tr>
+<tr><td>Menu typed up from a photo</td><td>Send a photo of your paper menu and FIG types it up for you to check and publish</td></tr>
+<tr><td>A Premium badge</td><td>A visible mark on your restaurant's page</td></tr>
+</tbody></table>
+<p>What you get without Premium: your page, your menu, your deals, scanning diners at the counter and the diners' reviews, with no commission on deals. The rest of this post compares the two so you can see whether the extras are worth $50 to you. Exact screens and wording are in the restaurant side of the app, so check Settings for the current details before you buy.</p>"""),
+             ("The break-even sum", """<p>The question to ask is simple: how many extra visits does it take to pay back $50? Use a dish you would really sell at a quiet hour. This example uses round numbers; swap in your own menu price and food cost.</p>
+<div class="callout math"><b>Example: a $20 dish with a $4-off deal</b><table><thead><tr><th></th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$20.00</td></tr>
+<tr><td>Deal</td><td>&minus;$4.00</td></tr>
+<tr><td>The diner pays for the dish</td><td>$16.00</td></tr>
+<tr><td>Food cost at 30% of the menu price ($20.00)</td><td>&minus;$6.00</td></tr>
+<tr><td><strong>Left toward wages, rent and profit</strong></td><td><strong>$10.00</strong></td></tr>
+<tr><td>Premium for a year</td><td>$50.00</td></tr>
+<tr><td>Visits that cover it: $50 ÷ $10</td><td>5</td></tr>
+</tbody></table><p>Five extra diners in a year, in hours that would otherwise have been empty, cover the whole cost. That works out to roughly one extra visit every ten weeks (52 weeks ÷ 5 visits is about 10.4). The 30% food cost is a round example, and a quoted industry range is 28% to 32%.</p></div>
+<p>The catch is the word "extra". A diner who would have come anyway and used the deal did not add a visit. They only cost you the $4. This is why we suggest reading your insights per deal: claims, scans, and who came back. <a href="/blog/slow-hour-deal-math">The slow-hour math covers how to tell the difference</a>.</p>"""),
+             ("If you own more than one location", """<p>Unlimited locations is where the cost per place drops. Split the $50 across your locations:</p>
+<div class="callout math"><b>Example: $50 across three locations</b><ul><li>$50 ÷ 3 = $16.67 per location per year.</li><li>That is about $1.39 a month per location ($16.67 ÷ 12).</li><li>With four locations it is $12.50 each, about $1.04 a month.</li></ul></div>
+<p>If you run several restaurants, the larger saving is usually time: one sign-in for all of them, and the same menu approach across every page. Even so, check whether each location needs its own deals. A deal that works at a lunch spot near offices may not help a family restaurant on a different street, and each page needs its own hours, photos and dishes.</p>"""),
+             ("If typing in your menu is the hard part", """<p>The menu feature is a time saver. You photograph your paper menu, FIG types it up, and you check it before you publish. Only you know whether it is worth $50. As an example, if typing a 60-dish menu would take you an hour and your time is worth $25 an hour, that is $25 of your time once, and again every time the menu changes. Either way, you still review every price before it goes live. Nothing changes for diners until you publish. <a href="/blog/set-up-fig-menu-takeout">How the setup works in 15 minutes</a>.</p>
+<p>If your menu is ten dishes, or you already have it typed in a document, you may not need this.</p>
+<p>A fair test: write down how long your last menu update took, from the first price you changed to the moment it was correct everywhere. If the answer is "a few minutes", skip the feature. If it is "an evening, and I still found a typo a week later", the photo route is worth a look.</p>"""),
+             ("What about the badge and the announcements?", """<p>We would rather be honest than make promises. A badge is a label on your page, and an announcement is a way to say "we have a deal" more often. Neither is a promise of more diners. Reviews on FIG still come only from scanned visits, so a badge cannot change what diners say about you. Announcements are best kept for deals that are really on. A restaurant that announces a flash deal when it truly has empty tables builds trust. One that announces every two hours with nothing new does the opposite. <a href="/blog/flash-deals-explained">How flash deals work</a>.</p>"""),
+             ("Who should skip it", """<ul><li><strong>A single restaurant with a short menu</strong> that wants to try deals first. Posting is free, so start there and look at your insights after two weeks.</li><li><strong>Owners who have not found a deal that works.</strong> A better deal, hour or cap will do more than any extra. <a href="/blog/deal-types-percent-dollar-2-for-1">Choosing a deal type</a>.</li><li><strong>Anyone who is unsure about the budget.</strong> $50 is small, but a free option exists, so there is no pressure.</li></ul>"""),
+             ("Who should consider it", """<ul><li><strong>Owners with two or more locations</strong>, where one price covers them all.</li><li><strong>Owners with a long menu</strong> and a paper copy.</li><li><strong>Owners who want to announce deals more often</strong> and have the quiet hours to justify it.</li><li><strong>Owners who like to compare their numbers with the area</strong> around them.</li></ul>
+<p>A sensible way to decide: run your first deals free for a month, note how many scans came from new diners, and do the $50 sum with your own dish and food cost. If you cover it in a handful of visits, it is an easy yes. If not, wait.</p>
+<p>You can also revisit the decision later. Nothing about posting deals changes if you start without Premium, and your page, menu and deals stay as they are.</p>"""),
+             ("Taxes and receipts", """<p>As with any business expense, keep the receipt and ask your accountant how it is treated in your books. This is general information, not tax advice. If you also take takeout paid in the app, that is a different cost: FIG keeps 5% of the food before tax, plus Stripe's card fee. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math on four order sizes</a>.</p>"""),
+         ],
+         faq=[("How much is FIG Premium?", "$50 CAD a year, which is about $4.17 a month."),
+              ("Do restaurants have to pay to post deals on FIG?", "No. Restaurants post deals free, with no commission on deals. Premium is optional."),
+              ("What does FIG Premium include?", "Unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge."),
+              ("Is FIG Premium worth it for one restaurant?", "It depends on your menu and your plans. The sum in this post shows how many extra visits cover the year. If you have a short menu and one location, you can start with the free version."),
+              ("Does Premium bring more diners?", "FIG cannot promise a number of diners. Check your insights for claims, scans and returning diners, and do the break-even sum with your own prices."),
+              ("Does the Premium badge change my reviews?", "No. Reviews on FIG come only from diners whose visit was scanned."),
+              ("Can I use Premium for several locations?", "Yes. Premium covers unlimited locations for one price.")]),
+
+    # Ontario HST 13%, $4 prepared food rebate (GI-064), and coupons before tax (RC4022): sources at the top. Main Street Unionville and Toogood Pond:
+    #   https://en.wikipedia.org/wiki/Main_Street_Unionville , https://www.blogto.com/travel/2023/03/unionville-ontario/
+    dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+         dek="A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards.",
+         desc="A budget-friendly dinner for two in Markham: pick the hour, choose the deal, check the sums with HST and add a walk afterwards.",
+         seo="Date night in Markham for less: a plan with deal math",
+         keywords="date night Markham, cheap date ideas Markham, dinner for two deals, 2 for 1 dinner Markham, Main Street Unionville dinner, budget dinner for two",
+         points=["Go early or midweek. Quiet hours are when restaurants post deals, and you get a calmer table.",
+                 "Pick the deal that fits what you would both eat anyway. On the example dinner below, a 2-for-1 on mains beats 20% off the whole bill.",
+                 "HST is worked out after the deal, so a deal also lowers the tax. The example dinner drops from $76.84 to $51.98.",
+                 "Call ahead to check for a table and to ask about diets. Then claim your deal before you leave.",
+                 "Plan something free to do afterwards, such as a walk. Main Street Unionville is a short walk from Toogood Pond."],
+         sections=[
+             ("The short answer", """<p>The cheapest good date night is an early dinner on a weeknight, with the deal chosen before the restaurant. Look for a deal that covers a main dish each, check the final price with tax, and keep the drinks modest. In the example below, the same dinner for two comes to $76.84 at full price and $51.98 with a 2-for-1 on the mains. Deals start in Markham on January 1, 2027, and you can explore the map now.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because the live deals change every day. FIG shows you what is on near you right now.</p>"""),
+             ("Step 1: pick the hour", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables earlier in the evening, and an empty table earns nothing, which is why owners post deals then.</p>
+<table><thead><tr><th>When</th><th>Why it suits a date</th></tr></thead><tbody>
+<tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, easier conversation, more deals</td></tr>
+<tr><td>Weekday late afternoon</td><td>If your schedule allows it, an early meal followed by a walk</td></tr>
+<tr><td>Late evening</td><td>After the rush, for dessert and a drink, if the kitchen is still open</td></tr>
+<tr><td>Weekend dinner</td><td>The busiest time. Book ahead, and expect fewer deals</td></tr>
+</tbody></table>
+<p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
+             ("Step 2: start from what you both want", """<p>Set your cravings, budget and diet in FIG once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look, so every option works for both of you. For allergies, filters are only a starting point, so call the restaurant. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask when you call</a>.</p>
+<p>Then choose by the dish, not the discount. A deal on something neither of you wanted is not a saving.</p>"""),
+             ("Step 3: compare the dinner, not the headline", """<p>Here is a dinner for two with round example prices: one shared starter, one main each and a drink each. Three ways to pay for it:</p>
+<div class="callout math"><b>Example dinner for two (before tip)</b><table><thead><tr><th>Plan</th><th>Food and drink</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
+<tr><td>No deal: starter $12, two $22 mains, two $6 drinks</td><td>$68.00</td><td>$8.84</td><td>$76.84</td></tr>
+<tr><td>20% off the whole bill</td><td>$54.40</td><td>$7.07</td><td>$61.47</td></tr>
+<tr><td>2-for-1 on the mains (pay for one $22 main)</td><td>$46.00</td><td>$5.98</td><td>$51.98</td></tr>
+</tbody></table><p>Check: 20% of $68.00 is $13.60, so $54.40; HST $7.072 rounds to $7.07. For the 2-for-1: $12 + $22 + $12 = $46; HST is $5.98. The 2-for-1 saves $24.86 against full price, and $9.49 more than 20% off. If you were having two cheap mains and an expensive bottle, the answer would change, so redo it with your order.</p></div>
+<p>The tax moves with the price. HST is worked out on what you pay after the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice. <a href="/blog/compare-restaurant-deals-worth-it">More on comparing deals</a>.</p>"""),
+             ("Step 4: check there is a table", """<p>Call the restaurant before you go, especially if you want a quiet corner. Ask whether the deal works for a table for two and whether it applies to the dishes you have in mind. How a deal applies to your order is the restaurant's call, and a thirty-second call is easier than a surprise at the till. If you are dining on a weeknight, a booking is often not needed, but a call costs nothing.</p>"""),
+             ("Step 5: claim, go and show your code", """<ol><li>Claim the deal in FIG. Each of you can claim your own if the deal suits you both.</li><li>At the restaurant, order as usual. When it is time to pay, open your Deals page and tap Show QR for staff to scan, or scan the restaurant's counter code if they have one.</li><li>The deal comes off the bill. You pay the restaurant the way you always do.</li></ol>
+<p>Your code keeps changing, so a screenshot will not work. <a href="/blog/how-restaurant-deals-work">How deals work, from claim to counter</a>. If something does not scan, <a href="/blog/deal-wont-scan-troubleshooting-diners">here is what to check</a>.</p>"""),
+             ("Step 6: keep the extras modest", """<p>Drinks, desserts and sides are usually full price, and they are where a budget evening gets away from you. A few ways to keep it enjoyable:</p>
+<ul><li>Share a dessert. Two spoons, one price.</li><li>Pick one drink each, or one to share. Tap water is a fine second round.</li><li>Look at the whole bill before you order, and decide on a number you are comfortable with.</li><li>Tip is your choice. Many people tip on the price before the deal, because the service was the same. That is a personal call, not a rule.</li></ul>"""),
+             ("If it is a first date or a special night", """<p>Choose a place where you can talk. Early weeknight dinners are quieter, and a table for two by the window usually helps more than a discount does. If you are unsure of a dish, read the restaurant's page and its reviews first. Only diners whose visit was scanned can review on FIG, so you are reading people who actually ate there. Sort by Newest to see how it is doing now. <a href="/blog/how-to-read-restaurant-reviews">How to read a restaurant's reviews</a>.</p>
+<p>It also helps to agree on a rough budget before you leave, so neither of you is guessing at the till. A shared number, such as "about $60 for the dinner", is easier to keep to than a feeling. Then the deal is a pleasant surprise instead of a requirement.</p>"""),
+             ("Step 7: add something free", """<p>A date does not end at dessert, and the rest of the evening costs nothing. Main Street Unionville is a historic village street lined with restaurants, pubs and cafés, and Toogood Pond is steps away, which makes it an easy place to walk off a meal. In Markham Village, the old Main Street offers another option, a few kilometres east. Both are free to stroll. If it is raining or cold, a short walk through a plaza or a coffee instead still keeps the evening cheap. <a href="/blog/student-food-deals-markham">Tips on eating out on a budget</a>.</p>"""),
+             ("A date-night budget in one table", """<table><thead><tr><th>Item</th><th>Example, no deals</th><th>Example, with deals</th></tr></thead><tbody>
+<tr><td>Dinner for two (from above)</td><td>$76.84</td><td>$51.98</td></tr>
+<tr><td>Shared dessert, $10 plus HST</td><td>$11.30</td><td>$11.30</td></tr>
+<tr><td>A walk</td><td>$0</td><td>$0</td></tr>
+<tr><td><strong>Total before tip</strong></td><td><strong>$88.14</strong></td><td><strong>$63.28</strong></td></tr>
+</tbody></table>
+<p>The saving is $24.86, about 28% of the full-price evening. The dessert is not discounted in this example. Your prices will differ, so use your own.</p>"""),
+         ],
+         faq=[("What is the cheapest way to do date night in Markham?", "Go early on a weeknight, pick a deal that covers a main each, keep drinks modest and add something free afterwards, such as a walk. FIG shows live deals near you on a map."),
+              ("Is a 2-for-1 better than 20% off for two people?", "If you both want a main, usually yes. In the example in this post, a 2-for-1 on $22 mains came to $51.98 against $61.47 for 20% off the whole bill. Redo it with your own order."),
+              ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
+              ("Do we each need our own deal?", "Each person can claim their own if the deal suits both of you. Codes are personal and keep changing, so one person's code cannot be used by someone else."),
+              ("Should I call the restaurant first?", "A short call helps. Ask if there is a table, whether the deal works for two and whether it covers the dishes you want."),
+              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now."),
+              ("Is FIG free?", "Yes, for diners. There are no ads.")]),
+
+    dict(slug="takeout-rush-pause-prep-time-deals-per-order", screen="tscanner", title="Takeout during a rush: pause, prep time and deals per order", date="2026-10-23", publish_at="2026-10-23T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="Takeout should fill the kitchen in quiet hours, not hurt the dining room at your peak. How to use pause, prep time and deals per order on FIG, with a simple capacity sum.",
+         desc="Keep takeout for your quiet hours: how to use pause, prep time and deals per order on FIG, with a simple capacity sum and fee example.",
+         seo="Takeout during a rush: pause, prep time and deals per order",
+         keywords="restaurant takeout rush, restaurant kitchen capacity, takeout prep time, pause takeout, takeout orders limit, restaurant takeout Markham, in-app takeout",
+         points=["Takeout earns most when it fills spare kitchen time in a quiet hour. At your peak it competes with tables.",
+                 "Pause takeout for a set time or until tomorrow, or add prep time, in one tap. Diners see it before they order.",
+                 "Set deals per order: 0 means takeout at full price, and a limit stops a large order stacking discounts.",
+                 "Work out spare capacity before you promote takeout: plates per hour minus what dine-in already uses.",
+                 "An $18 order after the deal leaves about $16.21 after FIG's 5% and Stripe's fee. Run your own sum on your dishes."],
+         sections=[
+             ("The short answer", """<p>Use takeout to fill spare kitchen time, not to compete with your busiest tables. On FIG you control this with three settings: pause takeout (for a set time or until tomorrow), add prep time so pickup times stay honest, and choose how many deals one order can use. Before you promote takeout, work out how many extra plates your kitchen can make in a quiet hour, and set your limits to that number.</p>
+<p>Takeout paid in the app needs your HST number and Stripe payouts. On each order FIG keeps 5% of the food before tax and Stripe's card fee comes off the same payment. This post focuses on keeping it manageable.</p>"""),
+             ("Why a rush needs its own plan", """<p>A diner who sits down at 6 pm and a diner who orders takeout at 6 pm are both asking the same cooks for food. The seated diner may also order drinks and dessert, and pays you at the counter with no per-order fee to FIG. At a busy time, a takeout order can slow the room you would have filled anyway.</p>
+<p>In a quiet hour the opposite holds. The cooks are standing there, the food is prepped and the tables are empty. Takeout lets that capacity earn. The settings below let you aim it at the second case and keep it away from the first.</p>"""),
+             ("Know your spare capacity", """<p>You do not need software for this. Pick one quiet window and think about it in plates per hour.</p>
+<div class="callout math"><b>Example: a 2 to 5 pm window</b><ul><li>Two cooks. A typical bowl takes about 6 minutes of one cook's time (an example, so time your own).</li><li>One cook can make 60 ÷ 6 = 10 bowls an hour, so two can make 20.</li><li>Dine-in in this window uses about 8 bowls an hour (count your own from receipts).</li><li>Spare capacity: 20 &minus; 8 = 12 bowls an hour.</li><li>Over the 3 hours: about 36 bowls of spare capacity.</li></ul><p>Keep a margin. If you plan to use only 8 or 9 of those 12 an hour, a sudden table of six will not sink the kitchen.</p></div>
+<p>Compare that with a daily cap on the deal. If your cap is 15 a day, and some of those are dine-in claims, the takeout share is probably well within your spare capacity. If the cap is 60, check again. <a href="/blog/slow-hour-deal-math">How to size a cap</a>.</p>"""),
+             ("Tool 1: pause takeout", """<p>When the dining room fills, stop new orders in one tap. You can pause for a set time or until tomorrow, and diners see that takeout is paused before they order. Orders already accepted still need to be made, so pause a little earlier than you think you need to.</p>
+<p>A good rule: pause when the dining room is more than about two thirds full, or when two or more orders are waiting longer than you promised. Choose your own number and tell the team.</p>"""),
+             ("Tool 2: add prep time", """<p>Prep time is the honest version of "we are busy". Instead of pausing, add minutes so diners see the real wait before they order. A diner who knows pickup is in 25 minutes will plan for it. A diner who expects 15 and waits 25 will be unhappy, whatever the food is like.</p>
+<table><thead><tr><th>Situation</th><th>Try</th></tr></thead><tbody>
+<tr><td>Quiet hour, kitchen idle</td><td>Takeout on, normal prep time</td></tr>
+<tr><td>Getting busy, still coping</td><td>Add 10 minutes of prep time</td></tr>
+<tr><td>Dining room full, kitchen stretched</td><td>Pause takeout for an hour, or until tomorrow</td></tr>
+<tr><td>Short on one ingredient</td><td>Mark that dish sold out for today and leave the rest on</td></tr>
+</tbody></table>
+<p>The numbers here are suggestions to adapt: you know your kitchen best.</p>"""),
+             ("Tool 3: deals per order", """<p>You choose how many deals one order can use. That setting does two jobs.</p>
+<ul><li><strong>A limit.</strong> A low limit stops a large order stacking several discounts. For percentage deals you can also set the most one takeout order can take off, so 20% of a very large order cannot run away.</li><li><strong>0 deals per order</strong> means diners can order takeout at full price, with no deal needed. Otherwise takeout comes with a deal. Full-price takeout can suit your quiet hours too, since you are not giving anything away.</li></ul>
+<div class="callout math"><b>Example: a worst case with a limit</b><p>If you allow one $4-off deal per order and cap the deal at 10 takeout orders in the window, the most you can give away to takeout is 10 &times; $4 = $40. With no limit, one large order could use four deals: $16 from a single pickup. Pick the number that makes the worst case a figure you shrug at.</p></div>"""),
+             ("What an order leaves you", """<p>Here is one takeout order, after the deal, as a reminder of the fees. Round example numbers:</p>
+<div class="callout math"><b>An $18 order after the deal</b><table><thead><tr><th></th><th>Amount</th></tr></thead><tbody>
+<tr><td>Food after the deal</td><td>$18.00</td></tr>
+<tr><td>HST at 13%</td><td>$2.34</td></tr>
+<tr><td>The diner pays</td><td>$20.34</td></tr>
+<tr><td>Stripe: 2.9% of $20.34 + $0.30</td><td>&minus;$0.89</td></tr>
+<tr><td>FIG: 5% of $18.00</td><td>&minus;$0.90</td></tr>
+<tr><td><strong>You keep from the food</strong></td><td><strong>$16.21</strong></td></tr>
+</tbody></table><p>The HST ($2.34) is paid out to you and is yours to remit. Food cost comes off the $16.21, and the rest goes toward wages, rent and profit. This is general information, not tax advice.</p></div>
+<p>More order sizes, side by side: <a href="/blog/takeout-order-math-what-you-keep">takeout order math on $12, $20, $40 and $60</a>.</p>"""),
+             ("Missed pickups", """<p>Diners tap I'm here when they arrive and show a pickup code. An order that is not picked up closes as Not picked up two hours after the pickup time. You can see a diner's missed pickups, which helps you decide how much to cook ahead. For dishes that lose quality while they wait, such as fried food, start cooking when the diner taps I'm here if your pickup time allows. For soups and braises that hold well, cooking ahead is fine.</p>"""),
+             ("A short example of a busy Friday", """<p>Suppose a restaurant has takeout on during a quiet afternoon, with normal prep time. At 5:15 pm the dining room starts to fill and two takeout orders are already waiting. The manager adds 10 minutes of prep time at once, so new orders show the longer wait. At 5:45 pm the room is nearly full, so the manager pauses takeout until 7:30 pm. The two orders that were accepted are still made. At 7:30 pm takeout comes back on. Nothing was lost: the afternoon was filled, the rush was protected, and every diner who ordered saw an honest pickup time. This is an example, not a rule. Choose your own times from your own receipts.</p>"""),
+             ("Tell your team", """<p>Before the shift, make sure every person knows who can pause takeout, what number triggers adding prep time, and where the pickup shelf is. A card by the till with those three answers saves arguments. <a href="/blog/train-staff-honour-fig-deal">A ten-minute staff plan</a>. Not set up for takeout yet? You need your HST number and Stripe payouts in Settings → Get paid. <a href="/blog/set-up-fig-menu-takeout">Setup takes about 15 minutes</a>, and <a href="/blog/hst-registration-small-restaurants-ontario">HST registration for small restaurants</a> explains the number.</p>"""),
+         ],
+         faq=[("Can I stop takeout when my kitchen is busy?", "Yes. Pause takeout for a set time or until tomorrow, or add prep time, in one tap. Diners see it before they order."),
+              ("What does prep time do?", "It adds minutes to the pickup time, so diners see an honest wait before they order."),
+              ("Can I offer takeout without a deal?", "Yes. If you set 0 deals per order, diners can order takeout at full price. Otherwise takeout comes with a deal."),
+              ("How do I stop a big order stacking discounts?", "Set how many deals one order can use. For percentage deals you can also set the most one takeout order can take off."),
+              ("What does a takeout order cost me?", "FIG keeps 5% of the food before tax and Stripe's card fee of 2.9% + $0.30 comes off the same payment. The HST is paid out to you and is yours to remit."),
+              ("What happens if a diner does not pick up?", "The order closes as Not picked up two hours after the pickup time. You can see a diner's missed pickups."),
+              ("What do I need to take takeout orders?", "Your HST number and Stripe payouts, both in Settings → Get paid. Dine-in deals need neither.")]),
 ]

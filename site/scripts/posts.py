@@ -41,12 +41,12 @@ POSTS = [
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
          points=["FIG is a restaurant deals app starting in Markham, Ontario. Deals start January 1, 2027.",
                  "Restaurants post their own deals, for the hours they choose, with their own daily cap. Posting deals and scanning diners are included in one flat plan, with no fee per diner.",
-                 "Diners find deals on a map, claim one in a tap and show a code at the counter. It's free for diners, with no ads.",
+                 "Diners find deals on a map, claim one in a tap and show a code at the counter. It's free for diners, with no ads for now.",
                  "FIG earns 5% of the food on takeout orders paid in the app. Never from a dine-in bill.",
                  "Markham first, expanding to Richmond Hill and Vaughan Mills."],
          sections=[
              ("The short answer", """<p>We built FIG because the restaurants that make a city worth eating in are mostly small and independent, and the tools that promise them customers usually charge a share of every order. FIG turns that around: a restaurant posts a deal for the hours it wants to fill, nearby diners find it on a map, and the diner pays the restaurant at the counter. FIG takes nothing from that bill.</p>
-<p>This post explains the thinking behind that model, what FIG does and doesn't do, and how it pays for itself without ads or commissions on dine-in.</p>"""),
+<p>This post explains the thinking behind that model, what FIG does and doesn't do, and how it pays for itself without ads (for now) or commissions on dine-in.</p>"""),
              # StatCan 2023: operating profit margin 3.6%, lowest since 2003 (see sources at the top)
              ("Restaurants run on thin margins", """<p>Running a restaurant is a hard way to make money. Statistics Canada reported that in 2023 the operating profit margin for food services and drinking places in Canada fell to 3.6%, the lowest since 2003. Food and drink bought for resale was the largest expense, at 35.7% of operating costs, with wages close behind.</p>
 <p>On a 3.6% margin, a $40 dinner leaves about $1.44 of profit. Anything that takes a percentage of the bill comes straight out of that, and usually more than all of it.</p>
@@ -57,9 +57,9 @@ POSTS = [
              ("So we flipped the model", """<p>On FIG, a deal is a decision the owner made. The restaurant picks:</p>
 <ul><li><strong>What</strong> the deal is: a percentage off, a dollar amount off, 2-for-1, or something free with an order, on the whole bill or on specific dishes from its menu.</li><li><strong>When</strong> it runs: which days and hours, every week, once, or until a date. Or a <a href="/blog/flash-deals-explained">flash deal</a> right now, for a quiet hour.</li><li><strong>How many</strong>: a daily cap, so a deal never gives away more than planned. It stops on its own when the cap is reached.</li><li><strong>Where</strong>: dine-in only, or also as takeout.</li></ul>
 <p>A diner finds the deal on Home or on the map, taps Claim, and the deal waits on their Deals page. At the restaurant, staff scan the diner's code with the restaurant side of FIG (on any phone, tablet or computer), or the diner scans the restaurant's own counter code. The deal comes off the bill, and the diner pays the restaurant the way they always do.</p>"""),
-             ("What FIG is for diners", """<ul><li><strong>Free.</strong> No subscription, no fees, no ads.</li><li><strong>Deals you can actually use.</strong> Live deals near you, nearest first, filtered by what you crave, your budget and your diet.</li><li><strong>No pressure.</strong> A claim doesn't time out. It works for as long as the deal runs, and it only ends when the restaurant ends the deal, or a flash or dated deal is over.</li><li><strong>Private.</strong> Restaurants see your first name and last initial, never your phone number or email.</li><li><strong>Honest reviews.</strong> Only diners whose visit was scanned can review a restaurant, so every review comes from a real meal. Deals get likes; restaurants get stars.</li></ul>"""),
+             ("What FIG is for diners", """<ul><li><strong>Free.</strong> No subscription, no fees, no ads for now.</li><li><strong>Deals you can actually use.</strong> Live deals near you, nearest first, filtered by what you crave, your budget and your diet.</li><li><strong>No pressure.</strong> A claim doesn't time out. It works for as long as the deal runs, and it only ends when the restaurant ends the deal, or a flash or dated deal is over.</li><li><strong>Private.</strong> Restaurants see your first name and last initial, never your phone number or email.</li><li><strong>Honest reviews.</strong> Only diners whose visit was scanned can review a restaurant, so every review comes from a real meal. Deals get likes; restaurants get stars.</li></ul>"""),
              ("How FIG pays for itself", """<p>Two ways. Restaurants pay <strong>one plan for all their restaurants</strong>: $29.99 a month or $299.99 a year from the day FIG opens to diners (founding restaurants lock in less before launch). And on <strong>takeout paid in the app</strong>, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, goes to the restaurant.</p>
-<p>That's it. No ads, no fee per diner, no commission on a dine-in bill, and nothing for sale that changes search order or reviews. <a href="/blog/how-fig-makes-money">How FIG makes money, in full</a>.</p>"""),
+<p>That's it. No ads for now, no fee per diner, no commission on a dine-in bill, and nothing for sale that changes search order or reviews. <a href="/blog/how-fig-makes-money">How FIG makes money, in full</a>.</p>"""),
              # Main Street Unionville and Markham Village: https://en.wikipedia.org/wiki/Main_Street_Unionville ,
              #   https://en.wikipedia.org/wiki/Markham_Village ; Pacific Mall, NE corner of Steeles and Kennedy: https://en.wikipedia.org/wiki/Pacific_Mall
              ("Why Markham first", """<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants spread across plazas and main streets, from Pacific Mall at Steeles and Kennedy to Main Street Unionville and the old Main Street of Markham Village, and a lot of people who love finding somewhere new to eat.</p>
@@ -69,7 +69,7 @@ POSTS = [
          faq=[("What is FIG?", "FIG is a restaurant deals app. Restaurants post their own deals; diners find them on a map, claim one and show a code at the counter. It's free for diners."),
               ("When does FIG launch?", "FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027."),
               ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are included in FIG's flat monthly plan, with no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
-              ("Does FIG show ads?", "No. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
+              ("Does FIG show ads?", "No, not for now. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
               ("Do I need the app to use FIG?", "You can use FIG on the web at fig-promo.vercel.app/app today. The App Store and Google Play apps are coming soon.")]),
 
@@ -160,7 +160,7 @@ POSTS = [
              ("7. Bring friends", """<p>Group plans fall apart over "where should we go?". Share the restaurant's link from FIG to your group chat: everyone sees the same place and its live deals. <a href="/blog/group-dining-deals">Eating out as a group, with deals</a>.</p>"""),
              ('Five mistakes that cost you the deal', "<ul><li><strong>Showing up outside the hours.</strong> Check the deal's days and times before you go.</li><li><strong>Ordering takeout on a dine-in deal.</strong> Look for Dine in or takeout.</li><li><strong>Waiting until the evening on a popular deal.</strong> Daily caps run out; claim early.</li><li><strong>Showing a screenshot.</strong> Codes keep changing: open your Deals page at the counter.</li><li><strong>Forgetting the extras.</strong> The deal covers what it says; drinks and sides are usually full price.</li></ul>"),
          ],
-         faq=[("What's the best app for restaurant deals in Markham?", "FIG is built for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners, with no ads. Deals start January 1, 2027."),
+         faq=[("What's the best app for restaurant deals in Markham?", "FIG is built for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners, with no ads for now. Deals start January 1, 2027."),
               ("When do Markham restaurants post the most deals?", "During their quiet hours: typically weekday afternoons, early weeknight dinners and late evenings. Each deal on FIG shows its own days and hours."),
               ("Do I pay through the app?", "For dine-in, no: you pay the restaurant at the counter as usual. Takeout is paid in the app when you order."),
               ("Does FIG need my location?", "No. FIG shows Markham by default and deals are never locked to where you are. Location just makes 'nearest first' mean nearest to you."),
@@ -268,7 +268,7 @@ POSTS = [
                  "Set a budget filter in FIG once and only see deals you can afford.",
                  "Snacks and drinks of $4 or less have a smaller tax in Ontario: only the 5% GST part, not the full 13%.",
                  "Send a restaurant's link to the group chat so everyone agrees faster, and split the bill fairly.",
-                 "FIG is free: no subscription, no ads, no card needed to claim a deal."],
+                 "FIG is free: no subscription, no ads for now, no card needed to claim a deal."],
          sections=[
              ("The short answer", """<p>Eat when restaurants are quiet, decide with a budget instead of a craving, and let the deals come to you. In Markham that usually means after school and on weekday evenings, when many places post deals to fill empty tables. FIG puts every live deal near you on one map, filtered to your budget, and it's free.</p>"""),
              ("After school is deal time", """<p>Between lunch and dinner, many restaurants and bubble tea shops are at their quietest. That's exactly when owners post deals, and exactly when you get out of class. Late evenings are the other sweet spot for desserts and drinks.</p>
@@ -282,12 +282,12 @@ POSTS = [
 <p>More in our <a href="/blog/restaurant-deals-markham">guide to restaurant deals in Markham</a>.</p>"""),
              ("How it works at the counter", """<ol><li>Claim the deal in FIG. It waits on your Deals page for as long as the deal runs.</li><li>At the restaurant, tap Show QR. Staff scan it, or you scan the restaurant's counter code.</li><li>The deal comes off your bill. You pay the restaurant like normal.</li></ol>
 <p>You don't need a credit card to claim a deal. The code keeps changing, so a screenshot from a friend won't work: everyone claims their own.</p>"""),
-             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads. Restaurants pay FIG a flat monthly plan, never per diner. Deals start in Markham on January 1, 2027.</p>"""),
+             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants pay FIG a flat monthly plan, never per diner. Deals start in Markham on January 1, 2027.</p>"""),
              ('A week of eating out on $40', '<div class="callout math"><b>An example week (your prices will vary)</b><table><thead><tr><th>Day</th><th>Plan</th><th>Cost with 13% HST</th></tr></thead><tbody>\n<tr><td>Monday</td><td>A $3.50 drink after school (taxed at 5% under $4)</td><td>$3.68</td></tr>\n<tr><td>Tuesday</td><td>A $14 bowl with a $3-off deal</td><td>$12.43</td></tr>\n<tr><td>Thursday</td><td>2-for-1 with a friend: you each pay half of one $15 dish</td><td>$8.48</td></tr>\n<tr><td>Saturday</td><td>A $12 lunch with 15% off</td><td>$11.53</td></tr>\n<tr><td colspan="2"><strong>Total</strong></td><td><strong>$36.12</strong></td></tr>\n</tbody></table><p>Four meals out for under $40, by choosing the deal first. Without the deals, the same food would be about $50.</p></div>'),
              ('Diets and allergies', "<p>Set your diet in FIG (halal, vegetarian, vegan, gluten-free and more) and the places that don't fit drop out of your results. For allergies, filters are a starting point, not a guarantee: call the restaurant before you go, or tell staff when you order. Kitchens share equipment, and only they know exactly what's in a dish.</p>"),
              ('Staying safe and private', '<ul><li>Restaurants see your first name and last initial, never your phone number or email.</li><li>Your claimed deal only works on your phone, so nobody can use it for you.</li></ul>'),
          ],
-         faq=[("Is FIG free for students?", "Yes. FIG is free for every diner, with no subscription and no ads."),
+         faq=[("Is FIG free for students?", "Yes. FIG is free for every diner, with no subscription and no ads for now."),
               ("Do I need a credit card?", "Not to claim a deal. You claim it in the app and pay the restaurant at the counter. Takeout paid in the app needs a card."),
               ("When are student food deals most common?", "In restaurants' quiet hours: after school, roughly 3 to 6 pm, and late evenings for desserts and drinks."),
               ("Can my friends use my code?", "No. Each code keeps changing and belongs to the person who claimed it. Everyone claims their own deal."),
@@ -399,7 +399,7 @@ POSTS = [
               ("What's the counter code?", "Some restaurants show their own QR code at the counter that changes every 30 seconds. Tap Scan the counter on your claimed deal and point your camera at it."),
               ("Can I use a deal more than once?", "Once per person per day, whether you use it at the counter or order takeout with it. The restaurant also caps how many are used each day."),
               ("Who can review a restaurant?", "Only diners whose visit was scanned, so every review comes from a real visit."),
-              ("Is FIG free?", "Yes, for every diner: no subscription, no fees and no ads.")]),
+              ("Is FIG free?", "Yes, for every diner: no subscription, no fees and no ads for now.")]),
 
     # StatCan 2023 margin 3.6%; food cost 28-32% (Resy): sources at the top
     dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
@@ -727,12 +727,12 @@ POSTS = [
              ("Group deals: share the saving fairly", """<p>When a deal saves money for the table, agree how to share it before the bill arrives. The simple rule is that the people whose dishes the deal covered share the saving. Example prices: four friends order two $15 bowls on a 2-for-1, plus a $12 bowl and a $14 bowl. Food is $56 before the deal and $41 after it, so the deal saved $15. Whoever ate the 2-for-1 bowls splits that $15 between them: $7.50 each. That is fairer than splitting the bill evenly, where the two people who ordered the cheaper dishes quietly cover part of the saving. <a href="/blog/group-dining-deals">Splitting the bill fairly, with the arithmetic</a>.</p>"""),
              ("Know when to skip a deal", """<p>Some deals are not worth chasing. Skip it if you would have to travel far out of your way for a few dollars, if the dish is not one you like, or if the hours mean rushing a meal you wanted to enjoy. A deal is a bonus on a good plan, not a reason for a bad one. Because FIG shows every live deal near you, nearest first, there is usually another one close by, and a claim does not time out while the deal runs, so you can claim now and go when it suits you.</p>"""),
              ("A quick checklist", """<ol><li>Would I order this dish anyway?</li><li>What is my final price under this deal, and under the next best one?</li><li>Does it cover the dishes, the day and the hour I am going?</li><li>Can I get there before it ends, and is there room if I am going with a group?</li><li>Have I counted the drinks and sides?</li></ol>
-<p>If you can answer yes to the first four and the fifth does not worry you, claim it. If not, the next deal is probably already live. FIG is free for diners, with no ads.</p>"""),
+<p>If you can answer yes to the first four and the fifth does not worry you, claim it. If not, the next deal is probably already live. FIG is free for diners, with no ads for now.</p>"""),
          ],
          faq=[("Is 2-for-1 better than 20% off?", "For two people who both want the dish, 2-for-1 saves more: 50% each. Alone, it saves nothing, and 20% off is better. Work out the final price for your order."),
               ("Is $3 off or 20% off better?", "On dishes over $15, 20% off saves more; under $15, $3 off does. At exactly $15 they are equal. These are round example numbers."),
               ("Does a restaurant deal lower the tax I pay?", "Yes. In Ontario, HST is calculated on the price after the restaurant's own discount, like a store coupon, so a smaller price means smaller tax. This is general information, not tax advice."),
-              ("Do I pay FIG anything to use a deal?", "No. FIG is free for diners, with no ads. For dine-in deals you pay the restaurant at the counter as usual."),
+              ("Do I pay FIG anything to use a deal?", "No. FIG is free for diners, with no ads for now. For dine-in deals you pay the restaurant at the counter as usual."),
               ("Can I use a deal on takeout?", "Only if the restaurant marked that deal as Dine in or takeout. Takeout is paid in the app, and there is no delivery or service fee from FIG."),
               ("What if a deal runs out before I get there?", "A daily cap can end a deal for the day, and a flash deal ends with its timer. An expired claim never counts against you."),
               ("How do I check that a deal fits my order?", "Open the deal and check the dishes, days, hours and whether it is dine in or takeout. You can also call the restaurant before you go.")]),
@@ -879,61 +879,6 @@ POSTS = [
               ("What happens if I miss a takeout pickup?", "An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tapping I'm here when you arrive keeps it from counting as missed."),
               ("Can I message a restaurant about a deal?", "Yes. You can message the restaurant from the app. Say which deal, the day and what you saw.")]),
 
-    dict(slug="fig-premium-worth-it-restaurants", screen="tdash", title="Is FIG Premium worth $50 a year? A break-even check for restaurants", date="2026-10-21", publish_at="2026-10-21T12:00:00-04:00", topic="For restaurants", group="takeout-and-money",
-         dek="FIG Premium is $50 CAD a year. Here is what it includes, the break-even sum in plain numbers, and who should skip it, so you can decide with your own receipts.",
-         desc="FIG Premium costs $50 CAD a year. What it includes, a break-even sum with round example numbers, and which restaurants can skip it.",
-         seo="FIG Premium for restaurants: is $50 a year worth it?",
-         keywords="FIG Premium, restaurant app subscription, is it worth it restaurant app, multi-location restaurant app, restaurant menu from photo, Markham restaurant marketing",
-         points=["FIG Premium is $50 CAD a year, about $4.17 a month. Posting deals on FIG is free, with no commission on deals.",
-                 "Premium includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge.",
-                 "On a $20 dish with $4 off, a new diner in an empty hour leaves about $10 after a 30% food cost. Five of those cover the year.",
-                 "Premium is worth most to owners with several locations or a menu they would rather not type in by hand.",
-                 "If you have one location, a short menu and no wish for the extras, you can post deals for free and see for yourself."],
-         sections=[
-             ("The short answer", """<p>FIG Premium costs $50 CAD a year, which is about $4.17 a month. It is optional: restaurants post deals on FIG for free, with no commission on deals, and Premium adds extras on top. For a single-location restaurant with a short menu, it may not be needed at first. For an owner with several locations, or a long menu to enter, it can pay for itself quickly.</p>
-<p>This post lists what Premium includes, does the break-even sum with round example numbers you can redo with your own, and says who should skip it. Nothing here promises a number of new diners. Only your own receipts can tell you that.</p>"""),
-             ("What Premium includes", """<table><thead><tr><th>Feature</th><th>What it means in practice</th></tr></thead><tbody>
-<tr><td>Unlimited locations</td><td>Every location you own can be on FIG under one sign-in</td></tr>
-<tr><td>Deal announcements every 2 hours</td><td>Deal announcements, available every 2 hours</td></tr>
-<tr><td>Area insights</td><td>Insights about your area, alongside your own numbers</td></tr>
-<tr><td>Menu typed up from a photo</td><td>Send a photo of your paper menu and FIG types it up for you to check and publish</td></tr>
-<tr><td>A Premium badge</td><td>A visible mark on your restaurant's page</td></tr>
-</tbody></table>
-<p>What you get without Premium: your page, your menu, your deals, scanning diners at the counter and the diners' reviews, with no commission on deals. The rest of this post compares the two so you can see whether the extras are worth $50 to you. Exact screens and wording are in the restaurant side of the app, so check Settings for the current details before you buy.</p>"""),
-             ("The break-even sum", """<p>The question to ask is simple: how many extra visits does it take to pay back $50? Use a dish you would really sell at a quiet hour. This example uses round numbers; swap in your own menu price and food cost.</p>
-<div class="callout math"><b>Example: a $20 dish with a $4-off deal</b><table><thead><tr><th></th><th>Amount</th></tr></thead><tbody>
-<tr><td>Menu price</td><td>$20.00</td></tr>
-<tr><td>Deal</td><td>&minus;$4.00</td></tr>
-<tr><td>The diner pays for the dish</td><td>$16.00</td></tr>
-<tr><td>Food cost at 30% of the menu price ($20.00)</td><td>&minus;$6.00</td></tr>
-<tr><td><strong>Left toward wages, rent and profit</strong></td><td><strong>$10.00</strong></td></tr>
-<tr><td>Premium for a year</td><td>$50.00</td></tr>
-<tr><td>Visits that cover it: $50 ÷ $10</td><td>5</td></tr>
-</tbody></table><p>Five extra diners in a year, in hours that would otherwise have been empty, cover the whole cost. That works out to roughly one extra visit every ten weeks (52 weeks ÷ 5 visits is about 10.4). The 30% food cost is a round example, and a quoted industry range is 28% to 32%.</p></div>
-<p>The catch is the word "extra". A diner who would have come anyway and used the deal did not add a visit. They only cost you the $4. This is why we suggest reading your insights per deal: claims, scans, and who came back. <a href="/blog/slow-hour-deal-math">The slow-hour math covers how to tell the difference</a>.</p>"""),
-             ("If you own more than one location", """<p>Unlimited locations is where the cost per place drops. Split the $50 across your locations:</p>
-<div class="callout math"><b>Example: $50 across three locations</b><ul><li>$50 ÷ 3 = $16.67 per location per year.</li><li>That is about $1.39 a month per location ($16.67 ÷ 12).</li><li>With four locations it is $12.50 each, about $1.04 a month.</li></ul></div>
-<p>If you run several restaurants, the larger saving is usually time: one sign-in for all of them, and the same menu approach across every page. Even so, check whether each location needs its own deals. A deal that works at a lunch spot near offices may not help a family restaurant on a different street, and each page needs its own hours, photos and dishes.</p>"""),
-             ("If typing in your menu is the hard part", """<p>The menu feature is a time saver. You photograph your paper menu, FIG types it up, and you check it before you publish. Only you know whether it is worth $50. As an example, if typing a 60-dish menu would take you an hour and your time is worth $25 an hour, that is $25 of your time once, and again every time the menu changes. Either way, you still review every price before it goes live. Nothing changes for diners until you publish. <a href="/blog/set-up-fig-menu-takeout">How the setup works in 15 minutes</a>.</p>
-<p>If your menu is ten dishes, or you already have it typed in a document, you may not need this.</p>
-<p>A fair test: write down how long your last menu update took, from the first price you changed to the moment it was correct everywhere. If the answer is "a few minutes", skip the feature. If it is "an evening, and I still found a typo a week later", the photo route is worth a look.</p>"""),
-             ("What about the badge and the announcements?", """<p>We would rather be honest than make promises. A badge is a label on your page, and an announcement is a way to say "we have a deal" more often. Neither is a promise of more diners. Reviews on FIG still come only from scanned visits, so a badge cannot change what diners say about you. Announcements are best kept for deals that are really on. A restaurant that announces a flash deal when it truly has empty tables builds trust. One that announces every two hours with nothing new does the opposite. <a href="/blog/flash-deals-explained">How flash deals work</a>.</p>"""),
-             ("Who should skip it", """<ul><li><strong>A single restaurant with a short menu</strong> that wants to try deals first. Posting is free, so start there and look at your insights after two weeks.</li><li><strong>Owners who have not found a deal that works.</strong> A better deal, hour or cap will do more than any extra. <a href="/blog/deal-types-percent-dollar-2-for-1">Choosing a deal type</a>.</li><li><strong>Anyone who is unsure about the budget.</strong> $50 is small, but a free option exists, so there is no pressure.</li></ul>"""),
-             ("Who should consider it", """<ul><li><strong>Owners with two or more locations</strong>, where one price covers them all.</li><li><strong>Owners with a long menu</strong> and a paper copy.</li><li><strong>Owners who want to announce deals more often</strong> and have the quiet hours to justify it.</li><li><strong>Owners who like to compare their numbers with the area</strong> around them.</li></ul>
-<p>A sensible way to decide: run your first deals free for a month, note how many scans came from new diners, and do the $50 sum with your own dish and food cost. If you cover it in a handful of visits, it is an easy yes. If not, wait.</p>
-<p>You can also revisit the decision later. Nothing about posting deals changes if you start without Premium, and your page, menu and deals stay as they are.</p>"""),
-             ("Taxes and receipts", """<p>As with any business expense, keep the receipt and ask your accountant how it is treated in your books. This is general information, not tax advice. If you also take takeout paid in the app, that is a different cost: FIG keeps 5% of the food before tax, plus Stripe's card fee. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math on four order sizes</a>.</p>"""),
-         ],
-         faq=[("How much is FIG Premium?", "$50 CAD a year, which is about $4.17 a month."),
-              ("Do restaurants have to pay to post deals on FIG?", "No. Restaurants post deals free, with no commission on deals. Premium is optional."),
-              ("What does FIG Premium include?", "Unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge."),
-              ("Is FIG Premium worth it for one restaurant?", "It depends on your menu and your plans. The sum in this post shows how many extra visits cover the year. If you have a short menu and one location, you can start with the free version."),
-              ("Does Premium bring more diners?", "FIG cannot promise a number of diners. Check your insights for claims, scans and returning diners, and do the break-even sum with your own prices."),
-              ("Does the Premium badge change my reviews?", "No. Reviews on FIG come only from diners whose visit was scanned."),
-              ("Can I use Premium for several locations?", "Yes. Premium covers unlimited locations for one price.")]),
-
-    # Ontario HST 13%, $4 prepared food rebate (GI-064), and coupons before tax (RC4022): sources at the top. Main Street Unionville and Toogood Pond:
-    #   https://en.wikipedia.org/wiki/Main_Street_Unionville , https://www.blogto.com/travel/2023/03/unionville-ontario/
     dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards.",
          desc="A budget-friendly dinner for two in Markham: pick the hour, choose the deal, check the sums with HST and add a walk afterwards.",
@@ -986,7 +931,7 @@ POSTS = [
               ("Do we each need our own deal?", "Each person can claim their own if the deal suits both of you. Codes are personal and keep changing, so one person's code cannot be used by someone else."),
               ("Should I call the restaurant first?", "A short call helps. Ask if there is a table, whether the deal works for two and whether it covers the dishes you want."),
               ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now."),
-              ("Is FIG free?", "Yes, for diners. There are no ads.")]),
+              ("Is FIG free?", "Yes, for diners. There are no ads for now.")]),
 
     dict(slug="takeout-rush-pause-prep-time-deals-per-order", screen="tscanner", title="Takeout during a rush: pause, prep time and deals per order", date="2026-10-23", publish_at="2026-10-23T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
          dek="Takeout should fill the kitchen in quiet hours, not hurt the dining room at your peak. How to use pause, prep time and deals per order on FIG, with a simple capacity sum.",

@@ -30,17 +30,6 @@
    "dek": "A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards."
   },
   {
-   "slug": "fig-premium-worth-it-restaurants",
-   "title": "Is FIG Premium worth $50 a year? A break-even check for restaurants",
-   "topic": "For restaurants",
-   "group": "takeout-and-money",
-   "date": "2026-10-21",
-   "publish_at": "2026-10-21T12:00:00-04:00",
-   "status": "live",
-   "words": 1093,
-   "dek": "FIG Premium is $50 CAD a year. Here is what it includes, the break-even sum in plain numbers, and who should skip it, so you can decide with your own receipts."
-  },
-  {
    "slug": "deal-wont-scan-troubleshooting-diners",
    "title": "Deal not working at the counter? What to check and what to say",
    "topic": "For diners",
@@ -81,7 +70,7 @@
    "date": "2026-10-17",
    "publish_at": "2026-10-17T12:00:00-04:00",
    "status": "live",
-   "words": 1181,
+   "words": 1183,
    "dek": "2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway."
   },
   {
@@ -224,7 +213,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 718,
+   "words": 720,
    "dek": "How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free."
   },
   {
@@ -257,7 +246,7 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 867,
+   "words": 873,
    "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill."
   }
  ]

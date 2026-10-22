@@ -1,9 +1,9 @@
 {
  "terms": {
   "title": "Terms of service",
-  "updated": "Last updated October 17, 2026",
+  "updated": "Last updated October 21, 2026",
   "short": [
-   "FIG is free for you, and FIG doesn't show ads.",
+   "FIG is free for you, and there are no ads for now.",
    "A deal counts once staff scan your QR at the restaurant.",
    "One account per person. No sharing codes or faking visits."
   ],
@@ -11,7 +11,7 @@
    {
     "heading": "1. Who we are",
     "paragraphs": [
-     "FIG is a local deals app based in Markham, Ontario, Canada (\"FIG\", \"we\", \"us\"). These terms cover the FIG app and website. By creating an account, you agree to them and to our Privacy Policy."
+     "FIG is a local deals app based in Markham, Ontario, Canada, run by Brendan Lau (\"FIG\", \"we\", \"us\"). These terms cover the FIG app and website. By creating an account, you agree to them and to our Privacy Policy."
     ]
    },
    {
@@ -86,7 +86,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 19, 2026",
+  "updated": "Last updated October 21, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -99,7 +99,7 @@
    {
     "heading": "1. Who's responsible",
     "paragraphs": [
-     "FIG, based in Markham, Ontario, Canada, is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer answers questions sent with Message us in the app, or from the contact page at fig-promo.vercel.app/contact."
+     "FIG, based in Markham, Ontario, Canada, is responsible for your personal information. We follow Canada's privacy law (PIPEDA). Our Privacy Officer, Brendan Lau, answers questions sent with Message us in the app, or from the contact page at fig-promo.vercel.app/contact."
     ]
    },
    {
@@ -127,7 +127,7 @@
      "• Send the alerts and emails you chose",
      "• Emails about deals and FIG news only if you said yes when you signed up. Each one has an unsubscribe link, and you can turn them off anytime in Account & password",
      "• Answer support requests and improve FIG",
-     "FIG doesn't show ads. We don't sell your information or show you third-party ads based on it."
+     "FIG doesn't show ads for now. We don't sell your information or show you third-party ads based on it."
     ]
    },
    {
@@ -201,11 +201,11 @@
    }
   ],
   "contactAsk": "Questions about your privacy?",
-  "contactLine": "Privacy Officer, FIG, Markham, Ontario"
+  "contactLine": "Brendan Lau, Privacy Officer, FIG, Markham, Ontario"
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 19, 2026",
+  "updated": "Last updated October 21, 2026",
   "short": [
    "One plan covers all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (founding restaurants lock in less before launch). Your page, deals and scans are included, with no commission on the bill.",
    "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",

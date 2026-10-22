@@ -147,7 +147,7 @@
     "paragraphs": [
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
-     "• Vercel: hosting",
+     "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
      "• Resend: sends FIG's emails, so it gets your email address and what the email says",
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",

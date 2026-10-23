@@ -219,6 +219,8 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <link rel="stylesheet" href="/css/site.css">
   <script>window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7L25CWPZ23"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() {{ dataLayer.push(arguments); }} gtag('js', new Date()); gtag('config', 'G-7L25CWPZ23');</script>
   <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body class="sub">
@@ -320,11 +322,10 @@ legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app: picked from a list of local high schools, colleges and universities built into the app, or typed in; it only helps us see which schools to reach first), that you agreed to “I agree to get emails from FIG and can unsubscribe at any time.” and when (joining needs it), when you joined, and which link brought you, if any. We email you to say FIG is open in Markham. If you unsubscribe, the emails stop and you keep your place. Every email comes from FIG, Markham, Ontario, and has an unsubscribe link: you can withdraw your consent anytime, through that link or by messaging us. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
 
 # Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
-legal("cookies", {"title": "Cookies", "updated": "Last updated October 19, 2026",
-                  "short": ["No cookies for visitors, and no advertising, tracking or analytics.", "The website keeps three small notes in your browser.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
+legal("cookies", {"title": "Cookies", "updated": "Last updated October 22, 2026",
+                  "short": ["The website uses Google Analytics, which sets cookies to count visits. No advertising cookies.", "The website keeps three small notes in your browser.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
                   "sections": [], "contactAsk": "Questions about cookies?", "contactLine": "FIG, Markham, Ontario"},
-      [("What the website stores", "<ul><li><b>No cookies.</b> Browsing the site and joining the waitlist don't set any. The website keeps three small notes in your browser instead: which link brought you here (until you close the tab, so a creator gets credit if you join the waitlist), whether FIG is open to diners, and an offline copy of the pages.</li>"
-        "<li><b>FIG team only:</b> signing in to the admin page sets secure, HttpOnly cookies: one keeps you signed in for 8 hours, one remembers that browser for 90 days, one counts wrong tries, and short-lived ones (10 minutes at most) hold a sign-in or set-up step.</li></ul>"),
+      [("What the website stores", "<ul><li><b>Google Analytics cookies.</b> To see how many people visit and which pages help, the website uses Google Analytics. It sets cookies (named _ga) that count visits and pages viewed, kept up to 2 years; Google gets your approximate location and device type, not your name. You can block them in your browser settings or with Google's opt-out add-on (tools.google.com/dlpage/gaoptout). Vercel Web Analytics also counts visits, without cookies.</li><li><b>Small notes in your browser.</b> The website also keeps three small notes in your browser instead: which link brought you here (until you close the tab, so a creator gets credit if you join the waitlist), whether FIG is open to diners, and an offline copy of the pages.</li>" "</ul>"),
        ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
        ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>")])
 

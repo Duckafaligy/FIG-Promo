@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://fig-promo.vercel.app/sitemap.xml
+Sitemap: https://www.figpromo.ca/sitemap.xml

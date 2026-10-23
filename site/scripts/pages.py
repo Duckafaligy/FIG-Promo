@@ -17,7 +17,7 @@ _bad = [x["slug"] for x in POSTS if x.get("group") not in {g for g, _, _ in GROU
 if _bad:
     sys.exit(f"pages.py: these posts have no group (or one that isn't in GROUPS): {', '.join(_bad)}")
 
-SITE_URL = "https://fig-promo.vercel.app"
+SITE_URL = "https://www.figpromo.ca"
 SITE = pathlib.Path(__file__).resolve().parents[1]
 ROOT = SITE.parent
 index = (SITE / "index.html").read_text(encoding="utf-8")

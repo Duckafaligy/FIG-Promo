@@ -71,7 +71,7 @@ POSTS = [
               ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are included in FIG's flat monthly plan, with no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
               ("Does FIG show ads?", "No, not for now. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
-              ("Do I need the app to use FIG?", "You can use FIG on the web at fig-promo.vercel.app/app today. The App Store and Google Play apps are coming soon.")]),
+              ("Do I need the app to use FIG?", "You can use FIG on the web at www.figpromo.ca/app today. The App Store and Google Play apps are coming soon.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-19", topic="For restaurants", group="takeout-and-money",
          dek="Restaurants pay FIG one flat monthly plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",

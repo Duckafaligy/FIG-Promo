@@ -42,6 +42,8 @@ jobs:
           git commit -m "Publish scheduled blog posts ($(TZ=America/Toronto date '+%Y-%m-%d %H:%M') Toronto)"
           git pull --rebase origin main || true
           git push origin HEAD:main
+          # tell Bing about the new post once Vercel has deployed it (IndexNow; a failed ping never fails the publish)
+          sleep 120; python site/scripts/indexnow.py || true
       - name: Warn when the queue is running low (once a day, 09:00 Toronto; a failed run makes GitHub email you)
         run: |
           H=$(TZ=America/Toronto date +%H); M=$(TZ=America/Toronto date +%M)

@@ -998,8 +998,8 @@ POSTS = [
                  "Call ahead to check for a table and to ask how the deal applies to a shared bill. That answer is the restaurant's call.",
                  "Keep drinks and extras modest, and decide on a rough total before you leave home."],
          sections=[
-             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners, deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>
-<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. FIG shows what is on near you right now.</p>"""),
+             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. Once FIG opens, it will show what is on near you.</p>"""),
              ("Step 1: pick an early table", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables in the early evening, and an empty table earns nothing, which is why owners post deals then. For a family it helps twice: more deals, and a quieter room when children are hungry and tired.</p>
 <table><thead><tr><th>When</th><th>Why it suits a family</th></tr></thead><tbody>
 <tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, faster kitchen, more deals</td></tr>
@@ -1008,9 +1008,9 @@ POSTS = [
 <tr><td>Weekend dinner</td><td>The busiest time. Call ahead, and expect fewer deals</td></tr>
 </tbody></table>
 <p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
-             ("Step 2: start from what everyone will eat", """<p>Set your cravings, budget and diet in FIG once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
+             ("Step 2: start from what everyone will eat", """<p>When FIG opens, you will set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
 <p>A deal on a dish nobody wanted is not a saving. Look for the deal that matches what the family would have ordered anyway.</p>"""),
-             ("Step 3: compare the whole dinner", """<p>Here is a dinner for a family of four with round example prices: one shared starter at $10, two adult mains at $16 and two children's mains at $9, with water to drink. Three ways to pay for it:</p>
+             ("Step 3: compare the whole dinner", """<p>Here is a dinner for a family of four with round example prices: one shared starter at $10, two adult mains at $16 and two children's mains at $9, with water to drink. Four ways to pay for it:</p>
 <div class="callout math"><b>Example dinner for four (before tip)</b><table><thead><tr><th>Plan</th><th>Food</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
 <tr><td>No deal</td><td>$60.00</td><td>$7.80</td><td>$67.80</td></tr>
 <tr><td>$3 off each adult main</td><td>$54.00</td><td>$7.02</td><td>$61.02</td></tr>
@@ -1029,70 +1029,13 @@ POSTS = [
              ("Something free afterwards", """<p>Main Street Unionville is a historic village street with restaurants, pubs and cafés, and Toogood Pond is steps away, which makes it an easy place for children to stretch their legs after dinner. Markham Village has its own old Main Street, a few kilometres east. A short walk costs nothing and tires out small people before bedtime.</p>"""),
              ("A quick checklist", """<ol><li>Pick an early weeknight and two or three places.</li><li>Work out the final price for your whole order under each deal.</li><li>Decide who claims, and call to check how it applies to your table.</li><li>Agree a rough total, including drinks and dessert.</li><li>After a scanned visit, rate it. Only diners whose visit was scanned can review, so your review helps the next family. <a href="/blog/how-to-read-restaurant-reviews">How reviews work</a>.</li></ol>"""),
          ],
-         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. FIG shows live deals near you on a map and is free for diners."),
+         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. When FIG opens to diners on January 1, 2027, it will show live deals near you on a map, and it is free for diners."),
               ("Is a 2-for-1 better than 20% off for a family?", "It depends on the order. In the example in this post, a 2-for-1 on two $16 adult mains came to $49.72 against $54.24 for 20% off the whole bill. Redo the sum with your own order."),
               ("Do children need their own deal?", "A claim is used once and the code only works on the phone of the person who claimed it. Call the restaurant to ask how a deal applies to a table with children."),
               ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
               ("Can I order takeout instead?", "If the restaurant allows takeout with that deal, yes. You order from the menu in the app, pay there and pick it up, with no delivery or service fee from FIG."),
               ("What if someone in the family has an allergy?", "Use FIG's diet filters to shortlist places, then call the restaurant and tell the server again when you order. Filters are a starting point, not a guarantee."),
-              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now.")]),
-
-    dict(slug="fig-premium-worth-it-restaurants-break-even", screen="tdash", title="Is FIG Premium worth $50 a year? A break-even check for restaurants", date="2026-10-25", publish_at="2026-10-25T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
-         dek="FIG Premium is $50 CAD a year. A plain way to decide if it is worth it for your restaurant: what it includes, the break-even arithmetic on a plate, and what to measure before you renew.",
-         desc="FIG Premium is $50 CAD a year. What it includes, the break-even sum on a plate, and how to decide whether it earns its place at your restaurant.",
-         seo="Is FIG Premium worth $50 a year? A restaurant break-even check",
-         keywords="FIG Premium, restaurant app subscription, restaurant marketing cost, break-even restaurant promotion, multi-location restaurant app, restaurant menu from photo, Markham restaurants",
-         points=["Posting deals on FIG is free, with no commission on deals. Premium is an extra, at $50 CAD a year.",
-                 "Premium includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge.",
-                 "$50 a year is about $4.17 a month, or about 96 cents a week.",
-                 "In the example below, it takes about 5 extra full-price plates, or 7 plates on a 15%-off deal, to cover a year of Premium.",
-                 "Decide by your own numbers: count what Premium saves in time, add what it brings in diners you can trace, and review it after a quarter."],
-         sections=[
-             ("The short answer", """<p>FIG Premium costs $50 CAD a year. It is worth it if it saves you more than $50 of time or brings in enough extra diners to cover that. On a $15 bowl with a 30% food cost, it takes about 5 extra full-price plates in a year to cover $50, or about 7 plates if each one is on a 15%-off deal. Whether Premium delivers that for you is something to measure, not assume. Everything in this post uses round example numbers, so swap in your own.</p>
-<p>You do not need Premium to start. Restaurants post deals on FIG free, with no commission on deals. Takeout paid in the app has its own fees, covered below, and they are the same with or without Premium.</p>"""),
-             ("What you get free, and what Premium adds", """<table><thead><tr><th>On FIG</th><th>Cost to the restaurant</th></tr></thead><tbody>
-<tr><td>Posting deals for your quiet hours</td><td>Free, no commission on deals</td></tr>
-<tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's 2.9% + $0.30. Needs your HST number and Stripe payouts</td></tr>
-<tr><td>Premium: unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo, a Premium badge</td><td>$50 CAD a year</td></tr>
-</tbody></table>
-<p>Read the Premium screen in the app for how each feature works for your restaurant. This post does not promise results from any of them. <a href="/blog/how-fig-makes-money">How FIG makes money</a> covers the rest of the model.</p>"""),
-             ("Turn $50 into plates", """<p>The easiest way to judge any cost is to turn it into the number of plates that pay for it. Contribution is what the diner pays minus the food cost on the plate. It is the money left toward wages, rent and profit.</p>
-<div class="callout math"><b>Break-even on a $15 noodle bowl (example)</b><table><thead><tr><th>How the bowl sells</th><th>Diner pays</th><th>Food cost (30%)</th><th>Contribution</th><th>Plates to cover $50</th></tr></thead><tbody>
-<tr><td>Full price</td><td>$15.00</td><td>$4.50</td><td>$10.50</td><td>5 ($50 &divide; $10.50 = 4.8)</td></tr>
-<tr><td>15% off</td><td>$12.75</td><td>$4.50</td><td>$8.25</td><td>7 ($50 &divide; $8.25 = 6.1)</td></tr>
-<tr><td>$4 off</td><td>$11.00</td><td>$4.50</td><td>$6.50</td><td>8 ($50 &divide; $6.50 = 7.7)</td></tr>
-</tbody></table><p>Food cost at 30% is a round example, inside the range often quoted for restaurants. Use your own menu price and food cost. We round up, because you cannot sell part of a plate.</p></div>
-<p>Eight plates in a year is a very small number for a restaurant. The real question is not the arithmetic. It is whether those plates would have been sold anyway. A deal that mostly discounts your regulars is a price cut, not marketing. <a href="/blog/slow-hour-deal-math">The slow-hour math covers how to tell the difference</a>.</p>"""),
-             ("The same $50, spread out", """<ul><li><strong>Per month:</strong> $50 &divide; 12 = $4.17.</li><li><strong>Per week:</strong> $50 &divide; 52 = about $0.96.</li><li><strong>Per location, for three locations:</strong> $50 &divide; 3 = $16.67 a year each.</li></ul>
-<p>The last line is the point of unlimited locations. If you run one place, it does not matter. If you run several, the cost per place falls as you add them, while one $50 covers them all.</p>"""),
-             ("Feature by feature: what to ask", """<table><thead><tr><th>Premium feature</th><th>Ask yourself</th></tr></thead><tbody>
-<tr><td>Unlimited locations</td><td>Do I run, or will I soon run, more than one place? Would one account across all of them save me setup time?</td></tr>
-<tr><td>Deal announcements every 2 hours</td><td>Do my quiet hours arrive without warning, so I need to tell people nearby quickly? Check the app for exactly how announcements work before you rely on them</td></tr>
-<tr><td>Area insights</td><td>Do I make decisions from data? Would knowing what is happening around me change which hours I fill?</td></tr>
-<tr><td>Menu typed up from a photo</td><td>How long would it take me to type my menu by hand? See the sum below</td></tr>
-<tr><td>Premium badge</td><td>Does a badge matter to my diners? It is a label, not a guarantee of quality</td></tr>
-</tbody></table>"""),
-             ("The menu-from-a-photo sum", """<p>Typing a menu is dull work, and it has a price: your time. If you use the photo feature, FIG types up the menu for you.</p>
-<div class="callout math"><b>Example: time saved on a 40-dish menu</b><ul><li>Typing a dish, its description and price by hand: about 1.5 minutes each (an example, so time your own).</li><li>40 dishes &times; 1.5 minutes = 60 minutes.</li><li>If an hour of your time is worth $20 to you, that is $20 of time, a good part of the $50.</li></ul><p>You still need to read the result and fix anything wrong before you publish it. That takes a few minutes, and it is much shorter than starting from nothing.</p></div>
-<p>If your menu changes often, or you are adding several locations, the saving repeats. If you have 12 dishes and rarely change them, it is small.</p>"""),
-             ("What Premium does not change", """<ul><li><strong>Fees on takeout.</strong> Takeout paid in the app is still 5% of the food before tax, plus Stripe's card fee. On a $20 order after the deal, that is $1.00 to FIG and about $0.96 to Stripe, so you keep about $18.04 of the food. <a href="/blog/takeout-order-math-what-you-keep">The numbers on four order sizes</a>.</li><li><strong>The cost of your deals.</strong> A 20% deal costs 20% on the plates that use it. Premium does not change that.</li><li><strong>Your reviews.</strong> Reviews come only from diners whose visit was scanned, and you can reply in public.</li><li><strong>Your diners' privacy.</strong> Restaurants never see a diner's phone number.</li></ul>"""),
-             ("How to test it without fooling yourself", """<ol><li><strong>Write down your baseline.</strong> Before you buy Premium, note your weekly scans from your insights and the sales in your quiet hours.</li><li><strong>Change one thing at a time.</strong> If you add Premium and launch three new deals in the same week, you cannot tell which did what.</li><li><strong>Give it a quarter.</strong> A week is noise, and seasons matter. Compare like with like.</li><li><strong>Count what you can trace.</strong> Scans of deals, new diners and diners who came back are in your insights. Extra plates you only hope you got do not count.</li><li><strong>Set the rule now.</strong> Decide today that you will keep Premium if it clearly covers its $50, and drop it if it does not.</li></ol>"""),
-             ("Is Premium for you?", """<table><thead><tr><th>You might skip it for now if</th><th>You might try it if</th></tr></thead><tbody>
-<tr><td>You run one place and your menu is small and stable</td><td>You run several places, or plan to</td></tr>
-<tr><td>You have not posted a deal yet</td><td>You already post deals and want more detail on what is happening around you</td></tr>
-<tr><td>Your cash is tight this month</td><td>$4.17 a month is easy to carry and you like the features</td></tr>
-</tbody></table>
-<p>Starting free costs you nothing and lets you see what deals do for you. Premium can wait until you know what you want from it. Nothing about posting deals changes if you wait.</p>"""),
-             ("Tax and your books", """<p>Think of Premium as a business cost. Whether it is deductible, and how any tax on it is handled, depends on your situation. This is general information, not tax advice, so ask your accountant. If you are not sure whether you need an HST number yet, <a href="/blog/hst-registration-small-restaurants-ontario">HST registration for small restaurants</a> explains the basics. Dine-in deals do not need one; takeout paid in the app does.</p>"""),
-             ("Getting started on FIG", """<p>Sign up as a business, add your menu and post your first deal. Setup takes about 15 minutes. <a href="/blog/set-up-fig-menu-takeout">Set up your menu and takeout</a>. Deals start in Markham on January 1, 2027, and the web app works today in a browser, so you can be ready before then. FIG is launching in Markham first, expanding to Richmond Hill and Vaughan Mills.</p>"""),
-         ],
-         faq=[("How much is FIG Premium?", "$50 CAD a year. It includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge."),
-              ("Do I need Premium to post deals?", "No. Restaurants post deals on FIG free, with no commission on deals."),
-              ("Does Premium change what takeout costs?", "No. Takeout paid in the app is 5% of the food before tax, plus Stripe's 2.9% + $0.30, with or without Premium."),
-              ("How many plates does it take to cover $50?", "In the example in this post, about 5 full-price plates at $10.50 contribution, or about 7 plates at $8.25 on a 15%-off deal. Use your own food cost and prices."),
-              ("Does Premium cover more than one restaurant?", "Yes. It includes unlimited locations."),
-              ("Can I start free and add Premium later?", "Yes. Posting deals is free, so you can see what deals do for you first."),
-              ("Is Premium tax deductible?", "That depends on your situation. This is general information, not tax advice. Ask your accountant.")]),
+              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
 
     dict(slug="takeout-or-dine-in-with-a-deal-which-costs-less", screen="qr", title="Takeout or dine-in with a deal: which costs you less?", date="2026-10-26", publish_at="2026-10-26T12:00:00-04:00", topic="For diners", group="takeout-and-money",
          dek="The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out.",
@@ -1106,9 +1049,9 @@ POSTS = [
                  "Dine-in is a different thing, not just a dearer one: you get the room, the service and the time."],
          sections=[
              ("The short answer", """<p>For the same dish and the same deal, takeout is usually the cheaper way to eat, because you skip the drink, the tip and the table time. In the example below, one $18 main with $4 off costs $15.82 as takeout and $23.04 as a dine-in meal with a drink and a 15% tip. The deal is worth the same either way. What changes is everything around it. This post works out where the difference comes from, so you can decide with your own prices.</p>
-<p>FIG is free for diners. Deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>"""),
+<p>FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>"""),
              ("What each way means on FIG", """<table><thead><tr><th></th><th>Dine-in with a deal</th><th>Takeout with a deal</th></tr></thead><tbody>
-<tr><td>How you use the deal</td><td>Show your QR code at the counter, or scan the restaurant's counter code</td><td>Tap Takeout on the deal, add dishes from the menu and pay in the app</td></tr>
+<tr><td>How you use the deal</td><td>Show your QR code at the restaurant and staff scan it</td><td>Tap Takeout on the deal, add dishes from the menu and pay in the app</td></tr>
 <tr><td>How you pay</td><td>The restaurant, the way you always do</td><td>In the app, by card</td></tr>
 <tr><td>Fees from FIG</td><td>None</td><td>No delivery fee and no service fee</td></tr>
 <tr><td>Which deals</td><td>Any live deal</td><td>Only deals the restaurant allows as takeout</td></tr>
@@ -1120,7 +1063,7 @@ POSTS = [
 <tr><td>Takeout with the deal</td><td>$14.00</td><td>$1.82</td><td>none</td><td>$15.82</td></tr>
 <tr><td>Dine-in with the deal, plus a $4 drink</td><td>$18.00</td><td>$2.34</td><td>15% of $18.00 = $2.70</td><td>$23.04</td></tr>
 <tr><td>Takeout at full price (0 deals per order)</td><td>$18.00</td><td>$2.34</td><td>none</td><td>$20.34</td></tr>
-</tbody></table><p>Check: $18.00 &minus; $4.00 = $14.00; 13% of $14.00 is $1.82. Dine-in: $14.00 + $4.00 = $18.00; 13% is $2.34; $18.00 + $2.34 + $2.70 = $23.04. A tip is a personal decision, and the 15% on the after-deal subtotal is only an example. You can tip on pickup if you like.</p></div>
+</tbody></table><p>Check: $18.00 &minus; $4.00 = $14.00; 13% of $14.00 is $1.82. Dine-in: $14.00 + $4.00 = $18.00; 13% is $2.34; $18.00 + $2.34 + $2.70 = $23.04. A tip is a personal decision, and the 15% on the after-deal subtotal is only an example.</p></div>
 <p>The deal saved $4.00 plus $0.52 of tax in both of the first two rows. The $7.22 gap between them is the drink, the tax on the drink, and the tip.</p>"""),
              ("What dine-in gives you that takeout cannot", """<p>Cheaper is not always better. Dine-in gives you the food made and served at its best, the room, someone else doing the dishes, and time with the people you are with. A cold bowl of noodles carried home in a bag is not the same dish. If the meal is the point of your evening, such as a date or a family night, the extra cost is the price of the evening. <a href="/blog/date-night-markham-deals-budget">A date night plan, with the math</a> and <a href="/blog/family-dinner-out-markham-deals-budget">a family dinner plan</a> go through that kind of meal.</p>
 <p>Takeout suits a different night: you are tired, you want to eat at home, or you only have twenty minutes.</p>"""),
@@ -1139,31 +1082,31 @@ POSTS = [
               ("How do I pay for takeout on FIG?", "In the app, by card, when you order. Dine-in deals are paid at the restaurant as usual."),
               ("Is HST charged before or after the deal?", "After the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice."),
               ("What if I cannot pick up my order?", "An order not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tap I'm here when you arrive."),
-              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now.")]),
+              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
 
-    dict(slug="reply-to-reviews-and-messages-restaurants", screen="map", title="Replying to reviews and diner messages: a short guide for restaurant owners", date="2026-10-27", publish_at="2026-10-27T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
-         dek="How to answer a review or a diner's message in a few minutes a week: what to say to a good review, a bad one and a question, with templates you can adapt and a little arithmetic on what one low rating does.",
-         desc="How restaurant owners can reply to reviews and diner messages on FIG in minutes a week, with templates and the arithmetic of one low rating.",
-         seo="Replying to restaurant reviews and diner messages: a short guide",
-         keywords="reply to restaurant reviews, respond to bad review restaurant, restaurant customer messages, restaurant reputation, review response examples, Markham restaurants, FIG reviews",
+    dict(slug="reply-to-reviews-restaurants", screen="map", title="Replying to reviews: a short guide for restaurant owners", date="2026-10-27", publish_at="2026-10-27T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="How to answer a review in a few minutes a week: what to say to a good review, a bad one and a rating with no words, with templates you can adapt and a little arithmetic on what one low rating does.",
+         desc="How restaurant owners can reply to reviews on FIG in minutes a week, with templates and the arithmetic of one low rating.",
+         seo="Replying to restaurant reviews: a short guide for owners",
+         keywords="reply to restaurant reviews, respond to bad review restaurant, review reply templates, restaurant reputation, review response examples, Markham restaurants, FIG reviews",
          points=["Reviews on FIG come only from diners whose visit was scanned, so each one is about a real visit. You can reply in public.",
-                 "Diners can message your restaurant. Restaurants never see a diner's phone number, only their first name and last initial.",
+                 "Reviews show the diner's first name and last initial. You never see a diner's phone number or email.",
                  "Answer in a few lines: thank, be specific, say what you will do, and keep it calm. Write for the next reader, not just the writer.",
                  "One low rating moves the average less than it feels like. Ten 5-star reviews and one 1-star give 4.64; thirty and one give 4.87.",
                  "Paying FIG never hides, changes or reorders a review. A fair reply is the only tool you have, and it is a good one."],
          sections=[
-             ("The short answer", """<p>Reply to every review and message with the same four steps: thank the person, name something specific, say what you will do if there is something to fix, and stop. Keep it to a few lines and write it for the next person who reads it, because most readers are future diners deciding whether to come. On FIG, reviews come only from diners whose visit was scanned, you can reply in public, and diners can message your restaurant. Ten minutes a week is enough for most small restaurants.</p>
+             ("The short answer", """<p>Reply to every review with the same four steps: thank the person, name something specific, say what you will do if there is something to fix, and stop. Keep it to a few lines and write it for the next person who reads it, because most readers are future diners deciding whether to come. On FIG, reviews come only from diners whose visit was scanned, and you can reply in public. Ten minutes a week is enough for most small restaurants.</p>
 <p>The examples below are templates to adapt. They are not quotes from real diners or real restaurants.</p>"""),
              ("What you can and cannot see", """<table><thead><tr><th>On FIG</th><th>What it means for you</th></tr></thead><tbody>
 <tr><td>Reviews come only from scanned visits</td><td>Each review is about a real visit, one per visit. You are not answering people who never came</td></tr>
 <tr><td>Restaurants get stars, deals get likes</td><td>A low star rating is about the visit. A low-liked deal is about the offer. Reply to each on its own terms</td></tr>
 <tr><td>You can reply in public</td><td>Everyone who reads the review reads your answer too</td></tr>
-<tr><td>Diners can message a restaurant</td><td>Questions about a deal, a booking or an allergy arrive as messages</td></tr>
 <tr><td>You see a first name and last initial</td><td>Never a phone number or email. Do not ask for contact details to resolve something</td></tr>
 </tbody></table>
 <p>Paying FIG never hides, changes or reorders a review. You cannot remove a review you dislike, which is exactly why diners can trust the ones they read. <a href="/blog/how-to-read-restaurant-reviews">How diners read a page</a>.</p>"""),
              ("Why replies matter more than the rating", """<p>A calm, specific reply to a bad review tells a future diner more about your restaurant than ten five-star ratings do. They are reading to find out two things: is the food good, and what happens when something goes wrong. A good answer to the second question can win a diner who would otherwise skip you.</p>
 <p>The reader to write for is not the person who complained. That person has already decided. It is the stranger scrolling at 5 pm, deciding where to eat.</p>"""),
+             ("What a diner sees next to your reply", """<p>At the top of your reviews a diner sees the average, the number of reviews and five bars from 5 stars down to 1. They can sort by Newest, to see how you are doing now, or by Lowest, to see what goes wrong when it goes wrong. Our guide for diners suggests reading a couple of the low ones and how the restaurant replied, so that is where your reply does the most work. Read yours as a stranger would. <a href="/blog/how-to-read-restaurant-reviews">How diners read a restaurant's reviews</a>.</p>"""),
              ("The arithmetic of one low rating", """<p>It helps to know how much a single low review moves your average, so a bad night does not feel bigger than it is.</p>
 <div class="callout math"><b>One 1-star review among 5-star reviews (example)</b><table><thead><tr><th>Reviews so far</th><th>Total stars</th><th>Average before</th><th>Average after one 1-star</th></tr></thead><tbody>
 <tr><td>4 reviews, all 5 stars</td><td>20</td><td>5.00</td><td>21 &divide; 5 = 4.20</td></tr>
@@ -1177,24 +1120,21 @@ POSTS = [
 <ol><li><strong>Thank and acknowledge.</strong> "Thank you for telling us, [first name]. We are sorry the wait was long."</li><li><strong>Be specific, not defensive.</strong> Say what you understand happened: "A tour group arrived at the same time as the lunch rush." One sentence of context is fine. A paragraph of excuses is not.</li><li><strong>Say what changes.</strong> "We now add prep time when the room fills, so wait times are honest." If nothing will change, do not promise it.</li><li><strong>Invite them back, once.</strong> "We would like another chance." Then stop.</li></ol>
 <div class="callout example"><b>Template for a low rating about service</b><p>"Thank you for telling us, [first name]. We are sorry the service was slow on your visit. We were short-staffed that evening and should have said so at the door. We have since changed how we handle busy nights. We hope you will give us another try."</p></div>
 <p>Do not argue facts in public, do not name staff, and do not share anything about the diner's order beyond what they wrote. If the review is unfair, one calm correction is enough, such as "Our kitchen is closed on Mondays, so we think this may be about another restaurant."</p>"""),
-             ("Replying to a message", """<p>Messages are usually practical: "Is the 2-for-1 on Saturday?" "Do you have gluten-free noodles?" "Can you fit six at 5 pm?" Answer plainly, and fast if you can.</p>
-<table><thead><tr><th>They ask about</th><th>A good answer includes</th></tr></thead><tbody>
-<tr><td>A deal</td><td>The days, hours and dishes it covers, and whether it is dine-in or also takeout</td></tr>
-<tr><td>A table for a group</td><td>Whether there is room at that time, and a quieter hour if not</td></tr>
-<tr><td>An allergy or diet</td><td>What you can honestly offer and what you cannot guarantee. Say what you know about ingredients and shared equipment. <a href="/blog/eating-out-dietary-needs-allergies-markham">What diners are told to ask</a></td></tr>
-<tr><td>A takeout order</td><td>The pickup time, any prep time you have added, and what to do if they are late</td></tr>
-</tbody></table>
-<p>Keep health and allergy answers careful and short. This is general information, not medical advice. If you cannot promise something, say so plainly: a diner who hears "we cannot guarantee a nut-free kitchen" can choose well.</p>"""),
-             ("How much time it takes", """<div class="callout math"><b>Example: a weekly routine</b><ul><li>5 reviews and messages a week, about 3 minutes each: 15 minutes.</li><li>15 minutes &times; 52 weeks = 780 minutes, or 13 hours a year.</li><li>If a dull week has none, you spend none.</li></ul><p>Use your own volume. Most small restaurants will have fewer, especially at first.</p></div>
+             ("Replying to a rating with no words", """<p>A diner on FIG picks the stars and can add a few words or a photo if they like, so some reviews are only a rating. One line is enough for a good one. For a low rating with no words, do not guess what went wrong: say you are sorry the visit fell short, say you would like to do better, and stop. A long reply to a silent one-star rating reads as defensive.</p>
+<div class="callout example"><b>Template for a low rating with no words</b><p>"Thank you for rating your visit, [first name]. We are sorry it fell short, and we would like another chance to get it right."</p></div>
+<p>If the review has a photo, thank them for it and talk about the dish, not the diner.</p>"""),
+             ("When a review is really about the deal", """<p>Restaurants get stars and deals get likes, so a star rating is about the visit. Diners still sometimes use their words to talk about the offer: "the 2-for-1 only covered one dish." Each deal shows its days, hours and dishes, so your reply can say what the deal covers, once, in plain words. If it was unclear, say so, and fix the deal's wording, because the next diner will read it the same way.</p>
+<div class="callout example"><b>Template for a review that misread the deal</b><p>"Thank you, [first name]. We are sorry the deal was not clear. It covers the [dish] on [days] between [hours], and we have made that easier to see."</p></div>"""),
+             ("How much time it takes", """<div class="callout math"><b>Example: a weekly routine</b><ul><li>5 reviews a week, about 3 minutes each: 15 minutes.</li><li>15 minutes &times; 52 weeks = 780 minutes, or 13 hours a year.</li><li>If a dull week has none, you spend none.</li></ul><p>Use your own volume. Most small restaurants will have fewer, especially at first.</p></div>
 <p>Set a time. Ten minutes at the end of a Tuesday shift is better than a hundred good intentions. Give one person ownership, and a second for holidays.</p>"""),
              ("A reply checklist", """<ol><li>Did I thank them by first name?</li><li>Did I mention something specific from their review?</li><li>Am I writing for the next reader as well as for them?</li><li>Did I avoid blaming the diner or the staff?</li><li>If there is something to fix, did I say what I will do, and will I do it?</li><li>Is it short enough to read in ten seconds?</li></ol>"""),
-             ("Turn feedback into changes", """<p>Over a month, patterns show up. Three people say the wait was long on Thursdays? Look at your staffing, or turn on takeout prep time. Several diners ask about the same deal? Make the details clearer. A deal nobody likes after two weeks? Change the dish or the hours. Your insights show views, claims and the diners who came back, and your reviews tell you why. <a href="/blog/slow-hour-deal-math">How to judge a deal by new and returning diners</a>. <a href="/blog/train-staff-honour-fig-deal">A ten-minute staff plan</a> can fix a lot of counter problems before they become reviews.</p>
-<p>Deals start in Markham on January 1, 2027. You can set up your page and menu before then, and the web app works today in a browser.</p>"""),
+             ("Turn feedback into changes", """<p>Over a month, patterns show up. Three people say the wait was long on Thursdays? Look at your staffing, or add takeout prep time. Several diners ask about the same deal? Make the details clearer. A deal nobody likes after two weeks? Change the dish or the hours. Your insights show views, claims and the diners who came back, and your reviews tell you why. <a href="/blog/slow-hour-deal-math">How to judge a deal by new and returning diners</a>. <a href="/blog/train-staff-honour-fig-deal">A ten-minute staff plan</a> can fix a lot of counter problems before they become reviews.</p>
+<p>FIG opens to diners in Markham on January 1, 2027, and reviews come from scanned visits, so yours start after that. Restaurants set up first: you can add your page and menu before then.</p>"""),
          ],
          faq=[("Can I reply to reviews on FIG?", "Yes. Restaurants can reply to reviews in public."),
               ("Can I delete a bad review?", "No. Paying FIG never hides, changes or reorders a review. Reviews come only from diners whose visit was scanned."),
               ("Who can leave a review?", "Only diners whose visit was scanned, one review per visit. Reviews show the diner's first name and last initial."),
-              ("Can diners message my restaurant?", "Yes. Diners can message a restaurant. You never see their phone number, only their first name and last initial."),
+              ("Can I reply to a rating that has no words?", "Yes. Restaurants can reply to reviews in public. For a rating with no words, keep it to a line or two and do not guess what went wrong."),
               ("How should I answer a bad review?", "Thank them, be specific, say what you will change and invite them back once. Keep it calm and short, and write for the next reader."),
               ("How much does one low rating change my average?", "Less than it feels like. In the example in this post, one 1-star among ten 5-star reviews gives 4.64, and among thirty gives 4.87."),
               ("Should I offer a discount in a reply?", "Usually not. Let the deal speak for itself, and focus on what you will fix.")]),

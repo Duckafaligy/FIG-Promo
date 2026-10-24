@@ -1037,63 +1037,6 @@ POSTS = [
               ("What if someone in the family has an allergy?", "Use FIG's diet filters to shortlist places, then call the restaurant and tell the server again when you order. Filters are a starting point, not a guarantee."),
               ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now.")]),
 
-    dict(slug="fig-premium-worth-it-restaurants-break-even", screen="tdash", title="Is FIG Premium worth $50 a year? A break-even check for restaurants", date="2026-10-25", publish_at="2026-10-25T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
-         dek="FIG Premium is $50 CAD a year. A plain way to decide if it is worth it for your restaurant: what it includes, the break-even arithmetic on a plate, and what to measure before you renew.",
-         desc="FIG Premium is $50 CAD a year. What it includes, the break-even sum on a plate, and how to decide whether it earns its place at your restaurant.",
-         seo="Is FIG Premium worth $50 a year? A restaurant break-even check",
-         keywords="FIG Premium, restaurant app subscription, restaurant marketing cost, break-even restaurant promotion, multi-location restaurant app, restaurant menu from photo, Markham restaurants",
-         points=["Posting deals on FIG is free, with no commission on deals. Premium is an extra, at $50 CAD a year.",
-                 "Premium includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge.",
-                 "$50 a year is about $4.17 a month, or about 96 cents a week.",
-                 "In the example below, it takes about 5 extra full-price plates, or 7 plates on a 15%-off deal, to cover a year of Premium.",
-                 "Decide by your own numbers: count what Premium saves in time, add what it brings in diners you can trace, and review it after a quarter."],
-         sections=[
-             ("The short answer", """<p>FIG Premium costs $50 CAD a year. It is worth it if it saves you more than $50 of time or brings in enough extra diners to cover that. On a $15 bowl with a 30% food cost, it takes about 5 extra full-price plates in a year to cover $50, or about 7 plates if each one is on a 15%-off deal. Whether Premium delivers that for you is something to measure, not assume. Everything in this post uses round example numbers, so swap in your own.</p>
-<p>You do not need Premium to start. Restaurants post deals on FIG free, with no commission on deals. Takeout paid in the app has its own fees, covered below, and they are the same with or without Premium.</p>"""),
-             ("What you get free, and what Premium adds", """<table><thead><tr><th>On FIG</th><th>Cost to the restaurant</th></tr></thead><tbody>
-<tr><td>Posting deals for your quiet hours</td><td>Free, no commission on deals</td></tr>
-<tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's 2.9% + $0.30. Needs your HST number and Stripe payouts</td></tr>
-<tr><td>Premium: unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo, a Premium badge</td><td>$50 CAD a year</td></tr>
-</tbody></table>
-<p>Read the Premium screen in the app for how each feature works for your restaurant. This post does not promise results from any of them. <a href="/blog/how-fig-makes-money">How FIG makes money</a> covers the rest of the model.</p>"""),
-             ("Turn $50 into plates", """<p>The easiest way to judge any cost is to turn it into the number of plates that pay for it. Contribution is what the diner pays minus the food cost on the plate. It is the money left toward wages, rent and profit.</p>
-<div class="callout math"><b>Break-even on a $15 noodle bowl (example)</b><table><thead><tr><th>How the bowl sells</th><th>Diner pays</th><th>Food cost (30%)</th><th>Contribution</th><th>Plates to cover $50</th></tr></thead><tbody>
-<tr><td>Full price</td><td>$15.00</td><td>$4.50</td><td>$10.50</td><td>5 ($50 &divide; $10.50 = 4.8)</td></tr>
-<tr><td>15% off</td><td>$12.75</td><td>$4.50</td><td>$8.25</td><td>7 ($50 &divide; $8.25 = 6.1)</td></tr>
-<tr><td>$4 off</td><td>$11.00</td><td>$4.50</td><td>$6.50</td><td>8 ($50 &divide; $6.50 = 7.7)</td></tr>
-</tbody></table><p>Food cost at 30% is a round example, inside the range often quoted for restaurants. Use your own menu price and food cost. We round up, because you cannot sell part of a plate.</p></div>
-<p>Eight plates in a year is a very small number for a restaurant. The real question is not the arithmetic. It is whether those plates would have been sold anyway. A deal that mostly discounts your regulars is a price cut, not marketing. <a href="/blog/slow-hour-deal-math">The slow-hour math covers how to tell the difference</a>.</p>"""),
-             ("The same $50, spread out", """<ul><li><strong>Per month:</strong> $50 &divide; 12 = $4.17.</li><li><strong>Per week:</strong> $50 &divide; 52 = about $0.96.</li><li><strong>Per location, for three locations:</strong> $50 &divide; 3 = $16.67 a year each.</li></ul>
-<p>The last line is the point of unlimited locations. If you run one place, it does not matter. If you run several, the cost per place falls as you add them, while one $50 covers them all.</p>"""),
-             ("Feature by feature: what to ask", """<table><thead><tr><th>Premium feature</th><th>Ask yourself</th></tr></thead><tbody>
-<tr><td>Unlimited locations</td><td>Do I run, or will I soon run, more than one place? Would one account across all of them save me setup time?</td></tr>
-<tr><td>Deal announcements every 2 hours</td><td>Do my quiet hours arrive without warning, so I need to tell people nearby quickly? Check the app for exactly how announcements work before you rely on them</td></tr>
-<tr><td>Area insights</td><td>Do I make decisions from data? Would knowing what is happening around me change which hours I fill?</td></tr>
-<tr><td>Menu typed up from a photo</td><td>How long would it take me to type my menu by hand? See the sum below</td></tr>
-<tr><td>Premium badge</td><td>Does a badge matter to my diners? It is a label, not a guarantee of quality</td></tr>
-</tbody></table>"""),
-             ("The menu-from-a-photo sum", """<p>Typing a menu is dull work, and it has a price: your time. If you use the photo feature, FIG types up the menu for you.</p>
-<div class="callout math"><b>Example: time saved on a 40-dish menu</b><ul><li>Typing a dish, its description and price by hand: about 1.5 minutes each (an example, so time your own).</li><li>40 dishes &times; 1.5 minutes = 60 minutes.</li><li>If an hour of your time is worth $20 to you, that is $20 of time, a good part of the $50.</li></ul><p>You still need to read the result and fix anything wrong before you publish it. That takes a few minutes, and it is much shorter than starting from nothing.</p></div>
-<p>If your menu changes often, or you are adding several locations, the saving repeats. If you have 12 dishes and rarely change them, it is small.</p>"""),
-             ("What Premium does not change", """<ul><li><strong>Fees on takeout.</strong> Takeout paid in the app is still 5% of the food before tax, plus Stripe's card fee. On a $20 order after the deal, that is $1.00 to FIG and about $0.96 to Stripe, so you keep about $18.04 of the food. <a href="/blog/takeout-order-math-what-you-keep">The numbers on four order sizes</a>.</li><li><strong>The cost of your deals.</strong> A 20% deal costs 20% on the plates that use it. Premium does not change that.</li><li><strong>Your reviews.</strong> Reviews come only from diners whose visit was scanned, and you can reply in public.</li><li><strong>Your diners' privacy.</strong> Restaurants never see a diner's phone number.</li></ul>"""),
-             ("How to test it without fooling yourself", """<ol><li><strong>Write down your baseline.</strong> Before you buy Premium, note your weekly scans from your insights and the sales in your quiet hours.</li><li><strong>Change one thing at a time.</strong> If you add Premium and launch three new deals in the same week, you cannot tell which did what.</li><li><strong>Give it a quarter.</strong> A week is noise, and seasons matter. Compare like with like.</li><li><strong>Count what you can trace.</strong> Scans of deals, new diners and diners who came back are in your insights. Extra plates you only hope you got do not count.</li><li><strong>Set the rule now.</strong> Decide today that you will keep Premium if it clearly covers its $50, and drop it if it does not.</li></ol>"""),
-             ("Is Premium for you?", """<table><thead><tr><th>You might skip it for now if</th><th>You might try it if</th></tr></thead><tbody>
-<tr><td>You run one place and your menu is small and stable</td><td>You run several places, or plan to</td></tr>
-<tr><td>You have not posted a deal yet</td><td>You already post deals and want more detail on what is happening around you</td></tr>
-<tr><td>Your cash is tight this month</td><td>$4.17 a month is easy to carry and you like the features</td></tr>
-</tbody></table>
-<p>Starting free costs you nothing and lets you see what deals do for you. Premium can wait until you know what you want from it. Nothing about posting deals changes if you wait.</p>"""),
-             ("Tax and your books", """<p>Think of Premium as a business cost. Whether it is deductible, and how any tax on it is handled, depends on your situation. This is general information, not tax advice, so ask your accountant. If you are not sure whether you need an HST number yet, <a href="/blog/hst-registration-small-restaurants-ontario">HST registration for small restaurants</a> explains the basics. Dine-in deals do not need one; takeout paid in the app does.</p>"""),
-             ("Getting started on FIG", """<p>Sign up as a business, add your menu and post your first deal. Setup takes about 15 minutes. <a href="/blog/set-up-fig-menu-takeout">Set up your menu and takeout</a>. Deals start in Markham on January 1, 2027, and the web app works today in a browser, so you can be ready before then. FIG is launching in Markham first, expanding to Richmond Hill and Vaughan Mills.</p>"""),
-         ],
-         faq=[("How much is FIG Premium?", "$50 CAD a year. It includes unlimited locations, deal announcements every 2 hours, area insights, a menu typed up from a photo and a Premium badge."),
-              ("Do I need Premium to post deals?", "No. Restaurants post deals on FIG free, with no commission on deals."),
-              ("Does Premium change what takeout costs?", "No. Takeout paid in the app is 5% of the food before tax, plus Stripe's 2.9% + $0.30, with or without Premium."),
-              ("How many plates does it take to cover $50?", "In the example in this post, about 5 full-price plates at $10.50 contribution, or about 7 plates at $8.25 on a 15%-off deal. Use your own food cost and prices."),
-              ("Does Premium cover more than one restaurant?", "Yes. It includes unlimited locations."),
-              ("Can I start free and add Premium later?", "Yes. Posting deals is free, so you can see what deals do for you first."),
-              ("Is Premium tax deductible?", "That depends on your situation. This is general information, not tax advice. Ask your accountant.")]),
-
     dict(slug="takeout-or-dine-in-with-a-deal-which-costs-less", screen="qr", title="Takeout or dine-in with a deal: which costs you less?", date="2026-10-26", publish_at="2026-10-26T12:00:00-04:00", topic="For diners", group="takeout-and-money",
          dek="The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out.",
          desc="Takeout or dine-in with a deal? The same dish compared with HST, drinks, tip and travel, so you can pick the cheaper night out or in.",

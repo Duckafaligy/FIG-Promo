@@ -35,7 +35,7 @@ GROUPS = [
 ]
 
 POSTS = [
-    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated=UPDATED, topic="News", group="fig-in-markham",
+    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-24", topic="News", group="fig-in-markham",
          dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill.",
          desc="Why FIG exists: a restaurant deals app for Markham that's free for diners, charges restaurants one flat plan and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
@@ -56,27 +56,27 @@ POSTS = [
 <p>FIG isn't trying to replace delivery. It does a narrower job: getting people <em>into</em> a restaurant, or to the counter for a pickup, during the hours the owner chooses. For that job, a percentage of every bill isn't needed, so FIG doesn't charge one. <a href="/blog/delivery-app-commissions-vs-fig">Delivery app commissions vs FIG, with the numbers</a>.</p>"""),
              ("So we flipped the model", """<p>On FIG, a deal is a decision the owner made. The restaurant picks:</p>
 <ul><li><strong>What</strong> the deal is: a percentage off, a dollar amount off, 2-for-1, or something free with an order, on the whole bill or on specific dishes from its menu.</li><li><strong>When</strong> it runs: which days and hours, every week, once, or until a date. Or a <a href="/blog/flash-deals-explained">flash deal</a> right now, for a quiet hour.</li><li><strong>How many</strong>: a daily cap, so a deal never gives away more than planned. It stops on its own when the cap is reached.</li><li><strong>Where</strong>: dine-in only, or also as takeout.</li></ul>
-<p>A diner finds the deal on Home or on the map, taps Claim, and the deal waits on their Deals page. At the restaurant, staff scan the diner's code with the restaurant side of FIG (on any phone, tablet or computer), or the diner scans the restaurant's own counter code. The deal comes off the bill, and the diner pays the restaurant the way they always do.</p>"""),
+<p>A diner finds the deal on Home or on the map, taps Claim, and the deal waits on their Deals page. At the restaurant, staff scan the diner's code with the restaurant side of FIG (on any phone, tablet or computer). The deal comes off the bill, and the diner pays the restaurant the way they always do.</p>"""),
              ("What FIG is for diners", """<ul><li><strong>Free.</strong> No subscription, no fees, no ads for now.</li><li><strong>Deals you can actually use.</strong> Live deals near you, nearest first, filtered by what you crave, your budget and your diet.</li><li><strong>No pressure.</strong> A claim doesn't time out. It works for as long as the deal runs, and it only ends when the restaurant ends the deal, or a flash or dated deal is over.</li><li><strong>Private.</strong> Restaurants see your first name and last initial, never your phone number or email.</li><li><strong>Honest reviews.</strong> Only diners whose visit was scanned can review a restaurant, so every review comes from a real meal. Deals get likes; restaurants get stars.</li></ul>"""),
              ("How FIG pays for itself", """<p>Two ways. Restaurants pay <strong>one plan for all their restaurants</strong>: $29.99 a month or $299.99 a year from the day FIG opens to diners (founding restaurants lock in less before launch). And on <strong>takeout paid in the app</strong>, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, goes to the restaurant.</p>
 <p>That's it. No ads for now, no fee per diner, no commission on a dine-in bill, and nothing for sale that changes search order or reviews. <a href="/blog/how-fig-makes-money">How FIG makes money, in full</a>.</p>"""),
              # Main Street Unionville and Markham Village: https://en.wikipedia.org/wiki/Main_Street_Unionville ,
              #   https://en.wikipedia.org/wiki/Markham_Village ; Pacific Mall, NE corner of Steeles and Kennedy: https://en.wikipedia.org/wiki/Pacific_Mall
              ("Why Markham first", """<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants spread across plazas and main streets, from Pacific Mall at Steeles and Kennedy to Main Street Unionville and the old Main Street of Markham Village, and a lot of people who love finding somewhere new to eat.</p>
-<p>FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027. Until then, restaurants can set up their page, menu and first deals, and diners can explore the map.</p>"""),
+<p>FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027. Until then, restaurants can set up their page, menu and first deals, and diners can join the waitlist at www.figpromo.ca.</p>"""),
              ("What's next", """<p>We're signing Markham restaurants now. If you own one, setting up takes a few minutes: your page, your menu, your first deal. Before FIG opens to diners, you can lock in a founding price. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
          ],
          faq=[("What is FIG?", "FIG is a restaurant deals app. Restaurants post their own deals; diners find them on a map, claim one and show a code at the counter. It's free for diners."),
               ("When does FIG launch?", "FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027."),
-              ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are included in FIG's flat monthly plan, with no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
+              ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are included in FIG's flat plan, with no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
               ("Does FIG show ads?", "No, not for now. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
-              ("Do I need the app to use FIG?", "You can use FIG on the web at www.figpromo.ca/app today. The App Store and Google Play apps are coming soon.")]),
+              ("Do I need the app to use FIG?", "No. FIG runs in your web browser at www.figpromo.ca/app. Restaurants can set up there today; diners can join the waitlist on the site, and FIG opens to diners on January 1, 2027. The App Store and Google Play apps are coming soon.")]),
 
-    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-19", topic="For restaurants", group="takeout-and-money",
-         dek="Restaurants pay FIG one flat monthly plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
+    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
+         dek="Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
          desc="One plan for all a restaurant owner's places ($29.99 a month or $299.99 a year from launch; founding prices before), no commission on dine-in, and 5% of in-app takeout.",
-         keywords="FIG pricing, restaurant app monthly plan, no commission restaurant app, restaurant deals app Markham",
+         keywords="FIG pricing, restaurant app flat plan, no commission restaurant app, restaurant deals app Markham",
          points=["One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers their pages, unlimited deals, every scan and insights, with no limit on locations.",
                  "Before launch, founding restaurants pay $49.99 once. It covers the plan until FIG starts billing, then they keep a founding price that's always lower.",
                  "No commission and no fee per diner on dine-in. On takeout paid in the app, FIG also keeps 5% of the food, and Stripe's card fee comes off the same payment.",
@@ -93,7 +93,7 @@ POSTS = [
 <tr><td>All your locations, under one sign-in</td><td>Included: one plan covers them all</td></tr>
 <tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's card fee</td></tr>
 </tbody></table>
-<p>No contract and no setup fee. Refunds: within 14 days of your first payment, for any plan; founding deposits are also refunded in full if FIG hasn't opened to diners by March 1, 2027 (for a plan whose first period hasn't started). After that, cancelling stops the renewal, and you keep full access until the end of the month or year you've paid.</p>"""),
+<p>No contract. Refunds: within 14 days of your first payment, for any plan; the founding payment is also refunded in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). After that, cancelling a monthly or yearly plan stops the renewal, and you keep full access until the end of the month or year you've paid.</p>"""),
              ("Founding prices, before launch", """<p>Restaurants that join before FIG opens to diners pay <strong>$49.99 once</strong>. It covers their plan until FIG starts billing. From then, they can keep a founding price that's always lower than the regular price, for as long as their plan stays active; we'll tell them the date and their price in writing at least 14 days before. Prices are before tax, plus HST once FIG is registered. The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
              # Stripe 2.9% + CA$0.30 domestic cards (source at the top); HST 13% Ontario
              ("Takeout paid in the app: 5% of the food", """<p>When a diner orders takeout and pays in the app, the payment goes through Stripe. FIG keeps 5% of the food before tax, Stripe's card fee comes off the same payment, and the rest, including the HST, is paid out to you. The HST is yours to remit, as with any sale.</p>
@@ -111,14 +111,14 @@ POSTS = [
              ("Why not charge per diner, like other apps?", """<p>Because the restaurant already gave something up: the deal itself. A 2-for-1 or 20% off is the price of the visit. Charging again for the same diner would push owners to make deals smaller and rarer, which is worse for everyone, diners included. FIG wins when deals are good enough to post, so it doesn't tax them: the plan is flat, however many diners come.</p>"""),
              ("What paying FIG never does", """<ul><li>Change your deal or its price.</li><li>Move you up in search or on the map.</li><li>Hide, remove or reorder reviews. Only diners whose visit was scanned can review, and you can reply in public.</li><li>Share a diner's phone number or email with you. Orders and reviews show their first name and last initial.</li></ul>
 <p>The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
-             ("How this compares", """<p>If you're weighing FIG against a delivery app, compare the job, not just the rate. Delivery apps bring the food to the door and charge for it: Uber Eats and DoorDash publish Canadian delivery plans between 20% and 30% per order. FIG brings the diner to your door for one flat monthly plan, with nothing per diner. For pickup, the big apps charge 8% to 10% of an order (Uber Eats charges 15% if your in-store prices aren't validated), which is close to what FIG's 5% plus the card fee comes to. <a href="/blog/delivery-app-commissions-vs-fig">The full comparison, with worked examples</a>.</p>"""),
+             ("How this compares", """<p>If you're weighing FIG against a delivery app, compare the job, not just the rate. Delivery apps bring the food to the door and charge for it: Uber Eats and DoorDash publish Canadian delivery plans between 20% and 30% per order. FIG brings the diner to your door for one flat plan, with nothing per diner. For pickup, the big apps charge 8% to 10% of an order (Uber Eats charges 15% if your in-store prices aren't validated), which is close to what FIG's 5% plus the card fee comes to. <a href="/blog/delivery-app-commissions-vs-fig">The full comparison, with worked examples</a>.</p>"""),
              ("Getting started", """<p>Sign up as a business, add your menu and post your first deal. Before FIG opens to diners, you can lock in a founding price in Settings. When you're ready for takeout paid in the app, add your HST number and connect Stripe in Settings → Get paid. Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
          ],
          faq=[("How much does FIG cost a restaurant?", "$29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for all your restaurants: their pages, deals, scans and insights. Founding restaurants pay $49.99 once before launch, which covers the plan until FIG starts billing; then they keep a founding price that's always lower. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
               ("Is there a commission on dine-in?", "No. A diner who uses your deal pays you at the counter, and FIG takes nothing from that bill. There's no fee per diner."),
               ("Who pays Stripe's fee on takeout?", "It comes off the same in-app payment, before the payout: 2.9% + $0.30 on Canadian cards, Stripe's published rate. On a $33.90 payment that's about $1.28."),
               ("Does FIG collect HST for me?", "The diner pays the HST with the order and it's paid out to you with the rest. It's yours to remit. Your HST number goes on every takeout receipt, with your restaurant as the seller."),
-              ("Is there a contract?", "No. There's no contract and no setup fee. Refunds: within 14 days of your first payment, for any plan; founding deposits are also refunded in full if FIG hasn't opened to diners by March 1, 2027 (for a plan whose first period hasn't started). After that, cancelling stops the renewal, and you keep full access until the end of the month or year you've paid."),
+              ("Is there a contract?", "No. There's no contract. Refunds: within 14 days of your first payment, for any plan; the founding payment is also refunded in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). After that, cancelling a monthly or yearly plan stops the renewal, and you keep full access until the end of the month or year you've paid."),
               ("Can I pay to rank higher?", "No. Nothing you pay FIG changes where you appear in search or on the map, or what your reviews say.")]),
 
     # Places: Main Street Unionville https://en.wikipedia.org/wiki/Main_Street_Unionville ; Markham Village and its Main Street,
@@ -127,7 +127,7 @@ POSTS = [
     #   York University Markham Campus in Markham Centre, opened Fall 2024: https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/ ;
     #   Toogood Pond steps from Main Street Unionville: https://www.blogto.com/travel/2023/03/unionville-ontario/ ;
     #   communities (Unionville, Markham Village, Cornell, Milliken, Cathedraltown): https://en.wikipedia.org/wiki/History_of_Markham,_Ontario
-    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated=UPDATED, topic="For diners", group="fig-in-markham",
+    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated="2026-10-24", topic="For diners", group="fig-in-markham",
          dek="A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them.",
          desc="How to eat out for less in Markham, Ontario: when restaurants post deals, where to look, and how to find and use them on FIG.",
          keywords="restaurant deals Markham, Markham food deals, cheap eats Markham, Markham restaurants, Unionville restaurants, Pacific Mall food",
@@ -152,7 +152,7 @@ POSTS = [
              ("3. Let the map do the searching", """<p>Open FIG and you see live deals around you, nearest first, on Home and on the map. Tell FIG once what you crave, your budget and any diet (halal, vegetarian, vegan, gluten-free and more), and the list becomes the places that actually fit you.</p>
 <p>On the map, pick how far you're willing to go: 1, 2, 5 or 10 km. If nothing's live that close, FIG widens the search to the nearest places rather than showing an empty map. Search has a start screen too: your recent searches, popular cravings and the places on FIG.</p>
 <div class="callout tip"><b>No location? No problem.</b><p>FIG works without your location. It shows Markham by default, and deals are never locked to where you are. Turn location on when you want "nearest first" to mean nearest to you.</p></div>"""),
-             ("4. Claim, go, show your code", """<ol><li>Open a restaurant and tap Claim on the deal you want.</li><li>It waits on your Deals page. A claim has no time limit: it works for as long as the deal runs.</li><li>At the restaurant, open your Deals page and tap Show QR. Staff scan it, or, if the restaurant uses a counter code, you scan theirs.</li><li>The deal comes off the bill. You pay the restaurant as usual.</li></ol>
+             ("4. Claim, go, show your code", """<ol><li>Open a restaurant and tap Claim on the deal you want.</li><li>It waits on your Deals page. A claim has no time limit: it works for as long as the deal runs.</li><li>At the restaurant, open your Deals page and tap Show QR. Staff scan it.</li><li>The deal comes off the bill. You pay the restaurant as usual.</li></ol>
 <p>The code on your screen keeps changing, so a screenshot can't be reused. <a href="/blog/how-restaurant-deals-work">How deals work, step by step</a>.</p>"""),
              ("5. Read the deal properly", """<p>A good deal is one that fits what you were going to do anyway. Before you claim, check:</p>
 <ul><li><strong>Days and hours.</strong> Many deals run only in quiet hours.</li><li><strong>Dine in or takeout.</strong> Some deals are for eating in only; others also work as <a href="/blog/takeout-without-delivery-fees">takeout you pick up</a>.</li><li><strong>Which dishes.</strong> Some deals are on the whole order, some on specific dishes from the menu, which you can see on the restaurant's page.</li><li><strong>The daily cap.</strong> Popular deals can run out for the day.</li></ul>"""),
@@ -167,17 +167,17 @@ POSTS = [
               ("Do claimed deals expire?", "Not on their own. A claim works for as long as the deal runs. It ends only when the restaurant ends the deal, or a flash or dated deal is over."),
               ("Is FIG only in Markham?", "Markham first, expanding to Richmond Hill and Vaughan Mills.")]),
 
-    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated=UPDATED, topic="For restaurants", group="takeout-and-money",
-         dek="Delivery apps charge restaurants a percentage of every order. FIG charges one flat monthly plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
+    dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
+         dek="Delivery apps charge restaurants a percentage of every order. FIG charges one flat plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
          desc="Delivery apps take a share of every order. FIG takes nothing per dine-in diner (one flat plan) and 5% of the food on in-app takeout. The published Canadian rates, side by side.",
          keywords="delivery app commission Canada, Uber Eats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
          points=["Uber Eats lists Canadian delivery plans at 20%, 25% and 30% of each order; DoorDash at 20%, 25% and 29%.",
                  "For pickup, Uber Eats lists 10% (15% if in-store prices aren't validated) and DoorDash 8% to 10%.",
-                 "On FIG, a dine-in diner costs nothing on top of the flat monthly plan; the only cost per visit is the deal you chose. In-app takeout costs 5% of the food plus Stripe's card fee: about 9.3% of a $30 order.",
+                 "On FIG, a dine-in diner costs nothing on top of the flat plan; the only cost per visit is the deal you chose. In-app takeout costs 5% of the food plus Stripe's card fee: about 9.3% of a $30 order.",
                  "On a $30 delivery order at 25%, a restaurant keeps $22.50 of the food. On a $30 FIG takeout paid in the app, it keeps about $27.22.",
                  "Different jobs: delivery apps bring food to the door; FIG brings diners in and to the counter. Many restaurants will use both."],
          sections=[
-             ("The short answer", """<p>Delivery apps charge restaurants a percentage of each order, and in Canada the published delivery rates run from 20% to 30%. FIG charges one flat monthly plan, nothing for a diner who eats in with your deal, and 5% of the food (plus Stripe's card fee) on takeout paid in the app. FIG doesn't deliver, so it isn't a like-for-like replacement: it's a cheaper way to fill the tables and the pickup counter you already have.</p>"""),
+             ("The short answer", """<p>Delivery apps charge restaurants a percentage of each order, and in Canada the published delivery rates run from 20% to 30%. FIG charges one flat plan, nothing for a diner who eats in with your deal, and 5% of the food (plus Stripe's card fee) on takeout paid in the app. FIG doesn't deliver, so it isn't a like-for-like replacement: it's a cheaper way to fill the tables and the pickup counter you already have.</p>"""),
              ("The published rates", """<p>Both big platforms publish their Canadian plans. Rates as listed in October 2026; your own agreement may differ.</p>
 <table><thead><tr><th>Plan</th><th>Delivery</th><th>Pickup</th></tr></thead><tbody>
 <tr><td>Uber Eats Lite</td><td>20%</td><td>10%</td></tr>
@@ -187,7 +187,7 @@ POSTS = [
 <tr><td>DoorDash Basic</td><td>20%</td><td>10%</td></tr>
 <tr><td>DoorDash Plus</td><td>25%</td><td>8%</td></tr>
 <tr><td>DoorDash Premier</td><td>29%</td><td>8%</td></tr>
-<tr><td>FIG, dine-in with a deal</td><td>n/a</td><td>No fee per diner (a flat monthly plan)</td></tr>
+<tr><td>FIG, dine-in with a deal</td><td>n/a</td><td>No fee per diner (a flat plan)</td></tr>
 <tr><td>FIG, takeout paid in the app</td><td>n/a</td><td>5% of the food + Stripe's 2.9% + $0.30</td></tr>
 </tbody></table>
 <p>Uber Eats notes its pickup fee rises to 15% if your in-store prices aren't validated. Higher plans buy more visibility, a wider delivery area and member programs, which is real value for some restaurants.</p>"""),
@@ -200,7 +200,7 @@ POSTS = [
 <tr><td>FIG takeout paid in the app</td><td>$1.50 FIG + $1.28 Stripe</td><td>$27.22</td></tr>
 <tr><td>FIG dine-in with a deal</td><td>$0.00</td><td>$30.00, minus the deal you chose</td></tr>
 </tbody></table><p>The FIG card fee is Stripe's 2.9% + $0.30 on the $33.90 the diner pays with 13% HST. The platform rows use the published plan rates; card processing and any marketing you buy are set by each platform's own terms. FIG's plan ($29.99 a month or $299.99 a year from launch, less for founding restaurants, one for all your restaurants) is flat, not a cut of each order.</p></div>
-<p>Be honest with yourself about pickup: an 8% to 10% pickup plan and FIG's in-app takeout land in the same range. FIG's real difference is everything around it: dine-in costs nothing per diner on top of one flat monthly plan, there's no contract, and nothing you pay for changes where you show up.</p>"""),
+<p>Be honest with yourself about pickup: an 8% to 10% pickup plan and FIG's in-app takeout land in the same range. FIG's real difference is everything around it: dine-in costs nothing per diner on top of one flat plan, there's no contract, and nothing you pay for changes where you show up.</p>"""),
              ("Worked example: a year of orders", """<div class="callout math"><b>Ten $40 orders a week</b><ul><li>At a 25% delivery commission: $10 an order, $100 a week, about $5,200 a year.</li><li>The same ten diners eating in with a FIG deal: $0 to FIG. Your cost is the deal itself, which you chose and capped.</li><li>As FIG takeout paid in the app: 5% of $40 is $2.00, and Stripe's fee on the $45.20 payment is about $1.61, so about $3.61 an order, or roughly $1,880 a year.</li></ul></div>"""),
              ("The cost you choose: the deal", """<p>A deal isn't free: if you offer 20% off, that 20% is a real cost. The difference is that you set it, for the hours you choose, with a daily cap, on the dishes you pick. A deal that fills a table at 3 pm, when it would otherwise be empty, can be worth it at a lower margin, as long as it covers its food cost and you're not giving it away at 7 pm on a Saturday. <a href="/blog/slow-hour-deal-math">How to run a slow-hour deal that makes money</a>.</p>"""),
              ("Different jobs, used together", """<p>Delivery apps are very good at one thing: getting food to someone's door. That has real costs (drivers, distance, support), and the commission pays for them. FIG does a different job:</p>
@@ -212,7 +212,7 @@ POSTS = [
              ('If you already use delivery apps', '<ul><li><strong>Keep delivery for delivery.</strong> FIG doesn\'t replace a driver network.</li><li><strong>Add FIG for the room and the counter.</strong> Post deals for your quiet hours and let diners order takeout with them.</li><li><strong>Tell your regulars.</strong> A sign at the counter, "We\'re on FIG: deals Monday to Thursday afternoons", points app customers to the cheaper way to reach you.</li><li><strong>Compare after a month.</strong> FIG\'s free insights show views, claims, the diners who came in and who came back.</li></ul>'),
          ],
          faq=[("What commission do delivery apps charge in Canada?", "As published in October 2026: Uber Eats 20%, 25% or 30% on delivery and 10% on pickup; DoorDash 20%, 25% or 29% on delivery and 10% or 8% on pickup, depending on the plan."),
-              ("Does FIG charge a commission?", "Not on dine-in: deals and scans are included in FIG's flat monthly plan, with no fee per diner. On takeout paid in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
+              ("Does FIG charge a commission?", "Not on dine-in: deals and scans are included in FIG's flat plan, with no fee per diner. On takeout paid in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
               ("Is FIG cheaper than a delivery app's pickup plan?", "Close. On a $30 order, FIG's in-app takeout costs about $2.78 including the card fee; an 8% to 10% pickup plan costs $2.40 to $3.00. FIG's difference is that dine-in diners cost nothing."),
               ("Does FIG do delivery?", "No. Diners eat in, or order takeout and pick it up."),
               ("Can I use FIG and a delivery app together?", "Yes. Many restaurants will keep delivery for delivery and use FIG to fill quiet hours and the pickup counter."),
@@ -260,7 +260,7 @@ POSTS = [
     # York University Markham Campus (Markham Centre, opened Fall 2024): https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/
     # Pacific Mall Heritage Town food court: https://en.wikipedia.org/wiki/Pacific_Mall
     # Ontario $4 prepared food point-of-sale rebate (GI-064): source at the top
-    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated=UPDATED, topic="For diners", group="fig-in-markham",
+    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated="2026-10-24", topic="For diners", group="fig-in-markham",
          dek="How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free.",
          desc="How Markham students can eat out for less: when deals show up, setting a real budget, deciding as a group, and why FIG is free.",
          keywords="student food deals Markham, cheap eats for students, after school food Markham, budget restaurants Markham, bubble tea deals Markham, York University Markham food",
@@ -280,9 +280,9 @@ POSTS = [
              ("Know your spots", """<p>A few areas worth knowing:</p>
 <ul><li><strong>Pacific Mall</strong> at Steeles and Kennedy, with its own food court and market, Heritage Town.</li><li><strong>Highway 7</strong> and Markham Centre, near the York campus.</li><li><strong>Main Street Unionville</strong>, for a sit-down treat.</li><li><strong>Your local plaza.</strong> Many of the best cheap eats in Markham are in plazas you walk past every day.</li></ul>
 <p>More in our <a href="/blog/restaurant-deals-markham">guide to restaurant deals in Markham</a>.</p>"""),
-             ("How it works at the counter", """<ol><li>Claim the deal in FIG. It waits on your Deals page for as long as the deal runs.</li><li>At the restaurant, tap Show QR. Staff scan it, or you scan the restaurant's counter code.</li><li>The deal comes off your bill. You pay the restaurant like normal.</li></ol>
+             ("How it works at the counter", """<ol><li>Claim the deal in FIG. It waits on your Deals page for as long as the deal runs.</li><li>At the restaurant, tap Show QR. Staff scan it.</li><li>The deal comes off your bill. You pay the restaurant like normal.</li></ol>
 <p>You don't need a credit card to claim a deal. The code keeps changing, so a screenshot from a friend won't work: everyone claims their own.</p>"""),
-             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants pay FIG a flat monthly plan, never per diner. Deals start in Markham on January 1, 2027.</p>"""),
+             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants pay FIG a flat plan, never per diner. Deals start in Markham on January 1, 2027.</p>"""),
              ('A week of eating out on $40', '<div class="callout math"><b>An example week (your prices will vary)</b><table><thead><tr><th>Day</th><th>Plan</th><th>Cost with 13% HST</th></tr></thead><tbody>\n<tr><td>Monday</td><td>A $3.50 drink after school (taxed at 5% under $4)</td><td>$3.68</td></tr>\n<tr><td>Tuesday</td><td>A $14 bowl with a $3-off deal</td><td>$12.43</td></tr>\n<tr><td>Thursday</td><td>2-for-1 with a friend: you each pay half of one $15 dish</td><td>$8.48</td></tr>\n<tr><td>Saturday</td><td>A $12 lunch with 15% off</td><td>$11.53</td></tr>\n<tr><td colspan="2"><strong>Total</strong></td><td><strong>$36.12</strong></td></tr>\n</tbody></table><p>Four meals out for under $40, by choosing the deal first. Without the deals, the same food would be about $50.</p></div>'),
              ('Diets and allergies', "<p>Set your diet in FIG (halal, vegetarian, vegan, gluten-free and more) and the places that don't fit drop out of your results. For allergies, filters are a starting point, not a guarantee: call the restaurant before you go, or tell staff when you order. Kitchens share equipment, and only they know exactly what's in a dish.</p>"),
              ('Staying safe and private', '<ul><li>Restaurants see your first name and last initial, never your phone number or email.</li><li>Your claimed deal only works on your phone, so nobody can use it for you.</li></ul>'),
@@ -292,9 +292,9 @@ POSTS = [
               ("When are student food deals most common?", "In restaurants' quiet hours: after school, roughly 3 to 6 pm, and late evenings for desserts and drinks."),
               ("Can my friends use my code?", "No. Each code keeps changing and belongs to the person who claimed it. Everyone claims their own deal."),
               ("Is food under $4 really taxed less?", "In Ontario, yes: qualifying prepared food and drinks sold for $4 or less in total get the 8% provincial part of the HST rebated at the till, so only the 5% GST applies."),
-              ("When can I start using FIG deals?", "Deals start in Markham on January 1, 2027. You can explore the map and restaurants now.")]),
+              ("When can I start using FIG deals?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
 
-    dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", updated=UPDATED, topic="For diners", group="eat-out-for-less",
+    dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", updated="2026-10-24", topic="For diners", group="eat-out-for-less",
          dek="Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends.",
          desc="Flash deals are short restaurant deals posted during quiet spells. How they work, how to catch one, and what happens to a claim when the timer ends.",
          keywords="flash deals restaurants, last minute restaurant deals, happy hour Markham, real time food deals, flash deal app",
@@ -313,13 +313,13 @@ POSTS = [
 <tr><td>Where you see it</td><td>Home, the map, the restaurant's page</td><td>Top of Search, the map, the restaurant's page</td></tr>
 </tbody></table>"""),
              ("How to catch one", """<p>Live flash deals stand out on the map and on Home, with their timer, and the Flash deals filter shows only them. Because they're short, the best way to catch them is to check FIG when you're already thinking about food, the same moment you'd open a group chat to ask "where should we eat?".</p>"""),
-             ("Claim it, then go", """<ol><li>Tap the flash deal and Claim it. It's on your Deals page with the time left.</li><li>Head over. A claim doesn't need you to be anywhere in particular: you can claim from home.</li><li>At the counter, tap Show QR and let staff scan it, or scan the restaurant's counter code.</li></ol>
+             ("Claim it, then go", """<ol><li>Tap the flash deal and Claim it. It's on your Deals page with the time left.</li><li>Head over. A claim doesn't need you to be anywhere in particular: you can claim from home.</li><li>At the counter, tap Show QR and let staff scan it.</li></ol>
 <p>Your code keeps changing on screen, so a screenshot can't be reused. If the timer runs out before you get there, the claim expires. It shows as Expired on your Deals page for a day, and it never counts against you.</p>"""),
              ("Are flash deals real?", """<p>Yes, and it's worth saying why. On FIG, the timer is the restaurant's own: the owner chose the deal and how long it runs, because they actually have the space. FIG doesn't invent urgency, and a flash deal isn't a fake countdown that resets tomorrow.</p>"""),
              ("For restaurant owners", """<p>Posting a flash deal takes a few seconds: pick the deal (a percentage off, a dollar amount off, 2-for-1 or something free), the length and an optional cap. There's no fee per deal or per scan. Good flash deals are:</p>
 <ul><li><strong>Simple.</strong> One dish or one clear discount, readable at a glance.</li><li><strong>Short.</strong> Long enough for someone nearby to get there, short enough to stay special.</li><li><strong>Capped.</strong> So a sudden rush can't overwhelm the kitchen.</li><li><strong>Real.</strong> Post one when you genuinely have room, and diners learn to trust them.</li></ul>
 <p>Check the math before you post: in a quiet spell, a deal only has to cover its food cost to add money. <a href="/blog/slow-hour-deal-math">Slow-hour deal math</a> · <a href="/#owners">How FIG works for restaurants</a></p>"""),
-             ('The life of a flash deal', '<table><thead><tr><th>When</th><th>What happens</th></tr></thead><tbody>\n<tr><td>2:40 pm</td><td>A restaurant has a quiet afternoon and posts "$4 off any noodle bowl, for 90 minutes, 15 available".</td></tr>\n<tr><td>2:41 pm</td><td>It stands out on the map and on Home, and shows on the restaurant\'s page, with the time left.</td></tr>\n<tr><td>2:45 to 4:10 pm</td><td>Diners nearby claim it and head over. Each claim waits on their Deals page.</td></tr>\n<tr><td>At the counter</td><td>Staff scan each diner\'s code, or diners scan the restaurant\'s counter code. $4 comes off.</td></tr>\n<tr><td>4:10 pm</td><td>The timer ends. The deal disappears, and any unused claims expire. If all 15 had been used first, it would have ended then.</td></tr>\n</tbody></table>\n<p>An example timeline: every restaurant chooses its own deal, length and cap.</p>'),
+             ('The life of a flash deal', '<table><thead><tr><th>When</th><th>What happens</th></tr></thead><tbody>\n<tr><td>2:40 pm</td><td>A restaurant has a quiet afternoon and posts "$4 off any noodle bowl, for 90 minutes, 15 available".</td></tr>\n<tr><td>2:41 pm</td><td>It stands out on the map and on Home, and shows on the restaurant\'s page, with the time left.</td></tr>\n<tr><td>2:45 to 4:10 pm</td><td>Diners nearby claim it and head over. Each claim waits on their Deals page.</td></tr>\n<tr><td>At the counter</td><td>Staff scan each diner\'s code. $4 comes off.</td></tr>\n<tr><td>4:10 pm</td><td>The timer ends. The deal disappears, and any unused claims expire. If all 15 had been used first, it would have ended then.</td></tr>\n</tbody></table>\n<p>An example timeline: every restaurant chooses its own deal, length and cap.</p>'),
              ('Why restaurants have surprise quiet spells', "<p>A dining room can go quiet for reasons nobody planned: a downpour, a cancelled group booking, a slow day after a holiday weekend, a road closure out front. The kitchen is staffed and the food is prepped either way. A flash deal turns that spare capacity into diners, and because it's short and capped, it doesn't train people to wait for discounts.</p>"),
              ('Flash deal etiquette for diners', '<ul><li><strong>Claim it when you mean to go.</strong> Caps are small, and an unused claim may keep someone else out.</li><li><strong>Go promptly.</strong> The deal ends with the timer, wherever you are.</li><li><strong>Check dine-in or takeout</strong> before you set off.</li><li><strong>Like the deal</strong> afterwards if it was good: it tells the restaurant, and other diners, that it worked.</li></ul>'),
              ('Everyday or flash? For owners', '<table><thead><tr><th>Use an everyday deal when</th><th>Use a flash deal when</th></tr></thead><tbody>\n<tr><td>The same hours are quiet every week</td><td>Today is unexpectedly quiet</td></tr>\n<tr><td>You want regulars to know when to come</td><td>You want diners who are nearby right now</td></tr>\n<tr><td>You can plan the dish and the staffing</td><td>You have food and staff ready but empty seats</td></tr>\n</tbody></table>\n<div class="callout math"><b>Is a flash deal worth it?</b><p>A $15 bowl with a food cost of $4.50 still leaves $6.50 with $4 off. In an hour where those seats would sit empty, fifteen of them add up to $97.50 toward the shift\'s wages and rent, before any drinks. Use your own numbers. <a href="/blog/slow-hour-deal-math">The full slow-hour math</a>.</p></div>'),
@@ -329,7 +329,7 @@ POSTS = [
               ("Will FIG message me about flash deals?", "Not on its own. Check the map or Home, or turn on the Flash deals filter to see only them."),
               ("Do I have to be nearby to claim a flash deal?", "No. Deals are never locked to your location. Just make sure you can get there before the timer ends."),
               ("Can a restaurant post a flash deal for takeout?", "A restaurant chooses whether each deal is dine-in only or also takeout."),
-              ("Do flash deals cost restaurants anything?", "Not on top of the plan. Posting deals and scanning diners are included in FIG's flat monthly plan, with no fee per deal or per diner.")]),
+              ("Do flash deals cost restaurants anything?", "Not on top of the plan. Posting deals and scanning diners are included in FIG's flat plan, with no fee per deal or per diner.")]),
 
     dict(slug="takeout-without-delivery-fees", screen="qr", title="Takeout with a deal, pick up, skip the delivery fees", date="2026-10-04", updated=UPDATED, topic="For diners", group="takeout-and-money",
          dek="Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late.",
@@ -364,13 +364,13 @@ POSTS = [
     # ---------------------------------------------------------------- the first batch of new posts (user 2026-10-14: "just post it";
     # the review gate is gone: a post without publish_at is live, and the admin page can hide one later)
 
-    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", topic="For diners", group="eat-out-for-less",
+    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", updated="2026-10-24", topic="For diners", group="eat-out-for-less",
          dek="Everything that happens between seeing a deal and paying the bill: claiming, your Deals page, the code at the counter, takeout, what happens when a deal ends, and rating the visit.",
          desc="From seeing a deal to paying the bill: claiming, your Deals page, the code at the counter, takeout, when a deal ends, and rating the visit.",
          keywords="how restaurant deals work, claim restaurant deal, restaurant deal app how to, FIG voucher, QR code restaurant deal",
          points=["Find a deal on Home, the map or a restaurant's page, and tap Claim. It waits on your Deals page.",
                  "A claim has no time limit: it works for as long as the deal runs.",
-                 "At the counter, tap Show QR and staff scan it, or scan the restaurant's own counter code. The deal comes off your bill.",
+                 "At the counter, tap Show QR and staff scan it. The deal comes off your bill.",
                  "The code keeps changing, so screenshots don't work and nobody can reuse your deal.",
                  "After a scanned visit you can rate the restaurant, and like the deal. FIG is free for diners."],
          sections=[
@@ -380,13 +380,9 @@ POSTS = [
 <p>Every deal shows what it is, when it runs and whether it's dine-in only or also takeout. Some deals are on the whole order; others are on specific dishes, which you'll see on the menu. Deals in Markham start January 1, 2027.</p>"""),
              ("Step 2: Claim it", """<p>Tap Claim on the deal, then Claim deal. It waits on your Deals page. A claim doesn't time out: it works for as long as the deal runs. You don't need to be near the restaurant to claim, and you don't need to go right away.</p>
 <div class="callout tip"><b>When does a claim end?</b><p>Only when the restaurant ends the deal, or when a flash deal's timer or a dated deal is over. Then it shows as Expired on your Deals page for a day and leaves the list. Expired claims never count against you.</p></div>"""),
-             ("Step 3: At the restaurant", """<p>Order as usual and, when it's time to pay, open your Deals page. There are two ways the deal gets applied, depending on the restaurant:</p>
-<table><thead><tr><th>Way</th><th>What you do</th><th>What staff do</th></tr></thead><tbody>
-<tr><td>Your QR code</td><td>Tap Show QR</td><td>Scan it with the restaurant side of FIG</td></tr>
-<tr><td>The counter code</td><td>Tap Scan the counter and point your camera at the restaurant's code</td><td>Nothing: the code on their screen does it</td></tr>
-</tbody></table>
+             ("Step 3: At the restaurant", """<p>Order as usual and, when it's time to pay, open your Deals page and tap Show QR. Staff scan it with the restaurant side of FIG.</p>
 <p>If a camera won't cooperate, there's a short code staff can type instead. Either way, the deal comes off the bill and you pay the restaurant directly.</p>
-<p>The QR code on your screen keeps changing, and the restaurant's counter code changes every 30 seconds. That's what makes deals safe: a screenshot can't be reused, and nobody can use your claim but you.</p>"""),
+<p>The QR code on your screen keeps changing. That's what makes deals safe: a screenshot can't be reused, and nobody can use your claim but you.</p>"""),
              ("Step 4: Rate the visit", """<p>Once your visit is scanned, you can rate the restaurant: tap Rate this visit, or find it later under Past visits on your Deals page. Pick the stars and add a few words or a photo if you like. One review per visit, and it shows your first name and last initial.</p>
 <p>Deals get likes, restaurants get stars. Only diners whose visit was scanned can review, so every review on FIG comes from a real meal. <a href="/blog/how-to-read-restaurant-reviews">How to read a restaurant's reviews</a>.</p>"""),
              ("Takeout works too", """<p>If a deal is marked Dine in or takeout, tap Takeout instead: the restaurant's menu opens with the deal applied, you add what you want, and you pick it up. Tap I'm here when you arrive and show your pickup code. No delivery or service fees. <a href="/blog/takeout-without-delivery-fees">How takeout works</a>.</p>"""),
@@ -396,13 +392,12 @@ POSTS = [
          faq=[("Do I need to pay in the app?", "Not for dine-in. You show your code and pay the restaurant as usual. Takeout is paid in the app when you order."),
               ("How long is a claimed deal good for?", "As long as the deal runs. It ends only when the restaurant ends the deal, or a flash or dated deal is over."),
               ("Can I screenshot my code?", "It won't work. The code keeps changing, so only the live code in your app can be scanned."),
-              ("What's the counter code?", "Some restaurants show their own QR code at the counter that changes every 30 seconds. Tap Scan the counter on your claimed deal and point your camera at it."),
               ("Can I use a deal more than once?", "Once per person per day, whether you use it at the counter or order takeout with it. The restaurant also caps how many are used each day."),
               ("Who can review a restaurant?", "Only diners whose visit was scanned, so every review comes from a real visit."),
               ("Is FIG free?", "Yes, for every diner: no subscription, no fees and no ads for now.")]),
 
     # StatCan 2023 margin 3.6%; food cost 28-32% (Resy): sources at the top
-    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="slow-hour-deal-math", screen="tdash", title="How to run a slow-hour deal that makes money (with the math)", date="2026-10-14", updated="2026-10-24", topic="For restaurants", group="fill-quiet-hours",
          dek="A slow-hour deal makes money when it fills seats that would otherwise be empty and covers its food cost. Here's the arithmetic: contribution per plate, the worst case, the cap, and how to tell new diners from regulars who'd have come anyway.",
          desc="A slow-hour deal makes money when it fills empty seats and covers its food cost. The math: contribution per plate, the worst case and the daily cap.",
          keywords="happy hour deal restaurant profit, slow hour promotion, restaurant deal math, restaurant discount profitability, off-peak restaurant deals",
@@ -440,7 +435,7 @@ POSTS = [
               ("How big should my daily cap be?", "Big enough to matter, small enough that the worst case (cap × discount) is a number you're comfortable with. Start small and raise it."),
               ("Should drinks be part of the deal?", "Often not: a deal on the main dish with drinks at full price lets add-ons do the earning."),
               ("How do I know if new people are coming?", "Watch scans and return visits per deal. FIG's insights show the diners who came in and who came back."),
-              ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners are included in FIG's flat monthly plan, with no fee per diner.")]),
+              ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners are included in FIG's flat plan, with no fee per diner.")]),
 
     # CRA: a store coupon reduces the price before GST/HST (RC4022): source at the top
     dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
@@ -491,7 +486,7 @@ POSTS = [
 
     # Stripe 2.9% + CA$0.30: source at the top. HST number format 123456789 RT 0001 (9-digit BN, RT = GST/HST program, 4-digit
     #   reference): https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4022/general-information-gst-hst-registrants.html
-    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", updated="2026-10-24", topic="For restaurants", group="fill-quiet-hours",
          dek="A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply.",
          desc="A step-by-step guide for owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts.",
          keywords="FIG restaurant setup, restaurant menu app, set up takeout restaurant, Stripe payouts restaurant, HST number restaurant app",
@@ -508,8 +503,8 @@ POSTS = [
 <p>Publishing is all or nothing: if one line has a problem, nothing changes and FIG tells you which line. Dishes keep their place in your deals and open orders when you edit them.</p>
 <p>Out of something tonight? Mark a dish sold out for today, and it's back tomorrow.</p>"""),
              ("Minutes 10 to 13: your first deal", """<p>Pick one dish with a healthy margin and one quiet window, and write it plainly: "$3 off any noodle bowl, Monday to Thursday, 2 to 5 pm". Set a daily cap (10 is a good start) and choose dine-in only or takeout too. That's it: it's live on the map for nearby diners. <a href="/blog/deal-types-percent-dollar-2-for-1">Which deal type to pick</a>.</p>"""),
-             ("Minutes 13 to 15: how you'll scan", """<p>Diners show a QR code; staff scan it with the restaurant side of FIG on any phone, tablet or computer, or type the short code if a camera won't cooperate. You can also turn on a <strong>counter code</strong> in Settings: your screen shows a code that changes every 30 seconds, and diners scan it themselves. Neither has a fee per scan or per diner.</p>"""),
-             ("Takeout: three ways to run it", """<table><thead><tr><th></th><th>What you need</th><th>What it costs</th></tr></thead><tbody>
+             ("Minutes 13 to 15: how you'll scan", """<p>Diners show a QR code; staff scan it with the restaurant side of FIG on any phone, tablet or computer, or type the short code if a camera won't cooperate. There's no fee per scan or per diner.</p>"""),
+             ("Takeout: two ways to run it", """<table><thead><tr><th></th><th>What you need</th><th>What it costs</th></tr></thead><tbody>
 <tr><td>Dine-in deals only</td><td>Nothing more</td><td>Included in your plan</td></tr>
 <tr><td>Takeout, paid in the app</td><td>Your HST number + Stripe payouts (Settings → Get paid)</td><td>5% of the food + Stripe's 2.9% + $0.30</td></tr>
 </tbody></table>
@@ -525,8 +520,7 @@ POSTS = [
          faq=[("How long does it take to set up FIG?", "About 15 minutes with your menu handy: sign up, add your menu, publish and post one deal. In-app takeout adds your HST number and Stripe setup."),
               ("Do I need an HST number to use FIG?", "Not for deals and scanning. You need one, with Stripe payouts, for takeout, which diners pay for in the app."),
               ("What does it cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (founding restaurants lock in less before launch). It covers their pages, menus, deals, scans and insights. In-app takeout also costs 5% of the food plus Stripe's card fee."),
-              ("What if we're too busy for takeout?", "Pause takeout for a while or until tomorrow, or add prep time, in one tap."),
-              ("Can diners scan us instead of us scanning them?", "Yes. Turn on the counter code in Settings: your screen shows a code that changes every 30 seconds, and diners scan it.")]),
+              ("What if we're too busy for takeout?", "Pause takeout for a while or until tomorrow, or add prep time, in one tap.")]),
 
     # CRA small supplier ($30,000 over four consecutive quarters, or in a single quarter; register within 29 days):
     #   https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/when-register-charge.html
@@ -609,7 +603,7 @@ POSTS = [
               ("When is the best time to eat out as a group?", "Quiet hours, like early weeknight dinners: more room, an easier kitchen, and more deals."),
               ("Do deals apply to the whole table?", "It depends on the deal: some are on specific dishes, some on the whole order. Check the deal, or call the restaurant before you go.")]),
 
-    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-14", topic="For diners", group="eat-out-for-less",
+    dict(slug="how-to-read-restaurant-reviews", screen="map", title="How to read a restaurant's reviews on FIG", date="2026-10-14", updated="2026-10-24", topic="For diners", group="eat-out-for-less",
          dek="Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute.",
          desc="Reviews on FIG come only from diners whose visit was scanned. How ratings, likes and replies work, and how to read a page in a minute.",
          keywords="restaurant reviews, trustworthy restaurant reviews, how to read restaurant reviews, verified reviews restaurant app, FIG reviews",
@@ -620,7 +614,7 @@ POSTS = [
                  "Paying FIG never hides, changes or reorders a review."],
          sections=[
              ("The short answer", """<p>On FIG, a review can only come from a diner whose visit was scanned at the restaurant, so you're reading people who actually ate there. To decide quickly: look at the spread of ratings, sort by Newest to see recent visits, read a couple of the low ones and how the restaurant replied, and check the likes on the deal you're considering.</p>"""),
-             ("Why FIG reviews are different", """<p>Most review sites let anyone write anything. On FIG, the review button appears only after a visit is scanned, whether staff scanned the diner's code or the diner scanned the restaurant's counter code. That rules out reviews from people who never went, and it ties each review to one visit: one review per visit. Reviews show the diner's first name and last initial.</p>
+             ("Why FIG reviews are different", """<p>Most review sites let anyone write anything. On FIG, the review button appears only after a visit is scanned: staff scan the diner's code at the restaurant. That rules out reviews from people who never went, and it ties each review to one visit: one review per visit. Reviews show the diner's first name and last initial.</p>
 <p>And nothing a restaurant pays FIG changes this: paying never hides, changes or reorders reviews.</p>"""),
              ("Stars for restaurants, likes for deals", """<table><thead><tr><th></th><th>Stars</th><th>Likes</th></tr></thead><tbody>
 <tr><td>On</td><td>The restaurant</td><td>A deal</td></tr>
@@ -737,30 +731,27 @@ POSTS = [
               ("What if a deal runs out before I get there?", "A daily cap can end a deal for the day, and a flash deal ends with its timer. An expired claim never counts against you."),
               ("How do I check that a deal fits my order?", "Open the deal and check the dishes, days, hours and whether it is dine in or takeout. You can also call the restaurant before you go.")]),
 
-    dict(slug="train-staff-honour-fig-deal", screen="tscanner", title="Train your staff to honour a FIG deal in 10 minutes", date="2026-10-18", publish_at="2026-10-18T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
-         dek="A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: the two ways to scan, what to check, what to say when something looks off, and a one-page cheat sheet.",
-         desc="A ten-minute training plan so counter staff know what to do with a FIG deal: the two ways to scan, what to check, what to say, and a cheat sheet.",
-         keywords="train restaurant staff, scan QR code restaurant deal, restaurant counter code, staff training restaurant promotion, FIG for restaurants, honour restaurant coupon",
-         points=["Staff need to know two ways a deal gets applied: scan the diner's code, or the diner scans your counter code.",
-                 "The diner's code keeps changing and the counter code changes every 30 seconds, so screenshots do not work.",
+    dict(slug="train-staff-honour-fig-deal", screen="tscanner", title="Train your staff to honour a FIG deal in 10 minutes", date="2026-10-18", updated="2026-10-24", publish_at="2026-10-18T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="A deal only works if the person at the counter knows what to do with it. A ten-minute training plan for restaurant staff: how to scan, what to check, what to say when something looks off, and a one-page cheat sheet.",
+         desc="A ten-minute training plan so counter staff know what to do with a FIG deal: how to scan, what to check, what to say, and a cheat sheet.",
+         keywords="train restaurant staff, scan QR code restaurant deal, staff training restaurant promotion, FIG for restaurants, honour restaurant coupon",
+         points=["Staff need to know how a deal gets applied: scan the diner's code, or type the short code if the camera fails.",
+                 "The diner's code keeps changing, so screenshots do not work.",
                  "Each claim is used once. A daily cap stops the deal on its own, so staff do not have to count.",
                  "Put the deal on a card by the till: what it covers, which days and hours, dine-in or takeout.",
                  "Decide in advance what staff do when a scan fails, and tell them they can ask you instead of arguing at the counter."],
          sections=[
-             ("The short answer", """<p>Staff need to know four things: what the deal is, how to scan it, what to do when it does not scan, and who to ask. That fits in ten minutes. Scanning on FIG works in two ways: staff scan the diner's code with the restaurant side of FIG on any phone, tablet or computer, or the diner scans your counter code on your screen. Either way the deal comes off the bill, and the diner pays you as usual. There's no fee per scan or per diner.</p>"""),
+             ("The short answer", """<p>Staff need to know four things: what the deal is, how to scan it, what to do when it does not scan, and who to ask. That fits in ten minutes. To scan, staff open the restaurant side of FIG on any phone, tablet or computer and scan the diner's code. The deal comes off the bill, and the diner pays you as usual. There's no fee per scan or per diner.</p>"""),
              ("Why training matters more than the deal", """<p>A diner who claimed a deal and then waits while three staff members debate it will not be back, however good the deal was. A short routine fixes that. It also protects you: when everyone applies the deal the same way, you can trust the numbers in your insights, which show views, claims, the diners who came in and the ones who came back.</p>"""),
              ("The ten-minute plan", """<table><thead><tr><th>Minutes</th><th>What to cover</th><th>Who does it</th></tr></thead><tbody>
 <tr><td>0 to 2</td><td>What today's deals are, in one sentence each, with days and hours</td><td>You, reading from the deal card</td></tr>
-<tr><td>2 to 5</td><td>Scan the diner's code with the restaurant side of FIG, step by step</td><td>You, then each person tries once</td></tr>
-<tr><td>5 to 7</td><td>The counter code: what it is and how to point diners to it</td><td>You, at the till</td></tr>
+<tr><td>2 to 7</td><td>Scan the diner's code with the restaurant side of FIG, step by step</td><td>You, then each person tries once</td></tr>
 <tr><td>7 to 9</td><td>When something looks off and what to say</td><td>Role-play two cases</td></tr>
 <tr><td>9 to 10</td><td>Who to ask, and where the cheat sheet lives</td><td>You</td></tr>
 </tbody></table>
 <p>Run it at the start of a shift, before the doors open, and again for anyone new. Put the same card by every till.</p>"""),
-             ("Way 1: staff scan the diner's code", """<ol><li>The diner orders as usual. When it is time to pay, they open their Deals page and tap Show QR.</li><li>A staff member opens the restaurant side of FIG on a phone, tablet or computer and scans the code on the diner's screen.</li><li>The deal comes off the bill. The diner pays you the way they always do: card, cash or whatever you take.</li></ol>
+             ("How staff scan the diner's code", """<ol><li>The diner orders as usual. When it is time to pay, they open their Deals page and tap Show QR.</li><li>A staff member opens the restaurant side of FIG on a phone, tablet or computer and scans the code on the diner's screen.</li><li>The deal comes off the bill. The diner pays you the way they always do: card, cash or whatever you take.</li></ol>
 <p>If a camera will not read the screen, there is a short code staff can type instead. Teach that too, so a dirty lens never stops a sale. The code on the diner's screen keeps changing, so a screenshot or a photo sent by a friend will not work. Each diner claims and shows their own.</p>"""),
-             ("Way 2: the diner scans your counter code", """<p>In Settings you can turn on a counter code. Your screen shows a code that changes every 30 seconds. The diner opens their claimed deal, taps Scan the counter and points their camera at it. Staff do not need to do anything with a scan, which suits busy tills and tables where the server is not near the device.</p>
-<p>Two things for staff to remember: the screen showing the code should be where diners can see it without asking, and it should be on and awake. A sign beside it, such as "Scan here to use your FIG deal", saves questions. You can use both ways. Many restaurants use staff scanning at the till and the counter code at the table.</p>"""),
              ("What staff should check", """<p>Before applying any deal, the person at the counter should be able to answer these without looking anything up. Put the answers on the card:</p>
 <ul><li><strong>What it covers.</strong> The whole order, or specific dishes from your menu?</li><li><strong>When it runs.</strong> Which days and hours? A deal for weekday afternoons does not apply on Saturday night.</li><li><strong>Dine in or takeout.</strong> Dine-in deals are for eating in. Takeout is paid in the app, and a takeout order arrives with its deal already applied.</li><li><strong>The cap.</strong> It stops the deal on its own once it has been used that many times today. Staff do not need to count.</li><li><strong>One use per claim.</strong> A scanned claim is used. The diner can claim again only if the deal allows it.</li></ul>"""),
              ("When something looks off", """<p>Settle the answers before the rush, so nobody invents them at the counter. These are suggestions to adapt, since your policy is yours:</p>
@@ -775,18 +766,17 @@ POSTS = [
              ("Tax and the bill", """<p>In Ontario, HST is worked out on what the diner pays after your own discount, the same way a store coupon lowers the price before tax. Your till should charge tax on the discounted amount. This is general information, not tax advice, so check with your accountant if you are unsure how your till handles a discount. <a href="/blog/deal-types-percent-dollar-2-for-1">How tax works on each deal type</a>.</p>
 <div class="callout math"><b>Example: a $12 bowl with $3 off, eating in</b><ul><li>Bowl $12.00 &minus; $3.00 = $9.00.</li><li>HST at 13%: $1.17.</li><li>Diner pays $10.17.</li></ul><p>Staff tip: if the till total does not match what the diner expects, show them the line. A clear receipt prevents most disputes.</p></div>"""),
              ("Be kind about privacy", """<p>Restaurants never see a diner's phone number. On orders and reviews, you see their first name and last initial. Tell staff not to ask for contact details to apply a deal; the scan is all that is needed.</p>"""),
-             ("Your one-page cheat sheet", """<ol><li>Today's deals, with days, hours and dishes.</li><li>Scan the diner's code with the restaurant side of FIG, or point them to the counter code.</li><li>If the camera fails, type the short code.</li><li>A screenshot will not scan: ask for the live code on their Deals page.</li><li>If anything looks off, ask the manager. Do not argue at the counter.</li><li>Afterwards, tell the diner they can rate the visit. Only scanned visits can be reviewed.</li></ol>
+             ("Your one-page cheat sheet", """<ol><li>Today's deals, with days, hours and dishes.</li><li>Scan the diner's code with the restaurant side of FIG.</li><li>If the camera fails, type the short code.</li><li>A screenshot will not scan: ask for the live code on their Deals page.</li><li>If anything looks off, ask the manager. Do not argue at the counter.</li><li>Afterwards, tell the diner they can rate the visit. Only scanned visits can be reviewed.</li></ol>
 <p>Print it, laminate it and tape it by each till. When you change a deal, change the card the same day. <a href="/blog/set-up-fig-menu-takeout">Setting up your menu, deals and scanning</a> covers the first-time setup.</p>"""),
          ],
-         faq=[("How do staff apply a FIG deal?", "They scan the diner's code with the restaurant side of FIG on any phone, tablet or computer, or the diner scans the restaurant's counter code on its screen. The deal comes off the bill."),
+         faq=[("How do staff apply a FIG deal?", "They scan the diner's code with the restaurant side of FIG on any phone, tablet or computer. The deal comes off the bill."),
               ("What if the camera cannot scan the code?", "There is a short code staff can type instead."),
               ("Can a diner use a screenshot of their code?", "No. The code keeps changing, so only the live code in the diner's app can be scanned."),
-              ("How often does the counter code change?", "Every 30 seconds."),
               ("Does it cost anything to scan diners?", "No. There's no fee per scan or per diner; scanning is part of your plan."),
               ("Do staff need to count how many times a deal was used?", "No. The daily cap you set stops the deal automatically once it has been used that many times."),
               ("Do restaurants see diners' phone numbers?", "No. On orders and reviews you see a first name and last initial.")]),
 
-    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", publish_at="2026-10-19T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", updated="2026-10-24", publish_at="2026-10-19T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order.",
          desc="Halal, vegetarian, vegan, gluten-free or an allergy: using diet filters as a start, and what to ask a restaurant before you go and when you order.",
          seo="Eating out with dietary needs or allergies in Markham",
@@ -798,7 +788,7 @@ POSTS = [
                  "This is general information, not medical advice. Follow your doctor's guidance for your own allergy."],
          sections=[
              ("The short answer", """<p>Use FIG's diet filters to narrow the list, then ask the restaurant about your exact need before you go. Filters tell you where to look. Only the kitchen knows what is in a dish, what it was cooked beside and who is working today. For an allergy, check twice: once on the phone before you go, and again when you order. This guide is general information, not medical advice.</p>"""),
-             ("Step 1: set your diet once", """<p>When you set up FIG, you choose what you crave, your budget and your diet: halal, vegetarian, vegan, gluten-free and more. After that, Home and the map show live deals from places that fit, nearest first, and the others drop out. Deals start in Markham on January 1, 2027, and you can explore the map and restaurants now.</p>
+             ("Step 1: set your diet once", """<p>When you set up FIG, you choose what you crave, your budget and your diet: halal, vegetarian, vegan, gluten-free and more. After that, Home and the map show live deals from places that fit, nearest first, and the others drop out. FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.</p>
 <p>It saves a lot of scrolling, and it helps groups too: set the group's must-haves before you share options, so everything you send already works for everyone. <a href="/blog/group-dining-deals">Eating out as a group</a>.</p>"""),
              ("Step 2: know what a filter can and cannot tell you", """<table><thead><tr><th>A filter can tell you</th><th>It cannot tell you</th></tr></thead><tbody>
 <tr><td>This place has options for your diet</td><td>That every dish on the menu is suitable</td></tr>
@@ -830,31 +820,27 @@ POSTS = [
 
     # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
 
-    dict(slug="deal-wont-scan-troubleshooting-diners", screen="qr", title="Deal not working at the counter? What to check and what to say", date="2026-10-20", publish_at="2026-10-20T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
+    dict(slug="deal-wont-scan-troubleshooting-diners", screen="qr", title="Deal not working at the counter? What to check and what to say", date="2026-10-20", updated="2026-10-24", publish_at="2026-10-20T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
          dek="A code that will not scan, a deal that seems to be over, a pickup that went wrong: the usual reasons a FIG deal does not apply at the counter, what to try first, and how to ask politely.",
          desc="A FIG code that will not scan, a deal that seems over or a missed pickup: the usual reasons, what to try first and how to ask politely.",
          seo="Restaurant deal not working at the counter: what to check",
-         keywords="QR code not scanning restaurant, restaurant deal not working, coupon not accepted restaurant, FIG deal troubleshooting, counter code restaurant, claim restaurant deal problem",
+         keywords="QR code not scanning restaurant, restaurant deal not working, coupon not accepted restaurant, FIG deal troubleshooting, claim restaurant deal problem",
          points=["Most counter problems come from the same few things: a dim screen, a screenshot, the wrong hours or a deal that has reached its daily cap.",
                  "Open your Deals page and tap Show QR yourself. Staff can scan it, or type the short code if a camera will not read the screen.",
-                 "If the restaurant uses a counter code, tap Scan the counter on your claimed deal and point your camera at their screen.",
+                 "A claim has no time limit of its own. It works for as long as the deal runs, so you can claim at home and go when it suits you.",
                  "Check the deal's days, hours, dishes and dine-in or takeout setting before you go. The restaurant sets all of them.",
                  "Stay friendly. The person at the counter wants to apply your deal, and a calm question gets the fastest answer."],
          sections=[
-             ("The short answer", """<p>If a FIG deal will not apply at the counter, check three things in this order: that you are showing the live code from your Deals page (not a screenshot), that the deal is running right now on those days and hours for those dishes, and that it has not reached its daily cap. If the code still will not scan, staff can type the short code, or you can scan the restaurant's own counter code if it has one.</p>
-<p>This guide goes through what to check before you leave, what to try at the till, and how to ask in a way that gets a quick, kind answer. Deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>"""),
+             ("The short answer", """<p>If a FIG deal will not apply at the counter, check three things in this order: that you are showing the live code from your Deals page (not a screenshot), that the deal is running right now on those days and hours for those dishes, and that it has not reached its daily cap. If the code still will not scan, staff can type the short code.</p>
+<p>This guide goes through what to check before you leave, what to try at the till, and how to ask in a way that gets a quick, kind answer. FIG opens to diners in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>"""),
              ("Before you leave: a 30-second check", """<p>Most problems are easier to fix on your couch than at a busy till. Before you head out:</p>
 <ul><li><strong>Open the deal.</strong> Read the days and hours. Many deals run only in quiet hours, such as weekday afternoons and early evenings.</li><li><strong>Check the dishes.</strong> Some deals cover the whole order. Others cover specific dishes from the restaurant's menu.</li><li><strong>Check dine in or takeout.</strong> A dine-in deal is for eating at the restaurant. A deal that also allows takeout is ordered in the app.</li><li><strong>Look at your Deals page.</strong> Your claim should be there, with the deal's name. If it says Expired, the deal ended.</li><li><strong>Charge your phone and turn the screen brightness up.</strong> A dim screen is the most common reason a camera cannot read a code.</li></ul>
 <p>A claim has no time limit of its own. It works for as long as the deal runs, so you can claim at home and go when it suits you. <a href="/blog/how-restaurant-deals-work">How a deal works, from claim to counter</a>.</p>"""),
              ("The code will not scan", """<p>Staff scan your code with the restaurant side of FIG on a phone, tablet or computer. If it does not work the first time, try these in order:</p>
 <ol><li><strong>Show the live code.</strong> Open your Deals page and tap Show QR. The code keeps changing, so a screenshot or a photo of the code will not scan. Only the live code in your own app works.</li><li><strong>Raise the brightness</strong> and hold the phone steady, close to the scanner but not touching it. Take off a glare-heavy screen protector if you can.</li><li><strong>Let them try again.</strong> A scanner that is moving, or a lens with a fingerprint on it, often fails once and works the second time.</li><li><strong>Offer the short code.</strong> If a camera will not cooperate, there is a short code that staff can type in instead. Ask if they would like to try that.</li></ol>
 <p>None of these steps needs you to be the expert. The staff member at the counter can try the same things, and a restaurant that has trained its team will know what to do. <a href="/blog/train-staff-honour-fig-deal">What restaurants are taught</a>.</p>"""),
-             ("The restaurant uses a counter code", """<p>Some restaurants show their own code on a screen at the counter, and it changes all the time. You scan it yourself, so the staff member does not have to do anything.</p>
-<ol><li>Open your Deals page and find the claimed deal.</li><li>Tap Scan the counter.</li><li>Point your camera at the restaurant's code, and hold steady until it confirms.</li></ol>
-<p>If you cannot see a counter code, ask. Many restaurants use staff scanning at the till and the counter code at the table, so the one that works may depend on where you are standing.</p>"""),
              ("What you see, why it happens, and what to do", """<table><thead><tr><th>What you see</th><th>Likely reason</th><th>What to try</th></tr></thead><tbody>
 <tr><td>The camera will not read your code</td><td>Dim screen, glare or a screenshot</td><td>Show the live QR from your Deals page, raise the brightness, or ask staff to type the short code</td></tr>
-<tr><td>Your counter scan does nothing</td><td>You are not on the claimed deal, or the code on their screen is out of view</td><td>Tap Scan the counter on the claimed deal, and make sure the restaurant's whole code is in the frame</td></tr>
 <tr><td>Staff say the deal is not running</td><td>You are outside its days or hours</td><td>Read the deal's days and hours together. Come back in the window, or ask whether the restaurant is willing to honour it as a courtesy</td></tr>
 <tr><td>The deal shows as Expired</td><td>The restaurant ended it, or a flash or dated deal is over</td><td>Look for another live deal nearby. Expired claims never count against you</td></tr>
 <tr><td>The deal has run out for the day</td><td>The restaurant's daily cap was reached</td><td>Try earlier next time. Popular deals can run out</td></tr>
@@ -866,20 +852,19 @@ POSTS = [
              ("Takeout and pickup problems", """<p>If you ordered takeout with a deal, the deal is already applied in the app, so there is nothing to scan for it. What you need is your pickup code. A few things that help:</p>
 <ul><li><strong>Tap I'm here when you arrive.</strong> It tells the restaurant you are outside, and it keeps the order from counting as missed.</li><li><strong>Show your pickup code</strong> so staff can scan it.</li><li><strong>Check the bag</strong> against your order before you leave. Allergies and changes are worth confirming with a quick call. <a href="/blog/takeout-without-delivery-fees">How takeout with a deal works</a>.</li><li><strong>If you will be late</strong>, still tap I'm here when you reach the door. An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see a diner's missed pickups.</li><li><strong>Need to change something?</strong> Call the restaurant. They can also tell you if they are waiting on you.</li></ul>"""),
              ("What to say at the counter", """<p>Staff are juggling a line, a kitchen and a till, and a short, friendly sentence helps them help you. Some examples you can copy and change:</p>
-<div class="callout example"><b>Things you can say</b><ul><li>"I claimed the 2-for-1 on FIG. Should I show the code or scan yours?"</li><li>"The camera is not reading my screen. Could you try the short code?"</li><li>"Is this deal on all the dishes, or only on the noodles?"</li><li>"I think the deal is for weekday afternoons. Is today one of those?"</li></ul></div>
+<div class="callout example"><b>Things you can say</b><ul><li>"I claimed the 2-for-1 on FIG. Should I show the code now or when I pay?"</li><li>"The camera is not reading my screen. Could you try the short code?"</li><li>"Is this deal on all the dishes, or only on the noodles?"</li><li>"I think the deal is for weekday afternoons. Is today one of those?"</li></ul></div>
 <p>If the answer is no, thank them anyway. Next time, you will know what to look for, and the next person in line will have a better afternoon.</p>"""),
-             ("Still stuck? Two ways to follow up", """<p>You can message the restaurant from the app, or contact FIG through the <a href="/contact">contact page</a>. When you write, say which deal it was, the day and the time, and what you saw on your screen. A short, factual message helps the restaurant fix its own settings if a deal was posted with the wrong hours.</p>
+             ("Still stuck? Two ways to follow up", """<p>You can call the restaurant, or contact FIG through the <a href="/contact">contact page</a>. When you call or write, say which deal it was, the day and the time, and what you saw on your screen. A short, factual message helps the restaurant fix its own settings if a deal was posted with the wrong hours.</p>
 <p>After a scanned visit you can rate it. Only diners whose visit was scanned can review, so a rating describes a real visit. Rate the food and the visit, and mention the deal if it was handled well. <a href="/blog/how-to-read-restaurant-reviews">How reviews work on FIG</a>.</p>"""),
          ],
          faq=[("Why will my FIG QR code not scan?", "Usually a dim screen, glare or a screenshot. Open your Deals page, tap Show QR, raise the brightness and hold the phone steady. If it still fails, staff can type the short code."),
               ("Can I use a screenshot of my code?", "No. The code keeps changing, so only the live code in your own app can be scanned."),
-              ("What is the counter code?", "Some restaurants show their own code on a screen at the counter, and it keeps changing. Tap Scan the counter on your claimed deal and point your camera at it."),
               ("Why did the restaurant say my deal is not running?", "Each deal has its own days, hours and dishes, set by the restaurant. Check them in the app, and remember a daily cap can end a deal for the day."),
               ("Does an expired claim count against me?", "No. An expired claim shows as Expired on your Deals page for a day and leaves the list. It never counts against you."),
               ("What happens if I miss a takeout pickup?", "An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tapping I'm here when you arrive keeps it from counting as missed."),
-              ("Can I message a restaurant about a deal?", "Yes. You can message the restaurant from the app. Say which deal, the day and what you saw.")]),
+              ("Who can I ask about a deal that did not work?", "Call the restaurant, or write to FIG through the contact page at www.figpromo.ca/contact. Say which deal, the day and what you saw.")]),
 
-    dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+    dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", updated="2026-10-24", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards.",
          desc="A budget-friendly dinner for two in Markham: pick the hour, choose the deal, check the sums with HST and add a walk afterwards.",
          seo="Date night in Markham for less: a plan with deal math",
@@ -890,8 +875,8 @@ POSTS = [
                  "Call ahead to check for a table and to ask about diets. Then claim your deal before you leave.",
                  "Plan something free to do afterwards, such as a walk. Main Street Unionville is a short walk from Toogood Pond."],
          sections=[
-             ("The short answer", """<p>The cheapest good date night is an early dinner on a weeknight, with the deal chosen before the restaurant. Look for a deal that covers a main dish each, check the final price with tax, and keep the drinks modest. In the example below, the same dinner for two comes to $76.84 at full price and $51.98 with a 2-for-1 on the mains. Deals start in Markham on January 1, 2027, and you can explore the map now.</p>
-<p>This is a plan, not a ranking of restaurants. We do not name places here, because the live deals change every day. FIG shows you what is on near you right now.</p>"""),
+             ("The short answer", """<p>The cheapest good date night is an early dinner on a weeknight, with the deal chosen before the restaurant. Look for a deal that covers a main dish each, check the final price with tax, and keep the drinks modest. In the example below, the same dinner for two comes to $76.84 at full price and $51.98 with a 2-for-1 on the mains. FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because the live deals change every day. Once FIG opens, it will show you what is on near you.</p>"""),
              ("Step 1: pick the hour", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables earlier in the evening, and an empty table earns nothing, which is why owners post deals then.</p>
 <table><thead><tr><th>When</th><th>Why it suits a date</th></tr></thead><tbody>
 <tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, easier conversation, more deals</td></tr>
@@ -900,7 +885,7 @@ POSTS = [
 <tr><td>Weekend dinner</td><td>The busiest time. Book ahead, and expect fewer deals</td></tr>
 </tbody></table>
 <p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
-             ("Step 2: start from what you both want", """<p>Set your cravings, budget and diet in FIG once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look, so every option works for both of you. For allergies, filters are only a starting point, so call the restaurant. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask when you call</a>.</p>
+             ("Step 2: start from what you both want", """<p>When FIG opens, you will set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look, so every option works for both of you. For allergies, filters are only a starting point, so call the restaurant. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask when you call</a>.</p>
 <p>Then choose by the dish, not the discount. A deal on something neither of you wanted is not a saving.</p>"""),
              ("Step 3: compare the dinner, not the headline", """<p>Here is a dinner for two with round example prices: one shared starter, one main each and a drink each. Three ways to pay for it:</p>
 <div class="callout math"><b>Example dinner for two (before tip)</b><table><thead><tr><th>Plan</th><th>Food and drink</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
@@ -910,7 +895,7 @@ POSTS = [
 </tbody></table><p>Check: 20% of $68.00 is $13.60, so $54.40; HST $7.072 rounds to $7.07. For the 2-for-1: $12 + $22 + $12 = $46; HST is $5.98. The 2-for-1 saves $24.86 against full price, and $9.49 more than 20% off. If you were having two cheap mains and an expensive bottle, the answer would change, so redo it with your order.</p></div>
 <p>The tax moves with the price. HST is worked out on what you pay after the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice. <a href="/blog/compare-restaurant-deals-worth-it">More on comparing deals</a>.</p>"""),
              ("Step 4: check there is a table", """<p>Call the restaurant before you go, especially if you want a quiet corner. Ask whether the deal works for a table for two and whether it applies to the dishes you have in mind. How a deal applies to your order is the restaurant's call, and a thirty-second call is easier than a surprise at the till. If you are dining on a weeknight, a booking is often not needed, but a call costs nothing.</p>"""),
-             ("Step 5: claim, go and show your code", """<ol><li>Claim the deal in FIG. Each of you can claim your own if the deal suits you both.</li><li>At the restaurant, order as usual. When it is time to pay, open your Deals page and tap Show QR for staff to scan, or scan the restaurant's counter code if they have one.</li><li>The deal comes off the bill. You pay the restaurant the way you always do.</li></ol>
+             ("Step 5: claim, go and show your code", """<ol><li>Claim the deal in FIG. Each of you can claim your own if the deal suits you both.</li><li>At the restaurant, order as usual. When it is time to pay, open your Deals page and tap Show QR for staff to scan.</li><li>The deal comes off the bill. You pay the restaurant the way you always do.</li></ol>
 <p>Your code keeps changing, so a screenshot will not work. <a href="/blog/how-restaurant-deals-work">How deals work, from claim to counter</a>. If something does not scan, <a href="/blog/deal-wont-scan-troubleshooting-diners">here is what to check</a>.</p>"""),
              ("Step 6: keep the extras modest", """<p>Drinks, desserts and sides are usually full price, and they are where a budget evening gets away from you. A few ways to keep it enjoyable:</p>
 <ul><li>Share a dessert. Two spoons, one price.</li><li>Pick one drink each, or one to share. Tap water is a fine second round.</li><li>Look at the whole bill before you order, and decide on a number you are comfortable with.</li><li>Tip is your choice. Many people tip on the price before the deal, because the service was the same. That is a personal call, not a rule.</li></ul>"""),
@@ -925,12 +910,12 @@ POSTS = [
 </tbody></table>
 <p>The saving is $24.86, about 28% of the full-price evening. The dessert is not discounted in this example. Your prices will differ, so use your own.</p>"""),
          ],
-         faq=[("What is the cheapest way to do date night in Markham?", "Go early on a weeknight, pick a deal that covers a main each, keep drinks modest and add something free afterwards, such as a walk. FIG shows live deals near you on a map."),
+         faq=[("What is the cheapest way to do date night in Markham?", "Go early on a weeknight, pick a deal that covers a main each, keep drinks modest and add something free afterwards, such as a walk. When FIG opens to diners on January 1, 2027, it will show live deals near you on a map."),
               ("Is a 2-for-1 better than 20% off for two people?", "If you both want a main, usually yes. In the example in this post, a 2-for-1 on $22 mains came to $51.98 against $61.47 for 20% off the whole bill. Redo it with your own order."),
               ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
               ("Do we each need our own deal?", "Each person can claim their own if the deal suits both of you. Codes are personal and keep changing, so one person's code cannot be used by someone else."),
               ("Should I call the restaurant first?", "A short call helps. Ask if there is a table, whether the deal works for two and whether it covers the dishes you want."),
-              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now."),
+              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca."),
               ("Is FIG free?", "Yes, for diners. There are no ads for now.")]),
 
     dict(slug="takeout-rush-pause-prep-time-deals-per-order", screen="tscanner", title="Takeout during a rush: pause, prep time and deals per order", date="2026-10-23", publish_at="2026-10-23T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",

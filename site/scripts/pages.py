@@ -10,6 +10,7 @@ import datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 from posts import GROUPS
+import blog_claims
 
 # every post belongs to exactly one of the blog's groups (FIX-LIST #145): a missing or unknown one stops the build, so no post
 # (a queued one included) can go out ungrouped
@@ -18,6 +19,9 @@ if _bad:
     sys.exit(f"pages.py: these posts have no group (or one that isn't in GROUPS): {', '.join(_bad)}")
 
 SITE_URL = "https://www.figpromo.ca"
+# False until FIG opens to diners (January 1, 2027). While it's False a diner post's closing button joins the waitlist instead of opening
+# the app, and blog_claims.py stops a post from saying the app or the map works now. Flip it to True the day diners can get in.
+DINERS_OPEN = False
 SITE = pathlib.Path(__file__).resolve().parents[1]
 ROOT = SITE.parent
 index = (SITE / "index.html").read_text(encoding="utf-8")
@@ -77,6 +81,9 @@ for _p in POSTS:
         if not _p["publish_at"]:
             del _p["publish_at"]
 live = lambda post: post["slug"] not in TAKEN_DOWN and (not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW)
+# the claims guard (REVIEW 2026-10-24 E3): no post about to be built may say what FIG has retired or what isn't true yet; stops the build, so the
+# publisher job never publishes one (see blog_claims.py; the batch writer's FIG_NOW=2030-... run makes every queued post due, so it checks them all)
+blog_claims.enforce([x for x in POSTS if live(x)], DINERS_OPEN)
 # every post that isn't live (queued or taken down): links to it are plain text on every page until it is
 NOT_LIVE = sorted(x["slug"] for x in POSTS if not live(x))
 _unlink = (lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{"|".join(re.escape(x) for x in NOT_LIVE)})(?:[#?][^"]*)?"[^>]*>(.*?)</a>', lambda m: m.group(1), h, flags=re.S)) if NOT_LIVE else (lambda h: h)
@@ -507,13 +514,16 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 
 
 def end_cta(post):
-    """The cobalt block at the end of a post: restaurants get listed, diners open FIG (the web app, 2026-10-13)."""
+    """The cobalt block at the end of a post: restaurants get listed; diners join the waitlist until FIG opens to them (DINERS_OPEN), then open the web app."""
     if post["topic"] == "For restaurants":
         words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Deals and scans in one flat plan, with no commission on dine-in. Founding prices before launch.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See how pricing works</a>')
-    else:
-        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners. Opens in Markham on January 1, 2027.</p>",
+    elif DINERS_OPEN:
+        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
+    else:  # the app's diner side is closed until January 1, 2027: the button joins the waitlist (it lands on Home's form)
+        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners and opens in Markham on January 1, 2027. Join the waitlist and we'll email you the day it opens.</p>",
+                       '<a class="btn btn-lg btn-volt" href="/#waitlist">Join the waitlist</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
     return f'<section class="section pg-tight"><div class="wrap"><div class="pg-cta"><div>{words}</div><div class="pg-cta-btns">{btns}</div></div></div></section>'
 
 

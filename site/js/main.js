@@ -64,6 +64,7 @@
     rise($(".hero .rise"), 0.25);
     ScrollTrigger.batch(".reveal", { start: "top 88%", once: true,
       onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, overwrite: true }) });
+    root.classList.add("reveal-on"); // the reveals above are set up: the CSS fallback (site.css) for a script that never gets here stands down
   }
 
 

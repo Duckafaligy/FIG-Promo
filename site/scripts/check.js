@@ -80,3 +80,64 @@ console.log("ok: blog groups");
   for (const p of ["/", "/about", "/blogger", "/app/welcome", "/contact"]) assert.deepStrictEqual(frame(p), [["DENY"], ["'none'"]], p + " can't be framed");
   console.log("ok: framing: the blog by FIG's own pages only, everything else by nobody");
 }
+
+// the build files aren't public (REVIEW 2026-10-24 E1): vercel.json publishes all of site/, so the post sources, generator and manifest in
+// /scripts/ are sent to a path that 404s. A rewrite can't do it (files win over rewrites on Vercel); a redirect runs before the files.
+{
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
+  const rule = (vercel.redirects || []).find((r) => r.source === "/scripts/:path*");
+  assert.ok(rule, "vercel.json: no redirect for /scripts/*, so posts.py, pages.py and the manifest are downloadable");
+  const dest = path.join(__dirname, "..", rule.destination.replace(/^\//, ""));
+  assert.ok(!fs.existsSync(dest) && !fs.existsSync(dest + ".html"), `vercel.json: ${rule.destination} is a real page, so /scripts/* would show it instead of a 404`);
+  assert.ok(!fs.existsSync(path.join(__dirname, "..", "supabase")), "site/supabase/ would be public: keep SQL out of site/");
+  console.log("ok: build files (/scripts) are not public");
+}
+
+// analytics only after consent (REVIEW 2026-10-24 E2): no page loads Google Analytics by itself (js/consent.js does, after "Accept"),
+// every page has the cookie notice, its two choices look alike, and the CSP still lets Google's script load once accepted
+{
+  const site = path.join(__dirname, "..");
+  const pages = (dir) => fs.readdirSync(path.join(site, dir)).filter((f) => f.endsWith(".html")).map((f) => path.join(dir, f));
+  for (const f of [...pages("."), ...pages("blog")]) {
+    const h = fs.readFileSync(path.join(site, f), "utf8");
+    assert.ok(!/googletagmanager\.com|gtag\(/.test(h), `${f}: Google Analytics is written into the page; it may only load from js/consent.js after "Accept"`);
+    assert.ok(/<script defer src="\/js\/consent\.js(\?v=[0-9a-f]+)?"><\/script>/.test(h), `${f}: no js/consent.js, so no cookie notice`);
+    assert.ok(h.includes("data-cookie-settings"), `${f}: no "Cookie settings" button in the footer`);
+  }
+  const js = fs.readFileSync(path.join(site, "js", "consent.js"), "utf8");
+  const looks = [...js.matchAll(/<button class="([^"]+)" type="button" data-ck="(granted|denied)"/g)];
+  assert.deepStrictEqual(looks.map((m) => m[2]).sort(), ["denied", "granted"], "consent.js: Accept and No thanks are both needed");
+  assert.strictEqual(new Set(looks.map((m) => m[1])).size, 1, "consent.js: Accept and No thanks must look the same");
+  const vj = fs.readFileSync(path.join(site, "..", "vercel.json"), "utf8");
+  assert.ok(/script-src[^;"]*https:\/\/www\.googletagmanager\.com/.test(vj) && /connect-src[^;"]*google-analytics\.com/.test(vj), "vercel.json: the CSP wouldn't let Google Analytics load after Accept");
+  console.log("ok: Google Analytics only after consent");
+}
+
+// scripts by hash, not 'unsafe-inline' (REVIEW 2026-10-24 E9): a page may run its own files and only those inline scripts whose sha256 its CSP names
+// (the Vercel analytics line on every page, Home's motion line). Edit one of them and the build says which hash to put in vercel.json's script-src.
+{
+  const crypto = require("crypto");
+  const site = path.join(__dirname, "..");
+  const vercel = JSON.parse(fs.readFileSync(path.join(site, "..", "vercel.json"), "utf8"));
+  const scriptSrc = (url) => {
+    const csps = vercel.headers.filter((h) => new RegExp(`^${h.source}$`).test(url)).flatMap((h) => h.headers).filter((x) => x.key === "Content-Security-Policy");
+    assert.strictEqual(csps.length, 1, `vercel.json: ${url} needs exactly one Content-Security-Policy`);
+    return (/script-src ([^;]*)/.exec(csps[0].value) || [])[1] || "";
+  };
+  const pagesIn = (dir) => fs.readdirSync(path.join(site, dir)).filter((f) => f.endsWith(".html")).map((f) => (dir === "." ? f : dir + "/" + f));
+  let inline = 0;
+  for (const f of [...pagesIn("."), ...pagesIn("blog")]) {
+    const url = "/" + f.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+    const src = scriptSrc(url);
+    assert.ok(!/'unsafe-inline'/.test(src), `vercel.json: ${url} allows 'unsafe-inline' scripts`);
+    for (const m of fs.readFileSync(path.join(site, f), "utf8").matchAll(/<script\b(?![^>]*\ssrc=)([^>]*)>([\s\S]*?)<\/script>/g)) {
+      if (/application\/ld\+json/.test(m[1])) continue; // data, never run
+      const hash = `'sha256-${crypto.createHash("sha256").update(m[2].replace(/\r\n/g, "\n")).digest("base64")}'`;
+      assert.ok(src.includes(hash), `${f}: this inline script isn't allowed by its CSP (${m[2].slice(0, 50)}...). Add ${hash} to the script-src of the CSPs for ${url} in vercel.json, or move it to a file`);
+      inline++;
+    }
+    assert.ok(!/\son[a-z]+\s*=\s*"/.test(fs.readFileSync(path.join(site, f), "utf8")), `${f}: an inline event handler (onclick=...) can't run without 'unsafe-inline'; use addEventListener in a file`);
+  }
+  assert.ok(inline > 0, "no inline scripts were found: this check reads the pages wrong");
+  console.log("ok: inline scripts allowed by hash (" + inline + " in the pages), no 'unsafe-inline' for scripts");
+}

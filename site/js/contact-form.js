@@ -3,6 +3,7 @@
   const form = document.querySelector("form.contact");
   if (!form) return;
   const cfg = window.FIG_CONFIG || {}, msg = form.querySelector(".form-msg"), btn = form.querySelector("button");
+  btn.disabled = false; // off in the page until this script is here, so the form can never fall back to a plain submit (a GET with the message in the address)
   const say = (t, kind) => { msg.textContent = t; msg.className = "form-msg " + (kind || ""); };
   const bad = (el, t) => { el.setAttribute("aria-invalid", "true"); el.focus(); say(t, "err"); };
   form.addEventListener("input", (e) => e.target.removeAttribute("aria-invalid"));

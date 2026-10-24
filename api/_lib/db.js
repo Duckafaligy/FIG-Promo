@@ -209,6 +209,10 @@ async function waitlistUnsubscribe(email) {
   const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "PATCH", body: JSON.stringify({ consent: false, unsubscribed_at: new Date().toISOString() }), headers: { Prefer: "return=representation" } });
   return { found: r.rows.length > 0 };
 }
+/** The account with this address stops getting FIG's marketing emails (profiles.marketing_emails false); the privacy policy says every one of them has a working unsubscribe. */
+async function accountUnsubscribe(email) {
+  await rest(`profiles?email=eq.${encodeURIComponent(listEmail(email))}&marketing_emails=is.true`, { method: "PATCH", body: JSON.stringify({ marketing_emails: false }), headers: { Prefer: "return=minimal" } });
+}
 /** Off the list for good (their row is deleted). */
 async function waitlistRemove(email) {
   const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "DELETE", headers: { Prefer: "return=representation" } });
@@ -395,4 +399,4 @@ const presaleComp = async (owner, on, note) => {
   return presale("comp", { owner: uuid(owner), on, note: String(note || "").trim().slice(0, 200) });
 };
 
-module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, presaleComp, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, presaleComp, tidyText, agreedEmails, sources, waitlistUnsubscribe, accountUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

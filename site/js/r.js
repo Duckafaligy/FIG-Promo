@@ -34,13 +34,14 @@
       var name = rows && rows[0] && String(rows[0].name || '').slice(0, 60);
       if (!name) return nowhere();
       title.textContent = (from ? from + ' sent you ' : 'Check out ') + name + ' on FIG';
-      line.textContent = 'See ' + name + '’s live deals, claim one, and show your QR at the counter. Free for diners.';
+      line.textContent = 'See ' + name + '’s live deals and menu. Free for diners.';
       if (from && fromEl) fromEl.textContent = from;
       if (web) { web.textContent = 'See ' + name + ' on FIG'; web.href = '/app/r/' + id + (from ? '?from=' + encodeURIComponent(from) : ''); }
       offerApp();
     }, function () { /* no answer: the page stays general (no name, no sender), and the button still opens FIG */ });
 
   function offerApp() {
+    if (!STORE.ios && !STORE.android) return; // no store app is published yet: the link would lead nowhere (set STORE above to bring it back)
     var path = 'r/' + id + (from ? '?from=' + encodeURIComponent(from) : '');
     var ua = navigator.userAgent;
     if (/Android/i.test(ua)) {
@@ -52,9 +53,6 @@
       open.href = 'fig://' + path; // only when they tap it themselves
       open.hidden = false;
       if (STORE.ios) location.replace(STORE.ios);
-    } else {
-      open.href = 'fig://' + path;
-      open.hidden = false;
-    }
+    } // a computer has no FIG app to open (no store app is published yet): no link
   }
 })();

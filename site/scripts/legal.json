@@ -1,7 +1,7 @@
 {
  "terms": {
   "title": "Terms of service",
-  "updated": "Last updated October 22, 2026",
+  "updated": "Last updated October 24, 2026",
   "short": [
    "FIG is free for you, and there are no ads for now.",
    "A deal counts once staff scan your QR at the restaurant.",
@@ -28,7 +28,7 @@
      "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
      "• The deal is used once staff scan it. That scan is a \"redemption\".",
      "• Each deal can be used once per person per day, whether you claim it or order it as takeout. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
-     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order always comes with one of those deals, which is applied to it; dine-in only deals can't be. You pay the restaurant in the app or at pickup, whichever it has set up. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order comes with a deal, which is applied to it, unless the restaurant sets 0 deals per order, then it is at full price; dine-in only deals can't be. You pay the restaurant in the app. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
     ]
    },
    {
@@ -86,7 +86,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 22, 2026",
+  "updated": "Last updated October 24, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -108,13 +108,13 @@
      "• Account: name, username, email (confirmed with a code), mobile number (we'll confirm it with a text code once texts are switched on), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
      "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
-     "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post (chat isn't available yet; if we turn it on, your messages will be kept here too).",
+     "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Terms: which version of our terms you accepted, and when.",
      "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
      "• Support: messages and reports you send us.",
      "• How you found FIG: the tag on the link you came from (a creator’s link or a flyer’s QR code, for example), noted once when you join the waitlist, sign up or add a restaurant, and your answer to “How did you hear about FIG?” if you give one (you can skip it). We use them only to see which outreach works. Restaurants never see them.",
-     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No tracking or advertising cookies."
+     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No advertising cookies. If you accept, Google Analytics sets cookies for up to 2 years; if you decline, it sets none. Vercel Web Analytics sets no cookies."
     ]
    },
    {
@@ -148,7 +148,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
-     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies; see the Cookies page",
+     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
      "• Resend: sends FIG's emails, so it gets your email address and what the email says",
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
@@ -206,12 +206,12 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 23, 2026",
+  "updated": "Last updated October 24, 2026",
   "short": [
    "One plan covers all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (before then, founding restaurants can pay $49.99 once instead). Your page, deals and scans are included, with no commission on the bill.",
    "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
    "Honour your live deals exactly as written.",
-   "Only you, the staff you invite, or a diner scanning your counter code (when you switch it on) can verify a deal."
+   "Only you and the staff you invite can verify a deal."
   ],
   "sections": [
    {
@@ -235,13 +235,14 @@
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• One plan covers all your restaurants, now and later: their pages, going live, posting deals and verified scans, with no limit on locations. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no sign-up, listing or per-scan fees.",
+     "• One plan covers all of your locations, now and later (up to 2 for now): their pages, going live, posting deals and verified scans. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no sign-up, listing or per-scan fees.",
      "• Founding restaurants: before FIG opens to diners, you can pay $49.99 once. It covers your plan, for all your restaurants, until FIG starts billing. FIG will tell you that date, and your founding price, in writing at least 14 days before. From then, you can keep your plan at a founding price that is always lower than FIG's regular price, for as long as your plan stays active; if you don't, your plan ends on that date. Refunds: within 14 days of paying, and in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started).",
      "• FIG plans to open to diners on January 1, 2027. FIG can't promise how many diners you'll get. Prices are before tax, plus HST once FIG is registered.",
      "• Regular plans: refunds within 14 days of your first payment. Your card is charged automatically each month or year until you cancel in FIG's Settings. Cancelling stops the renewal, and you keep full access until the end of the month or year you've paid. Nothing else is refundable.",
+     "• The refund you can ask for yourself in FIG is once per owner. If you've had a refund before, a later one is FIG's to give: message us.",
      "• Stripe processes the plan's payments. FIG never sees your card number.",
      "• Takeout orders paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
-     "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. A takeout order the diner pays for at your counter has no FIG fee.",
+     "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
      "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its plan and its 5% fee, and we’ll tell you at least 30 days before that starts.",
      "• Your plan includes everything FIG offers restaurants. If we ever offer a paid extra, we'll show the price and what's included before you buy anything."

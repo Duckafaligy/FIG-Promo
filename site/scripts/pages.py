@@ -10,6 +10,7 @@ import datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 from posts import GROUPS
+import blog_claims
 
 # every post belongs to exactly one of the blog's groups (FIX-LIST #145): a missing or unknown one stops the build, so no post
 # (a queued one included) can go out ungrouped
@@ -18,6 +19,9 @@ if _bad:
     sys.exit(f"pages.py: these posts have no group (or one that isn't in GROUPS): {', '.join(_bad)}")
 
 SITE_URL = "https://www.figpromo.ca"
+# False until FIG opens to diners (January 1, 2027). While it's False a diner post's closing button joins the waitlist instead of opening
+# the app, and blog_claims.py stops a post from saying the app or the map works now. Flip it to True the day diners can get in.
+DINERS_OPEN = False
 SITE = pathlib.Path(__file__).resolve().parents[1]
 ROOT = SITE.parent
 index = (SITE / "index.html").read_text(encoding="utf-8")
@@ -28,7 +32,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
-HIDDEN = {"404", "r", "paid", "stripe", "premium-on"}  # not indexed, no breadcrumbs, not in the sitemap
+HIDDEN = {"404", "r", "paid", "stripe"}  # not indexed, no breadcrumbs, not in the sitemap
 
 # Scheduled posts (user 2026-10-14: "Schedule + reviewed batches"): a post with `publish_at` (ISO 8601 with its offset) is
 # left out of everything until then: no page, not in the blog, its topics, "Keep reading", the feed, the sitemap, llms.txt or
@@ -77,6 +81,9 @@ for _p in POSTS:
         if not _p["publish_at"]:
             del _p["publish_at"]
 live = lambda post: post["slug"] not in TAKEN_DOWN and (not post.get("publish_at") or datetime.datetime.fromisoformat(post["publish_at"]) <= NOW)
+# the claims guard (REVIEW 2026-10-24 E3): no post about to be built may say what FIG has retired or what isn't true yet; stops the build, so the
+# publisher job never publishes one (see blog_claims.py; the batch writer's FIG_NOW=2030-... run makes every queued post due, so it checks them all)
+blog_claims.enforce([x for x in POSTS if live(x)], DINERS_OPEN)
 # every post that isn't live (queued or taken down): links to it are plain text on every page until it is
 NOT_LIVE = sorted(x["slug"] for x in POSTS if not live(x))
 _unlink = (lambda h: re.sub(rf'<a\s[^>]*href="/blog/(?:{"|".join(re.escape(x) for x in NOT_LIVE)})(?:[#?][^"]*)?"[^>]*>(.*?)</a>', lambda m: m.group(1), h, flags=re.S)) if NOT_LIVE else (lambda h: h)
@@ -115,7 +122,7 @@ FOOTER = f'''<footer class="foot">
         <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
         <div><p class="foot-h">Restaurants</p><a href="/#owners">Pricing</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
-        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a></div>
+        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a><button class="foot-btn" type="button" data-cookie-settings hidden>Cookie settings</button></div>
       </div>
     </div>
     <div class="foot-bottom">
@@ -148,9 +155,9 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "Organization", "name": "FIG", "url": SITE_URL, "logo": SITE_URL + "/assets/icons/icon-512.png",
      "address": {"@type": "PostalAddress", "addressLocality": "Markham", "addressRegion": "ON", "addressCountry": "CA"}},
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
-    {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
+    {"@type": "WebApplication", "name": "FIG", "url": SITE_URL + "/app/", "operatingSystem": "Any", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding restaurants: $49.99 once, before launch. FIG plans to open to diners on January 1, 2027.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding price: $49.99 once, before launch.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
@@ -216,11 +223,11 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 {head_meta(path, full, desc, extra_head, og_type, image)}
+  <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/site.css">
   <script>window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};</script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7L25CWPZ23"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag() {{ dataLayer.push(arguments); }} gtag('js', new Date()); gtag('config', 'G-7L25CWPZ23');</script>
+  <script defer src="/js/consent.js"></script>
   <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body class="sub">
@@ -278,7 +285,8 @@ def faq_ld(qs):
 
 
 # a search description where the first short line is too thin (FIX-LIST #106: /terms's was 46 characters)
-LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG."}
+LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG.",
+              "business-terms": "FIG's business terms for restaurants: one flat plan, no commission on the bill, the founding payment, takeout fees, refunds, reviews and staff."}
 LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms"), ("cookies", "Cookies")]
 
 
@@ -322,12 +330,14 @@ legal("business-terms", L["business-terms"])
 legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app: picked from a list of local high schools, colleges and universities built into the app, or typed in; it only helps us see which schools to reach first), that you agreed to “I agree to get emails from FIG and can unsubscribe at any time.” and when (joining needs it), when you joined, and which link brought you, if any. We email you to say FIG is open in Markham. If you unsubscribe, the emails stop and you keep your place. Every email comes from FIG, Markham, Ontario, and has an unsubscribe link: you can withdraw your consent anytime, through that link or by messaging us. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
 
 # Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
-legal("cookies", {"title": "Cookies", "updated": "Last updated October 22, 2026",
-                  "short": ["The website uses Google Analytics, which sets cookies to count visits. No advertising cookies.", "The website keeps three small notes in your browser.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
+# 2026-10-24 (REVIEW E2): Google Analytics sets its cookies only after "Accept" (js/consent.js); the notes the site keeps are listed by name
+legal("cookies", {"title": "Cookies", "updated": "Last updated October 24, 2026",
+                  "short": ["No advertising cookies. Google Analytics sets cookies on this website only if you accept them; if you say no thanks, it sets none.", "The website keeps a few small notes in your browser's storage, listed below. They are not cookies.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
                   "sections": [], "contactAsk": "Questions about cookies?", "contactLine": "FIG, Markham, Ontario"},
-      [("What the website stores", "<ul><li><b>Google Analytics cookies.</b> To see how many people visit and which pages help, the website uses Google Analytics. It sets cookies (named _ga) that count visits and pages viewed, kept up to 2 years; Google gets your approximate location and device type, not your name. You can block them in your browser settings or with Google's opt-out add-on (tools.google.com/dlpage/gaoptout). Vercel Web Analytics also counts visits, without cookies.</li><li><b>Small notes in your browser.</b> The website also keeps three small notes in your browser instead: which link brought you here (until you close the tab, so a creator gets credit if you join the waitlist), whether FIG is open to diners, and an offline copy of the pages.</li>" "</ul>"),
-       ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
-       ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you.</p>")])
+      [("What the website stores", "<ul><li><b>Google Analytics cookies, only if you accept.</b> The first time you visit, a notice asks whether FIG may use Google Analytics to count visits and see which pages help. If you accept, Google Analytics sets cookies (named _ga, and _ga_ followed by an ID) that count visits and pages viewed, kept up to 2 years; Google gets your approximate location and device type, not your name. If you say no thanks, or don't answer, nothing is loaded from Google and no cookie is set. Change your mind anytime with Cookie settings at the bottom of every page: choosing no thanks there deletes the cookies. You can also block them in your browser settings or with Google's opt-out add-on (tools.google.com/dlpage/gaoptout).</li><li><b>No advertising cookies.</b> FIG doesn't set any.</li><li><b>Vercel Web Analytics.</b> It also counts visits, and sets no cookies.</li></ul>"),
+       ("Small notes in your browser", "<p>These are kept in your browser's own storage, not in cookies, and stay on your device:</p><ul><li><b>fig.consent</b> is your answer about Google Analytics cookies. It stays until you change it or clear this site's data.</li><li><b>fig.src</b> remembers which link brought you here, so a creator gets credit if you join the waitlist. It's gone when you close the tab.</li><li><b>fig.paused</b> remembers that you paused the animations on the home page. It's gone when you close the tab.</li><li><b>fig.dinersOpen</b> remembers whether FIG is open to diners, so the web app's loading screen is right. It stays until you clear this site's data.</li><li><b>fig.reloadedForDeploy</b> stops the web app from reloading over and over after an update. It's gone when you close the tab.</li></ul>"),
+       ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. It also keeps an offline copy of the pages and pictures you've opened, so repeat visits open faster. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
+       ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you. Google's script loads only if you accept Google Analytics, as described above.</p>")])
 
 page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, with one flat plan for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',
@@ -344,15 +354,16 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 page("contact", "Contact", "Message the FIG team. A real person reads every message.", wide=True, body='''<section class="pg-hero ct-band"><div class="wrap ct-grid">
 <div class="pg-hero-text"><h1 class="pg-h1">Talk to a real person.</h1>
 <p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p></div>
-<form class="contact ct-card" novalidate>
+<form class="contact ct-card" method="post" action="/contact" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
 <label class="ct-field"><span>What's it about?</span><select name="topic">
 <option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
 </select></label>
 <label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-<button class="btn" type="submit">Send message</button>
+<button class="btn" type="submit" disabled>Send message</button>
 <p class="form-msg" role="status" aria-live="polite"></p>
+<noscript><p class="form-msg err">Sending a message needs JavaScript. Please turn it on for this page.</p></noscript>
 </form>
 </div></section>
 <section class="section ct-more"><div class="wrap"><h2 class="h2 pg-sub">Other ways</h2><div class="ct-ways">
@@ -374,16 +385,16 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for your pages, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants pay $49.99 once: it covers your plan until FIG starts billing, and from then you can keep a founding price that's always lower than the regular price (FIG tells you the date and your price in writing at least 14 days before). It's refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027. On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
+        ("What does FIG cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for your pages, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants pay $49.99 once: it covers your plan until FIG starts billing, and from then you can keep a founding price that's always lower than the regular price (FIG tells you the date and your price in writing at least 14 days before). It's refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
-        ("When does my page go live?", "Setting up is free: photos, address, hours and cuisine. Your page and deals go live when your plan does (a founding deposit before FIG opens to diners). FIG plans to open to diners on January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
+        ("When does my page go live?", "Setting up is free: photos, address, hours and cuisine. Your page and deals go live when your plan does (the founding payment before FIG opens to diners). FIG plans to open to diners on January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
         ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect. The diner's card is charged when you accept the order; decline it and nothing is charged."),
         ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
         ("What if a scan looks wrong?", "Message us from Help within 14 days. We review it, and if it was a mistake we remove it."),
         ("Can I pause takeout in a rush?", "Yes. Tap Takeout: On on your dashboard or Orders to pause new orders for 20 or 40 minutes or until tomorrow's opening, or to add prep time. Orders already in aren't touched, and it comes back on by itself."),
-        ("How do I stop?", "Cancel in Settings: that stops the renewal, and you keep full access until the end of the month or year you've paid. Within 14 days of your first payment you can get a full refund instead. You can also pause your deals, or close your account in Settings."),
+        ("How do I stop?", "If you paid the founding payment, there's nothing to cancel: it covers your plan until FIG starts billing, FIG tells you that date in writing at least 14 days before, and if you don't keep your plan then, it ends on that date. Within 14 days of paying you can get a full refund instead. On a monthly or yearly plan, cancel in Settings: that stops the renewal, and you keep full access until the end of the month or year you've paid; within 14 days of your first payment you can get a full refund instead. You can also pause your deals, or close your account in Settings."),
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
@@ -449,6 +460,17 @@ if NOT_LIVE:
         x["faq"] = [(q, _unlink(ans)) for q, ans in x["faq"]]
 
 
+def _sunday(year, month, n):
+    first = datetime.date(year, month, 1)
+    return first + datetime.timedelta(days=(6 - first.weekday()) % 7 + 7 * (n - 1))
+
+
+def rfc822_noon(day):
+    """A date at noon in Toronto, as the feed wants it: -0400 from the second Sunday of March to the first Sunday of November (the clocks
+    change at 2 am, so noon that day is already on the new time), else -0500. The rule itself, so no time zone database is needed."""
+    return f"{day:%a, %d %b %Y} 12:00:00 " + ("-0400" if _sunday(day.year, 3, 2) <= day < _sunday(day.year, 11, 1) else "-0500")
+
+
 def cover(post):
     """1200x630 cover + social image: topic colour, the title, a real app screen. Rebuilt every run (fast, deterministic)."""
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -506,13 +528,16 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 
 
 def end_cta(post):
-    """The cobalt block at the end of a post: restaurants get listed, diners open FIG (the web app, 2026-10-13)."""
+    """The cobalt block at the end of a post: restaurants get listed; diners join the waitlist until FIG opens to them (DINERS_OPEN), then open the web app."""
     if post["topic"] == "For restaurants":
         words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Deals and scans in one flat plan, with no commission on dine-in. Founding prices before launch.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See how pricing works</a>')
-    else:
-        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners. Opens in Markham on January 1, 2027.</p>",
+    elif DINERS_OPEN:
+        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
+    else:  # the app's diner side is closed until January 1, 2027: the button joins the waitlist (it lands on Home's form)
+        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners and opens in Markham on January 1, 2027. Join the waitlist and we'll email you the day it opens.</p>",
+                       '<a class="btn btn-lg btn-volt" href="/#waitlist">Join the waitlist</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
     return f'<section class="section pg-tight"><div class="wrap"><div class="pg-cta"><div>{words}</div><div class="pg-cta-btns">{btns}</div></div></div></section>'
 
 
@@ -595,7 +620,7 @@ for k, post in enumerate(POSTS):
     page(url[1:], post["title"], post.get("desc", post["dek"]), body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img, seo=post.get("seo"),
          extra_head=ld(article) + faq_ld(post["faq"]))
     items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
-    <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
+    <pubDate>{rfc822_noon(datetime.date.fromisoformat(post['date']))}</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
 """)
 page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for independent restaurants, from the FIG team.",
      blog + "".join(f'<section class="section bl-group" id="{g}"><div class="wrap"><h2 class="h2 bl-gh">{e(t)}</h2><p class="bl-gd">{e(d)}</p>'
@@ -603,10 +628,13 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
      keywords=BASE_KW + ", Markham food blog, restaurant marketing blog",
      extra_head=ld({"@context": "https://schema.org", "@type": "Blog", "name": "The FIG blog", "url": SITE_URL + "/blog",
                     "blogPost": [{"@type": "BlogPosting", "headline": x["title"], "url": f"{SITE_URL}/blog/{x['slug']}", "datePublished": x["date"]} for x in POSTS]}))
+# lastBuildDate is the newest post's own date (or update), not the clock: the same posts give the same file, so the hourly job commits real changes only
+BUILT = f"\n  <lastBuildDate>{rfc822_noon(datetime.date.fromisoformat(max(x.get('updated', x['date']) for x in POSTS)))}</lastBuildDate>" if POSTS else ""
 (SITE / "feed.xml").write_text(f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
   <title>The FIG blog</title><link>{SITE_URL}/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+  <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>{BUILT}
 {"".join(items)}</channel></rss>
 """, encoding="utf-8")
 
@@ -620,14 +648,14 @@ page("404", "Page not found", "This page doesn't exist.", body='''<p class="lost
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<div class="r-bubble" aria-hidden="true"><b id="r-from">A friend</b><span>dinner here?</span></div>
 <h1 id="r-title">Someone sent you a spot on FIG</h1>
-<p class="lead-p" id="r-line">Live deals from restaurants near you. Claim one, show your QR at the counter. Free for diners.</p>
+<p class="lead-p" id="r-line">Live deals and menus from restaurants near you. Free for diners.</p>
 <div class="r-actions"><a class="btn btn-lg" id="r-web" href="/app/">See it on FIG</a><a class="btn btn-lg btn-ghost" href="/#how">How FIG works</a></div>
 <p class="r-app"><a id="r-open" href="/" hidden>Have the FIG app? Open it there</a></p>
 <script src="/js/config.js" defer></script><script src="/js/r.js" defer></script>''')
 
 
 # Stripe sends people back here (takeout orders paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
-# and after FIG Premium (2026-10-09)
+# (Premium's page, premium-on, is gone with Premium: /premium-on is a redirect in vercel.json)
 page("paid", "Back to FIG", "Your takeout payment.", wide=True, body=back_to_fig("You’re all set. Head back to FIG.",
      "Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.",
      "Didn’t finish paying? Open your order in FIG and tap Pay.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/help">Help center</a>'))
@@ -635,17 +663,15 @@ page("stripe", "Back to FIG", "Setting up payouts with Stripe.", wide=True, body
      "Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.",
      "If Stripe still needs something, tap the button there again to pick up where you left off.",
      '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>', icon="→", cls="go"))
-page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("Thanks. Head back to FIG.",
-     "If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium to see it, or to cancel or change your card later.",
-     "Changed your mind before paying? Nothing was charged.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>'))
 
 # the sitemap's dates are the posts' own: the same posts give the same file, so the hourly job commits real changes only
 POST_DATE = {f"/blog/{x['slug']}": x.get("updated", x["date"]) for x in POSTS}
 if POSTS:
     POST_DATE["/blog"] = max(POST_DATE.values())
 # every other page (FIX-LIST #107): the legal pages from their own "Last updated" line; the rest from the date their words last changed
-# ponytail: hand-kept dates for 4 pages; bump the one you edit (a generated date would change the file every hourly run)
-POST_DATE.update({"/": "2026-10-19", "/about": "2026-10-19", "/contact": "2026-10-19", "/help": "2026-10-19"})
+# ponytail: hand-kept dates for 4 pages (a generated date would change the file every hourly run). KEEP THEM CURRENT: when you change the words of
+# Home (index.html), About (content.py), Contact or Help (pages.py), set that page's date to the day you did it (2026-10-24: all four changed).
+POST_DATE.update({"/": "2026-10-24", "/about": "2026-10-24", "/contact": "2026-10-24", "/help": "2026-10-24"})
 POST_DATE.update(LEGAL_DATES)
 lastmod = lambda p: f"<lastmod>{POST_DATE[p]}</lastmod>" if p in POST_DATE else ""
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"
@@ -660,7 +686,8 @@ LLMS = f"""# FIG
 
 ## Facts
 - Based in: Markham, Ontario
-- Platforms: iPhone and Android
+- Platforms: web app today at www.figpromo.ca/app; iPhone and Android apps coming soon
+- Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding plan before launch: $49.99 once, covering the plan until FIG starts billing, then a founding price always below the regular one (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads

@@ -112,3 +112,32 @@ console.log("ok: blog groups");
   assert.ok(/script-src[^;"]*https:\/\/www\.googletagmanager\.com/.test(vj) && /connect-src[^;"]*google-analytics\.com/.test(vj), "vercel.json: the CSP wouldn't let Google Analytics load after Accept");
   console.log("ok: Google Analytics only after consent");
 }
+
+// scripts by hash, not 'unsafe-inline' (REVIEW 2026-10-24 E9): a page may run its own files and only those inline scripts whose sha256 its CSP names
+// (the Vercel analytics line on every page, Home's motion line). Edit one of them and the build says which hash to put in vercel.json's script-src.
+{
+  const crypto = require("crypto");
+  const site = path.join(__dirname, "..");
+  const vercel = JSON.parse(fs.readFileSync(path.join(site, "..", "vercel.json"), "utf8"));
+  const scriptSrc = (url) => {
+    const csps = vercel.headers.filter((h) => new RegExp(`^${h.source}$`).test(url)).flatMap((h) => h.headers).filter((x) => x.key === "Content-Security-Policy");
+    assert.strictEqual(csps.length, 1, `vercel.json: ${url} needs exactly one Content-Security-Policy`);
+    return (/script-src ([^;]*)/.exec(csps[0].value) || [])[1] || "";
+  };
+  const pagesIn = (dir) => fs.readdirSync(path.join(site, dir)).filter((f) => f.endsWith(".html")).map((f) => (dir === "." ? f : dir + "/" + f));
+  let inline = 0;
+  for (const f of [...pagesIn("."), ...pagesIn("blog")]) {
+    const url = "/" + f.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+    const src = scriptSrc(url);
+    assert.ok(!/'unsafe-inline'/.test(src), `vercel.json: ${url} allows 'unsafe-inline' scripts`);
+    for (const m of fs.readFileSync(path.join(site, f), "utf8").matchAll(/<script\b(?![^>]*\ssrc=)([^>]*)>([\s\S]*?)<\/script>/g)) {
+      if (/application\/ld\+json/.test(m[1])) continue; // data, never run
+      const hash = `'sha256-${crypto.createHash("sha256").update(m[2].replace(/\r\n/g, "\n")).digest("base64")}'`;
+      assert.ok(src.includes(hash), `${f}: this inline script isn't allowed by its CSP (${m[2].slice(0, 50)}...). Add ${hash} to the script-src of the CSPs for ${url} in vercel.json, or move it to a file`);
+      inline++;
+    }
+    assert.ok(!/\son[a-z]+\s*=\s*"/.test(fs.readFileSync(path.join(site, f), "utf8")), `${f}: an inline event handler (onclick=...) can't run without 'unsafe-inline'; use addEventListener in a file`);
+  }
+  assert.ok(inline > 0, "no inline scripts were found: this check reads the pages wrong");
+  console.log("ok: inline scripts allowed by hash (" + inline + " in the pages), no 'unsafe-inline' for scripts");
+}

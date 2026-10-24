@@ -998,8 +998,8 @@ POSTS = [
                  "Call ahead to check for a table and to ask how the deal applies to a shared bill. That answer is the restaurant's call.",
                  "Keep drinks and extras modest, and decide on a rough total before you leave home."],
          sections=[
-             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners, deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>
-<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. FIG shows what is on near you right now.</p>"""),
+             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. Once FIG opens, it will show what is on near you.</p>"""),
              ("Step 1: pick an early table", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables in the early evening, and an empty table earns nothing, which is why owners post deals then. For a family it helps twice: more deals, and a quieter room when children are hungry and tired.</p>
 <table><thead><tr><th>When</th><th>Why it suits a family</th></tr></thead><tbody>
 <tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, faster kitchen, more deals</td></tr>
@@ -1008,9 +1008,9 @@ POSTS = [
 <tr><td>Weekend dinner</td><td>The busiest time. Call ahead, and expect fewer deals</td></tr>
 </tbody></table>
 <p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
-             ("Step 2: start from what everyone will eat", """<p>Set your cravings, budget and diet in FIG once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
+             ("Step 2: start from what everyone will eat", """<p>When FIG opens, you will set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
 <p>A deal on a dish nobody wanted is not a saving. Look for the deal that matches what the family would have ordered anyway.</p>"""),
-             ("Step 3: compare the whole dinner", """<p>Here is a dinner for a family of four with round example prices: one shared starter at $10, two adult mains at $16 and two children's mains at $9, with water to drink. Three ways to pay for it:</p>
+             ("Step 3: compare the whole dinner", """<p>Here is a dinner for a family of four with round example prices: one shared starter at $10, two adult mains at $16 and two children's mains at $9, with water to drink. Four ways to pay for it:</p>
 <div class="callout math"><b>Example dinner for four (before tip)</b><table><thead><tr><th>Plan</th><th>Food</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
 <tr><td>No deal</td><td>$60.00</td><td>$7.80</td><td>$67.80</td></tr>
 <tr><td>$3 off each adult main</td><td>$54.00</td><td>$7.02</td><td>$61.02</td></tr>
@@ -1029,13 +1029,13 @@ POSTS = [
              ("Something free afterwards", """<p>Main Street Unionville is a historic village street with restaurants, pubs and cafés, and Toogood Pond is steps away, which makes it an easy place for children to stretch their legs after dinner. Markham Village has its own old Main Street, a few kilometres east. A short walk costs nothing and tires out small people before bedtime.</p>"""),
              ("A quick checklist", """<ol><li>Pick an early weeknight and two or three places.</li><li>Work out the final price for your whole order under each deal.</li><li>Decide who claims, and call to check how it applies to your table.</li><li>Agree a rough total, including drinks and dessert.</li><li>After a scanned visit, rate it. Only diners whose visit was scanned can review, so your review helps the next family. <a href="/blog/how-to-read-restaurant-reviews">How reviews work</a>.</li></ol>"""),
          ],
-         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. FIG shows live deals near you on a map and is free for diners."),
+         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. When FIG opens to diners on January 1, 2027, it will show live deals near you on a map, and it is free for diners."),
               ("Is a 2-for-1 better than 20% off for a family?", "It depends on the order. In the example in this post, a 2-for-1 on two $16 adult mains came to $49.72 against $54.24 for 20% off the whole bill. Redo the sum with your own order."),
               ("Do children need their own deal?", "A claim is used once and the code only works on the phone of the person who claimed it. Call the restaurant to ask how a deal applies to a table with children."),
               ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
               ("Can I order takeout instead?", "If the restaurant allows takeout with that deal, yes. You order from the menu in the app, pay there and pick it up, with no delivery or service fee from FIG."),
               ("What if someone in the family has an allergy?", "Use FIG's diet filters to shortlist places, then call the restaurant and tell the server again when you order. Filters are a starting point, not a guarantee."),
-              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now.")]),
+              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
 
     dict(slug="takeout-or-dine-in-with-a-deal-which-costs-less", screen="qr", title="Takeout or dine-in with a deal: which costs you less?", date="2026-10-26", publish_at="2026-10-26T12:00:00-04:00", topic="For diners", group="takeout-and-money",
          dek="The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out.",
@@ -1049,9 +1049,9 @@ POSTS = [
                  "Dine-in is a different thing, not just a dearer one: you get the room, the service and the time."],
          sections=[
              ("The short answer", """<p>For the same dish and the same deal, takeout is usually the cheaper way to eat, because you skip the drink, the tip and the table time. In the example below, one $18 main with $4 off costs $15.82 as takeout and $23.04 as a dine-in meal with a drink and a 15% tip. The deal is worth the same either way. What changes is everything around it. This post works out where the difference comes from, so you can decide with your own prices.</p>
-<p>FIG is free for diners. Deals start in Markham on January 1, 2027, and the web app works today in a browser.</p>"""),
+<p>FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>"""),
              ("What each way means on FIG", """<table><thead><tr><th></th><th>Dine-in with a deal</th><th>Takeout with a deal</th></tr></thead><tbody>
-<tr><td>How you use the deal</td><td>Show your QR code at the counter, or scan the restaurant's counter code</td><td>Tap Takeout on the deal, add dishes from the menu and pay in the app</td></tr>
+<tr><td>How you use the deal</td><td>Show your QR code at the restaurant and staff scan it</td><td>Tap Takeout on the deal, add dishes from the menu and pay in the app</td></tr>
 <tr><td>How you pay</td><td>The restaurant, the way you always do</td><td>In the app, by card</td></tr>
 <tr><td>Fees from FIG</td><td>None</td><td>No delivery fee and no service fee</td></tr>
 <tr><td>Which deals</td><td>Any live deal</td><td>Only deals the restaurant allows as takeout</td></tr>
@@ -1063,7 +1063,7 @@ POSTS = [
 <tr><td>Takeout with the deal</td><td>$14.00</td><td>$1.82</td><td>none</td><td>$15.82</td></tr>
 <tr><td>Dine-in with the deal, plus a $4 drink</td><td>$18.00</td><td>$2.34</td><td>15% of $18.00 = $2.70</td><td>$23.04</td></tr>
 <tr><td>Takeout at full price (0 deals per order)</td><td>$18.00</td><td>$2.34</td><td>none</td><td>$20.34</td></tr>
-</tbody></table><p>Check: $18.00 &minus; $4.00 = $14.00; 13% of $14.00 is $1.82. Dine-in: $14.00 + $4.00 = $18.00; 13% is $2.34; $18.00 + $2.34 + $2.70 = $23.04. A tip is a personal decision, and the 15% on the after-deal subtotal is only an example. You can tip on pickup if you like.</p></div>
+</tbody></table><p>Check: $18.00 &minus; $4.00 = $14.00; 13% of $14.00 is $1.82. Dine-in: $14.00 + $4.00 = $18.00; 13% is $2.34; $18.00 + $2.34 + $2.70 = $23.04. A tip is a personal decision, and the 15% on the after-deal subtotal is only an example.</p></div>
 <p>The deal saved $4.00 plus $0.52 of tax in both of the first two rows. The $7.22 gap between them is the drink, the tax on the drink, and the tip.</p>"""),
              ("What dine-in gives you that takeout cannot", """<p>Cheaper is not always better. Dine-in gives you the food made and served at its best, the room, someone else doing the dishes, and time with the people you are with. A cold bowl of noodles carried home in a bag is not the same dish. If the meal is the point of your evening, such as a date or a family night, the extra cost is the price of the evening. <a href="/blog/date-night-markham-deals-budget">A date night plan, with the math</a> and <a href="/blog/family-dinner-out-markham-deals-budget">a family dinner plan</a> go through that kind of meal.</p>
 <p>Takeout suits a different night: you are tired, you want to eat at home, or you only have twenty minutes.</p>"""),
@@ -1082,7 +1082,7 @@ POSTS = [
               ("How do I pay for takeout on FIG?", "In the app, by card, when you order. Dine-in deals are paid at the restaurant as usual."),
               ("Is HST charged before or after the deal?", "After the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice."),
               ("What if I cannot pick up my order?", "An order not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tap I'm here when you arrive."),
-              ("When do deals start in Markham?", "Deals start on January 1, 2027. You can explore the map and restaurants now.")]),
+              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
 
     dict(slug="reply-to-reviews-and-messages-restaurants", screen="map", title="Replying to reviews and diner messages: a short guide for restaurant owners", date="2026-10-27", publish_at="2026-10-27T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
          dek="How to answer a review or a diner's message in a few minutes a week: what to say to a good review, a bad one and a question, with templates you can adapt and a little arithmetic on what one low rating does.",

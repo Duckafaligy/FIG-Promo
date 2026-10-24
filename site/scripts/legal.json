@@ -208,7 +208,7 @@
   "title": "Business terms",
   "updated": "Last updated October 24, 2026",
   "short": [
-   "One plan covers all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (before then, founding restaurants can pay $49.99 once instead). Your page, deals and scans are included, with no commission on the bill.",
+   "One plan covers all your restaurants (up to 2 for now): $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (before then, founding restaurants can pay $49.99 once instead). Your page, deals and scans are included, with no commission on the bill.",
    "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
    "Honour your live deals exactly as written.",
    "Only you and the staff you invite can verify a deal."
@@ -235,7 +235,7 @@
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• One plan covers all of your locations, now and later (up to 2 for now): their pages, going live, posting deals and verified scans. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no sign-up, listing or per-scan fees.",
+     "• One plan covers all of your locations, now and later (up to 2 for now): their pages, going live, posting deals and verified scans. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Signing up and setting up your listing are free; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no per-scan or per-listing fees.",
      "• Founding restaurants: before FIG opens to diners, you can pay $49.99 once. It covers your plan, for all your restaurants, until FIG starts billing. FIG will tell you that date, and your founding price, in writing at least 14 days before. From then, you can keep your plan at a founding price that is always lower than FIG's regular price, for as long as your plan stays active; if you don't, your plan ends on that date. Refunds: within 14 days of paying, and in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started).",
      "• FIG plans to open to diners on January 1, 2027. FIG can't promise how many diners you'll get. Prices are before tax, plus HST once FIG is registered.",
      "• Regular plans: refunds within 14 days of your first payment. Your card is charged automatically each month or year until you cancel in FIG's Settings. Cancelling stops the renewal, and you keep full access until the end of the month or year you've paid. Nothing else is refundable.",

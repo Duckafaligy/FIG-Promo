@@ -39,6 +39,10 @@
       "destination": "/app/help/[id]"
     },
     {
+      "source": "/app/join/:code",
+      "destination": "/app/join/[code]"
+    },
+    {
       "source": "/app/legal/:doc",
       "destination": "/app/legal/[doc]"
     },

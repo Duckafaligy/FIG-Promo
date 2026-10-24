@@ -4,7 +4,8 @@
 
 ## Facts
 - Based in: Markham, Ontario
-- Platforms: iPhone and Android
+- Platforms: web app today at www.figpromo.ca/app; iPhone and Android apps coming soon
+- Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding plan before launch: $49.99 once, covering the plan until FIG starts billing, then a founding price always below the regular one (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads

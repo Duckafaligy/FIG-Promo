@@ -155,7 +155,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "Organization", "name": "FIG", "url": SITE_URL, "logo": SITE_URL + "/assets/icons/icon-512.png",
      "address": {"@type": "PostalAddress", "addressLocality": "Markham", "addressRegion": "ON", "addressCountry": "CA"}},
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
-    {"@type": "MobileApplication", "name": "FIG", "operatingSystem": "iOS, Android", "applicationCategory": "LifestyleApplication",
+    {"@type": "WebApplication", "name": "FIG", "url": SITE_URL + "/app/", "operatingSystem": "Any", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
 index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding restaurants: $49.99 once, before launch. FIG plans to open to diners on January 1, 2027.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
@@ -671,7 +671,8 @@ LLMS = f"""# FIG
 
 ## Facts
 - Based in: Markham, Ontario
-- Platforms: iPhone and Android
+- Platforms: web app today at www.figpromo.ca/app; iPhone and Android apps coming soon
+- Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding plan before launch: $49.99 once, covering the plan until FIG starts billing, then a founding price always below the regular one (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads

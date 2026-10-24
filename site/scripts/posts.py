@@ -75,7 +75,7 @@ POSTS = [
 
     dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
          dek="Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
-         desc="One plan for all a restaurant owner's places ($29.99 a month or $299.99 a year from launch; founding prices before), no commission on dine-in, and 5% of in-app takeout.",
+         desc="One plan for all an owner's places ($29.99 a month or $299.99 a year; founding prices before launch), no commission on dine-in, and 5% of in-app takeout.",
          keywords="FIG pricing, restaurant app flat plan, no commission restaurant app, restaurant deals app Markham",
          points=["One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers their pages, unlimited deals, every scan and insights, for up to 2 locations for now.",
                  "Before launch, founding restaurants pay $49.99 once. It covers the plan until FIG starts billing, then they keep a founding price that's always lower.",
@@ -169,7 +169,7 @@ POSTS = [
 
     dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
          dek="Delivery apps charge restaurants a percentage of every order. FIG charges one flat plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
-         desc="Delivery apps take a share of every order. FIG takes nothing per dine-in diner (one flat plan) and 5% of the food on in-app takeout. The published Canadian rates, side by side.",
+         desc="Delivery apps take a share of every order. FIG takes nothing per dine-in diner and 5% of the food on in-app takeout. The published Canadian rates, side by side.",
          keywords="delivery app commission Canada, Uber Eats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
          points=["Uber Eats lists Canadian delivery plans at 20%, 25% and 30% of each order; DoorDash at 20%, 25% and 29%.",
                  "For pickup, Uber Eats lists 10% (15% if in-store prices aren't validated) and DoorDash 8% to 10%.",

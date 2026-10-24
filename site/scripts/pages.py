@@ -157,7 +157,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "WebApplication", "name": "FIG", "url": SITE_URL + "/app/", "operatingSystem": "Any", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding restaurants: $49.99 once, before launch. FIG plans to open to diners on January 1, 2027.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding price: $49.99 once, before launch.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
@@ -284,7 +284,8 @@ def faq_ld(qs):
 
 
 # a search description where the first short line is too thin (FIX-LIST #106: /terms's was 46 characters)
-LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG."}
+LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG.",
+              "business-terms": "FIG's business terms for restaurants: one flat plan, no commission on the bill, the founding payment, takeout fees, refunds, reviews and staff."}
 LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms"), ("cookies", "Cookies")]
 
 

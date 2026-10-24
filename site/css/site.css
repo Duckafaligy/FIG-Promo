@@ -1105,7 +1105,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .badges .soon { display: block; flex-basis: 100%; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 600; }
 
 /* launch date in the hero lede; FAQ grouped for diners / restaurants */
-.lede .opens { color: var(--ink); font-weight: 700; white-space: nowrap; }
+.lede .opens { color: var(--ink); font-weight: 700; } /* wraps like the sentence before it (nowrap clipped it on a 390 px phone); the date stays together through non-breaking spaces */
 
 /* keyboard focus on the feature cards (they clip overflow, so the ring sits inside); footer column labels are text now */
 .cell:focus-visible { outline: 3px solid var(--volt); outline-offset: -3px; }

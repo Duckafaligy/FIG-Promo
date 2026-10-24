@@ -352,15 +352,16 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 page("contact", "Contact", "Message the FIG team. A real person reads every message.", wide=True, body='''<section class="pg-hero ct-band"><div class="wrap ct-grid">
 <div class="pg-hero-text"><h1 class="pg-h1">Talk to a real person.</h1>
 <p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p></div>
-<form class="contact ct-card" novalidate>
+<form class="contact ct-card" method="post" action="/contact" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
 <label class="ct-field"><span>What's it about?</span><select name="topic">
 <option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
 </select></label>
 <label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-<button class="btn" type="submit">Send message</button>
+<button class="btn" type="submit" disabled>Send message</button>
 <p class="form-msg" role="status" aria-live="polite"></p>
+<noscript><p class="form-msg err">Sending a message needs JavaScript. Please turn it on for this page.</p></noscript>
 </form>
 </div></section>
 <section class="section ct-more"><div class="wrap"><h2 class="h2 pg-sub">Other ways</h2><div class="ct-ways">

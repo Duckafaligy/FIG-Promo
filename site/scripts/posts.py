@@ -6,6 +6,9 @@
 # points (the "Key takeaways" box), sections [(h2, html)], faq [(q, a)] (also the FAQPage data), publish_at (queued posts:
 # ISO with its offset; pages.py leaves a post out until then). Inside sections: plain <table>, and
 # <div class="callout tip|example|math"><b>Title</b>…</div>.
+# pages.py refuses to build a post that says what FIG has retired (Premium, announcements, diner messages, the Counter code, stamps, deposits,
+# paying at the counter for takeout, Toronto/GTA) or that the app works for diners before DINERS_OPEN: see blog_claims.py. A post that has to
+# mention one on purpose lists the rule in claims_ok=["premium"].
 
 # Sources used across several posts
 # Stripe Canada, domestic cards 2.9% + CA$0.30: https://stripe.com/en-ca/pricing

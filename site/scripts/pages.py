@@ -631,7 +631,7 @@ page("404", "Page not found", "This page doesn't exist.", body='''<p class="lost
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<div class="r-bubble" aria-hidden="true"><b id="r-from">A friend</b><span>dinner here?</span></div>
 <h1 id="r-title">Someone sent you a spot on FIG</h1>
-<p class="lead-p" id="r-line">Live deals from restaurants near you. Claim one, show your QR at the counter. Free for diners.</p>
+<p class="lead-p" id="r-line">Live deals and menus from restaurants near you. Free for diners.</p>
 <div class="r-actions"><a class="btn btn-lg" id="r-web" href="/app/">See it on FIG</a><a class="btn btn-lg btn-ghost" href="/#how">How FIG works</a></div>
 <p class="r-app"><a id="r-open" href="/" hidden>Have the FIG app? Open it there</a></p>
 <script src="/js/config.js" defer></script><script src="/js/r.js" defer></script>''')

@@ -34,7 +34,7 @@
       var name = rows && rows[0] && String(rows[0].name || '').slice(0, 60);
       if (!name) return nowhere();
       title.textContent = (from ? from + ' sent you ' : 'Check out ') + name + ' on FIG';
-      line.textContent = 'See ' + name + '’s live deals, claim one, and show your QR at the counter. Free for diners.';
+      line.textContent = 'See ' + name + '’s live deals and menu. Free for diners.';
       if (from && fromEl) fromEl.textContent = from;
       if (web) { web.textContent = 'See ' + name + ' on FIG'; web.href = '/app/r/' + id + (from ? '?from=' + encodeURIComponent(from) : ''); }
       offerApp();

@@ -52,9 +52,6 @@
       open.href = 'fig://' + path; // only when they tap it themselves
       open.hidden = false;
       if (STORE.ios) location.replace(STORE.ios);
-    } else {
-      open.href = 'fig://' + path;
-      open.hidden = false;
-    }
+    } // a computer has no FIG app to open (no store app is published yet): no link
   }
 })();

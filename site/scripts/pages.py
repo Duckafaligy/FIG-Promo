@@ -32,7 +32,7 @@ SECTION = lambda sid: re.search(rf'<section class="section[^"]*" id="{sid}">.*?<
 e = html.escape
 BASE_KW = "FIG, FIG app, restaurant deals Markham, Markham restaurants, food deals Ontario, local restaurant deals app"
 PAGES = []  # (path, title, group) for sitemap.xml and the site map page
-HIDDEN = {"404", "r", "paid", "stripe", "premium-on"}  # not indexed, no breadcrumbs, not in the sitemap
+HIDDEN = {"404", "r", "paid", "stripe"}  # not indexed, no breadcrumbs, not in the sitemap
 
 # Scheduled posts (user 2026-10-14: "Schedule + reviewed batches"): a post with `publish_at` (ISO 8601 with its offset) is
 # left out of everything until then: no page, not in the blog, its topics, "Keep reading", the feed, the sitemap, llms.txt or
@@ -654,7 +654,7 @@ page("r", "Shared with you", "A restaurant someone shared with you on FIG.", bod
 
 
 # Stripe sends people back here (takeout orders paid in the app, 2026-10-08): after paying for an order, after setting up payouts,
-# and after FIG Premium (2026-10-09)
+# (Premium's page, premium-on, is gone with Premium: /premium-on is a redirect in vercel.json)
 page("paid", "Back to FIG", "Your takeout payment.", wide=True, body=back_to_fig("You’re all set. Head back to FIG.",
      "Your card is held now and charged only when the restaurant accepts your order. If they decline it, you’re not charged.",
      "Didn’t finish paying? Open your order in FIG and tap Pay.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/help">Help center</a>'))
@@ -662,9 +662,6 @@ page("stripe", "Back to FIG", "Setting up payouts with Stripe.", wide=True, body
      "Stripe has your details. Open FIG, go to Settings → Get paid, and you’ll see whether payouts are ready.",
      "If Stripe still needs something, tap the button there again to pick up where you left off.",
      '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>', icon="→", cls="go"))
-page("premium-on", "Back to FIG", "FIG Premium.", wide=True, body=back_to_fig("Thanks. Head back to FIG.",
-     "If you finished paying, FIG Premium turns on in a moment, for your whole account. Open FIG and go to Settings → FIG Premium to see it, or to cancel or change your card later.",
-     "Changed your mind before paying? Nothing was charged.", '<a class="btn btn-lg" href="/app/">Open FIG</a><a class="btn btn-lg btn-soft" href="/business-terms">Business terms</a>'))
 
 # the sitemap's dates are the posts' own: the same posts give the same file, so the hourly job commits real changes only
 POST_DATE = {f"/blog/{x['slug']}": x.get("updated", x["date"]) for x in POSTS}

@@ -459,6 +459,17 @@ if NOT_LIVE:
         x["faq"] = [(q, _unlink(ans)) for q, ans in x["faq"]]
 
 
+def _sunday(year, month, n):
+    first = datetime.date(year, month, 1)
+    return first + datetime.timedelta(days=(6 - first.weekday()) % 7 + 7 * (n - 1))
+
+
+def rfc822_noon(day):
+    """A date at noon in Toronto, as the feed wants it: -0400 from the second Sunday of March to the first Sunday of November (the clocks
+    change at 2 am, so noon that day is already on the new time), else -0500. The rule itself, so no time zone database is needed."""
+    return f"{day:%a, %d %b %Y} 12:00:00 " + ("-0400" if _sunday(day.year, 3, 2) <= day < _sunday(day.year, 11, 1) else "-0500")
+
+
 def cover(post):
     """1200x630 cover + social image: topic colour, the title, a real app screen. Rebuilt every run (fast, deterministic)."""
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -608,7 +619,7 @@ for k, post in enumerate(POSTS):
     page(url[1:], post["title"], post.get("desc", post["dek"]), body, group="Blog", wide=True, keywords=post["keywords"], og_type="article", trail=[("Blog", "/blog")], image=img, seo=post.get("seo"),
          extra_head=ld(article) + faq_ld(post["faq"]))
     items.append(f"""  <item><title>{e(post['title'])}</title><link>{SITE_URL}{url}</link><guid>{SITE_URL}{url}</guid>
-    <pubDate>{datetime.date.fromisoformat(post['date']):%a, %d %b %Y} 12:00:00 -0400</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
+    <pubDate>{rfc822_noon(datetime.date.fromisoformat(post['date']))}</pubDate><category>{e(post['topic'])}</category><description>{e(post['dek'])}</description></item>
 """)
 page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for independent restaurants, from the FIG team.",
      blog + "".join(f'<section class="section bl-group" id="{g}"><div class="wrap"><h2 class="h2 bl-gh">{e(t)}</h2><p class="bl-gd">{e(d)}</p>'
@@ -616,10 +627,13 @@ page("blog", "Blog", "Guides to restaurant deals in Markham and ideas for indepe
      keywords=BASE_KW + ", Markham food blog, restaurant marketing blog",
      extra_head=ld({"@context": "https://schema.org", "@type": "Blog", "name": "The FIG blog", "url": SITE_URL + "/blog",
                     "blogPost": [{"@type": "BlogPosting", "headline": x["title"], "url": f"{SITE_URL}/blog/{x['slug']}", "datePublished": x["date"]} for x in POSTS]}))
+# lastBuildDate is the newest post's own date (or update), not the clock: the same posts give the same file, so the hourly job commits real changes only
+BUILT = f"\n  <lastBuildDate>{rfc822_noon(datetime.date.fromisoformat(max(x.get('updated', x['date']) for x in POSTS)))}</lastBuildDate>" if POSTS else ""
 (SITE / "feed.xml").write_text(f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
   <title>The FIG blog</title><link>{SITE_URL}/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
+  <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>{BUILT}
 {"".join(items)}</channel></rss>
 """, encoding="utf-8")
 
@@ -657,8 +671,9 @@ POST_DATE = {f"/blog/{x['slug']}": x.get("updated", x["date"]) for x in POSTS}
 if POSTS:
     POST_DATE["/blog"] = max(POST_DATE.values())
 # every other page (FIX-LIST #107): the legal pages from their own "Last updated" line; the rest from the date their words last changed
-# ponytail: hand-kept dates for 4 pages; bump the one you edit (a generated date would change the file every hourly run)
-POST_DATE.update({"/": "2026-10-19", "/about": "2026-10-19", "/contact": "2026-10-19", "/help": "2026-10-19"})
+# ponytail: hand-kept dates for 4 pages (a generated date would change the file every hourly run). KEEP THEM CURRENT: when you change the words of
+# Home (index.html), About (content.py), Contact or Help (pages.py), set that page's date to the day you did it (2026-10-24: all four changed).
+POST_DATE.update({"/": "2026-10-24", "/about": "2026-10-24", "/contact": "2026-10-24", "/help": "2026-10-24"})
 POST_DATE.update(LEGAL_DATES)
 lastmod = lambda p: f"<lastmod>{POST_DATE[p]}</lastmod>" if p in POST_DATE else ""
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"

@@ -77,7 +77,7 @@ POSTS = [
          dek="Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
          desc="One plan for all a restaurant owner's places ($29.99 a month or $299.99 a year from launch; founding prices before), no commission on dine-in, and 5% of in-app takeout.",
          keywords="FIG pricing, restaurant app flat plan, no commission restaurant app, restaurant deals app Markham",
-         points=["One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers their pages, unlimited deals, every scan and insights, with no limit on locations.",
+         points=["One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers their pages, unlimited deals, every scan and insights, for up to 2 locations for now.",
                  "Before launch, founding restaurants pay $49.99 once. It covers the plan until FIG starts billing, then they keep a founding price that's always lower.",
                  "No commission and no fee per diner on dine-in. On takeout paid in the app, FIG also keeps 5% of the food, and Stripe's card fee comes off the same payment.",
                  "On a $30 takeout order, FIG's 5% is $1.50 and Stripe's card fee is about $1.28. You keep about $27.22 of the $30, plus the HST you remit.",
@@ -90,7 +90,7 @@ POSTS = [
 <tr><td>Everyday deals and flash deals, as many as you like</td><td>Included</td></tr>
 <tr><td>Scanning diners at the counter (any phone, tablet or computer)</td><td>Included, no fee per diner</td></tr>
 <tr><td>Insights: views, claims, diners who came in and came back, per deal, day by day</td><td>Included</td></tr>
-<tr><td>All your locations, under one sign-in</td><td>Included: one plan covers them all</td></tr>
+<tr><td>Your locations, under one sign-in</td><td>Included: one plan covers up to 2 locations for now</td></tr>
 <tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's card fee</td></tr>
 </tbody></table>
 <p>No contract. Refunds: within 14 days of your first payment, for any plan; the founding payment is also refunded in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). After that, cancelling a monthly or yearly plan stops the renewal, and you keep full access until the end of the month or year you've paid.</p>"""),

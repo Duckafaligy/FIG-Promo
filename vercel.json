@@ -313,6 +313,11 @@
   },
   "redirects": [
     {
+      "source": "/scripts/:path*",
+      "destination": "/not-found",
+      "permanent": false
+    },
+    {
       "source": "/premium-on",
       "destination": "/#owners",
       "permanent": false

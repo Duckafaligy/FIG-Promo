@@ -80,3 +80,15 @@ console.log("ok: blog groups");
   for (const p of ["/", "/about", "/blogger", "/app/welcome", "/contact"]) assert.deepStrictEqual(frame(p), [["DENY"], ["'none'"]], p + " can't be framed");
   console.log("ok: framing: the blog by FIG's own pages only, everything else by nobody");
 }
+
+// the build files aren't public (REVIEW 2026-10-24 E1): vercel.json publishes all of site/, so the post sources, generator and manifest in
+// /scripts/ are sent to a path that 404s. A rewrite can't do it (files win over rewrites on Vercel); a redirect runs before the files.
+{
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
+  const rule = (vercel.redirects || []).find((r) => r.source === "/scripts/:path*");
+  assert.ok(rule, "vercel.json: no redirect for /scripts/*, so posts.py, pages.py and the manifest are downloadable");
+  const dest = path.join(__dirname, "..", rule.destination.replace(/^\//, ""));
+  assert.ok(!fs.existsSync(dest) && !fs.existsSync(dest + ".html"), `vercel.json: ${rule.destination} is a real page, so /scripts/* would show it instead of a 404`);
+  assert.ok(!fs.existsSync(path.join(__dirname, "..", "supabase")), "site/supabase/ would be public: keep SQL out of site/");
+  console.log("ok: build files (/scripts) are not public");
+}

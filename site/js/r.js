@@ -41,6 +41,7 @@
     }, function () { /* no answer: the page stays general (no name, no sender), and the button still opens FIG */ });
 
   function offerApp() {
+    if (!STORE.ios && !STORE.android) return; // no store app is published yet: the link would lead nowhere (set STORE above to bring it back)
     var path = 'r/' + id + (from ? '?from=' + encodeURIComponent(from) : '');
     var ua = navigator.userAgent;
     if (/Android/i.test(ua)) {

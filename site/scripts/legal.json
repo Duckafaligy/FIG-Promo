@@ -86,7 +86,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 22, 2026",
+  "updated": "Last updated October 24, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -114,7 +114,7 @@
      "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
      "• Support: messages and reports you send us.",
      "• How you found FIG: the tag on the link you came from (a creator’s link or a flyer’s QR code, for example), noted once when you join the waitlist, sign up or add a restaurant, and your answer to “How did you hear about FIG?” if you give one (you can skip it). We use them only to see which outreach works. Restaurants never see them.",
-     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No tracking or advertising cookies."
+     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No advertising cookies. If you accept, Google Analytics sets cookies for up to 2 years; if you decline, it sets none. Vercel Web Analytics sets no cookies."
     ]
    },
    {
@@ -148,7 +148,7 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
-     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies; see the Cookies page",
+     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
      "• Resend: sends FIG's emails, so it gets your email address and what the email says",
      "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",

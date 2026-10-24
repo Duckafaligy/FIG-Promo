@@ -92,3 +92,23 @@ console.log("ok: blog groups");
   assert.ok(!fs.existsSync(path.join(__dirname, "..", "supabase")), "site/supabase/ would be public: keep SQL out of site/");
   console.log("ok: build files (/scripts) are not public");
 }
+
+// analytics only after consent (REVIEW 2026-10-24 E2): no page loads Google Analytics by itself (js/consent.js does, after "Accept"),
+// every page has the cookie notice, its two choices look alike, and the CSP still lets Google's script load once accepted
+{
+  const site = path.join(__dirname, "..");
+  const pages = (dir) => fs.readdirSync(path.join(site, dir)).filter((f) => f.endsWith(".html")).map((f) => path.join(dir, f));
+  for (const f of [...pages("."), ...pages("blog")]) {
+    const h = fs.readFileSync(path.join(site, f), "utf8");
+    assert.ok(!/googletagmanager\.com|gtag\(/.test(h), `${f}: Google Analytics is written into the page; it may only load from js/consent.js after "Accept"`);
+    assert.ok(/<script defer src="\/js\/consent\.js(\?v=[0-9a-f]+)?"><\/script>/.test(h), `${f}: no js/consent.js, so no cookie notice`);
+    assert.ok(h.includes("data-cookie-settings"), `${f}: no "Cookie settings" button in the footer`);
+  }
+  const js = fs.readFileSync(path.join(site, "js", "consent.js"), "utf8");
+  const looks = [...js.matchAll(/<button class="([^"]+)" type="button" data-ck="(granted|denied)"/g)];
+  assert.deepStrictEqual(looks.map((m) => m[2]).sort(), ["denied", "granted"], "consent.js: Accept and No thanks are both needed");
+  assert.strictEqual(new Set(looks.map((m) => m[1])).size, 1, "consent.js: Accept and No thanks must look the same");
+  const vj = fs.readFileSync(path.join(site, "..", "vercel.json"), "utf8");
+  assert.ok(/script-src[^;"]*https:\/\/www\.googletagmanager\.com/.test(vj) && /connect-src[^;"]*google-analytics\.com/.test(vj), "vercel.json: the CSP wouldn't let Google Analytics load after Accept");
+  console.log("ok: Google Analytics only after consent");
+}

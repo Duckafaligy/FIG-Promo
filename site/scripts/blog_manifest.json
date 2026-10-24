@@ -8,15 +8,15 @@
  ],
  "posts": [
   {
-   "slug": "reply-to-reviews-and-messages-restaurants",
-   "title": "Replying to reviews and diner messages: a short guide for restaurant owners",
+   "slug": "reply-to-reviews-restaurants",
+   "title": "Replying to reviews: a short guide for restaurant owners",
    "topic": "For restaurants",
    "group": "fill-quiet-hours",
    "date": "2026-10-27",
    "publish_at": "2026-10-27T12:00:00-04:00",
    "status": "queued",
-   "words": 1165,
-   "dek": "How to answer a review or a diner's message in a few minutes a week: what to say to a good review, a bad one and a question, with templates you can adapt and a little arithmetic on what one low rating does."
+   "words": 1313,
+   "dek": "How to answer a review in a few minutes a week: what to say to a good review, a bad one and a rating with no words, with templates you can adapt and a little arithmetic on what one low rating does."
   },
   {
    "slug": "takeout-or-dine-in-with-a-deal-which-costs-less",
@@ -26,7 +26,7 @@
    "date": "2026-10-26",
    "publish_at": "2026-10-26T12:00:00-04:00",
    "status": "queued",
-   "words": 1039,
+   "words": 1031,
    "dek": "The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out."
   },
   {
@@ -37,7 +37,7 @@
    "date": "2026-10-24",
    "publish_at": "2026-10-24T12:00:00-04:00",
    "status": "queued",
-   "words": 1156,
+   "words": 1163,
    "dek": "Eating out with kids does not have to cost a lot. How to pick an early table, choose the deal that fits a family of four, check the sums with HST and keep the extras in check."
   },
   {

@@ -17,7 +17,7 @@
    {
     "heading": "2. Your account",
     "paragraphs": [
-     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You're responsible for what happens on your account."
+     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You can turn on two-step sign-in (an authenticator app, a code by email, or a code by text message). Restaurant owners and managers need it for money steps like payouts and refunds. You're responsible for what happens on your account."
     ]
    },
    {
@@ -25,9 +25,9 @@
     "paragraphs": [
      "Deals are offered by restaurants, not by FIG. Each deal shows its own rules (times, limits, dine-in only, and so on) before you claim it.",
      "• A claimed deal is yours until the restaurant ends the deal, or until a flash or dated deal is over.",
-     "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
-     "• The deal is used once staff scan it. That scan is a \"redemption\".",
-     "• Each deal can be used once per person per day, whether you claim it or order it as takeout. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
+     "• At the restaurant, open your QR code. It doesn't change with time: a code works once, and if the deal can be used more than once, your screen shows a new code after each scan.",
+     "• The deal is used when staff scan your code. That scan is a \"redemption\". A restaurant can let one claim be used more than once (up to 20 times) and can set a wait between uses; your claim shows how many uses are left and when the next one is ready.",
+     "• Each deal can be claimed once per person per day, whether you claim it or order it as takeout. Scans of one claim on the same day count as one visit. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
      "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order comes with a deal, which is applied to it, unless the restaurant sets 0 deals per order, then it is at full price; dine-in only deals can't be. You pay the restaurant in the app. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
     ]
    },
@@ -111,8 +111,10 @@
      "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Terms: which version of our terms you accepted, and when.",
-     "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
+     "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address or mobile number we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
+     "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
+     "• Team invitations: the email address a restaurant invites, the role, and when the invite ends.",
      "• How you found FIG: the tag on the link you came from (a creator’s link or a flyer’s QR code, for example), noted once when you join the waitlist, sign up or add a restaurant, and your answer to “How did you hear about FIG?” if you give one (you can skip it). We use them only to see which outreach works. Restaurants never see them.",
      "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No advertising cookies. If you accept, Google Analytics sets cookies for up to 2 years; if you decline, it sets none. Vercel Web Analytics sets no cookies."
     ]
@@ -168,7 +170,8 @@
     "paragraphs": [
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
-     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again."
+     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again.",
+     "Payment records of takeout and plan payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends."
     ]
    },
    {
@@ -185,7 +188,7 @@
    {
     "heading": "10. Keeping it safe",
     "paragraphs": [
-     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step login, so signing in also needs a code from an authenticator app. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
+     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step sign-in, so signing in also needs a code from an authenticator app, an email or a text message. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
     ]
    },
    {
@@ -229,7 +232,8 @@
    {
     "heading": "3. Your deals",
     "paragraphs": [
-     "You choose your deals, times and daily limits. While a deal is live, you must honour it exactly as listed. Don't raise prices to cancel out a discount. If you pause a deal, keep honouring claims made before that. Ending a deal is what stops its claims."
+     "You choose your deals, times and daily limits. While a deal is live, you must honour it exactly as listed. Don't raise prices to cancel out a discount. If you pause a deal, keep honouring claims made before that. Ending a deal is what stops its claims.",
+     "• You can let a diner use a deal more than once (up to 20 times) and set a wait between uses. Each claim keeps the rules it was made with."
     ]
    },
    {
@@ -245,7 +249,8 @@
      "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
      "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its plan and its 5% fee, and we’ll tell you at least 30 days before that starts.",
-     "• Your plan includes everything FIG offers restaurants. If we ever offer a paid extra, we'll show the price and what's included before you buy anything."
+     "• Your plan includes everything FIG offers restaurants. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
+     "• Your payments: every takeout payment, refund and fee, and your plan payments, are listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years."
     ]
    },
    {
@@ -263,7 +268,7 @@
    {
     "heading": "7. Staff",
     "paragraphs": [
-     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves."
+     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, plan changes, handing a restaurant over and closing it."
     ]
    },
    {

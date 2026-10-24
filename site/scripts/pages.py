@@ -223,6 +223,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 {head_meta(path, full, desc, extra_head, og_type, image)}
+  <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/site.css">
   <script>window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};</script>
   <script defer src="/_vercel/insights/script.js"></script>

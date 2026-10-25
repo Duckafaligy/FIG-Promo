@@ -17,7 +17,7 @@
    {
     "heading": "2. Your account",
     "paragraphs": [
-     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You can turn on two-step sign-in (an authenticator app, a code by email, or a code by text message). Restaurant owners and managers need it for money steps like payouts and refunds. You're responsible for what happens on your account."
+     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You can turn on two-step sign-in (an authenticator app, a code by email, or a code by text message). Restaurant owners and managers need it for money steps like payouts and refunds. Every account has a username. A staff account is an ordinary FIG account, made from an invite from a restaurant, and the person must be 18 or older. You're responsible for what happens on your account."
     ]
    },
    {
@@ -115,6 +115,8 @@
      "• Support: messages and reports you send us.",
      "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
      "• Team invitations: the email address a restaurant invites, the role, and when the invite ends.",
+    "• Ownership requests: if you tell FIG that a restaurant already on FIG is yours, we keep your name, role, email and note. Only you and FIG can read it. It is kept after an account is closed, with the link to the account removed.",
+    "• Receipts: for takeout, your confirmed email is sent to Stripe so it can email your receipt.",
      "• How you found FIG: the tag on the link you came from (a creator’s link or a flyer’s QR code, for example), noted once when you join the waitlist, sign up or add a restaurant, and your answer to “How did you hear about FIG?” if you give one (you can skip it). We use them only to see which outreach works. Restaurants never see them.",
      "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No advertising cookies. If you accept, Google Analytics sets cookies for up to 2 years; if you decline, it sets none. Vercel Web Analytics sets no cookies."
     ]
@@ -244,11 +246,13 @@
      "• Takeout needs your HST number and finished Stripe payouts, and a recent two-step sign-in code for money steps. Everything else is available without them.",
      "• Stripe processes takeout payments. FIG never sees a card number.",
      "• Everything FIG offers restaurants today is included. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
+    "• Menu reading from a photo is free for every restaurant. It is limited to a few reads a day for each owner and needs a confirmed email. It can make mistakes, so you must check every line it reads before you publish, and your menu and prices are your responsibility.",
      "• Your takeout orders are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
        "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
      "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its 5% fee, and we’ll tell you at least 30 days before that starts.",
-       "• Your payments: every takeout payment, refund and fee is listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years."
+       "• Your payments: every takeout payment, refund and fee is listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years.",
+    "• Each month you get a fee statement: a summary of FIG’s fee on your takeout orders. It is not a tax invoice until FIG is registered for HST."
     ]
    },
    {

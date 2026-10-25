@@ -531,7 +531,7 @@ def end_cta(post):
     """The cobalt block at the end of a post: restaurants get listed; diners join the waitlist until FIG opens to them (DINERS_OPEN), then open the web app."""
     if post["topic"] == "For restaurants":
         words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free for restaurants, with no commission on dine-in. Post deals, scan diners and see what works.</p>",
-                       '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See what restaurants get</a>')
+                       '<a class="btn btn-lg btn-volt" href="/app/sign-up-business">Set up my restaurant</a><a class="btn btn-lg btn-line" href="/#owners">See what restaurants get</a>')
     elif DINERS_OPEN:
         words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')

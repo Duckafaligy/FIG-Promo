@@ -25,7 +25,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 
 <section class="section ab-why"><div class="wrap ab-why-in">
 <div class="ab-why-side"><h2 class="h2">Why FIG exists</h2><blockquote>“A full room at 7 pm, then a slow Tuesday afternoon.”</blockquote>
-<div class="ab-tile-wide" aria-hidden="true"><svg class="logo"><use href="#logo"/></svg></div></div>
+<img src="/assets/about/noodle-bar.webp" srcset="/assets/about/noodle-bar-560.webp 560w, /assets/about/noodle-bar.webp 1040w" sizes="(min-width: 980px) 560px, 100vw" alt="Stir-fried noodles on a wooden plate" width="1040" height="600" loading="lazy"></div>
 <div class="ab-why-text">
 <p>Markham is one of the best places in Canada to eat. Dim sum, ramen, Hakka, Hong Kong cafés, Korean fried chicken, Indian sweets, bubble tea on every plaza. Most of the places that make it great are small and independent.</p>
 <p>Those owners all have the same problem: quiet hours. The usual answer is a delivery app, but delivery platforms take a percentage of every order, and a lot of owners decided long ago it doesn't add up.</p>

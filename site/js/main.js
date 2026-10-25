@@ -34,8 +34,7 @@
   const FOOD = [["golden-lantern", "Dim sum"], ["kinton-ramen", "Ramen"], ["chatime", "Bubble tea"], ["pho-hung", "Pho"], ["sakura-house", "Sushi"],
     ["burger-co", "Burgers"], ["seoul-house", "Korean BBQ"], ["alt-tacos", "Tacos"], ["alt-pizza", "Pizza"], ["alt-hotpot", "Hot pot"],
     ["alt-banhmi", "Banh mi"], ["brew-lab", "Coffee"], ["bowl-lab", "Rice bowls"], ["dumpling-house", "Dumplings"], ["noodle-bar", "Noodles"], ["wok-bar", "Stir-fry"]];
-  const TILE = ["", "g", "t", "m"]; // letter tiles in brand tints, no food photos
-  const chip = ([f, n], i) => `<span class="food"><i class="lt ${TILE[FOOD.findIndex((x) => x[0] === f) % 4]}" aria-hidden="true">${n[0]}</i>${n}</span>`;
+  const chip = ([f, n]) => `<span class="food"><img src="/assets/food/${f}.webp" alt="" loading="lazy" width="40" height="40">${n}</span>`;
   $$("[data-marquee]").forEach((t, k) => {
     const list = k ? [...FOOD.slice(8), ...FOOD.slice(0, 8)] : FOOD;
     const html = list.map(chip).join("");

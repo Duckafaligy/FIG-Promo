@@ -4,8 +4,8 @@
   const box = document.getElementById("map");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const wide = () => innerWidth >= 980;
-  const PHOTOS = ["Dim sum", "Bubble tea", "Ramen", "Korean BBQ", "Dumplings", "Coffee", "Sushi", "Pho", "Rice bowls", "Noodles", "Stir-fry", "Burgers", "Tacos", "Pizza", "Hot pot", "Banh mi"]; 
-  // letter pins (no food photos): the first letter of each cuisine
+  const PHOTOS = ["golden-lantern", "chatime", "kinton-ramen", "seoul-house", "dumpling-house", "brew-lab", "sakura-house", "pho-hung", "bowl-lab", "noodle-bar", "wok-bar", "burger-co", "alt-tacos", "alt-pizza", "alt-hotpot", "alt-banhmi"]; // Unsplash License, see assets/food/CREDITS.txt
+  window.FIG_PINS = PHOTOS.map((p) => `/assets/pins/${p}.jpg`);
   if (!box) return;
   // the still map paints first; MapLibre loads once the page is idle, so it never delays the hero text. The same pinned build as
   // the web app (6.11.2, /app/maplibre-load.js and its worker), so a visitor who goes on to /app doesn't download it twice (FIX-LIST #127)
@@ -49,7 +49,7 @@
       const el = document.createElement("div");
       el.className = `pin ${kind} pin-in`;
       el.style.animationDelay = `${0.5 + Math.hypot(x - W * 0.7, y - H * 0.5) / 900}s`;
-      el.innerHTML = `<i>${PHOTOS[i++ % PHOTOS.length][0].toUpperCase()}</i>`;
+      el.innerHTML = `<img src="${window.FIG_PINS[i++ % PHOTOS.length]}" alt="">`;
       outer.appendChild(el);
       deco(new maplibregl.Marker({ element: outer }).setLngLat(map.unproject([x, y])).addTo(map));
     }

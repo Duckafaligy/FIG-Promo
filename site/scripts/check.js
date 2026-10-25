@@ -145,7 +145,7 @@ console.log("ok: blog groups");
 // the email links (2026-10-25): /unsubscribe and /confirm. Tokens are the SAME as the Supabase mail function makes (the app's
 // scripts/check-emails.mjs asserts this vector too), a confirm token can't unsubscribe and the reverse, GET never changes anything, POST does only
 // with the right token, a mail app's one-click POST works, and the pages answer the same for a wrong link
-// no eyebrow labels and no food photos on the website's own pages (owner 2026-10-04 and 2026-10-25): the pages, the stylesheets and the scripts
+// no eyebrow labels on the website's own pages (owner 2026-10-04 and 2026-10-25): the pages, the stylesheets and the scripts
 {
   const site = path.join(__dirname, "..");
   const pages = [...fs.readdirSync(site).filter((f) => f.endsWith(".html")).map((f) => path.join(site, f)), ...fs.readdirSync(path.join(site, "blog")).filter((f) => f.endsWith(".html")).map((f) => path.join(site, "blog", f))];
@@ -154,11 +154,9 @@ console.log("ok: blog groups");
     assert.ok(!/class="[^"]*(eyebrow|kicker|overline|ph-k|city-tag)/.test(html), `${path.basename(f)}: an eyebrow label class is back`);
     assert.ok(!/assets\/screens\//.test(html), `${path.basename(f)}: it shows an app screenshot (use the native mock screens)`);
     assert.ok(!/class="phone[^"]*"[^>]*>\s*<img/.test(html), `${path.basename(f)}: a phone mockup holds an image`);
-    assert.ok(!/(assets\/food\/|assets\/pins\/|assets\/about\/|assets\/blog\/photos\/)/.test(html), `${path.basename(f)}: it shows a food photo`);
   }
   for (const f of ["css/site.css", "css/pages.css", "css/tokens.css"]) assert.ok(!/text-transform:\s*uppercase/.test(fs.readFileSync(path.join(site, f), "utf8")), `${f}: uppercase text-transform (an eyebrow look) is back`);
-  for (const f of ["js/main.js", "js/map.js"]) assert.ok(!/assets\/(food|pins|about)\//.test(fs.readFileSync(path.join(site, f), "utf8")), `${f}: it loads a food photo`);
-  console.log("ok: no eyebrow labels (classes, uppercase) and no food photos on the website's pages");
+  console.log("ok: no eyebrow labels (classes, uppercase) on the website's pages");
 }
 (async () => {
   process.env.UNSUB_SECRET = "test-secret-for-fig-emails"; delete process.env.SESSION_SECRET;

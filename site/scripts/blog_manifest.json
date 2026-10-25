@@ -136,7 +136,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 709,
+   "words": 705,
    "dek": "A slow-hour deal makes money when it fills seats that would otherwise be empty and covers its food cost. Here's the arithmetic: contribution per plate, the worst case, the cap, and how to tell new diners from regulars who'd have come anyway."
   },
   {
@@ -158,7 +158,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 674,
+   "words": 667,
    "dek": "A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply."
   },
   {
@@ -196,14 +196,14 @@
   },
   {
    "slug": "how-fig-makes-money",
-   "title": "How FIG makes money: one flat plan, and 5% of in-app takeout",
+   "title": "How FIG makes money: 5% of in-app takeout",
    "topic": "For restaurants",
    "group": "takeout-and-money",
    "date": "2026-10-07",
    "publish_at": null,
    "status": "live",
-   "words": 780,
-   "dek": "Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food."
+   "words": 690,
+   "dek": "FIG is free for restaurants, with no commission on dine-in and no fee per diner. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food."
   },
   {
    "slug": "restaurant-deals-markham",
@@ -224,8 +224,8 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 871,
-   "dek": "Delivery apps charge restaurants a percentage of every order. FIG charges one flat plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order."
+   "words": 852,
+   "dek": "Delivery apps charge restaurants a percentage of every order. FIG is free for restaurants on dine-in, with nothing per diner, and keeps 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order."
   },
   {
    "slug": "fill-slow-hours-restaurant",
@@ -246,7 +246,7 @@
    "date": "2026-10-04",
    "publish_at": null,
    "status": "live",
-   "words": 712,
+   "words": 714,
    "dek": "How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free."
   },
   {
@@ -279,8 +279,8 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 866,
-   "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill."
+   "words": 836,
+   "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill."
   }
  ]
 }

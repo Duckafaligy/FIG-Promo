@@ -29,7 +29,7 @@ UPDATED = "2026-10-14"
 
 # The blog's four groups (FIX-LIST #145): /blog is laid out by them (a section each, its anchor the slug) and Home's
 # "Good to know" cards link to them. Every post has a `group`, one of these slugs (pages.py stops the build otherwise).
-# The descriptions are true today; no "free for restaurants".
+# The descriptions are true today.
 GROUPS = [
     ("eat-out-for-less", "Eat out for less", "How deals on FIG work, and how to tell a good one."),
     ("fill-quiet-hours", "Fill your quiet hours", "Deal ideas for slow hours, the math behind them, and getting your team ready."),
@@ -39,13 +39,13 @@ GROUPS = [
 
 POSTS = [
     dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-24", topic="News", group="fig-in-markham",
-         dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill.",
-         desc="Why FIG exists: a restaurant deals app for Markham that's free for diners, charges restaurants one flat plan and takes no cut of a dine-in bill.",
+         dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill.",
+         desc="Why FIG exists: a restaurant deals app for Markham that's free for diners and for restaurants, and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
          points=["FIG is a restaurant deals app starting in Markham, Ontario. Deals start January 1, 2027.",
-                 "Restaurants post their own deals, for the hours they choose, with their own daily cap. Posting deals and scanning diners are included in one flat plan, with no fee per diner.",
+                 "Restaurants post their own deals, for the hours they choose, with their own daily cap. Posting deals and scanning diners are free, with no fee per diner.",
                  "Diners find deals on a map, claim one in a tap and show a code at the counter. It's free for diners, with no ads for now.",
-                 "FIG earns 5% of the food on takeout orders paid in the app. Never from a dine-in bill.",
+                 "FIG earns only 5% of the food on takeout orders paid in the app. Never from a dine-in bill.",
                  "Markham first, expanding to Richmond Hill and Vaughan Mills."],
          sections=[
              ("The short answer", """<p>We built FIG because the restaurants that make a city worth eating in are mostly small and independent, and the tools that promise them customers usually charge a share of every order. FIG turns that around: a restaurant posts a deal for the hours it wants to fill, nearby diners find it on a map, and the diner pays the restaurant at the counter. FIG takes nothing from that bill.</p>
@@ -61,45 +61,45 @@ POSTS = [
 <ul><li><strong>What</strong> the deal is: a percentage off, a dollar amount off, 2-for-1, or something free with an order, on the whole bill or on specific dishes from its menu.</li><li><strong>When</strong> it runs: which days and hours, every week, once, or until a date. Or a <a href="/blog/flash-deals-explained">flash deal</a> right now, for a quiet hour.</li><li><strong>How many</strong>: a daily cap, so a deal never gives away more than planned. It stops on its own when the cap is reached.</li><li><strong>Where</strong>: dine-in only, or also as takeout.</li></ul>
 <p>A diner finds the deal on Home or on the map, taps Claim, and the deal waits on their Deals page. At the restaurant, staff scan the diner's code with the restaurant side of FIG (on any phone, tablet or computer). The deal comes off the bill, and the diner pays the restaurant the way they always do.</p>"""),
              ("What FIG is for diners", """<ul><li><strong>Free.</strong> No subscription, no fees, no ads for now.</li><li><strong>Deals you can actually use.</strong> Live deals near you, nearest first, filtered by what you crave, your budget and your diet.</li><li><strong>No pressure.</strong> A claim doesn't time out. It works for as long as the deal runs, and it only ends when the restaurant ends the deal, or a flash or dated deal is over.</li><li><strong>Private.</strong> Restaurants see your first name and last initial, never your phone number or email.</li><li><strong>Honest reviews.</strong> Only diners whose visit was scanned can review a restaurant, so every review comes from a real meal. Deals get likes; restaurants get stars.</li></ul>"""),
-             ("How FIG pays for itself", """<p>Two ways. Restaurants pay <strong>one plan for all their restaurants</strong>: $29.99 a month or $299.99 a year from the day FIG opens to diners (founding restaurants lock in less before launch). And on <strong>takeout paid in the app</strong>, FIG keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, goes to the restaurant.</p>
+             ("How FIG pays for itself", """<p>Restaurants use FIG <strong>for free</strong>. FIG earns in one way: on <strong>takeout paid in the app</strong>, it keeps 5% of the food (before tax), and Stripe's card fee comes off the same payment. The rest, tax included, goes to the restaurant.</p>
 <p>That's it. No ads for now, no fee per diner, no commission on a dine-in bill, and nothing for sale that changes search order or reviews. <a href="/blog/how-fig-makes-money">How FIG makes money, in full</a>.</p>"""),
              # Main Street Unionville and Markham Village: https://en.wikipedia.org/wiki/Main_Street_Unionville ,
              #   https://en.wikipedia.org/wiki/Markham_Village ; Pacific Mall, NE corner of Steeles and Kennedy: https://en.wikipedia.org/wiki/Pacific_Mall
              ("Why Markham first", """<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants spread across plazas and main streets, from Pacific Mall at Steeles and Kennedy to Main Street Unionville and the old Main Street of Markham Village, and a lot of people who love finding somewhere new to eat.</p>
 <p>FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027. Until then, restaurants can set up their page, menu and first deals, and diners can join the waitlist at www.figpromo.ca.</p>"""),
-             ("What's next", """<p>We're signing Markham restaurants now. If you own one, setting up takes a few minutes: your page, your menu, your first deal. Before FIG opens to diners, you can lock in a founding price. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
+             ("What's next", """<p>We're signing Markham restaurants now. If you own one, setting up takes a few minutes: your page, your menu, your first deal. Setting up is free. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
          ],
          faq=[("What is FIG?", "FIG is a restaurant deals app. Restaurants post their own deals; diners find them on a map, claim one and show a code at the counter. It's free for diners."),
               ("When does FIG launch?", "FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027."),
-              ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are included in FIG's flat plan, with no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
+              ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are free, with no fee per diner. On takeout orders diners pay for in the app, FIG keeps 5% of the food before tax."),
               ("Does FIG show ads?", "No, not for now. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
               ("Do I need the app to use FIG?", "No. FIG runs in your web browser at www.figpromo.ca/app. Restaurants can set up there today; diners can join the waitlist on the site, and FIG opens to diners on January 1, 2027. The App Store and Google Play apps are coming soon.")]),
 
-    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: one flat plan, and 5% of in-app takeout", date="2026-10-07", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
-         dek="Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.",
-         desc="One plan for all an owner's places ($29.99 a month or $299.99 a year; founding prices before launch), no commission on dine-in, and 5% of in-app takeout.",
-         keywords="FIG pricing, restaurant app flat plan, no commission restaurant app, restaurant deals app Markham",
-         points=["One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers their pages, unlimited deals, every scan and insights, for up to 2 locations for now.",
-                 "Before launch, founding restaurants pay $49.99 once. It covers the plan until FIG starts billing, then they keep a founding price that's always lower.",
-                 "No commission and no fee per diner on dine-in. On takeout paid in the app, FIG also keeps 5% of the food, and Stripe's card fee comes off the same payment.",
+    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: 5% of in-app takeout", date="2026-10-07", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
+         dek="FIG is free for restaurants, with no commission on dine-in and no fee per diner. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.",
+         desc="FIG is free for restaurants, with no commission on dine-in. It earns only 5% of the food on takeout orders paid in the app.",
+         keywords="free restaurant app, FIG for restaurants, no commission restaurant app, restaurant deals app Markham",
+         points=["Free for restaurants: your page, unlimited deals, every scan and insights cost nothing, for up to 2 locations for now.",
+                 "There's no upfront payment, no monthly or yearly fee and nothing to choose or cancel.",
+                 "No commission and no fee per diner on dine-in. On takeout paid in the app, FIG keeps 5% of the food, and Stripe's card fee comes off the same payment.",
                  "On a $30 takeout order, FIG's 5% is $1.50 and Stripe's card fee is about $1.28. You keep about $27.22 of the $30, plus the HST you remit.",
                  "Paying FIG never changes your search position, your reviews or your deal."],
          sections=[
-             ("The short answer", """<p>FIG charges each owner one plan for all their restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. It covers everything a restaurant needs to bring diners in: your page, your menu, unlimited everyday and flash deals, scanning diners at the counter and the insights that show what's working. A diner who walks in with your deal pays you directly, and FIG takes nothing from that bill.</p>
-<p>On top of the plan, FIG keeps 5% of the food on takeout orders that diners pay for in the app. This post goes through both, with the arithmetic.</p>"""),
-             ("What the plan covers", """<table><thead><tr><th>On FIG</th><th>What it costs you</th></tr></thead><tbody>
-<tr><td>Your restaurant page, menu and photos</td><td>Included</td></tr>
-<tr><td>Everyday deals and flash deals, as many as you like</td><td>Included</td></tr>
-<tr><td>Scanning diners at the counter (any phone, tablet or computer)</td><td>Included, no fee per diner</td></tr>
-<tr><td>Insights: views, claims, diners who came in and came back, per deal, day by day</td><td>Included</td></tr>
-<tr><td>Your locations, under one sign-in</td><td>Included: one plan covers up to 2 locations for now</td></tr>
+             ("The short answer", """<p>FIG is free for restaurants. Everything a restaurant needs to bring diners in costs nothing: your page, your menu, unlimited everyday and flash deals, scanning diners at the counter and the insights that show what's working, for up to 2 locations for now. A diner who walks in with your deal pays you directly, and FIG takes nothing from that bill.</p>
+<p>FIG earns in one way: it keeps 5% of the food on takeout orders that diners pay for in the app. This post goes through it, with the arithmetic.</p>"""),
+             ("What you get, and what it costs", """<table><thead><tr><th>On FIG</th><th>What it costs you</th></tr></thead><tbody>
+<tr><td>Your restaurant page, menu and photos</td><td>Free</td></tr>
+<tr><td>Everyday deals and flash deals, as many as you like</td><td>Free</td></tr>
+<tr><td>Scanning diners at the counter (any phone, tablet or computer)</td><td>Free, no fee per diner</td></tr>
+<tr><td>Insights: views, claims, diners who came in and came back, per deal, day by day</td><td>Free</td></tr>
+<tr><td>Your locations, under one sign-in</td><td>Free: up to 2 locations for now</td></tr>
 <tr><td>Takeout paid in the app</td><td>5% of the food before tax, plus Stripe's card fee</td></tr>
 </tbody></table>
-<p>No contract. Refunds: within 14 days of your first payment, for any plan; the founding payment is also refunded in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). After that, cancelling a monthly or yearly plan stops the renewal, and you keep full access until the end of the month or year you've paid.</p>"""),
-             ("Founding prices, before launch", """<p>Restaurants that join before FIG opens to diners pay <strong>$49.99 once</strong>. It covers their plan until FIG starts billing. From then, they can keep a founding price that's always lower than the regular price, for as long as their plan stays active; we'll tell them the date and their price in writing at least 14 days before. Prices are before tax, plus HST once FIG is registered. The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
+<p>Everything above is free: no upfront payment and no monthly or yearly fee.</p>"""),
+             ("No contract, nothing to cancel", """<p>There is no contract. You can pause your deals or close your account whenever you like, and takeout orders already paid are paid out as usual. The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
              # Stripe 2.9% + CA$0.30 domestic cards (source at the top); HST 13% Ontario
-             ("Takeout paid in the app: 5% of the food", """<p>When a diner orders takeout and pays in the app, the payment goes through Stripe. FIG keeps 5% of the food before tax, Stripe's card fee comes off the same payment, and the rest, including the HST, is paid out to you. The HST is yours to remit, as with any sale.</p>
+             ("Takeout paid in the app: 5% of the food", """<p>When a diner orders takeout and pays in the app, the payment goes through Stripe. FIG keeps 5% of the food before tax, Stripe's card fee comes off the same payment, and the rest, including the HST, is paid out to you. The HST is yours to remit, as with any sale. FIG isn't registered for HST yet; once it is, it will add 13% HST to its 5% fee and tell restaurants at least 30 days before that starts.</p>
 <div class="callout math"><b>A $30 takeout order in Markham</b><table><thead><tr><th></th><th>Amount</th></tr></thead><tbody>
 <tr><td>Food</td><td>$30.00</td></tr>
 <tr><td>HST at 13%</td><td>$3.90</td></tr>
@@ -111,17 +111,17 @@ POSTS = [
 <tr><td><strong>You keep from the food</strong></td><td><strong>$27.22 (90.7%)</strong></td></tr>
 </tbody></table><p>Stripe's rate is its published price for Canadian domestic cards. Its fee is charged on the full payment, tax included.</p></div>
 <p>Takeout on FIG is paid in the app, so it needs two things in Settings → Get paid: your HST number (it goes on every takeout receipt, with your restaurant as the seller) and Stripe payouts. Dine-in deals need neither. Each month's takeout statement shows sales, HST, fees and what you kept.</p>"""),
-             ("Why not charge per diner, like other apps?", """<p>Because the restaurant already gave something up: the deal itself. A 2-for-1 or 20% off is the price of the visit. Charging again for the same diner would push owners to make deals smaller and rarer, which is worse for everyone, diners included. FIG wins when deals are good enough to post, so it doesn't tax them: the plan is flat, however many diners come.</p>"""),
+             ("Why not charge per diner, like other apps?", """<p>Because the restaurant already gave something up: the deal itself. A 2-for-1 or 20% off is the price of the visit. Charging again for the same diner would push owners to make deals smaller and rarer, which is worse for everyone, diners included. FIG wins when deals are good enough to post, so it doesn't tax them: there is no fee per diner, however many come.</p>"""),
              ("What paying FIG never does", """<ul><li>Change your deal or its price.</li><li>Move you up in search or on the map.</li><li>Hide, remove or reorder reviews. Only diners whose visit was scanned can review, and you can reply in public.</li><li>Share a diner's phone number or email with you. Orders and reviews show their first name and last initial.</li></ul>
 <p>The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
-             ("How this compares", """<p>If you're weighing FIG against a delivery app, compare the job, not just the rate. Delivery apps bring the food to the door and charge for it: Uber Eats and DoorDash publish Canadian delivery plans between 20% and 30% per order. FIG brings the diner to your door for one flat plan, with nothing per diner. For pickup, the big apps charge 8% to 10% of an order (Uber Eats charges 15% if your in-store prices aren't validated), which is close to what FIG's 5% plus the card fee comes to. <a href="/blog/delivery-app-commissions-vs-fig">The full comparison, with worked examples</a>.</p>"""),
-             ("Getting started", """<p>Sign up as a business, add your menu and post your first deal. Before FIG opens to diners, you can lock in a founding price in Settings. When you're ready for takeout paid in the app, add your HST number and connect Stripe in Settings → Get paid. Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
+             ("How this compares", """<p>If you're weighing FIG against a delivery app, compare the job, not just the rate. Delivery apps bring the food to the door and charge for it: Uber Eats and DoorDash publish Canadian delivery plans between 20% and 30% per order. FIG brings the diner to your door for free, with nothing per diner. For pickup, the big apps charge 8% to 10% of an order (Uber Eats charges 15% if your in-store prices aren't validated), which is close to what FIG's 5% plus the card fee comes to. <a href="/blog/delivery-app-commissions-vs-fig">The full comparison, with worked examples</a>.</p>"""),
+             ("Getting started", """<p>Sign up as a business, add your menu and post your first deal. Setting up is free. When you're ready for takeout paid in the app, add your HST number and connect Stripe in Settings → Get paid. Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
          ],
-         faq=[("How much does FIG cost a restaurant?", "$29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for all your restaurants: their pages, deals, scans and insights. Founding restaurants pay $49.99 once before launch, which covers the plan until FIG starts billing; then they keep a founding price that's always lower. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. On takeout orders diners pay for in the app, FIG also keeps 5% of the food before tax."),
+         faq=[("How much does FIG cost a restaurant?", "Nothing. Signing up, setting up, going live, posting deals, scanning and your dashboard are free, for up to 2 locations for now. On takeout orders diners pay for in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
               ("Is there a commission on dine-in?", "No. A diner who uses your deal pays you at the counter, and FIG takes nothing from that bill. There's no fee per diner."),
               ("Who pays Stripe's fee on takeout?", "It comes off the same in-app payment, before the payout: 2.9% + $0.30 on Canadian cards, Stripe's published rate. On a $33.90 payment that's about $1.28."),
               ("Does FIG collect HST for me?", "The diner pays the HST with the order and it's paid out to you with the rest. It's yours to remit. Your HST number goes on every takeout receipt, with your restaurant as the seller."),
-              ("Is there a contract?", "No. There's no contract. Refunds: within 14 days of your first payment, for any plan; the founding payment is also refunded in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). After that, cancelling a monthly or yearly plan stops the renewal, and you keep full access until the end of the month or year you've paid."),
+              ("Is there a contract?", "No. There's no contract and nothing to cancel. You can pause your deals or close your account whenever you like, and takeout orders already paid are paid out as usual."),
               ("Can I pay to rank higher?", "No. Nothing you pay FIG changes where you appear in search or on the map, or what your reviews say.")]),
 
     # Places: Main Street Unionville https://en.wikipedia.org/wiki/Main_Street_Unionville ; Markham Village and its Main Street,
@@ -171,16 +171,16 @@ POSTS = [
               ("Is FIG only in Markham?", "Markham first, expanding to Richmond Hill and Vaughan Mills.")]),
 
     dict(slug="delivery-app-commissions-vs-fig", screen="tscanner", title="Delivery app commissions vs FIG: what restaurants keep", date="2026-10-04", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
-         dek="Delivery apps charge restaurants a percentage of every order. FIG charges one flat plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
+         dek="Delivery apps charge restaurants a percentage of every order. FIG is free for restaurants on dine-in, with nothing per diner, and keeps 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.",
          desc="Delivery apps take a share of every order. FIG takes nothing per dine-in diner and 5% of the food on in-app takeout. The published Canadian rates, side by side.",
          keywords="delivery app commission Canada, Uber Eats commission, DoorDash commission, restaurant commission fees Ontario, commission-free restaurant app",
          points=["Uber Eats lists Canadian delivery plans at 20%, 25% and 30% of each order; DoorDash at 20%, 25% and 29%.",
                  "For pickup, Uber Eats lists 10% (15% if in-store prices aren't validated) and DoorDash 8% to 10%.",
-                 "On FIG, a dine-in diner costs nothing on top of the flat plan; the only cost per visit is the deal you chose. In-app takeout costs 5% of the food plus Stripe's card fee: about 9.3% of a $30 order.",
+                 "On FIG, a dine-in diner costs nothing; the only cost per visit is the deal you chose. In-app takeout costs 5% of the food plus Stripe's card fee: about 9.3% of a $30 order.",
                  "On a $30 delivery order at 25%, a restaurant keeps $22.50 of the food. On a $30 FIG takeout paid in the app, it keeps about $27.22.",
                  "Different jobs: delivery apps bring food to the door; FIG brings diners in and to the counter. Many restaurants will use both."],
          sections=[
-             ("The short answer", """<p>Delivery apps charge restaurants a percentage of each order, and in Canada the published delivery rates run from 20% to 30%. FIG charges one flat plan, nothing for a diner who eats in with your deal, and 5% of the food (plus Stripe's card fee) on takeout paid in the app. FIG doesn't deliver, so it isn't a like-for-like replacement: it's a cheaper way to fill the tables and the pickup counter you already have.</p>"""),
+             ("The short answer", """<p>Delivery apps charge restaurants a percentage of each order, and in Canada the published delivery rates run from 20% to 30%. FIG is free to use, charges nothing for a diner who eats in with your deal, and keeps 5% of the food (plus Stripe's card fee) on takeout paid in the app. FIG doesn't deliver, so it isn't a like-for-like replacement: it's a cheaper way to fill the tables and the pickup counter you already have.</p>"""),
              ("The published rates", """<p>Both big platforms publish their Canadian plans. Rates as listed in October 2026; your own agreement may differ.</p>
 <table><thead><tr><th>Plan</th><th>Delivery</th><th>Pickup</th></tr></thead><tbody>
 <tr><td>Uber Eats Lite</td><td>20%</td><td>10%</td></tr>
@@ -190,7 +190,7 @@ POSTS = [
 <tr><td>DoorDash Basic</td><td>20%</td><td>10%</td></tr>
 <tr><td>DoorDash Plus</td><td>25%</td><td>8%</td></tr>
 <tr><td>DoorDash Premier</td><td>29%</td><td>8%</td></tr>
-<tr><td>FIG, dine-in with a deal</td><td>n/a</td><td>No fee per diner (a flat plan)</td></tr>
+<tr><td>FIG, dine-in with a deal</td><td>n/a</td><td>No fee per diner (free)</td></tr>
 <tr><td>FIG, takeout paid in the app</td><td>n/a</td><td>5% of the food + Stripe's 2.9% + $0.30</td></tr>
 </tbody></table>
 <p>Uber Eats notes its pickup fee rises to 15% if your in-store prices aren't validated. Higher plans buy more visibility, a wider delivery area and member programs, which is real value for some restaurants.</p>"""),
@@ -202,27 +202,27 @@ POSTS = [
 <tr><td>Pickup, 8% plan</td><td>$2.40</td><td>$27.60</td></tr>
 <tr><td>FIG takeout paid in the app</td><td>$1.50 FIG + $1.28 Stripe</td><td>$27.22</td></tr>
 <tr><td>FIG dine-in with a deal</td><td>$0.00</td><td>$30.00, minus the deal you chose</td></tr>
-</tbody></table><p>The FIG card fee is Stripe's 2.9% + $0.30 on the $33.90 the diner pays with 13% HST. The platform rows use the published plan rates; card processing and any marketing you buy are set by each platform's own terms. FIG's plan ($29.99 a month or $299.99 a year from launch, less for founding restaurants, one for all your restaurants) is flat, not a cut of each order.</p></div>
-<p>Be honest with yourself about pickup: an 8% to 10% pickup plan and FIG's in-app takeout land in the same range. FIG's real difference is everything around it: dine-in costs nothing per diner on top of one flat plan, there's no contract, and nothing you pay for changes where you show up.</p>"""),
+</tbody></table><p>The FIG card fee is Stripe's 2.9% + $0.30 on the $33.90 the diner pays with 13% HST. The platform rows use the published plan rates; card processing and any marketing you buy are set by each platform's own terms. On dine-in, FIG takes no cut of any order.</p></div>
+<p>Be honest with yourself about pickup: an 8% to 10% pickup plan and FIG's in-app takeout land in the same range. FIG's real difference is everything around it: dine-in costs nothing per diner, there's no contract, and nothing you pay for changes where you show up.</p>"""),
              ("Worked example: a year of orders", """<div class="callout math"><b>Ten $40 orders a week</b><ul><li>At a 25% delivery commission: $10 an order, $100 a week, about $5,200 a year.</li><li>The same ten diners eating in with a FIG deal: $0 to FIG. Your cost is the deal itself, which you chose and capped.</li><li>As FIG takeout paid in the app: 5% of $40 is $2.00, and Stripe's fee on the $45.20 payment is about $1.61, so about $3.61 an order, or roughly $1,880 a year.</li></ul></div>"""),
              ("The cost you choose: the deal", """<p>A deal isn't free: if you offer 20% off, that 20% is a real cost. The difference is that you set it, for the hours you choose, with a daily cap, on the dishes you pick. A deal that fills a table at 3 pm, when it would otherwise be empty, can be worth it at a lower margin, as long as it covers its food cost and you're not giving it away at 7 pm on a Saturday. <a href="/blog/slow-hour-deal-math">How to run a slow-hour deal that makes money</a>.</p>"""),
              ("Different jobs, used together", """<p>Delivery apps are very good at one thing: getting food to someone's door. That has real costs (drivers, distance, support), and the commission pays for them. FIG does a different job:</p>
 <ul><li>bringing people <em>into</em> your restaurant in hours you want to fill;</li><li>letting diners order takeout with your deal and pick it up, with no delivery fee for them;</li><li>keeping the relationship in your hands: you reply to their reviews and decide every deal.</li></ul>
 <p>Plenty of restaurants will keep delivery for delivery and use FIG to fill the dining room and the counter.</p>"""),
-             ("What you control on FIG", """<ul><li>The deal: what, on which dishes, which days and hours, dine-in only or takeout too.</li><li>A daily cap, so a deal never gives away more than planned.</li><li>Takeout: pause it for a rush, add prep time, or turn it off.</li><li>Whether to pay FIG for anything at all.</li></ul>
+             ("What you control on FIG", """<ul><li>The deal: what, on which dishes, which days and hours, dine-in only or takeout too.</li><li>A daily cap, so a deal never gives away more than planned.</li><li>Takeout: pause it for a rush, add prep time, or turn it off.</li><li>Whether to take takeout paid in the app, the only thing FIG earns on.</li></ul>
 <p><a href="/blog/how-fig-makes-money">How FIG makes money</a> · <a href="/business-terms">Business terms</a></p>"""),
              ('Run your own numbers', "<p>Before you change anything, look at last month's statements and answer four questions:</p>\n<ol><li>What share of your sales came through each app, and at what rate?</li><li>How many of those orders were pickup, not delivery? Pickup on a delivery app still pays a commission.</li><li>Which hours are your dining room quiet? That's where FIG deals help most.</li><li>How many of your app customers have ever eaten in? Diners who come in are the ones who become regulars.</li></ol>\n<p>If a lot of your app orders are pickup from people who live nearby, a takeout deal on FIG is worth testing alongside.</p>"),
              ('If you already use delivery apps', '<ul><li><strong>Keep delivery for delivery.</strong> FIG doesn\'t replace a driver network.</li><li><strong>Add FIG for the room and the counter.</strong> Post deals for your quiet hours and let diners order takeout with them.</li><li><strong>Tell your regulars.</strong> A sign at the counter, "We\'re on FIG: deals Monday to Thursday afternoons", points app customers to the cheaper way to reach you.</li><li><strong>Compare after a month.</strong> FIG\'s free insights show views, claims, the diners who came in and who came back.</li></ul>'),
          ],
          faq=[("What commission do delivery apps charge in Canada?", "As published in October 2026: Uber Eats 20%, 25% or 30% on delivery and 10% on pickup; DoorDash 20%, 25% or 29% on delivery and 10% or 8% on pickup, depending on the plan."),
-              ("Does FIG charge a commission?", "Not on dine-in: deals and scans are included in FIG's flat plan, with no fee per diner. On takeout paid in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
+              ("Does FIG charge a commission?", "Not on dine-in: deals and scans are free, with no fee per diner. On takeout paid in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
               ("Is FIG cheaper than a delivery app's pickup plan?", "Close. On a $30 order, FIG's in-app takeout costs about $2.78 including the card fee; an 8% to 10% pickup plan costs $2.40 to $3.00. FIG's difference is that dine-in diners cost nothing."),
               ("Does FIG do delivery?", "No. Diners eat in, or order takeout and pick it up."),
               ("Can I use FIG and a delivery app together?", "Yes. Many restaurants will keep delivery for delivery and use FIG to fill quiet hours and the pickup counter."),
               ("Does paying FIG improve my ranking?", "No. Nothing you pay FIG moves a restaurant up in search or on the map.")]),
 
     # Food cost 28-32% (Resy/US Foods) and StatCan 3.6% margin: sources at the top
-    dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", updated=UPDATED, topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="fill-slow-hours-restaurant", screen="tdash", title="7 ways to fill slow hours at your restaurant", date="2026-10-04", updated="2026-10-24", topic="For restaurants", group="fill-quiet-hours",
          dek="Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away.",
          desc="Low-cost ways for independent restaurants to fill quiet afternoons and weeknights, with the math to make sure a deal adds money.",
          keywords="fill slow hours restaurant, restaurant marketing ideas, slow restaurant days, increase restaurant traffic, Markham restaurant marketing, happy hour ideas",
@@ -253,7 +253,7 @@ POSTS = [
              ("A one-week plan", """<ol><li><strong>Monday:</strong> mark your quiet hours from last month's receipts.</li><li><strong>Tuesday:</strong> pick one dish with a healthy margin and write one specific deal for one quiet window.</li><li><strong>Wednesday:</strong> post it on FIG with a cap of 10 a day. Take a good photo.</li><li><strong>Thursday to Sunday:</strong> make sure every staff member knows the deal and how to scan.</li><li><strong>Two weeks later:</strong> check claims, scans and return diners. Adjust the hours, the dish or the cap.</li></ol>
 <p>Setting up on FIG takes about 15 minutes. <a href="/blog/set-up-fig-menu-takeout">A 15-minute setup guide for your menu and takeout</a>.</p>"""),
          ],
-         faq=[("What's the cheapest way to market a small restaurant?", "Aim a specific, capped deal at your quiet hours and put it where diners are deciding. On FIG, posting deals and scanning diners are included in one flat plan, with no fee per diner."),
+         faq=[("What's the cheapest way to market a small restaurant?", "Aim a specific, capped deal at your quiet hours and put it where diners are deciding. On FIG, posting deals and scanning diners are free, with no fee per diner."),
               ("Will a deal hurt my margins?", "Not if it runs only in hours that would otherwise be empty and covers its food cost. Cap it per day so it can't cost more than planned."),
               ("What are the slowest hours for restaurants?", "For many, weekday afternoons (about 2 to 5 pm) and early weeknights. Check your own receipts by hour: every restaurant is different."),
               ("Should I offer a percentage off or 2-for-1?", "2-for-1 pulls hardest but costs the most per plate; a percentage off is gentler on margin. Run the numbers on your food cost first."),
@@ -285,7 +285,7 @@ POSTS = [
 <p>More in our <a href="/blog/restaurant-deals-markham">guide to restaurant deals in Markham</a>.</p>"""),
              ("How it works at the counter", """<ol><li>Claim the deal in FIG. It waits on your Deals page for as long as the deal runs.</li><li>At the restaurant, tap Show QR. Staff scan it.</li><li>The deal comes off your bill. You pay the restaurant like normal.</li></ol>
 <p>You don't need a credit card to claim a deal. The code keeps changing, so a screenshot from a friend won't work: everyone claims their own.</p>"""),
-             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants pay FIG a flat plan, never per diner. Deals start in Markham on January 1, 2027.</p>"""),
+             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants use FIG for free, and nothing is charged per diner. Deals start in Markham on January 1, 2027.</p>"""),
              ('A week of eating out on $40', '<div class="callout math"><b>An example week (your prices will vary)</b><table><thead><tr><th>Day</th><th>Plan</th><th>Cost with 13% HST</th></tr></thead><tbody>\n<tr><td>Monday</td><td>A $3.50 drink after school (taxed at 5% under $4)</td><td>$3.68</td></tr>\n<tr><td>Tuesday</td><td>A $14 bowl with a $3-off deal</td><td>$12.43</td></tr>\n<tr><td>Thursday</td><td>2-for-1 with a friend: you each pay half of one $15 dish</td><td>$8.48</td></tr>\n<tr><td>Saturday</td><td>A $12 lunch with 15% off</td><td>$11.53</td></tr>\n<tr><td colspan="2"><strong>Total</strong></td><td><strong>$36.12</strong></td></tr>\n</tbody></table><p>Four meals out for under $40, by choosing the deal first. Without the deals, the same food would be about $50.</p></div>'),
              ('Diets and allergies', "<p>Set your diet in FIG (halal, vegetarian, vegan, gluten-free and more) and the places that don't fit drop out of your results. For allergies, filters are a starting point, not a guarantee: call the restaurant before you go, or tell staff when you order. Kitchens share equipment, and only they know exactly what's in a dish.</p>"),
              ('Staying safe and private', '<ul><li>Restaurants see your first name and last initial, never your phone number or email.</li><li>Your claimed deal only works on your phone, so nobody can use it for you.</li></ul>'),
@@ -332,7 +332,7 @@ POSTS = [
               ("Will FIG message me about flash deals?", "Not on its own. Check the map or Home, or turn on the Flash deals filter to see only them."),
               ("Do I have to be nearby to claim a flash deal?", "No. Deals are never locked to your location. Just make sure you can get there before the timer ends."),
               ("Can a restaurant post a flash deal for takeout?", "A restaurant chooses whether each deal is dine-in only or also takeout."),
-              ("Do flash deals cost restaurants anything?", "Not on top of the plan. Posting deals and scanning diners are included in FIG's flat plan, with no fee per deal or per diner.")]),
+              ("Do flash deals cost restaurants anything?", "No. Posting deals and scanning diners are free, with no fee per deal or per diner.")]),
 
     dict(slug="takeout-without-delivery-fees", screen="qr", title="Takeout with a deal, pick up, skip the delivery fees", date="2026-10-04", updated=UPDATED, topic="For diners", group="takeout-and-money",
          dek="Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late.",
@@ -431,14 +431,14 @@ POSTS = [
 <ul><li><strong>Claims</strong> tell you if the deal is interesting.</li><li><strong>Scans</strong> tell you if people actually come.</li><li><strong>Return visits</strong> tell you if it's building regulars.</li></ul>
 <p>FIG's insights show views, claims, the diners who came in and who came back, per deal, day by day. If most scans are your usual faces, change the dish, the hours or the deal.</p>"""),
              ("A checklist before you post", """<ul><li>Does the diner's price cover the food cost, with room to spare?</li><li>Is it only in hours you're actually quiet?</li><li>Is the cap's worst case a number you're fine with?</li><li>Is it specific: a dish, a time, a price?</li><li>Do all staff know it and how to scan?</li><li>Have you set a date to check claims, scans and return diners?</li></ul>
-<p>On FIG, posting deals and scanning diners are included in one flat plan, with no fee per diner. <a href="/blog/deal-types-percent-dollar-2-for-1">Next: % off, $ off or 2-for-1?</a></p>"""),
+<p>On FIG, posting deals and scanning diners are free, with no fee per diner. <a href="/blog/deal-types-percent-dollar-2-for-1">Next: % off, $ off or 2-for-1?</a></p>"""),
          ],
          faq=[("Do restaurant discounts actually make money?", "They can, when they fill otherwise empty seats and the diner's price covers the food cost. At busy hours, the same discount mostly gives money to diners who'd have paid full price."),
               ("What food cost should I assume?", "Use your own. As a reference, the average food cost is often quoted at 28% to 32% of revenue."),
               ("How big should my daily cap be?", "Big enough to matter, small enough that the worst case (cap × discount) is a number you're comfortable with. Start small and raise it."),
               ("Should drinks be part of the deal?", "Often not: a deal on the main dish with drinks at full price lets add-ons do the earning."),
               ("How do I know if new people are coming?", "Watch scans and return visits per deal. FIG's insights show the diners who came in and who came back."),
-              ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners are included in FIG's flat plan, with no fee per diner.")]),
+              ("Does FIG take a cut of dine-in deals?", "No. Posting deals and scanning diners are free, with no fee per diner.")]),
 
     # CRA: a store coupon reduces the price before GST/HST (RC4022): source at the top
     dict(slug="deal-types-percent-dollar-2-for-1", screen="tdash", title="% off, $ off or 2-for-1? Pricing a restaurant deal", date="2026-10-14", topic="For restaurants", group="fill-quiet-hours",
@@ -495,11 +495,11 @@ POSTS = [
          keywords="FIG restaurant setup, restaurant menu app, set up takeout restaurant, Stripe payouts restaurant, HST number restaurant app",
          points=["Sign up as a business, then follow the Get FIG ready checklist on your dashboard: it ticks itself as you go.",
                  "Build your menu in sections, then dishes and prices. Nothing changes for diners until you tap Publish changes.",
-                 "Post one specific, capped deal for a quiet window. Posting deals and scanning diners are included in your plan.",
+                 "Post one specific, capped deal for a quiet window. Posting deals and scanning diners are free.",
                  "In-app takeout needs your HST number and Stripe payouts, both in Settings → Get paid. Dine-in deals need neither.",
                  "During a rush, pause takeout or add prep time in one tap."],
          sections=[
-             ("The short answer", """<p>Setting up on FIG takes about 15 minutes if you have your menu handy: sign up as a business, add your sections, dishes and prices, publish, and post one deal for a quiet window. If you want diners to pay for takeout in the app, add your HST number and connect Stripe for payouts in Settings → Get paid. Everything is included in one flat plan, and in-app takeout also costs 5% of the food plus Stripe's card fee.</p>"""),
+             ("The short answer", """<p>Setting up on FIG takes about 15 minutes if you have your menu handy: sign up as a business, add your sections, dishes and prices, publish, and post one deal for a quiet window. If you want diners to pay for takeout in the app, add your HST number and connect Stripe for payouts in Settings → Get paid. Everything is free, except that in-app takeout costs 5% of the food plus Stripe's card fee.</p>"""),
              ("Before you start: have these ready", """<ul><li>Your menu (paper, a PDF or a photo) with prices.</li><li>Two or three good photos of your food and room.</li><li>Your opening hours.</li><li>For in-app takeout only: your HST number (it looks like 123456789 RT 0001) and your bank details for Stripe.</li></ul>"""),
              ("Minutes 0 to 3: sign up and follow the checklist", """<p>Sign up as a business with your restaurant's name and address. Your dashboard shows a <strong>Get FIG ready</strong> checklist with one button per step. Each step ticks itself when it's done, from your real data, and you can hide the checklist for good once you're set. Quick tours point out the important buttons the first time you open a screen.</p>"""),
              ("Minutes 3 to 10: your menu", """<ol><li><strong>Sections first.</strong> Starters, Mains, Noodles, Drinks: however your paper menu is organised.</li><li><strong>Dishes and prices.</strong> Type prices the way you like: "15.50", "15,50" and "$15.50" all work.</li><li><strong>Publish.</strong> Your edits are kept while you work, and the button says Publish changes until you tap it. Nothing changes for diners before that, and if you close the tab with unpublished changes, FIG asks first.</li></ol>
@@ -508,7 +508,7 @@ POSTS = [
              ("Minutes 10 to 13: your first deal", """<p>Pick one dish with a healthy margin and one quiet window, and write it plainly: "$3 off any noodle bowl, Monday to Thursday, 2 to 5 pm". Set a daily cap (10 is a good start) and choose dine-in only or takeout too. That's it: it's live on the map for nearby diners. <a href="/blog/deal-types-percent-dollar-2-for-1">Which deal type to pick</a>.</p>"""),
              ("Minutes 13 to 15: how you'll scan", """<p>Diners show a QR code; staff scan it with the restaurant side of FIG on any phone, tablet or computer, or type the short code if a camera won't cooperate. There's no fee per scan or per diner.</p>"""),
              ("Takeout: two ways to run it", """<table><thead><tr><th></th><th>What you need</th><th>What it costs</th></tr></thead><tbody>
-<tr><td>Dine-in deals only</td><td>Nothing more</td><td>Included in your plan</td></tr>
+<tr><td>Dine-in deals only</td><td>Nothing more</td><td>Free</td></tr>
 <tr><td>Takeout, paid in the app</td><td>Your HST number + Stripe payouts (Settings → Get paid)</td><td>5% of the food + Stripe's 2.9% + $0.30</td></tr>
 </tbody></table>
 <p>You decide which deals work as takeout and how many deals one order can use. Some restaurants also take takeout at full price, with no deal needed.</p>"""),
@@ -522,7 +522,7 @@ POSTS = [
          ],
          faq=[("How long does it take to set up FIG?", "About 15 minutes with your menu handy: sign up, add your menu, publish and post one deal. In-app takeout adds your HST number and Stripe setup."),
               ("Do I need an HST number to use FIG?", "Not for deals and scanning. You need one, with Stripe payouts, for takeout, which diners pay for in the app."),
-              ("What does it cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (founding restaurants lock in less before launch). It covers their pages, menus, deals, scans and insights. In-app takeout also costs 5% of the food plus Stripe's card fee."),
+              ("What does it cost?", "Nothing to set up, go live, post deals or scan, for all your restaurants (up to 2 for now). In-app takeout costs 5% of the food plus Stripe's card fee."),
               ("What if we're too busy for takeout?", "Pause takeout for a while or until tomorrow, or add prep time, in one tap.")]),
 
     # CRA small supplier ($30,000 over four consecutive quarters, or in a single quarter; register within 29 days):
@@ -775,7 +775,7 @@ POSTS = [
          faq=[("How do staff apply a FIG deal?", "They scan the diner's code with the restaurant side of FIG on any phone, tablet or computer. The deal comes off the bill."),
               ("What if the camera cannot scan the code?", "There is a short code staff can type instead."),
               ("Can a diner use a screenshot of their code?", "No. The code keeps changing, so only the live code in the diner's app can be scanned."),
-              ("Does it cost anything to scan diners?", "No. There's no fee per scan or per diner; scanning is part of your plan."),
+              ("Does it cost anything to scan diners?", "No. There's no fee per scan or per diner; scanning is free."),
               ("Do staff need to count how many times a deal was used?", "No. The daily cap you set stops the deal automatically once it has been used that many times."),
               ("Do restaurants see diners' phone numbers?", "No. On orders and reviews you see a first name and last initial.")]),
 

@@ -120,7 +120,7 @@ FOOTER = f'''<footer class="foot">
       </div>
       <div class="foot-cols">
         <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><p class="foot-h">Restaurants</p><a href="/#owners">Pricing</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><p class="foot-h">Restaurants</p><a href="/#owners">Free for restaurants</a><a href="/blog/how-fig-makes-money">How FIG makes money</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
         <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a><button class="foot-btn" type="button" data-cookie-settings hidden>Cookie settings</button></div>
       </div>
@@ -157,7 +157,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "WebApplication", "name": "FIG", "url": SITE_URL + "/app/", "operatingSystem": "Any", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: post deals for your quiet hours and diners find you on the map. No commission on dine-in. Founding price: $49.99 once, before launch.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: free to join. Post deals for your quiet hours and diners find you on the map. No commission on dine-in. FIG earns only on takeout.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
@@ -286,7 +286,7 @@ def faq_ld(qs):
 
 # a search description where the first short line is too thin (FIX-LIST #106: /terms's was 46 characters)
 LEGAL_DESC = {"terms": "FIG's terms of service: your account, how deals and claims work, playing fair, restaurants and your food, what you send us, and leaving FIG.",
-              "business-terms": "FIG's business terms for restaurants: one flat plan, no commission on the bill, the founding payment, takeout fees, refunds, reviews and staff."}
+              "business-terms": "FIG's business terms for restaurants: free to use, how the takeout fee works, Stripe's card fee, HST, refunds, reviews and staff."}
 LEGAL_TABS = [("terms", "Terms of service"), ("privacy", "Privacy policy"), ("business-terms", "Business terms"), ("cookies", "Cookies")]
 
 
@@ -339,9 +339,9 @@ legal("cookies", {"title": "Cookies", "updated": "Last updated October 24, 2026"
        ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. It also keeps an offline copy of the pages and pictures you've opened, so repeat visits open faster. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
        ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you. Google's script loads only if you accept Google Analytics, as described above.</p>")])
 
-page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners, with one flat plan for restaurants.",
+page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',
-          "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Restaurants pay one flat plan and no commission on dine-in.",
+          "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Free for restaurants too, with no commission on dine-in.",
           '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" srcset="/assets/about/dumpling-house-360.webp 360w, /assets/about/dumpling-house.webp 720w" sizes="180px" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" srcset="/assets/about/brew-lab-360.webp 360w, /assets/about/brew-lab.webp 720w" sizes="180px" alt="" width="720" height="1360"></div>', "ab-hero")
      + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
      keywords=BASE_KW + ", about FIG, Markham startup", group="Company",
@@ -377,7 +377,7 @@ HELP = [
     ("diners", "For diners", [
         ("Is FIG free?", "Yes, completely. Deals are free to claim and use."),
         ("How do I use a deal?", "Claim it in the app. It waits on your Deals page for as long as the deal runs. Show the QR code at the counter when you order, and staff scan it or type the 8 characters under it."),
-        ("Can someone use my screenshot?", "No. Your code changes every 5 minutes, so only the live code on your phone works."),
+        ("Can someone use my screenshot?", "No. A code works once. After staff scan it, it's used, and if the deal can be used again your phone shows a new code, so a screenshot is just \"already used\"."),
         ("What do I pay?", "Just your bill, like normal, with the deal taken off. Some restaurants let you pay for takeout in the app; that money goes to the restaurant. FIG never charges diners anything."),
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits on your Deals page."),
         ("Do restaurants see my phone number?", "Never. Takeout orders go through the app and your number stays private."),
@@ -385,16 +385,16 @@ HELP = [
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
-        ("What does FIG cost?", "One plan for all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax, for your pages, deals, scans and insights, with no commission on dine-in. Before launch, founding restaurants pay $49.99 once: it covers your plan until FIG starts billing, and from then you can keep a founding price that's always lower than the regular price (FIG tells you the date and your price in writing at least 14 days before). It's refundable within 14 days, or in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started). On takeout orders diners pay for in the app, FIG also keeps 5% of the food (before tax), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
+        ("What does FIG cost?", "Nothing. Signing up, setting up your page, going live, posting deals, scanning and your dashboard are all free, for up to 2 locations for now, with no commission on dine-in or on the bill. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food after any deal and before tax (plus 13% HST on that fee once FIG is registered for HST), and Stripe's card fee (2.9% + $0.30 for most Canadian cards) comes off the same payment, paid by the restaurant. Takeout needs your HST number and finished Stripe payouts. Stripe pays the rest out to your bank on its usual schedule, often a few business days."),
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan: open FIG on the web (the iPhone and Android apps are coming soon). Invite your staff in Settings: they scan with their own FIG sign-in."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "In the app, open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, the days and hours, and check it the way diners will see it. You can pause it anytime, or post an ended deal again in one tap."),
-        ("When does my page go live?", "Setting up is free: photos, address, hours and cuisine. Your page and deals go live when your plan does (the founding payment before FIG opens to diners). FIG plans to open to diners on January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
+        ("When does my page go live?", "Setting up is free: photos, address, hours and cuisine. Add at least one photo and publish. Diners see your page and deals when FIG plans to open to them, on January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
         ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect. The diner's card is charged when you accept the order; decline it and nothing is charged."),
         ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
         ("What if a scan looks wrong?", "Message us from Help within 14 days. We review it, and if it was a mistake we remove it."),
         ("Can I pause takeout in a rush?", "Yes. Tap Takeout: On on your dashboard or Orders to pause new orders for 20 or 40 minutes or until tomorrow's opening, or to add prep time. Orders already in aren't touched, and it comes back on by itself."),
-        ("How do I stop?", "If you paid the founding payment, there's nothing to cancel: it covers your plan until FIG starts billing, FIG tells you that date in writing at least 14 days before, and if you don't keep your plan then, it ends on that date. Within 14 days of paying you can get a full refund instead. On a monthly or yearly plan, cancel in Settings: that stops the renewal, and you keep full access until the end of the month or year you've paid; within 14 days of your first payment you can get a full refund instead. You can also pause your deals, or close your account in Settings."),
+        ("How do I stop?", "There's nothing to cancel, because FIG is free for restaurants. You can pause your deals anytime, turn takeout off, or close your account in Settings."),
     ]),
 ]
 HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
@@ -530,8 +530,8 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 def end_cta(post):
     """The cobalt block at the end of a post: restaurants get listed; diners join the waitlist until FIG opens to them (DINERS_OPEN), then open the web app."""
     if post["topic"] == "For restaurants":
-        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Deals and scans in one flat plan, with no commission on dine-in. Founding prices before launch.</p>",
-                       '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See how pricing works</a>')
+        words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free for restaurants, with no commission on dine-in. Post deals, scan diners and see what works.</p>",
+                       '<a class="btn btn-lg btn-volt" href="/app/welcome">Sign up</a><a class="btn btn-lg btn-line" href="/#owners">See what restaurants get</a>')
     elif DINERS_OPEN:
         words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
@@ -682,7 +682,7 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemap
 (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 LLMS = f"""# FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one plan covering all their restaurants ($29.99 a month or $299.99 a year from launch; founding restaurants $49.99 once before launch, covering the plan until FIG starts billing, then a founding price always below the regular one), with no commission on dine-in. FIG also keeps 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a one-time QR code at the counter. Free for diners. Free for restaurants too, with no commission on dine-in or on the bill. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.
 
 ## Facts
 - Based in: Markham, Ontario
@@ -690,13 +690,13 @@ LLMS = f"""# FIG
 - Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding plan before launch: $49.99 once, covering the plan until FIG starts billing, then a founding price always below the regular one (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
-- How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
+- Restaurants: completely free to sign up, set up, go live, post deals, scan and use the dashboard and insights (up to 2 locations for now); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
+- How a deal works: claim (it stays good until the deal ends), show the QR code (a code works once and changes after every scan), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages
-- [Home]({SITE_URL}/): what FIG is, features, pricing
+- [Home]({SITE_URL}/): what FIG is, features, and how it is free for restaurants
 - [About]({SITE_URL}/about): the full story and FAQ
 - [Help center]({SITE_URL}/help): answers for diners and restaurants
 """ + "".join(f"- [{x['title']}]({SITE_URL}/blog/{x['slug']}): {x['dek']}\n" for x in POSTS) + f"""

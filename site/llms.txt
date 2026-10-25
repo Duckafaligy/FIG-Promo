@@ -1,6 +1,6 @@
 # FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a rotating QR code at the counter. Free for diners. Restaurants pay one plan covering all their restaurants ($29.99 a month or $299.99 a year from launch; founding restaurants $49.99 once before launch, covering the plan until FIG starts billing, then a founding price always below the regular one), with no commission on dine-in. FIG also keeps 5% of the food on takeout orders diners pay for in the app.
+> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a one-time QR code at the counter. Free for diners. Free for restaurants too, with no commission on dine-in or on the bill. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.
 
 ## Facts
 - Based in: Markham, Ontario
@@ -8,13 +8,13 @@
 - Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: one plan covering all an owner's restaurants, $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax; without a plan a restaurant can sign up and set up its listing, but going live, deals, scanning and takeout need one; refunds within 14 days of the first payment; founding plan before launch: $49.99 once, covering the plan until FIG starts billing, then a founding price always below the regular one (listing, unlimited everyday and flash deals, scans, dashboard and insights included); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
-- How a deal works: claim (it stays good until the deal ends), show the QR code (refreshes every 5 minutes), pay the restaurant directly
+- Restaurants: completely free to sign up, set up, go live, post deals, scan and use the dashboard and insights (up to 2 locations for now); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
+- How a deal works: claim (it stays good until the deal ends), show the QR code (a code works once and changes after every scan), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number
 
 ## Pages
-- [Home](https://www.figpromo.ca/): what FIG is, features, pricing
+- [Home](https://www.figpromo.ca/): what FIG is, features, and how it is free for restaurants
 - [About](https://www.figpromo.ca/about): the full story and FAQ
 - [Help center](https://www.figpromo.ca/help): answers for diners and restaurants
 - [Family dinner out in Markham for less: a plan for four, with the math](https://www.figpromo.ca/blog/family-dinner-out-markham-deals-budget): Eating out with kids does not have to cost a lot. How to pick an early table, choose the deal that fits a family of four, check the sums with HST and keep the extras in check.
@@ -32,14 +32,14 @@
 - [HST registration for small restaurants in Ontario: the $30,000 rule explained](https://www.figpromo.ca/blog/hst-registration-small-restaurants-ontario): When a small Ontario restaurant has to register for HST, what changes when it does, and how HST works on deals and takeout. Plain-language, with the Canada Revenue Agency's own rules linked.
 - [Eating out as a group: picking a place, deals and splitting the bill](https://www.figpromo.ca/blog/group-dining-deals): How to get a group from 'where should we eat?' to a table: deciding fast, checking there's room, making deals work for everyone, and splitting the bill fairly, with the arithmetic.
 - [How to read a restaurant's reviews on FIG](https://www.figpromo.ca/blog/how-to-read-restaurant-reviews): Reviews on FIG come only from diners whose visit was scanned. Here's how ratings, likes and replies work, and how to read a restaurant's page to decide in a minute.
-- [How FIG makes money: one flat plan, and 5% of in-app takeout](https://www.figpromo.ca/blog/how-fig-makes-money): Restaurants pay FIG one flat plan, with no commission on dine-in and no fee per diner. On takeout orders diners pay for in the app, FIG also keeps 5% of the food.
+- [How FIG makes money: 5% of in-app takeout](https://www.figpromo.ca/blog/how-fig-makes-money): FIG is free for restaurants, with no commission on dine-in and no fee per diner. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.
 - [How to find the best restaurant deals in Markham](https://www.figpromo.ca/blog/restaurant-deals-markham): A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them.
-- [Delivery app commissions vs FIG: what restaurants keep](https://www.figpromo.ca/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG charges one flat plan, nothing per dine-in diner, and 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.
+- [Delivery app commissions vs FIG: what restaurants keep](https://www.figpromo.ca/blog/delivery-app-commissions-vs-fig): Delivery apps charge restaurants a percentage of every order. FIG is free for restaurants on dine-in, with nothing per diner, and keeps 5% of the food on in-app takeout. Here are the published Canadian rates and what a restaurant keeps from the same order.
 - [7 ways to fill slow hours at your restaurant](https://www.figpromo.ca/blog/fill-slow-hours-restaurant): Practical, low-cost ways for independent restaurants to bring in diners on quiet afternoons and weeknights, with the arithmetic to make sure a deal adds money instead of giving it away.
 - [Student food deals in Markham: eating out on a budget](https://www.figpromo.ca/blog/student-food-deals-markham): How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free.
 - [What are flash deals, and how do they work on FIG?](https://www.figpromo.ca/blog/flash-deals-explained): Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends.
 - [Takeout with a deal, pick up, skip the delivery fees](https://www.figpromo.ca/blog/takeout-without-delivery-fees): Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late.
-- [Why we built FIG](https://www.figpromo.ca/blog/why-we-built-fig): Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners, one flat plan for restaurants, and no cut of a dine-in bill.
+- [Why we built FIG](https://www.figpromo.ca/blog/why-we-built-fig): Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill.
 
 ## Legal
 - [Terms](https://www.figpromo.ca/terms), [Privacy](https://www.figpromo.ca/privacy), [Business terms](https://www.figpromo.ca/business-terms)

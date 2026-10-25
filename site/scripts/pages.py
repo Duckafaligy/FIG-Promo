@@ -10,6 +10,7 @@ import datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from content import ABOUT, ABOUT_FAQ, POSTS
 from posts import GROUPS
+import mocks
 import blog_claims
 
 # every post belongs to exactly one of the blog's groups (FIX-LIST #145): a missing or unknown one stops the build, so no post
@@ -120,7 +121,7 @@ FOOTER = f'''<footer class="foot">
       </div>
       <div class="foot-cols">
         <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><p class="foot-h">Restaurants</p><a href="/#owners">Free for restaurants</a><a href="/blog/how-fig-makes-money">How FIG makes money</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><p class="foot-h">Restaurants</p><a href="/#owners">Free for restaurants</a><a href="/blog/how-fig-makes-money">How FIG makes money</a><a href="/business-terms">Business terms</a><a href="/help#start">Restaurant help</a></div>
         <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
         <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a><button class="foot-btn" type="button" data-cookie-settings hidden>Cookie settings</button></div>
       </div>
@@ -266,7 +267,7 @@ def hero(title, lead="", side="", cls=""):
 
 
 def qa_list(qs, open_first=0):
-    return '<div class="faq-list">' + "".join(f'<details class="qa"{" open" if k < open_first else ""}><summary>{e(q)}</summary><p>{e(a)}</p></details>' for k, (q, a) in enumerate(qs)) + "</div>"
+    return '<div class="faq-list">' + "".join(f'<details class="qa"{" open" if k < open_first else ""}><summary>{e(q)}</summary>{a if a.startswith("<") else "<p>" + e(a) + "</p>"}</details>' for k, (q, a) in enumerate(qs)) + "</div>"
 
 
 def back_to_fig(title, lead, note, second, icon="✓", cls=""):
@@ -281,7 +282,7 @@ def back_to_fig(title, lead, note, second, icon="✓", cls=""):
 
 def faq_ld(qs):
     return '\n  <script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qs]}) + "</script>"
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", a)).strip().replace(" .", ".").replace(" ,", ",")}} for q, a in qs]}) + "</script>"
 
 
 # a search description where the first short line is too thin (FIX-LIST #106: /terms's was 46 characters)
@@ -403,19 +404,37 @@ HELP = [
         ("How do I stop?", "There's nothing to cancel, because FIG is free for restaurants. You can pause your deals anytime, turn takeout off, or close your account in Settings."),
     ]),
 ]
-HELP_HEAD = {"diners": ("Eating out with FIG", "Claiming, codes, paying and takeout."), "restaurants": ("Running deals on FIG", "Cost, scanning, deals and takeout.")}
-# a real app screen under each section's title: the diner's QR, the restaurant's dashboard (tablet)
-SHOT_SIZE = {"qr": (780, 1688), "tdash": (1600, 1112)}  # the screenshots' own sizes, so the page doesn't shift as they load (FIX-LIST #107)
-HELP_SHOT = {"diners": ('qr', "The QR a diner shows at the counter", "phone"), "restaurants": ('tdash', "A restaurant's FIG dashboard", "wide")}
+# the restaurant questions, regrouped under five short headings (owner 2026-10-25); the cost answer is a short answer first, then a small table
+_R = dict(HELP[1][2])
+_R["What does FIG cost?"] = """<p>Nothing. FIG is free for restaurants, and earns only 5% of the food on takeout orders diners pay for in the app.</p>
+<table class="help-t"><tbody>
+<tr><th scope="row">Free</th><td>Signing up, building drafts, publishing (after Stripe's checks), scanning, deals, your dashboard and insights, for up to 2 locations for now. No commission on dine-in or on the bill.</td></tr>
+<tr><th scope="row">FIG keeps</th><td>5% of the food after any deal and before tax, on takeout paid in the app only. Plus 13% HST on that fee once FIG is registered for HST.</td></tr>
+<tr><th scope="row">Stripe keeps</th><td>Its card fee, 2.9% + $0.30 for most Canadian cards, from the same payment. The restaurant pays it.</td></tr>
+</tbody></table>
+<ul class="help-ul"><li>Publishing and takeout both need you to finish Stripe's identity, business and bank checks. Takeout also needs your HST number, two-step sign-in and the takeout switch.</li>
+<li>Stripe pays the rest out to your bank on its usual schedule, often a few business days.</li>
+<li>The HST on a takeout order is yours to remit.</li></ul>"""
+_R["How do I add my staff?"] = "In Settings, invite a person by email or with a link that expires. They open it, see which restaurant and role it is for, and tap Accept or Decline. Nobody joins your team without accepting. Roles are Owner, Manager and Staff, and you can remove people or cancel an invite anytime."
+_R["What is two-step sign-in, and who needs it?"] = "It is a second code when you sign in, from an authenticator app or sent by email. Owners and managers need it, with a recent code, for money steps: payouts, turning takeout on, refunds, handing a restaurant over and closing it. Backup codes help if you lose your phone."
+_GROUPS = [("start", "Start here", ["Why do I connect Stripe?", "Can I try FIG before connecting Stripe?", "When can I publish my page?", "Do I need new equipment?"]),
+           ("scanning", "Deals and scanning", ["How do I post a deal?", "What if a code won't scan?", "What if a scan looks wrong?"]),
+           ("takeout", "Takeout", ["Can diners order takeout?", "Can a diner cancel a takeout order?", "Can I pause takeout in a rush?", "Can I refund an order?"]),
+           ("money", "Money", ["What does FIG cost?", "How do I stop?"]),
+           ("staff", "Staff and security", ["How do I add my staff?", "What is two-step sign-in, and who needs it?"])]
+_used = [q for _, _, qs in _GROUPS for q in qs]
+assert sorted(_used) == sorted(_R), (set(_R) ^ set(_used))
+HELP = [HELP[0]] + [(a, h, [(q, _R[q]) for q in qs]) for a, h, qs in _GROUPS]
 help_html = hero("How can we help?", "Short answers to the questions people ask most. Still stuck? A real person replies within 24 hours.",
-                 '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{t}</a>' for a, t, _ in HELP) + "</nav>"
+                 '<nav class="pg-pills" aria-label="Jump to">' + "".join(f'<a href="#{a}">{h}</a>' for a, h in [("diners", "For diners")] + [(a, h) for a, h, _ in _GROUPS]) + "</nav>"
                  # search the questions as you type (28's research: search is the main way into help); js/help.js
                  + '<div class="hs-search"><input type="search" id="help-q" placeholder="Search the help center" aria-label="Search the help center" autocomplete="off">'
                  + '<p class="hs-none" id="help-none" hidden>No match. <a href="/contact">Message us</a> and a real person replies within 24 hours.</p></div>', cls="pg-hero-line")
+_titles = {"diners": "For diners"}
+help_html += '<section class="section help-wrap"><div class="wrap help-grid"><aside class="help-side">' + mocks.owner_home() + '</aside><div class="help-main">'
 for k, (anchor, title, qs) in enumerate(HELP):
-    head, sub = HELP_HEAD[anchor]
-    help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
-                  f'<h2 class="h2">{head}</h2><p class="side">{sub}</p><figure class="help-shot {HELP_SHOT[anchor][2]}"><img src="/assets/screens/{HELP_SHOT[anchor][0]}.webp" alt="{HELP_SHOT[anchor][1]}" width="{SHOT_SIZE[HELP_SHOT[anchor][0]][0]}" height="{SHOT_SIZE[HELP_SHOT[anchor][0]][1]}"></figure></div>{qa_list(qs, 1 if k else 2)}</div></section>')
+    help_html += f'<section class="help-group" id="{anchor}"><h2 class="help-h">{_titles.get(anchor, title)}</h2>{qa_list(qs, 1 if k == 0 or anchor == "money" else 0)}</section>'
+help_html += '</div></div></section>'
 help_html += '''<section class="section pg-tight"><div class="wrap"><div class="pg-dark">
 <div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p>
 <p class="fig-mail" hidden>You can also write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>

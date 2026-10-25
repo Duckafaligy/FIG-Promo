@@ -48,12 +48,6 @@
 
 /* ---------- Help: diners on white, restaurants on ice ---------- */
 .faq-head .side { margin-top: 14px; color: var(--muted); font-size: 17px; }
-.help-shot { display: none; margin: 32px 0 0; }
-.help-shot img { width: 100%; border-radius: 30px; border: 8px solid #0A1020; box-shadow: 0 30px 60px rgba(10, 16, 32, .18); background: #0A1020; }
-.help-shot.phone { width: 200px; transform: rotate(-3deg); }
-.help-shot.wide { width: 100%; transform: rotate(2deg); }
-.help-shot.wide img { border-radius: 22px; border-width: 7px; }
-@media (min-width: 980px) { .help-shot { display: block; } }
 .section.ice .faq-list, .section.ice .qa { border-color: var(--ice-line); }
 
 /* ---------- Contact: the form card on an ice band ---------- */

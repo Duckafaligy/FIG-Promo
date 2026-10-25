@@ -18,9 +18,9 @@
       d.open = parts.length ? hit : opened[i];
       if (hit) shown++;
     });
-    document.querySelectorAll('.faq').forEach(function (sec) {
+    document.querySelectorAll('.help-group').forEach(function (sec) {
       var any = sec.querySelector('details.qa:not([hidden])');
-      sec.closest('section').hidden = !any && parts.length > 0;
+      sec.hidden = !any && parts.length > 0;
     });
     if (none) none.hidden = !parts.length || shown > 0;
   });

@@ -152,6 +152,8 @@ console.log("ok: blog groups");
   for (const f of pages) {
     const html = fs.readFileSync(f, "utf8");
     assert.ok(!/class="[^"]*(eyebrow|kicker|overline|ph-k|city-tag)/.test(html), `${path.basename(f)}: an eyebrow label class is back`);
+    assert.ok(!/assets\/screens\//.test(html), `${path.basename(f)}: it shows an app screenshot (use the native mock screens)`);
+    assert.ok(!/class="phone[^"]*"[^>]*>\s*<img/.test(html), `${path.basename(f)}: a phone mockup holds an image`);
     assert.ok(!/(assets\/food\/|assets\/pins\/|assets\/about\/|assets\/blog\/photos\/)/.test(html), `${path.basename(f)}: it shows a food photo`);
   }
   for (const f of ["css/site.css", "css/pages.css", "css/tokens.css"]) assert.ok(!/text-transform:\s*uppercase/.test(fs.readFileSync(path.join(site, f), "utf8")), `${f}: uppercase text-transform (an eyebrow look) is back`);

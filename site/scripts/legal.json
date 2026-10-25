@@ -171,7 +171,7 @@
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
      "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again.",
-     "Payment records of takeout and plan payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends."
+     "Payment records of takeout payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends."
     ]
    },
    {
@@ -211,8 +211,8 @@
   "title": "Business terms",
   "updated": "Last updated October 24, 2026",
   "short": [
-   "One plan covers all your restaurants (up to 2 for now): $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (before then, founding restaurants can pay $49.99 once instead). Your page, deals and scans are included, with no commission on the bill.",
-   "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
+   "Restaurants use FIG for free: your page, deals, scans and dashboard cost nothing, with no commission on the bill (up to 2 locations for now).",
+   "Takeout orders paid in the app: FIG keeps 5% of the food (plus HST on that fee once FIG is registered), and Stripe’s card fee comes off the same payment, paid by the restaurant.",
    "Honour your live deals exactly as written.",
    "Only you and the staff you invite can verify a deal."
   ],
@@ -226,7 +226,7 @@
    {
     "heading": "2. Your listing",
     "paragraphs": [
-     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up is free. Your page and deals go live when your plan does (the founding payment before FIG opens to diners) and your page has at least one photo. We can pause or remove a listing that breaks these terms."
+     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up and going live are free. Your page can go live once it has at least one photo. We can pause or remove a listing that breaks these terms."
     ]
    },
    {
@@ -239,18 +239,16 @@
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• One plan covers all of your locations, now and later (up to 2 for now): their pages, going live, posting deals and verified scans. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Signing up and setting up your listing are free; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no per-scan or per-listing fees.",
-     "• Founding restaurants: before FIG opens to diners, you can pay $49.99 once. It covers your plan, for all your restaurants, until FIG starts billing. FIG will tell you that date, and your founding price, in writing at least 14 days before. From then, you can keep your plan at a founding price that is always lower than FIG's regular price, for as long as your plan stays active; if you don't, your plan ends on that date. Refunds: within 14 days of paying, and in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started).",
-     "• FIG plans to open to diners on January 1, 2027. FIG can't promise how many diners you'll get. Prices are before tax, plus HST once FIG is registered.",
-     "• Regular plans: refunds within 14 days of your first payment. Your card is charged automatically each month or year until you cancel in FIG's Settings. Cancelling stops the renewal, and you keep full access until the end of the month or year you've paid. Nothing else is refundable.",
-     "• The refund you can ask for yourself in FIG is once per owner. If you've had a refund before, a later one is FIG's to give: message us.",
-     "• Stripe processes the plan's payments. FIG never sees your card number.",
-     "• Takeout orders paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
-     "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
+     "• FIG is free for restaurants. Signing up, setting up your listing for all of your locations (up to 2 for now), going live, posting deals, verified scans and your dashboard cost nothing. There's no upfront payment, no monthly or yearly fee, no commission on the bill, and no per-scan or per-listing fees.",
+     "• FIG earns only on takeout orders that diners pay for in the app, as explained below. Nothing is taken on dine-in or on a bill paid at your counter. FIG plans to open to diners on January 1, 2027, and can't promise how many diners you'll get.",
+     "• Takeout needs your HST number and finished Stripe payouts, and a recent two-step sign-in code for money steps. Everything else is available without them.",
+     "• Stripe processes takeout payments. FIG never sees a card number.",
+     "• Everything FIG offers restaurants today is included. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
+     "• Your takeout orders are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
+       "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
-     "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its plan and its 5% fee, and we’ll tell you at least 30 days before that starts.",
-     "• Your plan includes everything FIG offers restaurants. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
-     "• Your payments: every takeout payment, refund and fee, and your plan payments, are listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years."
+     "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its 5% fee, and we’ll tell you at least 30 days before that starts.",
+       "• Your payments: every takeout payment, refund and fee is listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years."
     ]
    },
    {
@@ -268,7 +266,7 @@
    {
     "heading": "7. Staff",
     "paragraphs": [
-     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, plan changes, handing a restaurant over and closing it."
+     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, handing a restaurant over and closing it."
     ]
    },
    {
@@ -288,7 +286,7 @@
    {
     "heading": "10. Responsibility",
     "paragraphs": [
-     "You're responsible for your food, prices, service and safety, and for any claims about them. FIG is provided \"as is\". As far as the law allows, our total liability is limited to the greater of the fees you paid us in the last 12 months or $100 CAD."
+     "You're responsible for your food, prices, service and safety, and for any claims about them. FIG is provided \"as is\". As far as the law allows, our total liability is limited to the greater of the fees FIG kept from your takeout orders in the last 12 months or $100 CAD."
     ]
    },
    {

@@ -342,7 +342,7 @@ legal("cookies", {"title": "Cookies", "updated": "Last updated October 24, 2026"
 page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario: live deals on a map, free for diners and free for restaurants.",
      hero('The restaurant deals app for <span class="accent">Markham.</span>',
           "Live deals from local restaurants, on a map. Diners claim a deal in one tap and show a code at the counter. Free for restaurants too, with no commission on dine-in.",
-          '<div class="ab-photos" aria-hidden="true"><img src="/assets/about/dumpling-house.webp" srcset="/assets/about/dumpling-house-360.webp 360w, /assets/about/dumpling-house.webp 720w" sizes="180px" alt="" width="720" height="1040"><img src="/assets/about/brew-lab.webp" srcset="/assets/about/brew-lab-360.webp 360w, /assets/about/brew-lab.webp 720w" sizes="180px" alt="" width="720" height="1360"></div>', "ab-hero")
+          '<div class="ab-photos" aria-hidden="true"><div class="ab-tile"><svg class="logo"><use href="#logo"/></svg></div><div class="ab-tile"><svg class="logo"><use href="#logo"/></svg></div></div>', "ab-hero")
      + ABOUT.replace("{faq}", qa_list(ABOUT_FAQ, 1)), wide=True,
      keywords=BASE_KW + ", about FIG, Markham startup", group="Company",
      extra_head=ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "About FIG", "url": SITE_URL + "/about",
@@ -479,7 +479,7 @@ def rfc822_noon(day):
 
 
 def cover(post):
-    """1200x630 cover + social image: topic colour, the title, a real app screen. Rebuilt every run (fast, deterministic)."""
+    """1200x630 cover + social image: topic colour, the title, the FIG name (no photos, no labels). Rebuilt every run (fast, deterministic)."""
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
     W, H = 1200, 630
     top, bot, ink = {"For diners": ((58, 115, 255), (21, 70, 201), (255, 255, 255)),
@@ -491,35 +491,15 @@ def cover(post):
         d.line([(0, y), (W, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(top, bot)))
     font = lambda size, weight="ExtraBold": (lambda f: (f.set_variation_by_name(weight), f)[1])(ImageFont.truetype(str(SITE / "assets/PlusJakartaSans.ttf"), size))
 
-    shot = Image.open(SITE / f"assets/screens/{post.get('screen', 'map')}.webp").convert("RGB")
-    tablet = shot.width > shot.height
-    sw = 600 if tablet else 330
-    shot = shot.resize((sw, round(sw * shot.height / shot.width)), Image.LANCZOS)
-    pad, rad = (14, 30) if tablet else (12, 46)
-    fw, fh = shot.width + pad * 2, shot.height + pad * 2
-    x0, y0 = (W - fw + 70, H - fh + 150) if tablet else (W - fw - 70, 150)
-    shadow = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(shadow).rounded_rectangle([x0 + 10, y0 + 24, x0 + fw + 10, y0 + fh + 24], rad, fill=120)
-    img.paste((5, 10, 30), mask=shadow.filter(ImageFilter.GaussianBlur(26)))
-    d = ImageDraw.Draw(img)
-    d.rounded_rectangle([x0, y0, x0 + fw, y0 + fh], rad, fill=(10, 16, 32))
-    m = Image.new("L", shot.size, 0)
-    ImageDraw.Draw(m).rounded_rectangle([0, 0, shot.width, shot.height], rad - pad + 2, fill=255)
-    img.paste(shot, (x0 + pad, y0 + pad), m)
-
-    maxw = x0 - 64 - 48
-    for size in range(76, 38, -4):
+    maxw = W - 128
+    for size in range(96, 44, -4):
         f, lines = font(size), [""]
         for word in post["title"].split():
             trial = (lines[-1] + " " + word).strip()
             if f.getlength(trial) <= maxw: lines[-1] = trial
             else: lines.append(word)
         if len(lines) <= 4: break
-    k = font(22, "Bold")
-    tw = k.getlength(post["topic"].upper())
-    d.rounded_rectangle([64, 64, 64 + tw + 36, 104], 20, fill=ink)
-    d.text((82, 84), post["topic"].upper(), font=k, fill=bot, anchor="lm")
-    y = 140
+    y = 96
     for line in lines:
         d.text((64, y), line, font=f, fill=ink)
         y += round(size * 1.1)
@@ -549,38 +529,12 @@ def end_cta(post):
 
 
 STORE_BTNS = re.search(r'<div class="badges small">(.*)</div>', STORES, re.S).group(1)
-# the food photo on each post's card and page (the Paper design); the generated cover stays the social image
-PHOTO = {"how-fig-makes-money": "alt-hotpot", "restaurant-deals-markham": "sakura-house", "delivery-app-commissions-vs-fig": "burger-co",
-         "fill-slow-hours-restaurant": "noodle-bar", "student-food-deals-markham": "alt-banhmi", "flash-deals-explained": "alt-tacos",
-         "takeout-without-delivery-fees": "bowl-lab", "why-we-built-fig": "wok-bar"}
-BLOG_PICS = SITE / "assets" / "blog" / "photos"
-
-
-def blog_pic(name):
-    """The post's photo at blog size (the food photos in assets/food are 160px map pins): made once from the 1600px
-    Unsplash originals in Media Assets (credits in assets/food/CREDITS.txt)."""
-    out = BLOG_PICS / f"{name}.webp"
-    if not out.exists():
-        from PIL import Image
-        BLOG_PICS.mkdir(parents=True, exist_ok=True)
-        im = Image.open(ROOT / "Media Assets" / "Assets" / "website" / "food" / f"{name}.jpg").convert("RGB")
-        im.thumbnail((1600, 1600), Image.LANCZOS)
-        im.save(out, quality=78, method=6)
-    small = BLOG_PICS / f"{name}-480.webp"
-    if not small.exists():
-        from PIL import Image
-        im = Image.open(out)
-        im.thumbnail((480, 4000), Image.LANCZOS)  # 480 wide, whatever its shape
-        im.save(small, quality=76, method=6)
-    return f"/assets/blog/photos/{name}.webp"
-
-
 def thumb(pic):
     """A row's photo: the 480 px copy, the full one for big screens with sharp displays."""
     return f'src="{pic[:-5]}-480.webp" srcset="{pic[:-5]}-480.webp 480w, {pic} 1600w" sizes="(min-width: 720px) 240px, 112px"' if pic.startswith("/assets/blog/photos/") else f'src="{pic}"'
 
 
-photo_of = lambda post, img: blog_pic(PHOTO[post["slug"]]) if post["slug"] in PHOTO else img
+photo_of = lambda post, img: img  # the branded cover (no food photos, owner 2026-10-25)
 # laid out by group (FIX-LIST #145): a plain section per group (its anchor the slug, so /blog#fill-quiet-hours opens it), its
 # published posts newest first; the pills are links to them, and sub.js shows one group at a time. A group with nothing live yet
 # is left out, pill and all.

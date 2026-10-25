@@ -1454,3 +1454,4 @@ details.qa > p { margin: -2px 0 0; }
 .panel .mk-in-panel { flex: 0 0 auto; width: 200px; max-width: 72%; margin-top: 0; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
 @media (max-width: 399px) { .nav-end { gap: 6px; } .nav-get { padding: 0 12px; font-size: 13px; } .nav .brand span { display: none; } }
 @media (max-width: 479px) { .nav-get { display: none; } .nav-end { margin-left: auto; } }
+.mk-back { color: #1E5EFF; font-weight: 700; font-size: calc(3.6 * var(--u)); }

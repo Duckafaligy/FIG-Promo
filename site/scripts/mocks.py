@@ -4,15 +4,15 @@ Decorative: the wrapper is one image to a screen reader. The words inside are re
 import html
 
 COBALT, LEAF = "#1E5EFF", "#14C86B"
-ICON = {  # 24x24 line icons (like the app's tab icons)
-    "home": '<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
-    "ticket": '<path d="M3 8a2 2 0 0 0 0 8v2h18v-2a2 2 0 0 1 0-8V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/>',
+ICON = {  # the app's own tab icons (src/ui/icons.gen.ts), 24x24, drawn the same way
+    "home": '<path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    "ticket": '<path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z"/>',
     "scan": '<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/>',
-    "gear": '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
-    "map": '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    "gear": '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+    "map": '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>',
     "user": '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-    "bag": '<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
 }
+
 
 
 def e(s):
@@ -33,8 +33,8 @@ def tabs(items, active):
     return f'<div class="mk-tabs">{out}</div>'
 
 
-OWNER_TABS = [("home", "Home"), ("ticket", "Deals"), ("scan", "Scan"), ("bag", "Orders"), ("gear", "Settings")]
-DINER_TABS = [("home", "Home"), ("map", "Map"), ("ticket", "Voucher"), ("user", "Profile")]
+OWNER_TABS = [("home", "Home"), ("ticket", "Deals"), ("scan", "Scan"), ("gear", "Settings")]  # biz/(tabs)/_layout.tsx: Home, Deals, Scan, Settings (Chats is hidden)
+DINER_TABS = [("home", "Home"), ("map", "Map"), ("ticket", "Deals"), ("user", "Profile")]  # (diner)/(tabs)/_layout.tsx without Chats
 
 
 def tile(letter, cls=""):
@@ -85,18 +85,18 @@ def owner_scan():
 
 
 def owner_orders():
-    b = f'''<div class="mk-head"><b class="mk-h">Takeout</b><span class="mk-pill ok">Takeout: On</span></div>
+    b = f'''<div class="mk-head"><span class="mk-back">&lsaquo; Home</span><span class="mk-pill ok">Takeout: On</span></div><b class="mk-h">Orders</b>
 <div class="mk-card order"><div class="mk-row"><span class="mk-tag new">New</span><small>#A27</small></div>
 <b class="mk-h2">Alex C.</b><div class="mk-pick">Pickup 7:30 pm</div>
 <div class="mk-line"><span>2 &times; Dim sum basket</span><span>$18.00</span></div><div class="mk-line"><span>1 &times; Jasmine tea</span><span>$3.00</span></div>
 <div class="mk-line tot"><b>Food</b><b>$21.00</b></div>
 <div class="mk-two"><span class="mk-btn ghost">Decline</span><span class="mk-btn">Accept for 7:30 pm</span></div></div>
 <div class="mk-li slim"><span><b>#A24 &middot; Sam P.</b><small>Preparing &middot; pickup 6:45 pm</small></span><span class="mk-tag live">Preparing</span></div>'''
-    return screen(b, tabs(OWNER_TABS, "bag"), "FIG for restaurants: a new takeout order with a pickup time")
+    return screen(b, tabs(OWNER_TABS, "home"), "FIG for restaurants: a new takeout order with a pickup time")
 
 
 def owner_payments():
-    b = f'''<div class="mk-head"><b class="mk-h">Payments</b><span class="mk-btn sm ghost">CSV</span></div>
+    b = f'''<div class="mk-head"><span class="mk-back">&lsaquo; Settings</span><span class="mk-btn sm ghost">CSV</span></div><b class="mk-h">Payments</b>
 <div class="mk-card"><div class="mk-row"><b>October</b><small>Takeout</small></div><div class="mk-big">$412.60 <em>paid out</em></div>
 <div class="mk-line"><span>Food sold</span><span>$468.00</span></div><div class="mk-line"><span>FIG keeps 5%</span><span>&minus;$23.40</span></div><div class="mk-line"><span>Stripe card fees</span><span>&minus;$32.00</span></div></div>
 <div class="mk-sec"><b>Recent</b><small>Oct 24</small></div>
@@ -141,7 +141,7 @@ def diner_qr():
 
 def tablet(kind):
     """A wide restaurant screen for Home's tabs: dashboard, scanner, verified."""
-    side = '<div class="mk-side"><b>FIG</b><span class="on">Home</span><span>Deals</span><span>Scan</span><span>Orders</span><span>Payments</span><span>Settings</span></div>'
+    side = '<div class="mk-side"><b>FIG</b><span class="on">Home</span><span>Orders</span><span>Deals</span><span>Scan a code</span><span>Menu</span><span>Insights</span><span>Staff</span><span>Settings</span></div>'
     if kind == "dash":
         main = f'''<div class="mk-main"><div class="mk-head"><div><b class="mk-h">Golden Lantern</b><small>Markham</small></div><span class="mk-pill ok">Ready</span></div>
 <div class="mk-cols"><div class="mk-card"><div class="mk-row"><b>This week</b><small>Scans</small></div><div class="mk-big">41 <em>+12%</em></div>{bars([4, 6, 5, 8, 9, 6, 3])}</div>

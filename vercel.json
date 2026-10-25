@@ -11,6 +11,14 @@
       "destination": "/assets/icons/apple-touch-icon.png"
     },
     {
+      "source": "/confirm",
+      "destination": "/api/confirm"
+    },
+    {
+      "source": "/unsubscribe",
+      "destination": "/api/unsubscribe"
+    },
+    {
       "source": "/r/:id",
       "destination": "/r"
     },

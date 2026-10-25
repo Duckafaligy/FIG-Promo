@@ -46,15 +46,22 @@ RULES = [
      "FIG does not bill restaurants: there is no billing date or notice", False),
     ("plan-refund", r"March 1,? 2027|14[- ]day (plan )?refund|within 14 days of (your |the )?(first )?pay|refunds?[^.<]{0,40}first payment",
      "there is no plan to refund (the March 1, 2027 rule is gone with the founding payment)", False),
-    # 2026-10-24 (the owner): a diner's code does not change with time. It works once; a deal that can be used more than once shows a new code after each scan.
-    ("code-changes", r"(codes?|qr)[^.<]{0,40}(keeps?|kept) (changing|refreshing)|(codes?|qr)[^.<]{0,40}(changes?|refreshes?) (every|each|constantly|with time|over time)|rotat(es|ing) (qr|codes?)|\blive (qr|codes?)\b|(codes?|qr)[^.<]{0,40}expires? (in|after) \d+ min|every \d+ minutes?\b[^.<]{0,30}\bcodes?\b",
-     "a code does not change with time: it works once, and a new code appears only after each scan of a deal that can be used again", False),
+    # 2026-10-24 (the owner): a diner's code does not change with time. It works once; a deal that can be used more than once shows a new code after each scan.
+
+    ("code-changes", r"(codes?|qr)[^.<]{0,40}(keeps?|kept) (changing|refreshing)|(codes?|qr)[^.<]{0,40}(changes?|refreshes?) (every|each|constantly|with time|over time)|rotat(es|ing) (qr|codes?)|\blive (qr|codes?)\b|(codes?|qr)[^.<]{0,40}expires? (in|after) \d+ min|every \d+ minutes?\b[^.<]{0,30}\bcodes?\b",
+
+     "a code does not change with time: it works once, and a new code appears only after each scan of a deal that can be used again", False),
+
     # 2026-10-24 (the owner): a diner can cancel a takeout order for a full refund until the restaurant accepts it, then until 20 minutes before pickup. Never later.
     ("cancel-after-cutoff", r"cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}(?<!minutes )\b(until|up to|before|till) (the |your |its )?(pickup|collect\w*)\b|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(after|once|when) (the restaurant |it |they )?(has |have )?(accept|start|begin|prepar|mak)\w*|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(?!20\b)\d+ (minutes?|mins?|hours?) (before|of|prior to) (your |the |its )?pickup|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(any ?time|whenever)\b(?![^.<]{0,40}before the restaurant accepts)",
      "a diner can cancel a takeout order only until 20 minutes before pickup (and any time before the restaurant accepts it)", False),
     # 2026-10-25 (the owner): to publish a page, menu or deal, a restaurant must finish Stripe's identity, business and bank checks. Stripe collects the ID and bank data; FIG never sees it.
     ("stripe-verification", r"(publish|go(es)? live|going live|post(ing)? deals?)[^.<]{0,60}\b(without|with no|no) (verif\w+|ID\b|identity|stripe|checks?|documents?|paperwork)|\bno (ID|identity|paperwork|documents?|verification|bank details)\b[^.<]{0,40}(needed|required|to (publish|go live|sign up|post))|go(es)? live[^.<]{0,20}\b(instantly|immediately|right away|in (a |just )?(few |couple of )?(minutes?|seconds?))|\b(instantly|immediately|in (a )?(few )?minutes) go(es)? live|\b(FIG|we) (checks?|verif(y|ies)|reviews?|collects?|stores?|keeps?|holds?) (your |the |each |a )?(owner\Ws )?(ID\b|identity|passports?|driver\Ws licen[cs]e|documents?|photo ID)|\b(FIG|we) (sees?|can see|receives?|gets?|has|stores?|keeps?|holds?) (your |the |a )?(owner\Ws )?(bank (details|account|number|info\w*)|banking|ID number|SIN)|(publish|go live)[^.<]{0,40}\b(before|without) (you )?(connect\w*|finish\w*|verif\w+)[^.<]{0,12}stripe",
      "publishing needs Stripe's checks first; Stripe, not FIG, checks ID and holds ID and bank details", False),
+    # 2026-10-25: the business mailbox (hello@figpromo.ca) sends FIG's email, but the website does not show it until the owner has tested it end to end
+    # (site/js/config.js showEmail). A post that names it, or tells people to email FIG, would publish it early.
+    ("business-email", r"hello@figpromo\.ca|\b(email|e-mail|write to|write us at|reach us at) (us|FIG|the FIG team) (at|on) \S+@|[\w.-]+@figpromo\.ca|mailto:",
+     "the business email address is not public yet: point to the contact page (www.figpromo.ca/contact)", False),
     ("takeout-pay-at-counter", r"takeout[^.<]{0,40}\bpay (at|when)\b[^.<]{0,25}(counter|pickup|arriv)|make it when (they|you) arrive|pay at (the )?pickup",
      "takeout is paid in the app", False),
 ]
@@ -121,7 +128,7 @@ def _selftest():
         "code-changes": "The code keeps changing on your screen",
         "cancel-after-cutoff": "You can cancel a takeout order until pickup",
         "stripe-verification": "Restaurants can go live in minutes with no ID",
-        "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
+        "business-email": "Write to hello@figpromo.ca for help", "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
     }
     # each bad text above must trip exactly its own rule, and a few more phrasings must trip too
     more = {"stripe-verification": ["Restaurants can publish without verifying with Stripe", "No ID needed to publish", "Your page goes live instantly", "FIG verifies your ID", "FIG checks your documents",
@@ -129,6 +136,7 @@ def _selftest():
             "cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
                                     "You can cancel an order up to 2 hours before pickup", "You can cancel a takeout order right up to pickup"],
             "code-changes": ["Show the live code", "The code refreshes every 5 minutes", "a rotating QR code", "the code changes every few minutes", "the code expires in 5 minutes", "Codes keep changing"],
+            "business-email": ["Email us at help@figpromo.ca", "mailto:hello@figpromo.ca", "Reach us at hello@figpromo.ca"],
             "restaurant-price": ["The founding payment is $49.99 once", "$299.99 a year"], "founding-offer": ["a founding price that is always lower", "the founding payment"],
             "restaurant-plan": ["Choose a plan", "Going live needs a plan", "Without a plan you cannot post", "your plan covers every location", "a monthly plan"],
             "billing": ["FIG starts billing on a date it tells you", "a billing notice"], "plan-refund": ["a refund within 14 days of your first payment", "the 14-day refund"]}
@@ -149,7 +157,7 @@ def _selftest():
             "A cancelled order is refunded in full to the card you paid with", "Close your account anytime", "Pause your deals anytime", "cancel a reservation 20 minutes before",
             "Build your page in minutes; connect Stripe to publish", "FIG never sees your ID or bank details", "Stripe checks your ID and where payouts go", "FIG only keeps whether and when Stripe verified your account",
             "You can post a deal in a minute", "Setting up is free and takes a few minutes", "Publish after Stripe verifies your account", "Your bank details go straight to Stripe",
-            "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address"]
+            "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address", "Message us on the contact page at www.figpromo.ca/contact", "Email your receipt to yourself"]
     for text in good:
         assert not check([post(faq=[("Q?", text)])]), text
     assert not check([post(title="Is FIG Premium worth it?", claims_ok=["premium"])]), "claims_ok lets a deliberate mention through"

@@ -327,7 +327,7 @@ def legal(slug, doc, extra=""):
 L = json.loads((SITE / "scripts" / "legal.json").read_text(encoding="utf-8"))
 legal("terms", L["terms"])
 legal("business-terms", L["business-terms"])
-legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app: picked from a list of local high schools, colleges and universities built into the app, or typed in; it only helps us see which schools to reach first), that you agreed to “I agree to get emails from FIG and can unsubscribe at any time.” and when (joining needs it), when you joined, and which link brought you, if any. We email you to say FIG is open in Markham. If you unsubscribe, the emails stop and you keep your place. Every email comes from FIG, Markham, Ontario, and has an unsubscribe link: you can withdraw your consent anytime, through that link or by messaging us. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
+legal("privacy", L["privacy"], [("The waitlist", '''<p>While FIG opens to restaurants first, diners can join a waitlist, here on the website or in the FIG app. We keep your email, your school if you add one (in the app: picked from a list of local high schools, colleges and universities built into the app, or typed in; it only helps us see which schools to reach first), that you agreed to “I agree to get emails from FIG and can unsubscribe at any time.” and when (joining needs it), when you joined, and which link brought you, if any. We email you once to confirm your address (you tap the link in that email), and then to say FIG is open in Markham. We send no marketing to an address until it is confirmed. If you unsubscribe, the emails stop and you keep your place. Every marketing email comes from FIG, Markham, Ontario, shows our mailing address and has an unsubscribe link that works in one click: you can withdraw your consent anytime, through that link or by messaging us. We keep the address on a do-not-email list after you unsubscribe, so it stays honoured. To stop people flooding the list, we briefly count tries from your internet address. If you make a FIG account instead, your account is your place on the list. We never sell the list or share it with restaurants or advertisers.</p>''')])
 
 # Cookies: the fourth legal document, in the same layout as the other three (user 2026-10-14: "work the same for every extra page")
 # 2026-10-24 (REVIEW E2): Google Analytics sets its cookies only after "Accept" (js/consent.js); the notes the site keeps are listed by name
@@ -353,7 +353,8 @@ page("about", "About FIG", "FIG is the restaurant deals app for Markham, Ontario
 # contact_fig (limited per address and per network), the same inbox as Message us in the app; the admin site shows it.
 page("contact", "Contact", "Message the FIG team. A real person reads every message.", wide=True, body='''<section class="pg-hero ct-band"><div class="wrap ct-grid">
 <div class="pg-hero-text"><h1 class="pg-h1">Talk to a real person.</h1>
-<p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p></div>
+<p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p>
+<p class="pg-lead fig-mail" hidden>Prefer email? Write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
 <form class="contact ct-card" method="post" action="/contact" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
 <label class="ct-field"><span>What's it about?</span><select name="topic">
@@ -371,7 +372,7 @@ page("contact", "Contact", "Message the FIG team. A real person reads every mess
 <div class="ct-way"><b>In the app</b><span>Profile, then Help, then Message us. Restaurants: Settings, then Help for restaurants.</span><em class="leaf">Same inbox</em></div>
 </div></div></section>
 <script src="/js/config.js"></script>
-<script src="/js/contact-form.js" defer></script>''')
+<script src="/js/contact-form.js" defer></script><script src="/js/show-email.js" defer></script>''')
 
 HELP = [
     ("diners", "For diners", [
@@ -416,10 +417,11 @@ for k, (anchor, title, qs) in enumerate(HELP):
     help_html += (f'<section class="section{" ice" if k else ""}" id="{anchor}"><div class="wrap faq"><div class="faq-head">'
                   f'<h2 class="h2">{head}</h2><p class="side">{sub}</p><figure class="help-shot {HELP_SHOT[anchor][2]}"><img src="/assets/screens/{HELP_SHOT[anchor][0]}.webp" alt="{HELP_SHOT[anchor][1]}" width="{SHOT_SIZE[HELP_SHOT[anchor][0]][0]}" height="{SHOT_SIZE[HELP_SHOT[anchor][0]][1]}"></figure></div>{qa_list(qs, 1 if k else 2)}</div></section>')
 help_html += '''<section class="section pg-tight"><div class="wrap"><div class="pg-dark">
-<div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p></div>
+<div><h2>Still stuck?</h2><p>Message us and a real person replies within 24 hours. Or watch the quick tutorial videos for diners and restaurants.</p>
+<p class="fig-mail" hidden>You can also write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Answers for diners and restaurants using FIG: claiming deals, QR codes, takeout, accounts and running deals.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>')
+page("help", "Help center", "Answers for diners and restaurants using FIG: claiming deals, QR codes, takeout, accounts and running deals.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
 
 
 

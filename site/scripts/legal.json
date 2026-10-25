@@ -115,6 +115,7 @@
      "• Terms: which version of our terms you accepted, and when.",
      "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address or mobile number we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
+     "• Emails: when you join the waitlist, your email, that you agreed to emails, when you confirmed your address and whether you have unsubscribed. A do-not-email list (the address, why it is on the list and the date), so an unsubscribe, a bounced email or a spam complaint is always honoured. A log of the emails we send, which holds a scrambled version of your address instead of the address, the kind of email, when, and whether it went through.",
      "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
     "• Stripe verification status: when Stripe verified your account and whether payments were later paused. Stripe collects and keeps the identity and bank details you give it, under Stripe’s own privacy policy.",
      "• Team invitations: the email address a restaurant invites, the role, and when the invite ends.",
@@ -132,7 +133,8 @@
      "• Keep a record of your visits, so you can rate them and find places again",
      "• Personalise Home (you can turn this off)",
      "• Send the alerts and emails you chose",
-     "• Emails about deals and FIG news only if you said yes when you signed up. Each one has an unsubscribe link, and you can turn them off anytime in Account & password",
+     "• Emails you need because of something you did: sign-in and two-step codes, security notices (a changed password or email), order updates and receipts, team invites, and replies to your messages. These are not marketing, so unsubscribing does not stop them",
+     "• Marketing emails (for example, the message that FIG is open) only if you said yes. When you join the waitlist we email you once to confirm your address, and we send marketing only to addresses that are confirmed. Every marketing email has an unsubscribe link that works in one click, says who we are and shows our mailing address. You can also turn them off anytime in Account & password",
      "• Answer support requests and improve FIG",
      "FIG doesn't show ads for now. We don't sell your information or show you third-party ads based on it."
     ]
@@ -156,7 +158,7 @@
      "• Supabase: database and sign-in",
      "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
      "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
-     "• Resend: sends FIG's emails, so it gets your email address and what the email says",
+     "• Resend: sends FIG's emails from FIG's own address, so it gets your email address and what the email says, and tells us whether the email was delivered",
      "• Stripe: card payments for takeout orders, and checking and paying restaurants. To set up a restaurant’s account, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG; Stripe keeps them under its own privacy policy. FIG keeps only whether and when Stripe verified the account.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
@@ -176,7 +178,8 @@
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
      "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again.",
-     "Payment records of takeout payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends."
+     "Payment records of takeout payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends.",
+     "The do-not-email list keeps only the address, the reason and the date, for as long as it is needed to honour your choice. That includes after you delete your account, because deleting the address would let the emails start again. The log of emails we send is deleted after 12 months."
     ]
    },
    {

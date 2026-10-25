@@ -141,3 +141,56 @@ console.log("ok: blog groups");
   assert.ok(inline > 0, "no inline scripts were found: this check reads the pages wrong");
   console.log("ok: inline scripts allowed by hash (" + inline + " in the pages), no 'unsafe-inline' for scripts");
 }
+
+// the email links (2026-10-25): /unsubscribe and /confirm. Tokens are the SAME as the Supabase mail function makes (the app's
+// scripts/check-emails.mjs asserts this vector too), a confirm token can't unsubscribe and the reverse, GET never changes anything, POST does only
+// with the right token, a mail app's one-click POST works, and the pages answer the same for a wrong link
+(async () => {
+  process.env.UNSUB_SECRET = "test-secret-for-fig-emails"; delete process.env.SESSION_SECRET;
+  const unsub = require("../../api/_lib/unsub");
+  assert.strictEqual(unsub.tokenFor("unsub", "mei@example.com"), "6RGWktdssoX6ABV4z8C6mbgdV-xXfMG1", "unsubscribe token vector");
+  assert.strictEqual(unsub.tokenFor("confirm", "Mei@Example.com "), "vgD9wWgTGIwenaxe-U5kRZ-efG59Ia_w", "confirm token vector");
+  assert.ok(unsub.valid("mei@example.com", unsub.tokenFor("unsub", "mei@example.com")) && !unsub.valid("mei@example.com", unsub.tokenFor("confirm", "mei@example.com")), "purposes stay apart");
+  assert.ok(unsub.validFor("confirm", "mei@example.com", unsub.tokenFor("confirm", "mei@example.com")) && !unsub.validFor("confirm", "sam@example.com", unsub.tokenFor("confirm", "mei@example.com")), "one address's token is no other's");
+  const db = require("../../api/_lib/db");
+  const calls = [];
+  db.unsubscribeAddress = async (e, s) => { calls.push(["unsub", e, s]); };
+  db.confirmWaitlist = async (e) => { calls.push(["confirm", e]); return e === "gone@example.com" ? "unknown" : "confirmed"; };
+  const handlers = { unsubscribe: require("../../api/unsubscribe"), confirm: require("../../api/confirm") };
+  const run = async (name, method, e, t, headers = {}) => {
+    const res = { headers: {}, setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, end(b) { this.body = b; } };
+    await handlers[name]({ method, url: `/${name}?e=${encodeURIComponent(e)}&t=${t}`, headers }, res);
+    return res;
+  };
+  const U = unsub.tokenFor("unsub", "mei@example.com"), C = unsub.tokenFor("confirm", "mei@example.com");
+  let r = await run("unsubscribe", "GET", "mei@example.com", U);
+  assert.ok(r.statusCode === 200 && /<form method="post"/.test(r.body) && calls.length === 0, "GET only shows the button: a mail scanner unsubscribes nobody");
+  r = await run("unsubscribe", "POST", "mei@example.com", "wrongtoken");
+  assert.ok(r.statusCode === 200 && calls.length === 0 && /You're unsubscribed/.test(r.body), "a wrong token changes nothing and the page says the same");
+  const same = r.body;
+  r = await run("unsubscribe", "POST", "mei@example.com", U, { "content-type": "application/x-www-form-urlencoded" });
+  assert.deepStrictEqual(calls, [["unsub", "mei@example.com", "one-click"]], "the right token unsubscribes through the database call (a mail app's one-click post)");
+  assert.strictEqual(r.body.replace("mei@example.com", "this address"), same.replace("mei@example.com", "this address"), "and the page is the same either way");
+  r = await run("unsubscribe", "POST", "mei@example.com", C);
+  assert.strictEqual(calls.length, 1, "a confirm token does not unsubscribe");
+  r = await run("confirm", "GET", "mei@example.com", C);
+  assert.ok(/<form method="post"/.test(r.body) && calls.length === 1, "confirm: GET only shows the button");
+  r = await run("confirm", "POST", "mei@example.com", U);
+  assert.ok(calls.length === 1 && /doesn't work/.test(r.body), "an unsubscribe token does not confirm");
+  r = await run("confirm", "POST", "mei@example.com", C);
+  assert.ok(calls.length === 2 && calls[1][0] === "confirm" && /You're on the list/.test(r.body), "the right token confirms");
+  const gone = unsub.tokenFor("confirm", "gone@example.com");
+  r = await run("confirm", "POST", "gone@example.com", gone);
+  assert.ok(/doesn't work/.test(r.body), "an address that is not on the list gets the same answer as a wrong link");
+  for (let i = 0; i < 31; i++) r = await run("unsubscribe", "POST", "mei@example.com", "bad" + i);
+  assert.strictEqual(r.statusCode, 429, "a flood of wrong tokens is stopped");
+  r = await run("unsubscribe", "POST", "mei@example.com", U);
+  assert.ok(r.statusCode === 200 && calls[calls.length - 1][0] === "unsub", "but a right token is always honoured");
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
+  for (const n of ["confirm", "unsubscribe"]) assert.ok(vercel.rewrites.some((x) => x.source === "/" + n && x.destination === "/api/" + n), `vercel.json: /${n} is not routed to /api/${n}`);
+  // the contact page's email line stays hidden until the owner flips the one setting (site/js/config.js showEmail)
+  const cfg = fs.readFileSync(path.join(__dirname, "..", "js", "config.js"), "utf8");
+  assert.ok(/showEmail:\s*false/.test(cfg), "config.js: showEmail must be false until the owner has tested the mailbox");
+  for (const f of ["contact.html", "help.html"]) assert.ok(/class="[^"]*\bfig-mail\b[^"]*" hidden/.test(fs.readFileSync(path.join(__dirname, "..", f), "utf8")), `${f}: the email line must be hidden in the HTML`);
+  console.log("ok: email links: same tokens as the mail function, GET changes nothing, POST needs the right token, one-click works, same page for wrong links, rate limited, routes, email line hidden");
+})().catch((e) => { console.error(e); process.exit(1); });

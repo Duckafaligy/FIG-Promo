@@ -49,6 +49,9 @@ RULES = [
     # 2026-10-24 (the owner): a diner's code does not change with time. It works once; a deal that can be used more than once shows a new code after each scan.
     ("code-changes", r"(codes?|qr)[^.<]{0,40}(keeps?|kept) (changing|refreshing)|(codes?|qr)[^.<]{0,40}(changes?|refreshes?) (every|each|constantly|with time|over time)|rotat(es|ing) (qr|codes?)|\blive (qr|codes?)\b|(codes?|qr)[^.<]{0,40}expires? (in|after) \d+ min|every \d+ minutes?\b[^.<]{0,30}\bcodes?\b",
      "a code does not change with time: it works once, and a new code appears only after each scan of a deal that can be used again", False),
+    # 2026-10-24 (the owner): a diner can cancel a takeout order for a full refund until the restaurant accepts it, then until 20 minutes before pickup. Never later.
+    ("cancel-after-cutoff", r"cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}(?<!minutes )\b(until|up to|before|till) (the |your |its )?(pickup|collect\w*)\b|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(after|once|when) (the restaurant |it |they )?(has |have )?(accept|start|begin|prepar|mak)\w*|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(?!20\b)\d+ (minutes?|mins?|hours?) (before|of|prior to) (your |the |its )?pickup|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(any ?time|whenever)\b(?![^.<]{0,40}before the restaurant accepts)",
+     "a diner can cancel a takeout order only until 20 minutes before pickup (and any time before the restaurant accepts it)", False),
     ("takeout-pay-at-counter", r"takeout[^.<]{0,40}\bpay (at|when)\b[^.<]{0,25}(counter|pickup|arriv)|make it when (they|you) arrive|pay at (the )?pickup",
      "takeout is paid in the app", False),
 ]
@@ -113,10 +116,13 @@ def _selftest():
         "places": "Deals across the GTA", "takeout-pay-at-counter": "Takeout: pay at pickup",
         "restaurant-price": "Restaurants pay $29.99 a month", "founding-offer": "Join as a founding restaurant before launch",
         "code-changes": "The code keeps changing on your screen",
+        "cancel-after-cutoff": "You can cancel a takeout order until pickup",
         "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
     }
     # each bad text above must trip exactly its own rule, and a few more phrasings must trip too
-    more = {"code-changes": ["Show the live code", "The code refreshes every 5 minutes", "a rotating QR code", "the code changes every few minutes", "the code expires in 5 minutes", "Codes keep changing"],
+    more = {"cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
+                                    "You can cancel an order up to 2 hours before pickup", "You can cancel a takeout order right up to pickup"],
+            "code-changes": ["Show the live code", "The code refreshes every 5 minutes", "a rotating QR code", "the code changes every few minutes", "the code expires in 5 minutes", "Codes keep changing"],
             "restaurant-price": ["The founding payment is $49.99 once", "$299.99 a year"], "founding-offer": ["a founding price that is always lower", "the founding payment"],
             "restaurant-plan": ["Choose a plan", "Going live needs a plan", "Without a plan you cannot post", "your plan covers every location", "a monthly plan"],
             "billing": ["FIG starts billing on a date it tells you", "a billing notice"], "plan-refund": ["a refund within 14 days of your first payment", "the 14-day refund"]}
@@ -133,6 +139,8 @@ def _selftest():
             "Uber Eats lists marketplace plans at 20%", "A ten-minute training plan", "You need a plan for the evening", "a date night plan, with the math", "an 8% to 10% pickup plan",
             "A code works once, so a screenshot of a used code just says already used", "your screen shows a new code after each scan", "Wait a few minutes between uses",
             "The deal changes every Tuesday", "Rotating specials", "the menu changes each season", "Prices change with the season", "a short code staff can type",
+            "You can cancel a takeout order for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time",
+            "A cancelled order is refunded in full to the card you paid with", "Close your account anytime", "Pause your deals anytime", "cancel a reservation 20 minutes before",
             "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address"]
     for text in good:
         assert not check([post(faq=[("Q?", text)])]), text

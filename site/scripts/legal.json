@@ -28,7 +28,9 @@
      "• At the restaurant, open your QR code. It doesn't change with time: a code works once, and if the deal can be used more than once, your screen shows a new code after each scan.",
      "• The deal is used when staff scan your code. That scan is a \"redemption\". A restaurant can let one claim be used more than once (up to 20 times) and can set a wait between uses; your claim shows how many uses are left and when the next one is ready.",
      "• Each deal can be claimed once per person per day, whether you claim it or order it as takeout. Scans of one claim on the same day count as one visit. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
-     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order comes with a deal, which is applied to it, unless the restaurant sets 0 deals per order, then it is at full price; dine-in only deals can't be. You pay the restaurant in the app. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order comes with a deal, which is applied to it, unless the restaurant sets 0 deals per order, then it is at full price; dine-in only deals can't be. You pay the restaurant in the app. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it.",
+    "• You choose when you collect a takeout order, from the earliest time the restaurant can make it up to 24 hours ahead, while the restaurant is open.",
+    "• You can cancel a takeout order for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time. From 20 minutes before pickup the restaurant may already be making your food, so you can no longer cancel or be refunded through FIG. A cancelled order is refunded in full to the card you paid with; your bank may take 5 to 10 business days to show it."
     ]
    },
    {
@@ -250,6 +252,8 @@
      "• Your takeout orders are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
        "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
+    "• Diners choose their pickup time. If a diner picks a time you can make, accepting the order keeps that time. Accepting never moves a time the diner picked earlier.",
+    "• A diner can cancel an accepted takeout order for a full refund until 20 minutes before its pickup time. You are told right away. The refund includes FIG’s fee on that order, and Stripe’s own fee is not returned. From 20 minutes before pickup the order is locked in; only you can still refund it by hand.",
      "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its 5% fee, and we’ll tell you at least 30 days before that starts.",
        "• Your payments: every takeout payment, refund and fee is listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years.",
     "• Each month you get a fee statement: a summary of FIG’s fee on your takeout orders. It is not a tax invoice until FIG is registered for HST."
@@ -270,7 +274,7 @@
    {
     "heading": "7. Staff",
     "paragraphs": [
-     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, handing a restaurant over and closing it."
+     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders by hand. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, handing a restaurant over and closing it."
     ]
    },
    {

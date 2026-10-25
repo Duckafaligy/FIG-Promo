@@ -382,6 +382,8 @@ HELP = [
         ("How do reviews work?", "Only diners whose visit was scanned can review, so every review comes from a real visit. Rate a visit right after it, or later from Past visits on your Deals page."),
         ("Do restaurants see my phone number?", "Never. Takeout orders go through the app and your number stays private."),
         ("Can I order takeout?", "Yes. Tap Takeout on a deal that allows it, add what you want, watch it get made, and pick it up. Some restaurants also take takeout at full price: tap Order takeout on their page. FIG doesn't deliver."),
+        ("When can I pick up my order?", "You choose the time, from the earliest time the restaurant can make it up to 24 hours ahead, while the restaurant is open."),
+        ("Can I cancel a takeout order?", "Yes, for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time. From 20 minutes before pickup the restaurant may already be making your food, so you can no longer cancel through FIG. A cancelled order is refunded in full to the card you paid with; your bank may take 5 to 10 business days to show it."),
         ("What if a restaurant won't honour a deal?", "Report the visit in the app. A real person looks at every report and replies within 24 hours."),
     ]),
     ("restaurants", "For restaurants", [
@@ -392,6 +394,7 @@ HELP = [
         ("When does my page go live?", "Setting up is free: photos, address, hours and cuisine. Add at least one photo and publish. Diners see your page and deals when FIG plans to open to them, on January 1, 2027. An HST number and bank details only matter for takeout paid in the app, and you can add them later."),
         ("Can diners order takeout?", "Yes. Add your menu: first the sections, then the dishes in each. Turn on takeout and pick how many deals one order can use: 1, 2, 3, more or no limit, or 0 to take orders at full price. You scan their pickup code when they collect. The diner's card is charged when you accept the order; decline it and nothing is charged."),
         ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
+        ("Can a diner cancel a takeout order?", "Yes. A diner can cancel an accepted order for a full refund until 20 minutes before its pickup time, and you are told right away. The refund includes FIG's fee on that order, and Stripe's own fee is not returned. From 20 minutes before pickup the order is locked in; only you can still refund it by hand. Diners choose their pickup time, and accepting an order never moves a time they picked."),
         ("What if a scan looks wrong?", "Message us from Help within 14 days. We review it, and if it was a mistake we remove it."),
         ("Can I pause takeout in a rush?", "Yes. Tap Takeout: On on your dashboard or Orders to pause new orders for 20 or 40 minutes or until tomorrow's opening, or to add prep time. Orders already in aren't touched, and it comes back on by itself."),
         ("How do I stop?", "There's nothing to cancel, because FIG is free for restaurants. You can pause your deals anytime, turn takeout off, or close your account in Settings."),

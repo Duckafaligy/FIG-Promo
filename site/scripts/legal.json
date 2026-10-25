@@ -1,7 +1,7 @@
 {
  "terms": {
   "title": "Terms of service",
-  "updated": "Last updated October 22, 2026",
+  "updated": "Last updated October 24, 2026",
   "short": [
    "FIG is free for you, and there are no ads for now.",
    "A deal counts once staff scan your QR at the restaurant.",
@@ -17,7 +17,7 @@
    {
     "heading": "2. Your account",
     "paragraphs": [
-     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You're responsible for what happens on your account."
+     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You can turn on two-step sign-in (an authenticator app, a code by email, or a code by text message). Restaurant owners and managers need it for money steps like payouts and refunds. Every account has a username. A staff account is an ordinary FIG account, made from an invite from a restaurant, and the person must be 18 or older. You're responsible for what happens on your account."
     ]
    },
    {
@@ -25,10 +25,12 @@
     "paragraphs": [
      "Deals are offered by restaurants, not by FIG. Each deal shows its own rules (times, limits, dine-in only, and so on) before you claim it.",
      "• A claimed deal is yours until the restaurant ends the deal, or until a flash or dated deal is over.",
-     "• At the restaurant, open your QR code. It refreshes every 5 minutes.",
-     "• The deal is used once staff scan it. That scan is a \"redemption\".",
-     "• Each deal can be used once per person per day, whether you claim it or order it as takeout. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
-     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order always comes with one of those deals, which is applied to it; dine-in only deals can't be. You pay the restaurant in the app or at pickup, whichever it has set up. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it."
+     "• At the restaurant, open your QR code. It doesn't change with time: a code works once, and if the deal can be used more than once, your screen shows a new code after each scan.",
+     "• The deal is used when staff scan your code. That scan is a \"redemption\". A restaurant can let one claim be used more than once (up to 20 times) and can set a wait between uses; your claim shows how many uses are left and when the next one is ready.",
+     "• Each deal can be claimed once per person per day, whether you claim it or order it as takeout. Scans of one claim on the same day count as one visit. If you pay for a takeout order after you've already used its deal that day, the order is declined and your card isn't charged.",
+     "Restaurants can change or end a deal at any time. A deal isn't guaranteed until staff scan it. Some deals come as takeout: a takeout order comes with a deal, which is applied to it, unless the restaurant sets 0 deals per order, then it is at full price; dine-in only deals can't be. You pay the restaurant in the app. If you don't collect an order within 2 hours of its pickup time, it shows as a missed pickup on your takeout record (12 months), which restaurants can see when you order. Nobody reports it and takeout is never switched off for it.",
+    "• You choose when you collect a takeout order, from the earliest time the restaurant can make it up to 24 hours ahead, while the restaurant is open.",
+    "• You can cancel a takeout order for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time. From 20 minutes before pickup the restaurant may already be making your food, so you can no longer cancel or be refunded through FIG. A cancelled order is refunded in full to the card you paid with; your bank may take 5 to 10 business days to show it."
     ]
    },
    {
@@ -86,7 +88,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 22, 2026",
+  "updated": "Last updated October 25, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -108,13 +110,19 @@
      "• Account: name, username, email (confirmed with a code), mobile number (we'll confirm it with a text code once texts are switched on), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
      "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
-     "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post (chat isn't available yet; if we turn it on, your messages will be kept here too).",
+     "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Terms: which version of our terms you accepted, and when.",
-     "• Two-step login: if you turn it on, the key that links FIG to your authenticator app. The codes it makes stay on your phone.",
+     "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address or mobile number we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
+     "• Emails: when you join the waitlist, your email, that you agreed to emails, when you confirmed your address and whether you have unsubscribed. A do-not-email list (the address, why it is on the list and the date), so an unsubscribe, a bounced email or a spam complaint is always honoured. A log of the emails we send, which holds a scrambled version of your address instead of the address, the kind of email, when, and whether it went through.",
+     "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
+    "• Stripe verification status: when Stripe verified your account and whether payments were later paused. Stripe collects and keeps the identity and bank details you give it, under Stripe’s own privacy policy.",
+     "• Team invitations: the email address a restaurant invites, the role, and when the invite ends.",
+    "• Ownership requests: if you tell FIG that a restaurant already on FIG is yours, we keep your name, role, email and note. Only you and FIG can read it. It is kept after an account is closed, with the link to the account removed.",
+    "• Receipts: for takeout, your confirmed email is sent to Stripe so it can email your receipt.",
      "• How you found FIG: the tag on the link you came from (a creator’s link or a flyer’s QR code, for example), noted once when you join the waitlist, sign up or add a restaurant, and your answer to “How did you hear about FIG?” if you give one (you can skip it). We use them only to see which outreach works. Restaurants never see them.",
-     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No tracking or advertising cookies."
+     "• In your browser: your sign-in and the app's saved state (so you stay signed in), which link brought you to FIG (until you close the tab), whether FIG is open to diners, and an offline copy of the website's pages. No advertising cookies. If you accept, Google Analytics sets cookies for up to 2 years; if you decline, it sets none. Vercel Web Analytics sets no cookies."
     ]
    },
    {
@@ -125,7 +133,8 @@
      "• Keep a record of your visits, so you can rate them and find places again",
      "• Personalise Home (you can turn this off)",
      "• Send the alerts and emails you chose",
-     "• Emails about deals and FIG news only if you said yes when you signed up. Each one has an unsubscribe link, and you can turn them off anytime in Account & password",
+     "• Emails you need because of something you did: sign-in and two-step codes, security notices (a changed password or email), order updates and receipts, team invites, and replies to your messages. These are not marketing, so unsubscribing does not stop them",
+     "• Marketing emails (for example, the message that FIG is open) only if you said yes. When you join the waitlist we email you once to confirm your address, and we send marketing only to addresses that are confirmed. Every marketing email has an unsubscribe link that works in one click, says who we are and shows our mailing address. You can also turn them off anytime in Account & password",
      "• Answer support requests and improve FIG",
      "FIG doesn't show ads for now. We don't sell your information or show you third-party ads based on it."
     ]
@@ -148,9 +157,9 @@
      "These companies process data for us, only to run FIG, under contracts that protect it:",
      "• Supabase: database and sign-in",
      "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
-     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies; see the Cookies page",
-     "• Resend: sends FIG's emails, so it gets your email address and what the email says",
-     "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
+     "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
+     "• Resend: sends FIG's emails from FIG's own address, so it gets your email address and what the email says, and tells us whether the email was delivered",
+     "• Stripe: card payments for takeout orders, and checking and paying restaurants. To set up a restaurant’s account, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG; Stripe keeps them under its own privacy policy. FIG keeps only whether and when Stripe verified the account.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
      "• OpenFreeMap (map tiles), jsDelivr (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
@@ -168,7 +177,9 @@
     "paragraphs": [
      "We keep your data while your account is open. When you delete your account, we erase your personal information within 30 days, and it's gone from our backup copies within 60 days.",
      "Restaurants keep the records of your takeout orders and visits for their tax and accounting records, for as long as they're on FIG. Payments are also recorded by Stripe, our payment processor. When you delete your account, your name on those records is replaced with \"Former diner\", and your notes on dishes and your distance from the restaurant are removed.",
-     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again."
+     "If you tick \"Keep a way to bring back my past visits and orders\" when you delete, we also keep a one-way code made from your email (not the email itself) for 12 months. If you sign up again with the same confirmed email in that time, you can choose to bring back those orders and visits, or start fresh, which deletes the saved link. Your saved places, claims and reviews can't come back. If you don't tick it, the records can't be linked to you again.",
+     "Payment records of takeout payments made through FIG are kept for 7 years, for tax and accounting, and stay after an account is closed. They hold no name, email or card number. An email address that a restaurant invited is deleted within 60 days after the invite ends.",
+     "The do-not-email list keeps only the address, the reason and the date, for as long as it is needed to honour your choice. That includes after you delete your account, because deleting the address would let the emails start again. The log of emails we send is deleted after 12 months."
     ]
    },
    {
@@ -185,7 +196,7 @@
    {
     "heading": "10. Keeping it safe",
     "paragraphs": [
-     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step login, so signing in also needs a code from an authenticator app. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
+     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step sign-in, so signing in also needs a code from an authenticator app, an email or a text message. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
     ]
    },
    {
@@ -206,12 +217,12 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 23, 2026",
+  "updated": "Last updated October 25, 2026",
   "short": [
-   "One plan covers all your restaurants: $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax (before then, founding restaurants can pay $49.99 once instead). Your page, deals and scans are included, with no commission on the bill.",
-   "Takeout orders paid in the app: FIG keeps 5% of the food, and Stripe’s card fee comes off the same payment.",
+   "Restaurants use FIG for free: your page, deals, scans and dashboard cost nothing, with no commission on the bill (up to 2 locations for now).",
+   "Takeout orders paid in the app: FIG keeps 5% of the food (plus HST on that fee once FIG is registered), and Stripe’s card fee comes off the same payment, paid by the restaurant.",
    "Honour your live deals exactly as written.",
-   "Only you, the staff you invite, or a diner scanning your counter code (when you switch it on) can verify a deal."
+   "Only you and the staff you invite can verify a deal."
   ],
   "sections": [
    {
@@ -223,28 +234,34 @@
    {
     "heading": "2. Your listing",
     "paragraphs": [
-     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up is free. Your page and deals go live when your plan does (the founding payment before FIG opens to diners) and your page has at least one photo. We can pause or remove a listing that breaks these terms."
+     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up is free. Your page can be published once it has at least one photo and you have finished Stripe’s checks (see below). We can pause, unpublish or remove a listing that isn’t a real restaurant or that breaks these terms.",
+    "• You can set up your page, menu and deals for free and keep them as drafts. To publish them, and to turn on takeout, you must finish Stripe’s identity, business and bank checks. Stripe collects that information; FIG does not see your ID or bank details and only keeps whether and when Stripe verified your account."
     ]
    },
    {
     "heading": "3. Your deals",
     "paragraphs": [
-     "You choose your deals, times and daily limits. While a deal is live, you must honour it exactly as listed. Don't raise prices to cancel out a discount. If you pause a deal, keep honouring claims made before that. Ending a deal is what stops its claims."
+     "You choose your deals, times and daily limits. While a deal is live, you must honour it exactly as listed. Don't raise prices to cancel out a discount. If you pause a deal, keep honouring claims made before that. Ending a deal is what stops its claims.",
+     "• You can let a diner use a deal more than once (up to 20 times) and set a wait between uses. Each claim keeps the rules it was made with."
     ]
    },
    {
     "heading": "4. What FIG costs",
     "paragraphs": [
-     "• One plan covers all your restaurants, now and later: their pages, going live, posting deals and verified scans, with no limit on locations. It's $29.99 a month or $299.99 a year from the day FIG opens to diners, before tax. Without a plan a restaurant can sign up and set up its listing; going live, deals, scanning and takeout need a plan. There's no commission on the bill, and no sign-up, listing or per-scan fees.",
-     "• Founding restaurants: before FIG opens to diners, you can pay $49.99 once. It covers your plan, for all your restaurants, until FIG starts billing. FIG will tell you that date, and your founding price, in writing at least 14 days before. From then, you can keep your plan at a founding price that is always lower than FIG's regular price, for as long as your plan stays active; if you don't, your plan ends on that date. Refunds: within 14 days of paying, and in full if FIG hasn't opened to diners by March 1, 2027 (before billing has started).",
-     "• FIG plans to open to diners on January 1, 2027. FIG can't promise how many diners you'll get. Prices are before tax, plus HST once FIG is registered.",
-     "• Regular plans: refunds within 14 days of your first payment. Your card is charged automatically each month or year until you cancel in FIG's Settings. Cancelling stops the renewal, and you keep full access until the end of the month or year you've paid. Nothing else is refundable.",
-     "• Stripe processes the plan's payments. FIG never sees your card number.",
-     "• Takeout orders paid in the app are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
-     "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit. A takeout order the diner pays for at your counter has no FIG fee.",
+     "• FIG is free for restaurants. Signing up, setting up your listing for all of your locations (up to 2 for now), going live, posting deals, verified scans and your dashboard cost nothing. There's no upfront payment, no monthly or yearly fee, no commission on the bill, and no per-scan or per-listing fees.",
+     "• FIG earns only on takeout orders that diners pay for in the app, as explained below. Nothing is taken on dine-in or on a bill paid at your counter. FIG plans to open to diners on January 1, 2027, and can't promise how many diners you'll get.",
+     "• Publishing needs only Stripe’s checks. Takeout also needs your HST number, a recent two-step sign-in code for money steps and the takeout switch. Everything else is available without them.",
+     "• Stripe processes takeout payments. FIG never sees a card number.",
+     "• Everything FIG offers restaurants today is included. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
+    "• Menu reading from a photo is free for every restaurant. It is limited to a few reads a day for each owner and needs a confirmed email. It can make mistakes, so you must check every line it reads before you publish, and your menu and prices are your responsibility.",
+     "• Your takeout orders are paid out to you through Stripe. Setting up payouts happens inside FIG, and accepting Stripe’s terms (the Stripe Connected Account Agreement) is part of it. Your ID and bank details go straight to Stripe, never to FIG.",
+       "• When a diner pays for a takeout order in the app, FIG keeps 5% of the food after the deal’s discount, before tax, and Stripe’s card fee (2.9% + $0.30 for most Canadian cards; cards from outside Canada cost more) comes off the same payment. The rest, tax included, is paid out to you, and the tax is yours to remit.",
      "• If you refund an order, in full or in part, FIG gives back its fee in proportion. Stripe keeps its card fee.",
-     "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its plan and its 5% fee, and we’ll tell you at least 30 days before that starts.",
-     "• Your plan includes everything FIG offers restaurants. If we ever offer a paid extra, we'll show the price and what's included before you buy anything."
+    "• Diners choose their pickup time. If a diner picks a time you can make, accepting the order keeps that time. Accepting never moves a time the diner picked earlier.",
+    "• A diner can cancel an accepted takeout order for a full refund until 20 minutes before its pickup time. You are told right away. The refund includes FIG’s fee on that order, and Stripe’s own fee is not returned. From 20 minutes before pickup the order is locked in; only you can still refund it by hand.",
+     "• FIG isn’t registered for HST yet. Once it is, it will add 13% HST to its 5% fee, and we’ll tell you at least 30 days before that starts.",
+       "• Your payments: every takeout payment, refund and fee is listed under Payments, where you can download them as a CSV file. It is a permanent record, kept for 7 years.",
+    "• Each month you get a fee statement: a summary of FIG’s fee on your takeout orders. It is not a tax invoice until FIG is registered for HST."
     ]
    },
    {
@@ -262,7 +279,7 @@
    {
     "heading": "7. Staff",
     "paragraphs": [
-     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders. Remove access when someone leaves."
+     "You're responsible for scans made by your team. Only owners and managers can refund takeout orders by hand. Remove access when someone leaves. People join your team only by accepting an invite you send, to one email address or by a link that expires and that you can revoke. Owners can invite managers and staff; managers can invite staff. Owners and managers need two-step sign-in turned on, and a fresh code, for money steps like payouts, refunds, handing a restaurant over and closing it."
     ]
    },
    {
@@ -282,7 +299,7 @@
    {
     "heading": "10. Responsibility",
     "paragraphs": [
-     "You're responsible for your food, prices, service and safety, and for any claims about them. FIG is provided \"as is\". As far as the law allows, our total liability is limited to the greater of the fees you paid us in the last 12 months or $100 CAD."
+     "You're responsible for your food, prices, service and safety, and for any claims about them. FIG is provided \"as is\". As far as the law allows, our total liability is limited to the greater of the fees FIG kept from your takeout orders in the last 12 months or $100 CAD."
     ]
    },
    {

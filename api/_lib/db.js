@@ -209,6 +209,38 @@ async function waitlistUnsubscribe(email) {
   const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "PATCH", body: JSON.stringify({ consent: false, unsubscribed_at: new Date().toISOString() }), headers: { Prefer: "return=representation" } });
   return { found: r.rows.length > 0 };
 }
+/** The account with this address stops getting FIG's marketing emails (profiles.marketing_emails false); the privacy policy says every one of them has a working unsubscribe. */
+async function accountUnsubscribe(email) {
+  await rest(`profiles?email=eq.${encodeURIComponent(listEmail(email))}&marketing_emails=is.true`, { method: "PATCH", body: JSON.stringify({ marketing_emails: false }), headers: { Prefer: "return=minimal" } });
+}
+/** The unsubscribe link or a one-click request (2026-10-25): one database call that puts the address on the do-not-email list, withdraws the waitlist
+ *  consent and the account's marketing emails. Needs the migration 20261031100000_email_system.sql; until it is applied this falls back to the two older steps. */
+async function unsubscribeAddress(email, source) {
+  try {
+    await rest("rpc/unsubscribe_address", { method: "POST", body: JSON.stringify({ p_email: listEmail(email), p_source: source || "link" }), headers: { Prefer: "return=minimal" } });
+  } catch {
+    await waitlistUnsubscribe(email); await accountUnsubscribe(email);
+  }
+}
+/** The confirmation link (double opt-in): "confirmed" | "already" | "unknown". */
+async function confirmWaitlist(email) {
+  const r = await rest("rpc/confirm_waitlist", { method: "POST", body: JSON.stringify({ p_email: listEmail(email) }) });
+  return typeof r.rows === "string" ? r.rows : "unknown";
+}
+/** The unsubscribe link or a one-click request (2026-10-25): one database call that puts the address on the do-not-email list, withdraws the waitlist
+ *  consent and the account's marketing emails. Needs the migration 20261031100000_email_system.sql; until it is applied this falls back to the two older steps. */
+async function unsubscribeAddress(email, source) {
+  try {
+    await rest("rpc/unsubscribe_address", { method: "POST", body: JSON.stringify({ p_email: listEmail(email), p_source: source || "link" }) });
+  } catch {
+    await waitlistUnsubscribe(email); await accountUnsubscribe(email);
+  }
+}
+/** The confirmation link (double opt-in): "confirmed" | "already" | "unknown". */
+async function confirmWaitlist(email) {
+  const r = await rest("rpc/confirm_waitlist", { method: "POST", body: JSON.stringify({ p_email: listEmail(email) }) });
+  return typeof r.rows === "string" ? r.rows : "unknown";
+}
 /** Off the list for good (their row is deleted). */
 async function waitlistRemove(email) {
   const r = await rest(`diner_waitlist?email=eq.${encodeURIComponent(listEmail(email))}`, { method: "DELETE", headers: { Prefer: "return=representation" } });
@@ -395,4 +427,4 @@ const presaleComp = async (owner, on, note) => {
   return presale("comp", { owner: uuid(owner), on, note: String(note || "").trim().slice(0, 200) });
 };
 
-module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, presaleComp, tidyText, agreedEmails, sources, waitlistUnsubscribe, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };
+module.exports = { presaleState, setPresaleOn, presaleStart, presaleRefund, presaleRefundAll, presaleComp, tidyText, agreedEmails, sources, waitlistUnsubscribe, accountUnsubscribe, unsubscribeAddress, confirmWaitlist, unsubscribeAddress, confirmWaitlist, waitlistRemove, supportRemove, charts, restaurantDetail, personDetail, prospects, setProspect, dinersState, setDinersMode, setFoundingCap, setFoundingUntil, setOpensAt, connected, overview, setCampaign, setAccount, setPremium, setSupport, twoStepOff, makeInvoices, setInvoice, blogOverrides, setBlog };

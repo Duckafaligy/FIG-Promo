@@ -64,6 +64,7 @@
     rise($(".hero .rise"), 0.25);
     ScrollTrigger.batch(".reveal", { start: "top 88%", once: true,
       onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.08, overwrite: true }) });
+    root.classList.add("reveal-on"); // the reveals above are set up: the CSS fallback (site.css) for a script that never gets here stands down
   }
 
 
@@ -296,9 +297,9 @@
         wl.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
         // founding members (2026-10-17): after the founding list closed the answer is 'ok-late', the same for any email
         if (said === "ok-late") {
-          say("You're on the list. Founding members are in now; we'll let you in at the public launch. Already a founding member? ", "ok");
+          say("You're on the list. Check your email and tap the link to confirm. Founding members are in now; we'll let you in at the public launch. Already a founding member? ", "ok");
           const a = document.createElement("a"); a.href = "/app/sign-in"; a.textContent = "Sign in"; msg.appendChild(a);
-        } else say("You're on the list. We'll email you the day FIG opens.", "ok");
+        } else say("You're on the list. Check your email and tap the link to confirm; then we'll email you the day FIG opens.", "ok");
       } catch (e) {
         btn.disabled = false;
         // no answer at all (fetch throws a TypeError) is the connection, not FIG

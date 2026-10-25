@@ -21,11 +21,11 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.figpromo.ca/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.figpromo.ca/contact"}]}</script>
-  <link rel="stylesheet" href="/css/site.css?v=95a77dccdf">
+  <link rel="stylesheet" href="/css/tokens.css?v=b4d751d1c5">
+  <link rel="stylesheet" href="/css/site.css?v=bf58083549">
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7L25CWPZ23"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-7L25CWPZ23');</script>
+  <script defer src="/js/consent.js?v=2e95e27705"></script>
   <link rel="stylesheet" href="/css/pages.css?v=ef3ba3c035">
 </head>
 <body class="sub">
@@ -41,30 +41,32 @@
 <header class="nav" id="nav">
   <a class="brand" href="/" aria-label="FIG home"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
   <nav class="nav-links" aria-label="Sections"><a href="/#owners">For restaurants</a><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a></nav>
-  <div class="nav-end"><a class="btn btn-sm nav-get" href="/app/welcome">Sign up</a><button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span></button></div>
-  <div class="nav-sheet" id="nav-sheet"><a href="/#owners">For restaurants</a><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a><div class="badges small"><a class="btn btn-sm" href="/app/welcome">Sign up</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div></div>
+  <div class="nav-end"><a class="btn btn-sm nav-get" href="/app/sign-up-business">Restaurant sign-up</a><button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-sheet"><span></span><span></span></button></div>
+  <div class="nav-sheet" id="nav-sheet"><a href="/#owners">For restaurants</a><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/blog">Blog</a><div class="badges small"><a class="btn btn-sm" href="/app/sign-up-business">Restaurant sign-up</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div></div>
 </header>
 <main id="main" class="page">
 <section class="pg-hero ct-band"><div class="wrap ct-grid">
 <div class="pg-hero-text"><h1 class="pg-h1">Talk to a real person.</h1>
-<p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p></div>
-<form class="contact ct-card" novalidate>
+<p class="pg-lead">A real person reads every message and replies by email, usually within 24 hours.</p>
+<p class="pg-lead fig-mail" hidden>Prefer email? Write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
+<form class="contact ct-card" method="post" action="/contact" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
 <label class="ct-field"><span>What's it about?</span><select name="topic">
 <option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
 </select></label>
 <label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-<button class="btn" type="submit">Send message</button>
+<button class="btn" type="submit" disabled>Send message</button>
 <p class="form-msg" role="status" aria-live="polite"></p>
+<noscript><p class="form-msg err">Sending a message needs JavaScript. Please turn it on for this page.</p></noscript>
 </form>
 </div></section>
 <section class="section ct-more"><div class="wrap"><h2 class="h2 pg-sub">Other ways</h2><div class="ct-ways">
 <a class="ct-way" href="/help"><b>Help center</b><span>Answers to the questions people ask most.</span><em>Read the help</em></a>
 <div class="ct-way"><b>In the app</b><span>Profile, then Help, then Message us. Restaurants: Settings, then Help for restaurants.</span><em class="leaf">Same inbox</em></div>
 </div></div></section>
-<script src="/js/config.js?v=d578c3d2f8"></script>
-<script src="/js/contact-form.js?v=f9899e4eec" defer></script>
+<script src="/js/config.js?v=2e9e0c3523"></script>
+<script src="/js/contact-form.js?v=60e0cd5bf7" defer></script><script src="/js/show-email.js?v=a915d66a41" defer></script>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -72,13 +74,13 @@
       <div class="foot-brand">
         <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
         <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario. Expanding to Richmond Hill and Vaughan Mills.</p>
-        <div class="badges small"><a class="btn btn-sm" href="/app/welcome">Sign up</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div>
+        <div class="badges small"><a class="btn btn-sm" href="/app/sign-up-business">Restaurant sign-up</a><a class="btn btn-sm btn-ghost" href="/#waitlist">Diners: join the waitlist</a><span class="soon">App Store and Google Play: coming soon</span></div>
       </div>
       <div class="foot-cols">
         <div><p class="foot-h">Diners</p><a href="/#how">How it works</a><a href="/#features">Features</a><a href="/#catch">Tutorial</a><a href="/help">Help center</a></div>
-        <div><p class="foot-h">Restaurants</p><a href="/#owners">Pricing</a><a href="/blog/how-fig-makes-money">How pricing works</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
+        <div><p class="foot-h">Restaurants</p><a href="/#owners">Free for restaurants</a><a href="/blog/how-fig-makes-money">How FIG makes money</a><a href="/business-terms">Business terms</a><a href="/help#restaurants">Restaurant help</a></div>
         <div><p class="foot-h">Company</p><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a></div>
-        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a></div>
+        <div><p class="foot-h">Legal</p><a href="/terms">Terms of service</a><a href="/privacy">Privacy policy</a><a href="/cookies">Cookies</a><button class="foot-btn" type="button" data-cookie-settings hidden>Cookie settings</button></div>
       </div>
     </div>
     <div class="foot-bottom">
@@ -95,7 +97,7 @@
   <span class="sticker s4"><img src="/assets/food/dumpling-house.webp" alt="" loading="lazy" decoding="async" width="160" height="160"></span>
   <span class="tagline">Eat local. Save fast.</span>
 </div>
-<script src="/js/fx.js?v=7a82aafad0" defer></script>
+<script src="/js/fx.js?v=d4bcb2c586" defer></script>
 <script src="/js/sub.js?v=f361d09ea9" defer></script>
 </body>
 </html>

@@ -313,6 +313,21 @@
   },
   "redirects": [
     {
+      "source": "/scripts/:path*",
+      "destination": "/not-found",
+      "permanent": false
+    },
+    {
+      "source": "/blog/fig-premium-worth-it-restaurants-break-even",
+      "destination": "/blog/how-fig-makes-money",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fig-premium-worth-it-restaurants",
+      "destination": "/blog/how-fig-makes-money",
+      "permanent": true
+    },
+    {
       "source": "/premium-on",
       "destination": "/#owners",
       "permanent": false

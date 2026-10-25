@@ -184,7 +184,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-67fhrP0+BkBqmgGGXTtgiVO/9EQs3QruYNU/7fnRkI8=' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; font-src 'self' data: https://tiles.openfreemap.org; img-src 'self' data: blob: https:; connect-src 'self' https://frpoykqldlsysitiqnhz.supabase.co wss://frpoykqldlsysitiqnhz.supabase.co https://tiles.openfreemap.org https://photon.komoot.io https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; child-src blob:; frame-src https://hcaptcha.com https://*.hcaptcha.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'sha256-67fhrP0+BkBqmgGGXTtgiVO/9EQs3QruYNU/7fnRkI8=' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; font-src 'self' data: https://tiles.openfreemap.org; img-src 'self' data: blob: https:; connect-src 'self' blob: https://frpoykqldlsysitiqnhz.supabase.co wss://frpoykqldlsysitiqnhz.supabase.co https://tiles.openfreemap.org https://photon.komoot.io https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; child-src blob:; frame-src https://hcaptcha.com https://*.hcaptcha.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         },
         {
           "key": "X-Robots-Tag",
@@ -320,6 +320,16 @@
       "source": "/scripts/:path*",
       "destination": "/not-found",
       "permanent": false
+    },
+    {
+      "source": "/blog/fig-premium-worth-it-restaurants-break-even",
+      "destination": "/blog/how-fig-makes-money",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fig-premium-worth-it-restaurants",
+      "destination": "/blog/how-fig-makes-money",
+      "permanent": true
     },
     {
       "source": "/premium-on",

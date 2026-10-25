@@ -52,6 +52,9 @@ RULES = [
     # 2026-10-24 (the owner): a diner can cancel a takeout order for a full refund until the restaurant accepts it, then until 20 minutes before pickup. Never later.
     ("cancel-after-cutoff", r"cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}(?<!minutes )\b(until|up to|before|till) (the |your |its )?(pickup|collect\w*)\b|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(after|once|when) (the restaurant |it |they )?(has |have )?(accept|start|begin|prepar|mak)\w*|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(?!20\b)\d+ (minutes?|mins?|hours?) (before|of|prior to) (your |the |its )?pickup|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(any ?time|whenever)\b(?![^.<]{0,40}before the restaurant accepts)",
      "a diner can cancel a takeout order only until 20 minutes before pickup (and any time before the restaurant accepts it)", False),
+    # 2026-10-25 (the owner): to publish a page, menu or deal, a restaurant must finish Stripe's identity, business and bank checks. Stripe collects the ID and bank data; FIG never sees it.
+    ("stripe-verification", r"(publish|go(es)? live|going live|post(ing)? deals?)[^.<]{0,60}\b(without|with no|no) (verif\w+|ID\b|identity|stripe|checks?|documents?|paperwork)|\bno (ID|identity|paperwork|documents?|verification|bank details)\b[^.<]{0,40}(needed|required|to (publish|go live|sign up|post))|go(es)? live[^.<]{0,20}\b(instantly|immediately|right away|in (a |just )?(few |couple of )?(minutes?|seconds?))|\b(instantly|immediately|in (a )?(few )?minutes) go(es)? live|\b(FIG|we) (checks?|verif(y|ies)|reviews?|collects?|stores?|keeps?|holds?) (your |the |each |a )?(owner\Ws )?(ID\b|identity|passports?|driver\Ws licen[cs]e|documents?|photo ID)|\b(FIG|we) (sees?|can see|receives?|gets?|has|stores?|keeps?|holds?) (your |the |a )?(owner\Ws )?(bank (details|account|number|info\w*)|banking|ID number|SIN)|(publish|go live)[^.<]{0,40}\b(before|without) (you )?(connect\w*|finish\w*|verif\w+)[^.<]{0,12}stripe",
+     "publishing needs Stripe's checks first; Stripe, not FIG, checks ID and holds ID and bank details", False),
     ("takeout-pay-at-counter", r"takeout[^.<]{0,40}\bpay (at|when)\b[^.<]{0,25}(counter|pickup|arriv)|make it when (they|you) arrive|pay at (the )?pickup",
      "takeout is paid in the app", False),
 ]
@@ -117,10 +120,13 @@ def _selftest():
         "restaurant-price": "Restaurants pay $29.99 a month", "founding-offer": "Join as a founding restaurant before launch",
         "code-changes": "The code keeps changing on your screen",
         "cancel-after-cutoff": "You can cancel a takeout order until pickup",
+        "stripe-verification": "Restaurants can go live in minutes with no ID",
         "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
     }
     # each bad text above must trip exactly its own rule, and a few more phrasings must trip too
-    more = {"cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
+    more = {"stripe-verification": ["Restaurants can publish without verifying with Stripe", "No ID needed to publish", "Your page goes live instantly", "FIG verifies your ID", "FIG checks your documents",
+                                     "FIG sees your bank details", "Post deals with no verification", "We store your ID", "You can go live before you connect Stripe"],
+            "cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
                                     "You can cancel an order up to 2 hours before pickup", "You can cancel a takeout order right up to pickup"],
             "code-changes": ["Show the live code", "The code refreshes every 5 minutes", "a rotating QR code", "the code changes every few minutes", "the code expires in 5 minutes", "Codes keep changing"],
             "restaurant-price": ["The founding payment is $49.99 once", "$299.99 a year"], "founding-offer": ["a founding price that is always lower", "the founding payment"],
@@ -141,6 +147,8 @@ def _selftest():
             "The deal changes every Tuesday", "Rotating specials", "the menu changes each season", "Prices change with the season", "a short code staff can type",
             "You can cancel a takeout order for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time",
             "A cancelled order is refunded in full to the card you paid with", "Close your account anytime", "Pause your deals anytime", "cancel a reservation 20 minutes before",
+            "Build your page in minutes; connect Stripe to publish", "FIG never sees your ID or bank details", "Stripe checks your ID and where payouts go", "FIG only keeps whether and when Stripe verified your account",
+            "You can post a deal in a minute", "Setting up is free and takes a few minutes", "Publish after Stripe verifies your account", "Your bank details go straight to Stripe",
             "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address"]
     for text in good:
         assert not check([post(faq=[("Q?", text)])]), text

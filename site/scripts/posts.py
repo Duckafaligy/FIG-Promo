@@ -38,7 +38,7 @@ GROUPS = [
 ]
 
 POSTS = [
-    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-24", topic="News", group="fig-in-markham",
+    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-25", topic="News", group="fig-in-markham",
          dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill.",
          desc="Why FIG exists: a restaurant deals app for Markham that's free for diners and for restaurants, and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
@@ -67,7 +67,7 @@ POSTS = [
              #   https://en.wikipedia.org/wiki/Markham_Village ; Pacific Mall, NE corner of Steeles and Kennedy: https://en.wikipedia.org/wiki/Pacific_Mall
              ("Why Markham first", """<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants spread across plazas and main streets, from Pacific Mall at Steeles and Kennedy to Main Street Unionville and the old Main Street of Markham Village, and a lot of people who love finding somewhere new to eat.</p>
 <p>FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027. Until then, restaurants can set up their page, menu and first deals, and diners can join the waitlist at www.figpromo.ca.</p>"""),
-             ("What's next", """<p>We're signing Markham restaurants now. If you own one, setting up takes a few minutes: your page, your menu, your first deal. Setting up is free. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
+             ("What's next", """<p>We're signing Markham restaurants now. If you own one, building your page, your menu and your first deal takes a few minutes, and it is free. To publish them, you finish Stripe's identity and bank checks. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
          ],
          faq=[("What is FIG?", "FIG is a restaurant deals app. Restaurants post their own deals; diners find them on a map, claim one and show a code at the counter. It's free for diners."),
               ("When does FIG launch?", "FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027."),
@@ -76,7 +76,7 @@ POSTS = [
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
               ("Do I need the app to use FIG?", "No. FIG runs in your web browser at www.figpromo.ca/app. Restaurants can set up there today; diners can join the waitlist on the site, and FIG opens to diners on January 1, 2027. The App Store and Google Play apps are coming soon.")]),
 
-    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: 5% of in-app takeout", date="2026-10-07", updated="2026-10-24", topic="For restaurants", group="takeout-and-money",
+    dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: 5% of in-app takeout", date="2026-10-07", updated="2026-10-25", topic="For restaurants", group="takeout-and-money",
          dek="FIG is free for restaurants, with no commission on dine-in and no fee per diner. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.",
          desc="FIG is free for restaurants, with no commission on dine-in. It earns only 5% of the food on takeout orders paid in the app.",
          keywords="free restaurant app, FIG for restaurants, no commission restaurant app, restaurant deals app Markham",
@@ -115,9 +115,9 @@ POSTS = [
              ("What paying FIG never does", """<ul><li>Change your deal or its price.</li><li>Move you up in search or on the map.</li><li>Hide, remove or reorder reviews. Only diners whose visit was scanned can review, and you can reply in public.</li><li>Share a diner's phone number or email with you. Orders and reviews show their first name and last initial.</li></ul>
 <p>The full rules are in the <a href="/business-terms">business terms</a>.</p>"""),
              ("How this compares", """<p>If you're weighing FIG against a delivery app, compare the job, not just the rate. Delivery apps bring the food to the door and charge for it: Uber Eats and DoorDash publish Canadian delivery plans between 20% and 30% per order. FIG brings the diner to your door for free, with nothing per diner. For pickup, the big apps charge 8% to 10% of an order (Uber Eats charges 15% if your in-store prices aren't validated), which is close to what FIG's 5% plus the card fee comes to. <a href="/blog/delivery-app-commissions-vs-fig">The full comparison, with worked examples</a>.</p>"""),
-             ("Getting started", """<p>Sign up as a business, add your menu and post your first deal. Setting up is free. When you're ready for takeout paid in the app, add your HST number and connect Stripe in Settings → Get paid. Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
+             ("Getting started", """<p>Sign up as a business, add your menu and draft your first deal. Setting up is free, and everything stays a draft until you finish Stripe's identity, business and bank checks to publish. When you're ready for takeout paid in the app, add your HST number and connect Stripe in Settings → Get paid. Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
          ],
-         faq=[("How much does FIG cost a restaurant?", "Nothing. Signing up, setting up, going live, posting deals, scanning and your dashboard are free, for up to 2 locations for now. On takeout orders diners pay for in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
+         faq=[("How much does FIG cost a restaurant?", "Nothing. Signing up, building your page, menu and deals, publishing them, scanning and your dashboard are free, for up to 2 locations for now. On takeout orders diners pay for in the app, FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment."),
               ("Is there a commission on dine-in?", "No. A diner who uses your deal pays you at the counter, and FIG takes nothing from that bill. There's no fee per diner."),
               ("Who pays Stripe's fee on takeout?", "It comes off the same in-app payment, before the payout: 2.9% + $0.30 on Canadian cards, Stripe's published rate. On a $33.90 payment that's about $1.28."),
               ("Does FIG collect HST for me?", "The diner pays the HST with the order and it's paid out to you with the rest. It's yours to remit. Your HST number goes on every takeout receipt, with your restaurant as the seller."),
@@ -489,7 +489,7 @@ POSTS = [
 
     # Stripe 2.9% + CA$0.30: source at the top. HST number format 123456789 RT 0001 (9-digit BN, RT = GST/HST program, 4-digit
     #   reference): https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4022/general-information-gst-hst-registrants.html
-    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", updated="2026-10-24", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="set-up-fig-menu-takeout", screen="tscanner", title="Set up your FIG menu and takeout in 15 minutes", date="2026-10-14", updated="2026-10-25", topic="For restaurants", group="fill-quiet-hours",
          dek="A step-by-step guide for restaurant owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts, explained simply.",
          desc="A step-by-step guide for owners: your page, your menu, your first deal, and in-app takeout with your HST number and Stripe payouts.",
          keywords="FIG restaurant setup, restaurant menu app, set up takeout restaurant, Stripe payouts restaurant, HST number restaurant app",
@@ -499,7 +499,7 @@ POSTS = [
                  "In-app takeout needs your HST number and Stripe payouts, both in Settings → Get paid. Dine-in deals need neither.",
                  "During a rush, pause takeout or add prep time in one tap."],
          sections=[
-             ("The short answer", """<p>Setting up on FIG takes about 15 minutes if you have your menu handy: sign up as a business, add your sections, dishes and prices, publish, and post one deal for a quiet window. If you want diners to pay for takeout in the app, add your HST number and connect Stripe for payouts in Settings → Get paid. Everything is free, except that in-app takeout costs 5% of the food plus Stripe's card fee.</p>"""),
+             ("The short answer", """<p>Setting up on FIG takes about 15 minutes if you have your menu handy: sign up as a business, add your sections, dishes and prices, and draft one deal for a quiet window. Everything stays a draft until you connect Stripe, which checks your ID and bank account in about 5 minutes; then you publish. If you want diners to pay for takeout in the app, add your HST number and connect Stripe for payouts in Settings → Get paid. Everything is free, except that in-app takeout costs 5% of the food plus Stripe's card fee.</p>"""),
              ("Before you start: have these ready", """<ul><li>Your menu (paper, a PDF or a photo) with prices.</li><li>Two or three good photos of your food and room.</li><li>Your opening hours.</li><li>For in-app takeout only: your HST number (it looks like 123456789 RT 0001) and your bank details for Stripe.</li></ul>"""),
              ("Minutes 0 to 3: sign up and follow the checklist", """<p>Sign up as a business with your restaurant's name and address. Your dashboard shows a <strong>Get FIG ready</strong> checklist with one button per step. Each step ticks itself when it's done, from your real data, and you can hide the checklist for good once you're set. Quick tours point out the important buttons the first time you open a screen.</p>"""),
              ("Minutes 3 to 10: your menu", """<ol><li><strong>Sections first.</strong> Starters, Mains, Noodles, Drinks: however your paper menu is organised.</li><li><strong>Dishes and prices.</strong> Type prices the way you like: "15.50", "15,50" and "$15.50" all work.</li><li><strong>Publish.</strong> Your edits are kept while you work, and the button says Publish changes until you tap it. Nothing changes for diners before that, and if you close the tab with unpublished changes, FIG asks first.</li></ol>
@@ -520,7 +520,7 @@ POSTS = [
              ("After setup", """<ul><li>Reply to reviews in public. Only diners whose visit was scanned can leave one.</li><li>Check your insights after two weeks: claims, scans, and who came back.</li></ul>
 <p>Questions? <a href="/help">Restaurant help</a> or <a href="/contact">message us</a>.</p>"""),
          ],
-         faq=[("How long does it take to set up FIG?", "About 15 minutes with your menu handy: sign up, add your menu, publish and post one deal. In-app takeout adds your HST number and Stripe setup."),
+         faq=[("How long does it take to set up FIG?", "About 15 minutes with your menu handy: sign up, add your menu and draft one deal. To publish, connect Stripe (about 5 minutes, with your ID and a bank account). In-app takeout adds your HST number."),
               ("Do I need an HST number to use FIG?", "Not for deals and scanning. You need one, with Stripe payouts, for takeout, which diners pay for in the app."),
               ("What does it cost?", "Nothing to set up, go live, post deals or scan, for all your restaurants (up to 2 for now). In-app takeout costs 5% of the food plus Stripe's card fee."),
               ("What if we're too busy for takeout?", "Pause takeout for a while or until tomorrow, or add prep time, in one tap.")]),

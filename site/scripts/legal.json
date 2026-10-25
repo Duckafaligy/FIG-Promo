@@ -88,7 +88,7 @@
  },
  "privacy": {
   "title": "Privacy policy",
-  "updated": "Last updated October 24, 2026",
+  "updated": "Last updated October 25, 2026",
   "short": [
    "We collect what we need to show you deals nearby and check that redemptions are real.",
    "We never sell your personal information.",
@@ -116,6 +116,7 @@
      "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address or mobile number we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
      "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
+    "• Stripe verification status: when Stripe verified your account and whether payments were later paused. Stripe collects and keeps the identity and bank details you give it, under Stripe’s own privacy policy.",
      "• Team invitations: the email address a restaurant invites, the role, and when the invite ends.",
     "• Ownership requests: if you tell FIG that a restaurant already on FIG is yours, we keep your name, role, email and note. Only you and FIG can read it. It is kept after an account is closed, with the link to the account removed.",
     "• Receipts: for takeout, your confirmed email is sent to Stripe so it can email your receipt.",
@@ -156,7 +157,7 @@
      "• Vercel: hosting, and anonymous visit counts for the website (Vercel Web Analytics: no cookies, no personal profile)",
      "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
      "• Resend: sends FIG's emails, so it gets your email address and what the email says",
-     "• Stripe: card payments for takeout orders, and restaurants’ payouts. To set up a restaurant’s payouts, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG.",
+     "• Stripe: card payments for takeout orders, and checking and paying restaurants. To set up a restaurant’s account, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG; Stripe keeps them under its own privacy policy. FIG keeps only whether and when Stripe verified the account.",
      "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
      "• OpenFreeMap (map tiles), jsDelivr (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
@@ -213,7 +214,7 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 24, 2026",
+  "updated": "Last updated October 25, 2026",
   "short": [
    "Restaurants use FIG for free: your page, deals, scans and dashboard cost nothing, with no commission on the bill (up to 2 locations for now).",
    "Takeout orders paid in the app: FIG keeps 5% of the food (plus HST on that fee once FIG is registered), and Stripe’s card fee comes off the same payment, paid by the restaurant.",
@@ -230,7 +231,8 @@
    {
     "heading": "2. Your listing",
     "paragraphs": [
-     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up and going live are free. Your page can go live once it has at least one photo. We can pause or remove a listing that breaks these terms."
+     "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up is free. Your page can be published once it has at least one photo and you have finished Stripe’s checks (see below). We can pause, unpublish or remove a listing that isn’t a real restaurant or that breaks these terms.",
+    "• You can set up your page, menu and deals for free and keep them as drafts. To publish them, and to turn on takeout, you must finish Stripe’s identity, business and bank checks. Stripe collects that information; FIG does not see your ID or bank details and only keeps whether and when Stripe verified your account."
     ]
    },
    {
@@ -245,7 +247,7 @@
     "paragraphs": [
      "• FIG is free for restaurants. Signing up, setting up your listing for all of your locations (up to 2 for now), going live, posting deals, verified scans and your dashboard cost nothing. There's no upfront payment, no monthly or yearly fee, no commission on the bill, and no per-scan or per-listing fees.",
      "• FIG earns only on takeout orders that diners pay for in the app, as explained below. Nothing is taken on dine-in or on a bill paid at your counter. FIG plans to open to diners on January 1, 2027, and can't promise how many diners you'll get.",
-     "• Takeout needs your HST number and finished Stripe payouts, and a recent two-step sign-in code for money steps. Everything else is available without them.",
+     "• Publishing needs only Stripe’s checks. Takeout also needs your HST number, a recent two-step sign-in code for money steps and the takeout switch. Everything else is available without them.",
      "• Stripe processes takeout payments. FIG never sees a card number.",
      "• Everything FIG offers restaurants today is included. If we ever offer a paid extra, we'll show the price and what's included before you buy anything.",
     "• Menu reading from a photo is free for every restaurant. It is limited to a few reads a day for each owner and needs a confirmed email. It can make mistakes, so you must check every line it reads before you publish, and your menu and prices are your responsibility.",

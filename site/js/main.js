@@ -207,7 +207,7 @@
 
 
   // ---------- what's the catch: the tutorial video (diner or restaurant), nothing else ----------
-  const tutVideo = $("#tut-video");
+  const tutVideo = $("#tut-video"), vext = document.createElement("video").canPlayType("video/webm") ? "webm" : "mp4";
   let tutRole = "";
   function selectTab(tab) {
     $$("#catch [data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
@@ -216,10 +216,10 @@
     tutRole = tab;
     const load = () => {
       $(".tutwrap").dataset.role = tab;
-      tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
+      tutVideo.poster = `/assets/clips/tut-${tab}-poster.webp`;
       if (still) { tutVideo.preload = "none"; tutVideo.controls = true; } // reduced motion: the poster, and play only if they choose to
-      if (!tutVideo.src.endsWith(`/tut-${tab}.mp4`)) tutVideo.src = `/assets/clips/tut-${tab}.mp4`; // the look-ahead may have loaded it
-      tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
+      if (!tutVideo.src.endsWith(`/tut-${tab}.${vext}`)) tutVideo.src = `/assets/clips/tut-${tab}.${vext}`; // the look-ahead may have loaded it
+      tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1; // a little quicker than the full-length video
       if (!still) figPlay(tutVideo);
     };
     if (first || !root.classList.contains("motion")) return load();
@@ -236,21 +236,21 @@
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   // loaded a screen and a half ahead, like the loops (the diner's side is the one that shows first)
-  if (ahead && !still) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
+  if (ahead && !still) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = `/assets/clips/tut-diner.${vext}`; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return tutVideo.pause();
     if (!tutRole) selectTab("diner"); else if (!still) figPlay(tutVideo);
   }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------
-  const shots = $$(".tablet .mk-tab-scr"), tabs = $$("[data-tshot]");
+  const shots = $$(".rpanel .rp"), tabs = $$("[data-tshot]");
   let cur = 0, timer = null, stopped = false;
   function show(i) { cur = i; shots.forEach((s, k) => s.classList.toggle("on", k === i)); tabs.forEach((b, k) => b.setAttribute("aria-selected", String(k === i))); }
   tabs.forEach((b) => b.addEventListener("click", () => { stopped = true; clearInterval(timer); show(+b.dataset.tshot); }));
   new IntersectionObserver(([e]) => {
     clearInterval(timer);
     if (e.isIntersecting && !stopped && motion) timer = setInterval(() => show((cur + 1) % shots.length), 3500);
-  }, { threshold: 0.4 }).observe($(".tablet"));
+  }, { threshold: 0.4 }).observe($(".rpanel"));
 
   // ---------- the diner waitlist (2026-10-15: restaurants first, diners join January 1, 2027) ----------
   const cfg = window.FIG_CONFIG || {};

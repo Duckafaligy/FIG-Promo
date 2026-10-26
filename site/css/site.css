@@ -519,7 +519,7 @@ button, input { font: inherit; color: inherit; }
 .tut-label svg { margin-bottom: -18px; }
 /* the video already shows the phone: present it on a soft light stage instead of a second bezel */
 .tutvid { position: relative; width: 100%; padding: 1.5px; border-radius: 30px; background: linear-gradient(160deg, rgba(255,255,255,.55), rgba(30,94,255,.5) 45%, rgba(200,241,53,.45)); box-shadow: 0 50px 120px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255,255,255,.04); }
-.tutvid video { display: block; width: 100%; aspect-ratio: 600 / 1000; border-radius: 28.5px; object-fit: cover; background: #EEF2FA; pointer-events: none; }
+.tutvid video { display: block; width: 100%; aspect-ratio: 390 / 844; border-radius: 28.5px; object-fit: cover; background: #EEF2FA; pointer-events: none; }
 @media (min-width: 980px) { .catch { grid-template-columns: 1fr 500px; align-items: center; } .catch-copy { position: static; } }
 
 /* ---------- product pages ---------- */
@@ -1572,3 +1572,11 @@ details.qa > p { margin: -2px 0 0; }
 .ga-trust li { padding-left: 22px; position: relative; }
 .ga-trust li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 10px; height: 6px; border-left: 2px solid #C8F135; border-bottom: 2px solid #C8F135; transform: rotate(-45deg); }
 @media (min-width: 720px) { .ga-trust { grid-template-columns: 1fr 1fr; gap: 6px 20px; } }
+.mk-sheet.pop { flex: 0 1 auto; margin: calc(6 * var(--u)) 0 0; padding: calc(6 * var(--u)) calc(5 * var(--u)); border: 1px solid #E3E6EA; border-radius: calc(6 * var(--u)); box-shadow: 0 calc(2 * var(--u)) calc(8 * var(--u)) rgba(10,16,32,.12); }
+/* the restaurant panel: one phone at a time, behind the tabs */
+.rpanel { display: grid; justify-items: center; padding: 28px 0; border-radius: 28px; background: linear-gradient(160deg, #EEF3FF, #DCE7FF); }
+.rpanel .rp { display: none; width: min(260px, 66vw); }
+.rpanel .rp.on { display: block; animation: rpIn .45s var(--ease); }
+.rpanel .phone.mk-phone { width: 100%; max-width: none; transform: none; }
+@keyframes rpIn { from { opacity: 0; transform: translateY(12px); } }
+.tablet-wrap .seg { flex-wrap: wrap; }

@@ -125,6 +125,13 @@ def diner_saved():
     return screen(b, tabs(DINER_TABS, "ticket"), "FIG for diners: the deal came off the bill and saved $8")
 
 
+def owner_connect():
+    b = f'''<div class="mk-head"><div><b class="mk-h">Golden Lantern</b><small>Markham</small></div><span class="mk-pill ok">Ready</span></div>
+<div class="mk-sheet pop"><span class="mk-ok">&check;</span><b class="mk-h">You connected Stripe!</b><small>You can now publish your page, menu and deals, and turn on takeout.</small>
+<span class="mk-btn">Publish now</span><span class="mk-btn ghost">Turn on takeout</span><small>Done</small></div>'''
+    return screen(b, tabs(OWNER_TABS, "home"), "FIG for restaurants: Stripe is connected, so the page, menu and deals can be published")
+
+
 def qr_svg():
     import random
     rnd = random.Random(7)
@@ -163,5 +170,5 @@ def tablet(kind):
     return f'<div class="mk-tab-scr" role="img" aria-label="{e(label)}"><div class="mk-t">{side}{main}</div></div>'
 
 
-SCREENS = {"saved": diner_saved, "home": owner_home, "deals": owner_deals, "scan": owner_scan, "orders": owner_orders, "payments": owner_payments,
+SCREENS = {"connect": owner_connect, "saved": diner_saved, "home": owner_home, "deals": owner_deals, "scan": owner_scan, "orders": owner_orders, "payments": owner_payments,
            "map": diner_map, "claim": diner_claim, "qr": diner_qr}

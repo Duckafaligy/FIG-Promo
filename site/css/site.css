@@ -1580,3 +1580,13 @@ details.qa > p { margin: -2px 0 0; }
 .rpanel .phone.mk-phone { width: 100%; max-width: none; transform: none; }
 @keyframes rpIn { from { opacity: 0; transform: translateY(12px); } }
 .tablet-wrap .seg { flex-wrap: wrap; }
+/* the strip: image cards (a real screen from the app beside the words) */
+.fcard { display: inline-flex; align-items: center; gap: 14px; width: 310px; height: 120px; margin-right: 14px; padding: 12px 18px 12px 12px; border-radius: 24px; background: #fff; border: 1px solid #C9D6FF; box-shadow: 0 8px 22px rgba(30, 94, 255, .10); white-space: normal; flex: none; }
+.fcard img { width: 96px; height: 96px; flex: none; border-radius: 16px; object-fit: cover; object-position: top; background: #EAF0FF; }
+.fcard > span { display: grid; gap: 4px; min-width: 0; text-align: left; }
+.fcard b { font-size: 16px; line-height: 1.2; color: #0A1020; letter-spacing: -.01em; }
+.fcard small { font-size: 13px; line-height: 1.3; color: #5C6470; font-weight: 500; }
+@media (max-width: 599px) { .fcard { width: 236px; height: 96px; gap: 10px; padding: 10px 12px 10px 10px; border-radius: 20px; } .fcard img { width: 72px; height: 72px; border-radius: 13px; } .fcard b { font-size: 14px; } .fcard small { font-size: 12px; } }
+.marquee.facts .marquee-copy { display: flex; }
+.food { height: 72px; } .food img { width: 56px; height: 56px; }
+

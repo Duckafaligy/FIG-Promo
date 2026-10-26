@@ -16,7 +16,7 @@
     nums.forEach((n) => io.observe(n));
   }
   // recordings: names listed here exist in /assets/clips as <name>.webm, <name>.mp4 and <name>-poster.webp. Empty until they are copied in.
-  const LOOPS = [];
+  const LOOPS = ["d1", "d5"];
   const slots = $$(".mk-scr[data-loop]").filter((s) => LOOPS.includes(s.dataset.loop));
   if (slots.length && !calm && "IntersectionObserver" in window) {
     const vio = new IntersectionObserver((es) => es.forEach((e) => {

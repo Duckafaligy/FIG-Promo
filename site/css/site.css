@@ -1564,3 +1564,6 @@ details.qa > p { margin: -2px 0 0; }
 .mk-pad .mk-h { font-size: calc(6.4 * var(--u)); }
 .mk-pad small { font-size: calc(3.4 * var(--u)); }
 .mk-hero { height: calc(54 * var(--u)); }
+/* when the hero recording plays, it is the only screen: the drawn ones stop cycling */
+.hp-cycle:has(.has-vid) > .mk-phone:not(:first-child) { display: none; }
+.motion .hp-cycle:has(.has-vid) > .mk-phone:first-child { animation: none; opacity: 1; }

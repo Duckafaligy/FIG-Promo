@@ -15,15 +15,6 @@
     }), { threshold: 0.6 });
     nums.forEach((n) => io.observe(n));
   }
-  // the QR countdown (4:32 and down); it loops back to 5:00 so it never reads 0:00
-  const cds = $$(".mk-cd[data-cd]");
-  if (cds.length && !calm) {
-    const left = cds.map((c) => +c.dataset.cd);
-    setInterval(() => {
-      if (root.classList.contains("paused") || document.hidden) return;
-      cds.forEach((c, i) => { left[i] = left[i] > 1 ? left[i] - 1 : 299; const m = Math.floor(left[i] / 60), s = left[i] % 60; c.textContent = m + ":" + String(s).padStart(2, "0"); });
-    }, 1000);
-  }
   // recordings: names listed here exist in /assets/clips as <name>.webm, <name>.mp4 and <name>-poster.webp. Empty until they are copied in.
   const LOOPS = [];
   const slots = $$(".mk-scr[data-loop]").filter((s) => LOOPS.includes(s.dataset.loop));

@@ -141,7 +141,7 @@ def qr_svg():
 
 
 def diner_qr():
-    b = f'''<div class="mk-pad center"><b class="mk-h">Show your code</b><small>New code in <b class="mk-cd" data-cd="272">4:32</b></small><div class="mk-qr">{qr_svg()}</div>
+    b = f'''<div class="mk-pad center"><b class="mk-h">Show your code</b><small>New code after every scan</small><div class="mk-qr">{qr_svg()}</div>
 <b>2 for 1 dim sum</b><small>Golden Lantern &middot; code K7Q2 9XMD</small></div>'''
     return screen(b, tabs(DINER_TABS, "ticket"), "FIG for diners: the code to show at the counter")
 

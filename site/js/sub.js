@@ -18,7 +18,7 @@
     c.addEventListener("pointermove", (ev) => { const r = c.getBoundingClientRect(); c.style.setProperty("--cx", ev.clientX - r.left + "px"); c.style.setProperty("--cy", ev.clientY - r.top + "px"); });
   });
 
-  const shots = $$(".tablet .mk-tab-scr"), tabs = $$("[data-tshot]");
+  const shots = $$(".rpanel .rp"), tabs = $$("[data-tshot]");
   tabs.forEach((b) => b.addEventListener("click", () => {
     const i = +b.dataset.tshot;
     shots.forEach((s, k) => s.classList.toggle("on", k === i));

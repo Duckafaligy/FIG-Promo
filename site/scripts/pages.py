@@ -432,7 +432,7 @@ help_html = hero("How can we help?", "Short answers to the questions people ask 
                  + '<div class="hs-search"><input type="search" id="help-q" placeholder="Search the help center" aria-label="Search the help center" autocomplete="off">'
                  + '<p class="hs-none" id="help-none" hidden>No match. <a href="/contact">Message us</a> and a real person replies within 24 hours.</p></div>', cls="pg-hero-line")
 _titles = {"diners": "For diners"}
-help_html += '<section class="section help-wrap"><div class="wrap help-grid"><aside class="help-side">' + mocks.owner_home() + '</aside><div class="help-main">'
+help_html += '<section class="section help-wrap"><div class="wrap help-grid"><aside class="help-side">' + mocks.owner_home().replace('<div class="mk-scr">', '<div class="mk-scr" data-loop="r1">') + '</aside><div class="help-main">'
 for k, (anchor, title, qs) in enumerate(HELP):
     help_html += f'<section class="help-group" id="{anchor}"><h2 class="help-h">{_titles.get(anchor, title)}</h2>{qa_list(qs, 1 if k == 0 or anchor == "money" else 0)}</section>'
 help_html += '</div></div></section>'
@@ -441,7 +441,8 @@ help_html += '''<section class="section pg-tight"><div class="wrap"><div class="
 <p class="fig-mail" hidden>You can also write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
+page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>
+  <script src="/js/ui.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
 
 
 

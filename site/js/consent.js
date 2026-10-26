@@ -37,7 +37,7 @@
     box = document.createElement("section");
     box.className = "ck"; box.id = "cookie-notice"; box.hidden = true; box.tabIndex = -1;
     box.setAttribute("role", "region"); box.setAttribute("aria-label", "Cookie choice");
-    box.innerHTML = '<p>FIG would like to use Google Analytics cookies to count visits. They stay off unless you accept, and there are no advertising cookies. <a href="/cookies">More about cookies</a></p>' +
+    box.innerHTML = '<p>FIG would like to count visits with Google Analytics cookies. They stay off unless you accept. We never use advertising cookies. <a href="/cookies">More about cookies</a></p>' +
       '<p class="ck-now" hidden></p>' +
       '<div class="ck-btns"><button class="btn btn-sm btn-ink" type="button" data-ck="granted">Accept</button><button class="btn btn-sm btn-ink" type="button" data-ck="denied">No thanks</button></div>';
     box.addEventListener("click", (e) => { const b = e.target.closest("[data-ck]"); if (b) choose(b.dataset.ck); });

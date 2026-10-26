@@ -1,6 +1,6 @@
 # FIG
 
-> FIG is a restaurant deals app for Markham, Ontario, Canada. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a one-time QR code at the counter. Free for diners. Free for restaurants too, with no commission on dine-in or on the bill. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.
+> FIG helps restaurants in Markham, Ontario, Canada fill quiet hours. Restaurants post their own deals; diners find them on a map, claim one in a tap and show a one-time QR code at the counter. Free for diners. Free for restaurants too, with no commission on dine-in or on the bill. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.
 
 ## Facts
 - Based in: Markham, Ontario

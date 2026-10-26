@@ -152,6 +152,7 @@ console.log("ok: blog groups");
   for (const f of pages) {
     const html = fs.readFileSync(f, "utf8");
     assert.ok(!/class="[^"]*(eyebrow|kicker|overline|ph-k|city-tag)/.test(html), `${path.basename(f)}: an eyebrow label class is back`);
+    assert.ok(!/New code in\s*[0-9]/i.test(html), `${path.basename(f)}: a QR countdown is back (a code changes after every scan, never with time)`);
     assert.ok(!/assets\/screens\//.test(html), `${path.basename(f)}: it shows an app screenshot (use the native mock screens)`);
     assert.ok(!/class="phone[^"]*"[^>]*>\s*<img/.test(html), `${path.basename(f)}: a phone mockup holds an image`);
   }

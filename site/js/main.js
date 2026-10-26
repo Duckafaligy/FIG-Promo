@@ -243,7 +243,7 @@
   }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------
-  const shots = $$(".tablet img"), tabs = $$("[data-tshot]");
+  const shots = $$(".tablet .mk-tab-scr"), tabs = $$("[data-tshot]");
   let cur = 0, timer = null, stopped = false;
   function show(i) { cur = i; shots.forEach((s, k) => s.classList.toggle("on", k === i)); tabs.forEach((b, k) => b.setAttribute("aria-selected", String(k === i))); }
   tabs.forEach((b) => b.addEventListener("click", () => { stopped = true; clearInterval(timer); show(+b.dataset.tshot); }));

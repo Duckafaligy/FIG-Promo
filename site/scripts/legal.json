@@ -17,7 +17,7 @@
    {
     "heading": "2. Your account",
     "paragraphs": [
-     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and a mobile number (confirmed with a text code once texts are switched on). One account per person, and a confirmed mobile number belongs to one account. Keep your password private. You can turn on two-step sign-in (an authenticator app, a code by email, or a code by text message). Restaurant owners and managers need it for money steps like payouts and refunds. Every account has a username. A staff account is an ordinary FIG account, made from an invite from a restaurant, and the person must be 18 or older. You're responsible for what happens on your account."
+     "You can look around FIG without an account. To claim deals, order or post, you need one, and you must be 14 or older. If you're under 18, check with a parent or guardian that it's okay. Use your real name, an email (confirmed with a code) and, if you like, a mobile number (a contact number only: FIG never verifies it, texts it or uses it to sign you in). One account per person. Keep your password private. You can turn on two-step sign-in (an authenticator app or a code by email, with backup codes if you lose your phone). Restaurant owners and managers need it for money steps like payouts and refunds. Every account has a username. A staff account is an ordinary FIG account, made from an invite from a restaurant, and the person must be 18 or older. You're responsible for what happens on your account."
     ]
    },
    {
@@ -107,13 +107,13 @@
    {
     "heading": "2. What we collect",
     "paragraphs": [
-     "• Account: name, username, email (confirmed with a code), mobile number (we'll confirm it with a text code once texts are switched on), photo, and your password (stored scrambled, never readable).",
+     "• Account: name, username, email (confirmed with a code), optional mobile number (a contact number only: never verified, never used to sign in or send codes, never used to market to you), photo, and your password (stored scrambled, never readable).",
      "• Taste: cravings, budget, dietary needs and home area from Profile setup.",
      "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
      "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
      "• Terms: which version of our terms you accepted, and when.",
-     "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address or mobile number we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
+     "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
      "• Emails: when you join the waitlist, your email, that you agreed to emails, when you confirmed your address and whether you have unsubscribed. A do-not-email list (the address, why it is on the list and the date), so an unsubscribe, a bounced email or a spam complaint is always honoured. A log of the emails we send, which holds a scrambled version of your address instead of the address, the kind of email, when, and whether it went through.",
      "• Payments (restaurants): a permanent record of each payment made through FIG: amounts, HST, FIG's fee, Stripe's fee, order numbers, dates and Stripe reference numbers. It has no card numbers, names or emails.",
@@ -160,7 +160,6 @@
      "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
      "• Resend: sends FIG's emails from FIG's own address, so it gets your email address and what the email says, and tells us whether the email was delivered",
      "• Stripe: card payments for takeout orders, and checking and paying restaurants. To set up a restaurant’s account, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG; Stripe keeps them under its own privacy policy. FIG keeps only whether and when Stripe verified the account.",
-     "• Twilio: text messages, like codes that confirm your mobile number or sign you in, once we switch texts on",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
      "• OpenFreeMap (map tiles), jsDelivr (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
      "• Apple and Google: sign-in, maps, notifications"
@@ -196,7 +195,7 @@
    {
     "heading": "10. Keeping it safe",
     "paragraphs": [
-     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step sign-in, so signing in also needs a code from an authenticator app, an email or a text message. Where it's available, you can sign in with a code we text to your confirmed mobile number instead of a password. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
+     "We encrypt data in transit, scramble passwords and limit who on our team can access data. You can turn on two-step sign-in, so signing in also needs a code from an authenticator app or an email. FIG does not send text messages. No system is perfect. If a breach could put you at risk, we'll tell you and the Privacy Commissioner, as the law requires."
     ]
    },
    {

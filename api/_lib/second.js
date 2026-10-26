@@ -2,7 +2,7 @@
 // - the authenticator's secret is kept in settings, encrypted (AES-256-GCM) with a key derived from SESSION_SECRET under its own
 //   label, so no agent ever sets an env var for it; ADMIN_TOTP_SECRET still overrides it. If SESSION_SECRET changes, the stored
 //   secret can't be read: the user's reset flag (ADMIN_TOTP_RESET=1 in Vercel) is the way back.
-// - "Email me a code instead" (Resend) and "Text me a code instead" (Twilio, hidden until its env vars exist): one fixed address
+// - "Email me a code instead" (Resend): one fixed address
 //   or number, saved at set-up after a code sent to it proves it; 6 digits, 10 minutes, one use, only a hash kept.
 const crypto = require("crypto");
 
@@ -25,7 +25,7 @@ function decrypt(blob) {
 
 // a real sender only: onboarding@resend.dev can only reach the Resend account's own address
 const mailOn = () => !!(process.env.RESEND_API_KEY && process.env.RESEND_FROM) && !/@resend\.dev\b/i.test(process.env.RESEND_FROM);
-const textOn = () => !!(process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN && process.env.TWILIO_FROM);
+const textOn = () => false; // no Twilio: FIG sends no texts (the owner 2026-10-25); kept so auth.js still loads
 const newCode = () => String(crypto.randomInt(0, 1_000_000)).padStart(6, "0");
 const hashCode = (code) => crypto.createHash("sha256").update("fig-admin-code:" + String(code).trim()).digest("hex");
 const sameHash = (a, b) => typeof a === "string" && typeof b === "string" && a.length === b.length && crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
@@ -38,16 +38,7 @@ const mask = (via, to) => !to ? "" : via === "text" ? "•••• " + String(t
 async function sendCode(via, to, code) {
   const line = `Your FIG Admin code is ${code}. It works once, for 10 minutes. If you didn't just try to sign in, change the admin password.`;
   try {
-    if (via === "text") {
-      if (!textOn()) return false;
-      const sid = process.env.TWILIO_ACCOUNT_SID;
-      const r = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(sid)}/Messages.json`, {
-        method: "POST", signal: AbortSignal.timeout(8000),
-        headers: { Authorization: "Basic " + Buffer.from(sid + ":" + process.env.TWILIO_AUTH_TOKEN).toString("base64"), "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ To: to, From: process.env.TWILIO_FROM, Body: line }).toString(),
-      });
-      return r.ok;
-    }
+    if (via === "text") return false; // FIG sends no texts (the owner 2026-10-25): email codes only
     if (!mailOn()) return false;
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST", signal: AbortSignal.timeout(8000),

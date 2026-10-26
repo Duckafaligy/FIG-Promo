@@ -62,6 +62,9 @@ RULES = [
     # (site/js/config.js showEmail). A post that names it, or tells people to email FIG, would publish it early.
     ("business-email", r"hello@figpromo\.ca|\b(email|e-mail|write to|write us at|reach us at) (us|FIG|the FIG team) (at|on) \S+@|[\w.-]+@figpromo\.ca|mailto:",
      "the business email address is not public yet: point to the contact page (www.figpromo.ca/contact)", False),
+    # 2026-10-25 (the owner): FIG sends no texts. Two-step sign-in is an authenticator app, a code by email and backup codes; the mobile number is an optional contact number, never verified.
+    ("no-sms", r"\bSMS\b|text[- ]messag\w+|\btwilio\b|codes? (by|via|through|over) (text|sms)|\b(texts?|texted) (you |me |your )?(a |the )?(login |sign-in |verification )?codes?\b|(confirm|verif\w+)[^.<]{0,30}(mobile|phone|cell) number|\b(text|sms) (alerts?|reminders?|notifications?)",
+     "FIG sends no text messages and does not verify mobile numbers: two-step is an authenticator app, email codes and backup codes", False),
     ("takeout-pay-at-counter", r"takeout[^.<]{0,40}\bpay (at|when)\b[^.<]{0,25}(counter|pickup|arriv)|make it when (they|you) arrive|pay at (the )?pickup",
      "takeout is paid in the app", False),
 ]
@@ -128,10 +131,12 @@ def _selftest():
         "code-changes": "The code keeps changing on your screen",
         "cancel-after-cutoff": "You can cancel a takeout order until pickup",
         "stripe-verification": "Restaurants can go live in minutes with no ID",
+        "no-sms": "Confirm your mobile number with a text code",
         "business-email": "Write to hello@figpromo.ca for help", "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
     }
     # each bad text above must trip exactly its own rule, and a few more phrasings must trip too
-    more = {"stripe-verification": ["Restaurants can publish without verifying with Stripe", "No ID needed to publish", "Your page goes live instantly", "FIG verifies your ID", "FIG checks your documents",
+    more = {"no-sms": ["We send a code by text message", "Verify your phone number to sign up", "SMS two-step sign-in", "Twilio sends the codes", "Texts you a code"],
+            "stripe-verification": ["Restaurants can publish without verifying with Stripe", "No ID needed to publish", "Your page goes live instantly", "FIG verifies your ID", "FIG checks your documents",
                                      "FIG sees your bank details", "Post deals with no verification", "We store your ID", "You can go live before you connect Stripe"],
             "cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
                                     "You can cancel an order up to 2 hours before pickup", "You can cancel a takeout order right up to pickup"],
@@ -157,7 +162,7 @@ def _selftest():
             "A cancelled order is refunded in full to the card you paid with", "Close your account anytime", "Pause your deals anytime", "cancel a reservation 20 minutes before",
             "Build your page in minutes; connect Stripe to publish", "FIG never sees your ID or bank details", "Stripe checks your ID and where payouts go", "FIG only keeps whether and when Stripe verified your account",
             "You can post a deal in a minute", "Setting up is free and takes a few minutes", "Publish after Stripe verifies your account", "Your bank details go straight to Stripe",
-            "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address", "Message us on the contact page at www.figpromo.ca/contact", "Email your receipt to yourself"]
+            "Two-step sign-in uses an authenticator app or a code by email", "Share the restaurant's link in your group chat", "Restaurants never see your phone number", "Add an optional mobile number", "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address", "Message us on the contact page at www.figpromo.ca/contact", "Email your receipt to yourself"]
     for text in good:
         assert not check([post(faq=[("Q?", text)])]), text
     assert not check([post(title="Is FIG Premium worth it?", claims_ok=["premium"])]), "claims_ok lets a deliberate mention through"

@@ -1597,7 +1597,8 @@ img, video, svg { max-width: 100%; }
 body { overflow-x: clip; }
 .wrap { padding-inline: var(--pad); }
 /* clips: the drawn screen is only a fallback; a clip or its picture fills the phone */
-.mk-scr .mk-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; z-index: 2; background: #fff; border: 0; }
+.mk-scr .mk-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .2s; z-index: 2; background: transparent; border: 0; }
+.mk-scr.has-vid .mk-vid { opacity: 1; }
 .mk-scr.has-vid .mk { visibility: hidden; }
 .mk-scr[data-loop] { cursor: zoom-in; }
 .mk-scr[data-loop]:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; }
@@ -1647,3 +1648,7 @@ dialog.vbox video { display: block; width: min(92vw, 420px); max-height: 94vh; a
 }
 .hero { overflow-x: clip; }
 .hero-map, .hero-map .map-fallback, .hero-map .maplibregl-map { max-width: 100%; }
+.closing > *, .closing-side, .join, .faq > *, .get-app > * { min-width: 0; }
+.join, .join form, .field-pill { max-width: 100%; }
+.consent { overflow-wrap: anywhere; }
+@media (max-width: 767px) { .bento { margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); scroll-padding-inline: var(--pad); } }

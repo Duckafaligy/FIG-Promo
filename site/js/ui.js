@@ -31,12 +31,13 @@
     v.preload = eager ? "auto" : "metadata"; v.poster = `/assets/clips/${n}-poster.webp`;
     v.innerHTML = (canWebm ? `<source src="/assets/clips/${n}.webm" type="video/webm">` : "") + `<source src="/assets/clips/${n}.mp4" type="video/mp4">`;
     if (scr.closest(".step, .bento")) v.addEventListener("loadedmetadata", () => { v.defaultPlaybackRate = v.playbackRate = 1.25; });
-    scr.appendChild(v); scr.classList.add("has-vid"); return v;
+    const show = () => scr.classList.add("has-vid"); v.addEventListener("loadeddata", show, { once: true }); v.addEventListener("playing", show, { once: true }); if (v.readyState >= 2) show();
+    scr.appendChild(v); return v;
   };
   const fallback = (scr, v) => {
     if (scr.dataset.anim) return; scr.dataset.anim = "1"; v.pause();
     const img = new Image(); img.className = "mk-vid mk-anim"; img.alt = ""; img.width = 390; img.height = 844; img.decoding = "async";
-    img.src = `/assets/clips/anim/${scr.dataset.loop}.webp`; v.replaceWith(img);
+    img.addEventListener("load", () => scr.classList.add("has-vid"), { once: true }); img.src = `/assets/clips/anim/${scr.dataset.loop}.webp`; v.replaceWith(img);
   };
   const state = new WeakMap();
   const play = (scr, v) => {
@@ -46,10 +47,11 @@
     const t0 = v.currentTime; state.set(scr, { ...s, dog: setTimeout(() => { state.set(scr, { ...state.get(scr), dog: 0 }); if (!scr.dataset.anim && v.isConnected && !v.paused && v.currentTime === t0) fallback(scr, v); else if (!scr.dataset.anim && v.isConnected && v.paused && !root.classList.contains("paused")) fallback(scr, v); }, 2200) });
   };
   if (slots.length) {
-    slots.forEach((scr, i) => { if (!scr.querySelector("video")) { const eager = i < 6 && !calm; scr._v = make(scr, eager); } });
+    slots.forEach((scr) => { if (!calm && scr.closest(".hp-cycle, .step") && !scr.querySelector("video")) make(scr, true); }); // the rest are made when they come near (below)
     if ("IntersectionObserver" in window) {
       const near = new IntersectionObserver((es) => es.forEach((e) => {
-        const scr = e.target, v = scr.querySelector("video.mk-vid");
+        const scr = e.target; let v = scr.querySelector("video.mk-vid");
+        if (!v && !scr.dataset.anim && e.isIntersecting && !calm) v = make(scr, true);
         if (!v) return;
         if (e.isIntersecting) { if (v.preload !== "auto") v.preload = "auto"; play(scr, v); } else v.pause();
       }), { rootMargin: "800px 0px 800px 0px", threshold: 0 });

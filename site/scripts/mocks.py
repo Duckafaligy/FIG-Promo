@@ -45,8 +45,8 @@ def status():
     return '<div class="mk-status"><span>9:41</span><span class="mk-dots"><i></i><i></i><i></i></span></div>'
 
 
-def screen(body, tabbar="", label="App screen"):
-    return (f'<div class="phone mk-phone" role="img" aria-label="{e(label)}"><div class="mk-scr"><div class="mk">{status()}{body}{tabbar}</div></div></div>')
+def screen(body, tabbar="", label="App screen", loop=""):
+    return (f'<div class="phone mk-phone" role="img" aria-label="{e(label)}"><div class="mk-scr"{(' data-loop="' + loop + '"') if loop else ""}><div class="mk">{status()}{body}{tabbar}</div></div></div>')
 
 
 def bars(vals):
@@ -106,7 +106,7 @@ def owner_payments():
 
 
 def diner_map():
-    pins = "".join(f'<i class="mk-pin {c}" style="left:{x}%;top:{y}%">{l}</i>' for l, c, x, y in [("D", "", 22, 24), ("B", "g", 62, 18), ("R", "", 40, 44), ("P", "g", 74, 52), ("N", "", 18, 62), ("K", "g", 52, 70)])
+    pins = "".join(f'<i class="mk-pin pulse {c}" style="left:{x}%;top:{y}%">{l}</i>' for l, c, x, y in [("D", "", 22, 24), ("B", "g", 62, 18), ("R", "", 40, 44), ("P", "g", 74, 52), ("N", "", 18, 62), ("K", "g", 52, 70)])
     b = f'''<div class="mk-map"><span class="r r1"></span><span class="r r2"></span><span class="r r3"></span>{pins}</div>
 <div class="mk-search">Where are we eating?</div>'''
     return screen(b, tabs(DINER_TABS, "map"), "FIG for diners: the map with deal pins")
@@ -114,8 +114,15 @@ def diner_map():
 
 def diner_claim():
     b = f'''<div class="mk-hero">{tile("D")}</div><div class="mk-pad"><b class="mk-h">2 for 1 dim sum</b><small>Golden Lantern &middot; Weekdays 2 to 5 pm</small>
-<div class="mk-line"><span>Time left</span><b>Ends in 54 min</b></div><div class="mk-line"><span>Uses</span><b>1</b></div><span class="mk-btn wide">Claim this deal</span></div>'''
+<div class="mk-line"><span>Time left</span><b>Ends in 54 min</b></div><div class="mk-line"><span>Uses</span><b>1</b></div><span class="mk-btn wide mk-press">Claim this deal</span></div>'''
     return screen(b, tabs(DINER_TABS, "home"), "FIG for diners: claiming a deal")
+
+
+def diner_saved():
+    b = f'''<div class="mk-pad center sv"><span class="mk-ok pop-in">&check;</span><b class="mk-h">Saved $8</b><small>at Golden Lantern</small>
+<div class="mk-li slim">{tile("D")}<span><b>2 for 1 dim sum</b><small>Scanned by staff &middot; 3:12 pm</small></span></div>
+<small>It came off your bill. You paid the restaurant as usual.</small></div>'''
+    return screen(b, tabs(DINER_TABS, "ticket"), "FIG for diners: the deal came off the bill and saved $8")
 
 
 def qr_svg():
@@ -134,7 +141,7 @@ def qr_svg():
 
 
 def diner_qr():
-    b = f'''<div class="mk-pad center"><b class="mk-h">Show your code</b><small>Staff scan it once, then it is used</small><div class="mk-qr">{qr_svg()}</div>
+    b = f'''<div class="mk-pad center"><b class="mk-h">Show your code</b><small>New code in <b class="mk-cd" data-cd="272">4:32</b></small><div class="mk-qr">{qr_svg()}</div>
 <b>2 for 1 dim sum</b><small>Golden Lantern &middot; code K7Q2 9XMD</small></div>'''
     return screen(b, tabs(DINER_TABS, "ticket"), "FIG for diners: the code to show at the counter")
 
@@ -156,5 +163,5 @@ def tablet(kind):
     return f'<div class="mk-tab-scr" role="img" aria-label="{e(label)}"><div class="mk-t">{side}{main}</div></div>'
 
 
-SCREENS = {"home": owner_home, "deals": owner_deals, "scan": owner_scan, "orders": owner_orders, "payments": owner_payments,
+SCREENS = {"saved": diner_saved, "home": owner_home, "deals": owner_deals, "scan": owner_scan, "orders": owner_orders, "payments": owner_payments,
            "map": diner_map, "claim": diner_claim, "qr": diner_qr}

@@ -1567,3 +1567,8 @@ details.qa > p { margin: -2px 0 0; }
 /* when the hero recording plays, it is the only screen: the drawn ones stop cycling */
 .hp-cycle:has(.has-vid) > .mk-phone:not(:first-child) { display: none; }
 .motion .hp-cycle:has(.has-vid) > .mk-phone:first-child { animation: none; opacity: 1; }
+.ga-note { margin-top: 12px; position: relative; }
+.ga-trust { display: grid; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; position: relative; font-size: 14px; opacity: .95; }
+.ga-trust li { padding-left: 22px; position: relative; }
+.ga-trust li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 10px; height: 6px; border-left: 2px solid #C8F135; border-bottom: 2px solid #C8F135; transform: rotate(-45deg); }
+@media (min-width: 720px) { .ga-trust { grid-template-columns: 1fr 1fr; gap: 6px 20px; } }

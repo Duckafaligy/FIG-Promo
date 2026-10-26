@@ -54,7 +54,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <li><b>No commission on the bill.</b><span>Diners pay you, at your counter. FIG is paid only from 5% of the food on takeout orders diners pay for in the app.</span></li>
 <li><b>Honest deals.</b><span>Every deal, timer and opening hour is set by the restaurant itself.</span></li>
 <li><b>Codes that can't be copied.</b><span>One-time QR codes stop screenshots and resold deals.</span></li>
-<li><b>Private by default.</b><span>Restaurants never see a diner's phone number, even for a takeout order.</span></li>
+<li><b>Private and safe by default.</b><span>Restaurants never see a diner's phone number. Stripe checks identity before a restaurant publishes, a quick hCaptcha check keeps bots out at sign-up, two-step sign-in uses an authenticator app or an email code, and FIG sends no texts.</span></li>
 <li><b>Real reviews.</b><span>Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</span></li>
 <li><b>Local first.</b><span>Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor first. Then expanding to Richmond Hill and Vaughan Mills.</span></li>
 </ul></div></section>

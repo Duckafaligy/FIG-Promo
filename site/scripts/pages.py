@@ -416,9 +416,10 @@ _R["What does FIG cost?"] = """<p>Nothing to start. FIG is free for restaurants,
 <ul class="help-ul"><li>Publishing and takeout both need Stripe's identity, business and bank checks. Takeout also needs your HST number, two-step sign-in and the takeout switch.</li>
 <li>Stripe pays the rest out to your bank on its usual schedule, often within a few business days.</li>
 <li>The HST on a takeout order is yours to remit.</li></ul>"""
+_R["Why do I see a quick check when I sign up?"] = """<p>It is a short check by hCaptcha that keeps bots out. It takes a few seconds and runs only when you sign up, sign in or reset a password. hCaptcha processes your internet address and browser signals only for that. Details are on the <a href="/privacy">Privacy page</a>.</p>"""
 _R["How do I add my staff?"] = "In Settings, invite a person by email or with a link that expires. They open it, see which restaurant and role it is for, and tap Accept or Decline. Nobody joins your team without accepting. Roles are Owner, Manager and Staff, and you can remove people or cancel an invite anytime."
 _R["What is two-step sign-in, and who needs it?"] = "It is a second code when you sign in, from an authenticator app or sent by email. Owners and managers need it, with a recent code, for money steps: payouts, turning takeout on, refunds, handing a restaurant over and closing it. Backup codes help if you lose your phone."
-_GROUPS = [("start", "Start here", ["Why do I connect Stripe?", "Can I try FIG before connecting Stripe?", "When can I publish my page?", "Do I need new equipment?"]),
+_GROUPS = [("start", "Start here", ["Why do I see a quick check when I sign up?", "Why do I connect Stripe?", "Can I try FIG before connecting Stripe?", "When can I publish my page?", "Do I need new equipment?"]),
            ("scanning", "Deals and scanning", ["How do I post a deal?", "What if a code won't scan?", "What if a scan looks wrong?"]),
            ("takeout", "Takeout", ["Can diners order takeout?", "Can a diner cancel a takeout order?", "Can I pause takeout in a rush?", "Can I refund an order?"]),
            ("money", "Money", ["What does FIG cost?", "How do I stop?"]),

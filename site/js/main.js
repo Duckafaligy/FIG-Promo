@@ -217,7 +217,7 @@
     const load = () => {
       $(".tutwrap").dataset.role = tab;
       tutVideo.poster = `/assets/clips/tut-${tab}-poster.webp`;
-      if (still) { tutVideo.preload = "none"; tutVideo.controls = true; } // reduced motion: the poster, and play only if they choose to
+      tutVideo.controls = true; if (still) { tutVideo.preload = "none"; } // reduced motion: the poster, and play only if they choose to
       if (!tutVideo.src.endsWith(`/tut-${tab}.${vext}`)) tutVideo.src = `/assets/clips/tut-${tab}.${vext}`; // the look-ahead may have loaded it
       tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1; // a little quicker than the full-length video
       if (!still) figPlay(tutVideo);
@@ -317,15 +317,4 @@
 })();
 
 
-// numbers strip: count up when it scrolls into view (226 places, 4 languages)
-(() => {
-  const nums = [...document.querySelectorAll(".stats b")].filter((b) => /^\d+$/.test(b.textContent.trim()) && +b.textContent > 1);
-  if (!nums.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return; io.unobserve(e.target);
-    const el = e.target, end = +el.textContent, t0 = performance.now();
-    const step = (t) => { const k = Math.min(1, (t - t0) / 1400); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
-    el.textContent = "0"; requestAnimationFrame(step);
-  }), { threshold: 0.6 });
-  nums.forEach((n) => io.observe(n));
-})();
+

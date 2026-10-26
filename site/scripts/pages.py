@@ -441,8 +441,7 @@ help_html += '''<section class="section pg-tight"><div class="wrap"><div class="
 <p class="fig-mail" hidden>You can also write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>
-  <script src="/js/ui.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
+page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>\n  <script src="/js/ui.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
 
 
 

@@ -167,18 +167,9 @@
     } else v.pause();
   }), { threshold: 0.1 });
   if (!still) $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
-  // "Good to know" loops (FIX-LIST #145): each loads only once its card is on screen, plays while it is, pauses off it;
-  // with reduced motion only the poster shows
-  if (!still) {
-    const gio = new IntersectionObserver((es) => es.forEach((e) => {
-      const v = e.target;
-      if (!e.isIntersecting) return v.pause();
-      if (root.classList.contains("paused")) return; // "Pause animations" is on
-      if (!v.src) v.src = v.dataset.loop;
-      v.play().catch(() => {}); // refused (Low Power Mode, data saver): the poster stays
-    }), { threshold: 0.25 });
-    $$("video.gtk-loop").forEach((v) => gio.observe(v));
-  }
+  // "Good to know" scenes (CSS loops, site.css "gs-"): each runs only while it's on screen (.idle pauses it off screen)
+  const gio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)));
+  $$(".gtk-vis").forEach((v) => gio.observe(v));
   // ---------- Pause animations (FIX-LIST #149, WCAG 2.2.2): one button stops every loop on Home for the visit ----------
   // (the head script sets html.paused from the tab's memory before anything plays; the CSS stops the endless CSS loops,
   // figPlay and the loops above won't start a video while it's on, and the map's drift stays still)
@@ -193,8 +184,8 @@
         if (p) { v.pause(); if (v.readyState) v.currentTime = 0; } // back to the start, as still as its poster
         else if (onScreen(v)) { // on again: what's on screen plays (loading it first if it came into view while paused)
           if (still) return; // reduced motion: nothing loads or plays by itself (#154)
-          if (!v.src && (v.dataset.loop || v.dataset.src)) v.src = v.dataset.loop || v.dataset.src;
-          if (v.src) v.classList.contains("gtk-loop") ? v.play().catch(() => {}) : figPlay(v);
+          if (!v.src && v.dataset.src) v.src = v.dataset.src;
+          if (v.src) figPlay(v);
         }
       });
     };

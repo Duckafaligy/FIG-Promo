@@ -337,7 +337,7 @@ POSTS = [
     dict(slug="takeout-without-delivery-fees", screen="qr", title="Takeout with a deal, pick up, skip the delivery fees", date="2026-10-04", updated=UPDATED, topic="For diners", group="takeout-and-money",
          dek="Some FIG deals let you order takeout from a Markham restaurant's menu and pick it up yourself, with no delivery or service fees. Here's how it works, what it costs, and what happens if you're late.",
          desc="Some FIG deals let you order takeout from a Markham restaurant and pick it up yourself, with no delivery or service fees. How it works and what it costs.",
-         keywords="takeout deals Markham, pickup deals, no delivery fees, takeout pickup Markham, order ahead Markham",
+         keywords="takeout deals Markham, pickup deals, no delivery fees, takeout pickup Markham",
          points=["Tap Takeout on a deal that allows it, add what you want from the menu, and pick it up when it's ready.",
                  "No delivery fee and no service fee from FIG. You pay the menu price, minus the deal, plus tax.",
                  "Some restaurants also take takeout at full price: tap Order takeout on their page.",

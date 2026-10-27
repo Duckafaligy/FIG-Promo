@@ -162,24 +162,14 @@ index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_me
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
-# Each card's loop (site/assets/loops/<group>.mp4 + -poster.webp) shows only once its files exist: the poster first, the video
-# loaded and played only while it's on screen (main.js), never with reduced motion. A loop over ~400 KB stops the build.
-LOOPS = SITE / "assets" / "loops"
+# Each card's picture is a small animated HTML scene (mocks.GTK_SCENES; site.css "gs-"; main.js runs it only while it's on screen).
 def _vis(slug):
-    mp4, poster = LOOPS / f"{slug}.mp4", LOOPS / f"{slug}-poster.webp"
-    if mp4.exists() and mp4.stat().st_size > 450_000:
-        sys.exit(f"pages.py: {mp4.name} is {mp4.stat().st_size // 1000} KB; a Home loop must stay under ~400 KB")
-    if mp4.exists() and poster.exists():
-        return (f'<video class="gtk-loop" muted loop playsinline preload="none" data-poster="/assets/loops/{slug}-poster.webp" '
-                f'data-loop="/assets/loops/{slug}.mp4" disablepictureinpicture disableremoteplayback></video>')
-    if poster.exists():
-        return f'<img src="/assets/loops/{slug}-poster.webp" alt="" width="800" height="500" loading="lazy">'
-    return '<svg class="gtk-mark"><use href="#logo"/></svg>'
+    return mocks.gtk_scene(slug) or '<svg class="gtk-mark"><use href="#logo"/></svg>'
 GTK = ("<!-- good-to-know: written by pages.py from posts.py GROUPS (FIX-LIST #145) -->\n"
        '  <section class="section ice gtk" id="good-to-know">\n    <div class="wrap">\n'
        '      <h2 class="h2 reveal">Good to know</h2>\n      <p class="body gtk-sub reveal">Short reads for diners and restaurants.</p>\n'
        '      <div class="gtk-grid reveal">' + "".join(
-           f'<a class="gtk-card" href="/blog#{g}"><span class="gtk-vis" aria-hidden="true">{_vis(g)}</span>'
+           f'<a class="gtk-card" href="/blog#{g}"><div class="gtk-vis" aria-hidden="true">{_vis(g)}</div>'
            f'<div class="gtk-text"><h3>{e(t)}</h3><p>{e(d)}</p><span class="gtk-more">Learn more <i aria-hidden="true">→</i></span></div></a>' for g, t, d in GROUPS) + "</div>\n"
        '      <div class="gtk-wide reveal"><div><h3>Everything we write, in one place.</h3><nav class="gtk-pills" aria-label="Blog groups">'
        + "".join(f'<a href="/blog#{g}">{e(t)}</a>' for g, t, _ in GROUPS) + "</nav></div>"

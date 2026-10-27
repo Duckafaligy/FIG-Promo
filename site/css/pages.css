@@ -19,7 +19,7 @@
   font: inherit; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; cursor: pointer; transition: border-color .2s, background .2s, color .2s, transform .2s var(--ease); }
 .pg-pills a:hover, .pg-pills button:hover { border-color: var(--cobalt); }
 /* Help: search the questions (js/help.js) */
-.hs-search { margin-top: 18px; max-width: 560px; }
+.hs-search { flex: 1 1 300px; margin-top: 18px; max-width: 560px; }
 .hs-search input { width: 100%; height: 52px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: inherit; font-size: 16px; color: var(--ink); }
 .hs-search input:focus { outline: none; border-color: var(--cobalt); box-shadow: 0 0 0 3px rgba(30, 94, 255, .18); }
 .hs-none { margin: 12px 4px 0; font-size: 15px; color: var(--muted); }
@@ -171,9 +171,9 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .bl-feature-band { padding: 80px 0; }
 .bl-feature { display: grid; gap: 28px; align-items: center; text-decoration: none; color: var(--ink); }
 .bl-pic { position: relative; display: block; border-radius: 32px; overflow: hidden; }
-.bl-pic img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .6s var(--ease); }
+.bl-pic img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: left center; transition: transform .6s var(--ease); }
 .bl-feature:hover .bl-pic img { transform: scale(1.03); }
-.bl-pic i { position: absolute; left: 22px; top: 22px; padding: 8px 14px; border-radius: 999px; background: var(--volt); color: var(--ink); font-style: normal; font-weight: 800; font-size: 13px; }
+.bl-pic i { position: absolute; right: 22px; top: 22px; padding: 8px 14px; border-radius: 999px; background: var(--volt); color: var(--ink); font-style: normal; font-weight: 800; font-size: 13px; }
 .bl-text { display: grid; gap: 16px; }
 .bl-text b { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; font-weight: 800; letter-spacing: -0.045em; color: var(--ink) !important; }
 .bl-text p { font-size: 18px; line-height: 1.65; color: var(--muted); margin: 0; }
@@ -183,7 +183,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .bl-list { display: grid; }
 .bl-list > .bl-row:first-child { border-top: 1px solid var(--line); }
 .bl-row { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; padding: 22px 0 !important; border-bottom: 1px solid var(--line) !important; text-decoration: none; color: var(--ink); }
-.bl-row img { width: 112px; height: 84px; border-radius: 16px; object-fit: cover; transition: transform .4s var(--ease); }
+.bl-row img { width: 112px; height: 84px; border-radius: 16px; object-fit: cover; object-position: left center; transition: transform .4s var(--ease); }
 .bl-row:hover img { transform: scale(1.04); }
 .bl-row > span { display: grid; gap: 6px; min-width: 0; }
 .bl-row b { font-size: clamp(18px, 2vw, 24px); line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink) !important; transition: color .2s; }
@@ -228,7 +228,7 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .st-note { font-size: 15px; font-weight: 600; color: var(--dim); }
 .st-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 6px; }
 @media (max-width: 520px) { .st-btns .btn { flex: 1 1 100%; } }
-@media (max-width: 600px) { .pg-short { padding: 22px; border-radius: 20px; } .ps-cover { aspect-ratio: 4 / 3; border-radius: 24px; } .pg-hero { padding-top: 120px; } }
+@media (max-width: 600px) { .pg-short { padding: 22px; border-radius: 20px; } .ps-cover { aspect-ratio: 40 / 21; border-radius: 24px; } .pg-hero { padding-top: 120px; } }
 /* /about's For diners / For restaurants lists on a phone: the term on its own line, its text full width under it (28, 2026-10-13) */
 @media (max-width: 600px) { .ab-col ol { gap: 16px; } .ab-col li { grid-template-columns: 1fr; gap: 4px; } }
 /* the legal pages' side links: 44 px to tap on touch screens */

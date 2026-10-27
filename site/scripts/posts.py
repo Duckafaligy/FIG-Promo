@@ -1127,4 +1127,195 @@ POSTS = [
               ("How much does one low rating change my average?", "Less than it feels like. In the example in this post, one 1-star among ten 5-star reviews gives 4.64, and among thirty gives 4.87."),
               ("Should I offer a discount in a reply?", "Usually not. Let the deal speak for itself, and focus on what you will fix.")]),
 
+    dict(slug="fig-payments-page-csv-bookkeeping-takeout", screen="tdash", title="Reading your FIG Payments page: takeout, fees and your bookkeeping", date="2026-10-28", publish_at="2026-10-28T12:00:00-04:00", topic="For restaurants", group="takeout-and-money",
+         dek="Every takeout payment, refund and fee is listed on one page and downloads as a CSV file. How to read it, what each line means, a worked month-end example with the sums checked, and how to hand it to your bookkeeper.",
+         desc="How to read the FIG Payments page: takeout payments, refunds and fees, the CSV download, and a worked month-end example with the arithmetic.",
+         seo="FIG Payments page: reading takeout fees and the CSV",
+         keywords="restaurant takeout bookkeeping, restaurant payments CSV, Stripe fees restaurant Canada, reconcile takeout payments, restaurant month end, FIG Payments page, Markham restaurants",
+         points=["The Payments page lists every takeout payment, refund and fee, and it downloads as a CSV file you can open in a spreadsheet.",
+                 "On each takeout order the diner's card is charged the food plus HST. Stripe's fee of 2.9% + $0.30 for most Canadian cards comes off that payment, and FIG keeps 5% of the food after any deal and before tax.",
+                 "The HST on an order is yours to remit. Treat it as a separate line in your books, not as sales you keep.",
+                 "Dine-in deals do not appear as takeout payments: the diner pays you directly and FIG takes nothing from that bill.",
+                 "Check the page against your own records once a month. A short routine beats a long scramble at tax time."],
+         sections=[
+             ("The short answer", """<p>The Payments page in FIG lists every takeout payment, every refund and every fee, and you can download it as a CSV file. Use it as the record of your takeout money: one line per event, with the amounts that came in and the fees that came off. Once a month, download it, add up the lines and compare the total with what reached your bank account.</p>
+<p>This post is general information about reading your records, not accounting or tax advice. Your bookkeeper or accountant has the final word on how to record any of it.</p>"""),
+             ("What the page lists", """<table><thead><tr><th>Line</th><th>What it is</th><th>How to treat it</th></tr></thead><tbody>
+<tr><td>Takeout payment</td><td>What the diner paid in the app for a takeout order, food plus HST</td><td>Sales of food, plus HST you collected for the CRA</td></tr>
+<tr><td>Stripe fee</td><td>Stripe's card fee, 2.9% + $0.30 for most Canadian cards, taken off the payment</td><td>A card processing cost</td></tr>
+<tr><td>FIG fee</td><td>5% of the food after any deal and before tax, on takeout orders only</td><td>A fee for the order. Once FIG is registered for HST, HST is added to this fee</td></tr>
+<tr><td>Refund</td><td>Money returned to a diner</td><td>Reduces that order's sales</td></tr>
+</tbody></table>
+<p>Dine-in is not on this list. When a diner shows a code and pays you at the table or the till, FIG takes no commission on the bill and nothing about that bill is a takeout payment. Your dine-in sales stay in your own till or point-of-sale records. <a href="/blog/how-fig-makes-money">How FIG makes money</a> covers why.</p>"""),
+             ("How a payment is charged", """<p>When a diner checks out, the card is held. It is charged when you accept the order, and if you decline, nothing is charged. That matters for your records: an order you declined leaves no payment to match. An order you accepted and the diner collected is one payment line with its fees.</p>
+<p>There is no paying at the counter for takeout. The pickup code only confirms that the order was collected, so the app payment is the one place the money for a takeout order appears.</p>"""),
+             ("A worked month-end example", """<p>Here are three takeout orders, with the food amount after any deal and before tax. These are round example numbers, and your menu will differ. HST is 13%. Stripe's fee is 2.9% of the whole payment plus $0.30. FIG's is 5% of the food.</p>
+<div class="callout math"><b>Three example orders (before any HST on FIG's fee)</b><table><thead><tr><th>Food after deal</th><th>HST at 13%</th><th>Diner paid</th><th>Stripe fee</th><th>FIG 5%</th><th>Left from the food</th></tr></thead><tbody>
+<tr><td>$20.00</td><td>$2.60</td><td>$22.60</td><td>$0.96</td><td>$1.00</td><td>$18.04</td></tr>
+<tr><td>$30.00</td><td>$3.90</td><td>$33.90</td><td>$1.28</td><td>$1.50</td><td>$27.22</td></tr>
+<tr><td>$40.00</td><td>$5.20</td><td>$45.20</td><td>$1.61</td><td>$2.00</td><td>$36.39</td></tr>
+<tr><td><b>Total</b></td><td><b>$11.70</b></td><td><b>$101.70</b></td><td><b>$3.85</b></td><td><b>$4.50</b></td><td><b>$81.65</b></td></tr>
+</tbody></table><p>Check one row: on the $30 order, Stripe takes 2.9% of $33.90, which is $0.98, plus $0.30, so $1.28. FIG takes 5% of $30, which is $1.50. $30.00 &minus; $1.28 &minus; $1.50 = $27.22. Fees are rounded to the cent.</p></div>
+<p>Now the same total two ways. Food of $90.00 plus HST of $11.70 is $101.70 paid by diners. Take off $3.85 and $4.50 in fees and $93.35 is left. Of that, $81.65 is food and $11.70 is HST you will remit. If your CSV for these three orders does not add up to the same figures, look for a refund or a fee line you have not counted.</p>"""),
+             ("The monthly routine, in ten minutes", """<ol><li><strong>Download the CSV</strong> from the Payments page for the month.</li><li><strong>Open it in a spreadsheet</strong> and sum three things: payments, fees and refunds.</li><li><strong>Split each payment</strong> into food and HST. Divide the payment by 1.13 to get the food: $22.60 &divide; 1.13 = $20.00.</li><li><strong>Compare the net</strong> with the payouts that reached your bank account for the same period. A small gap can be timing, with an order near the month's end landing in the next one.</li><li><strong>Save the file</strong> with the month in its name, such as the year, the month and the word takeout.</li></ol>
+<p>If something does not match after that, write down the order and ask us on the <a href="/contact">contact page</a> rather than guessing.</p>"""),
+             ("HST: what is yours to remit", """<p>HST on a takeout order is the restaurant's to remit. The diner pays it with the order, it comes through to you with the rest, and your HST number is what lets takeout work in the first place: a restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts. Keep HST out of your sales figure and in its own line, so the amount you owe is easy to see.</p>
+<p>Not registered yet? <a href="/blog/hst-registration-small-restaurants-ontario">HST registration for small restaurants in Ontario</a> goes through the $30,000 rule. It is general information, not tax advice.</p>"""),
+             ("Refunds in your records", """<p>A refund shows up as its own line on the page, so you can see which order it belongs to. In your books, a refund reduces the sales for that order. Refunds are a money step, so owners and managers need a stronger sign-in for them: an authenticator app or a code by email. That is also a good control for your own records, because it means refunds are made on purpose by someone you chose. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">Who should be an owner, manager or staff member</a>.</p>"""),
+             ("Handing it to your bookkeeper", """<p>The CSV is the whole point. Send it as it is, one file a month, and say three things in the email: the month it covers, that the HST on each line is the restaurant's to remit, and that dine-in sales are in your own till records. A bookkeeper who gets the same layout every month spots a missing line quickly. Keep the downloaded files in one folder so the year's records are in order when you file.</p>
+<div class="callout example"><b>A simple email to send (example)</b><p>"Attached is the takeout payments file for [month]. It lists each payment, refund and fee. HST is included in each payment. Dine-in sales are in our till report."</p></div>"""),
+             ("What to look at besides the totals", """<p>Once the sums agree, use the page as a small business tool. Sort by amount to see which sizes of order you get. Count the lines to see how many takeout orders came in during a month. Compare it with your quiet hours: takeout is meant to fill a kitchen that would otherwise be idle. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math</a> shows what a restaurant keeps on a $12, $20, $40 or $60 order, and the <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">rush guide</a> covers pausing takeout and adding prep time when the kitchen is full.</p>
+<p>FIG opens to diners on January 1, 2027, so your page will be empty until then. You can set up your menu, hours, payouts and HST number before that day.</p>"""),
+         ],
+         faq=[("Where do I see my takeout payments?", "On the Payments page. It lists every takeout payment, refund and fee."),
+              ("Can I download my payments?", "Yes. The Payments page downloads as a CSV file, which opens in any spreadsheet."),
+              ("What fees come off a takeout payment?", "Stripe's card fee of 2.9% + $0.30 for most Canadian cards comes off the payment, and FIG keeps 5% of the food after any deal and before tax, on takeout orders only."),
+              ("Does dine-in show up on the Payments page?", "No. FIG takes no commission on the bill and nothing on dine-in, and the diner pays you directly."),
+              ("Who remits the HST on a takeout order?", "The restaurant. This is general information, not tax advice, so ask your accountant how to record it."),
+              ("When is the card charged?", "The card is held at checkout and charged when the restaurant accepts the order. If the restaurant declines, nothing is charged."),
+              ("Does a refund need a stronger sign-in?", "Yes. Refunds are a money step, so owners and managers need a sign-in step such as an authenticator app or a code by email.")]),
+
+    dict(slug="fig-staff-roles-sign-in-security-owners-managers", screen="tscanner", title="Owner, Manager or Staff: setting up your team and sign-in security on FIG", date="2026-10-29", publish_at="2026-10-29T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="Who should hold which role on FIG, how people join by invite, which steps need a stronger sign-in, and how to set it up so a busy shift runs smoothly and the money steps stay with the right people.",
+         desc="How to set up your team on FIG: Owner, Manager and Staff roles, invites, and the sign-in security for the money steps.",
+         seo="FIG roles and sign-in security for restaurant teams",
+         keywords="restaurant staff accounts, restaurant app roles, two-step sign-in restaurant, authenticator app restaurant, add staff FIG, restaurant owner manager access, Markham restaurants",
+         points=["FIG has three roles: Owner, Manager and Staff. People join by accepting an invite from the owner.",
+                 "Money steps, which are payouts, taking takeout live and refunds, need a stronger sign-in from owners and managers.",
+                 "Sign-in security can be an authenticator app or a code by email.",
+                 "Give each person their own account. Shared logins make it impossible to tell who did what, and they are hard to take back.",
+                 "Review who has access every few months, and take access away from people who have left. A short list is a safe list."],
+         sections=[
+             ("The short answer", """<p>Invite each person to FIG with the role that matches their job: Owner, Manager or Staff. They join by accepting your invite, so you never share a password. For anything involving money, namely payouts, taking takeout live and refunds, owners and managers confirm with a stronger sign-in step. Pick the authenticator app if you can, and keep a short list of people with access.</p>
+<p>You must be 18 or older to hold a restaurant account. Diners must be 14 or older.</p>"""),
+             ("The three roles", """<table><thead><tr><th>Role</th><th>Who it suits</th><th>Our suggestion</th></tr></thead><tbody>
+<tr><td>Owner</td><td>The person who runs the business and answers for it</td><td>Keep this to one or two people. Owners and managers are the ones asked for the extra sign-in on money steps</td></tr>
+<tr><td>Manager</td><td>A shift lead or general manager you trust with the day-to-day</td><td>Choose people you would trust with payouts and refunds, because those steps are theirs to confirm</td></tr>
+<tr><td>Staff</td><td>Counter staff, servers and cooks who scan codes on a shift</td><td>Everyone else who needs the app for their job</td></tr>
+</tbody></table>
+<p>The suggestions are ours, not rules. Check in the app for exactly what each role can do, and start with the smaller role: you can always move someone up later.</p>"""),
+             ("How people join", """<p>Nobody signs up themselves and appears on your team. The owner sends an invite, and the person joins by accepting it with their own account. That has two good effects. You decide who is on the team, and each person signs in as themselves, so you can tell who scanned what.</p>
+<ol><li>In the app, where you manage your team, send an invite with the role you chose.</li><li>Ask the person to accept it, and to set up their own sign-in security.</li><li>Check the page that they appear with the right role.</li><li>If anyone leaves, take away their access the same day.</li></ol>"""),
+             ("Sign-in security: the choices", """<p>For the steps that involve money, an owner or manager confirms with a sign-in step. Two common choices are:</p>
+<table><thead><tr><th>Method</th><th>How it works</th><th>Worth knowing</th></tr></thead><tbody>
+<tr><td>Authenticator app</td><td>An app on the phone shows a short code that changes</td><td>The code comes from the app on the phone itself. Our first choice</td></tr>
+<tr><td>Code by email</td><td>A code arrives in the person's inbox</td><td>Only as safe as that email account, so protect it too</td></tr>
+</tbody></table>
+<p>Whatever you choose, set it up on each owner's and manager's own phone, not a shared device behind the till. A code on a phone that stays with the person is the point.</p>"""),
+             ("Which steps ask for it", """<p>The extra step is for the actions that move money or open it up:</p>
+<ul><li><strong>Payouts.</strong> Finishing Stripe payouts, which a restaurant needs before it can take takeout.</li><li><strong>Taking takeout live.</strong> A restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts.</li><li><strong>Refunds.</strong> Returning money to a diner.</li></ul>
+<p>Keep the list of people who can do these things short. The fewer the phones that hold a code, the easier it is to know who made a change, and the easier it is to ask questions when the numbers on the Payments page look different from what you expected.</p>"""),
+             ("A worked example: a small restaurant", """<p>Here is how a small restaurant might set this up. The people and numbers are an example, not a real restaurant.</p>
+<div class="callout example"><b>Example: a restaurant with eight people</b><ul><li>1 owner who holds the business and the bank details.</li><li>1 manager who runs the evening shift and can handle a refund.</li><li>6 people on staff who scan codes at the till.</li><li>Money steps involve 2 people, the owner and the manager, both with an authenticator app.</li></ul><p>Of the 8 people, 2 (25%) can confirm the money steps and 6 (75%) cannot. If one of the 6 leaves, you take away one account and nothing else changes. With a single shared login for all 8 people, you would have to change it for everyone, and you could not say who did what.</p></div>"""),
+             ("What to do when someone leaves", """<p>The day someone leaves, take away their access. Do not wait for the end of the month. It closes the question of who can still act on your restaurant's page. If you cannot find how to do it, use the <a href="/contact">contact page</a> and say so. If that person was a manager, also think about what they could do with a code on their own phone, and ask for your own sign-in method to be set up again if you are unsure.</p>
+<p>It also helps to have a second owner or manager who can step in. If the only person with a code is away or has lost a phone, payouts and refunds wait, and a restaurant should not find that out on a busy Saturday.</p>
+<p>A habit that helps: put "take away their FIG access" on the same checklist you use to collect keys and uniforms. <a href="/blog/train-staff-honour-fig-deal">Train your staff to honour a deal</a> covers the day-to-day side.</p>"""),
+             ("Two locations", """<p>FIG supports up to 2 locations for now. If you run two, decide who is responsible at each: a manager per location is a reasonable starting point. The owner keeps the view of both. Everyone still gets their own account, and the roles are the same.</p>"""),
+             ("A security checklist for the owner", """<ol><li>Is everyone using their own account?</li><li>Do the owner and managers have an authenticator app, or a code by email, set up on their own phones?</li><li>Is the list of people short, and does it match who works for you today?</li><li>Do we know who to call if an owner loses a phone? Write that down now, and use the <a href="/contact">contact page</a> if you get stuck.</li><li>Do staff know which steps are theirs and which belong to owners and managers?</li></ol>
+<p>A last habit worth having: once a quarter, open the list, read each name aloud, and ask whether that person still works for you and still needs that role. If a part-time cook has never opened the app, they probably do not need to be on it. A list that matches your payroll is easy to defend, and easy to show an accountant or a new partner.</p>
+<p>Setting this up takes about ten minutes. Restaurants can do it before FIG opens to diners on January 1, 2027, and it is worth doing before the first busy night, not after. The <a href="/blog/set-up-fig-menu-takeout">menu and takeout setup guide</a> is the next step.</p>"""),
+         ],
+         faq=[("What roles are there on FIG?", "Owner, Manager and Staff."),
+              ("How do my staff get an account?", "They join by accepting an invite from the owner. Nobody can add themselves to your team."),
+              ("Which steps need a stronger sign-in?", "The money steps: payouts, taking takeout live and refunds. Owners and managers need it for those."),
+              ("What sign-in security can I use?", "An authenticator app or a code by email."),
+              ("Can I run two restaurants from one account?", "FIG supports up to 2 locations for now."),
+              ("How old do I have to be?", "Restaurant accounts are for people 18 or older. Diners must be 14 or older."),
+              ("Should my staff share one login?", "No. Give each person their own account, so you can tell who did what and take one person off without affecting the rest.")]),
+
+    dict(slug="deals-used-more-than-once-uses-per-diner-wait-between-uses", screen="qr", title="Deals diners can use more than once: uses per diner and the wait between uses", date="2026-10-30", publish_at="2026-10-30T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="A deal does not have to be a one-time offer. How uses per diner and the wait between uses work on FIG, how the code changes after every scan, and the arithmetic of a repeat deal for a quiet weekday.",
+         desc="How repeat deals work on FIG: up to 20 uses per diner, an optional wait between uses, a new code after each scan, and the math of a repeat deal.",
+         seo="Repeat restaurant deals: uses per diner and the wait between uses",
+         keywords="restaurant repeat customers, restaurant deal limits, how many times can a diner use a deal, uses per diner, restaurant weekday lunch deal, bring customers back, Markham restaurants",
+         points=["You set how many times one diner can use a deal, up to 20, and an optional wait between uses.",
+                 "A deal code works once. If the deal can be used more than once, the diner's screen shows a new code after each scan.",
+                 "A diner can claim a deal once a day, so a repeat deal naturally spreads visits over many days.",
+                 "Each use needs a fresh scan of the new code, so a repeat deal is a deal you let the same diner come back to.",
+                 "Work out the cost per use first. A repeat deal is good when it brings visits you would not have had."],
+         sections=[
+             ("The short answer", """<p>When you post a deal on FIG you choose how many times one diner can use it, from 1 up to 20, and you can add a wait between uses. After each scan the diner's screen shows a new code, because a code works once. Use one use for a trial offer, a few uses for a weekday habit, and a wait between uses so the same diner does not use it three times in an afternoon.</p>"""),
+             ("What you can set", """<table><thead><tr><th>Setting</th><th>What it does</th><th>Good to know</th></tr></thead><tbody>
+<tr><td>Uses per diner</td><td>How many times one diner can use the deal, up to 20</td><td>Start at 1 for something new</td></tr>
+<tr><td>Wait between uses</td><td>An optional pause before the same diner can use it again</td><td>Stops several uses in one visit or one afternoon</td></tr>
+<tr><td>Live now or scheduled</td><td>Starts the deal when you post it, or at a time you choose</td><td>Set a lunch deal ahead the evening before</td></tr>
+<tr><td>Deal type</td><td>2 for 1, percent off, dollar off, or free with a dish</td><td>Pick the type that suits your food cost. <a href="/blog/deal-types-percent-dollar-2-for-1">See the comparison</a></td></tr>
+</tbody></table>"""),
+             ("How the code behaves", """<p>A deal code works once. The diner shows the QR code on their phone, your staff scan it, and that code is spent. If the deal allows more than one use, the diner's screen then shows a new code for the next time. That is why a screenshot is no use: the old code has already worked.</p>
+<p>One more rule shapes how often the deal is used: a diner can claim a deal once a day. So even with 20 uses, one diner cannot burn through them in a single day. Your staff still do the same thing every time, which is scan whatever code is on the screen. <a href="/blog/train-staff-honour-fig-deal">A ten-minute staff guide</a> shows how.</p>"""),
+             ("When a single use is right", """<ul><li><strong>A new dish you want people to try.</strong> One use gets the first order. A second visit is up to the dish.</li><li><strong>A big discount.</strong> The deeper the cut, the fewer uses you want to give.</li><li><strong>A busy time.</strong> A deal that fills a weekday lunch is not a deal you want repeated on a Saturday night.</li></ul>"""),
+             ("When more uses make sense", """<ul><li><strong>A small, steady offer.</strong> A dollar off a lunch special for the week brings a regular a few times.</li><li><strong>A quiet weekday window.</strong> Repeat visits between 2 and 4 pm cost you the least, because the table and the cook were idle.</li><li><strong>A drink or a side.</strong> A small offer on an add-on can bring a full order with it.</li></ul>
+<p>Pair uses with a wait. A deal that allows 5 uses with a wait between them gives a diner a reason to come back across the week instead of five times on the same day. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> goes through how to judge a deal by new and returning diners.</p>"""),
+             ("The arithmetic of a repeat deal", """<p>Here is an example with round numbers, not a real restaurant. A weekday lunch bowl sells for $14.00, the ingredients cost about 30% of that, and the deal takes $2.00 off. This is a dine-in deal, so FIG takes nothing from the bill.</p>
+<div class="callout math"><b>One lunch bowl with $2 off (example)</b><table><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$14.00</td></tr>
+<tr><td>Deal</td><td>&minus; $2.00</td></tr>
+<tr><td>Diner pays (before HST)</td><td>$12.00</td></tr>
+<tr><td>Food cost, 30% of $14.00</td><td>&minus; $4.20</td></tr>
+<tr><td>Left toward wages, rent and profit</td><td>$7.80</td></tr>
+</tbody></table><p>A diner who uses the deal 5 times leaves you 5 &times; $7.80 = $39.00. Without the deal, if they would have come twice at full price, you would have had 2 &times; ($14.00 &minus; $4.20) = $19.60. So the deal is better when it brings at least 2 extra visits. If they would have come all 5 times anyway, the deal cost you 5 &times; $2.00 = $10.00.</p></div>
+<p>That last line is the risk to keep in mind. A repeat deal gives the discount to regulars as well as to newcomers. It pays off when the quiet window is truly quiet, and your results will tell you whether the same faces keep coming back or new ones do.</p>"""),
+             ("Choosing the wait between uses", """<p>The wait is optional, and it is the setting that shapes how the deal feels. With no wait, a diner can come back as soon as they have claimed the deal again, which is once a day at most. With a wait, you decide the rhythm: a lunch deal that makes sense once a week behaves differently from a coffee deal that suits most weekdays.</p>
+<table><thead><tr><th>If your goal is</th><th>Try</th></tr></thead><tbody>
+<tr><td>Bring newcomers in once</td><td>1 use per diner</td></tr>
+<tr><td>Make a weekday lunch a habit</td><td>A few uses, with a wait between them</td></tr>
+<tr><td>Fill a quiet window, nothing more</td><td>Several uses, a short wait and tight hours</td></tr>
+</tbody></table>
+<p>These are starting points, not rules. The setting is yours, and the right answer depends on how much the discount costs you per use.</p>"""),
+             ("Add-ons carry the margin", """<p>Most diners add a drink or a side. Keep the deal on the main dish and sell the add-ons at full price. If the same diner adds a $4.00 drink that costs you $1.00, that is another $3.00 per visit. Over 5 visits, $15.00 more, on top of the $39.00 above.</p>"""),
+             ("Reading the results", """<p>Your dashboard shows results deal by deal. After two weeks, compare the deal's scans with your quiet hours: did that window fill up, or did the same few diners use up their visits? Your own till tells you the rest. If tables in that window were busier than the week before, keep the deal and consider more uses. If your regulars used it and nobody new did, lower the uses or narrow the hours.</p>
+<p>Change one thing at a time, so you know which change made the difference. Write the setting down with the date, so that in a month you remember what you tried.</p>"""),
+             ("Before FIG opens", """<p>Diners can use FIG from January 1, 2027, and until then they can only join the waitlist at www.figpromo.ca. Restaurants set up first, so you can build your deals now, schedule them, and have your repeat deal waiting on day one. Pick the quietest weekday window you have and start with a small offer. Our <a href="/blog/fill-slow-hours-restaurant">seven ways to fill slow hours</a> has more ideas.</p>"""),
+         ],
+         faq=[("How many times can a diner use one deal?", "You choose, from 1 up to 20 uses per diner, with an optional wait between uses."),
+              ("Does the QR code change?", "A deal code works once. If the deal can be used more than once, the diner's screen shows a new code after each scan."),
+              ("Can a diner use a deal several times in a day?", "No. A diner can claim a deal once a day."),
+              ("Can I schedule a repeat deal?", "Yes. A deal can be live now or scheduled, with uses per diner and a wait between uses."),
+              ("Do restaurants see a diner's phone number?", "No. Restaurants never see diners' phone numbers."),
+              ("Do I need a different code for each use?", "No. Your staff just scan whatever code the diner shows. The diner's screen creates the new code."),
+              ("Does a dine-in repeat deal cost anything to FIG?", "No. FIG takes no commission on the bill and nothing on dine-in.")]),
+
+    dict(slug="restaurant-checklist-before-fig-opens-january-2027", screen="map", title="Restaurant checklist: get ready for FIG before it opens to diners on January 1, 2027", date="2026-10-31", publish_at="2026-10-31T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="FIG opens to diners on January 1, 2027, and restaurants set up first. A week-by-week checklist for the weeks in between: your page, menu, hours, team, first deals and takeout, with a count of the days left.",
+         desc="A week-by-week checklist for Markham restaurants to get ready for FIG before it opens to diners on January 1, 2027.",
+         seo="Restaurant checklist before FIG opens on January 1, 2027",
+         keywords="restaurant app setup checklist, new restaurant app launch Markham, get ready restaurant deals app, restaurant menu photos, set up restaurant deals, Markham restaurants, FIG launch",
+         points=["FIG opens to diners on January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first.",
+                 "Signing up, setting up your page, going live, posting deals, scanning and the dashboard cost nothing.",
+                 "Do the base first: page, hours, menu with photos and sections. Then the team, then the first deals.",
+                 "Takeout is optional. You can turn it on only after you add your HST number and finish Stripe payouts.",
+                 "From October 31, 2026 there are 62 days to January 1. About nine weeks is enough to do all of this without rushing."],
+         sections=[
+             ("The short answer", """<p>Use the weeks before January 1, 2027 to build your page, your menu and your first deals, so that on opening day diners find a complete restaurant. Signing up, setting up your page, going live, posting deals, scanning and the dashboard cost nothing. The order that works best is the page and hours, then the menu, then your team, then the first deals, and takeout last, if you want it at all.</p>"""),
+             ("What opens when", """<table><thead><tr><th>Who</th><th>Today</th><th>From January 1, 2027</th></tr></thead><tbody>
+<tr><td>Restaurants</td><td>Set up your page, menu, hours and deals</td><td>Diners find your live deals on the map and claim them</td></tr>
+<tr><td>Diners</td><td>Join the waitlist at www.figpromo.ca</td><td>Browse places, menus, reviews and live deals, and claim a deal in one tap</td></tr>
+</tbody></table>
+<p>FIG starts in Markham, then expands to Richmond Hill and Vaughan Mills. You need to be 18 or older to hold a restaurant account.</p>"""),
+             ("How much time you have", """<div class="callout math"><b>Counting the days</b><ul><li>From October 31, 2026: November has 30 days and December has 31.</li><li>30 + 31 + 1 (January 1 itself) = 62 days, which is 8 weeks and 6 days.</li></ul><p>If you give the checklist two hours a week for nine weeks, that is about 18 hours in all. Most small restaurants need less.</p></div>"""),
+             ("Weeks 1 and 2: the base", """<ol><li><strong>Create your account.</strong> It costs nothing.</li><li><strong>Fill in your page.</strong> Name, cuisine, address, a short description and a few good photos.</li><li><strong>Set your opening hours.</strong> Include holidays and any day you are closed, because diners decide where to go around them.</li><li><strong>Check your details twice.</strong> A wrong phone number or hour costs you more than a missing photo.</li></ol>
+<p>Photos matter more than most owners expect. Use daylight, shoot the dish from slightly above, and avoid stock images: diners can tell.</p>"""),
+             ("Weeks 3 and 4: the menu", """<p>A menu with photos and sections is the part diners read first. Group dishes the way you would on a printed menu, and add a photo for your most popular dishes before the rest. Write names the way a diner would say them, and put anything dietary in the description. <a href="/blog/set-up-fig-menu-takeout">Set up your FIG menu and takeout in 15 minutes</a> takes you through the screens.</p>
+<p>Prices should match your dining room. A price that is wrong on your page costs you either a sale or an argument at the till, so check each one once.</p>"""),
+             ("Weeks 5 and 6: your team", """<p>Invite the people who will work with FIG every day. They join by accepting an invite from the owner, as Owner, Manager or Staff. Give owners and managers a sign-in step for money, such as an authenticator app or a code by email. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">The roles guide</a> has a checklist, and <a href="/blog/train-staff-honour-fig-deal">the ten-minute staff session</a> gets everyone ready for the till.</p>"""),
+             ("Weeks 7 and 8: your first deals", """<p>Pick one or two quiet windows. Look at your week and find the hours where tables sit empty, usually weekday afternoons or early evenings. Then write a deal for each.</p>
+<ul><li>Choose a type: 2 for 1, percent off, dollar off, or free with a dish. <a href="/blog/deal-types-percent-dollar-2-for-1">Which one fits</a>.</li><li>Choose live now or scheduled. For January 1, schedule it.</li><li>Set uses per diner and, if you like, a wait between uses.</li><li>Do the sum on the price before you post. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> shows how.</li></ul>
+<div class="callout math"><b>A 60-second check (example)</b><p>A $15.00 dish, with a 30% food cost of $4.50, and a $3.00-off deal: the diner pays $12.00 and you keep $12.00 &minus; $4.50 = $7.50. That is $7.50 toward wages, rent and profit from a table that was empty. These are round example numbers.</p></div>"""),
+             ("Week 9: takeout, if you want it", """<p>Takeout is optional. Diners pay online in the app at checkout, and the kitchen starts when you accept. A restaurant can turn it on only after it has added its HST number and finished Stripe payouts, and those money steps ask owners and managers for a stronger sign-in. FIG keeps 5% of the food after any deal and before tax on takeout orders, plus Stripe's card fee of 2.9% + $0.30 for most Canadian cards, which comes off the payment. Dine-in has no such fee. Read <a href="/blog/takeout-order-math-what-you-keep">the order math</a> before you decide, and <a href="/blog/hst-registration-small-restaurants-ontario">the HST guide</a> if you are not registered. That guide is general information, not tax advice.</p>
+<p>If you do turn takeout on, learn the pause button and prep time first. <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">The rush guide</a> covers both.</p>"""),
+             ("Writing your page so diners understand it", """<p>Diners will see your page on a map next to other restaurants, so the first lines matter. Say what you serve and what the place is like in plain words, such as "a small Hakka kitchen, open late" or "a family bakery with a few tables". Name your best dish. If you serve halal, vegetarian, vegan or gluten-free food, say so clearly, because many diners filter for it and a vague description can lose them.</p>
+<p>Keep it honest. If your kitchen cannot guarantee an allergen-free dish, say that, and invite people to call. <a href="/blog/eating-out-dietary-needs-allergies-markham">What diners with dietary needs ask restaurants</a> shows the questions you will hear.</p>
+<ul><li>Use the same name that is on your sign.</li><li>Put your phone number where it can be found.</li><li>Choose the photo diners see first with care: a dish, not a storefront in the dark.</li></ul>"""),
+             ("The day before opening", """<ol><li>Open your page as a diner would and read it line by line.</li><li>Check that your hours, menu and photos are right.</li><li>Check that the scheduled deals start when you intend.</li><li>Run one test scan with your team so everyone has seen the screen.</li><li>Tell your regulars. A sign at the till and a word at the door cost nothing.</li></ol>"""),
+             ("Two things not to do", """<ul><li><strong>Do not tell diners to use the app yet.</strong> They cannot until January 1, 2027. Point them to the waitlist at www.figpromo.ca.</li><li><strong>Do not wait for a perfect page.</strong> Go live with a clear page and a good first deal, then improve it using your results, which show how each deal does.</li></ul>
+<p>Questions? The <a href="/contact">contact page</a> reaches us. FIG is run by Brendan Lau in Markham, Ontario.</p>"""),
+         ],
+         faq=[("When does FIG open to diners?", "January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first."),
+              ("What does it cost to set up my restaurant?", "Signing up, setting up the page, going live, posting deals, scanning and the dashboard cost nothing. FIG earns only on takeout orders paid in the app."),
+              ("Do I have to offer takeout?", "No. You can turn it on only after you add your HST number and finish Stripe payouts, and you can leave it off."),
+              ("How many locations can I add?", "Up to 2 for now."),
+              ("Where does FIG start?", "In Markham, then Richmond Hill and Vaughan Mills."),
+              ("How old do I have to be?", "Restaurant accounts are for people 18 or older."),
+              ("Can I post a deal before FIG opens?", "Yes. Deals can be live now or scheduled, so you can have them ready for January 1, 2027.")]),
+
 ]

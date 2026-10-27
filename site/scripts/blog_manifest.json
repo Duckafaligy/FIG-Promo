@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-27",
+ "generated": "2026-10-31",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "restaurant-checklist-before-fig-opens-january-2027",
+   "title": "Restaurant checklist: get ready for FIG before it opens to diners on January 1, 2027",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-10-31",
+   "publish_at": "2026-10-31T12:00:00-04:00",
+   "status": "queued",
+   "words": 963,
+   "dek": "FIG opens to diners on January 1, 2027, and restaurants set up first. A week-by-week checklist for the weeks in between: your page, menu, hours, team, first deals and takeout, with a count of the days left."
+  },
+  {
+   "slug": "deals-used-more-than-once-uses-per-diner-wait-between-uses",
+   "title": "Deals diners can use more than once: uses per diner and the wait between uses",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-10-30",
+   "publish_at": "2026-10-30T12:00:00-04:00",
+   "status": "queued",
+   "words": 1006,
+   "dek": "A deal does not have to be a one-time offer. How uses per diner and the wait between uses work on FIG, how the code changes after every scan, and the arithmetic of a repeat deal for a quiet weekday."
+  },
+  {
+   "slug": "fig-staff-roles-sign-in-security-owners-managers",
+   "title": "Owner, Manager or Staff: setting up your team and sign-in security on FIG",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-10-29",
+   "publish_at": "2026-10-29T12:00:00-04:00",
+   "status": "queued",
+   "words": 1029,
+   "dek": "Who should hold which role on FIG, how people join by invite, which steps need a stronger sign-in, and how to set it up so a busy shift runs smoothly and the money steps stay with the right people."
+  },
+  {
+   "slug": "fig-payments-page-csv-bookkeeping-takeout",
+   "title": "Reading your FIG Payments page: takeout, fees and your bookkeeping",
+   "topic": "For restaurants",
+   "group": "takeout-and-money",
+   "date": "2026-10-28",
+   "publish_at": "2026-10-28T12:00:00-04:00",
+   "status": "queued",
+   "words": 1066,
+   "dek": "Every takeout payment, refund and fee is listed on one page and downloads as a CSV file. How to read it, what each line means, a worked month-end example with the sums checked, and how to hand it to your bookkeeper."
+  },
   {
    "slug": "reply-to-reviews-restaurants",
    "title": "Replying to reviews: a short guide for restaurant owners",

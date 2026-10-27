@@ -167,16 +167,22 @@ SCREENS = {"home": owner_home, "deals": owner_deals, "scan": owner_scan, "orders
 QR_N, QR_D = 25, "M0 0h7v1h-7zM8 0h3v1h-3zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h3v1h-3zM12 1h1v1h-1zM15 1h1v1h-1zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h5v1h-5zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h5v1h-5zM14 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h3v1h-3zM12 5h3v1h-3zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM13 7h2v1h-2zM16 7h1v1h-1zM3 8h1v1h-1zM6 8h1v1h-1zM9 8h3v1h-3zM14 8h1v1h-1zM16 8h1v1h-1zM19 8h3v1h-3zM23 8h2v1h-2zM2 9h3v1h-3zM7 9h1v1h-1zM16 9h2v1h-2zM19 9h3v1h-3zM24 9h1v1h-1zM2 10h1v1h-1zM4 10h4v1h-4zM18 10h2v1h-2zM22 10h2v1h-2zM0 11h1v1h-1zM2 11h1v1h-1zM4 11h2v1h-2zM7 11h1v1h-1zM20 11h1v1h-1zM22 11h2v1h-2zM2 12h1v1h-1zM6 12h1v1h-1zM18 12h1v1h-1zM23 12h2v1h-2zM1 13h3v1h-3zM7 13h1v1h-1zM16 13h2v1h-2zM19 13h1v1h-1zM21 13h2v1h-2zM0 14h1v1h-1zM2 14h1v1h-1zM5 14h2v1h-2zM24 14h1v1h-1zM1 15h1v1h-1zM7 15h2v1h-2zM17 15h2v1h-2zM20 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM0 16h2v1h-2zM6 16h1v1h-1zM9 16h3v1h-3zM13 16h2v1h-2zM16 16h5v1h-5zM22 16h1v1h-1zM8 17h3v1h-3zM12 17h2v1h-2zM15 17h2v1h-2zM20 17h1v1h-1zM24 17h1v1h-1zM0 18h7v1h-7zM10 18h1v1h-1zM12 18h2v1h-2zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM22 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM10 19h2v1h-2zM13 19h2v1h-2zM16 19h1v1h-1zM20 19h2v1h-2zM23 19h2v1h-2zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM10 20h3v1h-3zM15 20h6v1h-6zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM8 21h1v1h-1zM10 21h2v1h-2zM13 21h1v1h-1zM15 21h2v1h-2zM18 21h1v1h-1zM20 21h1v1h-1zM23 21h1v1h-1zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM10 22h1v1h-1zM13 22h1v1h-1zM15 22h2v1h-2zM18 22h2v1h-2zM21 22h2v1h-2zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h2v1h-2zM19 23h1v1h-1zM21 23h1v1h-1zM24 23h1v1h-1zM0 24h7v1h-7zM11 24h1v1h-1zM14 24h1v1h-1zM16 24h4v1h-4zM21 24h1v1h-1zM24 24h1v1h-1z"
 
 
+# the FIG mark in white with its green leaf (the sprite's #logo paths), drawn inside the QR so it needs no <use>
+LOGO_WHITE = ('<path fill="#fff" d="M765.637 809.875C755.252 806.459 749.184 797.508 749.184 785.965V751.1C749.184 735.317 761.319 722.714 776.955 722.714H836.699L831.098 730.252C827.014 735.906 822.346 738.968 814.762 738.968H777.189C770.888 738.968 765.754 744.15 765.754 750.629V755.341L767.621 753.574C770.304 751.218 772.989 750.158 776.722 750.158H800.06L790.725 762.526C788.275 765.941 785.24 767.354 780.923 767.354H772.405C768.671 767.354 765.637 770.299 765.637 774.304V809.875Z"/>'
+              '<path fill="#fff" d="M793.759 769.592H836.699V784.08C836.699 799.746 824.563 811.171 809.044 811.171H770.888V795.387H809.161C815.462 795.387 820.013 790.794 820.013 784.433V783.256H781.623L793.759 769.592Z"/>'
+              '<path fill="#14C86B" d="M797.142 765.705L805.194 755.104C807.877 751.689 811.145 750.158 815.696 750.158H836.699V754.28C836.699 761.347 832.265 765.705 825.264 765.705H797.142Z"/>')
+
+
 def _qr():
     c, ring, t = QR_N / 2, 7.2, 6.0
     return (f'<svg class="gs-qr" viewBox="0 0 {QR_N} {QR_N}" shape-rendering="crispEdges"><path d="{QR_D}" fill="#0E1116"/>'
             f'<rect x="{c - ring / 2}" y="{c - ring / 2}" width="{ring}" height="{ring}" rx="1.6" fill="#fff" shape-rendering="auto"/>'
             f'<rect x="{c - t / 2}" y="{c - t / 2}" width="{t}" height="{t}" rx="1.5" fill="{COBALT}" shape-rendering="auto"/>'
-            f'<svg x="{c - 2.2}" y="{c - 2.2}" width="4.4" height="4.4" viewBox="743 716 100 100" class="gs-lg"><use href="#logo"/></svg></svg>')
+            f'<g transform="translate({c - 2.2} {c - 2.2}) scale(.044) translate(-743 -716)" shape-rendering="auto">{LOGO_WHITE}</g></svg>')
 
 
 def _pin(x, y, i):
-    return f'<i class="gs-pin p{i}" style="left:{x}%;top:{y}%"><svg viewBox="743 716 100 100"><use href="#logo"/></svg></i>'
+    return f'<i class="gs-pin p{i}" style="left:{x}%;top:{y}%"><svg viewBox="743 716 100 100">{LOGO_WHITE}</svg></i>'
 
 
 GTK_SCENES = {

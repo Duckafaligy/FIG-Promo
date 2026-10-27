@@ -328,7 +328,7 @@ button, input { font: inherit; color: inherit; }
 .tablet img.on { opacity: 1; transform: none; }
 .cell.tall { border: 1px solid var(--line); border-radius: 14px; background: var(--card); min-height: 520px; }
 .perks { display: grid; gap: 24px; margin: 56px 0; }
-.perks li { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid var(--line-2); }
+.perks li { display: grid; align-content: start; gap: 6px; padding-top: 18px; border-top: 1px solid var(--line-2); }
 .perks b { font-size: 18px; }
 .perks span { color: var(--muted); font-size: 15px; }
 .get-app { display: grid; gap: 24px; align-items: center; padding: 30px; border-radius: 16px; background: linear-gradient(140deg, #1A2132, #141925); border: 1px solid var(--line); }
@@ -353,7 +353,7 @@ button, input { font: inherit; color: inherit; }
 
 /* ---------- closing & footer ---------- */
 .closing-wrap { padding-top: 0; }
-.closing { position: relative; display: grid; gap: 36px; padding: 56px 28px; border-radius: 40px; background: linear-gradient(140deg, #1E5EFF, #1546C9); overflow: hidden; }
+.closing { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding: 56px 28px; border-radius: 40px; background: linear-gradient(140deg, #1E5EFF, #1546C9); overflow: hidden; }
 .closing::after { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(200, 241, 53, .28), transparent 65%); pointer-events: none; }
 .closing p { margin-top: 18px; color: #fff; font-size: 18px; }
 .closing .join { margin-top: 0; position: relative; z-index: 1; }
@@ -1246,7 +1246,7 @@ details.qa > p { margin: -2px 0 0; }
 .closing .join .btn { flex-shrink: 0; }
 .closing .wl-count:empty { display: none; }
 .closing .wl-count { margin-top: 10px; padding-left: 8px; font-size: 15px; font-weight: 700; }
-@media (max-width: 420px) { .closing .join .field-pill { flex-wrap: wrap; padding: 8px; border-radius: 28px; } .closing .join .field-pill input { padding-left: 12px; flex-basis: 100%; } .closing .join .btn { flex: 1; } }
+@media (max-width: 420px) { .closing .join .field-pill { flex-wrap: wrap; padding: 8px; border-radius: 28px; } .closing .join .field-pill input { padding-left: 12px; flex-basis: 100%; } .closing .join .btn { flex: 1; } .closing-btns .btn { flex: 1 1 100%; padding: 0 16px; font-size: 16px; white-space: normal; text-align: center; } }
 .closing .form-msg.ok { color: #fff; }
 .closing .form-msg.err { color: #FFD6D8; }
 @media (max-width: 520px) { .signup-btns .btn { flex: 1 1 100%; } }
@@ -1309,7 +1309,6 @@ details.qa > p { margin: -2px 0 0; }
 .gs-b2 { background: #14C86B; color: #062B16; }
 .gs-ticket { display: flex; flex-direction: column; align-items: center; gap: .6cqw; width: 40cqw; padding: 3.4cqw 3cqw 3cqw; text-align: center; }
 .gs-qr { display: block; width: 28cqw; height: 28cqw; margin-bottom: 1.6cqw; }
-.gs-lg { --lg: #fff; }
 .gs-ticket b { font-size: 3.5cqw; }
 .gs-ticket small { letter-spacing: .06em; font-variant-numeric: tabular-nums; }
 /* 2. Fill your quiet hours: 2 to 5 pm is set, the deal is switched on, it goes Live */
@@ -1351,7 +1350,7 @@ details.qa > p { margin: -2px 0 0; }
 .gs-place { display: flex; flex-direction: column; align-items: center; gap: 1cqw; color: #2A3346; font-size: 3.3cqw; font-weight: 700; transform: translate(-50%, -2cqw); }
 .gs-place i { width: 4cqw; height: 4cqw; border: .8cqw solid #7FA4FF; border-radius: 50%; background: #fff; }
 .gs-mk { left: 78%; top: 4%; font-size: 5.2cqw; letter-spacing: -.02em; transform: translateX(-50%); }
-.gs-pin { position: absolute; width: 7cqw; height: 7cqw; margin: -8.45cqw 0 0 -3.5cqw; --lg: #fff; transform-origin: 50% 121%; }
+.gs-pin { position: absolute; width: 7cqw; height: 7cqw; margin: -8.45cqw 0 0 -3.5cqw; transform-origin: 50% 121%; }
 .gs-pin::before { content: ""; position: absolute; inset: 0; border: .6cqw solid #fff; border-radius: 50% 50% 50% 0; background: #1E5EFF; box-shadow: -.5cqw .5cqw 1.6cqw rgba(10, 16, 32, .22); transform: rotate(-45deg); }
 .gs-pin svg { position: relative; display: block; width: 4.2cqw; height: 4.2cqw; margin: 1.4cqw; }
 .gs-cap { position: absolute; left: 5cqw; right: 5cqw; bottom: 4.4cqw; padding: 2.4cqw 3.4cqw; border: 1px solid #DCE4F7; border-radius: 3cqw; background: #fff; box-shadow: 0 1.6cqw 4cqw rgba(10, 16, 32, .10); color: #2A3346; line-height: 1.3; }
@@ -1366,9 +1365,8 @@ details.qa > p { margin: -2px 0 0; }
 .motion:not(.paused) .gs-sw i { animation: gsKnob 7s var(--gs) infinite both; }
 .motion:not(.paused) .gs-sw::before { animation: gsFill 7s var(--gs) infinite both; }
 .motion:not(.paused) .gs-live { animation: gsLive 7s var(--gs) infinite both; }
-.motion:not(.paused) .gs-r { animation: gsRow 8s var(--gs) infinite both; }
-.motion:not(.paused) .gs-r.r2 { animation-name: gsRow2; } .motion:not(.paused) .gs-r.r3 { animation-name: gsRow3; } .motion:not(.paused) .gs-r.r4 { animation-name: gsRow4; }
-.motion:not(.paused) .gs-r.gs-keep { animation-name: gsKeep; } .motion:not(.paused) .gs-note { animation: gsNote 8s var(--gs) infinite both; }
+.motion:not(.paused) .gs-r.r3 { animation: gsRow3 8s var(--gs) infinite both; } .motion:not(.paused) .gs-r.r4 { animation: gsRow4 8s var(--gs) infinite both; }
+.motion:not(.paused) .gs-r.gs-keep { animation: gsKeep 8s var(--gs) infinite both; } .motion:not(.paused) .gs-note { animation: gsNote 8s var(--gs) infinite both; }
 .motion:not(.paused) .gs-pin { animation: gsPin 8s var(--gs) infinite both; }
 .motion:not(.paused) .gs-pin.p2 { animation-delay: .24s; } .motion:not(.paused) .gs-pin.p3 { animation-delay: .48s; }
 .motion:not(.paused) .gs-pin.p4 { animation-delay: .72s; } .motion:not(.paused) .gs-pin.p5 { animation-delay: .96s; }
@@ -1382,14 +1380,12 @@ details.qa > p { margin: -2px 0 0; }
 @keyframes gsKnob { 0%, 30% { transform: none; } 37%, 86% { transform: translateX(4.4cqw); } 93%, 100% { transform: none; } }
 @keyframes gsFill { 0%, 30% { opacity: 0; } 37%, 86% { opacity: 1; } 93%, 100% { opacity: 0; } }
 @keyframes gsLive { 0%, 38% { opacity: 0; transform: scale(.8); } 43% { opacity: 1; transform: scale(1.08); } 47%, 86% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow { 0%, 4% { opacity: 0; transform: translateY(1.6cqw); } 10%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow2 { 0%, 10% { opacity: 0; transform: translateY(1.6cqw); } 16%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow3 { 0%, 18% { opacity: 0; transform: translateY(1.6cqw); } 24%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow4 { 0%, 24% { opacity: 0; transform: translateY(1.6cqw); } 30%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsKeep { 0%, 34% { opacity: 0; transform: translateY(2cqw); } 40% { opacity: 1; transform: translateY(-.4cqw); } 44%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsNote { 0%, 44% { opacity: 0; transform: translateY(1.2cqw); } 50%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsPin { 0%, 6% { opacity: 0; transform: scale(0); } 12% { opacity: 1; transform: scale(1.1); } 15%, 84% { opacity: 1; transform: none; } 90%, 100% { opacity: 0; transform: scale(0); } }
-@keyframes gsNext { 0%, 34% { opacity: 0; transform: translate(-50%, -.6cqw); } 42%, 86% { opacity: 1; transform: translate(-50%, -2cqw); } 92%, 100% { opacity: 0; transform: translate(-50%, -2cqw); } }
+@keyframes gsRow3 { 0%, 8% { opacity: 0; transform: translateY(1.6cqw); } 14%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsRow4 { 0%, 16% { opacity: 0; transform: translateY(1.6cqw); } 22%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsKeep { 0%, 28% { opacity: 0; transform: translateY(2cqw); } 34% { opacity: 1; transform: translateY(-.4cqw); } 38%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsNote { 0%, 38% { opacity: 0; transform: translateY(1.2cqw); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsPin { 0%, 2% { opacity: 0; transform: scale(0); } 8% { opacity: 1; transform: scale(1.1); } 11%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: scale(0); } }
+@keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -.6cqw); } 34%, 88% { opacity: 1; transform: translate(-50%, -2cqw); } 92%, 100% { opacity: 0; transform: translate(-50%, -2cqw); } }
 
 /* ---------- Pause animations (FIX-LIST #149, WCAG 2.2.2): one button on Home stops every loop on the page for the visit:
    the videos go back to their first frame, the endless CSS loops stop (the hero phone shows its first screen) ---------- */

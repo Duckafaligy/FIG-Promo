@@ -167,9 +167,9 @@
     } else v.pause();
   }), { threshold: 0.1 });
   if (!still) $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
-  // "Good to know" scenes (CSS loops, site.css "gs-"): each runs only while it's on screen (.idle pauses it off screen)
+  // "Good to know" and feature scenes (CSS loops, site.css "gs-" and "fs-"): each runs only while it's on screen (.idle pauses it off screen)
   const gio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)));
-  $$(".gtk-vis").forEach((v) => gio.observe(v));
+  $$(".gtk-vis, .fs").forEach((v) => gio.observe(v));
   // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
   const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
   $$("video[data-poster]").forEach((v) => pio.observe(v));

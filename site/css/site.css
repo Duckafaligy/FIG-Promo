@@ -1405,8 +1405,10 @@ details.qa > p { margin: -2px 0 0; }
 @media (max-width: 1024px), (pointer: coarse) { .foot-btn { display: flex; align-items: center; min-height: 44px; margin-bottom: 0; } }
 
 /* ---------- native mock screens (no screenshots, no photos): sizes are cqw, a share of the screen's own width, so nothing stretches ---------- */
-.phone.mk-phone { padding: 2.4%; border-radius: 13% / 6%; width: 100%; }
-.mk-phone .mk-scr { container-type: inline-size; position: relative; aspect-ratio: 390 / 844; overflow: hidden; background: #fff; border-radius: 11% / 5.1%; }
+/* the frame hugs its 390:844 screen: the bezel is a share of the PHONE's own width (cqw of the phone), never of its parent, and
+   the height comes from the screen alone (a phone stretched by a flex parent drew a long empty bar under the screen, 2026-10-28) */
+.phone.mk-phone { padding: 0; border-radius: 13% / 6%; width: 100%; height: auto; container-type: inline-size; }
+.mk-phone .mk-scr { container-type: inline-size; position: relative; aspect-ratio: 390 / 844; margin: 6px; margin: 2.4cqw; overflow: hidden; background: #fff; border-radius: 11% / 5.1%; }
 .mk, .mk-t { --u: 1cqw; }
 .mk-t { --u: .39cqw; }
 .mk { position: absolute; inset: 0; display: flex; flex-direction: column; gap: calc(2.6 * var(--u)); padding: 0 calc(5 * var(--u)); font-size: calc(3.6 * var(--u)); line-height: 1.25; color: #0E1116; text-align: left; letter-spacing: 0; font-weight: 500; user-select: text; }
@@ -1513,7 +1515,6 @@ details.qa > p { margin: -2px 0 0; }
 .motion .hp-cycle > .mk-phone:nth-child(2) { animation-delay: 3.5s; }
 .motion .hp-cycle > .mk-phone:nth-child(3) { animation-delay: 7s; }
 .motion .hp-cycle > .mk-phone:nth-child(4) { animation-delay: 10.5s; }
-.hero-phone .phone.mk-phone { padding: 2.4%; border-radius: 13% / 6%; }
 .step .phone.mk-phone { max-width: 300px; }
 /* ---------- Help: two columns on a desktop, the mock sticky on the left; jump links on a phone ---------- */
 .help-wrap { padding-top: 24px; }
@@ -1536,7 +1537,98 @@ details.qa > p { margin: -2px 0 0; }
 }
 .pg-pills a { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .faq details[open] > :not(summary), .qa[open] > :not(summary) { animation: none !important; } .hp-cycle > .mk-phone { animation: none !important; } .hp-cycle > .mk-phone:first-child { opacity: 1; } }
-.panel .mk-in-panel { flex: 0 0 auto; width: 200px; max-width: 72%; margin-top: 0; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
+.hint-tap { display: none; }
+@media (hover: none), (pointer: coarse) { .hint-hover { display: none; } .hint-tap { display: inline; } }
+
+/* ---------- Home features: each mock phone is a product shot in its panel (.shot), top-aligned and cropped by the panel's bottom
+   edge. It sits out of the flow (absolute, centred), so it never sets or stretches the box's height: the panel's min-height does. ---------- */
+.panel .mk-in-panel { position: absolute; left: 0; right: 0; margin: 0 auto; width: 200px; max-width: 72%; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
+.panel.shot { min-height: 290px; }
+@media (min-width: 900px) { .cell.wide .panel .mk-in-panel { width: 240px; } }
+@media (max-width: 719px) { .panel.shot { min-height: 270px; } }
+
+/* the four feature scenes (index.html "fs-"), built like the Good to know scenes: the resting styles ARE the finished picture
+   (reduced motion shows it), the loops run only with html.motion, and main.js pauses a scene while it's off screen (.idle).
+   Transform and opacity only, and every move is a % of the element itself (no container units inside @keyframes). */
+.fs { --fs: cubic-bezier(.2, .8, .2, 1); }
+.fs.idle *, .fs.idle *::before { animation-play-state: paused !important; }
+/* 1. Your city, filtered: "Under $15" switches on, the two pins over budget drop out, the rest hop */
+.mk-chips { position: relative; z-index: 2; display: flex; gap: calc(1.6 * var(--u)); }
+.mk-chip { display: grid; padding: calc(1.6 * var(--u)) calc(3 * var(--u)); border-radius: 99px; background: #fff; color: #0E1116; font-size: calc(3 * var(--u)); font-weight: 700; white-space: nowrap; box-shadow: 0 calc(.6 * var(--u)) calc(2 * var(--u)) rgba(10, 16, 32, .12); }
+.mk-chip.on, .mk-chip .on { background: #1E5EFF; color: #fff; }
+.mk-chip.fc { padding: 0; }
+.mk-chip.fc > span { grid-area: 1 / 1; padding: calc(1.6 * var(--u)) calc(3 * var(--u)); border-radius: 99px; }
+.fs-city .mk-pin.x { opacity: 0; }
+/* 2. Flash deals: the timer ticks down, Claim is pressed */
+.roll { display: inline-block; height: 1.25em; overflow: hidden; vertical-align: top; }
+.roll > span { display: block; text-align: right; }
+.fd-btn, .to-acc { position: relative; overflow: hidden; }
+.fd-ok, .to-ok { position: absolute; inset: 0; display: grid; place-items: center; border-radius: inherit; background: #14C86B; color: #062B16; opacity: 0; }
+/* 3. Group chat, solved: the phone's own group chat (not FIG's), a FIG link to a restaurant's page slides in */
+.mk-gc { gap: 0; padding: 0; background: #fff; }
+.mk-gc .mk-status { padding-left: calc(7 * var(--u)); padding-right: calc(7 * var(--u)); }
+.gc-head { display: flex; align-items: center; gap: calc(2.4 * var(--u)); margin-top: calc(2 * var(--u)); padding: 0 calc(5 * var(--u)) calc(2.6 * var(--u)); border-bottom: 1px solid #E3E6EA; }
+.gc-head b { display: block; font-size: calc(3.8 * var(--u)); }
+.gc-av { display: grid; place-items: center; flex: 0 0 calc(9 * var(--u)); height: calc(9 * var(--u)); border-radius: 50%; background: #E3ECFF; color: #1E5EFF; font-size: calc(3 * var(--u)); font-weight: 800; }
+.gc-body { display: flex; flex-direction: column; align-items: flex-start; gap: calc(1.6 * var(--u)); padding: calc(3.4 * var(--u)) calc(4 * var(--u)); }
+.gc-b { max-width: 76%; padding: calc(2 * var(--u)) calc(3.2 * var(--u)); border-radius: calc(4.4 * var(--u)); background: #EEF1F5; font-size: calc(3.4 * var(--u)); line-height: 1.3; }
+.gc-b small { font-size: calc(2.6 * var(--u)); font-weight: 700; color: #5C6470; }
+.gc-b.out { align-self: flex-end; background: #1E5EFF; color: #fff; transform-origin: 100% 100%; }
+.gc-b.in { border-bottom-left-radius: calc(1.4 * var(--u)); transform-origin: 0 100%; }
+.gc-link { display: flex; flex-direction: column; gap: calc(1.6 * var(--u)); width: 66%; padding: calc(1.2 * var(--u)) calc(1.2 * var(--u)) calc(2 * var(--u)); border-bottom-right-radius: calc(1.4 * var(--u)); }
+.gc-card { display: block; overflow: hidden; border-radius: calc(3.4 * var(--u)); background: #fff; color: #0E1116; }
+.gc-img { position: relative; display: grid; place-items: center; height: calc(20 * var(--u)); background: linear-gradient(135deg, #1E5EFF, #14C86B); }
+.gc-img .mk-lt { background: #fff; color: #1E5EFF; }
+.gc-img .mk-tag { position: absolute; top: calc(1.6 * var(--u)); left: calc(1.6 * var(--u)); background: #fff; color: #1E5EFF; font-size: calc(2.4 * var(--u)); }
+.gc-meta { display: block; padding: calc(1.8 * var(--u)) calc(2.4 * var(--u)); background: #F2F4F7; }
+.gc-meta b { display: block; font-size: calc(3 * var(--u)); }
+.gc-meta small { font-size: calc(2.5 * var(--u)); }
+.gc-txt { padding: 0 calc(2 * var(--u)); }
+.gc-compose { position: absolute; left: calc(4 * var(--u)); right: calc(4 * var(--u)); bottom: calc(5 * var(--u)); display: flex; align-items: center; gap: calc(2 * var(--u)); }
+.gc-compose span { flex: 1; padding: calc(2.4 * var(--u)) calc(4 * var(--u)); border: 1px solid #DDE1E7; border-radius: 99px; color: #8A919C; }
+.gc-compose i { flex: 0 0 calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: #1E5EFF; }
+/* 4. Takeout: a new order lands, "Accept for 7:30 pm" is pressed (same parts as above: .to-ok) */
+/* the loops (8 s each) */
+.motion .fs-city .fc { animation: fsChipPress 8s var(--fs) infinite both; }
+.motion .fs-city .fc .on { animation: fsChipOn 8s var(--fs) infinite both; }
+.motion .fs-city .mk-pin.x { animation: fsPinOut 8s var(--fs) infinite both; }
+.motion .fs-city .mk-pin.k { animation: fsPinHop 8s var(--fs) infinite both; }
+.motion .fs-city .k2 { animation-delay: .07s; } .motion .fs-city .k3 { animation-delay: .14s; } .motion .fs-city .k4 { animation-delay: .21s; }
+.motion .fs-flash .roll > span { animation: fsRoll 8s var(--fs) infinite both; }
+.motion .fs-flash .fd-btn { animation: fsPressLate 8s var(--fs) infinite both; }
+.motion .fs-flash .fd-ok { animation: fsOkLate 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-link { animation: fsLinkIn 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-card { animation: fsCardIn 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-r1 { animation: fsPop 8s var(--fs) infinite both; }
+.motion .fs-take .to-card { animation: fsOrder 8s var(--fs) infinite both; }
+.motion .fs-take .to-acc { animation: fsPressMid 8s var(--fs) infinite both; }
+.motion .fs-take .to-ok { animation: fsOkMid 8s var(--fs) infinite both; }
+@keyframes fsChipPress { 0%, 12% { transform: none; } 15% { transform: scale(.9); } 20%, 100% { transform: none; } }
+@keyframes fsChipOn { 0%, 14% { opacity: 0; } 18%, 86% { opacity: 1; } 91%, 100% { opacity: 0; } }
+@keyframes fsPinOut { 0%, 19% { opacity: 1; transform: translate(-50%, -50%); } 26%, 88% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  89% { opacity: 0; transform: translate(-50%, -170%); } 95% { opacity: 1; transform: translate(-50%, -42%); } 98%, 100% { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes fsPinHop { 0%, 24% { transform: translate(-50%, -50%); } 29% { transform: translate(-50%, -82%); } 33% { transform: translate(-50%, -44%); } 36%, 100% { transform: translate(-50%, -50%); } }
+@keyframes fsRoll { 0%, 16% { opacity: 1; transform: none; } 20%, 38% { transform: translateY(-33.333%); } 42%, 88% { opacity: 1; transform: translateY(-66.667%); }
+  91% { opacity: 0; transform: translateY(-66.667%); } 92% { opacity: 0; transform: none; } 96%, 100% { opacity: 1; transform: none; } }
+@keyframes fsPressLate { 0%, 55% { transform: none; } 58% { transform: scale(.93); } 63%, 100% { transform: none; } }
+@keyframes fsOkLate { 0%, 58% { opacity: 0; } 61%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
+@keyframes fsLinkIn { 0%, 12% { opacity: 0; transform: translateY(18%) scale(.94); } 19% { opacity: 1; transform: translateY(-2%); } 23%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
+@keyframes fsCardIn { 0%, 20% { opacity: 0; transform: translateY(14%); } 27% { opacity: 1; transform: translateY(-2%); } 30%, 100% { opacity: 1; transform: none; } }
+@keyframes fsPop { 0%, 44% { opacity: 0; transform: scale(.8); } 48% { opacity: 1; transform: scale(1.04); } 51%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
+@keyframes fsOrder { 0%, 5% { opacity: 0; transform: translateY(-12%) scale(.97); } 13% { opacity: 1; transform: translateY(1.5%); } 17%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: translateY(-4%); } }
+@keyframes fsPressMid { 0%, 42% { transform: none; } 45% { transform: scale(.93); } 50%, 100% { transform: none; } }
+@keyframes fsOkMid { 0%, 45% { opacity: 0; } 48%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
+
+/* browsers without container queries (iPhones before iOS 16): the mocks size in px from their usual width and stay still;
+   the Good to know scenes (all cqw) step aside for their plain picture background */
+@supports not (width: 1cqw) {
+  .mk { --u: 2.4px; }
+  .panel .mk { --u: 1.9px; }
+  .mk-t { --u: min(.34vw, 3px); }
+  .fs * { animation: none !important; }
+  .gs { display: none; }
+}
+@media (min-width: 900px) { @supports not (width: 1cqw) { .cell.wide .panel .mk { --u: 2.28px; } } }
 @media (max-width: 399px) { .nav-end { gap: 6px; } .nav-get { padding: 0 12px; font-size: 13px; } .nav .brand span { display: none; } }
 @media (max-width: 479px) { .nav-get { display: none; } .nav-end { margin-left: auto; } }
 .mk-back { color: #1E5EFF; font-weight: 700; font-size: calc(3.6 * var(--u)); }

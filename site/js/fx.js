@@ -73,7 +73,7 @@
 
   // feature boxes: a + button opens the panel (hover still does on a mouse), so tablets and phones can open it too.
   // Tap the + or the open panel to close it, or press Esc.
-  const touch = matchMedia("(pointer: coarse)").matches;
+  const touch = matchMedia("(hover: none), (pointer: coarse)").matches; // the same screens site.css says "Tap to learn more" on
   const cells = $$(".cell").filter((c) => c.querySelector(".drop"));
   const setCell = (c, open) => {
     c.classList.toggle("open", open);
@@ -91,8 +91,6 @@
     setCell(c, false);
     b.addEventListener("click", (e) => { e.stopPropagation(); setCell(c, !c.classList.contains("open")); });
     if (touch) c.addEventListener("click", (e) => { if (!e.target.closest("a, .vplay")) setCell(c, !c.classList.contains("open")); });
-    const hint = c.querySelector(".hint");
-    if (hint && touch) hint.textContent = "Tap to learn more";
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") cells.forEach((c) => c.classList.contains("open") && setCell(c, false)); });
 

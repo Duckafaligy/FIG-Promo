@@ -1530,9 +1530,9 @@ details.qa > p { margin: -2px 0 0; }
 
 /* ---------- Home features: each mock phone is a product shot in its panel (.shot), top-aligned and cropped by the panel's bottom
    edge. It sits out of the flow (absolute, centred), so it never sets or stretches the box's height: the panel's min-height does. ---------- */
-.panel .mk-in-panel { position: absolute; left: 0; right: 0; margin: 0 auto; width: 200px; max-width: 72%; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
+.panel .mk-in-panel { position: absolute; left: 0; right: 0; margin: 0 auto; width: 230px; max-width: 72%; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
 .panel.shot { min-height: 290px; }
-@media (min-width: 900px) { .cell.wide .panel .mk-in-panel { width: 240px; } }
+@media (min-width: 900px) { .cell.wide .panel .mk-in-panel { width: 260px; } }
 @media (max-width: 719px) { .panel.shot { min-height: 270px; } }
 
 /* the four feature scenes (index.html "fs-"), built like the Good to know scenes: the resting styles ARE the finished picture
@@ -1576,7 +1576,14 @@ details.qa > p { margin: -2px 0 0; }
 .gc-compose span { flex: 1; padding: calc(2.4 * var(--u)) calc(4 * var(--u)); border: 1px solid #DDE1E7; border-radius: 99px; color: #8A919C; }
 .gc-compose i { flex: 0 0 calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: #1E5EFF; }
 /* 4. Takeout: a new order lands, "Accept for 7:30 pm" is pressed (same parts as above: .to-ok) */
+/* How it works: the map's pins drop in one by one, the claim screen is the flash scene above, a scan line passes over the code */
+.mk-qr { position: relative; overflow: hidden; }
+.mk-scan { position: absolute; left: 0; right: 0; top: 0; height: 18%; background: linear-gradient(180deg, rgba(30, 94, 255, 0), rgba(30, 94, 255, .28)); border-bottom: 2px solid #1E5EFF; opacity: 0; }
 /* the loops (8 s each) */
+.motion .fs-pins .mk-pin { animation: fsPinDrop 8s var(--fs) infinite both; }
+.motion .fs-pins .mk-pin:nth-of-type(2) { animation-delay: .12s; } .motion .fs-pins .mk-pin:nth-of-type(3) { animation-delay: .24s; }
+.motion .fs-pins .mk-pin:nth-of-type(4) { animation-delay: .36s; } .motion .fs-pins .mk-pin:nth-of-type(5) { animation-delay: .48s; } .motion .fs-pins .mk-pin:nth-of-type(6) { animation-delay: .6s; }
+.motion .fs-qr .mk-scan { animation: fsScan 8s var(--fs) infinite both; }
 .motion .fs-city .fc { animation: fsChipPress 8s var(--fs) infinite both; }
 .motion .fs-city .fc .on { animation: fsChipOn 8s var(--fs) infinite both; }
 .motion .fs-city .mk-pin.x { animation: fsPinOut 8s var(--fs) infinite both; }
@@ -1604,6 +1611,8 @@ details.qa > p { margin: -2px 0 0; }
 @keyframes fsCardIn { 0%, 20% { opacity: 0; transform: translateY(14%); } 27% { opacity: 1; transform: translateY(-2%); } 30%, 100% { opacity: 1; transform: none; } }
 @keyframes fsPop { 0%, 44% { opacity: 0; transform: scale(.8); } 48% { opacity: 1; transform: scale(1.04); } 51%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
 @keyframes fsOrder { 0%, 5% { opacity: 0; transform: translateY(-12%) scale(.97); } 13% { opacity: 1; transform: translateY(1.5%); } 17%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: translateY(-4%); } }
+@keyframes fsPinDrop { 0%, 4% { opacity: 0; transform: translate(-50%, -190%); } 10% { opacity: 1; transform: translate(-50%, -42%); } 13%, 88% { opacity: 1; transform: translate(-50%, -50%); } 94%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } }
+@keyframes fsScan { 0%, 20% { opacity: 0; transform: none; } 24% { opacity: 1; } 50% { opacity: 1; transform: translateY(455%); } 54%, 100% { opacity: 0; transform: translateY(455%); } }
 @keyframes fsPressMid { 0%, 42% { transform: none; } 45% { transform: scale(.93); } 50%, 100% { transform: none; } }
 @keyframes fsOkMid { 0%, 45% { opacity: 0; } 48%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
 

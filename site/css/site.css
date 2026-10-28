@@ -1629,3 +1629,9 @@ details.qa > p { margin: -2px 0 0; }
 @media (max-width: 399px) { .nav-end { gap: 6px; } .nav-get { padding: 0 12px; font-size: 13px; } .nav .brand span { display: none; } }
 @media (max-width: 479px) { .nav-get { display: none; } .nav-end { margin-left: auto; } }
 .mk-back { color: #1E5EFF; font-weight: 700; font-size: calc(3.6 * var(--u)); }
+
+/* ---------- the app recordings fill their card, zoomed on the phone (the founder 2026-10-28: "I barely see anything"):
+   no pale box inside the coloured panel; the caption stays at the top, the phone runs off the bottom like a product shot ---------- */
+.cell:not(.mini) .panel { padding-top: 0; min-height: 330px; }
+.cell:not(.mini) .panel video { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; box-shadow: none;
+  object-fit: cover; object-position: 50% 0; transform: scale(1.32); transform-origin: 50% 0; }

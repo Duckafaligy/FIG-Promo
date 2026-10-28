@@ -1387,16 +1387,6 @@ details.qa > p { margin: -2px 0 0; }
 @keyframes gsPin { 0%, 2% { opacity: 0; transform: scale(0); } 8% { opacity: 1; transform: scale(1.1); } 11%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: scale(0); } }
 @keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -.6cqw); } 34%, 88% { opacity: 1; transform: translate(-50%, -2cqw); } 92%, 100% { opacity: 0; transform: translate(-50%, -2cqw); } }
 
-/* ---------- Pause animations (FIX-LIST #149, WCAG 2.2.2): one button on Home stops every loop on the page for the visit:
-   the videos go back to their first frame, the endless CSS loops stop (the hero phone shows its first screen) ---------- */
-.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 0 4px; border: 0; background: none; color: var(--soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
-.motion-toggle:hover { color: var(--cobalt); }
-.mt-ic { width: 10px; height: 12px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; box-sizing: border-box; }
-.motion-toggle[aria-pressed="true"] .mt-ic { width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent currentColor; }
-.paused .marquee-track { animation-play-state: paused !important; }
-.paused .hp-sticker, .paused .bub.typing i, .paused .hp-cycle img { animation: none !important; }
-.paused .hp-cycle img:first-child { opacity: 1; transform: none; }
-
 /* ---------- cookie choice (REVIEW 2026-10-24 E2): js/consent.js builds the notice; fixed to the bottom, over the content (z 6 at most) and under
    the nav (z 50), so nothing moves when it appears. "Accept" and "No thanks" are the same button on purpose. ---------- */
 .ck { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 540px; padding: 16px 18px; border: 1px solid var(--line-2); border-radius: var(--r-md); background: #fff; color: var(--text); box-shadow: 0 24px 50px rgba(10, 16, 32, .16); font-size: 15px; line-height: 1.5; opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s; }
@@ -1523,8 +1513,6 @@ details.qa > p { margin: -2px 0 0; }
 .motion .hp-cycle > .mk-phone:nth-child(2) { animation-delay: 3.5s; }
 .motion .hp-cycle > .mk-phone:nth-child(3) { animation-delay: 7s; }
 .motion .hp-cycle > .mk-phone:nth-child(4) { animation-delay: 10.5s; }
-.paused .hp-cycle > .mk-phone { animation: none !important; }
-.paused .hp-cycle > .mk-phone:first-child { opacity: 1; transform: none; }
 .hero-phone .phone.mk-phone { padding: 2.4%; border-radius: 13% / 6%; }
 .step .phone.mk-phone { max-width: 300px; }
 /* ---------- Help: two columns on a desktop, the mock sticky on the left; jump links on a phone ---------- */

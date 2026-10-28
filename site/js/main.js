@@ -170,28 +170,6 @@
   // "Good to know" scenes (CSS loops, site.css "gs-"): each runs only while it's on screen (.idle pauses it off screen)
   const gio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)));
   $$(".gtk-vis").forEach((v) => gio.observe(v));
-  // ---------- Pause animations (FIX-LIST #149, WCAG 2.2.2): one button stops every loop on Home for the visit ----------
-  // (the head script sets html.paused from the tab's memory before anything plays; the CSS stops the endless CSS loops,
-  // figPlay and the loops above won't start a video while it's on, and the map's drift stays still)
-  const mt = $(".motion-toggle");
-  if (mt) {
-    const onScreen = (v) => { const r = v.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; };
-    const set = (p) => {
-      root.classList.toggle("paused", p);
-      mt.setAttribute("aria-pressed", String(p));
-      try { sessionStorage.setItem("fig.paused", p ? "1" : "0"); } catch {}
-      $$("video").forEach((v) => {
-        if (p) { v.pause(); if (v.readyState) v.currentTime = 0; } // back to the start, as still as its poster
-        else if (onScreen(v)) { // on again: what's on screen plays (loading it first if it came into view while paused)
-          if (still) return; // reduced motion: nothing loads or plays by itself (#154)
-          if (!v.src && v.dataset.src) v.src = v.dataset.src;
-          if (v.src) figPlay(v);
-        }
-      });
-    };
-    mt.addEventListener("click", () => set(!root.classList.contains("paused")));
-    if (root.classList.contains("paused")) set(true);
-  }
   // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
   const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
   $$("video[data-poster]").forEach((v) => pio.observe(v));

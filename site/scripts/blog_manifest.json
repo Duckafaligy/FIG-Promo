@@ -47,7 +47,7 @@
    "group": "takeout-and-money",
    "date": "2026-10-28",
    "publish_at": "2026-10-28T12:00:00-04:00",
-   "status": "queued",
+   "status": "live",
    "words": 1066,
    "dek": "Every takeout payment, refund and fee is listed on one page and downloads as a CSV file. How to read it, what each line means, a worked month-end example with the sums checked, and how to hand it to your bookkeeper."
   },

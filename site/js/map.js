@@ -2,7 +2,6 @@
 // with the app's food-photo pins around Hwy 7 & Kennedy, Markham. Falls back to a still image without WebGL.
 (() => {
   const box = document.getElementById("map");
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const wide = () => innerWidth >= 980;
   const PHOTOS = ["golden-lantern", "chatime", "kinton-ramen", "seoul-house", "dumpling-house", "brew-lab", "sakura-house", "pho-hung", "bowl-lab", "noodle-bar", "wok-bar", "burger-co", "alt-tacos", "alt-pizza", "alt-hotpot", "alt-banhmi"]; // Unsplash License, see assets/food/CREDITS.txt
   window.FIG_PINS = PHOTOS.map((p) => `/assets/pins/${p}.jpg`);
@@ -58,7 +57,7 @@
 
     // phones and tablets: no drift. Turning the map redraws all of it every frame, which costs a phone ~1 s of main thread
     // per few seconds (slow taps, battery) for a 4° sway nobody sees on a small screen
-    if (reduce || !matchMedia("(pointer: fine)").matches) return;
+    if (!matchMedia("(pointer: fine)").matches) return;
     // slow drift, nudged by the mouse (FIX-LIST #144: the hero lagged): it runs only while the hero is on screen, the tab is
     // visible and the mouse has moved in the last 1.5 s, at 30 fps; otherwise there's no frame loop at all. A moving mouse or
     // the hero coming back starts it again; the sway picks up where it stopped.

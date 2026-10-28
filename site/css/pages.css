@@ -67,7 +67,6 @@
 .ct-done-tick { width: 76px; height: 76px; border-radius: 50%; background: var(--volt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.6 3.6L17.5 8.5' fill='none' stroke='%230A1020' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 40px no-repeat; animation: ctPop .6s .15s cubic-bezier(.25, 1, .5, 1) both; }
 @keyframes ctIn { from { opacity: 0; transform: translateY(16px); } }
 @keyframes ctPop { from { transform: scale(.4); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .ct-done, .ct-done-tick { animation: none; } }
 .ct-ways { display: grid; gap: 16px; }
 .ct-way { display: grid; gap: 10px; align-content: start; padding: 30px; border-radius: 24px; background: var(--ice); border: 1px solid var(--ice-line); text-decoration: none; color: var(--ink); transition: border-color .25s, transform .3s var(--ease); }
 a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
@@ -195,7 +194,6 @@ a.ct-way:hover { border-color: var(--cobalt); transform: translateY(-3px); }
 .bl-list > .post-card:nth-child(2) { animation-delay: .04s; } .bl-list > .post-card:nth-child(3) { animation-delay: .08s; }
 .bl-list > .post-card:nth-child(4) { animation-delay: .12s; } .bl-list > .post-card:nth-child(n+5) { animation-delay: .16s; }
 @keyframes blIn { from { opacity: 0; transform: translateY(12px); } }
-@media (prefers-reduced-motion: reduce) { .bl-list > .post-card { animation: none !important; } }
 .bl-row p { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0; }
 @media (min-width: 720px) { .bl-row { grid-template-columns: 240px 1fr; gap: 32px; } .bl-row img { width: 240px; height: 168px; border-radius: 20px; } }
 @media (max-width: 719px) { .bl-row p { display: none; } }

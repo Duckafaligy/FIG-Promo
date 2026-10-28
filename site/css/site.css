@@ -395,10 +395,6 @@ button, input { font: inherit; color: inherit; }
 .motion .intro { animation: introUp .8s var(--ease) both; }
 .motion .intro + .intro { animation-delay: .1s; }
 @keyframes introUp { from { transform: translateY(16px); } }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .marquee-track { animation: none; }
-}
 
 /* ---------- store buttons (match the navbar) ---------- */
 .dl { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; border-radius: 999px; background: #fff; color: #0A1020; text-decoration: none;
@@ -744,10 +740,6 @@ button, input { font: inherit; color: inherit; }
 @keyframes vtOut { to { opacity: 0; transform: translateY(-10px); } }
 @keyframes vtIn { from { opacity: 0; transform: translateY(16px); } }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  @view-transition { navigation: none; }
-}
 p.consent { cursor: default; padding-left: 22px; }
 .doc ol { list-style: decimal; padding-left: 22px; }
 
@@ -1217,12 +1209,10 @@ details.qa > p { margin: -2px 0 0; }
 .qa-group:first-child { margin-top: 0; }
 @media (max-width: 719px) { .qa summary { padding: 14px 14px 14px 18px; } .qa p { padding: 0 18px 18px; } }
 /* smooth open and close where the browser can animate to auto height */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (interpolate-size: allow-keywords) {
-    .qa { interpolate-size: allow-keywords; }
-    .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
-    .qa[open]::details-content { block-size: auto; }
-  }
+@supports (interpolate-size: allow-keywords) {
+  .qa { interpolate-size: allow-keywords; }
+  .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
+  .qa[open]::details-content { block-size: auto; }
 }
 /* insights example: the numbers are the point, so they read ink and big; the tag is a clear pill */
 .boostcard .bc-k { display: inline-block; padding: 5px 11px; border-radius: 999px; background: var(--ice); }
@@ -1287,11 +1277,10 @@ details.qa > p { margin: -2px 0 0; }
   .gtk-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .gtk-wide { grid-template-columns: 1fr auto; margin-top: 24px; padding: 40px 48px; }
 }
-@media (prefers-reduced-motion: reduce) { .gtk-card, .gtk-text h3, .gtk-more i { transition: none; } .gtk-card:hover, .gtk-card:focus-visible { transform: none; } }
 
 /* ---------- Good to know: one small scene per card (mocks.GTK_SCENES), in place of the old 960x600 videos ----------
    Every size is cqw of the picture, so the text stays sharp and nothing clips from a 320px phone to a wide desktop. The
-   resting styles ARE the finished picture (reduced motion and "Pause animations" show it); the loops run only with html.motion,
+   resting styles ARE the finished picture (shown until main.js runs, and on old iPhones); the loops run with html.motion (always on: every visitor sees them, 2026-10-28),
    not html.paused, and main.js pauses a scene while it's off screen (.idle). Transform and opacity only, on the Snap curve.
    No container units inside @keyframes (WebKit resolved them against the viewport, bug 299952): moves are a % of the element. */
 .gs { position: absolute; inset: 0; --u: .8cqw; display: flex; align-items: center; justify-content: center; gap: 4cqw; color: #0A1020; font-size: 3.6cqw; line-height: 1.2; font-weight: 600; text-align: left; }
@@ -1398,7 +1387,6 @@ details.qa > p { margin: -2px 0 0; }
 .ck-btns { display: flex; gap: 10px; margin-top: 14px; }
 .ck-btns .btn { flex: 1; min-height: 44px; }
 @media (min-width: 720px) { .ck { left: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); } .ck-btns .btn { flex: 0 0 auto; min-width: 120px; } }
-@media (prefers-reduced-motion: reduce) { .ck { transition: none; transform: none; } }
 @media print { .ck { display: none; } }
 /* the footer's "Cookie settings": a button that looks like the links around it */
 .foot-btn { display: block; margin: 0 0 10px; padding: 0; border: 0; background: none; font: inherit; font-weight: 500; font-size: 15px; color: var(--soft); text-align: left; cursor: pointer; transition: color .2s; }
@@ -1537,7 +1525,6 @@ details.qa > p { margin: -2px 0 0; }
   .help-side .mk-phone { transform: rotate(-2deg); box-shadow: 0 30px 60px rgba(10, 16, 32, .18); }
 }
 .pg-pills a { display: inline-flex; align-items: center; min-height: 44px; }
-@media (prefers-reduced-motion: reduce) { .faq details[open] > :not(summary), .qa[open] > :not(summary) { animation: none !important; } .hp-cycle > .mk-phone { animation: none !important; } .hp-cycle > .mk-phone:first-child { opacity: 1; } }
 .hint-tap { display: none; }
 @media (hover: none), (pointer: coarse) { .hint-hover { display: none; } .hint-tap { display: inline; } }
 
@@ -1549,7 +1536,7 @@ details.qa > p { margin: -2px 0 0; }
 @media (max-width: 719px) { .panel.shot { min-height: 270px; } }
 
 /* the four feature scenes (index.html "fs-"), built like the Good to know scenes: the resting styles ARE the finished picture
-   (reduced motion shows it), the loops run only with html.motion, and main.js pauses a scene while it's off screen (.idle).
+   (shown without container queries), the loops run with html.motion, and main.js pauses a scene while it's off screen (.idle).
    Transform and opacity only, and every move is a % of the element itself (no container units inside @keyframes). */
 .fs { --fs: cubic-bezier(.2, .8, .2, 1); }
 .fs.idle *, .fs.idle *::before { animation-play-state: paused !important; }

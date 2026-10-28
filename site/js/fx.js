@@ -1,7 +1,6 @@
 // Shared micro-interactions on every page: sliding tab pill, press ripples, scroll reveals on inner pages.
 (() => {
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // video loops: phones in Low Power Mode or data saver refuse to autoplay (and a scroll isn't a tap), so retry on the
   // first tap and show a play button on each refused loop so it never just sits on its poster
@@ -94,7 +93,6 @@
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") cells.forEach((c) => c.classList.contains("open") && setCell(c, false)); });
 
-  if (still) return;
 
   // press ripple from the exact point you tapped
   document.addEventListener("pointerdown", (e) => {

@@ -1,7 +1,6 @@
 // Shared micro-interactions on every page: sliding tab pill, press ripples, scroll reveals on inner pages.
 (() => {
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // video loops: phones in Low Power Mode or data saver refuse to autoplay (and a scroll isn't a tap), so retry on the
   // first tap and show a play button on each refused loop so it never just sits on its poster
@@ -73,7 +72,7 @@
 
   // feature boxes: a + button opens the panel (hover still does on a mouse), so tablets and phones can open it too.
   // Tap the + or the open panel to close it, or press Esc.
-  const touch = matchMedia("(pointer: coarse)").matches;
+  const touch = matchMedia("(hover: none), (pointer: coarse)").matches; // the same screens site.css says "Tap to learn more" on
   const cells = $$(".cell").filter((c) => c.querySelector(".drop"));
   const setCell = (c, open) => {
     c.classList.toggle("open", open);
@@ -91,12 +90,9 @@
     setCell(c, false);
     b.addEventListener("click", (e) => { e.stopPropagation(); setCell(c, !c.classList.contains("open")); });
     if (touch) c.addEventListener("click", (e) => { if (!e.target.closest("a, .vplay")) setCell(c, !c.classList.contains("open")); });
-    const hint = c.querySelector(".hint");
-    if (hint && touch) hint.textContent = "Tap to learn more";
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") cells.forEach((c) => c.classList.contains("open") && setCell(c, false)); });
 
-  if (still) return;
 
   // press ripple from the exact point you tapped
   document.addEventListener("pointerdown", (e) => {

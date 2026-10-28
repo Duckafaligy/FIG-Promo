@@ -149,9 +149,7 @@
   // (user 2026-10-14: they start on their own, already moving when you get there; the play button is only for a phone
   // that refuses autoplay.) On a phone the bento row scrolls sideways, where a look-ahead can't see: each loop that's
   // near or playing also loads the next card's. Data Saver: each loads only when it's on screen, as before.
-  // reduced motion (FIX-LIST #154): no Home video loads or plays by itself; each shows its poster (the tutorial can still be
-  // played with its own controls, and only then is its file fetched)
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // every visitor gets the loops, reduced-motion setting or not (the founder, 2026-10-28: they play like GIFs)
   const ahead = !(navigator.connection && navigator.connection.saveData);
   const load = (v) => { if (v && !v.src) { v.preload = "auto"; v.src = v.dataset.src; } };
   const next = (v) => v.closest(".cell")?.nextElementSibling?.querySelector("video[data-src]");
@@ -166,10 +164,10 @@
       figPlay(v);
     } else v.pause();
   }), { threshold: 0.1 });
-  if (!still) $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
-  // "Good to know" scenes (CSS loops, site.css "gs-"): each runs only while it's on screen (.idle pauses it off screen)
+  $$("video[data-src]").forEach((v) => { vio.observe(v); if (ahead) lio.observe(v); });
+  // "Good to know" and feature scenes (CSS loops, site.css "gs-" and "fs-"): each runs only while it's on screen (.idle pauses it off screen)
   const gio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)));
-  $$(".gtk-vis").forEach((v) => gio.observe(v));
+  $$(".gtk-vis, .fs").forEach((v) => gio.observe(v));
   // posters too: fetched only when a video is about a screen away (they were ~300 KB on first load)
   const pio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.poster = e.target.dataset.poster; pio.unobserve(e.target); } }), { rootMargin: "800px 0px" });
   $$("video[data-poster]").forEach((v) => pio.observe(v));
@@ -186,10 +184,9 @@
     const load = () => {
       $(".tutwrap").dataset.role = tab;
       tutVideo.poster = `/assets/clips/tut-${tab}.jpg`;
-      if (still) { tutVideo.preload = "none"; tutVideo.controls = true; } // reduced motion: the poster, and play only if they choose to
       if (!tutVideo.src.endsWith(`/tut-${tab}.mp4`)) tutVideo.src = `/assets/clips/tut-${tab}.mp4`; // the look-ahead may have loaded it
       tutVideo.defaultPlaybackRate = tutVideo.playbackRate = 1.35; // a little quicker than the full-length video
-      if (!still) figPlay(tutVideo);
+      figPlay(tutVideo);
     };
     if (first || !root.classList.contains("motion")) return load();
     // switching point of view: the card flips over and comes back as the other side
@@ -205,10 +202,10 @@
   }
   $$("#catch [data-tab]").forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.tab)));
   // loaded a screen and a half ahead, like the loops (the diner's side is the one that shows first)
-  if (ahead && !still) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
+  if (ahead) { const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting && !tutVideo.src) { tutVideo.preload = "auto"; tutVideo.src = "/assets/clips/tut-diner.mp4"; tio.disconnect(); } }, { rootMargin: "150% 0px" }); tio.observe(tutVideo); }
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return tutVideo.pause();
-    if (!tutRole) selectTab("diner"); else if (!still) figPlay(tutVideo);
+    if (!tutRole) selectTab("diner"); else figPlay(tutVideo);
   }, { threshold: 0.3 }).observe(tutVideo);
 
   // ---------- restaurant tablet: steps itself while visible, until tapped ----------
@@ -289,7 +286,7 @@
 // numbers strip: count up when it scrolls into view (226 places, 4 languages)
 (() => {
   const nums = [...document.querySelectorAll(".stats b")].filter((b) => /^\d+$/.test(b.textContent.trim()) && +b.textContent > 1);
-  if (!nums.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!nums.length) return;
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return; io.unobserve(e.target);
     const el = e.target, end = +el.textContent, t0 = performance.now();

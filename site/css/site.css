@@ -395,10 +395,6 @@ button, input { font: inherit; color: inherit; }
 .motion .intro { animation: introUp .8s var(--ease) both; }
 .motion .intro + .intro { animation-delay: .1s; }
 @keyframes introUp { from { transform: translateY(16px); } }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .marquee-track { animation: none; }
-}
 
 /* ---------- store buttons (match the navbar) ---------- */
 .dl { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; border-radius: 999px; background: #fff; color: #0A1020; text-decoration: none;
@@ -744,10 +740,6 @@ button, input { font: inherit; color: inherit; }
 @keyframes vtOut { to { opacity: 0; transform: translateY(-10px); } }
 @keyframes vtIn { from { opacity: 0; transform: translateY(16px); } }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  @view-transition { navigation: none; }
-}
 p.consent { cursor: default; padding-left: 22px; }
 .doc ol { list-style: decimal; padding-left: 22px; }
 
@@ -1217,12 +1209,10 @@ details.qa > p { margin: -2px 0 0; }
 .qa-group:first-child { margin-top: 0; }
 @media (max-width: 719px) { .qa summary { padding: 14px 14px 14px 18px; } .qa p { padding: 0 18px 18px; } }
 /* smooth open and close where the browser can animate to auto height */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (interpolate-size: allow-keywords) {
-    .qa { interpolate-size: allow-keywords; }
-    .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
-    .qa[open]::details-content { block-size: auto; }
-  }
+@supports (interpolate-size: allow-keywords) {
+  .qa { interpolate-size: allow-keywords; }
+  .qa::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
+  .qa[open]::details-content { block-size: auto; }
 }
 /* insights example: the numbers are the point, so they read ink and big; the tag is a clear pill */
 .boostcard .bc-k { display: inline-block; padding: 5px 11px; border-radius: 999px; background: var(--ice); }
@@ -1287,12 +1277,12 @@ details.qa > p { margin: -2px 0 0; }
   .gtk-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .gtk-wide { grid-template-columns: 1fr auto; margin-top: 24px; padding: 40px 48px; }
 }
-@media (prefers-reduced-motion: reduce) { .gtk-card, .gtk-text h3, .gtk-more i { transition: none; } .gtk-card:hover, .gtk-card:focus-visible { transform: none; } }
 
 /* ---------- Good to know: one small scene per card (mocks.GTK_SCENES), in place of the old 960x600 videos ----------
    Every size is cqw of the picture, so the text stays sharp and nothing clips from a 320px phone to a wide desktop. The
-   resting styles ARE the finished picture (reduced motion and "Pause animations" show it); the loops run only with html.motion,
-   not html.paused, and main.js pauses a scene while it's off screen (.idle). Transform and opacity only, on the Snap curve. */
+   resting styles ARE the finished picture (shown until main.js runs, and on old iPhones); the loops run with html.motion (always on: every visitor sees them, 2026-10-28),
+   not html.paused, and main.js pauses a scene while it's off screen (.idle). Transform and opacity only, on the Snap curve.
+   No container units inside @keyframes (WebKit resolved them against the viewport, bug 299952): moves are a % of the element. */
 .gs { position: absolute; inset: 0; --u: .8cqw; display: flex; align-items: center; justify-content: center; gap: 4cqw; color: #0A1020; font-size: 3.6cqw; line-height: 1.2; font-weight: 600; text-align: left; }
 .gs b { font-weight: 800; }
 .gs small { display: block; color: #4B5568; font-size: 3.3cqw; font-weight: 600; }
@@ -1372,20 +1362,20 @@ details.qa > p { margin: -2px 0 0; }
 .motion:not(.paused) .gs-pin.p4 { animation-delay: .72s; } .motion:not(.paused) .gs-pin.p5 { animation-delay: .96s; }
 .motion:not(.paused) .gs-place { animation: gsNext 8s var(--gs) infinite both; } .motion:not(.paused) .gs-place.gs-vm { animation-delay: .4s; }
 .gtk-vis.idle *, .gtk-vis.idle *::before { animation-play-state: paused !important; }
-@keyframes gsDeal { 0%, 22% { transform: translateX(22cqw); } 34%, 86% { transform: none; } 96%, 100% { transform: translateX(22cqw); } }
+@keyframes gsDeal { 0%, 22% { transform: translateX(52.381%); } 34%, 86% { transform: none; } 96%, 100% { transform: translateX(52.381%); } }
 @keyframes gsPress { 0%, 13% { transform: none; } 16% { transform: scale(.93); } 21%, 100% { transform: none; } }
 @keyframes gsClaimed { 0%, 16% { opacity: 0; } 20%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
-@keyframes gsTicket { 0%, 25% { opacity: 0; transform: translateX(10cqw) scale(.94); } 35% { opacity: 1; transform: translateX(-.8cqw); } 40%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: translateX(8cqw) scale(.96); } }
+@keyframes gsTicket { 0%, 25% { opacity: 0; transform: translateX(25%) scale(.94); } 35% { opacity: 1; transform: translateX(-2%); } 40%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: translateX(20%) scale(.96); } }
 @keyframes gsSeg { 0%, 8% { opacity: 1; transform: scaleX(0); } 26%, 86% { opacity: 1; transform: none; } 93% { opacity: 0; transform: none; } 94%, 100% { opacity: 0; transform: scaleX(0); } }
-@keyframes gsKnob { 0%, 30% { transform: none; } 37%, 86% { transform: translateX(4.4cqw); } 93%, 100% { transform: none; } }
+@keyframes gsKnob { 0%, 30% { transform: none; } 37%, 86% { transform: translateX(95.652%); } 93%, 100% { transform: none; } }
 @keyframes gsFill { 0%, 30% { opacity: 0; } 37%, 86% { opacity: 1; } 93%, 100% { opacity: 0; } }
 @keyframes gsLive { 0%, 38% { opacity: 0; transform: scale(.8); } 43% { opacity: 1; transform: scale(1.08); } 47%, 86% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow3 { 0%, 8% { opacity: 0; transform: translateY(1.6cqw); } 14%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow4 { 0%, 16% { opacity: 0; transform: translateY(1.6cqw); } 22%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsKeep { 0%, 28% { opacity: 0; transform: translateY(2cqw); } 34% { opacity: 1; transform: translateY(-.4cqw); } 38%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsNote { 0%, 38% { opacity: 0; transform: translateY(1.2cqw); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsRow3 { 0%, 8% { opacity: 0; transform: translateY(26%); } 14%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsRow4 { 0%, 16% { opacity: 0; transform: translateY(26%); } 22%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsKeep { 0%, 28% { opacity: 0; transform: translateY(19%); } 34% { opacity: 1; transform: translateY(-4%); } 38%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsNote { 0%, 38% { opacity: 0; transform: translateY(31%); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
 @keyframes gsPin { 0%, 2% { opacity: 0; transform: scale(0); } 8% { opacity: 1; transform: scale(1.1); } 11%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: scale(0); } }
-@keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -.6cqw); } 34%, 88% { opacity: 1; transform: translate(-50%, -2cqw); } 92%, 100% { opacity: 0; transform: translate(-50%, -2cqw); } }
+@keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -7%); } 34%, 88% { opacity: 1; transform: translate(-50%, -22%); } 92%, 100% { opacity: 0; transform: translate(-50%, -22%); } }
 
 /* ---------- cookie choice (REVIEW 2026-10-24 E2): js/consent.js builds the notice; fixed to the bottom, over the content (z 6 at most) and under
    the nav (z 50), so nothing moves when it appears. "Accept" and "No thanks" are the same button on purpose. ---------- */
@@ -1397,7 +1387,6 @@ details.qa > p { margin: -2px 0 0; }
 .ck-btns { display: flex; gap: 10px; margin-top: 14px; }
 .ck-btns .btn { flex: 1; min-height: 44px; }
 @media (min-width: 720px) { .ck { left: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); } .ck-btns .btn { flex: 0 0 auto; min-width: 120px; } }
-@media (prefers-reduced-motion: reduce) { .ck { transition: none; transform: none; } }
 @media print { .ck { display: none; } }
 /* the footer's "Cookie settings": a button that looks like the links around it */
 .foot-btn { display: block; margin: 0 0 10px; padding: 0; border: 0; background: none; font: inherit; font-weight: 500; font-size: 15px; color: var(--soft); text-align: left; cursor: pointer; transition: color .2s; }
@@ -1405,8 +1394,10 @@ details.qa > p { margin: -2px 0 0; }
 @media (max-width: 1024px), (pointer: coarse) { .foot-btn { display: flex; align-items: center; min-height: 44px; margin-bottom: 0; } }
 
 /* ---------- native mock screens (no screenshots, no photos): sizes are cqw, a share of the screen's own width, so nothing stretches ---------- */
-.phone.mk-phone { padding: 2.4%; border-radius: 13% / 6%; width: 100%; }
-.mk-phone .mk-scr { container-type: inline-size; position: relative; aspect-ratio: 390 / 844; overflow: hidden; background: #fff; border-radius: 11% / 5.1%; }
+/* the frame hugs its 390:844 screen: the bezel is a share of the PHONE's own width (cqw of the phone), never of its parent, and
+   the height comes from the screen alone (a phone stretched by a flex parent drew a long empty bar under the screen, 2026-10-28) */
+.phone.mk-phone { padding: 0; border-radius: 13% / 6%; width: 100%; height: auto; container-type: inline-size; }
+.mk-phone .mk-scr { container-type: inline-size; position: relative; aspect-ratio: 390 / 844; margin: 6px; margin: 2.4cqw; overflow: hidden; background: #fff; border-radius: 11% / 5.1%; }
 .mk, .mk-t { --u: 1cqw; }
 .mk-t { --u: .39cqw; }
 .mk { position: absolute; inset: 0; display: flex; flex-direction: column; gap: calc(2.6 * var(--u)); padding: 0 calc(5 * var(--u)); font-size: calc(3.6 * var(--u)); line-height: 1.25; color: #0E1116; text-align: left; letter-spacing: 0; font-weight: 500; user-select: text; }
@@ -1513,7 +1504,6 @@ details.qa > p { margin: -2px 0 0; }
 .motion .hp-cycle > .mk-phone:nth-child(2) { animation-delay: 3.5s; }
 .motion .hp-cycle > .mk-phone:nth-child(3) { animation-delay: 7s; }
 .motion .hp-cycle > .mk-phone:nth-child(4) { animation-delay: 10.5s; }
-.hero-phone .phone.mk-phone { padding: 2.4%; border-radius: 13% / 6%; }
 .step .phone.mk-phone { max-width: 300px; }
 /* ---------- Help: two columns on a desktop, the mock sticky on the left; jump links on a phone ---------- */
 .help-wrap { padding-top: 24px; }
@@ -1535,8 +1525,107 @@ details.qa > p { margin: -2px 0 0; }
   .help-side .mk-phone { transform: rotate(-2deg); box-shadow: 0 30px 60px rgba(10, 16, 32, .18); }
 }
 .pg-pills a { display: inline-flex; align-items: center; min-height: 44px; }
-@media (prefers-reduced-motion: reduce) { .faq details[open] > :not(summary), .qa[open] > :not(summary) { animation: none !important; } .hp-cycle > .mk-phone { animation: none !important; } .hp-cycle > .mk-phone:first-child { opacity: 1; } }
-.panel .mk-in-panel { flex: 0 0 auto; width: 200px; max-width: 72%; margin-top: 0; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
+.hint-tap { display: none; }
+@media (hover: none), (pointer: coarse) { .hint-hover { display: none; } .hint-tap { display: inline; } }
+
+/* ---------- Home features: each mock phone is a product shot in its panel (.shot), top-aligned and cropped by the panel's bottom
+   edge. It sits out of the flow (absolute, centred), so it never sets or stretches the box's height: the panel's min-height does. ---------- */
+.panel .mk-in-panel { position: absolute; left: 0; right: 0; margin: 0 auto; width: 230px; max-width: 72%; box-shadow: 0 20px 50px rgba(10, 16, 32, .25); }
+.panel.shot { min-height: 290px; }
+@media (min-width: 900px) { .cell.wide .panel .mk-in-panel { width: 260px; } }
+@media (max-width: 719px) { .panel.shot { min-height: 270px; } }
+
+/* the four feature scenes (index.html "fs-"), built like the Good to know scenes: the resting styles ARE the finished picture
+   (shown without container queries), the loops run with html.motion, and main.js pauses a scene while it's off screen (.idle).
+   Transform and opacity only, and every move is a % of the element itself (no container units inside @keyframes). */
+.fs { --fs: cubic-bezier(.2, .8, .2, 1); }
+.fs.idle *, .fs.idle *::before { animation-play-state: paused !important; }
+/* 1. Your city, filtered: "Under $15" switches on, the two pins over budget drop out, the rest hop */
+.mk-chips { position: relative; z-index: 2; display: flex; gap: calc(1.6 * var(--u)); }
+.mk-chip { display: grid; padding: calc(1.6 * var(--u)) calc(3 * var(--u)); border-radius: 99px; background: #fff; color: #0E1116; font-size: calc(3 * var(--u)); font-weight: 700; white-space: nowrap; box-shadow: 0 calc(.6 * var(--u)) calc(2 * var(--u)) rgba(10, 16, 32, .12); }
+.mk-chip.on, .mk-chip .on { background: #1E5EFF; color: #fff; }
+.mk-chip.fc { padding: 0; }
+.mk-chip.fc > span { grid-area: 1 / 1; padding: calc(1.6 * var(--u)) calc(3 * var(--u)); border-radius: 99px; }
+.fs-city .mk-pin.x { opacity: 0; }
+/* 2. Flash deals: the timer ticks down, Claim is pressed */
+.roll { display: inline-block; height: 1.25em; overflow: hidden; vertical-align: top; }
+.roll > span { display: block; text-align: right; }
+.fd-btn, .to-acc { position: relative; overflow: hidden; }
+.fd-ok, .to-ok { position: absolute; inset: 0; display: grid; place-items: center; border-radius: inherit; background: #14C86B; color: #062B16; opacity: 0; }
+/* 3. Group chat, solved: the phone's own group chat (not FIG's), a FIG link to a restaurant's page slides in */
+.mk-gc { gap: 0; padding: 0; background: #fff; }
+.mk-gc .mk-status { padding-left: calc(7 * var(--u)); padding-right: calc(7 * var(--u)); }
+.gc-head { display: flex; align-items: center; gap: calc(2.4 * var(--u)); margin-top: calc(2 * var(--u)); padding: 0 calc(5 * var(--u)) calc(2.6 * var(--u)); border-bottom: 1px solid #E3E6EA; }
+.gc-head b { display: block; font-size: calc(3.8 * var(--u)); }
+.gc-av { display: grid; place-items: center; flex: 0 0 calc(9 * var(--u)); height: calc(9 * var(--u)); border-radius: 50%; background: #E3ECFF; color: #1E5EFF; font-size: calc(3 * var(--u)); font-weight: 800; }
+.gc-body { display: flex; flex-direction: column; align-items: flex-start; gap: calc(1.6 * var(--u)); padding: calc(3.4 * var(--u)) calc(4 * var(--u)); }
+.gc-b { max-width: 76%; padding: calc(2 * var(--u)) calc(3.2 * var(--u)); border-radius: calc(4.4 * var(--u)); background: #EEF1F5; font-size: calc(3.4 * var(--u)); line-height: 1.3; }
+.gc-b small { font-size: calc(2.6 * var(--u)); font-weight: 700; color: #5C6470; }
+.gc-b.out { align-self: flex-end; background: #1E5EFF; color: #fff; transform-origin: 100% 100%; }
+.gc-b.in { border-bottom-left-radius: calc(1.4 * var(--u)); transform-origin: 0 100%; }
+.gc-link { display: flex; flex-direction: column; gap: calc(1.6 * var(--u)); width: 66%; padding: calc(1.2 * var(--u)) calc(1.2 * var(--u)) calc(2 * var(--u)); border-bottom-right-radius: calc(1.4 * var(--u)); }
+.gc-card { display: block; overflow: hidden; border-radius: calc(3.4 * var(--u)); background: #fff; color: #0E1116; }
+.gc-img { position: relative; display: grid; place-items: center; height: calc(20 * var(--u)); background: linear-gradient(135deg, #1E5EFF, #14C86B); }
+.gc-img .mk-lt { background: #fff; color: #1E5EFF; }
+.gc-img .mk-tag { position: absolute; top: calc(1.6 * var(--u)); left: calc(1.6 * var(--u)); background: #fff; color: #1E5EFF; font-size: calc(2.4 * var(--u)); }
+.gc-meta { display: block; padding: calc(1.8 * var(--u)) calc(2.4 * var(--u)); background: #F2F4F7; }
+.gc-meta b { display: block; font-size: calc(3 * var(--u)); }
+.gc-meta small { font-size: calc(2.5 * var(--u)); }
+.gc-txt { padding: 0 calc(2 * var(--u)); }
+.gc-compose { position: absolute; left: calc(4 * var(--u)); right: calc(4 * var(--u)); bottom: calc(5 * var(--u)); display: flex; align-items: center; gap: calc(2 * var(--u)); }
+.gc-compose span { flex: 1; padding: calc(2.4 * var(--u)) calc(4 * var(--u)); border: 1px solid #DDE1E7; border-radius: 99px; color: #8A919C; }
+.gc-compose i { flex: 0 0 calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: #1E5EFF; }
+/* 4. Takeout: a new order lands, "Accept for 7:30 pm" is pressed (same parts as above: .to-ok) */
+/* How it works: the map's pins drop in one by one, the claim screen is the flash scene above, a scan line passes over the code */
+.mk-qr { position: relative; overflow: hidden; }
+.mk-scan { position: absolute; left: 0; right: 0; top: 0; height: 18%; background: linear-gradient(180deg, rgba(30, 94, 255, 0), rgba(30, 94, 255, .28)); border-bottom: 2px solid #1E5EFF; opacity: 0; }
+/* the loops (8 s each) */
+.motion .fs-pins .mk-pin { animation: fsPinDrop 8s var(--fs) infinite both; }
+.motion .fs-pins .mk-pin:nth-of-type(2) { animation-delay: .12s; } .motion .fs-pins .mk-pin:nth-of-type(3) { animation-delay: .24s; }
+.motion .fs-pins .mk-pin:nth-of-type(4) { animation-delay: .36s; } .motion .fs-pins .mk-pin:nth-of-type(5) { animation-delay: .48s; } .motion .fs-pins .mk-pin:nth-of-type(6) { animation-delay: .6s; }
+.motion .fs-qr .mk-scan { animation: fsScan 8s var(--fs) infinite both; }
+.motion .fs-city .fc { animation: fsChipPress 8s var(--fs) infinite both; }
+.motion .fs-city .fc .on { animation: fsChipOn 8s var(--fs) infinite both; }
+.motion .fs-city .mk-pin.x { animation: fsPinOut 8s var(--fs) infinite both; }
+.motion .fs-city .mk-pin.k { animation: fsPinHop 8s var(--fs) infinite both; }
+.motion .fs-city .k2 { animation-delay: .07s; } .motion .fs-city .k3 { animation-delay: .14s; } .motion .fs-city .k4 { animation-delay: .21s; }
+.motion .fs-flash .roll > span { animation: fsRoll 8s var(--fs) infinite both; }
+.motion .fs-flash .fd-btn { animation: fsPressLate 8s var(--fs) infinite both; }
+.motion .fs-flash .fd-ok { animation: fsOkLate 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-link { animation: fsLinkIn 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-card { animation: fsCardIn 8s var(--fs) infinite both; }
+.motion .fs-chat .gc-r1 { animation: fsPop 8s var(--fs) infinite both; }
+.motion .fs-take .to-card { animation: fsOrder 8s var(--fs) infinite both; }
+.motion .fs-take .to-acc { animation: fsPressMid 8s var(--fs) infinite both; }
+.motion .fs-take .to-ok { animation: fsOkMid 8s var(--fs) infinite both; }
+@keyframes fsChipPress { 0%, 12% { transform: none; } 15% { transform: scale(.9); } 20%, 100% { transform: none; } }
+@keyframes fsChipOn { 0%, 14% { opacity: 0; } 18%, 86% { opacity: 1; } 91%, 100% { opacity: 0; } }
+@keyframes fsPinOut { 0%, 19% { opacity: 1; transform: translate(-50%, -50%); } 26%, 88% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  89% { opacity: 0; transform: translate(-50%, -170%); } 95% { opacity: 1; transform: translate(-50%, -42%); } 98%, 100% { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes fsPinHop { 0%, 24% { transform: translate(-50%, -50%); } 29% { transform: translate(-50%, -82%); } 33% { transform: translate(-50%, -44%); } 36%, 100% { transform: translate(-50%, -50%); } }
+@keyframes fsRoll { 0%, 16% { opacity: 1; transform: none; } 20%, 38% { transform: translateY(-33.333%); } 42%, 88% { opacity: 1; transform: translateY(-66.667%); }
+  91% { opacity: 0; transform: translateY(-66.667%); } 92% { opacity: 0; transform: none; } 96%, 100% { opacity: 1; transform: none; } }
+@keyframes fsPressLate { 0%, 55% { transform: none; } 58% { transform: scale(.93); } 63%, 100% { transform: none; } }
+@keyframes fsOkLate { 0%, 58% { opacity: 0; } 61%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
+@keyframes fsLinkIn { 0%, 12% { opacity: 0; transform: translateY(18%) scale(.94); } 19% { opacity: 1; transform: translateY(-2%); } 23%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
+@keyframes fsCardIn { 0%, 20% { opacity: 0; transform: translateY(14%); } 27% { opacity: 1; transform: translateY(-2%); } 30%, 100% { opacity: 1; transform: none; } }
+@keyframes fsPop { 0%, 44% { opacity: 0; transform: scale(.8); } 48% { opacity: 1; transform: scale(1.04); } 51%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
+@keyframes fsOrder { 0%, 5% { opacity: 0; transform: translateY(-12%) scale(.97); } 13% { opacity: 1; transform: translateY(1.5%); } 17%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: translateY(-4%); } }
+@keyframes fsPinDrop { 0%, 4% { opacity: 0; transform: translate(-50%, -190%); } 10% { opacity: 1; transform: translate(-50%, -42%); } 13%, 88% { opacity: 1; transform: translate(-50%, -50%); } 94%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } }
+@keyframes fsScan { 0%, 20% { opacity: 0; transform: none; } 24% { opacity: 1; } 50% { opacity: 1; transform: translateY(455%); } 54%, 100% { opacity: 0; transform: translateY(455%); } }
+@keyframes fsPressMid { 0%, 42% { transform: none; } 45% { transform: scale(.93); } 50%, 100% { transform: none; } }
+@keyframes fsOkMid { 0%, 45% { opacity: 0; } 48%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
+
+/* browsers without container queries (iPhones before iOS 16): the mocks size in px from their usual width and stay still;
+   the Good to know scenes (all cqw) step aside for their plain picture background */
+@supports not (width: 1cqw) {
+  .mk { --u: 2.4px; }
+  .panel .mk { --u: 1.9px; }
+  .mk-t { --u: min(.34vw, 3px); }
+  .fs * { animation: none !important; }
+  .gs { display: none; }
+}
+@media (min-width: 900px) { @supports not (width: 1cqw) { .cell.wide .panel .mk { --u: 2.28px; } } }
 @media (max-width: 399px) { .nav-end { gap: 6px; } .nav-get { padding: 0 12px; font-size: 13px; } .nav .brand span { display: none; } }
 @media (max-width: 479px) { .nav-get { display: none; } .nav-end { margin-left: auto; } }
 .mk-back { color: #1E5EFF; font-weight: 700; font-size: calc(3.6 * var(--u)); }

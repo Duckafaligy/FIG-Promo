@@ -14,7 +14,6 @@
   const links = [...document.querySelectorAll('.lg-rail a')];
   const ids = [...new Set(links.map((a) => a.hash.slice(1)))];
   const secs = ids.map((id) => document.getElementById(id)).filter(Boolean);
-  const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // the band's height, for the column's pinned line (and again whenever it changes: fonts, a resize, tabs wrapping)
   const measure = () => root.style.setProperty('--lg-band', `${band.offsetHeight}px`);
@@ -39,7 +38,7 @@
     if (!target) return;
     e.preventDefault();
     close();
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset(), behavior: reduce() ? 'auto' : 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset(), behavior: 'smooth' });
     history.replaceState(null, '', a.hash);
     target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });

@@ -1292,7 +1292,8 @@ details.qa > p { margin: -2px 0 0; }
 /* ---------- Good to know: one small scene per card (mocks.GTK_SCENES), in place of the old 960x600 videos ----------
    Every size is cqw of the picture, so the text stays sharp and nothing clips from a 320px phone to a wide desktop. The
    resting styles ARE the finished picture (reduced motion and "Pause animations" show it); the loops run only with html.motion,
-   not html.paused, and main.js pauses a scene while it's off screen (.idle). Transform and opacity only, on the Snap curve. */
+   not html.paused, and main.js pauses a scene while it's off screen (.idle). Transform and opacity only, on the Snap curve.
+   No container units inside @keyframes (WebKit resolved them against the viewport, bug 299952): moves are a % of the element. */
 .gs { position: absolute; inset: 0; --u: .8cqw; display: flex; align-items: center; justify-content: center; gap: 4cqw; color: #0A1020; font-size: 3.6cqw; line-height: 1.2; font-weight: 600; text-align: left; }
 .gs b { font-weight: 800; }
 .gs small { display: block; color: #4B5568; font-size: 3.3cqw; font-weight: 600; }
@@ -1372,20 +1373,20 @@ details.qa > p { margin: -2px 0 0; }
 .motion:not(.paused) .gs-pin.p4 { animation-delay: .72s; } .motion:not(.paused) .gs-pin.p5 { animation-delay: .96s; }
 .motion:not(.paused) .gs-place { animation: gsNext 8s var(--gs) infinite both; } .motion:not(.paused) .gs-place.gs-vm { animation-delay: .4s; }
 .gtk-vis.idle *, .gtk-vis.idle *::before { animation-play-state: paused !important; }
-@keyframes gsDeal { 0%, 22% { transform: translateX(22cqw); } 34%, 86% { transform: none; } 96%, 100% { transform: translateX(22cqw); } }
+@keyframes gsDeal { 0%, 22% { transform: translateX(52.381%); } 34%, 86% { transform: none; } 96%, 100% { transform: translateX(52.381%); } }
 @keyframes gsPress { 0%, 13% { transform: none; } 16% { transform: scale(.93); } 21%, 100% { transform: none; } }
 @keyframes gsClaimed { 0%, 16% { opacity: 0; } 20%, 88% { opacity: 1; } 93%, 100% { opacity: 0; } }
-@keyframes gsTicket { 0%, 25% { opacity: 0; transform: translateX(10cqw) scale(.94); } 35% { opacity: 1; transform: translateX(-.8cqw); } 40%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: translateX(8cqw) scale(.96); } }
+@keyframes gsTicket { 0%, 25% { opacity: 0; transform: translateX(25%) scale(.94); } 35% { opacity: 1; transform: translateX(-2%); } 40%, 86% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: translateX(20%) scale(.96); } }
 @keyframes gsSeg { 0%, 8% { opacity: 1; transform: scaleX(0); } 26%, 86% { opacity: 1; transform: none; } 93% { opacity: 0; transform: none; } 94%, 100% { opacity: 0; transform: scaleX(0); } }
-@keyframes gsKnob { 0%, 30% { transform: none; } 37%, 86% { transform: translateX(4.4cqw); } 93%, 100% { transform: none; } }
+@keyframes gsKnob { 0%, 30% { transform: none; } 37%, 86% { transform: translateX(95.652%); } 93%, 100% { transform: none; } }
 @keyframes gsFill { 0%, 30% { opacity: 0; } 37%, 86% { opacity: 1; } 93%, 100% { opacity: 0; } }
 @keyframes gsLive { 0%, 38% { opacity: 0; transform: scale(.8); } 43% { opacity: 1; transform: scale(1.08); } 47%, 86% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow3 { 0%, 8% { opacity: 0; transform: translateY(1.6cqw); } 14%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsRow4 { 0%, 16% { opacity: 0; transform: translateY(1.6cqw); } 22%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsKeep { 0%, 28% { opacity: 0; transform: translateY(2cqw); } 34% { opacity: 1; transform: translateY(-.4cqw); } 38%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
-@keyframes gsNote { 0%, 38% { opacity: 0; transform: translateY(1.2cqw); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsRow3 { 0%, 8% { opacity: 0; transform: translateY(26%); } 14%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsRow4 { 0%, 16% { opacity: 0; transform: translateY(26%); } 22%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsKeep { 0%, 28% { opacity: 0; transform: translateY(19%); } 34% { opacity: 1; transform: translateY(-4%); } 38%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
+@keyframes gsNote { 0%, 38% { opacity: 0; transform: translateY(31%); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: none; } }
 @keyframes gsPin { 0%, 2% { opacity: 0; transform: scale(0); } 8% { opacity: 1; transform: scale(1.1); } 11%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: scale(0); } }
-@keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -.6cqw); } 34%, 88% { opacity: 1; transform: translate(-50%, -2cqw); } 92%, 100% { opacity: 0; transform: translate(-50%, -2cqw); } }
+@keyframes gsNext { 0%, 26% { opacity: 0; transform: translate(-50%, -7%); } 34%, 88% { opacity: 1; transform: translate(-50%, -22%); } 92%, 100% { opacity: 0; transform: translate(-50%, -22%); } }
 
 /* ---------- cookie choice (REVIEW 2026-10-24 E2): js/consent.js builds the notice; fixed to the bottom, over the content (z 6 at most) and under
    the nav (z 50), so nothing moves when it appears. "Accept" and "No thanks" are the same button on purpose. ---------- */

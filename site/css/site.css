@@ -1753,16 +1753,12 @@ main > .lang-note:first-child { padding-top: 96px; margin-bottom: -72px; text-al
 .mk-dishes { display: flex; gap: calc(2.4 * var(--u)); }
 .mk-dishes img { flex: 1; min-width: 0; aspect-ratio: 1; border-radius: calc(3.4 * var(--u)); object-fit: cover; }
 
-/* the bar on tablets and phones (the founder 2026-10-31): Sign up (to /app/welcome) always shows, the language switch sits at the very right */
+/* the bar on tablets and phones (the founder 2026-10-31): logo, the Menu pill in the middle, the language switch at the very right;
+   Sign up lives in the menu (not the bar) below 1100 px */
 @media (max-width: 1099px) {
-  .nav .lang { position: static; transform: none; order: 3; }
+  .nav .lang { position: static; transform: none; }
   .nav .lang-list { left: auto; right: 0; }
-  .nav-get { order: 2; }
+  .nav-get { display: none !important; }
+  .nav-sheet .badges .btn:not(.btn-ghost) { display: inline-flex; }
 }
-@media (max-width: 479px) {
-  .nav-get { display: inline-flex; padding: 0 14px; }
-  .nav-menu { position: static; transform: none; order: 1; padding: 0 14px; }
-  .nav-end { gap: 6px; }
-}
-@media (max-width: 380px) { .nav-menu::after { display: none; } .nav-menu { width: 44px; padding: 0; justify-content: center; } }
 .nav .lang { order: 3; } .nav-get { order: 2; } /* the language switch at the very right on every width */

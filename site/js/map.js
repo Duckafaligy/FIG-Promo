@@ -35,7 +35,7 @@
   // a lost WebGL canvas (memory pressure, a GPU reset) comes back blank until something draws it: draw it again
   map.on("webglcontextrestored", () => map.triggerRepaint());
   map.on("load", () => {
-    box.classList.add("ready");
+    map.once("idle", () => box.classList.add("ready")); // fade in once every tile has drawn, not tile by tile
     map.triggerRepaint(); // one sure frame now the map is ready, with no drift loop to keep drawing
     const W = box.clientWidth, H = box.clientHeight, minX = wide() ? 0.53 : 0.04, maxY = wide() ? 0.95 : 0.5;
     const placed = [];

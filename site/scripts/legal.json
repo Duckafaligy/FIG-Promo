@@ -112,6 +112,7 @@
      "• Location: your precise location while you use FIG, to show nearby deals. It's optional: you can find, claim and use every deal with it off. If you tap I'm here on a takeout order, we keep how far you were from the restaurant with that order. If you turn on arrival reminders, also when you arrive at a restaurant where you have a claimed deal.",
      "• Activity: claims, verified visits, searches, takeout orders, and the reviews and photos you post.",
      "• Device: phone model, app version, notification token and crash reports.",
+    "• Quick check: when you sign up, sign in or reset a password, hCaptcha checks the visit. It processes your internet address, browser and device signals and how you interact with the check, only to tell people from bots. FIG learns only whether you passed.",
      "• Terms: which version of our terms you accepted, and when.",
      "• Two-step sign-in: if you turn it on, the key that links FIG to your authenticator app (the codes it makes stay on your phone), or the email address we send codes to. When we send you a code we keep only a scrambled copy of it for 10 minutes. Backup codes are kept scrambled too.",
      "• Support: messages and reports you send us.",
@@ -160,6 +161,7 @@
      "• Google Analytics: website visit statistics (pages viewed, approximate location, device type), using cookies only if you accept them; see the Cookies page",
      "• Resend: sends FIG's emails from FIG's own address, so it gets your email address and what the email says, and tells us whether the email was delivered",
      "• Stripe: card payments for takeout orders, and checking and paying restaurants. To set up a restaurant’s account, FIG shares its business name, address, phone and email with Stripe. ID and bank details go straight to Stripe and never pass through FIG; Stripe keeps them under its own privacy policy. FIG keeps only whether and when Stripe verified the account.",
+    "• hCaptcha (Intuity Inc.): the quick check on the sign-up, sign-in and password-reset screens. It processes your internet address, browser and device signals and how you interact with the check, only to tell people from bots, under hCaptcha’s own privacy policy.",
      "• Komoot (Photon): the address search when you or a restaurant look up an address. What you type, and your internet address, go to its servers in Germany",
      "• OpenFreeMap (map tiles), jsDelivr (code the pages load) and Unsplash (some pictures on Home): they see your internet address, as any website does, so they can send it",
      "• Apple and Google: sign-in, maps, notifications"

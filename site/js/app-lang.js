@@ -35,7 +35,8 @@
     const save = () => reg.active.postMessage({ page: location.pathname, files: performance.getEntriesByType("resource").map((x) => x.name) });
     if (!before) { save(); setTimeout(save, 10000); } // and again for the files still on their way when it took over
   }).catch(() => {}));
-  root.lang = /^zh/i.test(l) ? (/Hant|-(TW|HK|MO)\b/i.test(l) ? "zh-Hant" : "zh-Hans") : /^fr/i.test(l) ? "fr" : "en";
+  let site = null; try { site = localStorage.getItem("fig.siteLang"); } catch {} // the website's pick comes first (2026-10-30, as the app's phoneLang)
+  root.lang = ["en", "fr", "zh-Hans", "zh-Hant"].includes(site) ? site : /^zh/i.test(l) ? (/Hant|-(TW|HK|MO)\b/i.test(l) ? "zh-Hant" : "zh-Hans") : /^fr/i.test(l) ? "fr" : "en";
   const apply = () => { const t = document.querySelector(".fig-backlink span"); if (t) t.textContent = T[root.lang] || "Back to FIG"; };
   new MutationObserver(apply).observe(root, { attributes: true, attributeFilter: ["lang"] });
   document.addEventListener("DOMContentLoaded", apply);

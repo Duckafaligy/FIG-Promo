@@ -816,11 +816,9 @@ p.consent { cursor: default; padding-left: 22px; }
   .two-tone { font-size: 30px; }
 
   /* swipe rows */
-  .steps, .bento { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+  .bento { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
     margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); background: none; border: 0; border-radius: 0; }
-  .steps::-webkit-scrollbar, .bento::-webkit-scrollbar { display: none; }
-  .step { flex: 0 0 68%; scroll-snap-align: center; }
-  .step .phone { max-width: 200px; margin-bottom: 18px; }
+  .bento::-webkit-scrollbar { display: none; }
   .step h3 { font-size: 19px; }
   .bento { margin-top: 28px; }
   .bento .cell { flex: 0 0 86%; scroll-snap-align: center; min-height: 430px; gap: 18px; padding: 22px 22px 0; border: 1px solid var(--line); border-radius: 18px; }
@@ -1671,3 +1669,86 @@ html[lang="zh-Hant"] .lang-code::before { content: "繁"; }
 .lang-note { margin: 0; font-size: 14px; font-weight: 600; color: var(--muted); }
 .lg-band-in > .lang { position: absolute; top: 12px; right: var(--gutter, 20px); }
 main > .lang-note:first-child { padding-top: 96px; margin-bottom: -72px; text-align: center; }
+
+/* ---------- How it works (2026-10-30): four steps on a dotted path that draws in (main.js), frosted chips, soft glows.
+   The mock phones are flat (transform-style: flat). .phone's preserve-3d put the screen in a 3D context with the Claim button's
+   animated layers, and Chrome split the screen into planes there: the seam through the middle phone. The tilt needs no 3D children. ---------- */
+.phone.mk-phone { transform-style: flat; }
+.how { position: relative; overflow: hidden; isolation: isolate; }
+.how::before, .how::after { content: ""; position: absolute; z-index: -1; width: 960px; height: 960px; border-radius: 50%; pointer-events: none; }
+.how::before { left: -320px; top: 80px; background: radial-gradient(closest-side, rgba(30, 94, 255, .16), transparent); }
+.how::after { right: -340px; bottom: -260px; background: radial-gradient(closest-side, rgba(20, 200, 107, .16), transparent); }
+.how-flow { position: relative; }
+.how-path { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.how-dots { stroke: var(--cobalt); stroke-width: 3; stroke-linecap: round; stroke-dasharray: .1 11; opacity: .6; }
+.how .steps { position: relative; gap: 56px; }
+.how .step { display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "n t" ". v"; gap: 18px 16px; text-align: left; margin-top: 0; }
+.how .step-vis { grid-area: v; position: relative; justify-self: center; width: 100%; max-width: 230px; }
+.how .step-vis::before { content: ""; position: absolute; inset: 6% -22%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(30, 94, 255, .22), transparent); }
+.how .step:nth-child(even) .step-vis::before { background: radial-gradient(closest-side, rgba(20, 200, 107, .2), transparent); }
+.how .step .phone.mk-phone { max-width: none; margin: 0; box-shadow: 0 30px 60px rgba(10, 16, 32, .16); }
+.how .num { grid-area: n; position: relative; display: grid; place-items: center; width: 44px; height: 44px; margin: 0; border-radius: 50%; background: #fff; color: var(--cobalt); font-size: 14px; font-weight: 800;
+  box-shadow: 0 0 0 6px rgba(30, 94, 255, .1), 0 8px 20px rgba(10, 16, 32, .1); transition: background .5s, color .5s, box-shadow .5s; }
+.how .num.on { background: var(--cobalt); color: #fff; box-shadow: 0 0 0 6px rgba(30, 94, 255, .18), 0 10px 24px rgba(30, 94, 255, .3); }
+.how .step-t { grid-area: t; align-self: center; }
+.how .step p { max-width: 30em; }
+/* the frosted chips */
+.how-chip { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border: 1px solid rgba(255, 255, 255, .9); border-radius: 99px;
+  background: rgba(255, 255, 255, .72); -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4); box-shadow: 0 14px 34px rgba(10, 16, 32, .14);
+  color: var(--ink); font-size: 13px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.how-chip i { display: grid; place-items: center; flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--cobalt); color: #fff; }
+.how-chip i.g { background: var(--leaf); color: #062B16; }
+.how-chip svg { width: 14px; height: 14px; }
+.how-chip.c1 { right: -14px; top: 30%; }
+.how-chip.c2 { left: -16px; top: 13%; }
+.how-chip.c3 { right: -12px; top: 36%; }
+.how-chip.c4 { left: -14px; bottom: 26%; }
+/* gentle floats: the phone and its chip drift out of step (translate, so the tilt's transform stays free) */
+.motion .how .step-vis .phone { animation: hpFloat 7s ease-in-out infinite; }
+.motion .how .how-chip { animation: hpFloat 5s ease-in-out infinite; animation-delay: -1.5s; }
+.motion .how .step:nth-child(2) .phone { animation-delay: -1.8s; } .motion .how .step:nth-child(2) .how-chip { animation-delay: -3.2s; }
+.motion .how .step:nth-child(3) .phone { animation-delay: -3.6s; } .motion .how .step:nth-child(3) .how-chip { animation-delay: -.6s; }
+.motion .how .step:nth-child(4) .phone { animation-delay: -5.4s; } .motion .how .step:nth-child(4) .how-chip { animation-delay: -2.4s; }
+@media (min-width: 720px) and (max-width: 1099px) {
+  .how .steps { grid-template-columns: 1fr; gap: 64px; }
+  .how .step { grid-template-columns: 44px minmax(0, 1fr) 250px; grid-template-areas: "n t v"; column-gap: 24px; align-items: center; }
+  .how .step-vis { max-width: 250px; }
+}
+@media (min-width: 1100px) {
+  .how .steps { grid-template-columns: repeat(4, 1fr); gap: 40px; align-items: start; }
+  .how .step { grid-template-columns: 1fr; grid-template-areas: "v" "n" "t"; row-gap: 22px; }
+  .how .step:nth-child(even) .step-vis { margin-top: 64px; }
+  .how .step:nth-child(odd) .step-vis { margin-bottom: 64px; }
+  .how .step-vis { max-width: 280px; justify-self: start; }
+  .how .step-t { align-self: start; }
+}
+
+/* the four screens' extra parts (photo pins, the restaurant page, the claim sheet) */
+.mk-map.photo { background: #EEF0F2; }
+.mk-mapimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 34% 50%; }
+.mk-pin.ph { width: calc(11 * var(--u)); height: calc(11 * var(--u)); overflow: hidden; border: calc(.8 * var(--u)) solid #fff; background: #fff; box-shadow: 0 0 0 calc(.6 * var(--u)) #1E5EFF, 0 calc(1.2 * var(--u)) calc(3 * var(--u)) rgba(10, 16, 32, .3); }
+.mk-pin.ph img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.mk-pin.sel { z-index: 1; width: calc(16 * var(--u)); height: calc(16 * var(--u)); box-shadow: 0 0 0 calc(1 * var(--u)) #1E5EFF, 0 0 0 calc(3.4 * var(--u)) rgba(30, 94, 255, .22), 0 calc(2 * var(--u)) calc(5 * var(--u)) rgba(10, 16, 32, .35); }
+.mk-you { position: absolute; width: calc(4.6 * var(--u)); height: calc(4.6 * var(--u)); border: calc(1 * var(--u)) solid #fff; border-radius: 50%; background: #1E5EFF; box-shadow: 0 0 0 calc(4 * var(--u)) rgba(30, 94, 255, .2); transform: translate(-50%, -50%); }
+.mk-peek { position: absolute; z-index: 2; left: calc(4 * var(--u)); right: calc(4 * var(--u)); bottom: calc(23 * var(--u)); display: flex; align-items: center; gap: calc(3 * var(--u)); padding: calc(2.4 * var(--u)); border-radius: calc(4.4 * var(--u)); background: #fff; box-shadow: 0 calc(1.4 * var(--u)) calc(5 * var(--u)) rgba(10, 16, 32, .18); }
+.mk-peek > span:not(.mk-tag), .mk-dc { flex: 1; min-width: 0; }
+.mk-peek img, .mk-deal img, .mk-sheet .mk-li img { flex: 0 0 calc(12 * var(--u)); width: calc(12 * var(--u)); height: calc(12 * var(--u)); border-radius: calc(3 * var(--u)); object-fit: cover; }
+.mk-peek b, .mk-dc b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(3.6 * var(--u)); }
+.mk-photo { position: relative; flex: 0 0 calc(50 * var(--u)); margin: calc(-1 * var(--u)) calc(-5 * var(--u)) 0; overflow: hidden; }
+.mk-photo img { width: 100%; height: 100%; object-fit: cover; }
+.mk-deal { display: flex; align-items: center; gap: calc(2.6 * var(--u)); padding: calc(3.2 * var(--u)) calc(2.6 * var(--u)); border: 1px solid #E3E6EA; border-radius: calc(4 * var(--u)); background: #fff; }
+.mk-deal.on { border: calc(.5 * var(--u)) solid #1E5EFF; box-shadow: 0 calc(1 * var(--u)) calc(4 * var(--u)) rgba(30, 94, 255, .16); }
+.mk-dc { display: flex; flex-direction: column; align-items: flex-start; gap: calc(.6 * var(--u)); }
+.mk-dc .mk-tag { font-size: calc(2.4 * var(--u)); padding: calc(.4 * var(--u)) calc(2 * var(--u)); }
+.mk-dc small { white-space: nowrap; }
+.mk-deal .mk-btn.sm { padding: 0 calc(3 * var(--u)); }
+.mk-dim { position: absolute; inset: 0; z-index: 1; background: rgba(10, 16, 32, .42); }
+.mk-sheet.cl { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; flex: none; margin: 0; padding: calc(3 * var(--u)) calc(5 * var(--u)) calc(8 * var(--u)); gap: calc(3 * var(--u)); text-align: left; }
+.mk-grab { align-self: center; width: calc(10 * var(--u)); height: calc(1.2 * var(--u)); border-radius: 99px; background: #DDE1E7; }
+.mk-toast { position: absolute; z-index: 3; left: calc(5 * var(--u)); right: calc(5 * var(--u)); top: calc(12 * var(--u)); padding: calc(2.6 * var(--u)) calc(3.4 * var(--u)); border-radius: calc(3.4 * var(--u)); background: #0E1116; color: #fff; font-size: calc(3.2 * var(--u)); font-weight: 700; opacity: 0; }
+.motion .fs-flash .mk-toast { animation: fsOkLate 8s var(--fs) infinite both; }
+.fs-qr .mk-qr { width: calc(68 * var(--u)); height: calc(68 * var(--u)); }
+.mk-row.mid { justify-content: center; gap: calc(2 * var(--u)); }
+@media (max-width: 380px) { .how-chip { font-size: 12px; } .how-chip.c1, .how-chip.c3 { right: -8px; } .how-chip.c2, .how-chip.c4 { left: -8px; } }
+.mk-dishes { display: flex; gap: calc(2.4 * var(--u)); }
+.mk-dishes img { flex: 1; min-width: 0; aspect-ratio: 1; border-radius: calc(3.4 * var(--u)); object-fit: cover; }

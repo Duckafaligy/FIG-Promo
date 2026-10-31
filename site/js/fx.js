@@ -53,8 +53,8 @@
     document.addEventListener("click", (e) => { if (!nav.contains(e.target)) set(false); });
   }
 
-  // phones: steps and feature boxes are swipe rows, with dots that follow along
-  if (matchMedia("(max-width: 719px)").matches) $$(".steps, .bento").forEach((row) => {
+  // phones: feature boxes are a swipe row (the steps stack, site.css ".how"), with dots that follow along
+  if (matchMedia("(max-width: 719px)").matches) $$(".bento").forEach((row) => {
     const kids = [...row.children];
     if (kids.length < 2) return;
     const dots = document.createElement("div");

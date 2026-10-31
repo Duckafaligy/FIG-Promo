@@ -67,6 +67,35 @@
     root.classList.add("reveal-on"); // the reveals above are set up: the CSS fallback (site.css) for a script that never gets here stands down
   }
 
+  // ---------- How it works: a dotted path through the step numbers, drawn in as you scroll down to it (never undrawn) ----------
+  (() => {
+    const flow = $(".how-flow");
+    if (!flow) return;
+    const svg = $(".how-path", flow), draw = $(".how-draw", svg), dots = $(".how-dots", svg), nodes = $$(".num", flow);
+    let len = 1, stops = [], prog = motion ? 0 : 1;
+    // node centres in the flow's own box (offsets, so the steps' reveal transform doesn't move them)
+    const at = (el) => { let x = el.offsetWidth / 2, y = el.offsetHeight / 2; for (let e = el; e && e !== flow; e = e.offsetParent) { x += e.offsetLeft; y += e.offsetTop; } return [x, y]; };
+    const paint = () => { draw.style.strokeDashoffset = len * (1 - prog); nodes.forEach((n, i) => n.classList.toggle("on", prog >= stops[i] - 0.01)); };
+    const layout = () => {
+      const p = nodes.map(at), segs = [];
+      for (let i = 1; i < p.length; i++) {
+        const [x0, y0] = p[i - 1], [x1, y1] = p[i], dx = x1 - x0, a = i % 2 ? -18 : 18;
+        // across (a wide screen): a soft wave; down (a phone or tablet): straight
+        segs.push(Math.abs(dx) > Math.abs(y1 - y0) ? ` C${x0 + dx / 3} ${y0 + a} ${x1 - dx / 3} ${y1 + a} ${x1} ${y1}` : ` C${x0} ${(y0 + y1) / 2} ${x1} ${(y0 + y1) / 2} ${x1} ${y1}`);
+      }
+      svg.setAttribute("width", flow.offsetWidth); svg.setAttribute("height", flow.offsetHeight);
+      let d = `M${p[0][0]} ${p[0][1]}`;
+      stops = [0];
+      for (const s of segs) { d += s; draw.setAttribute("d", d); stops.push(draw.getTotalLength()); }
+      len = stops[stops.length - 1] || 1; stops = stops.map((s) => s / len);
+      dots.setAttribute("d", d); draw.style.strokeDasharray = len;
+      paint();
+    };
+    layout();
+    new ResizeObserver(layout).observe(flow);
+    if (motion) ScrollTrigger.create({ trigger: flow, start: "top 80%", end: "bottom 80%", onUpdate: (s) => { if (s.progress > prog) { prog = s.progress; paint(); } } });
+  })();
+
 
 
   // ---------- chats: a diner and the restaurant texting, 3-5 s per message ----------

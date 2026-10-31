@@ -84,7 +84,7 @@
     drop.id ||= "drop-" + i;
     b.type = "button"; b.className = "cell-more";
     b.setAttribute("aria-controls", drop.id);
-    b.setAttribute("aria-label", "More about " + (c.querySelector("h3")?.textContent.trim() || "this"));
+    b.setAttribute("aria-label", `More about ${c.querySelector("h3")?.textContent.trim() || "this"}`);
     c.removeAttribute("tabindex"); // the button is the keyboard stop now
     c.prepend(b);
     setCell(c, false);

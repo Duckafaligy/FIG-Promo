@@ -49,7 +49,7 @@
     if (!box) build();
     const now = read(), line = box.querySelector(".ck-now");
     line.hidden = !now;
-    line.textContent = now ? "Right now: Google Analytics is " + (now === "granted" ? "on." : "off.") : "";
+    line.textContent = now === "granted" ? "Right now: Google Analytics is on." : now ? "Right now: Google Analytics is off." : ""; // whole sentences, so js/site-lang.js can translate them
     box.hidden = false;
     void box.offsetWidth; // the fade starts from hidden
     box.classList.add("in");

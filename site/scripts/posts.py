@@ -31,16 +31,16 @@ UPDATED = "2026-10-14"
 # "Good to know" cards link to them. Every post has a `group`, one of these slugs (pages.py stops the build otherwise).
 # The descriptions are true today.
 GROUPS = [
-    ("eat-out-for-less", "Eat out for less", "How deals on FIG work, and how to tell a good one."),
-    ("fill-quiet-hours", "Fill your quiet hours", "Deal ideas for slow hours, the math behind them, and getting your team ready."),
-    ("takeout-and-money", "Takeout & money", "What a takeout order leaves a restaurant, with the fees and HST in plain numbers."),
+    ("eat-out-for-less", "Eat out for less", "How deals work, and how to spot a good one."),
+    ("fill-quiet-hours", "Fill your quiet hours", "Deal ideas for slow hours, the math behind them, and how to get your team ready."),
+    ("takeout-and-money", "Takeout & money", "What a takeout order leaves you, with the fees and HST in plain numbers."),
     ("fig-in-markham", "FIG in Markham", "Local guides, and why FIG starts here."),
 ]
 
 POSTS = [
     dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-25", topic="News", group="fig-in-markham",
          dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill.",
-         desc="Why FIG exists: a restaurant deals app for Markham that's free for diners and for restaurants, and takes no cut of a dine-in bill.",
+         desc="Why FIG exists: Markham restaurants run on thin margins, so FIG is free for them and for diners, and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
          points=["FIG is a restaurant deals app starting in Markham, Ontario. Deals start January 1, 2027.",
                  "Restaurants post their own deals, for the hours they choose, with their own daily cap. Posting deals and scanning diners are free, with no fee per diner.",

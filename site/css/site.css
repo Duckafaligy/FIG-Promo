@@ -1762,3 +1762,12 @@ main > .lang-note:first-child { padding-top: 96px; margin-bottom: -72px; text-al
   .nav-sheet .badges .btn:not(.btn-ghost) { display: inline-flex; }
 }
 .nav .lang { order: 3; } .nav-get { order: 2; } /* the language switch at the very right on every width */
+
+/* phones and tablets (the founder 2026-10-31: "make the map the entire background, not with white on the phone, you can't even see anything"):
+   the map runs behind the whole hero, only a soft tint at the top and a fade into the next section; the words keep a white glow to stay readable */
+@media (max-width: 979px) {
+  .hero-fade { background: linear-gradient(180deg, rgba(255, 255, 255, .3) 0, rgba(255, 255, 255, 0) 90px, rgba(255, 255, 255, 0) 26%, rgba(255, 255, 255, .6) 33%, rgba(255, 255, 255, .6) 57%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0) calc(100% - 120px), #fff 100%); z-index: 1; }
+  .hero-copy { position: relative; z-index: 2; }
+  .hero-copy::before { display: none; }
+  .hero-copy h1, .hero-copy .lede { text-shadow: 0 0 18px #fff, 0 0 8px #fff, 0 0 2px #fff; }
+}

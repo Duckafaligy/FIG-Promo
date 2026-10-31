@@ -11,6 +11,7 @@ figLang({
  "Blog": "Blogue",
  "Language": "Langue",
  "Restaurant sign-up": "Inscription restaurant",
+ "Sign up": "S’inscrire",
  "Menu": "Menu",
  "Diners: join the waitlist": "Clients : rejoignez la liste d’attente",
  "App Store and Google Play: coming soon": "App Store et Google Play : bientôt",

@@ -39,7 +39,9 @@
           bs[(i + (e.key === "ArrowDown" ? 1 : bs.length - 1)) % bs.length].focus(); e.preventDefault();
         }
       });
-      box.addEventListener("focusout", (e) => { if (!box.contains(e.relatedTarget)) show(false); });
+      // only when focus really moves elsewhere (Tab): Safari doesn't focus a tapped button, so a tap on a language blurred the list
+      // and closed it before the tap landed (the founder 2026-10-31: "i selected french and nothing changed"); taps outside close it below
+      box.addEventListener("focusout", (e) => { if (e.relatedTarget && !box.contains(e.relatedTarget)) show(false); });
       document.addEventListener("click", (e) => { if (!box.contains(e.target)) show(false); });
     });
   });

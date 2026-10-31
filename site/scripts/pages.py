@@ -111,13 +111,12 @@ def nav(current=""):
     return NAV
 
 
-FOOTER = f'''<footer class="foot bp">
-  <div class="foot-cta"><div class="wrap foot-cta-in"><div><h2>Fill your quiet hours.</h2><p>Free for Markham restaurants. Diners open January 1, 2027.</p></div><div class="foot-cta-btns"><a class="btn btn-lg btn-volt" href="/app/sign-up-business">Restaurant sign-up</a><a class="btn btn-lg btn-line" href="/#waitlist">Diners: join the waitlist</a><span class="store-pills"><span class="store-pill" aria-disabled="true" title="Coming soon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.9zM14.2 5.8c.6-.8 1.1-1.9.9-3-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg><span><small>Coming soon</small><b>App Store</b></span></span><span class="store-pill" aria-disabled="true" title="Coming soon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#00D7FE" d="M3.6 1.7 13.2 12 3.6 22.3c-.4-.3-.6-.8-.6-1.4V3.1c0-.6.2-1.1.6-1.4z"/><path fill="#FFCE00" d="M16.5 8.7 13.2 12l3.3 3.3 3.9-2.2c.9-.5.9-1.7 0-2.2z"/><path fill="#FF3A44" d="m13.2 12-9.6 10.3c.4.3 1 .3 1.6 0l11.3-6.4z"/><path fill="#00F076" d="M16.5 8.7 5.2 2.3c-.6-.3-1.2-.3-1.6 0z"/></svg><span><small>Coming soon</small><b>Google Play</b></span></span></span></div></div></div>
+FOOTER = f'''<footer class="foot">
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
         <a class="brand" href="/"><svg class="logo"><use href="#logo"/></svg><span>FIG</span></a>
-        <p>Live deals from local restaurants on a map. Markham first, then Richmond Hill and Vaughan Mills.</p>
+        <p>Live deals from local restaurants, on a map. Starting in Markham, Ontario. Expanding to Richmond Hill and Vaughan Mills.</p>
         {STORES}
       </div>
       <div class="foot-cols">
@@ -159,7 +158,7 @@ ORG = json.dumps({"@context": "https://schema.org", "@graph": [
     {"@type": "WebSite", "name": "FIG", "url": SITE_URL},
     {"@type": "WebApplication", "name": "FIG", "url": SITE_URL + "/app/", "operatingSystem": "Any", "applicationCategory": "LifestyleApplication",
      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CAD"}}]})
-index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Fill your quiet hours. Free for Markham restaurants", "Post a deal for your slow hours and Markham diners find it on the map. Free for restaurants, no commission on dine-in. Set up your page today.",
+index = index.replace('  <meta name="theme-color"', '  <!-- seo -->\n' + head_meta("/", "FIG · Restaurant deals in Markham, Ontario", "Markham restaurants: free to join. Post deals for your quiet hours and diners find you on the map. No commission on dine-in. FIG earns only on takeout.",
                       f'\n  <script type="application/ld+json">{ORG}</script>') + '\n  <!-- /seo -->\n  <meta name="theme-color"', 1)
 
 # ---------- Home's "Good to know": the blog's groups as cards (FIX-LIST #145), from the same GROUPS as /blog ----------
@@ -423,7 +422,7 @@ help_html = hero("How can we help?", "Short answers to the questions people ask 
                  + '<div class="hs-search"><input type="search" id="help-q" placeholder="Search the help center" aria-label="Search the help center" autocomplete="off">'
                  + '<p class="hs-none" id="help-none" hidden>No match. <a href="/contact">Message us</a> and a real person replies within 24 hours.</p></div>', cls="pg-hero-line")
 _titles = {"diners": "For diners"}
-help_html += '<section class="section help-wrap"><div class="wrap help-grid"><aside class="help-side">' + mocks.owner_home().replace('<div class="mk-scr">', '<div class="mk-scr" data-loop="r1">') + '</aside><div class="help-main">'
+help_html += '<section class="section help-wrap"><div class="wrap help-grid"><aside class="help-side">' + mocks.owner_home() + '</aside><div class="help-main">'
 for k, (anchor, title, qs) in enumerate(HELP):
     help_html += f'<section class="help-group" id="{anchor}"><h2 class="help-h">{_titles.get(anchor, title)}</h2>{qa_list(qs, 1 if k == 0 or anchor == "money" else 0)}</section>'
 help_html += '</div></div></section>'
@@ -656,8 +655,8 @@ BUILT = f"\n  <lastBuildDate>{rfc822_noon(datetime.date.fromisoformat(max(x.get(
 # =====================================================================  404, site map, sitemap.xml, robots, manifest
 page("404", "Page not found", "This page doesn't exist.", body='''<p class="lost-num" aria-hidden="true">404</p><h1>This page wandered off.</h1>
 <p class="lead-p">It may have moved, or the link has a typo.</p>
-<div class="cards"><a class="card-l" href="/"><b>Home</b><span>Fill your quiet hours.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Build, publish, post, scan.</span></a>
-<a class="card-l" href="/#owners"><b>For restaurants</b><span>Free to set up.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
+<div class="cards"><a class="card-l" href="/"><b>Home</b><span>Local deals, one tap away.</span></a><a class="card-l" href="/#how"><b>How it works</b><span>Find, claim, show, save.</span></a>
+<a class="card-l" href="/#owners"><b>For restaurants</b><span>Post deals diners can find.</span></a><a class="card-l" href="/help"><b>Help center</b><span>Answers to common questions.</span></a></div>''')
 
 # a restaurant shared from the app (/r/<id>?n=<name>&from=<first name>, rewritten to /r.html in vercel.json)
 page("r", "Shared with you", "A restaurant someone shared with you on FIG.", body='''<div class="r-bubble" aria-hidden="true"><b id="r-from">A friend</b><span>dinner here?</span></div>

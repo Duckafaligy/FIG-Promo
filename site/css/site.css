@@ -1630,6 +1630,11 @@ details.qa > p { margin: -2px 0 0; }
 @media (max-width: 479px) { .nav-get { display: none; } .nav-end { margin-left: auto; } }
 .mk-back { color: #1E5EFF; font-weight: 700; font-size: calc(3.6 * var(--u)); }
 
+/* the set-up box: how sign-up stays safe (from the 2026-10-26 copy pass) */
+.ga-trust { display: grid; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+.ga-trust li { padding-left: 22px; position: relative; }
+.ga-trust li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 10px; height: 6px; border-left: 2px solid var(--cobalt); border-bottom: 2px solid var(--cobalt); transform: rotate(-45deg); }
+@media (min-width: 720px) { .ga-trust { grid-template-columns: 1fr 1fr; gap: 6px 20px; } }
 /* ---------- the app recordings fill their card, zoomed on the phone (the founder 2026-10-28: "I barely see anything"):
    no pale box inside the coloured panel; the caption stays at the top, the phone runs off the bottom like a product shot ---------- */
 .cell:not(.mini) .panel { padding-top: 0; min-height: 330px; }

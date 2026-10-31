@@ -208,3 +208,33 @@ console.log("ok: blog groups");
   for (const f of ["contact.html", "help.html"]) assert.ok(/class="[^"]*\bfig-mail\b[^"]*" hidden/.test(fs.readFileSync(path.join(__dirname, "..", f), "utf8")), `${f}: the email line must be hidden in the HTML`);
   console.log("ok: email links: same tokens as the mail function, GET changes nothing, POST needs the right token, one-click works, same page for wrong links, rate limited, routes, email line hidden");
 })().catch((e) => { console.error(e); process.exit(1); });
+// the website in four languages (2026-10-30): every English string js/site-lang.js would look up on a page (text, placeholder,
+// aria-label, alt, title, <title>; not under translate="no") or that the pages' scripts write (scripts/lang-need.js) has a translation in
+// each of lang/fr.js, zh-Hans.js and zh-Hant.js, with the same {0} slots, and "Markham first, expanding to Richmond Hill and Vaughan Mills"
+// stays in every language. Edit the site's English and this says which words still need translating.
+{
+  const vm = require("vm");
+  const { need } = require("./lang-need.js");
+  const want = need();
+  assert.ok(want.size > 300 && want.has("Fill your") && want.has("This page is in English.") && want.has("We'll reply to {0}, usually within 24 hours."), "lang-need.js no longer finds the site's words");
+  assert.ok(![...want.keys()].some((k) => /Lorem|Premium/.test(k)), "the site's English mentions Premium");
+  const site = path.join(__dirname, "..");
+  for (const L of ["fr", "zh-Hans", "zh-Hant"]) {
+    let dict = null;
+    vm.runInNewContext(fs.readFileSync(path.join(site, "lang", L + ".js"), "utf8"), { figLang: (d) => { dict = d; } });
+    assert.ok(dict, `lang/${L}.js must call figLang({...})`);
+    const missing = [...want].filter(([k]) => !Object.prototype.hasOwnProperty.call(dict, k));
+    assert.ok(!missing.length, `lang/${L}.js has no translation for ${missing.length} string(s), e.g.:\n` + missing.slice(0, 15).map(([k, f]) => `  ${f}: ${JSON.stringify(k)}`).join("\n"));
+    const slots = (s) => (s.match(/\{\d\}/g) || []).sort().join();
+    for (const [k, v] of Object.entries(dict)) {
+      assert.ok(typeof v === "string" && v.trim(), `lang/${L}.js: an empty translation for ${JSON.stringify(k)}`);
+      assert.strictEqual(slots(v), slots(k), `lang/${L}.js: ${JSON.stringify(k)} and its translation need the same {0} slots`);
+      assert.ok(!/Premium/i.test(v), `lang/${L}.js: ${JSON.stringify(k)} mentions Premium`);
+    }
+    for (const [k, v] of Object.entries(dict)) if (/Markham first, expanding to Richmond Hill and Vaughan Mills/.test(k)) {
+      const towns = { fr: ["Markham", "Richmond Hill", "Vaughan Mills"], "zh-Hans": ["万锦", "列治文山", "旺市"], "zh-Hant": ["萬錦", "列治文山", "旺市"] }[L];
+      assert.ok(towns.every((t) => v.includes(t)), `lang/${L}.js: the launch line must name ${towns.join(", ")}: ${v}`);
+    }
+  }
+  console.log(`ok: the website's ${want.size} strings are translated into French, Simplified and Traditional Chinese`);
+}

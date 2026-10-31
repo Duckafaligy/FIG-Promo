@@ -239,9 +239,10 @@
       // open to everyone and no launch date still ahead: nothing left to announce (FIX-LIST #56)
       if ((m.mode || (m.diners_open ? "on" : "off")) === "on" && !(m.opens_at && new Date(m.opens_at) > new Date())) { $(".wl-count", wl).hidden = true; return; }
       let when = "FIG opens in Markham on January 1, 2027."; // no date set yet: the date the site gives everywhere (FIX-LIST #137)
-      try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString("en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
+      try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString({ fr: "fr-CA", "zh-Hans": "zh-CN", "zh-Hant": "zh-TW" }[document.documentElement.lang] || "en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
       const line = $(".wl-line", wl);
-      if (line) line.textContent = `${when} ${m.founding_cap && m.mode === "waitlist" ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first."}`;
+      // two sentences, two text nodes: js/site-lang.js translates each
+      if (line) { line.textContent = when; line.append(" " + (m.founding_cap && m.mode === "waitlist" ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first.")); }
       if (m.waitlist >= 25) $(".wl-count", wl).append(` ${m.waitlist.toLocaleString("en-CA")} people are already waiting.`);
     }).catch(() => {});
     email.addEventListener("input", () => email.removeAttribute("aria-invalid"));

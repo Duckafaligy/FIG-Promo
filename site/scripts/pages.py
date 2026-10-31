@@ -104,6 +104,12 @@ if not _mpath.exists() or _mpath.read_text(encoding="utf-8") != _mtext:
 # the nav is Home's own (index.html, Home v2 2026-10-13): every link scrolls to a section of Home, and its button opens the
 # web app. Every other page copies it as it is, so the two never drift.
 NAV = re.search(r'<header class="nav".*?</header>', index, re.S).group(0)
+# the language picker (js/site-lang.js): in the navbar, and in the legal pages' band, which have no navbar
+LANG = re.search(r'<div class="lang".*?</ul></div>', NAV, re.S).group(0)
+# the pages translated into French and Chinese (with Home and the navbar, footer and cookie notice everywhere); every other
+# page's content stays in English (translate="no") and says so in the visitor's language
+TRANSLATED = {"about", "contact", "help"}
+LANG_NOTE = '<p class="lang-note" translate="yes" hidden>This page is in English.</p>'
 NAV_LINKS = re.findall(r'<a href="(/#[a-z]+)"[^>]*>([^<]+)</a>', re.search(r'<nav class="nav-links".*?</nav>', NAV, re.S).group(0))
 
 
@@ -216,6 +222,7 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 {head_meta(path, full, desc, extra_head, og_type, image)}
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/site.css">
+  <script src="/js/site-lang.js"></script>
   <script>window.va = window.va || function () {{ (window.vaq = window.vaq || []).push(arguments); }};</script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/js/consent.js"></script>
@@ -226,8 +233,8 @@ def page(slug, title, desc, body, group="More", wide=False, extra_head="", keywo
 {SPRITE}
 <div class="bg" aria-hidden="true"><div class="bg-grid"></div></div>
 {nav(current) if chrome == 'nav' else ''}
-<main id="main"{' class="page"' if wide else ' class="wrap doc"'}{f' data-post="{slug[5:]}"' if slug.startswith("blog/") else ""}>
-{body}
+<main id="main"{' class="page"' if wide else ' class="wrap doc"'}{f' data-post="{slug[5:]}"' if slug.startswith("blog/") else ""}{'' if slug in TRANSLATED else ' translate="no" lang="en"'}>
+{'' if slug in TRANSLATED or chrome != 'nav' else LANG_NOTE + chr(10)}{body}
 </main>
 {FOOTER}
 {MEGA if chrome == 'nav' else ''}
@@ -304,7 +311,7 @@ def legal(slug, doc, extra=""):
     band = ('<section class="lg-band"><div class="wrap lg-band-in">'
             '<a class="lg-back" href="/"><span class="lg-back-arrow" aria-hidden="true">&larr;</span><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span>Back to FIG</span></a>'
             f'<div class="lg-title"><h1 class="lg-h1">{e(doc["title"])}</h1>'
-            f'<p class="lg-upd">{e(doc["updated"])}</p></div>{tabs if slug in dict(LEGAL_TABS) else ""}'
+            f'<p class="lg-upd">{e(doc["updated"])}</p>{LANG_NOTE}</div>{LANG}{tabs if slug in dict(LEGAL_TABS) else ""}'
             '<button class="lg-toc-btn" type="button" aria-expanded="false" aria-controls="lg-toc"><span class="lg-toc-lbl">On this page</span><span class="lg-toc-now" aria-hidden="true"></span></button>'
             f'<nav class="lg-rail lg-menu" id="lg-toc" aria-label="On this page">{links}</nav></div></section>')
     col = f'<nav class="lg-rail lg-col" aria-label="Contents"><b>On this page</b>{links}</nav>'
@@ -326,7 +333,7 @@ legal("cookies", {"title": "Cookies", "updated": "Last updated October 30, 2026"
                   "short": ["No advertising cookies. Google Analytics sets cookies on this website only if you accept them; if you say no thanks, it sets none.", "The website keeps a few small notes in your browser's storage, listed below. They are not cookies.", "The web app keeps your sign-in and settings in your browser, not in cookies."],
                   "sections": [], "contactAsk": "Questions about cookies?", "contactLine": "FIG, Markham, Ontario"},
       [("What the website stores", "<ul><li><b>Google Analytics cookies, only if you accept.</b> The first time you visit, a notice asks whether FIG may use Google Analytics to count visits and see which pages help. If you accept, Google Analytics sets cookies (named _ga, and _ga_ followed by an ID) that count visits and pages viewed, kept up to 2 years; Google gets your approximate location and device type, not your name. If you say no thanks, or don't answer, nothing is loaded from Google and no cookie is set. Change your mind anytime with Cookie settings at the bottom of every page: choosing no thanks there deletes the cookies. You can also block them in your browser settings or with Google's opt-out add-on (tools.google.com/dlpage/gaoptout).</li><li><b>No advertising cookies.</b> FIG doesn't set any.</li><li><b>Vercel Web Analytics.</b> It also counts visits, and sets no cookies.</li></ul>"),
-       ("Small notes in your browser", "<p>These are kept in your browser's own storage, not in cookies, and stay on your device:</p><ul><li><b>fig.consent</b> is your answer about Google Analytics cookies. It stays until you change it or clear this site's data.</li><li><b>fig.src</b> remembers which link brought you here, so a creator gets credit if you join the waitlist. It's gone when you close the tab.</li><li><b>fig.dinersOpen</b> remembers whether FIG is open to diners, so the web app's loading screen is right. It stays until you clear this site's data.</li><li><b>fig.reloadedForDeploy</b> stops the web app from reloading over and over after an update. It's gone when you close the tab.</li></ul>"),
+       ("Small notes in your browser", "<p>These are kept in your browser's own storage, not in cookies, and stay on your device:</p><ul><li><b>fig.consent</b> is your answer about Google Analytics cookies. It stays until you change it or clear this site's data.</li><li><b>fig.siteLang</b> is the language you picked for this website (English, French or Chinese). It stays until you pick another or clear this site's data.</li><li><b>fig.src</b> remembers which link brought you here, so a creator gets credit if you join the waitlist. It's gone when you close the tab.</li><li><b>fig.dinersOpen</b> remembers whether FIG is open to diners, so the web app's loading screen is right. It stays until you clear this site's data.</li><li><b>fig.reloadedForDeploy</b> stops the web app from reloading over and over after an update. It's gone when you close the tab.</li></ul>"),
        ("What the web app keeps", "<p>When you use FIG in your browser, it keeps your sign-in and your settings (like your language) in this browser's own storage, so you stay signed in and it remembers them. They're not cookies and they don't track you anywhere else. It also keeps an offline copy of the pages and pictures you've opened, so repeat visits open faster. Signing out removes your sign-in; clearing this site's data in your browser removes the rest.</p>"),
        ("Things loaded from other services", "<p>The map tiles come from OpenFreeMap and the map library from jsDelivr; the animation library is served from FIG's own site. They see a normal web request (like any website you visit) but we don't send them anything about you. Google's script loads only if you accept Google Analytics, as described above. hCaptcha, the quick check on the sign-up, sign-in and password-reset screens of the web app, loads from hcaptcha.com when the check is shown. It may set its own cookies or use local storage in your browser to tell people from bots, not for advertising; see hCaptcha's privacy policy.</p>")])
 
@@ -349,7 +356,7 @@ page("contact", "Contact", "Message the FIG team. A real person reads every mess
 <form class="contact ct-card" method="post" action="/contact" novalidate>
 <label class="ct-field"><span>Your email</span><input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
 <label class="ct-field"><span>What's it about?</span><select name="topic">
-<option>A question</option><option>My restaurant</option><option>Privacy or my data</option><option>Terms or anything official</option><option>Something else</option>
+<option value="A question">A question</option><option value="My restaurant">My restaurant</option><option value="Privacy or my data">Privacy or my data</option><option value="Terms or anything official">Terms or anything official</option><option value="Something else">Something else</option>
 </select></label>
 <label class="ct-field"><span>Message</span><textarea name="body" rows="6" maxlength="4000" placeholder="How can we help?" required></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">

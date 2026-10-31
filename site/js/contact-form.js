@@ -24,7 +24,7 @@
       const done = document.createElement("div");
       done.className = "ct-done"; done.setAttribute("role", "status");
       done.innerHTML = '<span class="ct-done-tick" aria-hidden="true"></span><b>Message sent</b><p></p><button class="btn btn-soft" type="button">Send another</button>';
-      done.querySelector("p").textContent = "We'll reply to " + email.value.trim() + ", usually within 24 hours.";
+      done.querySelector("p").textContent = `We'll reply to ${email.value.trim()}, usually within 24 hours.`;
       done.querySelector("button").addEventListener("click", () => { body.value = ""; form.classList.remove("sent"); done.remove(); btn.disabled = false; btn.textContent = "Send message"; body.focus(); });
       form.append(done); form.classList.add("sent");
     } catch (e) {

@@ -1754,10 +1754,12 @@ main > .lang-note:first-child { padding-top: 96px; margin-bottom: -72px; text-al
 .mk-dishes img { flex: 1; min-width: 0; aspect-ratio: 1; border-radius: calc(3.4 * var(--u)); object-fit: cover; }
 
 /* the bar on tablets and phones (the founder 2026-10-31): logo, the Menu pill in the middle, the language switch at the very right;
-   Sign up lives in the menu (not the bar) below 1100 px */
+   tablets keep Sign up next to the language switch like desktop; phones move it into the menu (below 700 px) */
 @media (max-width: 1099px) {
   .nav .lang { position: static; transform: none; }
   .nav .lang-list { left: auto; right: 0; }
+}
+@media (max-width: 699px) {
   .nav-get { display: none !important; }
   .nav-sheet .badges .btn:not(.btn-ghost) { display: inline-flex; }
 }

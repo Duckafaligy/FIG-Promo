@@ -16,8 +16,10 @@
     const js = document.createElement("script"); js.type = "module"; js.src = "/app/maplibre-load.js"; document.head.appendChild(js);
   }, { timeout: 2500 });
 
+  // only a device that can't draw the live map gets the still picture (the founder 2026-10-31: the live map looks far sharper)
+  const still = () => box.insertAdjacentHTML("afterbegin", '<img src="/assets/map-fallback.webp" srcset="/assets/map-fallback-800.webp 800w, /assets/map-fallback.webp 1920w" sizes="100vw" alt="" class="map-fallback">');
   function start() {
-  if (!window.maplibregl) return;
+  if (!window.maplibregl) return still();
   let map;
   try {
     map = new maplibregl.Map({
@@ -26,7 +28,7 @@
       // a 2x or 3x screen drew 4-9x the pixels for a map that sits under the hero's fade; 1.5 looks the same (FIX-LIST #144)
       pixelRatio: Math.min(devicePixelRatio || 1, 1.5),
     });
-  } catch (e) { return; } // no WebGL: the still image stays
+  } catch (e) { return still(); } // no WebGL: the still picture instead
 
   let seed = 11;
   const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;

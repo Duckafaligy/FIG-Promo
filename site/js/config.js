@@ -5,5 +5,5 @@ window.FIG_CONFIG = {
   supabaseKey: "sb_publishable_3YFOf3yQj010ppmatdj5-w_-H45r2se",
   // The business address on the contact page and the Help page (hello@figpromo.ca). Hidden until it has been tested end to end:
   // set this to true (and nothing else) to show it. Emails FIG sends always carry the address in their footer; this is only the website.
-  showEmail: false,
+  showEmail: true, // on (the founder 2026-10-31); mail to figpromo.ca is routed by Cloudflare Email Routing
 };

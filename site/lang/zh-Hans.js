@@ -12,6 +12,8 @@ figLang({
  "Language": "语言",
  "Restaurant sign-up": "餐厅注册",
  "Sign up": "注册",
+ ", or email": "，或发送邮件至",
+ "Open the app": "打开应用",
  "Menu": "菜单",
  "Diners: join the waitlist": "食客：加入等候名单",
  "App Store and Google Play: coming soon": "App Store 和 Google Play：即将上线",

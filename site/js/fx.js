@@ -121,3 +121,8 @@
   }, { rootMargin: "0px 0px -8% 0px" });
   els.forEach((el) => io.observe(el));
 })();
+
+// already signed in to the web app (its session sits in this browser, same site): "Sign up" opens the app instead (the founder 2026-10-31)
+try {
+  if (localStorage.getItem("sb-frpoykqldlsysitiqnhz-auth-token")) document.querySelectorAll('.nav-get, .nav-sheet a[href="/app/welcome"]').forEach((a) => { a.href = "/app"; a.textContent = "Open the app"; });
+} catch { /* no storage (private window): Sign up stays */ }

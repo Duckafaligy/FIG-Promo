@@ -202,9 +202,10 @@ console.log("ok: blog groups");
   assert.ok(r.statusCode === 200 && calls[calls.length - 1][0] === "unsub", "but a right token is always honoured");
   const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "vercel.json"), "utf8"));
   for (const n of ["confirm", "unsubscribe"]) assert.ok(vercel.rewrites.some((x) => x.source === "/" + n && x.destination === "/api/" + n), `vercel.json: /${n} is not routed to /api/${n}`);
-  // the contact page's email line stays hidden until the owner flips the one setting (site/js/config.js showEmail)
+  // the contact and help pages' email line: hidden in the HTML, shown by the one setting (site/js/config.js showEmail), which the
+  // owner turned on 2026-10-31 (hello@figpromo.ca is also in the footer and Home's FAQ)
   const cfg = fs.readFileSync(path.join(__dirname, "..", "js", "config.js"), "utf8");
-  assert.ok(/showEmail:\s*false/.test(cfg), "config.js: showEmail must be false until the owner has tested the mailbox");
+  assert.ok(/showEmail:\s*(true|false)/.test(cfg), "config.js: showEmail must be set");
   for (const f of ["contact.html", "help.html"]) assert.ok(/class="[^"]*\bfig-mail\b[^"]*" hidden/.test(fs.readFileSync(path.join(__dirname, "..", f), "utf8")), `${f}: the email line must be hidden in the HTML`);
   console.log("ok: email links: same tokens as the mail function, GET changes nothing, POST needs the right token, one-click works, same page for wrong links, rate limited, routes, email line hidden");
 })().catch((e) => { console.error(e); process.exit(1); });

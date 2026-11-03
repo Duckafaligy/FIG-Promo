@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-31",
+ "generated": "2026-11-04",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "read-your-deal-results-keep-change-or-stop",
+   "title": "Reading your deal results: keep, change or stop a deal",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-04",
+   "publish_at": "2026-11-04T12:00:00-05:00",
+   "status": "queued",
+   "words": 1012,
+   "dek": "Your dashboard shows results deal by deal. How to review a deal after two weeks, three questions to ask, and a worked example of the arithmetic that tells you whether to keep it, change it or end it."
+  },
+  {
+   "slug": "monthly-eating-out-budget-markham-diners",
+   "title": "A monthly eating-out budget that works: what to expect when FIG opens in Markham",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-03",
+   "publish_at": "2026-11-03T12:00:00-05:00",
+   "status": "queued",
+   "words": 1018,
+   "dek": "Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG when it opens to diners on January 1, 2027."
+  },
+  {
+   "slug": "takeout-order-declined-or-refunded-what-happens-to-the-money",
+   "title": "Takeout order declined or refunded: what happens to the money on FIG",
+   "topic": "For restaurants",
+   "group": "takeout-and-money",
+   "date": "2026-11-02",
+   "publish_at": "2026-11-02T12:00:00-05:00",
+   "status": "live",
+   "words": 1068,
+   "dek": "A takeout order is held on the diner's card and charged when you accept. What that means if you decline, if you need to refund, who can do it, and where to see every refund and fee afterwards."
+  },
+  {
+   "slug": "menu-photos-restaurant-phone-photography-fig",
+   "title": "Menu photos with a phone: how to photograph your dishes for your FIG menu",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-01",
+   "publish_at": "2026-11-01T12:00:00-05:00",
+   "status": "live",
+   "words": 1025,
+   "dek": "Your FIG menu has photos and sections, and photos are what diners look at first. How to shoot your dishes with the phone you already own: light, angle, plating, which dishes to do first and how long it takes."
+  },
   {
    "slug": "restaurant-checklist-before-fig-opens-january-2027",
    "title": "Restaurant checklist: get ready for FIG before it opens to diners on January 1, 2027",

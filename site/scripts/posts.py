@@ -1318,4 +1318,217 @@ POSTS = [
               ("How old do I have to be?", "Restaurant accounts are for people 18 or older."),
               ("Can I post a deal before FIG opens?", "Yes. Deals can be live now or scheduled, so you can have them ready for January 1, 2027.")]),
 
+    # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
+
+    dict(slug="menu-photos-restaurant-phone-photography-fig", screen="map", title="Menu photos with a phone: how to photograph your dishes for your FIG menu", date="2026-11-01", publish_at="2026-11-01T12:00:00-05:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="Your FIG menu has photos and sections, and photos are what diners look at first. How to shoot your dishes with the phone you already own: light, angle, plating, which dishes to do first and how long it takes.",
+         desc="A practical guide for restaurant owners to photograph dishes with a phone for a FIG menu: light, angle, plating, order of work and a time budget.",
+         seo="How to photograph restaurant dishes with a phone for your menu",
+         keywords="restaurant menu photos, food photography phone, photograph restaurant dishes, online menu photos, restaurant menu setup, Markham restaurants, FIG menu",
+         points=["A FIG menu has photos and sections, and you add both yourself. You do not need a studio or a hired photographer.",
+                 "Daylight from a window, a clean plate and a slightly raised angle do most of the work.",
+                 "Photograph your best sellers first. A menu with eight good photos beats one with thirty rushed ones.",
+                 "Shoot the dish you really serve, at the size you really serve it, so the plate that arrives matches the picture.",
+                 "Budget about four minutes a dish. Twenty dishes is a little over an hour, which fits into one quiet afternoon."],
+         sections=[
+             ("The short answer", """<p>You can take good menu photos with the phone in your pocket. Put the plate by a window in daylight, wipe the rim, hold the phone a little above the dish and take three or four shots, then keep the best one. Start with your best sellers, because those are the dishes diners will look for first on your FIG menu.</p>"""),
+             ("Why photos matter on a menu page", """<p>On FIG, diners will browse places, menus, reviews and live deals on a map. A menu with photos and sections is easier to read at a glance than a long list of names, and a photo answers the questions a diner would otherwise have to ask: how big is it, what is on it, does it look like what I want tonight?</p>
+<p>A photo is also a promise. If the picture shows a full bowl and the bowl that arrives is half that, the diner remembers the gap, and so does the review. The best menu photo is an honest one.</p>"""),
+             ("What you need", """<table><thead><tr><th>Item</th><th>Why</th><th>Cost</th></tr></thead><tbody>
+<tr><td>Your phone</td><td>Current phones take a sharp photo in daylight</td><td>Nothing</td></tr>
+<tr><td>A window with daylight</td><td>Soft light from the side makes food look like itself</td><td>Nothing</td></tr>
+<tr><td>A plain table or board</td><td>Keeps attention on the dish</td><td>Whatever you already have</td></tr>
+<tr><td>A clean cloth</td><td>For fingerprints on the lens and drips on the rim</td><td>Nothing</td></tr>
+<tr><td>A second pair of hands</td><td>One person plates, one person shoots</td><td>A few minutes of a colleague's time</td></tr>
+</tbody></table>
+<p>That is all. Do not buy lights or props before you have tried a window.</p>"""),
+             ("Light: the one thing worth getting right", """<p>Most bad food photos are bad because of light, not the phone. A few rules:</p>
+<ul><li><strong>Use daylight.</strong> Stand the dish near a window, with the light coming from the side or slightly behind the plate.</li><li><strong>Turn off the overhead lights</strong> in that corner. Mixed light makes food look yellow or grey.</li><li><strong>Skip the flash.</strong> It flattens the dish and makes sauce look oily.</li><li><strong>Shoot at the right time of day.</strong> If your kitchen is busy at noon, shoot at mid-afternoon when the room is quiet and the light is still good.</li></ul>
+<p>If your restaurant has no good window, a spot just inside the front door often works, before opening.</p>"""),
+             ("Angle and framing", """<p>Different dishes want different angles:</p>
+<table><thead><tr><th>Kind of dish</th><th>Try this angle</th></tr></thead><tbody>
+<tr><td>Flat dishes: pizza, a platter, a bowl seen from the top</td><td>Straight down</td></tr>
+<tr><td>Tall dishes: burgers, stacked sandwiches, layered desserts</td><td>From the side, at the height of the dish</td></tr>
+<tr><td>Most plates and bowls</td><td>A slightly raised angle, about halfway between the two</td></tr>
+<tr><td>Drinks</td><td>From the side, so the colour and the glass show</td></tr>
+</tbody></table>
+<p>Keep the dish in the middle with a little empty space around it, and use the same angle for dishes of the same kind. A menu where the burgers all share one angle looks tidy, and diners compare them more easily.</p>"""),
+             ("Plating for the camera, without cheating", """<ul><li><strong>Wipe the rim</strong> of the plate or bowl. Sauce drips are the most common flaw.</li><li><strong>Use the real portion.</strong> Do not pile it higher than a customer would receive.</li><li><strong>Add fresh colour</strong> that you would really serve, such as a few chopped green onions or a lemon wedge.</li><li><strong>Shoot it fast.</strong> Fries wilt and sauces skin over, so have the camera ready before the plate comes out.</li><li><strong>Keep plates and bowls consistent</strong> across the menu if you can.</li></ul>"""),
+             ("What to photograph first", """<p>Do not try to shoot the whole menu on day one. Work in this order:</p>
+<ol><li>Your best sellers. If you know what moves most, start there.</li><li>The dishes you want to sell more of, especially any you will use in a deal.</li><li>One dish per section, so every part of the menu has at least one picture.</li><li>The rest, whenever you have time.</li></ol>
+<p>If you are about to post a deal, photograph the dish it applies to first. A deal on a dish with a good photo is easier for a diner to say yes to.</p>"""),
+             ("A time budget, with the sum", """<div class="callout math"><b>How long it takes (example)</b><ul><li>Four minutes a dish: a minute to plate, two to shoot three or four angles, a minute to pick the best.</li><li>Eight best sellers: 8 &times; 4 = 32 minutes.</li><li>Twenty dishes: 20 &times; 4 = 80 minutes, which is one hour and twenty minutes.</li></ul><p>These are example numbers. Your own pace may be faster, because the second and third dish go quicker than the first.</p></div>
+<p>If you have a staff member who is good with a phone, ask them to run the session. People who photograph their own friends' dinners often take the best menu photos.</p>"""),
+             ("Choosing the best shot", """<p>Take three or four photos of each dish and then compare them side by side. Choose the one where the food is sharp and the plate is clean. Delete the rest, so the wrong one never ends up on your menu by mistake. Crop if you need to, but leave the edit there: heavy filters change the colour of the food, and then the dish on the table does not match.</p>
+<p>When a dish changes, whether the recipe, the garnish or the plate, take a new photo. A photo that is a year old and no longer true is worse than no photo at all.</p>"""),
+             ("Putting the photos on your FIG menu", """<p>In your restaurant account, your menu is built from sections with dishes in them, and each dish can have a photo. Group dishes the way your printed menu does, add the photo to each dish and check that every price is right. Our guide to <a href="/blog/set-up-fig-menu-takeout">setting up your FIG menu and takeout in 15 minutes</a> goes through the screens. If you want the full list of what to do before diners arrive, see the <a href="/blog/restaurant-checklist-before-fig-opens-january-2027">restaurant checklist</a>.</p>
+<p>Diners can use FIG from January 1, 2027. Until then they can only join the waitlist at www.figpromo.ca, and restaurants set up first, so you have time to do this at a calm pace.</p>"""),
+             ("Mistakes to avoid", """<ul><li><strong>Stock photos.</strong> They never match what you serve.</li><li><strong>Dark photos.</strong> If you cannot see the food on a phone screen in the sun, it is too dark.</li><li><strong>Hands and thumbs</strong> at the edge of the frame.</li><li><strong>A different look on every dish.</strong> Consistency reads as care.</li><li><strong>Leaving a dish without a photo</strong> because it is hard to shoot. Show the plate as it is, steam and all.</li></ul>"""),
+         ],
+         faq=[("Do I need a professional photographer for my FIG menu?", "No. A phone, a window with daylight and a clean plate are enough. Start with your best sellers."),
+              ("Does my FIG menu need photos?", "A FIG menu has photos and sections. You add them yourself, and you can start with your best sellers and add the rest later."),
+              ("What is the best light for food photos?", "Daylight from a window, coming from the side or slightly behind the plate. Turn off overhead lights and skip the flash."),
+              ("How many photos should I take of each dish?", "Three or four from slightly different angles, then keep the best one and delete the rest."),
+              ("Should the photo show the real portion?", "Yes. Show the dish as you serve it, so that the plate that reaches the table matches the picture."),
+              ("How long does it take to photograph a menu?", "About four minutes a dish as an example, so twenty dishes take a little over an hour. Do the best sellers first."),
+              ("Can diners use FIG yet?", "Not yet. FIG opens to diners on January 1, 2027. Until then diners can join the waitlist at www.figpromo.ca, and restaurants set up first.")]),
+
+    dict(slug="takeout-order-declined-or-refunded-what-happens-to-the-money", screen="tdash", title="Takeout order declined or refunded: what happens to the money on FIG", date="2026-11-02", publish_at="2026-11-02T12:00:00-05:00", topic="For restaurants", group="takeout-and-money",
+         dek="A takeout order is held on the diner's card and charged when you accept. What that means if you decline, if you need to refund, who can do it, and where to see every refund and fee afterwards.",
+         desc="What happens to the money when a restaurant declines or refunds a FIG takeout order: when the card is charged, who can refund, and the Payments page.",
+         seo="Takeout order declined or refunded: what happens to the money",
+         keywords="restaurant takeout refund, declined takeout order, takeout payment hold, restaurant refund Stripe, takeout order accept decline, Markham restaurants, FIG takeout",
+         points=["On a takeout order the diner pays online at checkout. The card is held, and charged when the restaurant accepts.",
+                 "If the restaurant declines, nothing is charged. The kitchen starts only when you accept.",
+                 "Refunds are a money step, so owners and managers need their stronger sign-in to make one.",
+                 "The Payments page lists every takeout payment, refund and fee, and downloads as a CSV file.",
+                 "FIG keeps 5% of the food after any deal and before tax, on takeout orders only. Use your Payments page, not memory, to see what a refunded order did to your month."],
+         sections=[
+             ("The short answer", """<p>When a diner pays for takeout in the FIG app, the card is held and is charged when the restaurant accepts the order. If you decline, nothing is charged. If you need to give money back after accepting, that is a refund, and owners and managers need their stronger sign-in to do it. Every payment, refund and fee then shows on your Payments page.</p>"""),
+             ("The life of a takeout order", """<table><thead><tr><th>Step</th><th>What happens</th><th>Money</th></tr></thead><tbody>
+<tr><td>1. The diner checks out</td><td>They pay online in the app. There is no paying at the counter</td><td>The card is held</td></tr>
+<tr><td>2a. You accept</td><td>The kitchen starts</td><td>The card is charged</td></tr>
+<tr><td>2b. You decline</td><td>The order does not go ahead</td><td>Nothing is charged</td></tr>
+<tr><td>3. The diner collects</td><td>Staff use the pickup code to confirm collection</td><td>No new money moves. The code only confirms collection</td></tr>
+<tr><td>4. Something goes wrong later</td><td>You refund the order</td><td>Listed on your Payments page</td></tr>
+</tbody></table>
+<p>Two things in this table are worth remembering. The kitchen starts when you accept, so accept only when you can make the order. And the pickup code is not a payment step. By the time the diner arrives, the payment has already happened.</p>"""),
+             ("Declining an order", """<p>You can decline an order that you cannot make: the kitchen is out of the main ingredient, the dish is sold out, or it is simply too busy. Because the card is only held until you accept, a declined order costs the diner nothing, and you have lost no fee.</p>
+<p>It is far better to decline quickly than to accept and then fail to deliver. A diner who is told no can eat somewhere else. A diner whose order is accepted and then late or wrong is the one who leaves a poor review. If you decline often at the same hour, that is the sign to use pause or prep time. <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">The rush guide</a> covers both.</p>"""),
+             ("Refunding an order", """<p>Once you have accepted and the card has been charged, a refund is how money goes back. Reasons you might refund include a dish that could not be made after you accepted, a mistake in the kitchen, or a problem the diner raised at pickup.</p>
+<p>Refunds are one of the money steps. Owners and managers need their stronger sign-in for them, which is an authenticator app or a code by email. Money steps stay with the people who answer for them. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">The roles and sign-in guide</a> shows how to choose who has which role.</p>"""),
+             ("Where you see it afterwards", """<p>Your Payments page lists every takeout payment, refund and fee, and it downloads as a CSV file. When an order is refunded, it shows there as its own line. Use it to answer three questions at month end:</p>
+<ol><li>How much did I take in takeout payments?</li><li>How much did I refund?</li><li>What did the fees come to?</li></ol>
+<p>Our guide to <a href="/blog/fig-payments-page-csv-bookkeeping-takeout">reading the Payments page</a> goes through the lines in detail and shows how to hand the file to a bookkeeper.</p>"""),
+             ("Keeping the refund count low", """<p>A refund is a symptom. These steps stop most of them before they start:</p>
+<ul><li><strong>Keep your menu current.</strong> A dish that is not available should not be on the menu. Check photos and prices at the start of each week.</li><li><strong>Add prep time</strong> when the kitchen is slow, so pickup times are honest.</li><li><strong>Pause takeout</strong> when you cannot keep up.</li><li><strong>Set deals per order</strong> so one order cannot stack more discounts than you meant.</li><li><strong>Check each bag against the order</strong> before it leaves the counter.</li></ul>"""),
+             ("What a refund can cost you: a worked example", """<p>This example uses round numbers, not a real restaurant. Suppose one month holds 40 takeout orders of $30 of food each, and 2 of them are refunded in full.</p>
+<div class="callout math"><b>Two refunds in forty orders (example)</b><ul><li>Takeout food sold: 40 &times; $30 = $1,200.</li><li>Refunded: 2 &times; $30 = $60, which is 5% of the month's takeout food.</li><li>Food still sold: $1,200 &minus; $60 = $1,140.</li></ul><p>The Payments page shows what happened to the fees on each refunded order. Look there rather than guessing.</p></div>
+<p>The point of the example is the rate. Two refunds in forty orders is one in twenty. If you see one in five, the problem is upstream, in the menu, the prep time or the staffing, and the fix is cheaper than the refunds.</p>"""),
+             ("A busy-night routine that prevents most problems", """<p>Most declined and refunded orders come from the same few causes, and they are cheap to prevent. Before a busy service, run through this short list with whoever is on the pass:</p>
+<ol><li><strong>Check what is sold out.</strong> Take it off the menu before the first order arrives, not after.</li><li><strong>Set the prep time.</strong> If the kitchen is running 25 minutes behind, say so in the prep time rather than promising a quick pickup.</li><li><strong>Decide who watches new orders.</strong> One person should own the accept and decline buttons, so an order never sits unseen.</li><li><strong>Know when you will pause.</strong> Agree a point, such as more tickets on the line than you can fire at once, at which takeout is paused until the line clears.</li></ol>
+<p>None of this costs anything, and each step protects the one thing a refund cannot repair, which is the diner's trust.</p>"""),
+             ("What the diner sees", """<p>From the diner's side, the order is simple. They pay online at checkout, they wait to hear whether the restaurant accepts, and they collect with a pickup code that confirms the handover. They are never asked to pay at the counter. That is why a decline is painless for them: nothing was taken. It is also why you should decline fast. The sooner the answer comes, the sooner they can order somewhere else.</p>"""),
+             ("Talking to the diner", """<p>A refund goes better with a short, plain note. Say what went wrong, say what you did and say you are sorry. Do not argue about it. A diner who gets a quick refund and an apology will often order again. A diner who is made to prove a point rarely does.</p>
+<p>If the problem was in the review, answer it. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> has templates that are easy to adapt.</p>"""),
+             ("What to do before takeout is on", """<p>A restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts, and those steps ask owners and managers for the stronger sign-in. Do them early, so that a refund on your first busy day is not the first time you meet the sign-in. Takeout is optional, and FIG earns only on takeout orders paid in the app. Dine-in has no such fee.</p>
+<p>Diners can use FIG from January 1, 2027. Until then they can only join the waitlist at www.figpromo.ca.</p>"""),
+         ],
+         faq=[("When is the diner's card charged for takeout?", "The card is held at checkout and charged when the restaurant accepts the order."),
+              ("What if I decline a takeout order?", "Nothing is charged. The kitchen starts when the restaurant accepts."),
+              ("Who can refund a takeout order?", "Refunds are a money step, so owners and managers need their stronger sign-in to make one."),
+              ("Where do I see my refunds and fees?", "On the Payments page, which lists every takeout payment, refund and fee and downloads as a CSV file."),
+              ("Can a diner pay at the counter for takeout?", "No. Diners pay online in the app at checkout. The pickup code only confirms collection."),
+              ("What does FIG keep on a takeout order?", "5% of the food after any deal and before tax, plus HST on that fee once FIG is registered for HST. Stripe's card fee of 2.9% + $0.30 for most Canadian cards comes off the payment."),
+              ("Do I pay anything on dine-in orders?", "No. There is no commission on the bill and nothing on dine-in.")]),
+
+    dict(slug="monthly-eating-out-budget-markham-diners", screen="claim", title="A monthly eating-out budget that works: what to expect when FIG opens in Markham", date="2026-11-03", publish_at="2026-11-03T12:00:00-05:00", topic="For diners", group="eat-out-for-less",
+         dek="Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG when it opens to diners on January 1, 2027.",
+         desc="How to set a monthly eating-out budget with HST and tip counted in, plus where restaurant deals fit once FIG opens to diners on January 1, 2027.",
+         seo="Monthly eating-out budget: a worked example with HST and tip",
+         keywords="eating out budget, monthly restaurant budget, restaurant bill with tax and tip Ontario, how much to spend eating out, restaurant deals Markham, FIG waitlist",
+         points=["Pick one monthly number for eating out and split it into a few kinds of meals, so one big dinner does not use it all.",
+                 "Count HST and tip: a $40 meal with 13% HST and a 15% tip is about $51.20 in your wallet.",
+                 "A deal helps most on the meals you were going to have anyway, not on extra ones.",
+                 "FIG opens to diners on January 1, 2027. A diner can claim a deal once a day. Until then, join the waitlist at www.figpromo.ca.",
+                 "Review the month in five minutes at the end, and move the number up or down."],
+         sections=[
+             ("The short answer", """<p>Choose one number for eating out each month, then divide it into three or four kinds of meal: quick lunches, relaxed dinners, treats and takeout. Work out each meal as it will appear on your card, with HST and tip, not as the menu price. When FIG opens to diners on January 1, 2027, you will be able to look for deals on the meals you were going to have anyway.</p>"""),
+             ("Start with one number", """<p>Most people overspend on eating out because they have no number. Look at the last two or three months of card statements, add up what went to restaurants, cafes and takeout, and take the average. Then choose a figure for next month that you are comfortable with, even if it is a little lower. A number you can keep to is better than a perfect number you ignore.</p>
+<p>Write it as a monthly figure and a weekly one. In an example, $240 a month is about $60 a week, which is easier to hold in your head on a Friday evening.</p>"""),
+             ("What a menu price really costs", """<p>The price on the menu is not what you pay. Ontario's HST is 13%, and many people tip on top. Here is a round example, with a 15% tip on the pre-tax amount. The tip is an example, not a rule.</p>
+<div class="callout math"><b>A $40 meal, all in (example)</b><table><thead><tr><th>Line</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$40.00</td></tr>
+<tr><td>HST at 13%</td><td>$5.20</td></tr>
+<tr><td>Tip at 15% of $40</td><td>$6.00</td></tr>
+<tr><td>Total</td><td>$51.20</td></tr>
+</tbody></table><p>So a $40 meal costs about 28% more than the menu says: $51.20 &minus; $40.00 = $11.20, and $11.20 &divide; $40.00 = 0.28.</p></div>
+<p>Do your budget with the all-in number. Otherwise a month of ten $40 meals is $400 on paper and $512 in real life.</p>"""),
+             ("Split the number into kinds of meal", """<p>Here is an example split for $240 a month. Yours will differ, and the figures are round for easy checking.</p>
+<table><thead><tr><th>Kind of meal</th><th>How many</th><th>All-in each</th><th>Total</th></tr></thead><tbody>
+<tr><td>Quick lunch</td><td>6</td><td>$15</td><td>$90</td></tr>
+<tr><td>Casual dinner</td><td>2</td><td>$35</td><td>$70</td></tr>
+<tr><td>Takeout night</td><td>2</td><td>$25</td><td>$50</td></tr>
+<tr><td>One treat</td><td>1</td><td>$30</td><td>$30</td></tr>
+<tr><td><b>Total</b></td><td>11</td><td></td><td><b>$240</b></td></tr>
+</tbody></table>
+<p>Check the sum: $90 + $70 + $50 + $30 = $240. Eleven meals out in a month is a little under three a week.</p>"""),
+             ("Where a deal fits", """<p>A deal is useful when it lowers the price of a meal you were already going to have. It is not useful when it talks you into an extra one. When FIG opens, you will be able to browse places, menus, reviews and live deals on a map, and claim a deal in one tap. A diner can claim a deal once a day, so it suits regular meals better than a binge.</p>
+<div class="callout math"><b>A 2 for 1 on a regular dinner (example)</b><ul><li>Two mains at $18 each, normally $36 before HST and tip.</li><li>With a 2 for 1, you pay for one: $18.</li><li>You saved $18 on that meal, which is half the bill.</li></ul><p>If your casual-dinner line has room for it, the saving could pay for another lunch. Check the real terms of each deal, because every restaurant sets its own.</p></div>
+<p>Our guides on <a href="/blog/compare-restaurant-deals-worth-it">comparing restaurant deals</a> and <a href="/blog/date-night-markham-deals-budget">a date night for less</a> go through the arithmetic in more detail.</p>"""),
+             ("Three habits that make the number stick", """<ol><li><strong>Choose the treat.</strong> A big dinner you looked forward to feels better than three small ones you forgot. Put it in the budget on purpose.</li><li><strong>Keep a running tally</strong> on your phone's notes, once a meal. It takes ten seconds.</li><li><strong>Check before you go.</strong> Look at the menu, the price and any deal first. It is easier to decide at home than at the table.</li></ol>
+<p>Eating with a group? <a href="/blog/group-dining-deals">Group dining deals</a> covers how to split a bill fairly.</p>"""),
+             ("What to expect when FIG opens", """<p>FIG is free for diners and opens to them on January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first. Do not expect a deal on that map today.</p>
+<ul><li>You will be able to browse places, menus, reviews and live deals on a map.</li><li>You will claim a deal in one tap and show a QR code that staff scan at the restaurant.</li><li>A deal code works once, and one diner can claim a deal once a day.</li><li>Location is optional and never limits a deal.</li><li>Guests can look around, but you need an account to claim, order, save or review. Diners must be 14 or older.</li></ul>
+<p>FIG starts in Markham, then Richmond Hill and Vaughan Mills.</p>"""),
+             ("Lunch, dinner and takeout: where the money goes", """<p>It helps to see which kind of meal costs you the most per dollar of enjoyment. A lunch out at $15 all-in is easy to repeat and easy to skip. A dinner at $35 is a bigger decision. A takeout night at $25 costs less than a dinner out but more than cooking.</p>
+<p>When FIG opens, takeout will be paid for online in the app at checkout, and it comes with a deal unless the restaurant sets takeout at full price. Whether or not a deal is on that night, check the price you see at checkout before you confirm, and put the total into your tally. There is no paying at the counter for takeout, so the amount in the app is the amount you spend.</p>
+<div class="callout math"><b>Swapping one meal (example)</b><ul><li>Before: two takeout nights at $25 each is $50.</li><li>If one of them becomes a lunch at $15, you spend $25 + $15 = $40.</li><li>That leaves $10 spare, which is two-thirds of another lunch.</li></ul></div>"""),
+             ("A five-minute month-end review", """<p>On the last day of the month, add up what you spent and compare it with the number. Ask two questions: which kind of meal went over, and which one gave you the most enjoyment for the money? Then move $10 or $20 from one line to the other. After two or three months, the budget fits how you actually eat.</p>
+<p>If you eat out far less than your number, that is fine too. The point of the number is to choose, not to spend it.</p>"""),
+             ("A note on tipping", """<p>Tipping is up to you and to the service you had. The 15% in the example is only there to make the arithmetic concrete. Use whatever you normally leave. Whatever it is, add it to your all-in figures, so your number stays honest.</p>"""),
+         ],
+         faq=[("How much should I budget for eating out each month?", "There is no right figure. Add up the last two or three months of card statements, take the average and choose a number you are comfortable with, even if it is a little lower."),
+              ("Should I count HST and tip in my restaurant budget?", "Yes. Ontario's HST is 13%, and tips come on top. In the example, a $40 meal comes to about $51.20 with HST and a 15% tip."),
+              ("When can I use FIG as a diner?", "FIG opens to diners on January 1, 2027. Until then you can join the waitlist at www.figpromo.ca."),
+              ("Is FIG free for diners?", "Yes. FIG is free for diners."),
+              ("How often can I claim the same deal?", "A diner can claim a deal once a day."),
+              ("Do I have to share my location?", "No. Location is optional and never limits a deal."),
+              ("Which deals save the most?", "The ones on meals you would have had anyway. A 2 for 1 on two $18 mains saves $18, half of that bill, but only if you did not add a meal you would have skipped.")]),
+
+    dict(slug="read-your-deal-results-keep-change-or-stop", screen="tdash", title="Reading your deal results: keep, change or stop a deal", date="2026-11-04", publish_at="2026-11-04T12:00:00-05:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="Your dashboard shows results deal by deal. How to review a deal after two weeks, three questions to ask, and a worked example of the arithmetic that tells you whether to keep it, change it or end it.",
+         desc="How restaurant owners can read deal-by-deal results on FIG and decide whether to keep, change or stop a deal, with a worked example.",
+         seo="How to read your restaurant deal results: keep, change or stop",
+         keywords="restaurant deal results, measure a restaurant promotion, is my restaurant deal working, restaurant promotion math, quiet hours deal review, Markham restaurants, FIG dashboard",
+         points=["Your FIG dashboard shows results deal by deal, so you can judge each deal on its own.",
+                 "Give a deal at least two weeks and change one thing at a time.",
+                 "Ask three questions: did the quiet window fill, who used the deal, and what did each use leave you?",
+                 "Your own till tells you how many diners would have come anyway. The dashboard cannot know that for you.",
+                 "At the end of a review, keep, change or stop the deal, and write down the date and the reason."],
+         sections=[
+             ("The short answer", """<p>After a deal has run for two weeks, open your dashboard, read the results for that one deal, and compare them with your own till for the same hours. Ask whether the quiet window filled, whether new faces came, and what each use left you after food cost. Then do one of three things: keep the deal, change one setting, or stop it.</p>"""),
+             ("Why review a deal at all", """<p>A deal is a bet on your quiet hours. Some bets pay off, some break even and some cost money without anyone noticing. The difference is easy to see if you look, and easy to miss if you do not. Looking takes ten minutes every two weeks, which is less time than it takes to make one batch of dough.</p>"""),
+             ("What you have to look at", """<table><thead><tr><th>Source</th><th>What it shows you</th></tr></thead><tbody>
+<tr><td>FIG dashboard</td><td>Results deal by deal, including how many diners used each deal</td></tr>
+<tr><td>Your till or sales report</td><td>How busy the same hours were before the deal, and during it</td></tr>
+<tr><td>Your kitchen notes</td><td>Whether the rush was manageable or whether the deal swamped the line</td></tr>
+<tr><td>Your reviews</td><td>What diners said about the visit. You can reply to them in the app</td></tr>
+</tbody></table>
+<p>The dashboard tells you what the deal did. Only your own records can tell you what would have happened without it.</p>"""),
+             ("Give it two weeks", """<p>A single day proves nothing. A rainy Tuesday, a school holiday or a road closure can change a lunch hour more than any deal can. Two full weeks, with the same hours each week, gives you at least two samples of each weekday. If you can wait four weeks, better still.</p>
+<p>During the test, do not change the deal, the hours or the price. If you change three things, you will not know which one made the difference.</p>"""),
+             ("Three questions to ask", """<ol><li><strong>Did the quiet window fill?</strong> Compare the hours of the deal with the same hours before it. A deal can have many uses and still leave the room just as empty if the uses were all in an hour that was already busy.</li><li><strong>Who used it?</strong> Regulars who would have come at full price, or new diners? Staff will usually know. If your regulars are the ones using it, the deal is a discount, not a draw.</li><li><strong>What did each use leave you?</strong> This is the arithmetic, shown below.</li></ol>"""),
+             ("A worked example", """<p>These are round example numbers, not a real restaurant. A $15.00 dish costs $4.50 to make (a food cost of 30%). A deal takes $3.00 off, and the deal is dine-in, so FIG takes nothing from the bill. Over two weeks the dashboard shows 40 uses. Your till and your staff tell you that about 25 of those diners would have come anyway, and 15 would not.</p>
+<div class="callout math"><b>Two weeks of a $3 off deal (example)</b><table><thead><tr><th>Line</th><th>Working</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Left from a dish at the deal price</td><td>$15.00 &minus; $3.00 &minus; $4.50</td><td>$7.50</td></tr>
+<tr><td>Left from the same dish at full price</td><td>$15.00 &minus; $4.50</td><td>$10.50</td></tr>
+<tr><td>Cost of the 25 who would have come anyway</td><td>25 &times; $3.00</td><td>&minus; $75.00</td></tr>
+<tr><td>Earned from the 15 new diners</td><td>15 &times; $7.50</td><td>+ $112.50</td></tr>
+<tr><td><b>Net for the two weeks</b></td><td>$112.50 &minus; $75.00</td><td><b>+ $37.50</b></td></tr>
+</tbody></table></div>
+<p>The deal is positive here, but only by a little, and the result depends heavily on the 25-and-15 split. If 30 had come anyway and 10 were new, the cost is 30 &times; $3.00 = $90.00 and the gain is 10 &times; $7.50 = $75.00, a net of &minus; $15.00. The same deal flips from a gain to a loss. That is why the split matters more than the total.</p>"""),
+             ("Keep, change or stop", """<table><thead><tr><th>What you see</th><th>Try</th></tr></thead><tbody>
+<tr><td>Quiet window filled, net positive</td><td>Keep it. Consider more uses per diner, with a wait between uses</td></tr>
+<tr><td>Many uses, window already busy</td><td>Move the deal to a quieter window</td></tr>
+<tr><td>Mostly regulars</td><td>Narrow the hours, lower the discount or change the deal type</td></tr>
+<tr><td>Few uses</td><td>Check the photo, the dish and the hours. Then try another dish before cutting the discount</td></tr>
+<tr><td>Too many uses for the kitchen</td><td>Shorten the hours or add a limit. For takeout, use pause and prep time</td></tr>
+<tr><td>Net negative after two weeks</td><td>Stop it, and write down what you learned</td></tr>
+</tbody></table>
+<p><a href="/blog/deals-used-more-than-once-uses-per-diner-wait-between-uses">Uses per diner and the wait between uses</a> explains the two settings, and <a href="/blog/deal-types-percent-dollar-2-for-1">the deal-type guide</a> helps when it is the type that needs to change.</p>"""),
+             ("Change one thing at a time", """<p>If a deal needs fixing, change a single setting and run it for another two weeks. The settings you can change are the discount, the dish, the days and hours, the uses per diner and the wait between uses. Posting a deal live now or scheduled is also up to you, so a change can be set to start on a Monday.</p>
+<p>Keep a notes page with a line for each change: the date, what you changed, why and what happened. In three months you will be glad of it.</p>"""),
+             ("Share the numbers with your team", """<p>The people who work the quiet shift know things the dashboard does not: which regulars came, whether the new faces ordered a drink, whether the room felt busier. Ask them two questions at the end of the two weeks: who used the deal, and what did you notice? Write the answers next to your numbers. A thirty-second talk at the end of a shift is often the most useful part of the review, and it also shows the team that the deal is something they have a say in.</p>"""),
+             ("Do not forget the reviews", """<p>Numbers do not show how a diner felt. Read what diners say about their visits, and reply. A review that says the line was too long tells you more than a use count can. Reviews come only from scanned visits, so each one is from someone who really came. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> shows how.</p>"""),
+             ("Before FIG opens to diners", """<p>Diners can use FIG from January 1, 2027. Until then there are no results to read, since diners can only join the waitlist at www.figpromo.ca. Use the weeks before to build deals you can judge later: choose a quiet window, do the arithmetic from <a href="/blog/slow-hour-deal-math">the slow-hour math</a> and write down your guess for how many new diners it will bring. In January, you will have something to compare it with.</p>"""),
+         ],
+         faq=[("Where do I see how a deal is doing?", "Your dashboard shows results deal by deal."),
+              ("How long should I run a deal before judging it?", "At least two weeks, with the same hours each week, and without changing the deal while you wait."),
+              ("Can the dashboard tell me whether a diner would have come anyway?", "No. Only your own till, your staff and your regulars can tell you that, which is why the arithmetic uses your own numbers."),
+              ("What should I change first if a deal is not working?", "Change one thing at a time: the hours, the dish, the discount, the uses per diner or the wait between uses."),
+              ("How do I know whether a deal pays?", "Compare its results on your dashboard with your own till, then do the arithmetic on what each use leaves you after food cost."),
+              ("Do restaurants see diners' phone numbers?", "No. Restaurants never see diners' phone numbers."),
+              ("Can I read results before FIG opens to diners?", "Not yet. FIG opens to diners on January 1, 2027, and until then diners can only join the waitlist at www.figpromo.ca.")]),
+
 ]

@@ -14,6 +14,7 @@ figLang({
  "Sign up": "S’inscrire",
  ", or email": ", ou écrivez à",
  "Open the app": "Ouvrir l’app",
+ "Check out deals": "Voir les offres",
  "Menu": "Menu",
  "Diners: join the waitlist": "Clients : rejoignez la liste d’attente",
  "App Store and Google Play: coming soon": "App Store et Google Play : bientôt",

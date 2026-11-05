@@ -122,7 +122,8 @@
   els.forEach((el) => io.observe(el));
 })();
 
-// already signed in to the web app (its session sits in this browser, same site): "Sign up" opens the app instead (the founder 2026-10-31)
+// "Check out deals" opens the app straight on Home as a guest (the founder 2026-11-04: no sign-up first). Already signed in to the
+// web app (its session sits in this browser, same site): it says "Open the app" and opens the app instead (the founder 2026-10-31)
 try {
-  if (localStorage.getItem("sb-frpoykqldlsysitiqnhz-auth-token")) document.querySelectorAll('.nav-get, .nav-sheet a[href="/app/welcome"]').forEach((a) => { a.href = "/app"; a.textContent = "Open the app"; });
+  if (localStorage.getItem("sb-frpoykqldlsysitiqnhz-auth-token")) document.querySelectorAll('.nav-get, .nav-sheet a[href="/app/home"]').forEach((a) => { a.href = "/app"; a.textContent = "Open the app"; });
 } catch { /* no storage (private window): Sign up stays */ }

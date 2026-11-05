@@ -14,6 +14,7 @@ figLang({
  "Sign up": "注册",
  ", or email": "，或发送邮件至",
  "Open the app": "打开应用",
+ "Check out deals": "查看优惠",
  "Menu": "菜单",
  "Diners: join the waitlist": "食客：加入等候名单",
  "App Store and Google Play: coming soon": "App Store 和 Google Play：即将上线",

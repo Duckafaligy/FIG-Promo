@@ -1530,4 +1530,191 @@ POSTS = [
               ("Do restaurants see diners' phone numbers?", "No. Restaurants never see diners' phone numbers."),
               ("How soon can I read results?", "As soon as diners start viewing and claiming your deal. Give a new deal a few weeks before you judge it, since the first numbers are small.")]),
 
+    dict(slug="browse-fig-as-a-guest-or-make-an-account-markham-diners", screen="map", title="Browsing FIG as a guest: what you can do before you make an account", date="2026-11-05", publish_at="2026-11-05T12:00:00-05:00", updated="2026-11-05", topic="For diners", group="eat-out-for-less",
+         dek="You can look around FIG without signing up. What a guest can see, what needs an account, how to use the map to choose a place, and a short routine for deciding where to eat.",
+         desc="What you can do on FIG as a guest in Markham, what needs an account (claiming, ordering, saving, reviewing), and how to choose a restaurant from the map.",
+         seo="Browse FIG as a guest: what you can do without an account",
+         keywords="browse restaurant deals Markham, FIG guest, restaurant deals app no account, find restaurants on a map, Markham restaurants, FIG web app",
+         points=["FIG is free for diners and open on the web at www.figpromo.ca/app. Home works as a guest, so browsing needs no account.",
+                 "A guest can look at places, menus, reviews and live deals on a map.",
+                 "You need an account to claim a deal, order, save a place or write a review.",
+                 "Location is optional and never limits a deal, so you can look at any part of Markham.",
+                 "A short routine helps: pick a meal, scan the map, read the menu and the reviews, then claim only when you are ready to go."],
+         sections=[
+             ("The short answer", """<p>Yes, you can use FIG without an account. Open www.figpromo.ca/app and Home works as a guest: you can browse places, menus, reviews and live deals on a map. You only need an account when you want to claim a deal, order, save a place or write a review. FIG is free for diners.</p>"""),
+             ("What a guest can do", """<p>Think of guest mode as window shopping. You can walk down the street, read the menus in the windows and see which places have a deal on right now, before you commit to anything. That is useful on its own, because choosing where to eat is often the longest part of going out.</p>
+<table><thead><tr><th>You want to</th><th>As a guest</th><th>With an account</th></tr></thead><tbody>
+<tr><td>See places and live deals on the map</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Read menus and reviews</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Claim a deal</td><td>No</td><td>Yes, in one tap</td></tr>
+<tr><td>Order takeout</td><td>No</td><td>Yes</td></tr>
+<tr><td>Save a place</td><td>No</td><td>Yes</td></tr>
+<tr><td>Write a review</td><td>No</td><td>Yes, after a scanned visit</td></tr>
+</tbody></table>
+<p>Diners must be 14 or older to have an account.</p>"""),
+             ("Why browsing first is a good habit", """<p>Most bad meals out come from deciding in a hurry. You are hungry, you are standing on a plaza and you pick the first place with a short line. Looking first, even for two minutes, changes that. You find out what is open, what a main costs and what other people thought of it.</p>
+<p>Because location is optional and never limits a deal, you can also look ahead. If you work in one part of Markham and live in another, you can look at both and decide which suits tonight.</p>"""),
+             ("A five-step routine for choosing a place", """<ol><li><strong>Pick the kind of meal.</strong> A quick lunch, a family dinner and a snack with a friend are different jobs. Decide first, so you are not comparing a coffee shop with a sit-down restaurant.</li><li><strong>Scan the map.</strong> Look for places near where you will be, and notice which ones have a live deal right now.</li><li><strong>Open the menu.</strong> Check that there is something you want at a price you are happy with. A deal on a dish you do not like is not a deal.</li><li><strong>Read the reviews.</strong> Reviews come only from scanned visits, so each one is from someone who actually went. <a href="/blog/how-to-read-restaurant-reviews">How to read a restaurant's reviews on FIG</a> shows what to look for.</li><li><strong>Decide how you will pay.</strong> For a dine-in deal, you show the code and pay the restaurant as usual. For takeout, you pay in the app at checkout.</li></ol>"""),
+             ("What the map shows, and what it does not", """<p>The map is a good way to see what is nearby and what is on offer now. It does not tell you how busy a place is, whether a table is available or whether the kitchen has run out of a dish. For a larger group, or if you have dietary needs, a quick call to the restaurant is still the best step. <a href="/blog/eating-out-dietary-needs-allergies-markham">Eating out with dietary needs or allergies</a> covers what to ask.</p>"""),
+             ("When it is worth making an account", """<p>Make an account when you find a deal you want to use. Claiming is one tap, and then you show a QR code that staff scan at the restaurant. A few things are worth knowing before you do:</p>
+<ul><li>A deal code works once.</li><li>If the restaurant lets a deal be used more than once (up to 20 times, with an optional wait between uses), your screen shows a new code after each scan.</li><li>You can claim a deal once a day.</li><li>Restaurants never see your phone number.</li></ul>
+<p>The value of a deal is the saving on the meal itself.</p>"""),
+             ("A worked example: two minutes of looking", """<div class="callout example"><b>Choosing lunch (example)</b><ul><li>You have about $15 to spend on lunch, all in, and you can walk ten minutes.</li><li>On the map you see six places nearby, and two of them have a deal on right now.</li><li>You open the menus. One deal is on a dish you like. The other is on something you would not order.</li><li>You read three reviews for the first place, and they match what you want: a quick lunch.</li></ul><p>Total time: about two minutes. You walk over knowing what you will order, and you claim the deal on the way.</p></div>
+<p>The numbers are only an example. The point is the order of steps: look, read, then claim.</p>"""),
+             ("If you are not sure about a deal", """<p>Read the terms on the deal before you go. If anything is unclear, such as the hours it is live or whether it applies to your dish, ask the staff when you arrive. Everyone does better when the deal is understood on both sides of the counter. If a code will not scan, <a href="/blog/deal-wont-scan-troubleshooting-diners">what to check and what to say</a> has a short checklist.</p>"""),
+             ("Using FIG with friends or family", """<p>Browsing as a guest is also a good way to settle a group decision. Open the map together, look at two or three places and read the menus out loud. Everyone can see the same thing without anyone needing to sign up first. Once the group has chosen, one person makes an account and claims the deal, or each person claims their own, since a diner can claim a deal once a day. If the group is large, call ahead as well. <a href="/blog/group-dining-deals">Group dining deals</a> has more on choosing a place and splitting the bill.</p>"""),
+             ("Privacy, in plain words", """<p>Looking around as a guest asks nothing of you. When you do make an account, you are in control of what you do with it: you claim, order, save and review by choice. Restaurants never see diners' phone numbers, and location is optional. If you have a question about your account or about FIG, you can reach FIG on the contact page at www.figpromo.ca/contact.</p>"""),
+             ("What is coming", """<p>FIG is on the web today. The iPhone and Android apps are coming. FIG starts in Markham, then Richmond Hill and Vaughan Mills. To start looking, check out deals at www.figpromo.ca/app.</p>"""),
+         ],
+         faq=[("Do I need an account to look at deals on FIG?", "No. Home works as a guest, so you can browse places, menus, reviews and live deals on a map without an account."),
+              ("What do I need an account for?", "Claiming a deal, ordering, saving a place and writing a review."),
+              ("Is FIG free for diners?", "Yes. FIG is free for diners."),
+              ("Where do I use FIG?", "On the web at www.figpromo.ca/app. The iPhone and Android apps are coming."),
+              ("Do I have to share my location?", "No. Location is optional and never limits a deal."),
+              ("How old do I have to be?", "Diners must be 14 or older."),
+              ("Can restaurants see my phone number?", "No. Restaurants never see diners' phone numbers.")]),
+
+    dict(slug="free-with-a-dish-deal-pricing-restaurant-math", screen="tdash", title="A 'free with a dish' deal: what it costs you, with the math", date="2026-11-06", publish_at="2026-11-06T12:00:00-05:00", updated="2026-11-06", topic="For restaurants", group="fill-quiet-hours",
+         dek="Give a drink, a side or a dessert with a main, and the real cost is your food cost, not your menu price. A worked example, how to choose the item, and how it compares with a dollar off.",
+         desc="How to price a 'free with a dish' restaurant deal on FIG: what the free item really costs, a worked example and when it beats a dollar-off deal.",
+         seo="Free with a dish: pricing a restaurant deal, with the math",
+         keywords="free with a dish deal, restaurant combo deal math, restaurant promotion cost, free drink with a meal, food cost, Markham restaurants, FIG deal types",
+         points=["On FIG a deal can be 2 for 1, percent off, dollar off, or free with a dish.",
+                 "With a free item, the cost to you is what the item costs to make, not what it sells for.",
+                 "Choose an item with a high menu price and a low food cost, such as a drink or a side, and one that fits the main.",
+                 "Compare it with a dollar-off deal using the same arithmetic: what does one use leave you?",
+                 "Start with a quiet window, a limit on uses per diner and two weeks of results on your dashboard."],
+         sections=[
+             ("The short answer", """<p>A free-with-a-dish deal gives the diner an extra item when they order a dish. It costs you what that item costs to make, not the price on your menu, so a drink or a side can be a cheap way to bring people in. Work out the food cost of the item, add it to the cost of the main, and check what each use leaves you.</p>"""),
+             ("What the deal is", """<p>On FIG, a restaurant can post a deal as 2 for 1, percent off, dollar off, or free with a dish. The last one is a pairing: the diner orders a dish and gets another item with it. You choose the dish, the extra item, the hours, how many times one diner can use it and how long they wait between uses. You can post it live now or scheduled. <a href="/blog/deal-types-percent-dollar-2-for-1">Which type suits which restaurant</a> compares all four.</p>"""),
+             ("Why the cost is not the menu price", """<p>If a drink sells for $3.50, giving it away does not cost you $3.50. It costs the ingredients, the cup and the few seconds of staff time. A dollar-off deal is different: $3.00 off is $3.00 gone from the till, every time. That is why a free item can look generous to the diner while costing you much less than the same amount taken off the bill.</p>
+<p>The catch is that this only works for items with a low food cost. A steak and a soda are very different things to give away.</p>"""),
+             ("A worked example", """<p>These are round example numbers, not a real restaurant. A main sells for $16.00 and costs $4.80 to make. A drink sells for $3.50 and costs $0.70 to make. The deal is dine-in, so FIG takes nothing from the bill.</p>
+<div class="callout math"><b>One use of a free drink with a $16 main (example)</b><table><thead><tr><th>Line</th><th>Working</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Main at full price</td><td>$16.00 &minus; $4.80</td><td>$11.20 left</td></tr>
+<tr><td>Main with a free drink</td><td>$16.00 &minus; $4.80 &minus; $0.70</td><td>$10.50 left</td></tr>
+<tr><td>Main with $3.50 off instead</td><td>$16.00 &minus; $3.50 &minus; $4.80</td><td>$7.70 left</td></tr>
+<tr><td><b>Difference, free drink vs $3.50 off</b></td><td>$10.50 &minus; $7.70</td><td><b>$2.80 more for you</b></td></tr>
+</tbody></table></div>
+<p>The diner sees a $3.50 drink for nothing, and you give up $0.70. The $3.50 off deal costs you the full $3.50. If the diner would have bought the drink anyway, the picture changes: the drink was a sale at $3.50 with $2.80 left after its cost, and now you earn nothing from it. That is the same question as in <a href="/blog/read-your-deal-results-keep-change-or-stop">reading your deal results</a>: who would have come, and what would they have bought, anyway?</p>"""),
+             ("Choosing the item", """<table><thead><tr><th>Good choice</th><th>Why</th></tr></thead><tbody>
+<tr><td>A fountain drink, tea or coffee</td><td>Low food cost, quick to serve</td></tr>
+<tr><td>A small side or a soup</td><td>Easy to prepare in batches</td></tr>
+<tr><td>A small dessert</td><td>Gives the diner a reason to stay and tells them what else you make</td></tr>
+<tr><td>A topping or an upgrade</td><td>Low cost, and diners remember it</td></tr>
+</tbody></table>
+<p>Avoid items that are expensive to make, slow to prepare or that you often run short of. If the free item is out, the deal is out, and a diner who was promised a dessert and told it is gone is not a happy diner.</p>"""),
+             ("Choosing the main", """<p>Pair the free item with a main that you want to sell more of, one with a good margin that is easy for the kitchen. A deal on your slowest, least profitable dish is hard to justify. A deal on a popular dish that is already in the kitchen's rhythm is easy to serve and easy to repeat.</p>
+<p>Name the pairing clearly, so the diner and the staff both know what it is. A short description is enough.</p>"""),
+             ("When it beats the other types", """<ul><li><strong>Against dollar off:</strong> better when the extra item has a low food cost, as in the example above.</li><li><strong>Against percent off:</strong> better when you want to protect the price of the main. The menu price stays the same.</li><li><strong>Against 2 for 1:</strong> better when you want to bring in one diner rather than two.</li></ul>
+<p>It is worse when the item costs a lot to make, or when most diners would have ordered it anyway.</p>"""),
+             ("Watch for the common mistakes", """<ul><li><strong>Choosing an item the kitchen cannot spare.</strong> If the free item is the one that is always running out, pick another.</li><li><strong>Forgetting the main's cost.</strong> The deal is only worth running if the main still leaves you something. In the example, $10.50 is left after the main and the free drink. If a main only leaves $3.00 after its cost, a free item of any size can wipe it out.</li><li><strong>Giving the same item to everyone all day.</strong> A deal for a quiet window brings people in when you need them. The same deal at the lunch rush only gives away items to people who were already coming.</li><li><strong>Not telling the team.</strong> A free item that the server did not know about is a free item argued about at the counter.</li></ul>"""),
+             ("A second example: a free dessert", """<p>Here is another round-number example, to show that the same steps work for a different item. A main sells for $18.00 and costs $5.40 to make. A dessert sells for $7.00 and costs $1.40 to make. With the dessert free, what is left from the main is $18.00 &minus; $5.40 &minus; $1.40 = $11.20. Without the deal and without the dessert it is $12.60. So a diner who would have ordered only the main costs you $1.40 for that use. A diner who was never going to come at all brings you $11.20. If the deal brings in even a few diners like that on a quiet afternoon, it can pay for the cost of the free desserts given to others.</p>"""),
+             ("Setting it up", """<ol><li>Choose a quiet window, using <a href="/blog/slow-hour-deal-math">the slow-hour math</a>.</li><li>Do the arithmetic above with your own food costs.</li><li>Set the uses per diner. One is a good start. If you want regulars to come back, <a href="/blog/deals-used-more-than-once-uses-per-diner-wait-between-uses">uses per diner and the wait between uses</a> shows how.</li><li>Brief your team, so everyone knows what the free item is and how to scan the code. <a href="/blog/train-staff-honour-fig-deal">Train your staff in 10 minutes</a>.</li><li>Check the results after two weeks.</li></ol>
+<p>If the deal comes with takeout, remember the takeout fees: FIG keeps 5% of the food after any deal and before tax, on takeout orders only, and Stripe's card fee comes off the payment. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math</a> has the arithmetic.</p>"""),
+         ],
+         faq=[("What does 'free with a dish' mean on FIG?", "It is one of four deal types, alongside 2 for 1, percent off and dollar off. The diner orders a dish and gets another item with it."),
+              ("What does a free item cost me?", "What it costs to make, not its menu price. In the example, a $3.50 drink that costs $0.70 to make costs you $0.70."),
+              ("Which items work best as the free item?", "Items with a low food cost that are quick to serve, such as drinks, small sides, soup or a small dessert."),
+              ("Can I limit how often a diner uses it?", "Yes. You set uses per diner, and an optional wait between uses. A diner can claim a deal once a day."),
+              ("Does FIG take a cut of a dine-in deal?", "No. FIG takes nothing on dine-in. It earns only on takeout orders paid in the app."),
+              ("How do I know whether the deal is paying off?", "Read the results for that deal on your dashboard and compare them with your own till and your food costs, after at least two weeks."),
+              ("Does it cost anything to post a deal?", "No. Posting deals costs restaurants nothing.")]),
+
+    dict(slug="weekday-lunch-markham-for-less-deals-math", screen="claim", title="Weekday lunch in Markham for less: a work-week guide, with the math", date="2026-11-07", publish_at="2026-11-07T12:00:00-05:00", updated="2026-11-07", topic="For diners", group="eat-out-for-less",
+         dek="Five lunches out is a real number once HST and tip are in. A way to look at a work week of lunches, where a deal helps, and the arithmetic for a dollar-off deal and a 2 for 1 with a colleague.",
+         desc="A work-week lunch budget for Markham diners, with HST and tip in the math, and how a dollar-off deal or a 2 for 1 with a colleague changes it.",
+         seo="Weekday lunch in Markham for less: the math",
+         keywords="cheap lunch Markham, weekday lunch deals Markham, lunch budget, 2 for 1 lunch, eating out on a budget, restaurant deals Markham, FIG",
+         points=["A $12 lunch comes to about $15.36 once HST and a 15% tip are added, so five lunches a week is about $76.80 in the example.",
+                 "A dollar-off deal reduces the price before HST, so it saves a little more than its face value.",
+                 "A 2 for 1 with a colleague cuts each person's lunch to about $8.58 in the example.",
+                 "A diner can claim a deal once a day, so a deal fits best on the days you were going out anyway.",
+                 "Browse live deals on the FIG map as a guest, and make an account when you want to claim one."],
+         sections=[
+             ("The short answer", """<p>Count a weekday lunch at its full price: the menu price, HST and a tip. In the example below, a $12 lunch costs $15.36, so five a week is $76.80. A $3 off deal on one of them saves about $3.39, and a 2 for 1 with a colleague saves about $6.78 each. Deals help most on the lunches you were already going to buy.</p>"""),
+             ("Start with the real price", """<p>The number on the menu is not what leaves your account. In Ontario, HST is 13% on most restaurant meals, and a tip goes on top. This post uses 15% for the tip only to make the arithmetic concrete. Use whatever you normally leave.</p>
+<div class="callout math"><b>One $12 lunch, all in (example)</b><ul><li>Menu price: $12.00.</li><li>HST at 13%: $12.00 &times; 0.13 = $1.56.</li><li>Tip at 15% of the menu price: $12.00 &times; 0.15 = $1.80.</li><li>Total: $12.00 + $1.56 + $1.80 = <b>$15.36</b>.</li></ul><p>Five of these in a work week: 5 &times; $15.36 = <b>$76.80</b>. Four weeks: $307.20.</p></div>
+<p>If you are used to thinking of lunch as "twelve bucks", that is a surprise. It is also a reason to look for a saving, even a small one.</p>"""),
+             ("Where a deal fits in a work week", """<p>A deal is worth the most on a lunch you would have bought anyway. A saving on a meal you did not need is not a saving. Here is a simple way to sort a week:</p>
+<table><thead><tr><th>Day</th><th>Type of lunch</th><th>Deal to look for</th></tr></thead><tbody>
+<tr><td>Monday</td><td>Packed lunch from home</td><td>None needed</td></tr>
+<tr><td>Tuesday</td><td>Out, on your own</td><td>Dollar off or percent off</td></tr>
+<tr><td>Wednesday</td><td>Out with a colleague</td><td>2 for 1</td></tr>
+<tr><td>Thursday</td><td>Packed lunch or leftovers</td><td>None needed</td></tr>
+<tr><td>Friday</td><td>Out, a treat</td><td>Whichever is live near you</td></tr>
+</tbody></table>
+<p>This is only an example of a week. Yours will look different, and that is fine. The point is to choose the days, rather than let the week choose them for you.</p>"""),
+             ("A dollar-off deal on your own lunch", """<p>A $3 off deal takes $3.00 off the menu price, and the HST is worked out on the lower price. That means the saving is a little more than $3.00.</p>
+<div class="callout math"><b>The same lunch with $3 off (example)</b><ul><li>Price after the deal: $12.00 &minus; $3.00 = $9.00.</li><li>HST at 13%: $9.00 &times; 0.13 = $1.17.</li><li>Tip, still on the $12.00 menu price: $1.80.</li><li>Total: $9.00 + $1.17 + $1.80 = <b>$11.97</b>.</li><li>Saving: $15.36 &minus; $11.97 = <b>$3.39</b>.</li></ul></div>
+<p>The extra $0.39 is the HST on the $3.00. If you tip on the lower price instead, you save a bit more, because the tip is smaller too. Either way, the saving is real but modest, so it is best on days when you are going out regardless.</p>
+<p>The tax rule behind this is that a store's own coupon or discount lowers the price before tax is worked out. The Canada Revenue Agency sets this out in its guide for GST/HST registrants (RC4022, "Coupons").</p>"""),
+             ("A 2 for 1 with a colleague", """<p>A 2 for 1 is the bigger saving, and it needs two people. Two colleagues each order a $12 lunch, and the second lunch costs nothing.</p>
+<div class="callout math"><b>Two $12 lunches on a 2 for 1 (example)</b><ul><li>Price after the deal: $12.00 for the two of you.</li><li>HST at 13%: $12.00 &times; 0.13 = $1.56.</li><li>Tip, on the $24.00 menu value: $24.00 &times; 0.15 = $3.60.</li><li>Total: $12.00 + $1.56 + $3.60 = <b>$17.16</b>, or <b>$8.58</b> each.</li><li>Without the deal: $15.36 each. Saving: $15.36 &minus; $8.58 = <b>$6.78</b> each.</li></ul></div>
+<p>If you split the bill, <a href="/blog/group-dining-deals">group dining deals</a> shows how to do it fairly, including how to handle a tip.</p>"""),
+             ("What about tipping and the staff?", """<p>It is fair to tip on the value of the meal you would have paid for, and many diners do, since the server does the same work. This post tips on the menu price in the examples. If you tip on the lower price, your saving is a little larger, and you can decide what feels right. Whatever you decide, put it into your tally so the number stays honest.</p>"""),
+             ("What a month looks like", """<div class="callout example"><b>Four weeks, three lunches out a week (example)</b><ul><li>Without any deal: 12 lunches &times; $15.36 = <b>$184.32</b>.</li><li>With a $3 off deal on 4 of them: 4 &times; $3.39 = $13.56 saved.</li><li>With a 2 for 1 on 4 of them: 4 &times; $6.78 = $27.12 saved.</li><li>Both together, on 8 of the 12 lunches: $13.56 + $27.12 = $40.68 saved, leaving <b>$143.64</b>.</li></ul></div>
+<p>These are example numbers. Your lunches, your prices and your tip will differ, but you can redo the sums in two minutes. <a href="/blog/monthly-eating-out-budget-markham-diners">A monthly eating-out budget</a> shows how to fit lunches into a bigger number.</p>"""),
+             ("How to find a lunch deal on FIG", """<p>FIG is free for diners. You can browse places, menus, reviews and live deals on a map without an account. When you find one you want, make an account, claim it in one tap and show the QR code that staff scan at the restaurant. A few rules help to know:</p>
+<ul><li>A diner can claim a deal once a day.</li><li>A deal code works once. If the restaurant lets a deal be used more than once, your screen shows a new code after each scan.</li><li>Location is optional and never limits a deal.</li></ul>
+<p>Check the hours of the deal. A lunch deal that ends at 2 pm is no use at 2:15. If you are not sure, <a href="/blog/compare-restaurant-deals-worth-it">how to compare restaurant deals</a> helps you decide whether it is worth it.</p>"""),
+             ("Takeout at lunch", """<p>If you would rather pick lunch up, takeout on FIG is paid for online in the app at checkout. The card is held and charged when the restaurant accepts, and nothing is charged if the restaurant declines. There is no paying at the counter, and the pickup code only confirms collection. Takeout comes with a deal unless the restaurant has set takeout at full price, so check the total at checkout. <a href="/blog/takeout-or-dine-in-with-a-deal-which-costs-less">Takeout or dine-in with a deal</a> compares the two.</p>"""),
+             ("Small habits that add up", """<ul><li>Look at the map on the morning of a lunch out, not at noon when you are hungry.</li><li>Ask a colleague on the days you want a 2 for 1.</li><li>Keep one lunch a week as a treat, with no deal at all. A budget you enjoy is a budget you keep.</li></ul>
+<p>To start looking, check out deals at www.figpromo.ca/app. FIG is open in Markham now, and it is expanding to Richmond Hill and Vaughan Mills.</p>"""),
+         ],
+         faq=[("How much does a weekday lunch really cost?", "More than the menu price. In the example, a $12 lunch comes to $15.36 with 13% HST and a 15% tip."),
+              ("Does a dollar-off deal reduce the HST?", "Yes. A store's own discount lowers the price before HST is worked out, so $3 off a $12 lunch saves $3.39 with HST in the example."),
+              ("How much does a 2 for 1 save two colleagues?", "In the example, about $6.78 each, bringing a $15.36 lunch to $8.58."),
+              ("How often can I claim the same deal?", "A diner can claim a deal once a day."),
+              ("Do I need an account to look for lunch deals?", "No. You can browse places, menus, reviews and live deals on the map as a guest. You need an account to claim a deal."),
+              ("Is FIG free for diners?", "Yes. FIG is free for diners."),
+              ("Where can I use FIG?", "In Markham, on the web at www.figpromo.ca/app. FIG is expanding to Richmond Hill and Vaughan Mills.")]),
+
+    dict(slug="keep-your-fig-page-current-hours-menu-prices", screen="tscanner", title="Keep your FIG page current: hours, menu and prices", date="2026-11-08", publish_at="2026-11-08T12:00:00-05:00", updated="2026-11-08", topic="For restaurants", group="fill-quiet-hours",
+         dek="A page that is out of date costs you trust the first time a diner arrives at a closed door. A short routine for your opening hours, menu sections, photos and prices, and who on your team should look after each.",
+         desc="A simple routine for Markham restaurants to keep their FIG opening hours, menu, photos and prices up to date, with a checklist and a table of when to update.",
+         seo="Keep your restaurant page current: hours, menu and prices",
+         keywords="restaurant opening hours online, update restaurant menu, restaurant listing accuracy, restaurant holiday hours, menu prices, Markham restaurants, FIG restaurant page",
+         points=["Diners on FIG see your opening hours, menu with photos and sections, reviews and live deals, so each needs to be right.",
+                 "Check your page on a fixed day each week. Five minutes is enough.",
+                 "Update hours before holidays and before any closure, not after.",
+                 "When a price changes in the kitchen or on the till, change it on your FIG menu the same day.",
+                 "Owners and managers can look after the page. Decide who does it, so it is never nobody's job."],
+         sections=[
+             ("The short answer", """<p>Choose one day a week, open your FIG page as a diner would, and check three things: your opening hours, your menu and your prices. Fix anything that is wrong that day. Update your hours before a holiday or a closure rather than after, and give one person the job, so it is not left to chance.</p>"""),
+             ("Why it matters", """<p>When a diner finds your deal on the map, they are making a trip: they will walk or drive to you. If the page says you are open and the door is locked, the diner is annoyed with you, not with the page. If the menu shows a dish you stopped making, or a price that is lower than the till, the conversation at the counter starts badly.</p>
+<p>Reviews on FIG come only from scanned visits, so every review is from a diner who really came. A visit that begins with a surprise is more likely to end with a lower rating. Keeping the page right is one of the cheapest ways to protect your stars.</p>"""),
+             ("What diners see", """<table><thead><tr><th>Part of your page</th><th>What it is for</th><th>How often to check</th></tr></thead><tbody>
+<tr><td>Opening hours</td><td>Tells diners when to come</td><td>Weekly, and before every holiday</td></tr>
+<tr><td>Menu sections and dishes</td><td>Lets diners choose before they arrive</td><td>Weekly, and whenever the menu changes</td></tr>
+<tr><td>Prices</td><td>Sets what diners expect to pay</td><td>Whenever a price changes</td></tr>
+<tr><td>Photos</td><td>Is the first thing diners look at</td><td>When a dish changes, or each season</td></tr>
+<tr><td>Live deals</td><td>Brings in diners for your quiet hours</td><td>Weekly, with your results</td></tr>
+<tr><td>Reviews and replies</td><td>Shows how visits went</td><td>A few times a week</td></tr>
+</tbody></table>"""),
+             ("Opening hours", """<p>Your opening hours are the most important line on the page. Set them to match the real days and times you serve, including any day you are closed. Then think ahead:</p>
+<ul><li>Update the hours before a holiday, not on the morning of it.</li><li>If you will close early for a private event or a staff day, change it as soon as you know.</li><li>If a deal is scheduled for a time you are going to be closed, change or end the deal too.</li></ul>
+<p>It helps to keep a short list of the dates you are closed each year, so you can check the page against it. <a href="/blog/restaurant-checklist-before-fig-opens-january-2027">The go-live checklist</a> covers hours as part of the first setup.</p>"""),
+             ("Menu, sections and photos", """<p>Your menu on FIG has sections and photos. Keep the sections in the order a diner would read them, with your best-known dishes near the top. When you add or remove a dish on the printed menu, do the same online the same day.</p>
+<p>A photo that no longer matches the plate is worse than no photo. Retake it when the dish changes. <a href="/blog/menu-photos-restaurant-phone-photography-fig">How to photograph your dishes with a phone</a> shows how, and it takes about as long as it does to plate the dish.</p>"""),
+             ("Prices", """<p>Prices are where the page and the till most often drift apart. Food costs go up, a supplier changes, and the till is updated but the page is not. The result is a diner who expects $14.00 and is asked for $15.50.</p>
+<div class="callout math"><b>A small price change, checked (example)</b><ul><li>A dish on the page costs $14.00. In the kitchen it costs $4.20 to make, which is 30% of the price.</li><li>Your supplier's costs rise, and the dish now costs $4.90 to make.</li><li>At $14.00, the food cost is now $4.90 &divide; $14.00 = 35%.</li><li>To get back to 30%, the price would be $4.90 &divide; 0.30 = about $16.33, so you might choose $16.00 and accept a food cost of about 30.6%.</li></ul></div>
+<p>These are round example numbers. The point is to change the price on the till and on the page together, and to think about any deal that sits on top of it. A deal that was fine at $14.00 may need a second look at a new price. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> shows how.</p>"""),
+             ("Who looks after the page", """<p>On FIG, staff join by accepting an invite from the owner, with the roles Owner, Manager and Staff. Decide who on the team keeps the page current. It is often a manager who knows the menu well. Put the weekly check in the same place as other recurring jobs, such as ordering or the cash-up.</p>
+<p>Owners and managers also need a stronger sign-in for the money steps. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">Setting up your team and sign-in security</a> has the details.</p>"""),
+             ("A five-minute weekly check", """<ol><li>Open your page as a diner would see it.</li><li>Read your opening hours for the coming week, and check them against holidays and events.</li><li>Scan the menu for dishes you no longer have, and for prices that have changed.</li><li>Look at your live deals, and end or change any that no longer suit.</li><li>Read new reviews, and reply to any that need it. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> has a short guide.</li></ol>
+<p>Keep a note of what you changed and the date. If a diner says the page was wrong, you will know when it was last checked.</p>"""),
+             ("What to do when something is wrong", """<p>Mistakes happen. If a diner tells you the page was wrong, thank them, fix it and note the date. If you find the error yourself, fix it at once and look at the other lines for the same kind of slip. It is worth replying to a review that mentions it, in a calm, short way. You do not need to explain at length: say what was wrong and that it is fixed.</p>
+<p>A quick tip: the next time you print a new menu, update the page first and print second. The page then never falls behind the paper.</p>"""),
+             ("A routine your team will keep", """<p>A routine only works if it is short. Put the five-minute check in your weekly schedule next to a task you already do. Hold it at the same time each week, so nobody has to remember. If the person who does it is away, name a backup. When the check is quick and has an owner, the page stays right without anyone thinking about it.</p>"""),
+             ("If you have two locations", """<p>A restaurant can have up to 2 locations on FIG for now. Check each one separately, since hours and menus often differ between them. A short list with a line per location keeps the check quick.</p>"""),
+         ],
+         faq=[("How often should I check my FIG page?", "Once a week is a good habit, and again before any holiday or closure. Change prices the same day they change on your till."),
+              ("What do diners see on my page?", "Your opening hours, your menu with photos and sections, reviews and your live deals."),
+              ("Who can update the page?", "Your team, with the roles Owner, Manager and Staff. Staff join by accepting an invite from the owner."),
+              ("What if I will be closed on a day a deal is scheduled?", "Change or end the deal, and update your opening hours, so diners do not arrive to a closed door."),
+              ("Where do reviews come from?", "Reviews come only from scanned visits, so each one is from a diner who came to your restaurant."),
+              ("Does it cost anything to keep my page up to date?", "No. Setting up the page, posting deals, scanning and the dashboard cost nothing for restaurants."),
+              ("How many locations can I add?", "Up to 2 locations for now.")]),
+
 ]

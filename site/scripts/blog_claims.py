@@ -15,9 +15,9 @@ import html
 import re
 import sys
 
-# (name, pattern, why it's wrong today, dated). A "dated" rule is about the diner side not being open yet: it stops applying once
-# DINERS_OPEN is True in pages.py (the day FIG opens to diners). All patterns are case-insensitive and run on plain text with
-# curly apostrophes made straight.
+# (name, pattern, why it's wrong today, dated). A dated rule follows DINERS_OPEN in pages.py: True = it applies only while FIG is closed
+# to diners (a post may not say the app works yet); "open" = it applies only once FIG is open to diners (2026-11-04: a post may not say
+# diners wait for an opening day or join a waitlist). All patterns are case-insensitive and run on plain text with curly apostrophes made straight.
 RULES = [
     ("premium", r"FIG Premium|Premium badge|\$50(\.00)?\s*(a|per|/)\s*(year|yr)\b|\$50\s*(annual|yearly)",
      "FIG Premium is hidden", False),
@@ -30,7 +30,9 @@ RULES = [
     ("stamps", r"\bstamps?\b|passport|loyalty points?",
      "FIG has no stamps, passport or points", False),
     ("works-today", r"works today|web app works|use FIG (on the web )?(at \S+ )?(today|now)|open FIG on the web|explore the map( and restaurants)? (now|today)",
-     "FIG isn't open to diners until January 1, 2027 (diners join the waitlist)", True),
+     "FIG isn't open to diners yet (diners join the waitlist)", True),
+    ("not-open-yet", r"January 1,? 2027|\bwait ?list\b|\b(opens|opening) (to|for) diners|\b(when|once|until|before) FIG (opens|launches)\b|\bdeals start (in Markham )?(on )?January",
+     "FIG is open to diners since November 4, 2026: no opening date ahead and no waitlist (point diners to www.figpromo.ca/app)", "open"),
     ("deposit", r"\bdeposits?\b",
      "restaurants pay nothing up front: no deposit and no founding payment", False),
     ("places", r"Toronto|\bGTA\b|York Region",
@@ -102,7 +104,7 @@ def check(posts, diners_open=False):
         for field, text in _fields(post):
             plain = _plain(text)
             for name, rx, why, dated in _COMPILED:
-                if name in ok or (dated and diners_open):
+                if name in ok or (dated is True and diners_open) or (dated == "open" and not diners_open):
                     continue
                 for m in rx.finditer(plain):
                     hits.append((post["slug"], field, name, why, plain[max(0, m.start() - 50):m.end() + 50]))
@@ -168,6 +170,10 @@ def _selftest():
     assert not check([post(title="Is FIG Premium worth it?", claims_ok=["premium"])]), "claims_ok lets a deliberate mention through"
     assert check([post(dek="Open FIG on the web")]) and not check([post(dek="Open FIG on the web")], diners_open=True), "dated rules stop once FIG is open"
     assert check([post(keywords="restaurant counter code")]), "keywords are checked"
+    for text in ["FIG opens to diners on January 1, 2027", "Join the waitlist at www.figpromo.ca", "When FIG opens, you will see deals", "Deals start January 1"]:
+        assert {h[2] for h in check([post(dek=text)], diners_open=True)} == {"not-open-yet"} and not check([post(dek=text)]), text
+    for text in ["FIG opened to diners on November 4, 2026", "Check out deals at www.figpromo.ca/app", "the menu opens with the deal applied", "FIG is open to diners in Markham now"]:
+        assert not check([post(dek=text)], diners_open=True), text
     print("blog_claims: self-check ok,", len(RULES), "rules")
 
 

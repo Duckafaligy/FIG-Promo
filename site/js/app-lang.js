@@ -6,7 +6,7 @@
   const T = { fr: "Retour à FIG", "zh-Hans": "返回 FIG", "zh-Hant": "返回 FIG" };
   const l = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
   const root = document.documentElement;
-  // a creator's link (?src=name, 2026-10-17): kept for this tab so the waitlist form can say who sent them (first one wins)
+  // a creator's link (?src=name, 2026-10-17): kept for this tab so a sign-up can say who sent them (first one wins)
   try {
     const src = (new URLSearchParams(location.search).get("src") || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
     if (src && !sessionStorage.getItem("fig.src")) sessionStorage.setItem("fig.src", src);

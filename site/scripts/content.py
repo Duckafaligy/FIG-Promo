@@ -8,7 +8,7 @@ a code works once and changes after every scan (not with time), claims last unti
 ABOUT_FAQ = [
     ("What is FIG?", "FIG is a deals app for Markham, Ontario. Restaurants post their own deals, diners find them on a map, claim one in a tap and show a code at the counter."),
     ("Is FIG free?", "Yes, for diners and for restaurants, with no commission on the bill and no fee per diner. FIG earns only by keeping 5% of the food on takeout orders paid in the app."),
-    ("Where is FIG available?", "FIG is launching in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
+    ("Where is FIG available?", "FIG is live in Markham, Ontario. Markham first, expanding to Richmond Hill and Vaughan Mills."),
     ("Who makes FIG?", "FIG is run by Brendan Lau in Markham, Ontario. You can reach FIG on the contact page."),
     ("Is FIG a delivery app?", "No. FIG brings diners to your restaurant. They eat in or, when a deal allows it, order takeout and pick it up. FIG never delivers, and diners never pay FIG."),
 ]
@@ -16,7 +16,7 @@ ABOUT_FAQ = [
 ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <h2 class="h2">FIG at a glance</h2>
 <dl class="ab-dl">
-<div><dt>What</dt><dd>A deals app for local restaurants. Restaurants can set up on the web today. Diners open on January 1, 2027. iPhone and Android apps are coming.</dd></div>
+<div><dt>What</dt><dd>A deals app for local restaurants, open to diners and restaurants on the web today. iPhone and Android apps are coming.</dd></div>
 <div><dt>Where</dt><dd>Markham first, expanding to Richmond Hill and Vaughan Mills.</dd></div>
 <div><dt>For diners</dt><dd>Free. Nothing to upgrade.</dd></div>
 <div><dt>For restaurants</dt><dd>Free to start and free to run. FIG keeps 5% of the food only on takeout paid in the app.</dd></div>

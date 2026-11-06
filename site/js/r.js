@@ -7,7 +7,7 @@
 //   set up), so anyone here doesn't have it: straight to the App Store. Never try fig:// on its own: without the app,
 //   Safari shows an "address is invalid" error.
 // - Android: one intent link opens FIG if it's installed, else Google Play.
-// Until then, the page shows who shared what, with the waitlist.
+// Until then, the page shows who shared what, with a button to open it on the web.
 (function () {
   var STORE = { ios: '', android: '' }; // e.g. https://apps.apple.com/app/id1234567890 and https://play.google.com/store/apps/details?id=com.figtechnologies.fig
   var PACKAGE = 'com.figtechnologies.fig';

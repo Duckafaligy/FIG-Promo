@@ -20,9 +20,9 @@ if _bad:
     sys.exit(f"pages.py: these posts have no group (or one that isn't in GROUPS): {', '.join(_bad)}")
 
 SITE_URL = "https://www.figpromo.ca"
-# False until FIG opens to diners (January 1, 2027). While it's False a diner post's closing button joins the waitlist instead of opening
-# the app, and blog_claims.py stops a post from saying the app or the map works now. Flip it to True the day diners can get in.
-DINERS_OPEN = False
+# True since 2026-11-04, when FIG opened to diners (the web app's Home works as a guest). While it was False, blog_claims.py's dated
+# rules stopped a post from saying the app or the map works now.
+DINERS_OPEN = True
 SITE = pathlib.Path(__file__).resolve().parents[1]
 ROOT = SITE.parent
 index = (SITE / "index.html").read_text(encoding="utf-8")
@@ -392,7 +392,7 @@ HELP = [
         ("Do I need new equipment?", "No. Any phone, tablet or computer can scan. Open FIG on the web (the iPhone and Android apps are coming). Your staff sign in with their own FIG accounts."),
         ("What if a code won't scan?", "Tap Enter code and type the 8 characters under the diner's QR. It runs the same check as a scan."),
         ("How do I post a deal?", "Open Deals and tap New deal. Pick the dishes (or the whole order, for dine-in), the offer, and the days and hours. Check it the way diners will see it. You can pause a deal any time, or post an ended one again in one tap."),
-        ("When can I publish my page?", "As soon as you finish Stripe's checks, which take about 5 minutes. Have your ID and a bank account ready. Until then, everything you build stays a draft that diners can't see. Add at least one photo to publish. Diners see published pages from January 1, 2027. An HST number is needed only for takeout."),
+        ("When can I publish my page?", "As soon as you finish Stripe's checks, which take about 5 minutes. Have your ID and a bank account ready. Until then, everything you build stays a draft that diners can't see. Add at least one photo to publish. Diners see your page as soon as it's published. An HST number is needed only for takeout."),
         ("Can diners order takeout?", "Yes, once takeout is on. Add your menu (sections first, then dishes), then choose how many deals one order can use: 1, 2, 3, more, no limit, or 0 for full-price orders. Diners pay in the app and choose a pickup time. The card is charged when you accept, and nothing is charged if you decline. Scan their pickup code when they collect."),
         ("Can I refund an order?", "Yes, owners and managers can: open the order and tap Refund, for all of it or part. FIG gives back its fee in proportion; Stripe keeps its card fee."),
         ("Can a diner cancel a takeout order?", "Yes. A diner can cancel an accepted order for a full refund until 20 minutes before pickup, and you are told right away. The refund includes FIG's fee on that order. Stripe's own fee is not returned. After that the order is locked in and only you can refund it. Accepting an order keeps the pickup time the diner chose."),
@@ -438,7 +438,7 @@ help_html += '''<section class="section pg-tight"><div class="wrap"><div class="
 <p class="fig-mail" hidden>You can also write to <a href="mailto:hello@figpromo.ca">hello@figpromo.ca</a>.</p></div>
 <div class="pg-dark-btns"><a class="btn btn-lg" href="/contact">Contact us</a><a class="btn btn-lg btn-line" href="/#catch">Watch the tutorials</a></div>
 </div></div></section>'''
-page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>\n  <script src="/js/ui.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
+page("help", "Help center", "Plain answers for restaurants and diners: publishing, deals, scanning, takeout, Stripe and codes.", help_html, group="Main", wide=True, extra_head=faq_ld([qa for _, _, qs in HELP for qa in qs]) + '\n  <script src="/js/help.js" defer></script>\n  <script src="/js/config.js" defer></script><script src="/js/show-email.js" defer></script>')
 
 
 
@@ -548,16 +548,13 @@ SHARE = '<button class="share" type="button" data-share><svg width="16" height="
 
 
 def end_cta(post):
-    """The cobalt block at the end of a post: restaurants get listed; diners join the waitlist until FIG opens to them (DINERS_OPEN), then open the web app."""
+    """The cobalt block at the end of a post: restaurants get listed; diners open the web app's Home (no account needed to browse)."""
     if post["topic"] == "For restaurants":
         words, btns = ("<h2>Get your restaurant on FIG.</h2><p>Free for restaurants, with no commission on dine-in. Post deals, scan diners and see what works.</p>",
                        '<a class="btn btn-lg btn-volt" href="/app/sign-up-business">Set up my restaurant</a><a class="btn btn-lg btn-line" href="/#owners">See what restaurants get</a>')
-    elif DINERS_OPEN:
-        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners.</p>",
-                       '<a class="btn btn-lg btn-volt" href="/app/">Open FIG on the web</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
-    else:  # the app's diner side is closed until January 1, 2027: the button joins the waitlist (it lands on Home's form)
-        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners and opens in Markham on January 1, 2027. Join the waitlist and we'll email you the day it opens.</p>",
-                       '<a class="btn btn-lg btn-volt" href="/#waitlist">Join the waitlist</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
+    else:
+        words, btns = ("<h2>Find a deal near you.</h2><p>FIG is free for diners and open now in Markham. No account needed to look around.</p>",
+                       '<a class="btn btn-lg btn-volt" href="/app/home">Check out deals</a><a class="btn btn-lg btn-line" href="/#how">How it works</a>')
     return f'<section class="section pg-tight"><div class="wrap"><div class="pg-cta"><div>{words}</div><div class="pg-cta-btns">{btns}</div></div></div></section>'
 
 
@@ -690,8 +687,8 @@ if POSTS:
     POST_DATE["/blog"] = max(POST_DATE.values())
 # every other page (FIX-LIST #107): the legal pages from their own "Last updated" line; the rest from the date their words last changed
 # ponytail: hand-kept dates for 4 pages (a generated date would change the file every hourly run). KEEP THEM CURRENT: when you change the words of
-# Home (index.html), About (content.py), Contact or Help (pages.py), set that page's date to the day you did it (2026-10-24: all four changed).
-POST_DATE.update({"/": "2026-10-25", "/about": "2026-10-25", "/contact": "2026-10-24", "/help": "2026-10-25"})
+# Home (index.html), About (content.py), Contact or Help (pages.py), set that page's date to the day you did it (2026-11-05: Home, About, Help).
+POST_DATE.update({"/": "2026-11-05", "/about": "2026-11-05", "/contact": "2026-10-24", "/help": "2026-11-05"})
 POST_DATE.update(LEGAL_DATES)
 lastmod = lambda p: f"<lastmod>{POST_DATE[p]}</lastmod>" if p in POST_DATE else ""
 prio = lambda p: "1.0" if p == "/" else "0.8" if p in ("/about", "/blog", "/help") else "0.4" if p in ("/terms", "/privacy", "/business-terms", "/cookies") else "0.6"
@@ -707,7 +704,7 @@ LLMS = f"""# FIG
 ## Facts
 - Based in: Markham, Ontario
 - Platforms: web app today at www.figpromo.ca/app; iPhone and Android apps coming soon
-- Status: restaurants can sign up and set up now; FIG opens to diners on January 1, 2027, and until then diners can join the waitlist at www.figpromo.ca
+- Status: open to diners and restaurants since November 4, 2026; diners browse deals in the web app at www.figpromo.ca/app with no account needed to look around; restaurants sign up and set up there too
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
 - Restaurants: completely free to sign up, build a page, menu and deals as drafts, publish them (after Stripe's identity, business and bank checks), scan and use the dashboard and insights (up to 2 locations for now); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads

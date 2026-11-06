@@ -1,0 +1,1 @@
+__d(function(g,r,i,a,m,e,d){"use strict";Object.defineProperty(e,'__esModule',{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return s}});var t=r(d[0]),n=r(d[1]),u=r(d[2]);function s(){return(0,n.useWebWide)()?(0,u.jsx)(t.WebDealsPage,{}):(0,u.jsx)(t.DealsScreen,{})}},1003,[955,925,2]);

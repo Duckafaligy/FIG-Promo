@@ -15,19 +15,19 @@
    "date": "2026-11-04",
    "publish_at": "2026-11-04T12:00:00-05:00",
    "status": "live",
-   "words": 1012,
+   "words": 1002,
    "dek": "Your dashboard shows results deal by deal. How to review a deal after two weeks, three questions to ask, and a worked example of the arithmetic that tells you whether to keep it, change it or end it."
   },
   {
    "slug": "monthly-eating-out-budget-markham-diners",
-   "title": "A monthly eating-out budget that works: what to expect when FIG opens in Markham",
+   "title": "A monthly eating-out budget that works: where FIG deals fit in Markham",
    "topic": "For diners",
    "group": "eat-out-for-less",
    "date": "2026-11-03",
    "publish_at": "2026-11-03T12:00:00-05:00",
    "status": "live",
-   "words": 1018,
-   "dek": "Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG when it opens to diners on January 1, 2027."
+   "words": 976,
+   "dek": "Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG in Markham."
   },
   {
    "slug": "takeout-order-declined-or-refunded-what-happens-to-the-money",
@@ -37,7 +37,7 @@
    "date": "2026-11-02",
    "publish_at": "2026-11-02T12:00:00-05:00",
    "status": "live",
-   "words": 1068,
+   "words": 1050,
    "dek": "A takeout order is held on the diner's card and charged when you accept. What that means if you decline, if you need to refund, who can do it, and where to see every refund and fee afterwards."
   },
   {
@@ -48,19 +48,19 @@
    "date": "2026-11-01",
    "publish_at": "2026-11-01T12:00:00-05:00",
    "status": "live",
-   "words": 1025,
+   "words": 1022,
    "dek": "Your FIG menu has photos and sections, and photos are what diners look at first. How to shoot your dishes with the phone you already own: light, angle, plating, which dishes to do first and how long it takes."
   },
   {
    "slug": "restaurant-checklist-before-fig-opens-january-2027",
-   "title": "Restaurant checklist: get ready for FIG before it opens to diners on January 1, 2027",
+   "title": "Restaurant checklist: get your FIG page ready before you go live",
    "topic": "For restaurants",
    "group": "fill-quiet-hours",
    "date": "2026-10-31",
    "publish_at": "2026-10-31T12:00:00-04:00",
    "status": "live",
-   "words": 963,
-   "dek": "FIG opens to diners on January 1, 2027, and restaurants set up first. A week-by-week checklist for the weeks in between: your page, menu, hours, team, first deals and takeout, with a count of the days left."
+   "words": 947,
+   "dek": "Diners are on FIG now, so your page counts from the day you publish it. A step-by-step checklist: your page, menu, hours, team, first deals and takeout."
   },
   {
    "slug": "deals-used-more-than-once-uses-per-diner-wait-between-uses",
@@ -70,7 +70,7 @@
    "date": "2026-10-30",
    "publish_at": "2026-10-30T12:00:00-04:00",
    "status": "live",
-   "words": 1006,
+   "words": 997,
    "dek": "A deal does not have to be a one-time offer. How uses per diner and the wait between uses work on FIG, how the code changes after every scan, and the arithmetic of a repeat deal for a quiet weekday."
   },
   {
@@ -81,7 +81,7 @@
    "date": "2026-10-29",
    "publish_at": "2026-10-29T12:00:00-04:00",
    "status": "live",
-   "words": 1029,
+   "words": 1016,
    "dek": "Who should hold which role on FIG, how people join by invite, which steps need a stronger sign-in, and how to set it up so a busy shift runs smoothly and the money steps stay with the right people."
   },
   {
@@ -92,7 +92,7 @@
    "date": "2026-10-28",
    "publish_at": "2026-10-28T12:00:00-04:00",
    "status": "live",
-   "words": 1066,
+   "words": 1062,
    "dek": "Every takeout payment, refund and fee is listed on one page and downloads as a CSV file. How to read it, what each line means, a worked month-end example with the sums checked, and how to hand it to your bookkeeper."
   },
   {
@@ -103,7 +103,7 @@
    "date": "2026-10-27",
    "publish_at": "2026-10-27T12:00:00-04:00",
    "status": "live",
-   "words": 1313,
+   "words": 1312,
    "dek": "How to answer a review in a few minutes a week: what to say to a good review, a bad one and a rating with no words, with templates you can adapt and a little arithmetic on what one low rating does."
   },
   {
@@ -114,7 +114,7 @@
    "date": "2026-10-26",
    "publish_at": "2026-10-26T12:00:00-04:00",
    "status": "live",
-   "words": 1031,
+   "words": 1022,
    "dek": "The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out."
   },
   {
@@ -125,7 +125,7 @@
    "date": "2026-10-24",
    "publish_at": "2026-10-24T12:00:00-04:00",
    "status": "live",
-   "words": 1162,
+   "words": 1142,
    "dek": "Eating out with kids does not have to cost a lot. How to pick an early table, choose the deal that fits a family of four, check the sums with HST and keep the extras in check."
   },
   {
@@ -147,7 +147,7 @@
    "date": "2026-10-22",
    "publish_at": "2026-10-22T12:00:00-04:00",
    "status": "live",
-   "words": 1046,
+   "words": 1026,
    "dek": "A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards."
   },
   {
@@ -158,7 +158,7 @@
    "date": "2026-10-20",
    "publish_at": "2026-10-20T12:00:00-04:00",
    "status": "live",
-   "words": 1164,
+   "words": 1145,
    "dek": "A code that will not scan, a deal that seems to be over, a pickup that went wrong: the usual reasons a FIG deal does not apply at the counter, what to try first, and how to ask politely."
   },
   {
@@ -169,7 +169,7 @@
    "date": "2026-10-19",
    "publish_at": "2026-10-19T12:00:00-04:00",
    "status": "live",
-   "words": 1025,
+   "words": 1002,
    "dek": "Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order."
   },
   {
@@ -191,7 +191,7 @@
    "date": "2026-10-17",
    "publish_at": "2026-10-17T12:00:00-04:00",
    "status": "live",
-   "words": 1183,
+   "words": 1175,
    "dek": "2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway."
   },
   {
@@ -213,7 +213,7 @@
    "date": "2026-10-14",
    "publish_at": null,
    "status": "live",
-   "words": 536,
+   "words": 529,
    "dek": "Everything that happens between seeing a deal and paying the bill: claiming, your Deals page, the code at the counter, takeout, what happens when a deal ends, and rating the visit."
   },
   {
@@ -367,7 +367,7 @@
    "date": "2026-10-02",
    "publish_at": null,
    "status": "live",
-   "words": 846,
+   "words": 854,
    "dek": "Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill."
   }
  ]

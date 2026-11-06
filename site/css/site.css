@@ -58,22 +58,6 @@ button, input { font: inherit; color: inherit; }
 .btn[disabled] { opacity: .6; cursor: progress; }
 :focus-visible { outline: 3px solid var(--volt); outline-offset: 3px; }
 
-.field-pill { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 8px 8px 8px 22px; border-radius: 999px; background: rgba(20, 25, 37, .88); border: 1px solid var(--line-2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: border-color .2s, box-shadow .3s; }
-.field-pill:focus-within { border-color: var(--cobalt); box-shadow: 0 0 0 4px rgba(30, 94, 255, .18); }
-.field-pill svg { color: var(--dim); flex-shrink: 0; }
-.field-pill input { flex: 1; min-width: 0; height: 46px; border: 0; background: transparent; font-size: 17px; font-weight: 500; outline: none; }
-.field-pill input::placeholder { color: var(--dim); }
-.field-pill .sm { display: none; }
-@media (max-width: 520px) { .field-pill .lg { display: none; } .field-pill .sm { display: inline; } }
-.field-pill.light { background: #fff; border-color: #fff; }
-.field-pill.light input { color: #0A1020; }
-.field-pill.light input::placeholder { color: #5B6779; }
-.consent { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; margin-top: 8px; padding: 6px 0 6px 8px; box-sizing: border-box; font-size: 13px; line-height: 1.5; color: var(--muted); cursor: pointer; }
-.consent input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; accent-color: var(--cobalt); }
-.consent.light { color: #fff; }
-/* who asks and how to reach them, under the waitlist box (FIX-LIST #95) */
-.consent-link { display: inline-flex; align-items: center; min-height: 44px; margin: 0 0 0 36px; /* 44 px to tap (#204) */ font-size: 13px; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.closing .consent-link { color: #fff; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-msg { min-height: 0; margin-top: 10px; padding-left: 8px; font-size: 15px; font-weight: 600; }
 .form-msg:empty { display: none; }
@@ -112,7 +96,6 @@ button, input { font: inherit; color: inherit; }
 .chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: 999px; background: rgba(20, 25, 37, .85); border: 1px solid var(--line); font-size: 14px; font-weight: 700; margin-bottom: 22px; }
 .chip .dot { width: 8px; height: 8px; border-radius: 99px; background: var(--leaf); }
 .lede { margin-top: 22px; max-width: 30em; }
-.join { margin-top: 32px; max-width: 560px; }
 .owner-link { margin-top: 22px; padding-left: 8px; font-size: 15px; font-weight: 600; color: var(--muted); }
 .owner-link a { color: var(--volt); text-decoration: none; }
 .owner-link a:hover { text-decoration: underline; }
@@ -358,7 +341,6 @@ button, input { font: inherit; color: inherit; }
 .closing { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding: 56px 28px; border-radius: 40px; background: linear-gradient(140deg, #1E5EFF, #1546C9); overflow: hidden; }
 .closing::after { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(200, 241, 53, .28), transparent 65%); pointer-events: none; }
 .closing p { margin-top: 18px; color: #fff; font-size: 18px; }
-.closing .join { margin-top: 0; position: relative; z-index: 1; }
 @media (min-width: 980px) { .closing { grid-template-columns: 1fr 460px; align-items: center; padding: 76px 80px; } }
 .foot { padding: 72px 0 calc(36px + env(safe-area-inset-bottom)); border-top: 1px solid #1A2030; background: var(--bg); }
 .foot-top { display: grid; gap: 40px; }
@@ -600,7 +582,6 @@ button, input { font: inherit; color: inherit; }
 .two-tone .muted { color: #8A94A6; }
 :focus-visible { outline-color: var(--cobalt); }
 .btn:hover, .btn-volt:hover { box-shadow: 0 8px 24px rgba(10, 16, 32, .14); }
-.field-pill { background: rgba(255, 255, 255, .94); border-color: var(--field-edge); box-shadow: 0 10px 30px rgba(10, 16, 32, .06); }
 .form-msg.err { color: #C9353A; } .form-msg.ok { color: #0B7E58; }
 [aria-invalid="true"] { box-shadow: inset 0 0 0 1.5px #C9353A !important; }
 
@@ -767,7 +748,7 @@ p.consent { cursor: default; padding-left: 22px; }
 .post-cta { margin: 44px 0 10px; }
 .doc h2[id] { scroll-margin-top: 110px; }
 
-/* hero: sign up instead of a waitlist field */
+/* hero: the sign-up buttons */
 .signup { margin-top: 32px; }
 .signup-q { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; margin-bottom: 14px; }
 .signup-btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -1232,13 +1213,8 @@ details.qa > p { margin: -2px 0 0; }
   .s4 { left: 9%; right: auto; top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); width: clamp(56px, 14vw, 88px); }
 }
 
-/* the diner waitlist in the closing band (2026-10-15: restaurants first, diners join January 1, 2027) */
-.closing .join .btn { flex-shrink: 0; }
-.closing .wl-count:empty { display: none; }
-.closing .wl-count { margin-top: 10px; padding-left: 8px; font-size: 15px; font-weight: 700; }
-@media (max-width: 420px) { .closing .join .field-pill { flex-wrap: wrap; padding: 8px; border-radius: 28px; } .closing .join .field-pill input { padding-left: 12px; flex-basis: 100%; } .closing .join .btn { flex: 1; } .closing-btns .btn { flex: 1 1 100%; padding: 0 16px; font-size: 16px; white-space: normal; text-align: center; } }
-.closing .form-msg.ok { color: #fff; }
-.closing .form-msg.err { color: #FFD6D8; }
+/* the closing band's buttons stack on a small phone */
+@media (max-width: 420px) { .closing-btns .btn { flex: 1 1 100%; padding: 0 16px; font-size: 16px; white-space: normal; text-align: center; } }
 @media (max-width: 520px) { .signup-btns .btn { flex: 1 1 100%; } }
 
 /* a keyboard user can jump past the navigation (FIX-LIST #92, WCAG 2.4.1) */

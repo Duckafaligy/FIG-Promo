@@ -38,11 +38,11 @@ GROUPS = [
 ]
 
 POSTS = [
-    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-10-25", topic="News", group="fig-in-markham",
+    dict(slug="why-we-built-fig", screen="map", title="Why we built FIG", date="2026-10-02", updated="2026-11-05", topic="News", group="fig-in-markham",
          dek="Markham is full of great independent restaurants, and most of them run on thin margins. FIG is a deals app built around that: free for diners and for restaurants, with no cut of a dine-in bill.",
          desc="Why FIG exists: Markham restaurants run on thin margins, so FIG is free for them and for diners, and takes no cut of a dine-in bill.",
          keywords="FIG app, Markham restaurants, independent restaurants, restaurant deals app, why FIG",
-         points=["FIG is a restaurant deals app starting in Markham, Ontario. Deals start January 1, 2027.",
+         points=["FIG is a restaurant deals app starting in Markham, Ontario. It opened to diners on November 4, 2026.",
                  "Restaurants post their own deals, for the hours they choose, with their own daily cap. Posting deals and scanning diners are free, with no fee per diner.",
                  "Diners find deals on a map, claim one in a tap and show a code at the counter. It's free for diners, with no ads for now.",
                  "FIG earns only 5% of the food on takeout orders paid in the app. Never from a dine-in bill.",
@@ -66,15 +66,15 @@ POSTS = [
              # Main Street Unionville and Markham Village: https://en.wikipedia.org/wiki/Main_Street_Unionville ,
              #   https://en.wikipedia.org/wiki/Markham_Village ; Pacific Mall, NE corner of Steeles and Kennedy: https://en.wikipedia.org/wiki/Pacific_Mall
              ("Why Markham first", """<p>Because it's home, and because it has exactly the mix FIG is built for: hundreds of independent restaurants spread across plazas and main streets, from Pacific Mall at Steeles and Kennedy to Main Street Unionville and the old Main Street of Markham Village, and a lot of people who love finding somewhere new to eat.</p>
-<p>FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027. Until then, restaurants can set up their page, menu and first deals, and diners can join the waitlist at www.figpromo.ca.</p>"""),
+<p>FIG is in Markham first, expanding to Richmond Hill and Vaughan Mills. It is open to diners and restaurants now: diners can check out deals at www.figpromo.ca/app with no account needed to look around, and restaurants set up their page, menu and deals there too.</p>"""),
              ("What's next", """<p>We're signing Markham restaurants now. If you own one, building your page, your menu and your first deal takes a few minutes, and it is free. To publish them, you finish Stripe's identity and bank checks. <a href="/#owners">See how it works for restaurants</a> or read the <a href="/help">Help center</a>.</p>"""),
          ],
          faq=[("What is FIG?", "FIG is a restaurant deals app. Restaurants post their own deals; diners find them on a map, claim one and show a code at the counter. It's free for diners."),
-              ("When does FIG launch?", "FIG opens in Markham first, expanding to Richmond Hill and Vaughan Mills. Deals start January 1, 2027."),
+              ("Is FIG open yet?", "Yes. FIG opened to diners on November 4, 2026, in Markham first, expanding to Richmond Hill and Vaughan Mills."),
               ("Does FIG take a commission?", "Not on dine-in. Posting deals and scanning diners are free, with no fee per diner. On takeout orders diners pay for in the app, FIG keeps 5% of the food before tax."),
               ("Does FIG show ads?", "No, not for now. FIG has no ads, and paying FIG never moves a restaurant up in search or on the map."),
               ("Does FIG deliver?", "No. Diners eat in, or order takeout with a deal and pick it up."),
-              ("Do I need the app to use FIG?", "No. FIG runs in your web browser at www.figpromo.ca/app. Restaurants can set up there today; diners can join the waitlist on the site, and FIG opens to diners on January 1, 2027. The App Store and Google Play apps are coming soon.")]),
+              ("Do I need the app to use FIG?", "No. FIG runs in your web browser at www.figpromo.ca/app. Diners can check out deals there today, with no account needed to look around, and restaurants set up there too. The App Store and Google Play apps are coming soon.")]),
 
     dict(slug="how-fig-makes-money", screen="tdash", title="How FIG makes money: 5% of in-app takeout", date="2026-10-07", updated="2026-10-25", topic="For restaurants", group="takeout-and-money",
          dek="FIG is free for restaurants, with no commission on dine-in and no fee per diner. FIG earns only on takeout orders diners pay for in the app: it keeps 5% of the food.",
@@ -130,13 +130,13 @@ POSTS = [
     #   York University Markham Campus in Markham Centre, opened Fall 2024: https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/ ;
     #   Toogood Pond steps from Main Street Unionville: https://www.blogto.com/travel/2023/03/unionville-ontario/ ;
     #   communities (Unionville, Markham Village, Cornell, Milliken, Cathedraltown): https://en.wikipedia.org/wiki/History_of_Markham,_Ontario
-    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated="2026-10-24", topic="For diners", group="fig-in-markham",
+    dict(slug="restaurant-deals-markham", screen="map", title="How to find the best restaurant deals in Markham", date="2026-10-04", updated="2026-11-05", topic="For diners", group="fig-in-markham",
          dek="A practical guide to eating out for less in Markham, Ontario: when restaurants post deals, where to look across the city, and how to use FIG to find and use them.",
          desc="How to eat out for less in Markham, Ontario: when restaurants post deals, where to look, and how to find and use them on FIG.",
          keywords="restaurant deals Markham, Markham food deals, cheap eats Markham, Markham restaurants, Unionville restaurants, Pacific Mall food",
          points=["The best deals show up when restaurants are quiet: weekday afternoons, early dinners and late evenings.",
                  "Markham's food is spread across plazas and main streets: Highway 7, Steeles and Kennedy, Main Street Unionville, Markham Village and more.",
-                 "FIG shows live deals on a map, nearest first, filtered by craving, budget and diet. Deals start January 1, 2027.",
+                 "FIG shows live deals on a map, nearest first, filtered by craving, budget and diet. It is open to diners in Markham now.",
                  "Claim in one tap, show your code at the counter, pay the restaurant as usual. Claims don't time out while the deal runs.",
                  "Reviews on FIG come only from scanned visits, so you can trust what you read."],
          sections=[
@@ -163,7 +163,7 @@ POSTS = [
              ("7. Bring friends", """<p>Group plans fall apart over "where should we go?". Share the restaurant's link from FIG to your group chat: everyone sees the same place and its live deals. <a href="/blog/group-dining-deals">Eating out as a group, with deals</a>.</p>"""),
              ('Five mistakes that cost you the deal', "<ul><li><strong>Showing up outside the hours.</strong> Check the deal's days and times before you go.</li><li><strong>Ordering takeout on a dine-in deal.</strong> Look for Dine in or takeout.</li><li><strong>Waiting until the evening on a popular deal.</strong> Daily caps run out; claim early.</li><li><strong>Showing a screenshot.</strong> A screenshot of a code that was already scanned just says already used: open your Deals page at the counter.</li><li><strong>Forgetting the extras.</strong> The deal covers what it says; drinks and sides are usually full price.</li></ul>"),
          ],
-         faq=[("What's the best app for restaurant deals in Markham?", "FIG is built for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners, with no ads for now. Deals start January 1, 2027."),
+         faq=[("What's the best app for restaurant deals in Markham?", "FIG is built for Markham restaurant deals: live deals on a map, set by the restaurants themselves, free for diners, with no ads for now. Check out deals at www.figpromo.ca/app."),
               ("When do Markham restaurants post the most deals?", "During their quiet hours: typically weekday afternoons, early weeknight dinners and late evenings. Each deal on FIG shows its own days and hours."),
               ("Do I pay through the app?", "For dine-in, no: you pay the restaurant at the counter as usual. Takeout is paid in the app when you order."),
               ("Does FIG need my location?", "No. FIG shows Markham by default and deals are never locked to where you are. Location just makes 'nearest first' mean nearest to you."),
@@ -263,7 +263,7 @@ POSTS = [
     # York University Markham Campus (Markham Centre, opened Fall 2024): https://presidentsreport2023.yorku.ca/opening-the-doors-to-innovation/
     # Pacific Mall Heritage Town food court: https://en.wikipedia.org/wiki/Pacific_Mall
     # Ontario $4 prepared food point-of-sale rebate (GI-064): source at the top
-    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated="2026-10-24", topic="For diners", group="fig-in-markham",
+    dict(slug="student-food-deals-markham", screen="claim", title="Student food deals in Markham: eating out on a budget", date="2026-10-04", updated="2026-11-05", topic="For diners", group="fig-in-markham",
          dek="How high school and university students in Markham can eat out for less: when deals show up, how to set a real budget, how to decide as a group, and how FIG keeps it free.",
          desc="How Markham students can eat out for less: when deals show up, setting a real budget, deciding as a group, and why FIG is free.",
          keywords="student food deals Markham, cheap eats for students, after school food Markham, budget restaurants Markham, bubble tea deals Markham, York University Markham food",
@@ -285,7 +285,7 @@ POSTS = [
 <p>More in our <a href="/blog/restaurant-deals-markham">guide to restaurant deals in Markham</a>.</p>"""),
              ("How it works at the counter", """<ol><li>Claim the deal in FIG. It waits on your Deals page for as long as the deal runs.</li><li>At the restaurant, tap Show QR. Staff scan it.</li><li>The deal comes off your bill. You pay the restaurant like normal.</li></ol>
 <p>You don't need a credit card to claim a deal. A code works once, so a screenshot from a friend won't help: everyone claims their own.</p>"""),
-             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants use FIG for free, and nothing is charged per diner. Deals start in Markham on January 1, 2027.</p>"""),
+             ("Free is the point", """<p>FIG is free for every diner. There's nothing to subscribe to, no points to collect and no ads for now. Restaurants use FIG for free, and nothing is charged per diner. FIG is open to diners in Markham now.</p>"""),
              ('A week of eating out on $40', '<div class="callout math"><b>An example week (your prices will vary)</b><table><thead><tr><th>Day</th><th>Plan</th><th>Cost with 13% HST</th></tr></thead><tbody>\n<tr><td>Monday</td><td>A $3.50 drink after school (taxed at 5% under $4)</td><td>$3.68</td></tr>\n<tr><td>Tuesday</td><td>A $14 bowl with a $3-off deal</td><td>$12.43</td></tr>\n<tr><td>Thursday</td><td>2-for-1 with a friend: you each pay half of one $15 dish</td><td>$8.48</td></tr>\n<tr><td>Saturday</td><td>A $12 lunch with 15% off</td><td>$11.53</td></tr>\n<tr><td colspan="2"><strong>Total</strong></td><td><strong>$36.12</strong></td></tr>\n</tbody></table><p>Four meals out for under $40, by choosing the deal first. Without the deals, the same food would be about $50.</p></div>'),
              ('Diets and allergies', "<p>Set your diet in FIG (halal, vegetarian, vegan, gluten-free and more) and the places that don't fit drop out of your results. For allergies, filters are a starting point, not a guarantee: call the restaurant before you go, or tell staff when you order. Kitchens share equipment, and only they know exactly what's in a dish.</p>"),
              ('Staying safe and private', '<ul><li>Restaurants see your first name and last initial, never your phone number or email.</li><li>Your claimed deal only works on your phone, so nobody can use it for you.</li></ul>'),
@@ -295,7 +295,7 @@ POSTS = [
               ("When are student food deals most common?", "In restaurants' quiet hours: after school, roughly 3 to 6 pm, and late evenings for desserts and drinks."),
               ("Can my friends use my code?", "No. Each code belongs to the person who claimed it and works once. Everyone claims their own deal."),
               ("Is food under $4 really taxed less?", "In Ontario, yes: qualifying prepared food and drinks sold for $4 or less in total get the 8% provincial part of the HST rebated at the till, so only the 5% GST applies."),
-              ("When can I start using FIG deals?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
+              ("When can I start using FIG deals?", "Now. FIG is open to diners in Markham: check out deals at www.figpromo.ca/app, with no account needed to look around.")]),
 
     dict(slug="flash-deals-explained", screen="qr", title="What are flash deals, and how do they work on FIG?", date="2026-10-04", updated="2026-10-24", topic="For diners", group="eat-out-for-less",
          dek="Flash deals are short, real-time restaurant deals posted during unexpected quiet spells. Here's how they work for diners and restaurants, how to catch them, and what happens to a claim when the timer ends.",
@@ -367,7 +367,7 @@ POSTS = [
     # ---------------------------------------------------------------- the first batch of new posts (user 2026-10-14: "just post it";
     # the review gate is gone: a post without publish_at is live, and the admin page can hide one later)
 
-    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", updated="2026-10-24", topic="For diners", group="eat-out-for-less",
+    dict(slug="how-restaurant-deals-work", screen="claim", title="How restaurant deals work on FIG, from claim to counter", date="2026-10-14", updated="2026-11-05", topic="For diners", group="eat-out-for-less",
          dek="Everything that happens between seeing a deal and paying the bill: claiming, your Deals page, the code at the counter, takeout, what happens when a deal ends, and rating the visit.",
          desc="From seeing a deal to paying the bill: claiming, your Deals page, the code at the counter, takeout, when a deal ends, and rating the visit.",
          keywords="how restaurant deals work, claim restaurant deal, restaurant deal app how to, FIG voucher, QR code restaurant deal",
@@ -380,7 +380,7 @@ POSTS = [
              ("The short answer", """<p>On FIG, a restaurant deal works in four steps: you find a deal, claim it in one tap, show your code at the restaurant, and the deal comes off your bill. You pay the restaurant the way you always do. There's no card to add for dine-in, no points to collect and no fee: FIG is free for diners.</p>"""),
              ("Step 1: Find a deal", """<p>Deals show up in three places:</p>
 <ul><li><strong>Home</strong>, nearest first, filtered by what you crave, your budget and your diet.</li><li><strong>The map</strong>, where you choose how far you'll go: 1, 2, 5 or 10 km.</li><li><strong>A restaurant's page</strong>, alongside its menu, hours, photos and reviews.</li></ul>
-<p>Every deal shows what it is, when it runs and whether it's dine-in only or also takeout. Some deals are on the whole order; others are on specific dishes, which you'll see on the menu. Deals in Markham start January 1, 2027.</p>"""),
+<p>Every deal shows what it is, when it runs and whether it's dine-in only or also takeout. Some deals are on the whole order; others are on specific dishes, which you'll see on the menu.</p>"""),
              ("Step 2: Claim it", """<p>Tap Claim on the deal, then Claim deal. It waits on your Deals page. A claim doesn't time out: it works for as long as the deal runs. You don't need to be near the restaurant to claim, and you don't need to go right away.</p>
 <div class="callout tip"><b>When does a claim end?</b><p>Only when the restaurant ends the deal, or when a flash deal's timer or a dated deal is over. Then it shows as Expired on your Deals page for a day and leaves the list. Expired claims never count against you.</p></div>"""),
              ("Step 3: At the restaurant", """<p>Order as usual and, when it's time to pay, open your Deals page and tap Show QR. Staff scan it with the restaurant side of FIG.</p>
@@ -691,7 +691,7 @@ POSTS = [
               ("Can I stop takeout when the kitchen is busy?", "Yes. Pause takeout for a set time or until tomorrow, or add prep time, in one tap."),
               ("Is dine-in with a deal charged the same way?", "No. A diner who uses your deal at the counter pays you directly and FIG takes nothing from that bill.")]),
 
-    dict(slug="compare-restaurant-deals-worth-it", screen="claim", title="Is it a good deal? How to compare restaurant deals", date="2026-10-17", publish_at="2026-10-17T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
+    dict(slug="compare-restaurant-deals-worth-it", screen="claim", title="Is it a good deal? How to compare restaurant deals", date="2026-10-17", publish_at="2026-10-17T12:00:00-04:00", updated="2026-11-05", topic="For diners", group="eat-out-for-less",
          dek="2-for-1, 20% off, $3 off or a free drink: which one saves you the most? A plain method for comparing restaurant deals, with worked examples, so you pick the one that fits what you were going to eat anyway.",
          desc="2-for-1, 20% off, $3 off or a free drink: which saves the most? A plain way to compare restaurant deals, with worked examples.",
          keywords="is this restaurant deal worth it, compare restaurant deals, 2 for 1 vs percent off, how to save money eating out, restaurant discount math, Markham restaurant deals",
@@ -702,7 +702,7 @@ POSTS = [
                  "Tax is worked out after the deal, so a deal also lowers the HST you pay."],
          sections=[
              ("The short answer", """<p>A good deal lowers what you pay for a meal you were already planning to have. To compare two deals, work out the final price you would pay for the same food, not the headline: $3 off, 20% off and 2-for-1 sound different but only the end price tells you which one is cheaper. Then check when it runs, which dishes it covers and whether you can get there before it ends.</p>"""),
-             ("Step 1: start with the food, not the deal", """<p>The biggest mistake with any deal is ordering something you did not want because it was discounted. A $6 saving on a $20 dish you would never choose is a $14 loss. Decide what you feel like eating, then look for the deal that fits it. On FIG you can set what you crave, your budget and your diet once, and Home and the map show live deals that fit, nearest first. Deals start in Markham on January 1, 2027.</p>"""),
+             ("Step 1: start with the food, not the deal", """<p>The biggest mistake with any deal is ordering something you did not want because it was discounted. A $6 saving on a $20 dish you would never choose is a $14 loss. Decide what you feel like eating, then look for the deal that fits it. On FIG you can set what you crave, your budget and your diet once, and Home and the map show live deals that fit, nearest first.</p>"""),
              ("Step 2: turn every deal into a final price", """<p>Take the dish you want and work out what you pay under each deal. Here is a $16 dish, using round example prices:</p>
 <div class="callout math"><b>One $16 dish, four deals (example prices, before tax)</b><table><thead><tr><th>Deal</th><th>How it works out</th><th>You pay</th><th>You save</th></tr></thead><tbody>
 <tr><td>20% off</td><td>$16.00 &minus; $3.20</td><td>$12.80</td><td>$3.20</td></tr>
@@ -779,7 +779,7 @@ POSTS = [
               ("Do staff need to count how many times a deal was used?", "No. The daily cap you set stops the deal automatically once it has been used that many times."),
               ("Do restaurants see diners' phone numbers?", "No. On orders and reviews you see a first name and last initial.")]),
 
-    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", updated="2026-10-24", publish_at="2026-10-19T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+    dict(slug="eating-out-dietary-needs-allergies-markham", screen="claim", title="Eating out with dietary needs or allergies: filters, calling ahead and what to ask", date="2026-10-19", updated="2026-11-05", publish_at="2026-10-19T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="Halal, vegetarian, vegan, gluten-free or an allergy: how to use diet filters as a starting point, and what to ask a restaurant before you go and when you order.",
          desc="Halal, vegetarian, vegan, gluten-free or an allergy: using diet filters as a start, and what to ask a restaurant before you go and when you order.",
          seo="Eating out with dietary needs or allergies in Markham",
@@ -791,7 +791,7 @@ POSTS = [
                  "This is general information, not medical advice. Follow your doctor's guidance for your own allergy."],
          sections=[
              ("The short answer", """<p>Use FIG's diet filters to narrow the list, then ask the restaurant about your exact need before you go. Filters tell you where to look. Only the kitchen knows what is in a dish, what it was cooked beside and who is working today. For an allergy, check twice: once on the phone before you go, and again when you order. This guide is general information, not medical advice.</p>"""),
-             ("Step 1: set your diet once", """<p>When you set up FIG, you choose what you crave, your budget and your diet: halal, vegetarian, vegan, gluten-free and more. After that, Home and the map show live deals from places that fit, nearest first, and the others drop out. FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.</p>
+             ("Step 1: set your diet once", """<p>When you set up FIG, you choose what you crave, your budget and your diet: halal, vegetarian, vegan, gluten-free and more. After that, Home and the map show live deals from places that fit, nearest first, and the others drop out.</p>
 <p>It saves a lot of scrolling, and it helps groups too: set the group's must-haves before you share options, so everything you send already works for everyone. <a href="/blog/group-dining-deals">Eating out as a group</a>.</p>"""),
              ("Step 2: know what a filter can and cannot tell you", """<table><thead><tr><th>A filter can tell you</th><th>It cannot tell you</th></tr></thead><tbody>
 <tr><td>This place has options for your diet</td><td>That every dish on the menu is suitable</td></tr>
@@ -823,7 +823,7 @@ POSTS = [
 
     # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
 
-    dict(slug="deal-wont-scan-troubleshooting-diners", screen="qr", title="Deal not working at the counter? What to check and what to say", date="2026-10-20", updated="2026-10-24", publish_at="2026-10-20T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
+    dict(slug="deal-wont-scan-troubleshooting-diners", screen="qr", title="Deal not working at the counter? What to check and what to say", date="2026-10-20", updated="2026-11-05", publish_at="2026-10-20T12:00:00-04:00", topic="For diners", group="eat-out-for-less",
          dek="A code that will not scan, a deal that seems to be over, a pickup that went wrong: the usual reasons a FIG deal does not apply at the counter, what to try first, and how to ask politely.",
          desc="A FIG code that will not scan, a deal that seems over or a missed pickup: the usual reasons, what to try first and how to ask politely.",
          seo="Restaurant deal not working at the counter: what to check",
@@ -835,7 +835,7 @@ POSTS = [
                  "Stay friendly. The person at the counter wants to apply your deal, and a calm question gets the fastest answer."],
          sections=[
              ("The short answer", """<p>If a FIG deal will not apply at the counter, check three things in this order: that you are showing the current code from your Deals page (not an old screenshot), that the deal is running right now on those days and hours for those dishes, and that it has not reached its daily cap. If the code still will not scan, staff can type the short code.</p>
-<p>This guide goes through what to check before you leave, what to try at the till, and how to ask in a way that gets a quick, kind answer. FIG opens to diners in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>"""),
+<p>This guide goes through what to check before you leave, what to try at the till, and how to ask in a way that gets a quick, kind answer.</p>"""),
              ("Before you leave: a 30-second check", """<p>Most problems are easier to fix on your couch than at a busy till. Before you head out:</p>
 <ul><li><strong>Open the deal.</strong> Read the days and hours. Many deals run only in quiet hours, such as weekday afternoons and early evenings.</li><li><strong>Check the dishes.</strong> Some deals cover the whole order. Others cover specific dishes from the restaurant's menu.</li><li><strong>Check dine in or takeout.</strong> A dine-in deal is for eating at the restaurant. A deal that also allows takeout is ordered in the app.</li><li><strong>Look at your Deals page.</strong> Your claim should be there, with the deal's name. If it says Expired, the deal ended.</li><li><strong>Charge your phone and turn the screen brightness up.</strong> A dim screen is the most common reason a camera cannot read a code.</li></ul>
 <p>A claim has no time limit of its own. It works for as long as the deal runs, so you can claim at home and go when it suits you. <a href="/blog/how-restaurant-deals-work">How a deal works, from claim to counter</a>.</p>"""),
@@ -867,7 +867,7 @@ POSTS = [
               ("What happens if I miss a takeout pickup?", "An order that is not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tapping I'm here when you arrive keeps it from counting as missed."),
               ("Who can I ask about a deal that did not work?", "Call the restaurant, or write to FIG through the contact page at www.figpromo.ca/contact. Say which deal, the day and what you saw.")]),
 
-    dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", updated="2026-10-24", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+    dict(slug="date-night-markham-deals-budget", screen="map", title="Date night in Markham for less: a plan, with the math", date="2026-10-22", updated="2026-11-05", publish_at="2026-10-22T12:00:00-04:00", topic="For diners", group="fig-in-markham",
          dek="A dinner out for two does not have to cost a lot. How to pick the hour, choose the deal that fits the two of you, check the sums with HST and plan a walk afterwards.",
          desc="A budget-friendly dinner for two in Markham: pick the hour, choose the deal, check the sums with HST and add a walk afterwards.",
          seo="Date night in Markham for less: a plan with deal math",
@@ -878,8 +878,8 @@ POSTS = [
                  "Call ahead to check for a table and to ask about diets. Then claim your deal before you leave.",
                  "Plan something free to do afterwards, such as a walk. Main Street Unionville is a short walk from Toogood Pond."],
          sections=[
-             ("The short answer", """<p>The cheapest good date night is an early dinner on a weeknight, with the deal chosen before the restaurant. Look for a deal that covers a main dish each, check the final price with tax, and keep the drinks modest. In the example below, the same dinner for two comes to $76.84 at full price and $51.98 with a 2-for-1 on the mains. FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>
-<p>This is a plan, not a ranking of restaurants. We do not name places here, because the live deals change every day. Once FIG opens, it will show you what is on near you.</p>"""),
+             ("The short answer", """<p>The cheapest good date night is an early dinner on a weeknight, with the deal chosen before the restaurant. Look for a deal that covers a main dish each, check the final price with tax, and keep the drinks modest. In the example below, the same dinner for two comes to $76.84 at full price and $51.98 with a 2-for-1 on the mains. FIG is free for diners and open now in Markham.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because the live deals change every day. FIG shows you what is on near you.</p>"""),
              ("Step 1: pick the hour", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables earlier in the evening, and an empty table earns nothing, which is why owners post deals then.</p>
 <table><thead><tr><th>When</th><th>Why it suits a date</th></tr></thead><tbody>
 <tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, easier conversation, more deals</td></tr>
@@ -888,7 +888,7 @@ POSTS = [
 <tr><td>Weekend dinner</td><td>The busiest time. Book ahead, and expect fewer deals</td></tr>
 </tbody></table>
 <p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
-             ("Step 2: start from what you both want", """<p>When FIG opens, you will set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look, so every option works for both of you. For allergies, filters are only a starting point, so call the restaurant. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask when you call</a>.</p>
+             ("Step 2: start from what you both want", """<p>On FIG, you set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look, so every option works for both of you. For allergies, filters are only a starting point, so call the restaurant. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask when you call</a>.</p>
 <p>Then choose by the dish, not the discount. A deal on something neither of you wanted is not a saving.</p>"""),
              ("Step 3: compare the dinner, not the headline", """<p>Here is a dinner for two with round example prices: one shared starter, one main each and a drink each. Three ways to pay for it:</p>
 <div class="callout math"><b>Example dinner for two (before tip)</b><table><thead><tr><th>Plan</th><th>Food and drink</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
@@ -913,12 +913,12 @@ POSTS = [
 </tbody></table>
 <p>The saving is $24.86, about 28% of the full-price evening. The dessert is not discounted in this example. Your prices will differ, so use your own.</p>"""),
          ],
-         faq=[("What is the cheapest way to do date night in Markham?", "Go early on a weeknight, pick a deal that covers a main each, keep drinks modest and add something free afterwards, such as a walk. When FIG opens to diners on January 1, 2027, it will show live deals near you on a map."),
+         faq=[("What is the cheapest way to do date night in Markham?", "Go early on a weeknight, pick a deal that covers a main each, keep drinks modest and add something free afterwards, such as a walk. FIG shows live deals near you on a map."),
               ("Is a 2-for-1 better than 20% off for two people?", "If you both want a main, usually yes. In the example in this post, a 2-for-1 on $22 mains came to $51.98 against $61.47 for 20% off the whole bill. Redo it with your own order."),
               ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
               ("Do we each need our own deal?", "Each person can claim their own if the deal suits both of you. Codes are personal and work once, so one person's code cannot be used by someone else."),
               ("Should I call the restaurant first?", "A short call helps. Ask if there is a table, whether the deal works for two and whether it covers the dishes you want."),
-              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca."),
+              ("Can I use FIG in Markham now?", "Yes. FIG is open to diners in Markham, and it is free. Check out deals at www.figpromo.ca/app, with no account needed to look around."),
               ("Is FIG free?", "Yes, for diners. There are no ads for now.")]),
 
     dict(slug="takeout-rush-pause-prep-time-deals-per-order", screen="tscanner", title="Takeout during a rush: pause, prep time and deals per order", date="2026-10-23", publish_at="2026-10-23T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
@@ -975,7 +975,7 @@ POSTS = [
               ("What do I need to take takeout orders?", "Your HST number and Stripe payouts, both in Settings → Get paid. Dine-in deals need neither.")]),
     # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
 
-    dict(slug="family-dinner-out-markham-deals-budget", screen="claim", title="Family dinner out in Markham for less: a plan for four, with the math", date="2026-10-24", publish_at="2026-10-24T12:00:00-04:00", topic="For diners", group="fig-in-markham",
+    dict(slug="family-dinner-out-markham-deals-budget", screen="claim", title="Family dinner out in Markham for less: a plan for four, with the math", date="2026-10-24", publish_at="2026-10-24T12:00:00-04:00", updated="2026-11-05", topic="For diners", group="fig-in-markham",
          dek="Eating out with kids does not have to cost a lot. How to pick an early table, choose the deal that fits a family of four, check the sums with HST and keep the extras in check.",
          desc="A budget plan for a family dinner in Markham: pick the hour, choose the deal, check the sums with HST and keep drinks and extras modest.",
          seo="Family dinner out in Markham for less: a plan with deal math",
@@ -986,8 +986,8 @@ POSTS = [
                  "Call ahead to check for a table and to ask how the deal applies to a shared bill. That answer is the restaurant's call.",
                  "Keep drinks and extras modest, and decide on a rough total before you leave home."],
          sections=[
-             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>
-<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. Once FIG opens, it will show what is on near you.</p>"""),
+             ("The short answer", """<p>The cheapest good family dinner is an early weeknight meal, with the deal chosen before the restaurant. Look for a deal that covers the adult mains, work out the final price for the whole table including tax, and keep the drinks simple. In the example below, the same dinner for four comes to $67.80 at full price and $49.72 with a 2-for-1 on the two adult mains. FIG is free for diners and open now in Markham.</p>
+<p>This is a plan, not a ranking of restaurants. We do not name places here, because live deals change every day. FIG shows what is on near you.</p>"""),
              ("Step 1: pick an early table", """<p>Restaurants are busiest at weekend dinner. The rest of the week, many have empty tables in the early evening, and an empty table earns nothing, which is why owners post deals then. For a family it helps twice: more deals, and a quieter room when children are hungry and tired.</p>
 <table><thead><tr><th>When</th><th>Why it suits a family</th></tr></thead><tbody>
 <tr><td>Monday to Thursday, early dinner</td><td>Before the evening rush. Quieter room, faster kitchen, more deals</td></tr>
@@ -996,7 +996,7 @@ POSTS = [
 <tr><td>Weekend dinner</td><td>The busiest time. Call ahead, and expect fewer deals</td></tr>
 </tbody></table>
 <p>Every restaurant is different, so treat this as a pattern, not a rule. Each deal on FIG shows its own days and hours. <a href="/blog/restaurant-deals-markham">When Markham restaurants post deals</a>.</p>"""),
-             ("Step 2: start from what everyone will eat", """<p>When FIG opens, you will set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
+             ("Step 2: start from what everyone will eat", """<p>On FIG, you set your cravings, budget and diet once. Home and the map then show live deals from places that fit, nearest first. If one of you is halal, vegetarian, vegan or gluten-free, set that before you look. Then ask the picky eater to choose between two or three options, instead of an open question. Sharing one concrete restaurant to the family chat works better than "where should we eat?". <a href="/blog/group-dining-deals">More on deciding as a group</a>.</p>
 <p>A deal on a dish nobody wanted is not a saving. Look for the deal that matches what the family would have ordered anyway.</p>"""),
              ("Step 3: compare the whole dinner", """<p>Here is a dinner for a family of four with round example prices: one shared starter at $10, two adult mains at $16 and two children's mains at $9, with water to drink. Four ways to pay for it:</p>
 <div class="callout math"><b>Example dinner for four (before tip)</b><table><thead><tr><th>Plan</th><th>Food</th><th>HST at 13%</th><th>You pay</th></tr></thead><tbody>
@@ -1017,15 +1017,15 @@ POSTS = [
              ("Something free afterwards", """<p>Main Street Unionville is a historic village street with restaurants, pubs and cafés, and Toogood Pond is steps away, which makes it an easy place for children to stretch their legs after dinner. Markham Village has its own old Main Street, a few kilometres east. A short walk costs nothing and tires out small people before bedtime.</p>"""),
              ("A quick checklist", """<ol><li>Pick an early weeknight and two or three places.</li><li>Work out the final price for your whole order under each deal.</li><li>Decide who claims, and call to check how it applies to your table.</li><li>Agree a rough total, including drinks and dessert.</li><li>After a scanned visit, rate it. Only diners whose visit was scanned can review, so your review helps the next family. <a href="/blog/how-to-read-restaurant-reviews">How reviews work</a>.</li></ol>"""),
          ],
-         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. When FIG opens to diners on January 1, 2027, it will show live deals near you on a map, and it is free for diners."),
+         faq=[("What is the cheapest way to eat out as a family in Markham?", "Go early on a weeknight, pick a deal that covers the adult mains, work out the final price with tax and keep drinks and extras modest. FIG shows live deals near you on a map, and it is free for diners."),
               ("Is a 2-for-1 better than 20% off for a family?", "It depends on the order. In the example in this post, a 2-for-1 on two $16 adult mains came to $49.72 against $54.24 for 20% off the whole bill. Redo the sum with your own order."),
               ("Do children need their own deal?", "A claim is used once and the code only works on the phone of the person who claimed it. Call the restaurant to ask how a deal applies to a table with children."),
               ("Does a restaurant deal lower the tax?", "Yes. In Ontario, HST is worked out after the restaurant's own discount, so a lower price means less tax. This is general information, not tax advice."),
               ("Can I order takeout instead?", "If the restaurant allows takeout with that deal, yes. You order from the menu in the app, pay there and pick it up, with no delivery or service fee from FIG."),
               ("What if someone in the family has an allergy?", "Use FIG's diet filters to shortlist places, then call the restaurant and tell the server again when you order. Filters are a starting point, not a guarantee."),
-              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
+              ("Can I use FIG in Markham now?", "Yes. FIG is open to diners in Markham, and it is free. Check out deals at www.figpromo.ca/app, with no account needed to look around.")]),
 
-    dict(slug="takeout-or-dine-in-with-a-deal-which-costs-less", screen="qr", title="Takeout or dine-in with a deal: which costs you less?", date="2026-10-26", publish_at="2026-10-26T12:00:00-04:00", topic="For diners", group="takeout-and-money",
+    dict(slug="takeout-or-dine-in-with-a-deal-which-costs-less", screen="qr", title="Takeout or dine-in with a deal: which costs you less?", date="2026-10-26", publish_at="2026-10-26T12:00:00-04:00", updated="2026-11-05", topic="For diners", group="takeout-and-money",
          dek="The same dish can cost different amounts depending on how you eat it. A side-by-side of dine-in and takeout with a deal, with the HST, the drink, the tip and the trip worked out.",
          desc="Takeout or dine-in with a deal? The same dish compared with HST, drinks, tip and travel, so you can pick the cheaper night out or in.",
          seo="Takeout or dine-in with a deal: which costs less?",
@@ -1037,7 +1037,7 @@ POSTS = [
                  "Dine-in is a different thing, not just a dearer one: you get the room, the service and the time."],
          sections=[
              ("The short answer", """<p>For the same dish and the same deal, takeout is usually the cheaper way to eat, because you skip the drink, the tip and the table time. In the example below, one $18 main with $4 off costs $15.82 as takeout and $23.04 as a dine-in meal with a drink and a 15% tip. The deal is worth the same either way. What changes is everything around it. This post works out where the difference comes from, so you can decide with your own prices.</p>
-<p>FIG is free for diners and opens to them in Markham on January 1, 2027. Until then, diners can join the waitlist at www.figpromo.ca.</p>"""),
+<p>FIG is free for diners and open now in Markham. Check out deals at www.figpromo.ca/app.</p>"""),
              ("What each way means on FIG", """<table><thead><tr><th></th><th>Dine-in with a deal</th><th>Takeout with a deal</th></tr></thead><tbody>
 <tr><td>How you use the deal</td><td>Show your QR code at the restaurant and staff scan it</td><td>Tap Takeout on the deal, add dishes from the menu and pay in the app</td></tr>
 <tr><td>How you pay</td><td>The restaurant, the way you always do</td><td>In the app, by card</td></tr>
@@ -1070,9 +1070,9 @@ POSTS = [
               ("How do I pay for takeout on FIG?", "In the app, by card, when you order. Dine-in deals are paid at the restaurant as usual."),
               ("Is HST charged before or after the deal?", "After the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice."),
               ("What if I cannot pick up my order?", "An order not picked up closes as Not picked up two hours after the pickup time, and restaurants can see missed pickups. Tap I'm here when you arrive."),
-              ("When do deals start in Markham?", "FIG opens to diners in Markham on January 1, 2027, and deals start then. Until then, diners can join the waitlist at www.figpromo.ca.")]),
+              ("Can I use FIG in Markham now?", "Yes. FIG is open to diners in Markham, and it is free. Check out deals at www.figpromo.ca/app, with no account needed to look around.")]),
 
-    dict(slug="reply-to-reviews-restaurants", screen="map", title="Replying to reviews: a short guide for restaurant owners", date="2026-10-27", publish_at="2026-10-27T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="reply-to-reviews-restaurants", screen="map", title="Replying to reviews: a short guide for restaurant owners", date="2026-10-27", publish_at="2026-10-27T12:00:00-04:00", updated="2026-11-05", topic="For restaurants", group="fill-quiet-hours",
          dek="How to answer a review in a few minutes a week: what to say to a good review, a bad one and a rating with no words, with templates you can adapt and a little arithmetic on what one low rating does.",
          desc="How restaurant owners can reply to reviews on FIG in minutes a week, with templates and the arithmetic of one low rating.",
          seo="Replying to restaurant reviews: a short guide for owners",
@@ -1117,7 +1117,7 @@ POSTS = [
 <p>Set a time. Ten minutes at the end of a Tuesday shift is better than a hundred good intentions. Give one person ownership, and a second for holidays.</p>"""),
              ("A reply checklist", """<ol><li>Did I thank them by first name?</li><li>Did I mention something specific from their review?</li><li>Am I writing for the next reader as well as for them?</li><li>Did I avoid blaming the diner or the staff?</li><li>If there is something to fix, did I say what I will do, and will I do it?</li><li>Is it short enough to read in ten seconds?</li></ol>"""),
              ("Turn feedback into changes", """<p>Over a month, patterns show up. Three people say the wait was long on Thursdays? Look at your staffing, or add takeout prep time. Several diners ask about the same deal? Make the details clearer. A deal nobody likes after two weeks? Change the dish or the hours. Your insights show views, claims and the diners who came back, and your reviews tell you why. <a href="/blog/slow-hour-deal-math">How to judge a deal by new and returning diners</a>. <a href="/blog/train-staff-honour-fig-deal">A ten-minute staff plan</a> can fix a lot of counter problems before they become reviews.</p>
-<p>FIG opens to diners in Markham on January 1, 2027, and reviews come from scanned visits, so yours start after that. Restaurants set up first: you can add your page and menu before then.</p>"""),
+<p>FIG is open to diners in Markham, and reviews come only from scanned visits, so yours start with your first diners. If you are still setting up, add your page and menu first.</p>"""),
          ],
          faq=[("Can I reply to reviews on FIG?", "Yes. Restaurants can reply to reviews in public."),
               ("Can I delete a bad review?", "No. Paying FIG never hides, changes or reorders a review. Reviews come only from diners whose visit was scanned."),
@@ -1127,7 +1127,7 @@ POSTS = [
               ("How much does one low rating change my average?", "Less than it feels like. In the example in this post, one 1-star among ten 5-star reviews gives 4.64, and among thirty gives 4.87."),
               ("Should I offer a discount in a reply?", "Usually not. Let the deal speak for itself, and focus on what you will fix.")]),
 
-    dict(slug="fig-payments-page-csv-bookkeeping-takeout", screen="tdash", title="Reading your FIG Payments page: takeout, fees and your bookkeeping", date="2026-10-28", publish_at="2026-10-28T12:00:00-04:00", topic="For restaurants", group="takeout-and-money",
+    dict(slug="fig-payments-page-csv-bookkeeping-takeout", screen="tdash", title="Reading your FIG Payments page: takeout, fees and your bookkeeping", date="2026-10-28", publish_at="2026-10-28T12:00:00-04:00", updated="2026-11-05", topic="For restaurants", group="takeout-and-money",
          dek="Every takeout payment, refund and fee is listed on one page and downloads as a CSV file. How to read it, what each line means, a worked month-end example with the sums checked, and how to hand it to your bookkeeper.",
          desc="How to read the FIG Payments page: takeout payments, refunds and fees, the CSV download, and a worked month-end example with the arithmetic.",
          seo="FIG Payments page: reading takeout fees and the CSV",
@@ -1165,7 +1165,7 @@ POSTS = [
              ("Handing it to your bookkeeper", """<p>The CSV is the whole point. Send it as it is, one file a month, and say three things in the email: the month it covers, that the HST on each line is the restaurant's to remit, and that dine-in sales are in your own till records. A bookkeeper who gets the same layout every month spots a missing line quickly. Keep the downloaded files in one folder so the year's records are in order when you file.</p>
 <div class="callout example"><b>A simple email to send (example)</b><p>"Attached is the takeout payments file for [month]. It lists each payment, refund and fee. HST is included in each payment. Dine-in sales are in our till report."</p></div>"""),
              ("What to look at besides the totals", """<p>Once the sums agree, use the page as a small business tool. Sort by amount to see which sizes of order you get. Count the lines to see how many takeout orders came in during a month. Compare it with your quiet hours: takeout is meant to fill a kitchen that would otherwise be idle. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math</a> shows what a restaurant keeps on a $12, $20, $40 or $60 order, and the <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">rush guide</a> covers pausing takeout and adding prep time when the kitchen is full.</p>
-<p>FIG opens to diners on January 1, 2027, so your page will be empty until then. You can set up your menu, hours, payouts and HST number before that day.</p>"""),
+<p>The page fills in as takeout orders come in. If you have not had one yet, set up your menu, hours, payouts and HST number first.</p>"""),
          ],
          faq=[("Where do I see my takeout payments?", "On the Payments page. It lists every takeout payment, refund and fee."),
               ("Can I download my payments?", "Yes. The Payments page downloads as a CSV file, which opens in any spreadsheet."),
@@ -1175,7 +1175,7 @@ POSTS = [
               ("When is the card charged?", "The card is held at checkout and charged when the restaurant accepts the order. If the restaurant declines, nothing is charged."),
               ("Does a refund need a stronger sign-in?", "Yes. Refunds are a money step, so owners and managers need a sign-in step such as an authenticator app or a code by email.")]),
 
-    dict(slug="fig-staff-roles-sign-in-security-owners-managers", screen="tscanner", title="Owner, Manager or Staff: setting up your team and sign-in security on FIG", date="2026-10-29", publish_at="2026-10-29T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="fig-staff-roles-sign-in-security-owners-managers", screen="tscanner", title="Owner, Manager or Staff: setting up your team and sign-in security on FIG", date="2026-10-29", publish_at="2026-10-29T12:00:00-04:00", updated="2026-11-05", topic="For restaurants", group="fill-quiet-hours",
          dek="Who should hold which role on FIG, how people join by invite, which steps need a stronger sign-in, and how to set it up so a busy shift runs smoothly and the money steps stay with the right people.",
          desc="How to set up your team on FIG: Owner, Manager and Staff roles, invites, and the sign-in security for the money steps.",
          seo="FIG roles and sign-in security for restaurant teams",
@@ -1213,7 +1213,7 @@ POSTS = [
              ("Two locations", """<p>FIG supports up to 2 locations for now. If you run two, decide who is responsible at each: a manager per location is a reasonable starting point. The owner keeps the view of both. Everyone still gets their own account, and the roles are the same.</p>"""),
              ("A security checklist for the owner", """<ol><li>Is everyone using their own account?</li><li>Do the owner and managers have an authenticator app, or a code by email, set up on their own phones?</li><li>Is the list of people short, and does it match who works for you today?</li><li>Do we know who to call if an owner loses a phone? Write that down now, and use the <a href="/contact">contact page</a> if you get stuck.</li><li>Do staff know which steps are theirs and which belong to owners and managers?</li></ol>
 <p>A last habit worth having: once a quarter, open the list, read each name aloud, and ask whether that person still works for you and still needs that role. If a part-time cook has never opened the app, they probably do not need to be on it. A list that matches your payroll is easy to defend, and easy to show an accountant or a new partner.</p>
-<p>Setting this up takes about ten minutes. Restaurants can do it before FIG opens to diners on January 1, 2027, and it is worth doing before the first busy night, not after. The <a href="/blog/set-up-fig-menu-takeout">menu and takeout setup guide</a> is the next step.</p>"""),
+<p>Setting this up takes about ten minutes, and it is worth doing before the first busy night, not after. The <a href="/blog/set-up-fig-menu-takeout">menu and takeout setup guide</a> is the next step.</p>"""),
          ],
          faq=[("What roles are there on FIG?", "Owner, Manager and Staff."),
               ("How do my staff get an account?", "They join by accepting an invite from the owner. Nobody can add themselves to your team."),
@@ -1223,7 +1223,7 @@ POSTS = [
               ("How old do I have to be?", "Restaurant accounts are for people 18 or older. Diners must be 14 or older."),
               ("Should my staff share one login?", "No. Give each person their own account, so you can tell who did what and take one person off without affecting the rest.")]),
 
-    dict(slug="deals-used-more-than-once-uses-per-diner-wait-between-uses", screen="qr", title="Deals diners can use more than once: uses per diner and the wait between uses", date="2026-10-30", publish_at="2026-10-30T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="deals-used-more-than-once-uses-per-diner-wait-between-uses", screen="qr", title="Deals diners can use more than once: uses per diner and the wait between uses", date="2026-10-30", publish_at="2026-10-30T12:00:00-04:00", updated="2026-11-05", topic="For restaurants", group="fill-quiet-hours",
          dek="A deal does not have to be a one-time offer. How uses per diner and the wait between uses work on FIG, how the code changes after every scan, and the arithmetic of a repeat deal for a quiet weekday.",
          desc="How repeat deals work on FIG: up to 20 uses per diner, an optional wait between uses, a new code after each scan, and the math of a repeat deal.",
          seo="Repeat restaurant deals: uses per diner and the wait between uses",
@@ -1265,7 +1265,7 @@ POSTS = [
              ("Add-ons carry the margin", """<p>Most diners add a drink or a side. Keep the deal on the main dish and sell the add-ons at full price. If the same diner adds a $4.00 drink that costs you $1.00, that is another $3.00 per visit. Over 5 visits, $15.00 more, on top of the $39.00 above.</p>"""),
              ("Reading the results", """<p>Your dashboard shows results deal by deal. After two weeks, compare the deal's scans with your quiet hours: did that window fill up, or did the same few diners use up their visits? Your own till tells you the rest. If tables in that window were busier than the week before, keep the deal and consider more uses. If your regulars used it and nobody new did, lower the uses or narrow the hours.</p>
 <p>Change one thing at a time, so you know which change made the difference. Write the setting down with the date, so that in a month you remember what you tried.</p>"""),
-             ("Before FIG opens", """<p>Diners can use FIG from January 1, 2027, and until then they can only join the waitlist at www.figpromo.ca. Restaurants set up first, so you can build your deals now, schedule them, and have your repeat deal waiting on day one. Pick the quietest weekday window you have and start with a small offer. Our <a href="/blog/fill-slow-hours-restaurant">seven ways to fill slow hours</a> has more ideas.</p>"""),
+             ("Getting started", """<p>Diners are on FIG now, so a repeat deal starts working the day you publish it. You can post it live now or schedule it for the days and hours you choose. Pick the quietest weekday window you have and start with a small offer. Our <a href="/blog/fill-slow-hours-restaurant">seven ways to fill slow hours</a> has more ideas.</p>"""),
          ],
          faq=[("How many times can a diner use one deal?", "You choose, from 1 up to 20 uses per diner, with an optional wait between uses."),
               ("Does the QR code change?", "A deal code works once. If the deal can be used more than once, the diner's screen shows a new code after each scan."),
@@ -1275,52 +1275,52 @@ POSTS = [
               ("Do I need a different code for each use?", "No. Your staff just scan whatever code the diner shows. The diner's screen creates the new code."),
               ("Does a dine-in repeat deal cost anything to FIG?", "No. FIG takes no commission on the bill and nothing on dine-in.")]),
 
-    dict(slug="restaurant-checklist-before-fig-opens-january-2027", screen="map", title="Restaurant checklist: get ready for FIG before it opens to diners on January 1, 2027", date="2026-10-31", publish_at="2026-10-31T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
-         dek="FIG opens to diners on January 1, 2027, and restaurants set up first. A week-by-week checklist for the weeks in between: your page, menu, hours, team, first deals and takeout, with a count of the days left.",
-         desc="A week-by-week checklist for Markham restaurants to get ready for FIG before it opens to diners on January 1, 2027.",
-         seo="Restaurant checklist before FIG opens on January 1, 2027",
-         keywords="restaurant app setup checklist, new restaurant app launch Markham, get ready restaurant deals app, restaurant menu photos, set up restaurant deals, Markham restaurants, FIG launch",
-         points=["FIG opens to diners on January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first.",
+    dict(slug="restaurant-checklist-before-fig-opens-january-2027", screen="map", title="Restaurant checklist: get your FIG page ready before you go live", date="2026-10-31", updated="2026-11-05", publish_at="2026-10-31T12:00:00-04:00", topic="For restaurants", group="fill-quiet-hours",
+         dek="Diners are on FIG now, so your page counts from the day you publish it. A step-by-step checklist: your page, menu, hours, team, first deals and takeout.",
+         desc="A step-by-step checklist for Markham restaurants to get their FIG page, menu and first deals ready before they go live.",
+         seo="Restaurant checklist before you go live on FIG",
+         keywords="restaurant app setup checklist, new restaurant app launch Markham, get ready restaurant deals app, restaurant menu photos, set up restaurant deals, Markham restaurants, go live on FIG",
+         points=["FIG is open to diners in Markham now, so diners see your page as soon as you publish it.",
                  "Signing up, setting up your page, going live, posting deals, scanning and the dashboard cost nothing.",
                  "Do the base first: page, hours, menu with photos and sections. Then the team, then the first deals.",
                  "Takeout is optional. You can turn it on only after you add your HST number and finish Stripe payouts.",
-                 "From October 31, 2026 there are 62 days to January 1. About nine weeks is enough to do all of this without rushing."],
+                 "Two hours a week for five weeks is enough to do all of this without rushing, and most small restaurants need less."],
          sections=[
-             ("The short answer", """<p>Use the weeks before January 1, 2027 to build your page, your menu and your first deals, so that on opening day diners find a complete restaurant. Signing up, setting up your page, going live, posting deals, scanning and the dashboard cost nothing. The order that works best is the page and hours, then the menu, then your team, then the first deals, and takeout last, if you want it at all.</p>"""),
-             ("What opens when", """<table><thead><tr><th>Who</th><th>Today</th><th>From January 1, 2027</th></tr></thead><tbody>
-<tr><td>Restaurants</td><td>Set up your page, menu, hours and deals</td><td>Diners find your live deals on the map and claim them</td></tr>
-<tr><td>Diners</td><td>Join the waitlist at www.figpromo.ca</td><td>Browse places, menus, reviews and live deals, and claim a deal in one tap</td></tr>
+             ("The short answer", """<p>Before you go live, build your page, your menu and your first deals, so that the first diners who find you see a complete restaurant. Signing up, setting up your page, going live, posting deals, scanning and the dashboard cost nothing. The order that works best is the page and hours, then the menu, then your team, then the first deals, and takeout last, if you want it at all.</p>"""),
+             ("Who does what", """<table><thead><tr><th>Who</th><th>What they do on FIG today</th></tr></thead><tbody>
+<tr><td>Restaurants</td><td>Set up your page, menu, hours and deals, then publish them</td></tr>
+<tr><td>Diners</td><td>Browse places, menus, reviews and live deals at www.figpromo.ca/app, and claim a deal in one tap</td></tr>
 </tbody></table>
 <p>FIG starts in Markham, then expands to Richmond Hill and Vaughan Mills. You need to be 18 or older to hold a restaurant account.</p>"""),
-             ("How much time you have", """<div class="callout math"><b>Counting the days</b><ul><li>From October 31, 2026: November has 30 days and December has 31.</li><li>30 + 31 + 1 (January 1 itself) = 62 days, which is 8 weeks and 6 days.</li></ul><p>If you give the checklist two hours a week for nine weeks, that is about 18 hours in all. Most small restaurants need less.</p></div>"""),
-             ("Weeks 1 and 2: the base", """<ol><li><strong>Create your account.</strong> It costs nothing.</li><li><strong>Fill in your page.</strong> Name, cuisine, address, a short description and a few good photos.</li><li><strong>Set your opening hours.</strong> Include holidays and any day you are closed, because diners decide where to go around them.</li><li><strong>Check your details twice.</strong> A wrong phone number or hour costs you more than a missing photo.</li></ol>
+             ("How much time it takes", """<div class="callout math"><b>Counting the hours</b><ul><li>Five steps below: the base, the menu, your team, your first deals and takeout.</li><li>One step a week at two hours a week is 5 &times; 2 = 10 hours in all.</li></ul><p>Most small restaurants need less, and you can skip takeout altogether.</p></div>"""),
+             ("Step 1: the base", """<ol><li><strong>Create your account.</strong> It costs nothing.</li><li><strong>Fill in your page.</strong> Name, cuisine, address, a short description and a few good photos.</li><li><strong>Set your opening hours.</strong> Include holidays and any day you are closed, because diners decide where to go around them.</li><li><strong>Check your details twice.</strong> A wrong phone number or hour costs you more than a missing photo.</li></ol>
 <p>Photos matter more than most owners expect. Use daylight, shoot the dish from slightly above, and avoid stock images: diners can tell.</p>"""),
-             ("Weeks 3 and 4: the menu", """<p>A menu with photos and sections is the part diners read first. Group dishes the way you would on a printed menu, and add a photo for your most popular dishes before the rest. Write names the way a diner would say them, and put anything dietary in the description. <a href="/blog/set-up-fig-menu-takeout">Set up your FIG menu and takeout in 15 minutes</a> takes you through the screens.</p>
+             ("Step 2: the menu", """<p>A menu with photos and sections is the part diners read first. Group dishes the way you would on a printed menu, and add a photo for your most popular dishes before the rest. Write names the way a diner would say them, and put anything dietary in the description. <a href="/blog/set-up-fig-menu-takeout">Set up your FIG menu and takeout in 15 minutes</a> takes you through the screens.</p>
 <p>Prices should match your dining room. A price that is wrong on your page costs you either a sale or an argument at the till, so check each one once.</p>"""),
-             ("Weeks 5 and 6: your team", """<p>Invite the people who will work with FIG every day. They join by accepting an invite from the owner, as Owner, Manager or Staff. Give owners and managers a sign-in step for money, such as an authenticator app or a code by email. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">The roles guide</a> has a checklist, and <a href="/blog/train-staff-honour-fig-deal">the ten-minute staff session</a> gets everyone ready for the till.</p>"""),
-             ("Weeks 7 and 8: your first deals", """<p>Pick one or two quiet windows. Look at your week and find the hours where tables sit empty, usually weekday afternoons or early evenings. Then write a deal for each.</p>
-<ul><li>Choose a type: 2 for 1, percent off, dollar off, or free with a dish. <a href="/blog/deal-types-percent-dollar-2-for-1">Which one fits</a>.</li><li>Choose live now or scheduled. For January 1, schedule it.</li><li>Set uses per diner and, if you like, a wait between uses.</li><li>Do the sum on the price before you post. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> shows how.</li></ul>
+             ("Step 3: your team", """<p>Invite the people who will work with FIG every day. They join by accepting an invite from the owner, as Owner, Manager or Staff. Give owners and managers a sign-in step for money, such as an authenticator app or a code by email. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">The roles guide</a> has a checklist, and <a href="/blog/train-staff-honour-fig-deal">the ten-minute staff session</a> gets everyone ready for the till.</p>"""),
+             ("Step 4: your first deals", """<p>Pick one or two quiet windows. Look at your week and find the hours where tables sit empty, usually weekday afternoons or early evenings. Then write a deal for each.</p>
+<ul><li>Choose a type: 2 for 1, percent off, dollar off, or free with a dish. <a href="/blog/deal-types-percent-dollar-2-for-1">Which one fits</a>.</li><li>Choose live now or scheduled for the hours you want to fill.</li><li>Set uses per diner and, if you like, a wait between uses.</li><li>Do the sum on the price before you post. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> shows how.</li></ul>
 <div class="callout math"><b>A 60-second check (example)</b><p>A $15.00 dish, with a 30% food cost of $4.50, and a $3.00-off deal: the diner pays $12.00 and you keep $12.00 &minus; $4.50 = $7.50. That is $7.50 toward wages, rent and profit from a table that was empty. These are round example numbers.</p></div>"""),
-             ("Week 9: takeout, if you want it", """<p>Takeout is optional. Diners pay online in the app at checkout, and the kitchen starts when you accept. A restaurant can turn it on only after it has added its HST number and finished Stripe payouts, and those money steps ask owners and managers for a stronger sign-in. FIG keeps 5% of the food after any deal and before tax on takeout orders, plus Stripe's card fee of 2.9% + $0.30 for most Canadian cards, which comes off the payment. Dine-in has no such fee. Read <a href="/blog/takeout-order-math-what-you-keep">the order math</a> before you decide, and <a href="/blog/hst-registration-small-restaurants-ontario">the HST guide</a> if you are not registered. That guide is general information, not tax advice.</p>
+             ("Step 5: takeout, if you want it", """<p>Takeout is optional. Diners pay online in the app at checkout, and the kitchen starts when you accept. A restaurant can turn it on only after it has added its HST number and finished Stripe payouts, and those money steps ask owners and managers for a stronger sign-in. FIG keeps 5% of the food after any deal and before tax on takeout orders, plus Stripe's card fee of 2.9% + $0.30 for most Canadian cards, which comes off the payment. Dine-in has no such fee. Read <a href="/blog/takeout-order-math-what-you-keep">the order math</a> before you decide, and <a href="/blog/hst-registration-small-restaurants-ontario">the HST guide</a> if you are not registered. That guide is general information, not tax advice.</p>
 <p>If you do turn takeout on, learn the pause button and prep time first. <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">The rush guide</a> covers both.</p>"""),
              ("Writing your page so diners understand it", """<p>Diners will see your page on a map next to other restaurants, so the first lines matter. Say what you serve and what the place is like in plain words, such as "a small Hakka kitchen, open late" or "a family bakery with a few tables". Name your best dish. If you serve halal, vegetarian, vegan or gluten-free food, say so clearly, because many diners filter for it and a vague description can lose them.</p>
 <p>Keep it honest. If your kitchen cannot guarantee an allergen-free dish, say that, and invite people to call. <a href="/blog/eating-out-dietary-needs-allergies-markham">What diners with dietary needs ask restaurants</a> shows the questions you will hear.</p>
 <ul><li>Use the same name that is on your sign.</li><li>Put your phone number where it can be found.</li><li>Choose the photo diners see first with care: a dish, not a storefront in the dark.</li></ul>"""),
-             ("The day before opening", """<ol><li>Open your page as a diner would and read it line by line.</li><li>Check that your hours, menu and photos are right.</li><li>Check that the scheduled deals start when you intend.</li><li>Run one test scan with your team so everyone has seen the screen.</li><li>Tell your regulars. A sign at the till and a word at the door cost nothing.</li></ol>"""),
-             ("Two things not to do", """<ul><li><strong>Do not tell diners to use the app yet.</strong> They cannot until January 1, 2027. Point them to the waitlist at www.figpromo.ca.</li><li><strong>Do not wait for a perfect page.</strong> Go live with a clear page and a good first deal, then improve it using your results, which show how each deal does.</li></ul>
+             ("The day before you go live", """<ol><li>Open your page as a diner would and read it line by line.</li><li>Check that your hours, menu and photos are right.</li><li>Check that the scheduled deals start when you intend.</li><li>Run one test scan with your team so everyone has seen the screen.</li><li>Tell your regulars. A sign at the till and a word at the door cost nothing.</li></ol>"""),
+             ("Two things not to do", """<ul><li><strong>Do not post a deal you have not priced.</strong> Do the sum first, because a deal that loses money on every table is hard to take back.</li><li><strong>Do not wait for a perfect page.</strong> Go live with a clear page and a good first deal, then improve it using your results, which show how each deal does.</li></ul>
 <p>Questions? The <a href="/contact">contact page</a> reaches us. FIG is run by Brendan Lau in Markham, Ontario.</p>"""),
          ],
-         faq=[("When does FIG open to diners?", "January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first."),
+         faq=[("Is FIG open to diners?", "Yes. FIG opened to diners on November 4, 2026, in Markham first, expanding to Richmond Hill and Vaughan Mills. Diners see your page as soon as you publish it."),
               ("What does it cost to set up my restaurant?", "Signing up, setting up the page, going live, posting deals, scanning and the dashboard cost nothing. FIG earns only on takeout orders paid in the app."),
               ("Do I have to offer takeout?", "No. You can turn it on only after you add your HST number and finish Stripe payouts, and you can leave it off."),
               ("How many locations can I add?", "Up to 2 for now."),
               ("Where does FIG start?", "In Markham, then Richmond Hill and Vaughan Mills."),
               ("How old do I have to be?", "Restaurant accounts are for people 18 or older."),
-              ("Can I post a deal before FIG opens?", "Yes. Deals can be live now or scheduled, so you can have them ready for January 1, 2027.")]),
+              ("Can I schedule a deal?", "Yes. Deals can be live now or scheduled for the days and hours you choose.")]),
 
     # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
 
-    dict(slug="menu-photos-restaurant-phone-photography-fig", screen="map", title="Menu photos with a phone: how to photograph your dishes for your FIG menu", date="2026-11-01", publish_at="2026-11-01T12:00:00-05:00", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="menu-photos-restaurant-phone-photography-fig", screen="map", title="Menu photos with a phone: how to photograph your dishes for your FIG menu", date="2026-11-01", publish_at="2026-11-01T12:00:00-05:00", updated="2026-11-05", topic="For restaurants", group="fill-quiet-hours",
          dek="Your FIG menu has photos and sections, and photos are what diners look at first. How to shoot your dishes with the phone you already own: light, angle, plating, which dishes to do first and how long it takes.",
          desc="A practical guide for restaurant owners to photograph dishes with a phone for a FIG menu: light, angle, plating, order of work and a time budget.",
          seo="How to photograph restaurant dishes with a phone for your menu",
@@ -1361,8 +1361,8 @@ POSTS = [
 <p>If you have a staff member who is good with a phone, ask them to run the session. People who photograph their own friends' dinners often take the best menu photos.</p>"""),
              ("Choosing the best shot", """<p>Take three or four photos of each dish and then compare them side by side. Choose the one where the food is sharp and the plate is clean. Delete the rest, so the wrong one never ends up on your menu by mistake. Crop if you need to, but leave the edit there: heavy filters change the colour of the food, and then the dish on the table does not match.</p>
 <p>When a dish changes, whether the recipe, the garnish or the plate, take a new photo. A photo that is a year old and no longer true is worse than no photo at all.</p>"""),
-             ("Putting the photos on your FIG menu", """<p>In your restaurant account, your menu is built from sections with dishes in them, and each dish can have a photo. Group dishes the way your printed menu does, add the photo to each dish and check that every price is right. Our guide to <a href="/blog/set-up-fig-menu-takeout">setting up your FIG menu and takeout in 15 minutes</a> goes through the screens. If you want the full list of what to do before diners arrive, see the <a href="/blog/restaurant-checklist-before-fig-opens-january-2027">restaurant checklist</a>.</p>
-<p>Diners can use FIG from January 1, 2027. Until then they can only join the waitlist at www.figpromo.ca, and restaurants set up first, so you have time to do this at a calm pace.</p>"""),
+             ("Putting the photos on your FIG menu", """<p>In your restaurant account, your menu is built from sections with dishes in them, and each dish can have a photo. Group dishes the way your printed menu does, add the photo to each dish and check that every price is right. Our guide to <a href="/blog/set-up-fig-menu-takeout">setting up your FIG menu and takeout in 15 minutes</a> goes through the screens. If you want the full list of what to do before you go live, see the <a href="/blog/restaurant-checklist-before-fig-opens-january-2027">restaurant checklist</a>.</p>
+<p>Diners are on FIG now, so a photo starts working as soon as your menu is published. Do your most popular dishes first and the rest at a calm pace.</p>"""),
              ("Mistakes to avoid", """<ul><li><strong>Stock photos.</strong> They never match what you serve.</li><li><strong>Dark photos.</strong> If you cannot see the food on a phone screen in the sun, it is too dark.</li><li><strong>Hands and thumbs</strong> at the edge of the frame.</li><li><strong>A different look on every dish.</strong> Consistency reads as care.</li><li><strong>Leaving a dish without a photo</strong> because it is hard to shoot. Show the plate as it is, steam and all.</li></ul>"""),
          ],
          faq=[("Do I need a professional photographer for my FIG menu?", "No. A phone, a window with daylight and a clean plate are enough. Start with your best sellers."),
@@ -1371,9 +1371,9 @@ POSTS = [
               ("How many photos should I take of each dish?", "Three or four from slightly different angles, then keep the best one and delete the rest."),
               ("Should the photo show the real portion?", "Yes. Show the dish as you serve it, so that the plate that reaches the table matches the picture."),
               ("How long does it take to photograph a menu?", "About four minutes a dish as an example, so twenty dishes take a little over an hour. Do the best sellers first."),
-              ("Can diners use FIG yet?", "Not yet. FIG opens to diners on January 1, 2027. Until then diners can join the waitlist at www.figpromo.ca, and restaurants set up first.")]),
+              ("Can diners see my menu now?", "Yes. FIG is open to diners in Markham, and they see your menu and photos as soon as they are published.")]),
 
-    dict(slug="takeout-order-declined-or-refunded-what-happens-to-the-money", screen="tdash", title="Takeout order declined or refunded: what happens to the money on FIG", date="2026-11-02", publish_at="2026-11-02T12:00:00-05:00", topic="For restaurants", group="takeout-and-money",
+    dict(slug="takeout-order-declined-or-refunded-what-happens-to-the-money", screen="tdash", title="Takeout order declined or refunded: what happens to the money on FIG", date="2026-11-02", publish_at="2026-11-02T12:00:00-05:00", updated="2026-11-05", topic="For restaurants", group="takeout-and-money",
          dek="A takeout order is held on the diner's card and charged when you accept. What that means if you decline, if you need to refund, who can do it, and where to see every refund and fee afterwards.",
          desc="What happens to the money when a restaurant declines or refunds a FIG takeout order: when the card is charged, who can refund, and the Payments page.",
          seo="Takeout order declined or refunded: what happens to the money",
@@ -1411,8 +1411,7 @@ POSTS = [
              ("What the diner sees", """<p>From the diner's side, the order is simple. They pay online at checkout, they wait to hear whether the restaurant accepts, and they collect with a pickup code that confirms the handover. They are never asked to pay at the counter. That is why a decline is painless for them: nothing was taken. It is also why you should decline fast. The sooner the answer comes, the sooner they can order somewhere else.</p>"""),
              ("Talking to the diner", """<p>A refund goes better with a short, plain note. Say what went wrong, say what you did and say you are sorry. Do not argue about it. A diner who gets a quick refund and an apology will often order again. A diner who is made to prove a point rarely does.</p>
 <p>If the problem was in the review, answer it. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> has templates that are easy to adapt.</p>"""),
-             ("What to do before takeout is on", """<p>A restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts, and those steps ask owners and managers for the stronger sign-in. Do them early, so that a refund on your first busy day is not the first time you meet the sign-in. Takeout is optional, and FIG earns only on takeout orders paid in the app. Dine-in has no such fee.</p>
-<p>Diners can use FIG from January 1, 2027. Until then they can only join the waitlist at www.figpromo.ca.</p>"""),
+             ("What to do before takeout is on", """<p>A restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts, and those steps ask owners and managers for the stronger sign-in. Do them early, so that a refund on your first busy day is not the first time you meet the sign-in. Takeout is optional, and FIG earns only on takeout orders paid in the app. Dine-in has no such fee.</p>"""),
          ],
          faq=[("When is the diner's card charged for takeout?", "The card is held at checkout and charged when the restaurant accepts the order."),
               ("What if I decline a takeout order?", "Nothing is charged. The kitchen starts when the restaurant accepts."),
@@ -1422,18 +1421,18 @@ POSTS = [
               ("What does FIG keep on a takeout order?", "5% of the food after any deal and before tax, plus HST on that fee once FIG is registered for HST. Stripe's card fee of 2.9% + $0.30 for most Canadian cards comes off the payment."),
               ("Do I pay anything on dine-in orders?", "No. There is no commission on the bill and nothing on dine-in.")]),
 
-    dict(slug="monthly-eating-out-budget-markham-diners", screen="claim", title="A monthly eating-out budget that works: what to expect when FIG opens in Markham", date="2026-11-03", publish_at="2026-11-03T12:00:00-05:00", topic="For diners", group="eat-out-for-less",
-         dek="Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG when it opens to diners on January 1, 2027.",
-         desc="How to set a monthly eating-out budget with HST and tip counted in, plus where restaurant deals fit once FIG opens to diners on January 1, 2027.",
+    dict(slug="monthly-eating-out-budget-markham-diners", screen="claim", title="A monthly eating-out budget that works: where FIG deals fit in Markham", date="2026-11-03", updated="2026-11-05", publish_at="2026-11-03T12:00:00-05:00", topic="For diners", group="eat-out-for-less",
+         dek="Set one number for eating out, split it into a few kinds of meals, add HST and tip, and see where a deal fits. A worked example with round numbers, and what to expect from FIG in Markham.",
+         desc="How to set a monthly eating-out budget with HST and tip counted in, plus where restaurant deals on FIG fit in Markham.",
          seo="Monthly eating-out budget: a worked example with HST and tip",
-         keywords="eating out budget, monthly restaurant budget, restaurant bill with tax and tip Ontario, how much to spend eating out, restaurant deals Markham, FIG waitlist",
+         keywords="eating out budget, monthly restaurant budget, restaurant bill with tax and tip Ontario, how much to spend eating out, restaurant deals Markham, FIG deals",
          points=["Pick one monthly number for eating out and split it into a few kinds of meals, so one big dinner does not use it all.",
                  "Count HST and tip: a $40 meal with 13% HST and a 15% tip is about $51.20 in your wallet.",
                  "A deal helps most on the meals you were going to have anyway, not on extra ones.",
-                 "FIG opens to diners on January 1, 2027. A diner can claim a deal once a day. Until then, join the waitlist at www.figpromo.ca.",
+                 "FIG is open to diners in Markham now, and free. A diner can claim a deal once a day.",
                  "Review the month in five minutes at the end, and move the number up or down."],
          sections=[
-             ("The short answer", """<p>Choose one number for eating out each month, then divide it into three or four kinds of meal: quick lunches, relaxed dinners, treats and takeout. Work out each meal as it will appear on your card, with HST and tip, not as the menu price. When FIG opens to diners on January 1, 2027, you will be able to look for deals on the meals you were going to have anyway.</p>"""),
+             ("The short answer", """<p>Choose one number for eating out each month, then divide it into three or four kinds of meal: quick lunches, relaxed dinners, treats and takeout. Work out each meal as it will appear on your card, with HST and tip, not as the menu price. On FIG, you can look for deals on the meals you were going to have anyway.</p>"""),
              ("Start with one number", """<p>Most people overspend on eating out because they have no number. Look at the last two or three months of card statements, add up what went to restaurants, cafes and takeout, and take the average. Then choose a figure for next month that you are comfortable with, even if it is a little lower. A number you can keep to is better than a perfect number you ignore.</p>
 <p>Write it as a monthly figure and a weekly one. In an example, $240 a month is about $60 a week, which is easier to hold in your head on a Friday evening.</p>"""),
              ("What a menu price really costs", """<p>The price on the menu is not what you pay. Ontario's HST is 13%, and many people tip on top. Here is a round example, with a 15% tip on the pre-tax amount. The tip is an example, not a rule.</p>
@@ -1453,16 +1452,16 @@ POSTS = [
 <tr><td><b>Total</b></td><td>11</td><td></td><td><b>$240</b></td></tr>
 </tbody></table>
 <p>Check the sum: $90 + $70 + $50 + $30 = $240. Eleven meals out in a month is a little under three a week.</p>"""),
-             ("Where a deal fits", """<p>A deal is useful when it lowers the price of a meal you were already going to have. It is not useful when it talks you into an extra one. When FIG opens, you will be able to browse places, menus, reviews and live deals on a map, and claim a deal in one tap. A diner can claim a deal once a day, so it suits regular meals better than a binge.</p>
+             ("Where a deal fits", """<p>A deal is useful when it lowers the price of a meal you were already going to have. It is not useful when it talks you into an extra one. On FIG, you can browse places, menus, reviews and live deals on a map, and claim a deal in one tap. A diner can claim a deal once a day, so it suits regular meals better than a binge.</p>
 <div class="callout math"><b>A 2 for 1 on a regular dinner (example)</b><ul><li>Two mains at $18 each, normally $36 before HST and tip.</li><li>With a 2 for 1, you pay for one: $18.</li><li>You saved $18 on that meal, which is half the bill.</li></ul><p>If your casual-dinner line has room for it, the saving could pay for another lunch. Check the real terms of each deal, because every restaurant sets its own.</p></div>
 <p>Our guides on <a href="/blog/compare-restaurant-deals-worth-it">comparing restaurant deals</a> and <a href="/blog/date-night-markham-deals-budget">a date night for less</a> go through the arithmetic in more detail.</p>"""),
              ("Three habits that make the number stick", """<ol><li><strong>Choose the treat.</strong> A big dinner you looked forward to feels better than three small ones you forgot. Put it in the budget on purpose.</li><li><strong>Keep a running tally</strong> on your phone's notes, once a meal. It takes ten seconds.</li><li><strong>Check before you go.</strong> Look at the menu, the price and any deal first. It is easier to decide at home than at the table.</li></ol>
 <p>Eating with a group? <a href="/blog/group-dining-deals">Group dining deals</a> covers how to split a bill fairly.</p>"""),
-             ("What to expect when FIG opens", """<p>FIG is free for diners and opens to them on January 1, 2027. Until then diners can only join the waitlist at www.figpromo.ca, and restaurants set up first. Do not expect a deal on that map today.</p>
-<ul><li>You will be able to browse places, menus, reviews and live deals on a map.</li><li>You will claim a deal in one tap and show a QR code that staff scan at the restaurant.</li><li>A deal code works once, and one diner can claim a deal once a day.</li><li>Location is optional and never limits a deal.</li><li>Guests can look around, but you need an account to claim, order, save or review. Diners must be 14 or older.</li></ul>
+             ("What to expect from FIG", """<p>FIG is free for diners and open now in Markham. Check out deals at www.figpromo.ca/app.</p>
+<ul><li>You can browse places, menus, reviews and live deals on a map.</li><li>You claim a deal in one tap and show a QR code that staff scan at the restaurant.</li><li>A deal code works once, and one diner can claim a deal once a day.</li><li>Location is optional and never limits a deal.</li><li>Guests can look around, but you need an account to claim, order, save or review. Diners must be 14 or older.</li></ul>
 <p>FIG starts in Markham, then Richmond Hill and Vaughan Mills.</p>"""),
              ("Lunch, dinner and takeout: where the money goes", """<p>It helps to see which kind of meal costs you the most per dollar of enjoyment. A lunch out at $15 all-in is easy to repeat and easy to skip. A dinner at $35 is a bigger decision. A takeout night at $25 costs less than a dinner out but more than cooking.</p>
-<p>When FIG opens, takeout will be paid for online in the app at checkout, and it comes with a deal unless the restaurant sets takeout at full price. Whether or not a deal is on that night, check the price you see at checkout before you confirm, and put the total into your tally. There is no paying at the counter for takeout, so the amount in the app is the amount you spend.</p>
+<p>On FIG, takeout is paid for online in the app at checkout, and it comes with a deal unless the restaurant sets takeout at full price. Whether or not a deal is on that night, check the price you see at checkout before you confirm, and put the total into your tally. There is no paying at the counter for takeout, so the amount in the app is the amount you spend.</p>
 <div class="callout math"><b>Swapping one meal (example)</b><ul><li>Before: two takeout nights at $25 each is $50.</li><li>If one of them becomes a lunch at $15, you spend $25 + $15 = $40.</li><li>That leaves $10 spare, which is two-thirds of another lunch.</li></ul></div>"""),
              ("A five-minute month-end review", """<p>On the last day of the month, add up what you spent and compare it with the number. Ask two questions: which kind of meal went over, and which one gave you the most enjoyment for the money? Then move $10 or $20 from one line to the other. After two or three months, the budget fits how you actually eat.</p>
 <p>If you eat out far less than your number, that is fine too. The point of the number is to choose, not to spend it.</p>"""),
@@ -1470,13 +1469,13 @@ POSTS = [
          ],
          faq=[("How much should I budget for eating out each month?", "There is no right figure. Add up the last two or three months of card statements, take the average and choose a number you are comfortable with, even if it is a little lower."),
               ("Should I count HST and tip in my restaurant budget?", "Yes. Ontario's HST is 13%, and tips come on top. In the example, a $40 meal comes to about $51.20 with HST and a 15% tip."),
-              ("When can I use FIG as a diner?", "FIG opens to diners on January 1, 2027. Until then you can join the waitlist at www.figpromo.ca."),
+              ("When can I use FIG as a diner?", "Now. FIG is open to diners in Markham: check out deals at www.figpromo.ca/app, with no account needed to look around."),
               ("Is FIG free for diners?", "Yes. FIG is free for diners."),
               ("How often can I claim the same deal?", "A diner can claim a deal once a day."),
               ("Do I have to share my location?", "No. Location is optional and never limits a deal."),
               ("Which deals save the most?", "The ones on meals you would have had anyway. A 2 for 1 on two $18 mains saves $18, half of that bill, but only if you did not add a meal you would have skipped.")]),
 
-    dict(slug="read-your-deal-results-keep-change-or-stop", screen="tdash", title="Reading your deal results: keep, change or stop a deal", date="2026-11-04", publish_at="2026-11-04T12:00:00-05:00", topic="For restaurants", group="fill-quiet-hours",
+    dict(slug="read-your-deal-results-keep-change-or-stop", screen="tdash", title="Reading your deal results: keep, change or stop a deal", date="2026-11-04", publish_at="2026-11-04T12:00:00-05:00", updated="2026-11-05", topic="For restaurants", group="fill-quiet-hours",
          dek="Your dashboard shows results deal by deal. How to review a deal after two weeks, three questions to ask, and a worked example of the arithmetic that tells you whether to keep it, change it or end it.",
          desc="How restaurant owners can read deal-by-deal results on FIG and decide whether to keep, change or stop a deal, with a worked example.",
          seo="How to read your restaurant deal results: keep, change or stop",
@@ -1521,7 +1520,7 @@ POSTS = [
 <p>Keep a notes page with a line for each change: the date, what you changed, why and what happened. In three months you will be glad of it.</p>"""),
              ("Share the numbers with your team", """<p>The people who work the quiet shift know things the dashboard does not: which regulars came, whether the new faces ordered a drink, whether the room felt busier. Ask them two questions at the end of the two weeks: who used the deal, and what did you notice? Write the answers next to your numbers. A thirty-second talk at the end of a shift is often the most useful part of the review, and it also shows the team that the deal is something they have a say in.</p>"""),
              ("Do not forget the reviews", """<p>Numbers do not show how a diner felt. Read what diners say about their visits, and reply. A review that says the line was too long tells you more than a use count can. Reviews come only from scanned visits, so each one is from someone who really came. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> shows how.</p>"""),
-             ("Before FIG opens to diners", """<p>Diners can use FIG from January 1, 2027. Until then there are no results to read, since diners can only join the waitlist at www.figpromo.ca. Use the weeks before to build deals you can judge later: choose a quiet window, do the arithmetic from <a href="/blog/slow-hour-deal-math">the slow-hour math</a> and write down your guess for how many new diners it will bring. In January, you will have something to compare it with.</p>"""),
+             ("Your first weeks", """<p>Results build up as diners find your deals, so the first numbers are small. Set up each deal so you can judge it later: choose a quiet window, do the arithmetic from <a href="/blog/slow-hour-deal-math">the slow-hour math</a> and write down your guess for how many new diners it will bring. After a few weeks, you will have something to compare it with.</p>"""),
          ],
          faq=[("Where do I see how a deal is doing?", "Your dashboard shows results deal by deal."),
               ("How long should I run a deal before judging it?", "At least two weeks, with the same hours each week, and without changing the deal while you wait."),
@@ -1529,6 +1528,6 @@ POSTS = [
               ("What should I change first if a deal is not working?", "Change one thing at a time: the hours, the dish, the discount, the uses per diner or the wait between uses."),
               ("How do I know whether a deal pays?", "Compare its results on your dashboard with your own till, then do the arithmetic on what each use leaves you after food cost."),
               ("Do restaurants see diners' phone numbers?", "No. Restaurants never see diners' phone numbers."),
-              ("Can I read results before FIG opens to diners?", "Not yet. FIG opens to diners on January 1, 2027, and until then diners can only join the waitlist at www.figpromo.ca.")]),
+              ("How soon can I read results?", "As soon as diners start viewing and claiming your deal. Give a new deal a few weeks before you judge it, since the first numbers are small.")]),
 
 ]

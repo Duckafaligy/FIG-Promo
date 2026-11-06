@@ -247,63 +247,11 @@
     if (e.isIntersecting && !stopped && motion) timer = setInterval(() => show((cur + 1) % shots.length), 3500);
   }, { threshold: 0.4 }).observe($(".tablet"));
 
-  // ---------- the diner waitlist (2026-10-15: restaurants first, diners join January 1, 2027) ----------
-  const cfg = window.FIG_CONFIG || {};
-  const rpc = (fn, body) => fetch(`${cfg.supabaseUrl}/rest/v1/rpc/${fn}`, { method: "POST",
-    headers: { apikey: cfg.supabaseKey, "Content-Type": "application/json" }, body: JSON.stringify(body || {}) });
-  // a creator's link (?src=name, 2026-10-17): kept for this tab so the waitlist form can say who sent them (first one wins)
+  // a creator's link (?src=name, 2026-10-17): kept for this tab so a sign-up can say who sent them (first one wins)
   try {
     const src = (new URLSearchParams(location.search).get("src") || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
     if (src && !sessionStorage.getItem("fig.src")) sessionStorage.setItem("fig.src", src);
   } catch {}
-  const wl = $("#waitlist form");
-  if (wl) {
-    const msg = $(".form-msg", wl), btn = $("button[type=submit]", wl), email = wl.elements.email;
-    const say = (t, kind) => { msg.textContent = t; msg.className = "form-msg " + (kind || ""); };
-    // the count only shows once it's worth showing
-    // the opening line (the user's words, 2026-10-17): the date and the order from site_mode; the HTML has a true fallback.
-    // An order, never exclusivity.
-    rpc("site_mode").then((r) => r.ok && r.json()).then((m) => {
-      if (!m) return;
-      // open to everyone and no launch date still ahead: nothing left to announce (FIX-LIST #56)
-      if ((m.mode || (m.diners_open ? "on" : "off")) === "on" && !(m.opens_at && new Date(m.opens_at) > new Date())) { $(".wl-count", wl).hidden = true; return; }
-      let when = "FIG opens in Markham on January 1, 2027."; // no date set yet: the date the site gives everywhere (FIX-LIST #137)
-      try { if (m.opens_at) when = `FIG opens in Markham on ${new Date(m.opens_at).toLocaleDateString({ fr: "fr-CA", "zh-Hans": "zh-CN", "zh-Hant": "zh-TW" }[document.documentElement.lang] || "en-US", { timeZone: "America/Toronto", month: "long", day: "numeric", year: "numeric" })}.`; } catch {}
-      const line = $(".wl-line", wl);
-      // two sentences, two text nodes: js/site-lang.js translates each
-      if (line) { line.textContent = when; line.append(" " + (m.founding_cap && m.mode === "waitlist" ? `The first ${Number(m.founding_cap).toLocaleString("en-CA")} on the list get in first.` : "The first members get in first.")); }
-      if (m.waitlist >= 25) $(".wl-count", wl).append(` ${m.waitlist.toLocaleString("en-CA")} people are already waiting.`);
-    }).catch(() => {});
-    email.addEventListener("input", () => email.removeAttribute("aria-invalid"));
-    // joining needs the email consent (FIX-LIST #103): Join stays off until the box is ticked (the database refuses without it too)
-    const ok = () => { btn.disabled = !wl.elements.consent.checked; };
-    wl.elements.consent.addEventListener("change", ok); ok();
-    addEventListener("pageshow", ok); // back/forward restores a ticked box: Join follows it
-    wl.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-      if (wl.elements.website.value) return; // bots fill the hidden field
-      // an empty field and a mistyped one get their own words (FIX-LIST #136)
-      if (!email.value.trim() || !email.checkValidity()) { email.setAttribute("aria-invalid", "true"); email.focus(); return say(email.value.trim() ? "That email doesn't look right." : "Enter your email.", "err"); }
-      btn.disabled = true; say("");
-      try {
-        let src = ""; try { src = sessionStorage.getItem("fig.src") || ""; } catch {}
-        const r = await rpc("join_waitlist", { p_email: email.value.trim(), p_consent: wl.elements.consent.checked, ...(src ? { p_source: src } : {}) });
-        if (!r.ok) throw new Error(await r.text());
-        const said = await r.json().catch(() => "ok");
-        wl.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
-        // founding members (2026-10-17): after the founding list closed the answer is 'ok-late', the same for any email
-        if (said === "ok-late") {
-          say("You're on the list. Check your email and tap the link to confirm. Founding members are in now; we'll let you in at the public launch. Already a founding member? ", "ok");
-          const a = document.createElement("a"); a.href = "/app/sign-in"; a.textContent = "Sign in"; msg.appendChild(a);
-        } else say("You're on the list. Check your email and tap the link to confirm; then we'll email you the day FIG opens.", "ok");
-      } catch (e) {
-        btn.disabled = false;
-        // no answer at all (fetch throws a TypeError) is the connection, not FIG
-        btn.disabled = !wl.elements.consent.checked;
-        say(/too-many/.test(e.message) ? "Too many tries. Try again in 15 minutes." : /bad-email/.test(e.message) ? "That email doesn't look right." : /consent-needed/.test(e.message) ? "Tick the box to agree to emails from FIG, then join." : e instanceof TypeError || !navigator.onLine ? "You seem to be offline. Check your connection and try again." : "Something went wrong. Try again in a moment.", "err");
-      }
-    });
-  }
 
   // figpromo.com/owners: the link to open on your phone when you walk into a restaurant
   if (location.pathname.startsWith("/owners")) {

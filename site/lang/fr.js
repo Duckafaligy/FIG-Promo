@@ -37,6 +37,7 @@ figLang({
  "Cookie settings": "Paramètres des témoins",
  "© 2026 FIG · Brendan Lau · Markham, Ontario": "© 2026 FIG · Brendan Lau · Markham, Ontario",
  "App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap. App Store is a trademark of Apple Inc. Google Play is a trademark of Google LLC.": "Les écrans de l’appli montrent des restaurants et des offres fictifs. Données cartographiques © contributeurs OpenStreetMap, OpenFreeMap. App Store est une marque d’Apple Inc. Google Play est une marque de Google LLC.",
+ "Example food photos: public domain, by photographers on Unsplash, Pixabay, StockSnap, Wikimedia Commons, Flickr and WordPress Photos.": "Photos de plats d’exemple : domaine public, par des photographes d’Unsplash, Pixabay, StockSnap, Wikimedia Commons, Flickr et WordPress Photos.",
  "Eat local. Save fast.": "Mangez local. Économisez vite.",
  "About FIG · FIG": "À propos de FIG · FIG",
  "The restaurant deals app for": "L’appli d’offres de restaurants pour",

@@ -16,3 +16,195 @@ The home page's scroll animations
 Icons
   Drawn for FIG in its own designs, on a 24 px grid in the style of Lucide (https://lucide.dev, ISC licence:
   https://lucide.dev/license). No icon font or third-party icon file is loaded.
+
+Food photos on restaurant listings without photos of their own (/assets/food-library/, details in library.json)
+  Public domain: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/) or the Public Domain Mark 1.0
+  (https://creativecommons.org/publicdomain/mark/1.0/), so free for commercial use; credit is not required but given here.
+  Cropped to 3:2 and resized. Shown as an example of the kind of food, never as a restaurant's own photo.
+  food/1  Eaters Collective eaterscollective, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Plate_of_Pasta_(Unsplash).jpg
+  food/2  Alex Munsell alexmunsell, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Steak_Dinner_1_(Unsplash).jpg
+  food/3  Casey Lee simplethemes, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Meal_with_salmon_and_zucchini_(Unsplash).jpg
+  food/4  DanaTentis, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Grilled_plated_salmon_fillet.jpg
+  food/5  Tim Sullivan, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/gourmet-food-BGROKWFVRK
+  food/6  James Harris jharris, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Salad_for_dinner_(Unsplash).jpg
+  food/7  Mantra Media mantra_media_ltd, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Steak_Dinner_for_Two_(Unsplash).jpg
+  food/8  Tim Sullivan, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/seafood-dish-WRHZL4AVT0
+  cafe/1  Hello Goodbye, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/coffee-cappuccino-UXO5P8KFS5
+  cafe/2  Vicky Gu, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/coffee-cappuccino-9QUVG8OY1I
+  cafe/3  JESHOOTS.com, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/croissants-jam-3D88A11AF9
+  cafe/4  Alisa Anton, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/bread-food-LAH2QU8ASJ
+  cafe/5  Katerina Pavlickova, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/croissant-bread-VROE918EPC
+  cafe/6  shirishpoudel07, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/52268ebb46/
+  cafe/7  season321, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/6667fb9e77/
+  cafe/8  Mohammed Kateregga, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/91669d9259/
+  chinese/1  Sharon Ang, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:%E6%8B%85%E6%8B%85%E9%9D%A2_Dandan_noodles.jpg
+  chinese/2  chengzhu, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Dong_bei_da_la_pi.jpg
+  chinese/3  sushmakhatri, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/55064fabb0/
+  chinese/4  渡邉厚夫(たいちょ渡邉), WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/67659a21ae/
+  chinese/5  Joan Namunina, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/9846a5bdbd/
+  chinese/6  Mx. Granger, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=148620129
+  chinese/7  Huihermit, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=45954585
+  chinese/8  roland, Flickr, CC0 1.0: https://www.flickr.com/photos/35034347371@N01/226817152
+  dimsum/1  Tara B tarabear, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Dim_Sum_Dinner_(Unsplash).jpg
+  dimsum/2  afterdog, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Dim_Sum_Breakfast.jpg
+  dimsum/3  Gosu MSAIO WIEEH 02, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=155394843
+  dimsum/4  ORUM 2 ZEOWM, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=152065120
+  dimsum/5  Charles Deluvio charlesdeluvio, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Dumplings_(Unsplash).jpg
+  burgers/1  Niklas Rhöse blitzer, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Bacon_Burgers_(Unsplash).jpg
+  burgers/2  Thomas Habr thomashabr, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Best_Cheeseburger_ever_(Unsplash).jpg
+  burgers/3  Eaters Collective eaterscollective, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Gourmet_Hamburger_(Unsplash).jpg
+  burgers/4  Sebastián LP elmundoderabbitlp, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Hamburguesa_de_carne.jpg
+  burgers/5  quentin lagache quentinlagache, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Burgers_and_Fries_(Unsplash).jpg
+  desserts/1  johnkamatsos4, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Brownie-dessert-cake-sweet-45202.jpg
+  desserts/2  Daria YakovlevaMinor edits made by Subsidiary account, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg
+  desserts/3  JULIANA ANNUNCIATO, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Petit_g%C3%A2teau.jpg
+  desserts/4  Reyes Martínez, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/916622f30e/
+  desserts/5  Michal Kulesza, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/cupcakes-dessert-Z5FHOTPM31
+  desserts/6  Oriana Ortiz, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/chocolate-cake-XTNRPGQBYL
+  seafood/1  pompi, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Plated_grilled_fish.jpg
+  seafood/2  Joan Namunina, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/57169ce134/
+  seafood/3  Utsav Singh Rathour, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/2436a1f0fd/
+  seafood/4  Syced, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=150958524
+  seafood/5  Daderot, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=148891733
+  seafood/6  alfy777, Flickr, CC0 1.0: https://www.flickr.com/photos/198507664@N02/52988102202
+  korean/1  changupn, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Bibimbap_with_kkakdugi.jpg
+  korean/2  Sharon Ang, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Kimchi_fried_rice.jpg
+  korean/3  709 K, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Tteok-bokki_3.jpg
+  korean/4  ewhity, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Korean_fried_chicken_(banban)_(cropped).jpg
+  korean/5  happy11u, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Moksal-gui.jpg
+  korean/6  Tilak Bahadur Karki, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/5406a23c8a/
+  noodles/1  Noahs Knight noahsknight, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Lan_Jie_Famous_Curry_Noodles_(Unsplash).jpg
+  noodles/2  Tran Mau Tri Tam tranmautritam, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Noodle_Bowl_for_Lunch_(Unsplash).jpg
+  noodles/3  Manjil Aryal, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/2726a17a64/
+  noodles/4  Ocdp, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=39770418
+  noodles/5  Jungyeon, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=54768083
+  noodles/6  roland, Flickr, CC0 1.0: https://www.flickr.com/photos/35034347371@N01/12194076
+  chicken/1  Brian Chan tigerrulezzz, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Fried_Chicken_(Unsplash).jpg
+  chicken/2  sarahstierch, Flickr, CC0 1.0: https://www.flickr.com/photos/7633518@N08/55174138176
+  chicken/3  sarahstierch, Flickr, CC0 1.0: https://www.flickr.com/photos/7633518@N08/55174306058
+  chicken/4  kuujinbo (-_-'), Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/74749623@N05/35698798694
+  chicken/5  Eaters Collective eaterscollective, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Chicken_Sandwich_(Unsplash).jpg
+  chicken/6  adiosmary, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Sunsal-fried-chicken.jpg
+  icecream/1  Andris Romanovskis flomaasters, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Andris_Romanovskis_2017_(Unsplash).jpg
+  icecream/2  Rachael Gorjestani rachaelgorjestani, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Rachael_Gorjestani_2016-10-26_(Unsplash_HLt6jQLf_J0).jpg
+  icecream/3  Madeline Tallman, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Ledena_kava_s_smetano_na_Bledu_(44555).jpg
+  icecream/4  JESHOOTS.com, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/icecream-gelato-E7125AED61
+  icecream/5  auntmasako from Yokosuka, Japan, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Strawberry_flavor_ice_cream,_served_with_strawberry,_restaurant_in_Takanawa,_Shinagawa,_Tokyo,_Japan_(2007-02-26_by_auntmasako_@pixabay_1665355).jpg
+  breakfast/1  Maria Mekht maria_mekht, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Maria_Mekht_2016-11-05_(Unsplash).jpg
+  breakfast/2  Constance Chen theskyandthesea, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Eggs_Benedict_(Unsplash).jpg
+  breakfast/3  Joseph Gonzalez miracletwentyone, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Fruit_waffles_and_coffee_(Unsplash).jpg
+  breakfast/4  Alexandra Kusper alexandrakusper, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Nutella_filled_pancake_(Unsplash).jpg
+  breakfast/5  Brooke Lark brookelark, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Breakfast_on_the_Veranda_(Unsplash).jpg
+  breakfast/6  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=128272106
+  italian/1  Eaters Collective eaterscollective, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Pesto_Pasta_(Unsplash).jpg
+  italian/2  Julien Pianetti julienpian, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Clermont-Ferrand,_France_(Unsplash).jpg
+  italian/3  Izzy Boscawen ib1994, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:The_temptress_(Unsplash).jpg
+  italian/4  ChrisEdwardsCE, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/326329df56/
+  italian/5  Benoît Prieur, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=81265884
+  italian/6  Brooke Lark brookelark, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Pasta_in_Amorebieta_(Unsplash).jpg
+  caribbean/1  diegolopez97, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/8406a57100/
+  caribbean/2  Iyundhu Kennedy, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/5506a3049c/
+  caribbean/3  Adesolive, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=164409429
+  caribbean/4  Bigul Malayi, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/6076a663a9/
+  indian/1  Shubham Patil, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/76367d15aa/
+  indian/2  Shitalben Parmar, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/573688d195/
+  indian/3  Mohammed Kateregga, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/8369c4ba63/
+  indian/4  Raju Alam, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/3165c5006e/
+  indian/5  K.Sreeram Wiki, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=159735707
+  indian/6  Abithavelu, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=154416720
+  vietnamese/1  roland, Flickr, CC0 1.0: https://www.flickr.com/photos/35034347371@N01/217100173
+  vietnamese/2  Syced, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=106234005
+  vietnamese/3  Mojmir Churavy, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=170487348
+  vietnamese/4  roland, Flickr, CC0 1.0: https://www.flickr.com/photos/35034347371@N01/1990743
+  vietnamese/5  Alina Kakshapati, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/2368cbca31/
+  vietnamese/6  Matthew Hamilton thatsmrbio, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Pho_for_Dinner_(Unsplash).jpg
+  drinks/1  Patryk Dziejma, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/fruit-smoothie-HWFUPZEHMO
+  drinks/2  Skitter Photo, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/smoothies-drinks-8CEA601549
+  drinks/3  rawpixel.com, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=122615036
+  drinks/4  Neha Deshmukh, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/pink-mojito-TD2WHV8MIE
+  drinks/5  Kaushik Baroliya, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/4286246a5e/
+  pizza/1  Jos Velasco, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/9516528906/
+  pizza/2  ChrisEdwardsCE, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/914636e748/
+  pizza/3  igorovsyannykov, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=69850719
+  pizza/4  Felipe Eloy Silva Duarte, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=176694868
+  pizza/5  Benoît Prieur, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=120437579
+  pizza/6  Akahito Yamabe, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=105918958
+  cantonese/1  HgoROEJP Hueam, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=144689903
+  cantonese/2  Wilfredor, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=28148401
+  cantonese/3  Iudexvivorum, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=58876597
+  cantonese/4  Jason Goh, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Portuguese_egg_tart.jpg
+  cantonese/5  Mojmir Churavy, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=170491578
+  tea/1  dungthuyvunguyen, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=67120678
+  tea/2  Image Catalog, Flickr, CC0 1.0: https://www.flickr.com/photos/132795455@N08/17106495329
+  tea/3  Mehraz Morshed, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/7766a285a6/
+  tea/4  appealdahal, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/124697b90d/
+  healthy/1  Brenda Godinez cravethebenefits, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Acai_Smoothie_Bowls_(Unsplash).jpg
+  healthy/2  Brenda Godinez cravethebenefits, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Avocado_Rose_Toast_(Unsplash).jpg
+  healthy/3  FOCA Stock, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/salad-bowl-PLOA1CWIRK
+  healthy/4  Yam B Chhetri, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/7616a84439/
+  bakery/1  Ben Garratt wstn, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Ben_Garratt_2016_(Unsplash).jpg
+  bakery/2  Kim Cruickshanks helloimkim, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Bread_(Unsplash).jpg
+  bakery/3  Liene Vitamante lienevitamante, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Santa_Monica,_United_States_(Unsplash_PO2GsmeN8hU).jpg
+  bakery/4  Mink Mingle minkmingle, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Mink_Mingle_2017_(Unsplash).jpg
+  bakery/5  Olia Gozha olia, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Rivne,_Ukraine_(Unsplash).jpg
+  bakery/6  Alisa Anton alisaanton, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Alisa_Anton_2016-03-12_(Unsplash).jpg
+  thai/1  Elli O. oelli, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Red_Curry_(Unsplash).jpg
+  thai/2  Mike Moloney, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/thai-food-FYXTJK8JBU
+  thai/3  Index Librorum Permissorum, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=144386365
+  thai/4  pbonahora, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/54163ef36e/
+  thai/5  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=150608635
+  thai/6  Faisal Ahammad, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/2056793bbd/
+  japanese/1  Yevgeniy Rozenblat, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/food-asiancuisine-RZUWVKLQAR
+  japanese/2  Bigul Malayi, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/2266973125/
+  japanese/3  NORTLAUKAU 26088 JP, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=184241298
+  japanese/4  Evelyn-rose, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=86329746
+  japanese/5  Ocdp, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=110007929
+  japanese/6  Ocdp, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=112636956
+  sushi/1  Krzysztof%20Puszczy%u0144ski, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/sushi-maki-R6DB535ZZA
+  sushi/2  Jamie Hamel-Smith, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/sushi-sake-EZWO30D5TV
+  sushi/3  Nilo Velez, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/461b926910/
+  sushi/4  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=166848394
+  sushi/5  eshao5721, Flickr, CC0 1.0: https://www.flickr.com/photos/165868022@N02/47098028862
+  sushi/6  wanghaiwanbay, Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/164367418@N03/42677399180
+  bubbletea/1  Uttkrista Chhetri, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/58169e6440/
+  bubbletea/2  sam651030 from Pixabay, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:A_bubble_tea_with_tapioca_pearls,_July_2018.jpg
+  bubbletea/3  Lounis Aissaoui, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Bubble-tea.jpg
+  bubbletea/4  Saya1611, Pixabay (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Iced_green_tea_latte.jpg
+  bubbletea/5  Thomas Vimare vimarethomas, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:Cup_of_latte_with_straw_(Unsplash).jpg
+  bubbletea/6  Linda Xu rhindaxu, Unsplash (via Wikimedia Commons), CC0 1.0: https://commons.wikimedia.org/wiki/File:The_Coffee_life_(Unsplash).jpg
+  hotpot/1  漱石の猫, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=155392618
+  hotpot/2  hey Erin!, Flickr, CC0 1.0: https://www.flickr.com/photos/130391828@N03/16802032808
+  hotpot/3  haylei wu, Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/134974721@N04/31172600445
+  hotpot/4  roland, Flickr, CC0 1.0: https://www.flickr.com/photos/35034347371@N01/2277107
+  bbq/1  Krzysztof%20Puszczy%u0144ski, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/kabob-skewers-LVXXHV4D98
+  bbq/2  Jamie Hamel-Smith, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/skewer-meat-04XU0KPGN0
+  bbq/3  mdburnette, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/9256203350/
+  bbq/4  Nilo Velez, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/778678ba77/
+  bbq/5  Joan Namunina, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/13769ce12d/
+  sandwich/1  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=163494284
+  sandwich/2  Image Catalog, Flickr, CC0 1.0: https://www.flickr.com/photos/132795455@N08/18691945541
+  sandwich/3  Anton Porsche, Flickr, CC0 1.0: https://www.flickr.com/photos/28764274@N03/28803796215
+  sandwich/4  Blarvar, Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/46583370@N04/4593033016
+  sandwich/5  Kim Siever, Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/57873306@N00/7346865110
+  middleeastern/1  Jose Varghese, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/7606896716/
+  middleeastern/2  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=130489662
+  middleeastern/3  Behnam9395, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=151502878
+  middleeastern/4  Benoît Prieur, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=107595359
+  middleeastern/5  Vishnu Chandra, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/66a16de9b0/
+  middleeastern/6  yanayrosen, Flickr, Public Domain Mark 1.0: https://www.flickr.com/photos/187878392@N04/51306049173
+  asian/1  Kawin Harasai, StockSnap.io, CC0 1.0: https://stocksnap.io/photo/rice-bowl-CCBWIQCNEJ
+  asian/2  Orianna Radomile, WordPress Photo Directory, CC0 1.0: https://wordpress.org/photos/photo/19269c1301/
+  asian/3  GALAXY 2018 A7, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=117696063
+  asian/4  GALAXY 2018 A7, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=92359004
+  asian/5  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=141645800
+  asian/6  Andy Li, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=132839196
+  filipino/1  Obsidian Soul, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=85679755
+  filipino/2  Judgefloro, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=59411922
+  filipino/3  Obsidian Soul, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=81648355
+  filipino/4  Gary Lee Todd, Ph.D., Flickr, CC0 1.0: https://www.flickr.com/photos/101561334@N08/33691641374
+  mexican/1  samuelfernandezrivera, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=113332258
+  mexican/2  Superbass, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=66570396
+  mexican/3  Tomwsulcer, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=41349883
+  mexican/4  cogdogblog, Flickr, CC0 1.0: https://www.flickr.com/photos/37996646802@N01/24926715648
+  mexican/5  Daderot, Wikimedia Commons, CC0 1.0: https://commons.wikimedia.org/w/index.php?curid=132326152
+  mexican/6  palewire, Flickr, CC0 1.0: https://www.flickr.com/photos/77114776@N00/7625853058

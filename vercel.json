@@ -43,10 +43,6 @@
       "destination": "/app/deal-used/[id]"
     },
     {
-      "source": "/app/example/:slug",
-      "destination": "/app/example/[slug]"
-    },
-    {
       "source": "/app/help/:id",
       "destination": "/app/help/[id]"
     },

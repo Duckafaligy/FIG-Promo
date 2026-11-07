@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-04",
+ "generated": "2026-11-08",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "keep-your-fig-page-current-hours-menu-prices",
+   "title": "Keep your FIG page current: hours, menu and prices",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-08",
+   "publish_at": "2026-11-08T12:00:00-05:00",
+   "status": "queued",
+   "words": 1014,
+   "dek": "A page that is out of date costs you trust the first time a diner arrives at a closed door. A short routine for your opening hours, menu sections, photos and prices, and who on your team should look after each."
+  },
+  {
+   "slug": "weekday-lunch-markham-for-less-deals-math",
+   "title": "Weekday lunch in Markham for less: a work-week guide, with the math",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-07",
+   "publish_at": "2026-11-07T12:00:00-05:00",
+   "status": "queued",
+   "words": 1035,
+   "dek": "Five lunches out is a real number once HST and tip are in. A way to look at a work week of lunches, where a deal helps, and the arithmetic for a dollar-off deal and a 2 for 1 with a colleague."
+  },
+  {
+   "slug": "free-with-a-dish-deal-pricing-restaurant-math",
+   "title": "A 'free with a dish' deal: what it costs you, with the math",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-06",
+   "publish_at": "2026-11-06T12:00:00-05:00",
+   "status": "queued",
+   "words": 1033,
+   "dek": "Give a drink, a side or a dessert with a main, and the real cost is your food cost, not your menu price. A worked example, how to choose the item, and how it compares with a dollar off."
+  },
+  {
+   "slug": "browse-fig-as-a-guest-or-make-an-account-markham-diners",
+   "title": "Browsing FIG as a guest: what you can do before you make an account",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-05",
+   "publish_at": "2026-11-05T12:00:00-05:00",
+   "status": "queued",
+   "words": 941,
+   "dek": "You can look around FIG without signing up. What a guest can see, what needs an account, how to use the map to choose a place, and a short routine for deciding where to eat."
+  },
   {
    "slug": "read-your-deal-results-keep-change-or-stop",
    "title": "Reading your deal results: keep, change or stop a deal",

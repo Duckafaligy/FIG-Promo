@@ -36,7 +36,7 @@
    "group": "fill-quiet-hours",
    "date": "2026-11-06",
    "publish_at": "2026-11-06T12:00:00-05:00",
-   "status": "queued",
+   "status": "live",
    "words": 1033,
    "dek": "Give a drink, a side or a dessert with a main, and the real cost is your food cost, not your menu price. A worked example, how to choose the item, and how it compares with a dollar off."
   },
@@ -47,7 +47,7 @@
    "group": "eat-out-for-less",
    "date": "2026-11-05",
    "publish_at": "2026-11-05T12:00:00-05:00",
-   "status": "queued",
+   "status": "live",
    "words": 941,
    "dek": "You can look around FIG without signing up. What a guest can see, what needs an account, how to use the map to choose a place, and a short routine for deciding where to eat."
   },

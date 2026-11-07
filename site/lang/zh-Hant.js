@@ -37,6 +37,7 @@ figLang({
  "Cookie settings": "Cookie 設定",
  "© 2026 FIG · Brendan Lau · Markham, Ontario": "© 2026 FIG · Brendan Lau · 安大略省萬錦",
  "App screens show example restaurants and deals. Map data © OpenStreetMap contributors, OpenFreeMap. App Store is a trademark of Apple Inc. Google Play is a trademark of Google LLC.": "App 畫面展示的是示例餐廳和優惠。地圖資料 © OpenStreetMap 貢獻者、OpenFreeMap。App Store 是 Apple Inc. 的商標。Google Play 是 Google LLC 的商標。",
+ "Example food photos: public domain, by photographers on Unsplash, Pixabay, StockSnap, Wikimedia Commons, Flickr and WordPress Photos.": "示例美食照片：公共領域，來自 Unsplash、Pixabay、StockSnap、Wikimedia Commons、Flickr 和 WordPress Photos 的攝影師。",
  "Eat local. Save fast.": "吃在本地，省得更快。",
  "About FIG · FIG": "關於 FIG · FIG",
  "The restaurant deals app for": "專為萬錦而設的",

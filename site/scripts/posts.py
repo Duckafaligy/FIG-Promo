@@ -1717,4 +1717,193 @@ POSTS = [
               ("Does it cost anything to keep my page up to date?", "No. Setting up the page, posting deals, scanning and the dashboard cost nothing for restaurants."),
               ("How many locations can I add?", "Up to 2 locations for now.")]),
 
+    # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
+
+    dict(slug="schedule-fig-deals-live-now-or-scheduled-quiet-hours", screen="tscanner", title="Live now or scheduled: when to start a deal on FIG", date="2026-11-09", publish_at="2026-11-09T12:00:00-05:00", updated="2026-11-09", topic="For restaurants", group="fill-quiet-hours",
+         dek="A deal can go live the moment you post it or start later. When each makes sense, how uses per diner and the wait between uses shape the week, and a worked example that checks what a $3-off deal really costs.",
+         desc="How Markham restaurants can post a FIG deal live now or scheduled, set uses per diner, and check the cost of a dollar-off deal with simple arithmetic.",
+         seo="Live now or scheduled: when to start a restaurant deal",
+         keywords="schedule restaurant deal, restaurant promotion timing, slow hours promotion, dollar off deal, restaurant deal uses per diner, Markham restaurants, FIG deals",
+         points=["On FIG a deal can be live now or scheduled, so you choose when diners first see it.",
+                 "Post live now when you want to fill a quiet hour today. Schedule when you can prepare staff first.",
+                 "Uses per diner and the wait between uses decide how often one person can come back for the same deal.",
+                 "A diner can claim a deal once a day, and a deal code works once, so one deal cannot be used over and over by accident.",
+                 "Check the cost with real arithmetic: in the example below a $3-off deal on a $15 meal nets $66 across 20 diners."],
+         sections=[
+             ("The short answer", """<p>Post a deal live now when you want to fill a quiet hour today, and schedule it when you want your team ready first, or when the deal belongs to a day later in the week. Either way, decide how many times one diner can use it and how long they wait between uses. Then check the cost with your own numbers before you post. FIG is completely free for restaurants to set up and run, so you can change timing as often as you like.</p>"""),
+             ("What live now and scheduled mean", """<p>When you post a deal on FIG you choose when it starts. Live now means diners can see and claim it straight away. Scheduled means you set it up ahead of time and it starts when you chose. Both kinds can be a 2 for 1, a percent off, a dollar off or a free item with a dish.</p>
+<table><thead><tr><th></th><th>Live now</th><th>Scheduled</th></tr></thead><tbody>
+<tr><td>When diners see it</td><td>Straight away</td><td>When it starts</td></tr>
+<tr><td>Best for</td><td>A slow afternoon that is already happening</td><td>A quiet hour you can see coming</td></tr>
+<tr><td>Staff readiness</td><td>Tell the team before you post</td><td>Brief the team any time before the start</td></tr>
+<tr><td>Risk</td><td>Posting in a rush, with the wrong numbers</td><td>Forgetting a deal is set, then closing early</td></tr>
+</tbody></table>
+<p>The deal itself is the same. What changes is how much time you have to think, and how much time your staff have to get ready.</p>"""),
+             ("When to go live now", """<p>Some quiet hours cannot be predicted. A storm clears the street, a school event finishes early, or the lunch rush simply does not show. If the room is half empty and you have the stock, a live-now deal is the fastest response you have. It costs nothing to post, and you can end it as soon as the room fills.</p>
+<p>A few habits keep a same-day deal safe:</p>
+<ul><li>Tell the person at the till before you post, so the first diner is not a surprise. <a href="/blog/train-staff-honour-fig-deal">Train your staff to honour a FIG deal</a> covers a ten-minute briefing.</li><li>Pick a deal you can price in your head, such as a dollar off a dish you already sell well.</li><li>Check you have the ingredients for the dishes the deal touches.</li></ul>"""),
+             ("When to schedule", """<p>Most quiet hours are predictable. You probably know the day and the hour when the room thins out. A scheduled deal lets you set it once, when you have a calm moment, and have it start on its own.</p>
+<ul><li><strong>You want the team briefed.</strong> Schedule the deal for tomorrow and tell the morning shift today.</li><li><strong>You are testing.</strong> Start with one scheduled deal for one slow hour, and read the results before you add another. <a href="/blog/read-your-deal-results-keep-change-or-stop">Reading your deal results</a> shows how.</li><li><strong>The deal has a purpose on a certain day.</strong> A quiet weekday lunch is a different problem from a slow Sunday evening, and each can have its own deal.</li></ul>
+<p>When a schedule changes, such as a holiday closure, change or end the deal so a diner does not claim something you cannot honour. <a href="/blog/keep-your-fig-page-current-hours-menu-prices">Keeping your page current</a> has a weekly routine for this.</p>"""),
+             ("Uses per diner and the wait between uses", """<p>Each deal has settings for how many times one diner can use it, and an optional wait between uses. A deal can be used once, or a restaurant can let it be used more than once, up to 20 times, with a wait between uses if you want one. After each scan, the diner's screen shows a new code. A deal code works once.</p>
+<p>A diner can claim a deal once a day, so even a generous deal does not mean the same person arrives three times in an afternoon. Think about what you want:</p>
+<table><thead><tr><th>Goal</th><th>Setting to consider</th></tr></thead><tbody>
+<tr><td>Bring a new diner in once</td><td>One use per diner</td></tr>
+<tr><td>Build a habit for a weekday lunch</td><td>Several uses with a wait, such as a week, between them</td></tr>
+<tr><td>Protect a thin margin</td><td>One use, or a small number of uses with a longer wait</td></tr>
+</tbody></table>
+<p><a href="/blog/deals-used-more-than-once-uses-per-diner-wait-between-uses">Deals diners can use more than once</a> goes through these settings in detail.</p>"""),
+             ("Check the cost before you post", """<p>A dollar-off deal is simple, which makes it easy to check. Here is an example with round numbers. Use your own prices and food cost.</p>
+<div class="callout math"><b>A $3-off deal on a $15 meal, checked (example)</b><ul><li>Your average meal is $15 and costs you about 30% to make, so $4.50 of food.</li><li>Suppose 20 diners use the deal in a month. Say 12 would not have come without it, and 8 would have come anyway.</li><li>The 12 new diners each pay $15 &minus; $3 = $12. After $4.50 of food, each leaves $7.50. Twelve of them leave $90.</li><li>The 8 who would have come anyway each get $3 off a meal they would have paid full price for, so that is $24 given up.</li><li>Net: $90 &minus; $24 = $66.</li></ul><p>Change the split and the answer moves. If only 4 of the 20 were new, you would have $30 from them and $48 given up on the other 16, so the net is a loss of $18. These are example numbers, not a forecast. They show why a deal belongs in your quiet hours, when the people it brings in would otherwise be empty seats.</p></div>
+<p><a href="/blog/slow-hour-deal-math">The slow-hour math</a> works through the same idea with other deal types.</p>"""),
+             ("A weekly rhythm", """<p>A simple pattern is one live-now deal as needed, plus one or two scheduled deals aimed at your known slow hours.</p>
+<ol><li>On the same day each week, look at the quiet hours you had.</li><li>Schedule a deal for the next one that fits.</li><li>Keep one deal idea ready to post live now if the room is empty.</li><li>After two weeks, check the results and keep, change or stop each deal.</li></ol>
+<p>Keep it small. One deal that you understand is worth more than five that you cannot keep track of.</p>"""),
+             ("Mistakes to avoid", """<ul><li><strong>Posting without telling staff.</strong> The first diner should not be the first time the team hears of it.</li><li><strong>Leaving a scheduled deal set through a closure.</strong> Check it when you change your hours.</li><li><strong>Setting uses too high on day one.</strong> You can raise the limit later. It is harder to take a deal back from diners who have seen it.</li><li><strong>Pricing from memory.</strong> Write down the dish price, the food cost and the deal, then do the sum.</li></ul>"""),
+         ],
+         faq=[("Can I post a FIG deal that starts later?", "Yes. A deal can be live now or scheduled, so you can set it up ahead of time."),
+              ("How many times can one diner use a deal?", "That is up to you. A deal can be used once, or a restaurant can let it be used more than once, up to 20 times, with an optional wait between uses."),
+              ("Can a diner claim the same deal again and again in one day?", "No. A diner can claim a deal once a day, and a deal code works once."),
+              ("What happens to the code after a diner uses a deal more than once?", "The diner's screen shows a new code after each scan. A deal code works once."),
+              ("Does it cost anything to post or schedule a deal?", "No. Setting up your page, going live, posting deals, scanning and the dashboard cost nothing for restaurants."),
+              ("What types of deal can I schedule?", "A 2 for 1, a percent off, a dollar off, or a free item with a dish."),
+              ("How do I know whether a deal worked?", "Your dashboard shows results deal by deal. Read them after a couple of weeks and decide to keep, change or stop the deal.")]),
+
+    dict(slug="order-takeout-on-fig-step-by-step-card-held-pickup-code", screen="qr", title="Ordering takeout on FIG, step by step: what happens to your card", date="2026-11-10", publish_at="2026-11-10T12:00:00-05:00", updated="2026-11-10", topic="For diners", group="takeout-and-money",
+         dek="You pay in the app, the restaurant accepts, and you pick up. What happens to your card at each step, when the kitchen starts, what the pickup code is for, and the total on a worked example.",
+         desc="How takeout works on FIG in Markham: paying in the app, when your card is charged, what happens if the restaurant declines, and the pickup code, with a worked total.",
+         seo="Ordering takeout on FIG: what happens to your card",
+         keywords="order takeout Markham, takeout app Markham, card held until restaurant accepts, takeout pickup code, restaurant takeout deal, FIG takeout, pay online takeout",
+         points=["You pay online in the app at checkout. There is no paying at the counter.",
+                 "Your card is held and charged when the restaurant accepts. If the restaurant declines, nothing is charged.",
+                 "The kitchen starts when the restaurant accepts, so the clock for your pickup starts then, not at checkout.",
+                 "The pickup code only confirms collection. It is not how you pay.",
+                 "Takeout comes with a deal, unless the restaurant sets 0 deals per order, and then takeout is at full price."],
+         sections=[
+             ("The short answer", """<p>You choose a deal and the dishes, pay by card in the app at checkout, and wait for the restaurant to accept. Your card is held and charged when the restaurant accepts, and nothing is charged if it declines. The kitchen starts once it accepts, and you pick the order up with a pickup code that only confirms you have collected it. FIG is free for diners, and it is open in Markham now at www.figpromo.ca/app.</p>"""),
+             ("Before you order", """<p>You can browse places, menus and live deals as a guest, with no account. To order, you need an account. Diners must be 14 or older. Location is optional, and it never limits a deal, so you can look at a restaurant across town just as easily as one nearby. <a href="/blog/browse-fig-as-a-guest-or-make-an-account-markham-diners">Browsing as a guest</a> covers what you can do before you sign up.</p>
+<p>Not every restaurant offers takeout. A restaurant can turn takeout on only after it has added its HST number and finished payouts, so the option appears on the places that are set up for it.</p>"""),
+             ("The steps, in order", """<table><thead><tr><th>Step</th><th>What you do</th><th>What happens to your card</th></tr></thead><tbody>
+<tr><td>1. Choose</td><td>Pick a place, a deal and your dishes from the menu</td><td>Nothing yet</td></tr>
+<tr><td>2. Pay</td><td>Check out in the app</td><td>Your card is held</td></tr>
+<tr><td>3. Wait</td><td>The restaurant looks at the order</td><td>Still held</td></tr>
+<tr><td>4a. Accepted</td><td>The kitchen starts</td><td>Your card is charged</td></tr>
+<tr><td>4b. Declined</td><td>Order does not go ahead</td><td>Nothing is charged</td></tr>
+<tr><td>5. Pick up</td><td>Go to the restaurant and show your pickup code</td><td>Already paid</td></tr>
+</tbody></table>
+<p>There is no paying at the counter. The pickup code confirms that you collected the order. It is not a way to pay, and it is not the code you show for a dine-in deal.</p>"""),
+             ("Why your card is held first", """<p>The restaurant decides whether it can make your order. On a busy night it may be short of an ingredient, or it may need more time. Holding the card at checkout and charging only on acceptance means you are not paid up for food nobody has started. If the restaurant declines, nothing is charged. <a href="/blog/takeout-order-declined-or-refunded-what-happens-to-the-money">A declined or refunded order, from the restaurant's side</a> shows the same steps from its point of view.</p>
+<p>Because the kitchen starts only once the restaurant accepts, you should leave for pickup after you see that it has, not before. An order made when you are already at the door is the safest way to get hot food.</p>"""),
+             ("What the total looks like", """<p>Here is an example with round numbers. Ontario HST is 13%, worked out on the price after the restaurant's own discount, the same way a store coupon lowers the price before tax. This is general information, not tax advice.</p>
+<div class="callout math"><b>Two $15 mains with a $5-off deal (example)</b><ul><li>Two mains: 2 &times; $15 = $30.00.</li><li>Deal: $30.00 &minus; $5.00 = $25.00.</li><li>HST at 13%: 0.13 &times; $25.00 = $3.25.</li><li>You pay $25.00 + $3.25 = $28.25.</li></ul><p>These are example prices. The real total on your screen will depend on the restaurant's menu, its deal and its rules, so read it before you pay.</p></div>
+<p>Compare that with the same order at full price: $30.00 plus $3.90 of HST is $33.90. In this example the deal saves $5.65 once tax is counted. <a href="/blog/takeout-or-dine-in-with-a-deal-which-costs-less">Takeout or dine-in with a deal</a> compares both ways to eat.</p>"""),
+             ("Deals and takeout", """<p>Takeout comes with a deal, unless the restaurant sets 0 deals per order. In that case takeout is at full price. A restaurant can also limit how many deals one order can use, so a large order may not stack discounts. A diner can claim a deal once a day, so plan which meal gets the deal. <a href="/blog/compare-restaurant-deals-worth-it">How to compare deals</a> helps with the choice.</p>"""),
+             ("Pickup", """<p>Go to the restaurant when it has accepted and the food should be ready. If the restaurant added prep time, allow for it. Show your pickup code to the staff. It only confirms collection, so it does not matter that the payment was made earlier.</p>
+<ul><li>Check the bag against your order before you leave.</li><li>If you have an allergy, call the restaurant after you order, since you cannot ask a server at a table. <a href="/blog/eating-out-dietary-needs-allergies-markham">What to ask about diets and allergies</a> has a short list. This is general information, not medical advice.</li><li>If something is wrong, speak to the restaurant straight away while the order is in front of you.</li></ul>"""),
+             ("If you change your mind", """<p>Because the card is held until the restaurant accepts, the moment to change your mind is early. If you have just paid and realise you picked the wrong dish, contact the restaurant straight away, before it accepts, while it can still say no. After the kitchen has started, the food is being made for you, so the restaurant has to decide what it can do. The contact page at www.figpromo.ca/contact is there for problems with the app itself, but the restaurant is the one holding your food.</p>
+<p>The simple rule is to read the cart before you pay. Check the dishes, the number of each, the deal and the total. It takes ten seconds, and it is the easiest way to avoid a mix-up.</p>"""),
+             ("Takeout for a group or a family", """<p>A single pickup for several people is one trip, one payment and one person carrying the bags. It works best when everyone agrees on dishes before checkout, since the order is paid in one go.</p>
+<div class="callout math"><b>Splitting a pickup four ways (example)</b><ul><li>Four mains at $15 each: 4 &times; $15 = $60.00.</li><li>A $5-off deal: $60.00 &minus; $5.00 = $55.00.</li><li>HST at 13%: 0.13 &times; $55.00 = $7.15.</li><li>Total $62.15. Split four ways, that is $15.5375, so about $15.54 each.</li></ul><p>These are example prices. Each person can send you their share by whatever method you already use with friends. FIG does not split the bill for you.</p></div>
+<p><a href="/blog/group-dining-deals">Group dining deals</a> has more on dining with several people.</p>"""),
+             ("A short checklist", """<ol><li>Browse as a guest, then make an account when you want to order.</li><li>Choose a deal and your dishes. Read the total.</li><li>Pay in the app. Your card is held.</li><li>Wait for the restaurant to accept. That is when your card is charged and the kitchen starts.</li><li>Pick up, show the pickup code and check the bag.</li></ol>"""),
+         ],
+         faq=[("How do I pay for takeout on FIG?", "Online, in the app, at checkout. There is no paying at the counter."),
+              ("When is my card charged?", "Your card is held at checkout and charged when the restaurant accepts the order."),
+              ("What happens if the restaurant declines my order?", "Nothing is charged."),
+              ("When does the kitchen start?", "When the restaurant accepts the order."),
+              ("What is the pickup code for?", "It only confirms that you collected the order. It is not how you pay."),
+              ("Can I order takeout without a deal?", "Only if the restaurant sets 0 deals per order. Then takeout is at full price. Otherwise takeout comes with a deal."),
+              ("Do I need an account to order?", "Yes. Guests can look around, but you need an account to claim, order, save or review. FIG is free for diners.")]),
+
+    dict(slug="first-week-live-on-fig-restaurant-day-by-day-routine", screen="tdash", title="Your first week live on FIG: a day-by-day routine for restaurants", date="2026-11-11", publish_at="2026-11-11T12:00:00-05:00", updated="2026-11-11", topic="For restaurants", group="fill-quiet-hours",
+         dek="Going live is the start, not the finish. A simple seven-day routine for your first week on FIG: check your page, brief your team, post a first deal, scan, read the numbers and decide what to do next.",
+         desc="A seven-day routine for Markham restaurants in their first week live on FIG: page check, team briefing, first deal, scanning and reading the results.",
+         seo="Your first week live on FIG: a day-by-day routine",
+         keywords="new restaurant listing first week, restaurant promotion routine, brief restaurant staff, first restaurant deal, Markham restaurants, FIG restaurant, quiet hours",
+         points=["Setting up, going live, posting deals, scanning and the dashboard cost nothing for restaurants.",
+                 "Spend day 1 on your page as a diner sees it: hours, menu and photos.",
+                 "Brief your team before the first deal, and give them a short script for scanning.",
+                 "Start with one deal aimed at one quiet hour, and read the results before adding more.",
+                 "A 12-scan example week shows how to turn results into a keep, change or stop decision."],
+         sections=[
+             ("The short answer", """<p>In your first week, do one small thing a day. Check your page as a diner sees it, brief your team, post one deal for one quiet hour, scan the first diners, read the numbers and decide what to change. You do not need to do everything at once, and nothing in setup or running costs anything: FIG is completely free for restaurants.</p>"""),
+             ("The week at a glance", """<table><thead><tr><th>Day</th><th>Job</th><th>Time</th></tr></thead><tbody>
+<tr><td>1</td><td>Check your page: hours, menu, photos</td><td>20 minutes</td></tr>
+<tr><td>2</td><td>Brief your team and set up staff invites</td><td>15 minutes</td></tr>
+<tr><td>3</td><td>Post one deal for one quiet hour</td><td>10 minutes</td></tr>
+<tr><td>4</td><td>Watch the first scans, with a manager nearby</td><td>During service</td></tr>
+<tr><td>5</td><td>Read new reviews and reply</td><td>10 minutes</td></tr>
+<tr><td>6</td><td>Look at the dashboard, deal by deal</td><td>10 minutes</td></tr>
+<tr><td>7</td><td>Decide: keep, change or stop</td><td>15 minutes</td></tr>
+</tbody></table>
+<p>Add it up: 20 + 15 + 10 + 10 + 10 + 15 = 80 minutes of set-aside work across the week, plus the time you spend on the floor anyway.</p>"""),
+             ("Day 1: look at your page as a diner would", """<p>Diners can browse places, menus, reviews and live deals on a map, even as guests. Open your page the way they would. Are your opening hours right for the coming week? Do the menu sections read in the order a diner would read them? Are prices the same as on the till, and do the photos match the plates? <a href="/blog/keep-your-fig-page-current-hours-menu-prices">Keep your FIG page current</a> has the routine, and <a href="/blog/menu-photos-restaurant-phone-photography-fig">menu photos with a phone</a> helps if you need new ones.</p>"""),
+             ("Day 2: get the team ready", """<p>Staff join by accepting an invite from the owner, with the roles Owner, Manager and Staff. Send the invites, and brief the people who will be at the till. Owners and managers also need sign-in security for the money steps: an authenticator app or a code by email. FIG sends no texts. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">Setting up your team and sign-in security</a> goes through it.</p>
+<p>A short script for the till is enough: ask the diner to show their code, scan it, and serve the deal as written. <a href="/blog/train-staff-honour-fig-deal">Train your staff to honour a FIG deal in 10 minutes</a> has the full version.</p>"""),
+             ("Day 3: post one deal", """<p>Pick the quiet hour that hurts most, and one deal for it. A deal can be a 2 for 1, a percent off, a dollar off or a free item with a dish, live now or scheduled, with uses per diner and a wait between uses. For a first deal, keep it simple: one use per diner, a dish you already sell well, and a discount you have worked out. <a href="/blog/deal-types-percent-dollar-2-for-1">Choosing between deal types</a> compares them, and <a href="/blog/schedule-fig-deals-live-now-or-scheduled-quiet-hours">live now or scheduled</a> helps with timing.</p>"""),
+             ("Day 4: watch the first scans", """<p>The first few scans are where small problems show up. Have a manager within reach. Each diner shows a QR code on their phone and staff scan it. A deal code works once. If the deal lets a diner use it more than once, the diner's screen shows a new code after each scan.</p>
+<p>If a code does not scan, check the basics first. <a href="/blog/deal-wont-scan-troubleshooting-diners">What to check and what to say</a> was written for diners, and it is worth a read for staff as well.</p>"""),
+             ("Days 5 and 6: reviews and numbers", """<p>Reviews come only from scanned visits, so each one is from a diner who really came. Read new reviews, and reply to the ones that need it. <a href="/blog/reply-to-reviews-restaurants">Replying to reviews</a> has a short guide. Then open the dashboard. Results are shown deal by deal, so you can see what each deal did.</p>
+<div class="callout math"><b>Reading a first week (example)</b><ul><li>Suppose a $3-off deal was scanned 12 times in the week, and your average bill before the deal was $15.</li><li>The bills before the deal were 12 &times; $15 = $180. The discount was 12 &times; $3 = $36, which is 20% of $180.</li><li>You took in $180 &minus; $36 = $144.</li><li>With food at about 30% of the pre-deal price, food cost was 12 &times; $4.50 = $54. That leaves $144 &minus; $54 = $90 before your other costs.</li></ul><p>These are example numbers. One week is a small sample, so use it to spot problems, not to make big decisions. Check how many of the 12 were new faces to you.</p></div>"""),
+             ("Day 7: keep, change or stop", """<p>Ask three questions. Did the deal bring people in the quiet hour you chose? Did the numbers hold up? Did the team find it easy? Then pick one action. Keep it as it is, change one thing, such as the hours or the wait between uses, or stop it. Change one thing at a time so you know what caused a difference. <a href="/blog/read-your-deal-results-keep-change-or-stop">Reading your deal results</a> goes deeper after two weeks of data.</p>"""),
+             ("What to do if the first week is quiet", """<p>A slow first week is normal and it does not mean the deal failed. People need to find the page. Here are things you can do that cost nothing:</p>
+<ul><li>Tell your regulars at the till. A sentence such as "we have a deal on the FIG app this week" is enough.</li><li>Put the address of your page on your door or your counter, so people can look you up.</li><li>Check the deal is aimed at an hour when you really are quiet, and that it is live at the times you meant.</li><li>Make sure the photos and the menu look good. A diner choosing between two places will pick the one that looks ready.</li></ul>
+<p>Give a new deal two weeks before you judge it, and change one thing at a time.</p>"""),
+             ("Mistakes that cost an afternoon", """<ul><li><strong>Posting a deal and forgetting to tell the till.</strong> The first diner finds out the team has not heard of it.</li><li><strong>Leaving old hours on the page.</strong> A diner arrives to a closed door and the review shows it.</li><li><strong>Starting with three deals.</strong> You cannot tell which one worked.</li><li><strong>Waiting for perfect.</strong> A page that is right and a deal that is simple beat a page that is still being polished.</li></ul>
+<p>If you have a second location, which FIG supports up to 2 for now, repeat the week for it with its own hours and menu.</p>"""),
+             ("If you offer takeout", """<p>Takeout is separate from your first week. A restaurant can turn takeout on only after it has added its HST number and finished Stripe payouts, and owners and managers need the stronger sign-in for those money steps. On takeout orders paid in the app, FIG keeps 5% of the food after any deal and before tax, and Stripe's card fee comes off the payment. There is no commission on the bill and none on dine-in. <a href="/blog/set-up-fig-menu-takeout">Setting up your menu and takeout</a> has the steps.</p>"""),
+         ],
+         faq=[("Does it cost anything to be live on FIG?", "No. Signing up, setting up the page, going live, posting deals, scanning and the dashboard cost nothing for restaurants."),
+              ("How many deals should I start with?", "One, for one quiet hour. Read the results, then add or change."),
+              ("Who can use the scanner?", "Staff who have joined by accepting an invite from the owner, with the roles Owner, Manager and Staff."),
+              ("Do I need sign-in security straight away?", "Owners and managers need an authenticator app or a code by email for money steps such as payouts, taking takeout live and refunds. FIG sends no texts."),
+              ("How long should I run a deal before judging it?", "A couple of weeks gives more to go on than one. The first week is for spotting problems."),
+              ("Where do reviews come from?", "Only from scanned visits, so each review is from a diner who came to your restaurant."),
+              ("How many locations can I have?", "Up to 2 locations for now.")]),
+
+    dict(slug="daily-claim-week-of-fig-deals-markham-diners-math", screen="claim", title="Using your daily claim: a week of FIG deals in Markham, with the math", date="2026-11-12", publish_at="2026-11-12T12:00:00-05:00", updated="2026-11-12", topic="For diners", group="eat-out-for-less",
+         dek="A diner can claim a deal once a day. How to spread claims across a week, what to do with deals you can use more than once, and the arithmetic for a week of three deals.",
+         desc="How to use FIG deals across a week in Markham: one claim a day, one-time codes, deals you can use again, and a worked example of the savings.",
+         seo="Using your daily claim: a week of FIG deals in Markham",
+         keywords="restaurant deals Markham, how to claim a restaurant deal, eat out for less, 2 for 1 deals, dollar off deals, FIG deals web app, budget eating out",
+         points=["FIG is free for diners and open on the web at www.figpromo.ca/app. Browsing needs no account.",
+                 "A diner can claim a deal once a day, so spread your claims across the week.",
+                 "A deal code works once. If a deal can be used more than once, your screen shows a new code after each scan.",
+                 "Location is optional and never limits a deal, so you can choose a place near work, home or school.",
+                 "In the example week below, three deals save $14 before tax and tip."],
+         sections=[
+             ("The short answer", """<p>Look at the live deals on the map, claim one in a tap when you know when you will eat, and show your QR code to the staff, who scan it. A diner can claim a deal once a day, so a week of eating out can use a different deal each day. In the example below, three deals across one week save $14 before tax and tip. FIG is free for diners, and you can check out deals at www.figpromo.ca/app.</p>"""),
+             ("How a claim works", """<p>Guests can look around, but you need an account to claim, order, save or review. Diners must be 14 or older. When you find a deal, you claim it in one tap and show a QR code that staff scan at the restaurant.</p>
+<ul><li>A deal code works once.</li><li>If a restaurant lets a deal be used more than once, up to 20 times with an optional wait between uses, your screen shows a new code after each scan.</li><li>Location is optional, and it never limits a deal.</li><li>Restaurants never see your phone number.</li></ul>
+<p><a href="/blog/how-restaurant-deals-work">How a deal works from claim to counter</a> goes through the steps in more detail.</p>"""),
+             ("Why once a day matters", """<p>A claim a day is a useful limit. It stops you from using up a good deal on a snack, and it nudges you to choose. If two good deals are live on the same day, you can claim one, and the other is there tomorrow if the restaurant still has it live.</p>
+<p>Think of the daily claim as a menu for the week, not a race. A good habit is to look at the map on a Sunday evening, pick the two or three days you expect to eat out, and claim only on those days. Claiming a deal you then do not use is a small waste of your own day's claim.</p>"""),
+             ("A week, as an example", """<p>This is an example week with round numbers. Your deals, prices and appetite will be different. Savings are before HST and tip, and we assume the deal is taken in full.</p>
+<div class="callout math"><b>Three deals in one week (example)</b><table><thead><tr><th>Day</th><th>Deal</th><th>Meal</th><th>You save</th></tr></thead><tbody>
+<tr><td>Monday</td><td>$3 off a lunch</td><td>A $13 lunch, so $10 before tax</td><td>$3</td></tr>
+<tr><td>Wednesday</td><td>2 for 1 with a colleague, two $14 mains</td><td>Pay $14 for the pair, so $7 each</td><td>$7 for you</td></tr>
+<tr><td>Friday</td><td>$4 off a dinner</td><td>A $19 dinner, so $15 before tax</td><td>$4</td></tr>
+<tr><td colspan="3"><b>Total for you</b></td><td><b>$3 + $7 + $4 = $14</b></td></tr>
+</tbody></table><p>Check: the 2 for 1 saves $14 in all, because one of the two $14 mains is free, and half of that is $7 each. Your three meals would have cost $13 + $14 + $19 = $46 at the menu prices, so $14 off is about 30%. A deal does not make a meal free. It makes the meal you were going to have a bit cheaper.</p></div>
+<p>For lunch-specific ideas, read <a href="/blog/weekday-lunch-markham-for-less-deals-math">weekday lunch in Markham for less</a>.</p>"""),
+             ("Deals you can use more than once", """<p>Some restaurants let a deal be used more than once, with an optional wait between uses. If a place you like does this, you do not need to claim every time you want a meal. After each scan your screen shows a new code, so the same code cannot be reused by anyone else.</p>
+<p>It still helps to think ahead. Check the rules on the deal: how many uses are left and how long you have to wait. A wait between uses is there so that a deal supports regular visits without being used up in one afternoon.</p>"""),
+             ("Check the deal before you claim", """<ul><li><strong>The dish.</strong> Is it something you would order anyway? A deal on a dish you do not want is not a saving.</li><li><strong>The days and hours.</strong> A restaurant sets when a deal runs. Check you can get there.</li><li><strong>The reviews.</strong> Reviews come only from scanned visits, so they are from real diners. Deals get likes, and restaurants get stars.</li><li><strong>The extras.</strong> Drinks, tax and tip are still yours to pay.</li></ul>
+<p><a href="/blog/compare-restaurant-deals-worth-it">How to compare restaurant deals</a> has a short method for choosing between two.</p>"""),
+             ("Eating out with other people", """<p>Deals are easier to use with friends. A 2 for 1 needs two people. A dollar-off deal works for each person who claims it, since each diner claims their own. Agree on the place before you leave, and each person claims on their own phone. Because a code works once, the person who claimed it is the one who shows it.</p>
+<div class="callout math"><b>Two friends, two different deals (example)</b><ul><li>Friend A claims $3 off a $12 bowl and pays $9.00 before tax.</li><li>Friend B claims $4 off a $16 plate and pays $12.00 before tax.</li><li>Together: $9.00 + $12.00 = $21.00, against $28.00 at menu prices. That is $7.00 saved between them.</li></ul><p>These are example prices before tax and tip. If you each claim in the app and agree to keep the bill simple, the restaurant handles it as it normally would.</p></div>"""),
+             ("When a deal is not worth it", """<p>A deal is not always the right choice. Skip it if the dish is one you would not otherwise order, if the trip costs more than the saving, or if the only deal available is on a day you cannot go. The point of a deal is to nudge you toward somewhere you already wanted to eat, not to change what you want. A $4 saving on a 40-minute round trip is a poor trade. A $4 saving at the place in your own plaza is a good one.</p>
+<p><a href="/blog/monthly-eating-out-budget-markham-diners">A monthly eating-out budget</a> shows how to set an amount for the month and see how deals fit inside it.</p>"""),
+             ("If you want to eat at home", """<p>Some deals can be used for takeout. You pay online in the app at checkout, your card is held and charged when the restaurant accepts, and nothing is charged if the restaurant declines. <a href="/blog/order-takeout-on-fig-step-by-step-card-held-pickup-code">Ordering takeout on FIG, step by step</a> goes through it.</p>"""),
+             ("A routine that takes five minutes", """<ol><li>On Sunday, open the map and look at the deals for the days ahead.</li><li>Pick the one or two you would really use, and note the days.</li><li>On the day, claim the deal before you leave, so you are not fiddling at the counter.</li><li>Show your QR code and let the staff scan it.</li><li>After the meal, leave a review if you want. Reviews come from scanned visits.</li></ol>
+<p>If it does not scan, <a href="/blog/deal-wont-scan-troubleshooting-diners">here is what to check and what to say</a>.</p>"""),
+         ],
+         faq=[("How often can I claim a deal on FIG?", "A diner can claim a deal once a day."),
+              ("Do I need an account to look at deals?", "No. Browsing works as a guest. You need an account to claim, order, save or review."),
+              ("Can I use the same QR code twice?", "No. A deal code works once. If a deal can be used more than once, your screen shows a new code after each scan."),
+              ("Does FIG need my location?", "Location is optional, and it never limits a deal."),
+              ("Does the restaurant see my phone number?", "No. Restaurants never see diners' phone numbers."),
+              ("How old do I need to be?", "Diners must be 14 or older."),
+              ("Is FIG free to use?", "Yes, for diners. FIG is open on the web at www.figpromo.ca/app, and the iPhone and Android apps are coming.")]),
+
 ]

@@ -42,7 +42,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 </ol><p>Some deals also let you order takeout and pick it up. You can send a restaurant's link to friends: it opens the place's page with its live deals, so everyone sees the same thing.</p></article>
 <article class="ab-col ab-owners"><h2>For restaurants</h2><ol>
 <li><b>Build</b><span>Your page, menu and first deal as drafts: photos, hours, cuisine and dietary options.</span></li>
-<li><b>Publish</b><span>Connect Stripe so it can check your identity, business and bank account (about 5 minutes). FIG never sees your ID.</span></li>
+<li><b>Publish</b><span>Publish your page, menu and deals when they are ready. No payment setup needed.</span></li>
 <li><b>Post</b><span>A deal for the hours you want to fill, with an optional daily cap. Pause it any time.</span></li>
 <li><b>Scan</b><span>Staff scan each diner's code with any phone or tablet. No fee per scan.</span></li>
 </ol><p>The dashboard shows scans, new diners and which deals work, so you can keep what fills seats and drop what doesn't.</p></article>
@@ -54,7 +54,7 @@ ABOUT = '''<section class="ab-glance"><div class="wrap ab-glance-in">
 <li><b>No commission on the bill.</b><span>Diners pay you, at your counter. FIG is paid only from 5% of the food on takeout orders diners pay for in the app.</span></li>
 <li><b>Honest deals.</b><span>Every deal, timer and opening hour is set by the restaurant itself.</span></li>
 <li><b>Codes that can't be copied.</b><span>One-time QR codes stop screenshots and resold deals.</span></li>
-<li><b>Private and safe by default.</b><span>Restaurants never see a diner's phone number. Stripe checks identity before a restaurant publishes, a quick hCaptcha check keeps bots out at sign-up, two-step sign-in uses an authenticator app or an email code, and FIG sends no texts.</span></li>
+<li><b>Private and safe by default.</b><span>Restaurants never see a diner's phone number. Stripe checks identity before a restaurant takes payments in the app, a quick hCaptcha check keeps bots out at sign-up, two-step sign-in uses an authenticator app or an email code, and FIG sends no texts.</span></li>
 <li><b>Real reviews.</b><span>Only diners whose visit was scanned can review, and paying FIG never changes or removes a review.</span></li>
 <li><b>Local first.</b><span>Unionville, Markham Village, Cornell, Milliken, Cathedraltown and the Highway 7 corridor first. Then expanding to Richmond Hill and Vaughan Mills.</span></li>
 </ul></div></section>

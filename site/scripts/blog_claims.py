@@ -57,9 +57,10 @@ RULES = [
     # 2026-10-24 (the owner): a diner can cancel a takeout order for a full refund until the restaurant accepts it, then until 20 minutes before pickup. Never later.
     ("cancel-after-cutoff", r"cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}(?<!minutes )\b(until|up to|before|till) (the |your |its )?(pickup|collect\w*)\b|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(after|once|when) (the restaurant |it |they )?(has |have )?(accept|start|begin|prepar|mak)\w*|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(?!20\b)\d+ (minutes?|mins?|hours?) (before|of|prior to) (your |the |its )?pickup|cancel\w*[^.<]{0,25}\b(orders?|takeout)\b[^.<]{0,80}\b(any ?time|whenever)\b(?![^.<]{0,40}before the restaurant accepts)",
      "a diner can cancel a takeout order only until 20 minutes before pickup (and any time before the restaurant accepts it)", False),
-    # 2026-10-25 (the owner): to publish a page, menu or deal, a restaurant must finish Stripe's identity, business and bank checks. Stripe collects the ID and bank data; FIG never sees it.
-    ("stripe-verification", r"(publish|go(es)? live|going live|post(ing)? deals?)[^.<]{0,60}\b(without|with no|no) (verif\w+|ID\b|identity|stripe|checks?|documents?|paperwork)|\bno (ID|identity|paperwork|documents?|verification|bank details)\b[^.<]{0,40}(needed|required|to (publish|go live|sign up|post))|go(es)? live[^.<]{0,20}\b(instantly|immediately|right away|in (a |just )?(few |couple of )?(minutes?|seconds?))|\b(instantly|immediately|in (a )?(few )?minutes) go(es)? live|\b(FIG|we) (checks?|verif(y|ies)|reviews?|collects?|stores?|keeps?|holds?) (your |the |each |a )?(owner\Ws )?(ID\b|identity|passports?|driver\Ws licen[cs]e|documents?|photo ID)|\b(FIG|we) (sees?|can see|receives?|gets?|has|stores?|keeps?|holds?) (your |the |a )?(owner\Ws )?(bank (details|account|number|info\w*)|banking|ID number|SIN)|(publish|go live)[^.<]{0,40}\b(before|without) (you )?(connect\w*|finish\w*|verif\w+)[^.<]{0,12}stripe",
-     "publishing needs Stripe's checks first; Stripe, not FIG, checks ID and holds ID and bank details", False),
+    # 2026-11-10 (the founder): Stripe is ONLY for takeout. Publishing a page, menu or dine-in deal needs no Stripe (this reverses 2026-10-25). Stripe, not FIG,
+    # checks ID and holds ID and bank details. A post must not say publishing needs Stripe, nor that FIG sees ID or bank details.
+    ("stripe-verification", r"\b(FIG|we) (checks?|verif(y|ies)|reviews?|collects?|stores?|keeps?|holds?) (your |the |each |a )?(owner\Ws )?(ID\b|identity|passports?|driver\Ws licen[cs]e|documents?|photo ID)|\b(FIG|we) (sees?|can see|receives?|gets?|has|stores?|keeps?|holds?) (your |the |a )?(owner\Ws )?(bank (details|account|number|info\w*)|banking|ID number|SIN)|\b(connect|finish)\w*[^.<]{0,40}stripe[^.<]{0,60}\b(to |before (you |a restaurant |restaurants )?(can )?|then (you )?)(publish|go live|post)|\b(publish\w*|go(es)? live|going live|post(ing)? deals?)[^.<]{0,50}\b(needs?|requires?|after)\b[^.<]{0,40}stripe|\bstays? (a )?drafts?[^.<]{0,30}until[^.<]{0,40}stripe|\bto (publish|go live|post\w*)[^.<]{0,30}\b(connect|finish)\w*[^.<]{0,20}stripe|\bstripe (checks?|verif\w+)[^.<]{0,30}before (you|a restaurant|restaurants) (can )?(publish|go live|post)",
+     "Stripe is only for takeout: publishing a page, menu or dine-in deal needs no Stripe; Stripe, not FIG, checks ID and holds ID and bank details", False),
     # 2026-10-25: the business mailbox (hello@figpromo.ca) sends FIG's email, but the website does not show it until the owner has tested it end to end
     # (site/js/config.js showEmail). A post that names it, or tells people to email FIG, would publish it early.
     ("business-email", r"hello@figpromo\.ca|\b(email|e-mail|write to|write us at|reach us at) (us|FIG|the FIG team) (at|on) \S+@|[\w.-]+@figpromo\.ca|mailto:",
@@ -132,14 +133,14 @@ def _selftest():
         "restaurant-price": "Restaurants pay $29.99 a month", "founding-offer": "Join as a founding restaurant before launch",
         "code-changes": "The code keeps changing on your screen",
         "cancel-after-cutoff": "You can cancel a takeout order until pickup",
-        "stripe-verification": "Restaurants can go live in minutes with no ID",
+        "stripe-verification": "Connect Stripe to publish your page",
         "no-sms": "Confirm your mobile number with a text code",
         "business-email": "Write to hello@figpromo.ca for help", "restaurant-plan": "FIG charges one flat plan", "billing": "Before billing starts you pay nothing", "plan-refund": "Refunded in full by March 1, 2027",
     }
     # each bad text above must trip exactly its own rule, and a few more phrasings must trip too
     more = {"no-sms": ["We send a code by text message", "Verify your phone number to sign up", "SMS two-step sign-in", "Twilio sends the codes", "Texts you a code"],
-            "stripe-verification": ["Restaurants can publish without verifying with Stripe", "No ID needed to publish", "Your page goes live instantly", "FIG verifies your ID", "FIG checks your documents",
-                                     "FIG sees your bank details", "Post deals with no verification", "We store your ID", "You can go live before you connect Stripe"],
+            "stripe-verification": ["Build your page in minutes; connect Stripe to publish", "Publish after Stripe verifies your account", "Your deals stay drafts until you connect Stripe",
+                                     "Publishing needs Stripe's checks", "To publish, finish Stripe's checks", "FIG verifies your ID", "FIG checks your documents", "FIG sees your bank details", "We store your ID"],
             "cancel-after-cutoff": ["You can cancel your takeout order after the restaurant accepts it", "A diner can cancel the order up to 10 minutes before pickup", "Cancel a takeout order anytime",
                                     "You can cancel an order up to 2 hours before pickup", "You can cancel a takeout order right up to pickup"],
             "code-changes": ["Show the live code", "The code refreshes every 5 minutes", "a rotating QR code", "the code changes every few minutes", "the code expires in 5 minutes", "Codes keep changing"],
@@ -162,8 +163,8 @@ def _selftest():
             "The deal changes every Tuesday", "Rotating specials", "the menu changes each season", "Prices change with the season", "a short code staff can type",
             "You can cancel a takeout order for a full refund at any time before the restaurant accepts it, and after that until 20 minutes before your pickup time",
             "A cancelled order is refunded in full to the card you paid with", "Close your account anytime", "Pause your deals anytime", "cancel a reservation 20 minutes before",
-            "Build your page in minutes; connect Stripe to publish", "FIG never sees your ID or bank details", "Stripe checks your ID and where payouts go", "FIG only keeps whether and when Stripe verified your account",
-            "You can post a deal in a minute", "Setting up is free and takes a few minutes", "Publish after Stripe verifies your account", "Your bank details go straight to Stripe",
+            "Build and publish your page free; Stripe is only for takeout", "Restaurants can publish without Stripe", "Connect Stripe to turn on takeout", "FIG never sees your ID or bank details", "Stripe checks your ID and where payouts go", "FIG only keeps whether and when Stripe verified your account",
+            "You can post a deal in a minute", "Setting up is free and takes a few minutes", "Your page goes live as soon as you publish it", "Your bank details go straight to Stripe",
             "Two-step sign-in uses an authenticator app or a code by email", "Share the restaurant's link in your group chat", "Restaurants never see your phone number", "Add an optional mobile number", "choose a table", "Plan your visit", "a $12 starter and a $22 main", "The $1.50 FIG fee", "Stripe charges 2.9% + $0.30", "billing address", "Message us on the contact page at www.figpromo.ca/contact", "Email your receipt to yourself"]
     for text in good:
         assert not check([post(faq=[("Q?", text)])]), text

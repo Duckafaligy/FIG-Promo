@@ -8,7 +8,7 @@
 - Status: open to diners and restaurants since November 4, 2026; diners browse deals in the web app at www.figpromo.ca/app with no account needed to look around; restaurants sign up and set up there too
 - Launch area: Markham first, expanding to Richmond Hill and Vaughan Mills
 - Diners: free; no loyalty points, rewards or AI features
-- Restaurants: completely free to sign up, build a page, menu and deals as drafts, publish them (after Stripe's identity, business and bank checks), scan and use the dashboard and insights (up to 2 locations for now); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
+- Restaurants: completely free to sign up, build a page, menu and deals as drafts, publish them (no payment setup needed; Stripe only for takeout), scan and use the dashboard and insights (up to 2 locations for now); takeout orders paid in the app: FIG keeps 5% of the food before tax, and Stripe's card fee comes off the same payment; no ads
 - How a deal works: claim (it stays good until the deal ends), show the QR code (a code works once and changes after every scan), pay the restaurant directly
 - Takeout: with a deal that allows it, or at full price where the restaurant takes plain takeout orders; pay in the app and pick up at the counter; no delivery, and no fees for diners
 - Privacy: restaurants never see a diner's phone number

@@ -218,7 +218,7 @@
  },
  "business-terms": {
   "title": "Business terms",
-  "updated": "Last updated October 25, 2026",
+  "updated": "Last updated November 10, 2026",
   "short": [
    "Restaurants use FIG for free: your page, deals, scans and dashboard cost nothing, with no commission on the bill (up to 2 locations for now).",
    "Takeout orders paid in the app: FIG keeps 5% of the food (plus HST on that fee once FIG is registered), and Stripe’s card fee comes off the same payment, paid by the restaurant.",
@@ -236,7 +236,7 @@
     "heading": "2. Your listing",
     "paragraphs": [
      "You must run a real, licensed food business at the address you give us, and keep your details accurate. Setting up is free. Your page can be published once it has at least one photo and you have finished Stripe’s checks (see below). We can pause, unpublish or remove a listing that isn’t a real restaurant or that breaks these terms.",
-    "• You can set up your page, menu and deals for free and keep them as drafts. To publish them, and to turn on takeout, you must finish Stripe’s identity, business and bank checks. Stripe collects that information; FIG does not see your ID or bank details and only keeps whether and when Stripe verified your account."
+    "• You can set up your page, menu and deals for free and publish them when they are ready. To turn on takeout paid in the app, you must finish Stripe’s identity, business and bank checks. Stripe collects that information; FIG does not see your ID or bank details and only keeps whether and when Stripe verified your account."
     ]
    },
    {

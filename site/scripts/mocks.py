@@ -73,7 +73,7 @@ def owner_deals():
 <div class="mk-li">{tile("D")}<span><b>2 for 1 dim sum</b><small>Weekdays 2 to 5 pm &middot; up to 1 use</small></span><span class="mk-tag live">Live</span></div>
 <div class="mk-li">{tile("B", "g")}<span><b>$3 off any bubble tea</b><small>Daily 3 to 5 pm &middot; 20 a day</small></span><span class="mk-tag live">Live</span></div>
 <div class="mk-li">{tile("N", "t")}<span><b>Free tea with noodles</b><small>Not visible to diners yet</small></span><span class="mk-tag">Draft</span></div>
-<div class="mk-note"><b>Connect Stripe to publish</b><small>Your drafts are saved. It takes about 5 minutes.</small><span class="mk-btn">Connect Stripe</span></div>'''
+<div class="mk-note"><b>Ready to publish</b><small>Your page, menu and first deal are set.</small><span class="mk-btn">Publish</span></div>'''
     return screen(b, tabs(OWNER_TABS, "ticket"), "FIG for restaurants: the Deals screen with live deals and a draft")
 
 

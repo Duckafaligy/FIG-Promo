@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12",
+ "generated": "2026-11-16",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "what-restaurants-see-when-you-use-fig-diners",
+   "title": "What a restaurant sees when you use FIG, and what stays private",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-16",
+   "publish_at": "2026-11-16T12:00:00-05:00",
+   "status": "queued",
+   "words": 1055,
+   "dek": "Your phone number is never shared with a restaurant, location is optional, and browsing needs no account at all. A plain answer to what a deals app actually knows about you."
+  },
+  {
+   "slug": "write-a-review-on-fig-diners",
+   "title": "Writing a review on FIG: how it works, and what makes one useful",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-15",
+   "publish_at": "2026-11-15T12:00:00-05:00",
+   "status": "queued",
+   "words": 1075,
+   "dek": "Reviews on FIG come only from scanned visits. What that means, how stars and likes differ, and how to write a few lines that actually help the next person choose."
+  },
+  {
+   "slug": "regulars-using-your-deal-restaurant-math",
+   "title": "Regulars using your deal: what it costs, and what to do about it",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-14",
+   "publish_at": "2026-11-14T12:00:00-05:00",
+   "status": "queued",
+   "words": 1057,
+   "dek": "Some of the people scanning your deal would have come anyway. Here is the arithmetic on a 20-scan week, the point where a deal still pays, and the settings that tilt it toward the hours you want to fill."
+  },
+  {
+   "slug": "write-a-clear-deal-description-restaurants",
+   "title": "Writing a deal diners understand: wording, limits and the small print",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-13",
+   "publish_at": "2026-11-13T12:00:00-05:00",
+   "status": "live",
+   "words": 1149,
+   "dek": "Most arguments at the till come from a missing word, not from a diner trying it on. What to write in a deal so diners, and your own team, read it the same way."
+  },
   {
    "slug": "daily-claim-week-of-fig-deals-markham-diners-math",
    "title": "Using your daily claim: a week of FIG deals in Markham, with the math",

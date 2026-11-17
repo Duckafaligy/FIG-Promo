@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16",
+ "generated": "2026-11-20",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -7,6 +7,50 @@
   "fig-in-markham"
  ],
  "posts": [
+  {
+   "slug": "launch-a-new-dish-with-a-fig-deal-restaurant-math",
+   "title": "Launching a new dish with a FIG deal: which type costs least, with the math",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-20",
+   "publish_at": "2026-11-20T12:00:00-05:00",
+   "status": "queued",
+   "words": 1033,
+   "dek": "A new dish needs first tries. Here are four deal types on a $16 dish, what each leaves you per visit, and how to run a two-week test without guessing."
+  },
+  {
+   "slug": "tell-your-regulars-about-your-fig-deal-sign-link-script",
+   "title": "Telling people about your FIG deal: a sign, a link and a staff script",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-19",
+   "publish_at": "2026-11-19T12:00:00-05:00",
+   "status": "queued",
+   "words": 1006,
+   "dek": "A deal only works if people know it exists. Here is a short, practical way to tell regulars and passers-by: where to say it, what to say, and how to check it is working."
+  },
+  {
+   "slug": "birthday-dinner-markham-for-less-deals-math",
+   "title": "A birthday dinner in Markham for less: sorting out a group table, with the math",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-18",
+   "publish_at": "2026-11-18T12:00:00-05:00",
+   "status": "queued",
+   "words": 1029,
+   "dek": "Celebrating with six people does not have to mean a big bill. Here is how to pick the place, use a 2 for 1 across a table, and check the arithmetic before you book."
+  },
+  {
+   "slug": "do-you-need-stripe-to-go-live-on-fig-takeout-only",
+   "title": "Do you need Stripe to go live on FIG? What works without it",
+   "topic": "For restaurants",
+   "group": "takeout-and-money",
+   "date": "2026-11-17",
+   "publish_at": "2026-11-17T12:00:00-05:00",
+   "status": "queued",
+   "words": 1116,
+   "dek": "A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe's checks are needed only for takeout paid in the app. Here is what that means, with the order math."
+  },
   {
    "slug": "what-restaurants-see-when-you-use-fig-diners",
    "title": "What a restaurant sees when you use FIG, and what stays private",

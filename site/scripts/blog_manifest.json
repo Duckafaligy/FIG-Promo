@@ -47,7 +47,7 @@
    "group": "takeout-and-money",
    "date": "2026-11-17",
    "publish_at": "2026-11-17T12:00:00-05:00",
-   "status": "queued",
+   "status": "live",
    "words": 1116,
    "dek": "A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe's checks are needed only for takeout paid in the app. Here is what that means, with the order math."
   },

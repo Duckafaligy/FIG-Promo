@@ -3,7 +3,9 @@
   <title>The FIG blog</title><link>https://www.figpromo.ca/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
   <atom:link href="https://www.figpromo.ca/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Mon, 16 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <lastBuildDate>Tue, 17 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <item><title>Do you need Stripe to go live on FIG? What works without it</title><link>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</link><guid>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</guid>
+    <pubDate>Tue, 17 Nov 2026 12:00:00 -0500</pubDate><category>For restaurants</category><description>A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe&#x27;s checks are needed only for takeout paid in the app. Here is what that means, with the order math.</description></item>
   <item><title>What a restaurant sees when you use FIG, and what stays private</title><link>https://www.figpromo.ca/blog/what-restaurants-see-when-you-use-fig-diners</link><guid>https://www.figpromo.ca/blog/what-restaurants-see-when-you-use-fig-diners</guid>
     <pubDate>Mon, 16 Nov 2026 12:00:00 -0500</pubDate><category>For diners</category><description>Your phone number is never shared with a restaurant, location is optional, and browsing needs no account at all. A plain answer to what a deals app actually knows about you.</description></item>
   <item><title>Writing a review on FIG: how it works, and what makes one useful</title><link>https://www.figpromo.ca/blog/write-a-review-on-fig-diners</link><guid>https://www.figpromo.ca/blog/write-a-review-on-fig-diners</guid>

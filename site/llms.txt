@@ -17,6 +17,7 @@
 - [Home](https://www.figpromo.ca/): what FIG is, features, and how it is free for restaurants
 - [About](https://www.figpromo.ca/about): the full story and FAQ
 - [Help center](https://www.figpromo.ca/help): answers for diners and restaurants
+- [A birthday dinner in Markham for less: sorting out a group table, with the math](https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math): Celebrating with six people does not have to mean a big bill. Here is how to pick the place, use a 2 for 1 across a table, and check the arithmetic before you book.
 - [Do you need Stripe to go live on FIG? What works without it](https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only): A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe's checks are needed only for takeout paid in the app. Here is what that means, with the order math.
 - [What a restaurant sees when you use FIG, and what stays private](https://www.figpromo.ca/blog/what-restaurants-see-when-you-use-fig-diners): Your phone number is never shared with a restaurant, location is optional, and browsing needs no account at all. A plain answer to what a deals app actually knows about you.
 - [Writing a review on FIG: how it works, and what makes one useful](https://www.figpromo.ca/blog/write-a-review-on-fig-diners): Reviews on FIG come only from scanned visits. What that means, how stars and likes differ, and how to write a few lines that actually help the next person choose.

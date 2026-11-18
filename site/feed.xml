@@ -3,7 +3,9 @@
   <title>The FIG blog</title><link>https://www.figpromo.ca/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
   <atom:link href="https://www.figpromo.ca/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Tue, 17 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <item><title>A birthday dinner in Markham for less: sorting out a group table, with the math</title><link>https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math</link><guid>https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math</guid>
+    <pubDate>Wed, 18 Nov 2026 12:00:00 -0500</pubDate><category>For diners</category><description>Celebrating with six people does not have to mean a big bill. Here is how to pick the place, use a 2 for 1 across a table, and check the arithmetic before you book.</description></item>
   <item><title>Do you need Stripe to go live on FIG? What works without it</title><link>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</link><guid>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</guid>
     <pubDate>Tue, 17 Nov 2026 12:00:00 -0500</pubDate><category>For restaurants</category><description>A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe&#x27;s checks are needed only for takeout paid in the app. Here is what that means, with the order math.</description></item>
   <item><title>What a restaurant sees when you use FIG, and what stays private</title><link>https://www.figpromo.ca/blog/what-restaurants-see-when-you-use-fig-diners</link><guid>https://www.figpromo.ca/blog/what-restaurants-see-when-you-use-fig-diners</guid>

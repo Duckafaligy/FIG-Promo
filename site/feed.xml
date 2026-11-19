@@ -3,7 +3,9 @@
   <title>The FIG blog</title><link>https://www.figpromo.ca/blog</link><language>en-ca</language>
   <description>Restaurant deals in Markham, Ontario, and ideas for independent restaurants.</description>
   <atom:link href="https://www.figpromo.ca/feed.xml" rel="self" type="application/rss+xml"/>
-  <lastBuildDate>Wed, 18 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <lastBuildDate>Thu, 19 Nov 2026 12:00:00 -0500</lastBuildDate>
+  <item><title>Telling people about your FIG deal: a sign, a link and a staff script</title><link>https://www.figpromo.ca/blog/tell-your-regulars-about-your-fig-deal-sign-link-script</link><guid>https://www.figpromo.ca/blog/tell-your-regulars-about-your-fig-deal-sign-link-script</guid>
+    <pubDate>Thu, 19 Nov 2026 12:00:00 -0500</pubDate><category>For restaurants</category><description>A deal only works if people know it exists. Here is a short, practical way to tell regulars and passers-by: where to say it, what to say, and how to check it is working.</description></item>
   <item><title>A birthday dinner in Markham for less: sorting out a group table, with the math</title><link>https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math</link><guid>https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math</guid>
     <pubDate>Wed, 18 Nov 2026 12:00:00 -0500</pubDate><category>For diners</category><description>Celebrating with six people does not have to mean a big bill. Here is how to pick the place, use a 2 for 1 across a table, and check the arithmetic before you book.</description></item>
   <item><title>Do you need Stripe to go live on FIG? What works without it</title><link>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</link><guid>https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only</guid>

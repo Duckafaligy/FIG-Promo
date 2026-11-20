@@ -17,6 +17,7 @@
 - [Home](https://www.figpromo.ca/): what FIG is, features, and how it is free for restaurants
 - [About](https://www.figpromo.ca/about): the full story and FAQ
 - [Help center](https://www.figpromo.ca/help): answers for diners and restaurants
+- [Launching a new dish with a FIG deal: which type costs least, with the math](https://www.figpromo.ca/blog/launch-a-new-dish-with-a-fig-deal-restaurant-math): A new dish needs first tries. Here are four deal types on a $16 dish, what each leaves you per visit, and how to run a two-week test without guessing.
 - [Telling people about your FIG deal: a sign, a link and a staff script](https://www.figpromo.ca/blog/tell-your-regulars-about-your-fig-deal-sign-link-script): A deal only works if people know it exists. Here is a short, practical way to tell regulars and passers-by: where to say it, what to say, and how to check it is working.
 - [A birthday dinner in Markham for less: sorting out a group table, with the math](https://www.figpromo.ca/blog/birthday-dinner-markham-for-less-deals-math): Celebrating with six people does not have to mean a big bill. Here is how to pick the place, use a 2 for 1 across a table, and check the arithmetic before you book.
 - [Do you need Stripe to go live on FIG? What works without it](https://www.figpromo.ca/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only): A restaurant can go live on FIG with its page, menu and dine-in deals without Stripe. Stripe's checks are needed only for takeout paid in the app. Here is what that means, with the order math.

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-20",
+ "generated": "2026-11-24",
  "groups": [
   "eat-out-for-less",
   "fill-quiet-hours",
@@ -8,13 +8,57 @@
  ],
  "posts": [
   {
+   "slug": "check-a-restaurant-on-fig-before-you-go-two-minute-checklist",
+   "title": "Before you go: a two-minute check of a restaurant on FIG",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-24",
+   "publish_at": "2026-11-24T12:00:00-05:00",
+   "status": "queued",
+   "words": 992,
+   "dek": "A restaurant's FIG page shows hours, a menu, reviews and live deals in one place. Here is a short checklist to run before you claim a deal and head out."
+  },
+  {
+   "slug": "pause-or-end-a-fig-deal-when-and-how-restaurants",
+   "title": "When to pause or end a deal on FIG, and how to do it without upsetting diners",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-23",
+   "publish_at": "2026-11-23T12:00:00-05:00",
+   "status": "queued",
+   "words": 1009,
+   "dek": "Sometimes a deal should stop: an ingredient costs more, the kitchen is short-handed, or you will be closed. Here is when to pause or end one, and how to keep diners from arriving to a surprise."
+  },
+  {
+   "slug": "end-of-day-routine-restaurant-fig-scans-vs-till",
+   "title": "A five-minute end-of-day routine: matching your FIG scans to your till",
+   "topic": "For restaurants",
+   "group": "fill-quiet-hours",
+   "date": "2026-11-22",
+   "publish_at": "2026-11-22T12:00:00-05:00",
+   "status": "queued",
+   "words": 1027,
+   "dek": "Scans on your dashboard and discounts at your till should tell the same story. Here is a short closing routine, a worked example and what to do when the numbers differ."
+  },
+  {
+   "slug": "eating-out-alone-markham-deals-budget-math",
+   "title": "Eating out on your own in Markham: lunch or dinner for one, with the math",
+   "topic": "For diners",
+   "group": "eat-out-for-less",
+   "date": "2026-11-21",
+   "publish_at": "2026-11-21T12:00:00-05:00",
+   "status": "queued",
+   "words": 1109,
+   "dek": "Most deals are talked about for pairs and groups. Here is how to pick the right type of deal when you are eating alone, with a $20 meal worked out four ways."
+  },
+  {
    "slug": "launch-a-new-dish-with-a-fig-deal-restaurant-math",
    "title": "Launching a new dish with a FIG deal: which type costs least, with the math",
    "topic": "For restaurants",
    "group": "fill-quiet-hours",
    "date": "2026-11-20",
    "publish_at": "2026-11-20T12:00:00-05:00",
-   "status": "queued",
+   "status": "live",
    "words": 1033,
    "dek": "A new dish needs first tries. Here are four deal types on a $16 dish, what each leaves you per visit, and how to run a two-week test without guessing."
   },

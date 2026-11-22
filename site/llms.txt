@@ -17,6 +17,7 @@
 - [Home](https://www.figpromo.ca/): what FIG is, features, and how it is free for restaurants
 - [About](https://www.figpromo.ca/about): the full story and FAQ
 - [Help center](https://www.figpromo.ca/help): answers for diners and restaurants
+- [A five-minute end-of-day routine: matching your FIG scans to your till](https://www.figpromo.ca/blog/end-of-day-routine-restaurant-fig-scans-vs-till): Scans on your dashboard and discounts at your till should tell the same story. Here is a short closing routine, a worked example and what to do when the numbers differ.
 - [Eating out on your own in Markham: lunch or dinner for one, with the math](https://www.figpromo.ca/blog/eating-out-alone-markham-deals-budget-math): Most deals are talked about for pairs and groups. Here is how to pick the right type of deal when you are eating alone, with a $20 meal worked out four ways.
 - [Launching a new dish with a FIG deal: which type costs least, with the math](https://www.figpromo.ca/blog/launch-a-new-dish-with-a-fig-deal-restaurant-math): A new dish needs first tries. Here are four deal types on a $16 dish, what each leaves you per visit, and how to run a two-week test without guessing.
 - [Telling people about your FIG deal: a sign, a link and a staff script](https://www.figpromo.ca/blog/tell-your-regulars-about-your-fig-deal-sign-link-script): A deal only works if people know it exists. Here is a short, practical way to tell regulars and passers-by: where to say it, what to say, and how to check it is working.

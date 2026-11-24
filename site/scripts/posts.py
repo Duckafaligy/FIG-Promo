@@ -2498,4 +2498,223 @@ POSTS = [
               ("Can restaurants see my phone number?", "No. Restaurants never see diners' phone numbers."),
               ("Is FIG free for diners?", "Yes. FIG is free for diners and open on the web at www.figpromo.ca/app.")]),
 
+    # ---------------------------------------------------------------- batch of 4 queued posts (publish_at: hidden until then)
+
+    dict(slug="december-ready-fig-restaurant-holiday-hours-scheduled-deals-takeout", screen="tscanner", title="Getting ready for December: holiday hours, scheduled deals and takeout on FIG", date="2026-11-25", publish_at="2026-11-25T12:00:00-05:00", updated="2026-11-25", topic="For restaurants", group="fill-quiet-hours",
+         dek="December changes your hours, your staff and your quiet days. Here is a short plan for updating opening hours, scheduling deals ahead and pausing takeout, with a worked example of a quiet-day deal.",
+         desc="A December plan for Markham restaurants on FIG: update opening hours, schedule deals ahead, pause takeout when needed, and check the math of a quiet-day deal.",
+         seo="December plan for restaurants on FIG",
+         keywords="restaurant holiday hours, December restaurant plan, schedule restaurant deals, pause takeout, quiet day restaurant deal, Markham restaurants, FIG restaurant",
+         points=["Update your opening hours first, so no diner arrives to a closed door.",
+                 "Schedule deals ahead for the quiet days you can see coming, and end or pause any deal for days you will be closed.",
+                 "Takeout has its own switch: pause it or add prep time when the kitchen is stretched.",
+                 "In the example, a $3 off deal on a $15 dish leaves $7.50 per visit, so 8 extra visits a week is $60.00.",
+                 "Posting, scheduling and pausing deals cost a restaurant nothing."],
+         sections=[
+             ("The short answer", """<p>Do three things before December gets busy: update your opening hours for every day that will differ, schedule the deals you want on your quiet days, and decide when you will pause takeout. All three are quick, and all three stop the same problem: a diner arriving with a claim for something you cannot serve that day.</p>
+<p>This post is a plan you can finish in about half an hour, with one worked example so you can check a quiet-day deal against your own numbers.</p>"""),
+             ("Why December needs its own plan", """<p>Most restaurants do not run a normal month in December. Some days are very full, some are very quiet, and some have shorter hours or a closure. A deal that suits a normal Tuesday can be wrong on a day you are closed or booked solid.</p>
+<p>FIG helps because you control the pieces. Deals can be live now or scheduled. Opening hours are yours to edit. Takeout can be paused. The plan below uses all three, in an order that avoids surprises.</p>"""),
+             ("Step 1: opening hours first", """<p>Open your page and go through every date in December where your hours will differ from usual: early closes, late openings, a closure, an event. Change the hours before you touch any deal, because a diner reads the hours on your page before anything else. <a href="/blog/keep-your-fig-page-current-hours-menu-prices">Keep your FIG page current</a> shows where to change them.</p>
+<p>Then make a short list of the dates, with the hours for each, and tape it by the till. Staff who read the same list answer the same way when a diner asks.</p>"""),
+             ("Step 2: schedule the deals you want", """<p>A scheduled deal starts at the time you choose, so you can set it up in one sitting instead of remembering each morning. Pick the days and hours that are quiet for you, give each deal a clear name, and decide how many times one diner can use it. <a href="/blog/schedule-fig-deals-live-now-or-scheduled-quiet-hours">Live now or scheduled</a> goes through the choices, and <a href="/blog/write-a-clear-deal-description-restaurants">writing a deal diners understand</a> covers the wording.</p>
+<p>Keep the deal small and the hours tight. A diner can claim a deal once a day, and a deal can be used more than once, up to 20 times, with an optional wait between uses. For a short season, one use or a few uses is usually plenty.</p>"""),
+             ("A quiet-day deal, with the math", """<p>These are round example numbers, not a real menu. Say a bowl sells for $15.00, the ingredients cost 30% of that, and you post $3 off for a quiet weekday window. Dine-in, so FIG takes nothing from the bill.</p>
+<div class="callout math"><b>One bowl with $3 off (example)</b><table><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$15.00</td></tr>
+<tr><td>Deal</td><td>&minus; $3.00</td></tr>
+<tr><td>Diner pays, before tax</td><td>$12.00</td></tr>
+<tr><td>Food cost, 30% of $15.00</td><td>&minus; $4.50</td></tr>
+<tr><td>Left toward wages, rent and profit</td><td>$7.50</td></tr>
+</tbody></table><p>Check: 30% of $15 is $4.50, and $12.00 &minus; $4.50 = $7.50. If the deal brings 8 extra visits a week that would not have happened, that is 8 &times; $7.50 = $60.00 a week, or $240.00 over four weeks. If those 8 would have come at full price anyway, the deal gave away 8 &times; $3.00 = $24.00 a week instead.</p></div>
+<p>The question is always the same: does the deal bring people who would not have come? <a href="/blog/regulars-using-your-deal-restaurant-math">Regulars using your deal</a> explains how to tell.</p>"""),
+             ("Step 3: decide when to pause takeout", """<p>Takeout is paid in the app at checkout, and the kitchen starts when the restaurant accepts the order. On a day when the dining room is full or the kitchen is short-handed, you can pause takeout and add prep time so pickup times stay honest. Takeout comes with a deal unless you set 0 deals per order, in which case it is at full price.</p>
+<p>Pausing takeout is separate from ending a dine-in deal, so you can do one without the other. <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">Takeout during a rush</a> has the details. Takeout is available only after a restaurant has finished Stripe's checks and payouts and added its HST number, so if you have not done that, dine-in deals still work without it.</p>"""),
+             ("A December checklist", """<table><thead><tr><th>Task</th><th>When</th><th>Why</th></tr></thead><tbody>
+<tr><td>Change opening hours for every different date</td><td>This week</td><td>Diners read hours first</td></tr>
+<tr><td>Schedule quiet-day deals</td><td>This week</td><td>Set once, not every morning</td></tr>
+<tr><td>End or pause deals on closure days</td><td>Before each closure</td><td>A claim lasts as long as the deal runs</td></tr>
+<tr><td>Check your menu for sold-out dishes</td><td>Weekly</td><td>The page should match the kitchen</td></tr>
+<tr><td>Brief staff on the date list</td><td>Before each shift change</td><td>Everyone gives the same answer</td></tr>
+<tr><td>Look at deal results</td><td>Each Monday</td><td>Keep, change or stop what you see</td></tr>
+</tbody></table>"""),
+             ("Staff and the busy weeks", """<p>Busy weeks are when a deal is most likely to be misread. A new cook or a part-timer may not know that a deal is live. Before a busy stretch, spend ten minutes with the team: which deals run on which days, what the scan screen looks like, and the one sentence to say if a deal has ended. <a href="/blog/train-staff-honour-fig-deal">Train your staff to honour a FIG deal</a> is a ten-minute guide you can print.</p>
+<p>Staff can join FIG by accepting an invite from the owner, with the roles Owner, Manager and Staff. Give seasonal helpers the Staff role, so they can scan diners' codes without reaching the money steps. <a href="/blog/fig-staff-roles-sign-in-security-owners-managers">Owner, Manager or Staff</a> explains who can do what.</p>"""),
+             ("If a day goes wrong", """<p>Even a good plan meets a bad day: a delivery that does not arrive, a sick cook, a power cut. The fastest fixes are the ones you already know. Pause the deal for the day, pause takeout, and change the hours if you must close early. Then say sorry once at the door and offer what you can do. A claim lasts as long as the deal runs, so tomorrow the same deal can work again if you turn it back on.</p>
+<p>Write one line in a notebook about what happened, so the next busy week starts with a better plan. Small notes like that are what turn a rough December into an easier one next year.</p>"""),
+             ("Telling your regulars", """<p>Your page covers diners who find you on FIG. For people who walk past, a small sign by the door with the changed hours does the rest. <a href="/blog/tell-your-regulars-about-your-fig-deal-sign-link-script">Telling people about your FIG deal</a> has a sign, a link and a short staff script you can reuse for the season.</p>"""),
+             ("What it costs", """<p>Updating hours, scheduling deals and pausing takeout cost nothing. FIG earns only on takeout orders paid in the app, keeping 5% of the food after any deal and before tax, with nothing on dine-in.</p>"""),
+             ("After the season", """<p>In the first week of January, open your deal results and compare each deal's scans with the quiet days you aimed it at. Keep what filled seats, and drop the rest. <a href="/blog/read-your-deal-results-keep-change-or-stop">Reading your deal results</a> shows how to decide.</p>"""),
+         ],
+         faq=[("What should a restaurant update on FIG for December?", "Start with opening hours for every day that differs, then schedule or end deals to match, and decide when to pause takeout."),
+              ("Can I set up deals ahead of time?", "Yes. A deal can be live now or scheduled, with uses per diner and an optional wait between uses."),
+              ("What happens to a claim if I end a deal for a closure?", "A claim lasts as long as the deal runs. If you end the deal, anyone holding a claim can no longer use it, so end it deliberately and tell people."),
+              ("Can I pause takeout without ending my deals?", "Yes. A restaurant can pause takeout and add prep time. It is separate from your dine-in deals."),
+              ("How many times can one diner use a deal?", "You choose, up to 20 uses per diner. A diner can claim a deal once a day."),
+              ("Does it cost anything to change hours or schedule deals?", "No. Posting, scheduling, changing and pausing cost a restaurant nothing."),
+              ("Do I need Stripe for dine-in deals?", "No. Stripe's checks are needed only to turn on takeout paid in the app.")]),
+
+    dict(slug="tipping-when-you-use-a-restaurant-deal-markham-diners", screen="claim", title="Tipping when you use a restaurant deal: what to base it on, with the math", date="2026-11-26", publish_at="2026-11-26T12:00:00-05:00", updated="2026-11-26", topic="For diners", group="eat-out-for-less",
+         dek="A 2 for 1 or a percent off changes your bill but not the work your server did. Here is how the math changes depending on whether you tip on the discounted total or the menu price.",
+         desc="How to think about tipping when you use a restaurant deal in Markham: the same order tipped two ways, with the arithmetic, and a note on who decides.",
+         seo="Tipping when you use a restaurant deal",
+         keywords="tipping with a coupon, tip on discounted bill, restaurant deal tip, how much to tip Markham, 2 for 1 tip, restaurant deals Markham, FIG diners",
+         points=["Tipping is between you and the restaurant, and FIG sets no tip amount.",
+                 "Many diners tip on the menu price, because the service is the same with or without the deal. It is a choice, not a rule.",
+                 "On a $44 order with a 2 for 1, a 15% tip is $3.90 on the $26 you pay or $6.60 on the $44 menu total.",
+                 "Work out the tip before you leave home and add it to your budget.",
+                 "A dine-in deal is paid to the restaurant directly, with no commission on the bill."],
+         sections=[
+             ("The short answer", """<p>There is no rule that says whether to tip on the discounted total or on the menu price, and FIG sets no tip amount. A common approach is to tip on what the order would have cost without the deal, because your server did the same work either way. If your budget is tight, tipping on the discounted total is also a choice many people make. Decide what you are comfortable with before you go.</p>
+<p>This post shows the arithmetic both ways, so you can pick with the numbers in front of you. It is general information, not a rule.</p>"""),
+             ("Who decides", """<p>On FIG, a diner who uses a deal at the restaurant pays the restaurant directly, like any other visit. Restaurants set their own deals, and the tip is between you and the restaurant. FIG does not take a share of the bill for dine-in and does not set a tip.</p>
+<p>That means the question is really about your own budget and your own view of fairness. The rest of this post helps you compare the options.</p>"""),
+             ("The same order, tipped two ways", """<p>These are round example numbers, not any real menu. Two of you order two mains at $18 each and two drinks at $4 each, so $36 + $8 = $44.00 before tax. A 2 for 1 on mains means one main is free, so you pay $18 + $8 = $26.00.</p>
+<div class="callout math"><b>A $44 order with a 2 for 1 (example, before tax)</b><table><thead><tr><th>Tip as a share of</th><th>10%</th><th>15%</th><th>18%</th><th>20%</th></tr></thead><tbody>
+<tr><td>Discounted total, $26.00</td><td>$2.60</td><td>$3.90</td><td>$4.68</td><td>$5.20</td></tr>
+<tr><td>Menu price, $44.00</td><td>$4.40</td><td>$6.60</td><td>$7.92</td><td>$8.80</td></tr>
+</tbody></table><p>Check: 15% of $26 is $3.90, and 15% of $44 is $6.60. The difference at 15% is $6.60 &minus; $3.90 = $2.70. At 20% it is $8.80 &minus; $5.20 = $3.60. With a 15% tip on the menu price, you would pay $26.00 + $6.60 = $32.60 before tax, against $44.00 + $6.60 = $50.60 with no deal.</p></div>
+<p>The deal still saves you $18.00 in this example, even if you tip on the full menu price. That is why many people treat the deal as a saving on the food and keep the tip where it would have been.</p>"""),
+             ("Why some people tip on the menu price", """<ul><li><strong>The work is the same.</strong> The server carries the same plates, refills the same drinks and keeps the table the same way.</li><li><strong>The restaurant chose the deal, not the server.</strong> The discount is the restaurant's decision, so the server's tip should not shrink because of it.</li><li><strong>It is simple.</strong> You can read the menu prices and work the tip out before you order.</li></ul>
+<p>None of that makes it an obligation. If you are watching your budget, you can plan for the tip you can afford.</p>"""),
+             ("Why some people tip on the discounted total", """<ul><li><strong>Budget.</strong> A deal is often the reason someone can eat out at all.</li><li><strong>The bill is what you are paying.</strong> A tip on the amount that leaves your wallet is easy to work out at the table.</li><li><strong>It is still a tip.</strong> A smaller tip on a smaller bill is still money for good service.</li></ul>
+<p>Both views are reasonable. If you tip on the discounted total, consider rounding up, since a small round-up costs little.</p>"""),
+             ("Plan the tip before you go", """<p>The easiest way to avoid an awkward moment at the table is to settle the number at home. Look at the restaurant's menu on its FIG page, add up what you expect to order, and write down the tip you plan to leave. <a href="/blog/check-a-restaurant-on-fig-before-you-go-two-minute-checklist">A two-minute check of a restaurant on FIG</a> shows what to look at first.</p>
+<ol><li>Add up the menu prices of what you will order.</li><li>Subtract the deal, using its exact wording.</li><li>Decide your tip, and on which number.</li><li>Add tax and the tip to get your real total.</li></ol>
+<p>If you are splitting the bill with friends, <a href="/blog/group-dining-deals">eating out as a group</a> covers how to divide it.</p>"""),
+             ("When the deal is a percent off", """<p>The same logic holds for a percent off. Say the bill is $60.00 and the deal is 20% off, which is $12.00, so you pay $48.00. A 15% tip is $9.00 on $60, or $7.20 on $48. The gap is $1.80. Percent deals make the gap proportional to the discount, while a 2 for 1 can make it larger on a table of mostly mains.</p>
+<div class="callout example"><b>Check</b><p>20% of $60 is $12.00, and $60 &minus; $12 = $48.00. 15% of $60 is $9.00, and 15% of $48 is $7.20. $9.00 &minus; $7.20 = $1.80.</p></div>"""),
+             ("A table of four, splitting the bill", """<p>With a group, the tip question becomes a splitting question. Say four of you have $100.00 of food and drinks at menu prices, and a 20% off deal takes $20.00 off, so the bill is $80.00. These are round example numbers, before tax.</p>
+<table><thead><tr><th>Tip on</th><th>15% tip</th><th>Total</th><th>Each of four</th></tr></thead><tbody>
+<tr><td>Menu price, $100.00</td><td>$15.00</td><td>$95.00</td><td>$23.75</td></tr>
+<tr><td>Discounted bill, $80.00</td><td>$12.00</td><td>$92.00</td><td>$23.00</td></tr>
+</tbody></table>
+<p>Check: $80 + $15 = $95, and $95 &divide; 4 = $23.75. $80 + $12 = $92, and $92 &divide; 4 = $23.00. The difference is $0.75 a person, which most groups can agree on without a long talk.</p>"""),
+             ("What if the deal is free with a dish?", """<p>A free-with-a-dish deal changes the bill in a different way. Say a main is $18.00 and a side that normally costs $6.00 comes free with it. You pay $18.00 instead of $24.00. A 15% tip is $3.60 on the $24.00 menu total, or $2.70 on the $18.00 you pay. The gap is $0.90, and it comes from a free item rather than a discount on a dish. The same options apply: tip on the menu total, or on what you pay.</p>
+<div class="callout example"><b>Check</b><p>$18.00 + $6.00 = $24.00. 15% of $24 is $3.60, and 15% of $18 is $2.70. $3.60 &minus; $2.70 = $0.90.</p></div>"""),
+             ("A quick way to do it in your head", """<p>You do not need a calculator for a tip at the table. Work out 10% by moving the decimal one place, then add half of that for 15%, or double it for 20%. On $44.00, 10% is $4.40, half of that is $2.20, and so 15% is $6.60. On $26.00, 10% is $2.60, half is $1.30, so 15% is $3.90. The same trick works on any total, and it keeps the conversation at the table on the food rather than the bill.</p>"""),
+             ("Takeout is different", """<p>For takeout ordered in the app, you pay online at checkout, the card is held and charged when the restaurant accepts, and there is no paying at the counter. This post is about dine-in. For how a takeout order works, see <a href="/blog/order-takeout-on-fig-step-by-step-card-held-pickup-code">ordering takeout on FIG</a>.</p>"""),
+             ("Be kind if something goes wrong", """<p>If a deal does not scan or a dish is missing, the person helping you is rarely the one who set it up. A calm word and a thank-you go a long way. <a href="/blog/deal-wont-scan-troubleshooting-diners">Deal not working at the counter?</a> has the usual causes and what to say.</p>"""),
+         ],
+         faq=[("Should I tip on the discounted total or the menu price?", "There is no rule. Many diners tip on the menu price because the service is the same, and others tip on the discounted total to fit a budget. It is your choice."),
+              ("Does FIG set a tip?", "No. For dine-in, you pay the restaurant directly and the tip is between you and the restaurant."),
+              ("Does FIG take a share of my dine-in bill?", "No. FIG takes no commission on the bill and nothing on dine-in."),
+              ("How much does a 2 for 1 change the tip?", "In the example, a 15% tip is $3.90 on the $26.00 you pay or $6.60 on the $44.00 menu total, a difference of $2.70."),
+              ("Can I work out the tip before I go?", "Yes. Use the menu prices on the restaurant's FIG page, subtract the deal, and decide which number to tip on."),
+              ("Is this tax or legal advice?", "No. It is general information about a common question."),
+              ("Is FIG free for diners?", "Yes. FIG is free for diners and open on the web at www.figpromo.ca/app.")]),
+
+    dict(slug="deals-for-cafes-bubble-tea-dessert-shops-small-orders-fig-math", screen="tdash", title="Deals for cafés, bubble tea and dessert shops: small orders and the math", date="2026-11-27", publish_at="2026-11-27T12:00:00-05:00", updated="2026-11-27", topic="For restaurants", group="takeout-and-money",
+         dek="When the average order is a drink and a snack, a flat card fee weighs more. Here is how deals and takeout work out on $4 to $16 of food, and how to build an order that keeps more.",
+         desc="A worked guide for cafés, bubble tea and dessert shops in Markham on FIG: what a restaurant keeps on small takeout orders, and how to build bigger ones.",
+         seo="FIG deals for cafés and bubble tea shops",
+         keywords="cafe deals Markham, bubble tea shop promotion, dessert shop takeout, small order fees, Stripe fee small orders, restaurant takeout math, FIG restaurant",
+         points=["Dine-in deals cost a restaurant nothing to FIG. Fees apply only to takeout paid in the app.",
+                 "On takeout, FIG keeps 5% of the food after any deal and before tax, and Stripe's 2.9% + $0.30 comes off the payment.",
+                 "The flat $0.30 matters most on small orders: about 15.8% of a $4 order but 10.1% of a $16 order.",
+                 "A drink plus a snack at one price moves a small order toward a bigger one.",
+                 "A restaurant can set 0 deals per order, so takeout is at full price."],
+         sections=[
+             ("The short answer", """<p>If your average order is a drink and something small, put your deal on dine-in first, where FIG takes nothing, and build takeout around combinations so each order is larger. On takeout, the flat $0.30 in Stripe's fee weighs more on small orders: in the example below, the two fees take about 15.8% of $4.00 of food but about 10.1% of $16.00.</p>
+<p>The numbers are examples with round prices. Your own statement shows your real orders.</p>"""),
+             ("What costs what", """<table><thead><tr><th>Way it is sold</th><th>What FIG keeps</th><th>Card fee</th></tr></thead><tbody>
+<tr><td>Dine-in with a deal</td><td>Nothing</td><td>Whatever your own till charges</td></tr>
+<tr><td>Takeout paid in the app</td><td>5% of the food after any deal, before tax</td><td>Stripe's 2.9% + $0.30 for most Canadian cards, paid by the restaurant</td></tr>
+</tbody></table>
+<p>There is no commission on the bill, no sign-up cost and no plan. FIG earns only on takeout orders paid in the app. <a href="/blog/how-fig-makes-money">How FIG makes money</a> has the full picture.</p>"""),
+             ("Four small orders, side by side", """<p>The food is the amount charged for dishes after any deal and before tax. The diner pays that plus 13% HST. Stripe's percentage applies to the whole payment, tax included. FIG's 5% is on the food only. These are round example orders.</p>
+<div class="callout math"><b>Takeout on four small orders (example)</b><table><thead><tr><th>Food</th><th>Diner pays with 13% HST</th><th>Stripe fee</th><th>FIG 5%</th><th>You keep from the food</th><th>Fees as a share of food</th></tr></thead><tbody>
+<tr><td>$4.00</td><td>$4.52</td><td>$0.43</td><td>$0.20</td><td>$3.37</td><td>15.8%</td></tr>
+<tr><td>$6.00</td><td>$6.78</td><td>$0.50</td><td>$0.30</td><td>$5.20</td><td>13.3%</td></tr>
+<tr><td>$10.00</td><td>$11.30</td><td>$0.63</td><td>$0.50</td><td>$8.87</td><td>11.3%</td></tr>
+<tr><td>$16.00</td><td>$18.08</td><td>$0.82</td><td>$0.80</td><td>$14.38</td><td>10.1%</td></tr>
+</tbody></table><p>Check the $10.00 row: HST is $1.30, so the payment is $11.30. Stripe takes 2.9% of $11.30, which is $0.33, plus $0.30, so $0.63. FIG takes 5% of $10.00, which is $0.50. $10.00 &minus; $0.63 &minus; $0.50 = $8.87. Fees are rounded to the cent. Tax on very small sales can differ in Ontario, and HST on the order is the restaurant's to remit, so treat the tax line as an example and use your statement for real figures.</p></div>
+<p>The pattern is clear. The fixed $0.30 is the same on every order, so it weighs most when the order is smallest. <a href="/blog/takeout-order-math-what-you-keep">Takeout order math</a> works through larger orders in the same way.</p>"""),
+             ("Contribution matters more than the fee", """<p>What counts is what is left after your ingredients and cups. Take a $10.00 order of food with a cost of 30%, so $3.00. You keep $8.87 and the contribution is $8.87 &minus; $3.00 = $5.87 toward wages and rent. Compare that with an empty counter at 3 pm: $0. A small order in a quiet hour can still be worth taking.</p>
+<p>Use your own numbers. Cafés and bubble tea shops often have different costs from a kitchen, so write down the real cost of your drink with its cup, lid and toppings.</p>"""),
+             ("Put the deal where it costs least", """<ul><li><strong>Dine-in first.</strong> A deal at the counter costs FIG nothing, so a dollar-off or a free topping works with no per-order fee.</li><li><strong>A deal on the add-on.</strong> A free pastry with a drink at full price makes the order bigger, not smaller. A &quot;free with a dish&quot; deal is built for that. <a href="/blog/free-with-a-dish-deal-pricing-restaurant-math">Free with a dish, with the math</a> has the arithmetic.</li><li><strong>Quiet hours.</strong> An afternoon slot is where an idle counter and an available cook cost you least. <a href="/blog/slow-hour-deal-math">The slow-hour math</a> shows how to test it.</li></ul>"""),
+             ("Build an order, not a drink", """<p>Takeout comes with a deal, unless you set 0 deals per order, in which case it is at full price. For small orders, the second choice deserves a look. A full-price takeout order has no discount to pay for, so more of each dollar stays with you.</p>
+<p>You can also make the basket bigger. A drink plus a snack at one set price turns a $6.00 order into a $10.00 one, and in the table that moves the fee share from 13.3% to 11.3%. The food you add is food you sold at full price, which is the bigger gain.</p>
+<div class="callout example"><b>Example: a combo</b><p>A $6.00 drink and a $4.00 pastry sold together as a $10.00 combo is the $10.00 row in the table: you keep $8.87. The same drink alone, as a $6.00 order, leaves $5.20. So the combo keeps $3.67 more than the drink alone, and $8.87 &minus; $5.20 = $3.67 is the number to compare with the cost of the pastry.</p></div>"""),
+             ("When the line is long", """<p>Small-order shops feel a rush quickly. If the line at the counter is long, you can pause takeout and add prep time, so app orders do not stack up behind the people in front of you. <a href="/blog/takeout-rush-pause-prep-time-deals-per-order">Takeout during a rush</a> covers how.</p>"""),
+             ("A quiet-hour deal on a drink, with the math", """<p>Here is a dine-in example with round numbers. A drink sells for $6.00, the cup, lid and ingredients cost about $1.80 (30%), and you offer $1.00 off between 2 and 4 pm on weekdays. FIG takes nothing from a dine-in bill.</p>
+<div class="callout math"><b>A $1.00-off drink in a quiet window (example)</b><table><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$6.00</td></tr>
+<tr><td>Deal</td><td>&minus; $1.00</td></tr>
+<tr><td>Diner pays, before tax</td><td>$5.00</td></tr>
+<tr><td>Cost of the drink, 30% of $6.00</td><td>&minus; $1.80</td></tr>
+<tr><td>Left toward wages, rent and profit</td><td>$3.20</td></tr>
+</tbody></table><p>Check: 30% of $6.00 is $1.80, and $5.00 &minus; $1.80 = $3.20. If the deal brings 20 extra drinks in a week, that is 20 &times; $3.20 = $64.00. If those 20 customers would have come anyway at full price, the deal gave away 20 &times; $1.00 = $20.00.</p></div>
+<p>A small discount on a small item is easy to afford, which is why a short window and a tight limit matter. <a href="/blog/regulars-using-your-deal-restaurant-math">Regulars using your deal</a> shows how to tell which case you are in.</p>"""),
+             ("Small shops and big queues", """<p>A small shop often has one or two people behind the counter. A deal that sends five people in at once can slow every order. Keep the deal to the hours you can handle, pick a limit on uses that suits the counter, and brief the person on the till. The scan takes a moment, and staff scan with any phone or tablet. <a href="/blog/train-staff-honour-fig-deal">Train your staff to honour a FIG deal</a> covers it in ten minutes.</p>
+<p>Think too about what you want diners to buy next. A deal on a drink can bring someone who then buys a pastry at full price. A deal on the pastry may do the opposite. Start with the item whose margin is best and the one you most want to be known for.</p>"""),
+             ("What you need for takeout", """<p>Takeout paid in the app is available only after a restaurant has finished Stripe's checks and payouts and added its HST number. Stripe, not FIG, checks ID and holds ID and bank details. Dine-in deals need none of that, so you can start there. <a href="/blog/do-you-need-stripe-to-go-live-on-fig-takeout-only">Do you need Stripe to go live on FIG?</a> explains the split. HST registration is general information, not advice, and <a href="/blog/hst-registration-small-restaurants-ontario">HST registration for small restaurants</a> is a good place to start.</p>"""),
+             ("A short plan", """<ol><li>Start with a dine-in deal in your quietest window.</li><li>Write down the real cost of your three most popular items.</li><li>Create one combo that lifts the average order.</li><li>Decide whether takeout runs with a deal or at full price.</li><li>After two weeks, open <a href="/blog/read-your-deal-results-keep-change-or-stop">your deal results</a> and keep what works.</li></ol>"""),
+         ],
+         faq=[("Does FIG charge a café anything for dine-in deals?", "No. FIG takes no commission on the bill and nothing on dine-in. Posting deals costs nothing."),
+              ("What does FIG keep on takeout?", "5% of the food after any deal and before tax, on takeout orders paid in the app, plus HST on that fee once FIG is registered for HST."),
+              ("Why do small orders cost more in percentage terms?", "Stripe's card fee has a flat $0.30 part. In the example, the fees are about 15.8% of $4.00 of food and 10.1% of $16.00."),
+              ("Can I sell takeout at full price?", "Yes. Set 0 deals per order and takeout is at full price."),
+              ("Who pays Stripe's fee?", "The restaurant. Stripe's 2.9% + $0.30 for most Canadian cards comes off the payment."),
+              ("Can I pause takeout when the line is long?", "Yes. A restaurant can pause takeout and add prep time."),
+              ("Do I need Stripe to post a dine-in deal?", "No. Stripe's checks are needed only to turn on takeout paid in the app.")]),
+
+    dict(slug="deals-you-can-use-more-than-once-diners-fig-how-it-works", screen="qr", title="Deals you can use more than once: how repeat deals work for diners", date="2026-11-28", publish_at="2026-11-28T12:00:00-05:00", updated="2026-11-28", topic="For diners", group="eat-out-for-less",
+         dek="Some FIG deals can be used more than once. Here is what that means at the counter: the new code after each scan, the once-a-day claim, the optional wait, and a worked example of a month of lunches.",
+         desc="How a FIG deal that can be used more than once works for diners in Markham: a new code after each scan, claiming once a day, the wait between uses, and the math.",
+         seo="Deals you can use more than once on FIG",
+         keywords="repeat restaurant deal, use a deal more than once, restaurant deal limits, FIG deals diners, Markham restaurant deals, weekday lunch deal, QR code deal",
+         points=["A restaurant can let one diner use a deal more than once, up to 20 times, with an optional wait between uses.",
+                 "A deal code works once, and your screen shows a new code after each scan.",
+                 "You can claim a deal once a day, so repeat uses spread across different days.",
+                 "A screenshot of an old code will not work, because that code is spent.",
+                 "In the example, $2 off a $12 lunch used 5 times saves $10.00."],
+         sections=[
+             ("The short answer", """<p>Some restaurants let a diner use the same deal more than once, up to 20 times, with an optional wait between uses. A deal code works once, so after staff scan it your screen shows a new code ready for next time. You can claim a deal once a day, so a repeat deal means coming back on different days, not several times in one visit.</p>
+<p>FIG is free for diners and open on the web at www.figpromo.ca/app. Home works as a guest, but you need an account to claim, order, save or review.</p>"""),
+             ("What happens at the counter", """<ol><li><strong>Claim the deal</strong> on the restaurant's page, in one tap.</li><li><strong>Show your QR code</strong> when you order. Staff scan it.</li><li><strong>The code is spent.</strong> If the restaurant allows more uses, your screen then shows a new code.</li><li><strong>Next visit</strong>, show the new code the same way.</li></ol>
+<p>Staff do nothing different each time. They scan whatever code is on your screen. If a scan does not go through, <a href="/blog/deal-wont-scan-troubleshooting-diners">what to check and what to say</a> covers the usual causes.</p>"""),
+             ("Why a screenshot will not work", """<p>A deal code works once. After staff scan it, that code is finished, so a screenshot of it is only a picture of a spent code. That protects restaurants from shared or resold codes, and it protects you from someone else using yours. Open the app and show the code on your own screen.</p>"""),
+             ("The once-a-day limit", """<p>A diner can claim a deal once a day. Even if a restaurant allows 20 uses, you cannot use up 20 in one day. For a lunch deal, that makes the most sense across a work week.</p>
+<p>The restaurant can also add a wait between uses, so you may need to leave some days or a short time before the next one. Read the deal's wording on the restaurant's page, because each restaurant sets its own limits. <a href="/blog/daily-claim-week-of-fig-deals-markham-diners-math">Using your daily claim</a> shows how to plan a week around it.</p>"""),
+             ("A month of lunches, with the math", """<p>These are round example numbers, not a real restaurant. A weekday lunch bowl sells for $12.00 and the deal takes $2.00 off. The restaurant allows 5 uses per diner.</p>
+<div class="callout math"><b>A $2-off lunch bowl used 5 times (example, before tax)</b><table><thead><tr><th>Item</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Menu price</td><td>$12.00</td></tr>
+<tr><td>With the deal</td><td>$10.00</td></tr>
+<tr><td>Saved per use</td><td>$2.00</td></tr>
+<tr><td>Saved over 5 uses</td><td>$10.00</td></tr>
+<tr><td>Paid over 5 uses</td><td>5 &times; $10.00 = $50.00, against 5 &times; $12.00 = $60.00</td></tr>
+</tbody></table><p>Check: $12.00 &minus; $2.00 = $10.00, 5 &times; $2.00 = $10.00, and $60.00 &minus; $50.00 = $10.00. The saving is real only on lunches you would have bought anyway, or lunches you enjoy more than your usual one.</p></div>
+<p>If the deal makes you spend $10.00 on a lunch you would have skipped, you have spent money rather than saved it. <a href="/blog/compare-restaurant-deals-worth-it">Is it a good deal?</a> has a short checklist.</p>"""),
+             ("Percent off or dollar off, over time", """<p>Over several uses, the type of deal matters. A fixed dollar off is worth more on a cheap dish and less on an expensive one, while a percent off grows with the dish.</p>
+<table><thead><tr><th>Deal</th><th>On a $10 dish</th><th>On a $20 dish</th></tr></thead><tbody>
+<tr><td>$2 off</td><td>$2.00</td><td>$2.00</td></tr>
+<tr><td>20% off</td><td>$2.00</td><td>$4.00</td></tr>
+</tbody></table>
+<p>Check: 20% of $10 is $2.00, and 20% of $20 is $4.00. Look at what you usually order and pick accordingly.</p>"""),
+             ("Keep track of your uses", """<p>It is easy to lose count. A short note in your phone helps: the restaurant, the deal, how many uses it allows and the days you have gone. Better still, plan the days ahead. Pick the two or three weekdays you are near the restaurant and use the deal there.</p>
+<ul><li>Do not rush to use it up. A deal you enjoy over a month is worth more than five in a row.</li><li>If a deal ends before your last use, it is gone, because a claim lasts as long as the deal runs.</li><li>Check the hours. A deal may run only in a quiet window.</li></ul>"""),
+             ("How many uses are worth how much", """<p>The number of uses a restaurant allows sets the most you could save. With a $2.00 saving per use, as in the example above:</p>
+<table><thead><tr><th>Uses allowed</th><th>Most you could save</th><th>Fewest days it takes</th></tr></thead><tbody>
+<tr><td>1</td><td>$2.00</td><td>1 day</td></tr>
+<tr><td>5</td><td>$10.00</td><td>5 days, one claim a day</td></tr>
+<tr><td>20</td><td>$40.00</td><td>20 days, one claim a day</td></tr>
+</tbody></table>
+<p>Check: 5 &times; $2.00 = $10.00 and 20 &times; $2.00 = $40.00. These are ceilings, since you only save on the visits you actually make. A restaurant may also add a wait between uses, which stretches the days further, so read the deal's wording before you plan around a number.</p>"""),
+             ("How to pick a deal worth repeating", """<p>Not every deal deserves five visits. A good repeat deal fits your week. Ask yourself three things before you claim.</p>
+<ul><li><strong>Is it near where I already go?</strong> A deal near your office or your regular route costs you no extra trip.</li><li><strong>Do I like the dish?</strong> A saving on a lunch you do not enjoy is not a saving.</li><li><strong>Do the hours suit me?</strong> A quiet-window deal may run only at some times, so check the days and hours on the page before you plan.</li></ul>
+<p><a href="/blog/weekday-lunch-markham-for-less-deals-math">Weekday lunch in Markham for less</a> works through a work week with the same method.</p>"""),
+             ("When something goes wrong", """<p>If your new code does not appear after a scan, or a scan does not go through, stay calm and tell the staff. They can try again, and you can check that you have claimed the deal for the day. If it still does not work, <a href="/blog/deal-wont-scan-troubleshooting-diners">deal not working at the counter</a> lists what to check, and you can reach FIG on <a href="/contact">the contact page</a>.</p>
+<p>Keep in mind that each restaurant sets its own deal, uses and hours. The wording on the page is the place to check first, before you assume something is wrong.</p>"""),
+             ("What the restaurant sees", """<p>Restaurants never see your phone number. They see scans, which is how they learn whether a deal works. Reviews come only from scanned visits, so a repeat deal is also a way to build a real picture of a place. <a href="/blog/what-restaurants-see-when-you-use-fig-diners">What a restaurant sees when you use FIG</a> explains it in full. After a few visits, <a href="/blog/write-a-review-on-fig-diners">a short review</a> helps the next diner.</p>"""),
+             ("Be fair to the restaurant", """<p>A repeat deal is the restaurant's way of saying come back. Be kind to staff, show your code early and tip as you normally would. <a href="/blog/tipping-when-you-use-a-restaurant-deal-markham-diners">Tipping when you use a restaurant deal</a> has the math. If a deal has ended, ask what is on today, and thank them.</p>"""),
+         ],
+         faq=[("Can I use the same FIG deal more than once?", "If the restaurant allows it, yes. A restaurant can let one diner use a deal up to 20 times, with an optional wait between uses."),
+              ("Does my QR code change?", "A deal code works once. If the deal can be used more than once, your screen shows a new code after each scan."),
+              ("Can I use a deal twice in one day?", "No. A diner can claim a deal once a day."),
+              ("Will a screenshot of my code work?", "No. A code works once, so a screenshot of a used code is of no use."),
+              ("Do I need an account?", "Yes, to claim. Guests can look around but need an account to claim, order, save or review. Diners must be 14 or older."),
+              ("Can restaurants see my phone number?", "No. Restaurants never see diners' phone numbers."),
+              ("Does it cost anything to use a deal?", "No. FIG is free for diners.")]),
+
 ]
